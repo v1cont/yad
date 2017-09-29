@@ -1,0 +1,1159 @@
+.TH YAD 1 "June 3, 2017"
+.SH NAME
+yad \- display GTK+ dialogs in shell scripts
+
+.SH SYNOPSIS
+.B yad
+.RI [ OPTIONS ]
+
+.SH DESCRIPTION
+\fBYAD\fP is a program that will display GTK+ dialogs, and return
+(either in the return code or on standard output) the users
+input. This allows you to present information, and ask for information
+from the user, from all manner of shell scripts.
+.PP
+\fBYAD\fP is the fork of \fBZenity\fP program.
+
+.SH OPTIONS
+This program follows the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+
+.SS Dialog options
+.TP
+.B \-\-calendar
+Display calendar dialog.
+.TP
+.B \-\-color
+Display color selection dialog.
+.TP
+.B \-\-dnd
+Display drag-and-drop box.
+.TP
+.B \-\-entry
+Display text entry dialog.
+.TP
+.B \-\-icons
+Display box with shortcut icons.
+.TP
+.B \-\-file
+Display file selection dialog.
+.TP
+.B \-\-font
+Display font selection dialog.
+.TP
+.B \-\-form
+Display form dialog
+.TP
+.B \-\-html
+Display HTML dialog
+.TP
+.B \-\-list
+Display list dialog
+.TP
+.B \-\-multi-progress
+Display multi progress bars dialog.
+.TP
+.B \-\-notebook
+Display notebook dialog.
+.TP
+.B \-\-notification
+Display notification icon.
+.TP
+.B \-\-print
+Display print dialog.
+.TP
+.B \-\-progress
+Display progress indication dialog.
+.TP
+.B \-\-text-info
+Display text information dialog.
+.TP
+.B \-\-scale
+Display scale dialog.
+
+.SS General options
+.TP
+.B \-\-title=\fITITLE\fP
+Set the dialog title.
+.TP
+.B \-\-window-icon=\fIICON\fP
+Set the window icon.
+.TP
+.B \-\-width=\fIWIDTH\fP
+Set the dialog window width.
+.TP
+.B \-\-height=\fIHEIGHT\fP
+Set the dialog window height.
+.TP
+.B \-\-posx=\fINUMBER\fP
+Set the X position of dialog window. \fINUMBER\fP can be negative.
+.TP
+.B \-\-posy=\fINUMBER\fP
+Set the Y position of dialog window. \fINUMBER\fP can be negative.
+.TP
+.B \-\-geometry=\fIWIDTHxHEIGHT+X+Y\fP
+Use standard X Window geometry notation for placing dialog.
+When this option is used, \fIwidth\fP, \fIheight\fP, \fIposx\fP, \fIposy\fP, \fImouse\fP and \fIcenter\fP options are
+ignored. This option is obsolete for gtk3 builds.
+.TP
+.B \-\-timeout=\fITIMEOUT\fP
+Set the dialog timeout in seconds.
+.TP
+.B \-\-timeout-indicator=\fIPOSITION\fP
+Show timeout indicator in given position. Positions are \fItop\fP, \fIbottom\fP, \fIleft\fP or \fIright\fP.
+Style of indicator may be set through the gtkrc file.
+See \fIhttp://code.google.com/p/yad/wiki/TimeoutIndicator\fP for details.
+.TP
+.B \-\-kill-parent=\fI[SIGNAL]\fP
+Send SIGNAL to parent process. Default value of SIGNAL is a SIGTERM.
+SIGNAL may be specified by it's number or symbolic name with or without SIG prefix.
+See signal(7) for details about signals.
+.TP \-\-print-xid=\fI[FILENAME]\fP
+Output X Window ID of a yad's window to the specified file or stderr.
+.TP
+.B \-\-plug=\fIKEY\fP
+Run dialog in plug mode for swallow as a notebook tab. See \fINOTEBOOK\fP section for more.
+.TP
+.B \-\-tabnum=\fINUMBER\fP
+Set the tab number for plugged dialog. See \fINOTEBOOK\fP section for more.
+.TP
+.B \-\-text=\fISTRING\fP
+Set the dialog text.
+.TP
+.B \-\-text-align=\fITYPE\fP
+Set type of dialog text justification. \fITYPE\fP may be \fIleft\fP, \fIright\fP, \fIcenter\fP or \fIfill\fP.
+.TP
+.B \-\-image=\fIIMAGE\fP
+Set the dialog image which appears on the left side of dialog.
+\fIIMAGE\fP might be file name or icon name from current icon theme.
+.TP
+.B \-\-image-on-top
+Show image above main widget instead of left. This option is always on for print dialog.
+.TP
+.B \-\-icon-theme=\fITHEME\fP
+Use specified GTK icon theme instead of default.
+.TP
+.B \-\-expander=\fI[TEXT]\fP
+Hide main widget with expander. \fITEXT\fP is an optional argument with expander's label.
+.TP
+.B \-\-button=\fIBUTTON:ID\fP
+Add the dialog button. May be used multiply times. \fIID\fP is an exit code or a command.
+\fIBUTTON\fP may be gtk stock item name for predefined buttons (like gtk-close or gtk-ok) or text in a form
+\fILABEL[!ICON[!TOOLTIP]]\fP where `!' is an item separator.
+Full list of stock items may be found in gtk-demo program, in snippet called \fI"Stock Items and Icon Browser"\fP.
+If no buttons specified \fIOK\fP and \fICancel\fP buttons used. See \fBEXIT STATUS\fP section for more.
+If \fIID\fP have a non-numeric value it treats like a command and click on such button doesn't close the dialog.
+.TP
+.B \-\-no-buttons
+Don't show buttons.
+.TP
+.B \-\-buttons-layout=\fITYPE\fP
+Set buttons layout type. Possible types are: \fIspread\fP, \fIedge\fP, \fIstart\fP, \fIend\fP or \fIcenter\fP.
+Default is \fIend\fP.
+.TP
+.B \-\-no-markup
+Don't use pango markup in dialog's text.
+.TP
+.B \-\-no-escape
+Don't close dialog if \fIEscape\fP was pressed.
+.TP
+.B \-\-escape-ok
+\fIEscape\fP acts like pressing \fIOK\fP button.
+.TP
+.B \-\-always-print-result
+Print result for aby of the return codes. This options doesn't work if timeout was reached or \fIEscape\fP was pressed.
+.TP
+.B \-\-dialog-sep
+Show separator between dialog and buttons. Works only with gtk+-2.0.
+.TP
+.B \-\-borders=\fINUM\fP
+Set dialog window borders.
+.TP
+.B \-\-sticky
+Make window visible on all desktops.
+.TP
+.B \-\-fixed
+Make window fixed width and height.
+.TP
+.B \-\-center
+Place window on center of screen.
+.TP
+.B \-\-mouse
+Place window under mouse position.
+.TP
+.B \-\-on-top
+Place window over other windows.
+.TP
+.B \-\-undecorated
+Make window undecorated (remove title and window borders).
+.TP
+.B \-\-skip-taskbar
+Don't show window in taskbar and pager.
+.TP
+.B \-\-maximized
+Run dialog window maximized.
+.TP
+.B \-\-fullscreen
+Run dialog in fullscreen mode. This option may not work on all window managers.
+.TP
+.B \-\-splash
+Open window with "splashscreen" window hints. For details see description of \fI_NET_WM_WINDOW_TYPE_SPLASH\fP
+in EWMH specification. The behavior of dialog with this option is HIGHLY DEPENDS on settings of your window manager.
+.TP
+.B \-\-no-focus
+Dialog window never take focus.
+.TP
+.B \-\-close-on-unfocus
+Close the dialog window when it loose the focus.
+.TP
+.B \-\-selectable-labels
+If set, user can select dialog's text and copy it to clipboard.
+This option also affects on label fields in form dialog.
+.TP
+.B \-\-image-path=\fIPATH\fP
+Add specified path to the standard list of directories for looking for icons. This option can be used multiply times.
+.TP
+.B \-\-rest=\fIFILENAME\fP
+Read extra arguments from given file instead of command line. Each line of a file treats as a single argument.
+.TP
+.B \-\-response=\fINUMBER\fP
+Set default exit code to \fINUMBER\fP instead of \fI0\fP.
+.TP
+.B \-\-gtkrc=\fIFILENAME\fP
+Read and parse additional GTK+ settings from given file. This option doesn't work with GTK+-3.x builds.
+.TP
+.B \-\-hscroll-policy=\fITYPE\fP
+Set the policy type for horizontal scrollbars. \fITYPE\fP can be one of the \fIauto\fP, \fIalways\fP or \fInever\fP. Default is \fIauto\fP.
+.TP
+.B \-\-vscroll-policy=\fITYPE\fP
+Set the policy type for vertical scrollbars. \fITYPE\fP can be one of the \fIauto\fP, \fIalways\fP or \fInever\fP. Default is \fIauto\fP.
+.TP
+.B \-\-enable-spell
+Enable spell checking in textview widgets
+.TP
+.B \-\-spell-lang=\fILANGUAGE\fP
+Set spell checking language to \fILANGUAGE\fP. By default language guesses from current locale. Use option \fI\-\-show-langs\fP for get list of all possible languages.
+
+.SS Calendar options
+.TP
+.B \-\-day=\fINUMBER\fP
+Set the calendar day.
+.TP
+.B \-\-month=\fINUMBER\fP
+Set the calendar month.
+.TP
+.B \-\-year=\fINUMBER\fP
+Set the calendar year.
+.TP
+.B \-\-date-format=\fIPATTERN\fP
+Set the format for the returned date. By default is `%x'. See \fIstrftime(3)\fP for more details.
+.TP
+.B \-\-show-weeks
+Show the week numbers at the left side of calendar.
+.TP
+.B \-\-details=\fIFILENAME\fP
+Read days description from \fIFILENAME\fP.
+.PP
+File with days details must be in following format:
+.IP
+<date> <description>
+.PP
+\fIdate\fP field is date in format, specified with \fI\-\-date-format\fP option. \fIdescription\fP
+is a string with date details, which may include Pango markup.
+
+.SS Color selection options
+.TP
+.B \-\-init\-color=\fICOLOR\fP
+Set initial color value.
+.TP
+.B \-\-gtk-palette
+Show system palette inside color dialog.
+.TP
+.B \-\-extra
+Show extra information about color in returned string.
+.TP
+.B \-\-alpha
+Add opacity to output color string.
+.TP
+.B \-\-palette=\fI[FILENAME]\fP
+Show palette and set predefined colors from given filename.
+By default used \fI/etc/X11/rgb.txt\fP.
+.TP
+.B \-\-expand-palette
+Expander for list of user-defined colors will be initially opened.
+.TP
+.B \-\-mode=\fIMODE\fP
+Set output color mode. Possible values are \fIhex\fP or \fIrgb\fP. Default is \fIhex\fP. HEX mode looks like \fI#rrggbbaa\fP, RGB mode - \fIrgba(r, g, b, a)\fP.
+In RGBA mode opacity have values from 0.0 to 1.0.
+
+.SS Drag-and-Drop box options
+.TP
+.B \-\-tooltip
+Use dialog text as a tooltip for Drag-and-Drop box.
+.TP
+.B \-\-command=\fICMD\fP
+Run command when data received. Data strings pass to command as an argument.
+By default data just prints to stdout.
+.TP
+.B \-\-exit-on-drop=\fINUMBER\fP
+Exit after \fINUMBER\fP of drops was reached. 0 means infinite number of drops, this is the default.
+
+.SS Text entry options
+.TP
+.B \-\-entry-label=\fISTRING\fP
+Set the entry label text.
+.TP
+.B \-\-entry-text=\fISTRING\fP
+Set the initial entry text or default item in combo-box.
+.TP
+.B \-\-hide-text
+Hide the entry text.
+.TP
+.B \-\-completion
+Use completion instead of combo-box.
+.TP
+.B \-\-complete=\fITYPE\fP
+Use specific type for extended completion. \fITYPE\fP can be \fIany\fP for match any of typed words, \fIall\fP for match all of typed words or
+\fIregex\fP when typed text treats as regular expression.
+.TP
+.B \-\-editable
+Allow make changes to text in combo-box.
+.TP
+.B \-\-numeric
+Use spin button instead of text entry. Additional parameters in command line treats as minimum and maximum
+values, step value and precisions (in that order). All this values are optional. Default range is from 0 to 65535 with step 1.
+.TP
+.B \-\-float-precision=\fINUMBER\fP
+Set precision of floating point numbers. By default precision is three digits after point.
+.TP
+.B \-\-licon=\fIIMAGE\fP
+Set an icon on a left side of entry.
+.TP
+.B \-\-licon-action=\fICMD\fP
+Specify a command which will be run when the left icon clicked. Output of command will be set as entry text.
+.TP
+.B \-\-ricon=\fIIMAGE\fP
+Set an icon on a right side of entry.
+.TP
+.B \-\-ricon-action=\fICMD\fP
+Specify a command which will be run when the right icon clicked. Output of command will be set as entry text.
+.TP
+.B \-\-num-output
+Output index of active element instead of text for combo-box entry.
+.PP
+Any extra data specified in command line adds as an items of combo-box entry, except of numeric mode.
+
+If icon specified and icon action is not given, click on icon just clear the entry.
+Numeric fields will ignore the icons.
+
+.SS Iconbox options
+.TP
+.B \-\-read-dir=\fIPATH\fP
+Read .desktop files from specified directory.
+.TP
+.B \-\-monitor
+Watch for changes in directory and automatically update content of iconbox.
+.TP
+.B \-\-generic
+Use field GenericName instead of Name for shortcut label.
+.TP
+.B \-\-sort-by-name
+Use field Name instead of filename for sorting items.
+.TP
+.B \-\-descend
+Sort items in descending order. If data reads from stdin this option is useless without \fI\-\-sort-by-name\fP.
+.TP
+.B \-\-listen
+Read data from stdin. Data must be in order - \fIName\fP, \fITooltip\fP, \fIIcon\fP, \fICommand\fP, \fIInTerm\fP
+separated by newline. \fIInTerm\fP is a case insensitive boolean constant (\fITRUE\fP or \fIFALSE\fP).
+Sending \fIFormFeed\fP character clears iconbox.
+.TP
+.B \-\-item-width
+Set items width.
+.TP
+.B \-\-compact
+Use compact mode. Icon and name of each item is placed in a single row.
+.TP
+.B \-\-single-click
+Activate items by single mouse click. This option may not works properly in case of compact mode.
+.TP
+.B \-\-term
+Pattern for terminal. By default use `xterm \-e %s' where %s replaced by the command.
+.PP
+If both directory and stdin specified, content of iconbox will be read from directory.
+
+.SS File selection options
+.TP
+.B \-\-filename=\fIFILENAME\fP
+Set the filename.
+.TP
+.B \-\-multiple
+Allow selection of multiple filenames in file selection dialog.
+.TP
+.B \-\-directory
+Activate directory-only selection.
+.TP
+.B \-\-save
+Activate save mode.
+.TP
+.B \-\-separator=\fISTRING\fP
+Specify separator character when returning multiple filenames.
+.TP
+.B \-\-confirm\-overwrite=\fI[TEXT]\fP
+Confirm file selection if filename already exists.
+Optional argument is a text for confirmation dialog.
+.TP
+.B \-\-quoted-output
+Output values will be shell-style quoted.
+
+.SS Font selection options
+.TP
+.B \-\-fontname=\fIFONTNAME\fP
+Set the initial font. \fIFONTNAME\fP is a string with font representation in the
+form \fI"[FAMILY-LIST] [STYLE-OPTIONS] [SIZE]"\fP.
+.TP
+.B \-\-preview
+Set the preview text.
+.TP
+.B \-\-separate-output
+Separate output of selected font description.
+.TP
+.B \-\-separator=\fISTRING\fP
+Set output separator character. Default is `|'.
+.TP
+.B \-\-quoted-output
+Output data will be in shell-style quotes.
+
+.SS Form options
+.TP
+.B \-\-field=\fILABEL[:TYPE]\fP
+Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fICE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIMDIR\fP, \fIDT\fP, \fISCL\fP, \fICLR\fP, \fIBTN\fP, \fIFBTN\fP, \fILBL\fP or \fITXT\fP.
+.br
+\fBH\fP - hidden field type. All characters are displayed as the invisible char.
+.br
+\fBRO\fP - field is in read-only mode.
+.br
+\fBNUM\fP - field is a numeric. Initial value format for this field is \fIVALUE[!RANGE[!STEP![PREC]]]\fP, where \fIRANGE\fP must be in form \fIMIN..MAX\fP. `!' is a default item separator. \fIPREC\fP is a precision for decimals.
+.br
+\fBCHK\fP - checkbox field. Initial value is a case insensitive boolean constant (\fITRUE\fP or \fIFALSE\fP).
+.br
+\fBCB\fP - combo-box field. Initial value is a list \fIVAL1!VAL2!...\fP. The separator is the same as in \fINUM\fP field. Value started with `^' threats as default for combo-box.
+.br
+\fBCBE\fP - editable combo-box field. Initial value same as for combo-box.
+.br
+\fBCE\fP - entry with completion. Initial value same as for combo-box.
+.br
+\fBFL\fP - file selection button.
+.br
+\fBSFL\fP - field for create file.
+.br
+\fBDIR\fP - directory selection button.
+.br
+\fBCDIR\fP - field for create folder.
+.br
+\fBFN\fP - font selection button. Initial value same as in font dialog.
+.br
+\fBMFL\fP - select multiple files. Value of this field is a list of files separated by \fIitem-separator\fP.
+.br
+\fBMDIR\fP - select multiple folders. Value of this field is a list of folders separated by \fIitem-separator\fP.
+.br
+\fBDT\fP - date field.
+.br
+\fBSCL\fP - scale field. Value of this field in a range 0..100.
+.br
+\fBCLR\fP - color selection button. Output values for this field generates in the same manner as for color dialog.
+.br
+\fBBTN\fP - button field. Label may be in form text in a form \fILABEL[!ICON[!TOOLTIP]]\fP where `!' is an item separator. \fILABEL\fP is a text of button label or gtk stock id. \fIICON\fP is a buttons icon (stock id or file name). \fITOOLTIP\fP is an optional text for popup help string. Initial value is a command which is running when button is clicked. A special sympols \fI%N\fP in command are replaced by value of field \fIN\fP. If command starts with \fI@\fP, the output of command will be parsed and lines started with number and colon will be treats as a new field values.
+A quoting style for value when \fIsh -c\fP is used \- a single quotes around command and double quotes around -c argument
+.br
+\fBFBTN\fP - same as button field, but with full relief of a button.
+.br
+\fBLBL\fP - text label. If field name is empty, horizontal separator line will be shown.
+.br
+\fBTXT\fP - multiline text entry. This field is always occupy all of form width.
+
+Without type field will be a simple text entry.
+.TP
+.B \-\-align=\fITYPE\fP
+Set alignment of field labels. Possible types are \fIleft\fP, \fIcenter\fP or \fIright\fP. Default is left.
+.TP
+.B \-\-columns=\fINUMBER\fP
+Set number of columns in form. Fields will be placed from top to bottom.
+.TP
+.B \-\-separator=\fISTRING\fP
+Set output separator character. Default is `|'.
+.TP
+.B \-\-focus-field=\fINUMBER\fP
+Set focused field.
+.TP
+.B \-\-cycle-read
+Cycled reading of stdin data. Sending FormFeed character clears the form. This symbol may be sent as \fIecho \-e '\\f'\fP.
+.TP
+.B \-\-item-separator=\fISTRING\fP
+Set separator character for combo-box or scale values. Default is `!'.
+.TP
+.B \-\-date-format=\fIPATTERN\fP
+Set the format for the date fields (same as in calendar dialog).
+.TP
+.B \-\-float-precision=\fINUMBER\fP
+Set precision of floating point numbers. By default precision is three digits after point.
+.TP
+.B \-\-complete=\fITYPE\fP
+Use specific type for extended completion. \fITYPE\fP can be \fIany\fP for match any of typed words, \fIall\fP for match all of typed words or
+\fIregex\fP when typed text treats as regular expression.
+.TP
+.B \-\-scroll
+Make form scrollable.
+.TP
+.B \-\-quoted-output
+Output values will be in shell-style quotes.
+.TP
+.B \-\-output-by-row
+Output field values row by row if several columns is specified.
+.TP
+.B \-\-num-output
+Output index of active element instead of text for combo-box fields.
+.PP
+Additional data in command line interprets as a default values for form fields. A special value \fI@disabled@\fP makes corresponding field inactive. If no extra arguments specified in a command line, data will be readed from stdin, one value per line. Cycled reading means that for \fIN\fP fields \fIN+1\fP value will replace the first field. Empty values are skipped when reading from stdin.
+
+.SS HTML options
+.TP
+.B \-\-uri=\fIURI\fP
+Open specified location. \fIURI\fP can be a filename or internet address. If \fIURI\fP is not an existing file and protocol is not specified a prefix \fIhttp://\fP will be added to \fIURI\fP.
+.TP
+.B \-\-browser
+Turn on browser mode. In this mode all clicked links will be opened in html widget and command \fIOpen\fP will be added to context menu.
+.TP
+.B \-\-print-uri
+Print clicked links to standard output. By default clicked links opens with \fIxdg-open\fP.
+.TP
+.B \-\-mime=\fIMIME\fP
+Set mime type of data passed to standard input to \fIMIME\fP. Default is \fItext/html\fP.
+.TP
+.B \-\-encodintg=\fIENCODING\fP
+Set encoding of data passed to standard input to \fIENCODING\fP. Default is \fIUTF-8\fP.
+.TP
+.B \-\-uri-handler=\fICMD\fP
+Set external handler for clicked uri. \fI%s\fP will be replaced by activated uri. Return code of the \fICMD\fP must be \fI0\fP for keep working, \fI1\fP for ignoring uri and \fI2\fP for downloading uri. This option works only in browser mode. There are two environment variables available in handler - \fIYAD_HTML_BUTTON\fP with value of pressed mouse button and \fIYAD_HTML_STATE\fP with value of bitmask with the the state of the modifier keys.
+.TP
+.B \-\-user-agent=\fISTRING\fP
+Set user agent string. Default is \fIYAD-Webkit (@VERSION@)\fP
+.TP
+.B \-\-user-style=\fIURI\fP
+Set path or uri to custom user styles. Path to local file can be an absolute file name or uri with \fIfile://\fP prefix.
+
+.SS List options
+.TP
+.B \-\-column=\fISTRING[:TYPE]\fP
+Set the column header. Types are \fITEXT\fP, \fINUM\fP, \fISZ\fP, \fIFLT\fP, \fICHK\fP, \fIRD\fP, \fIBAR\fP, \fIIMG\fP, \fIHD\fP or \fITIP\fP.
+\fITEXT\fP type is default. Use \fINUM\fP for integers and \fIFLT\fP for double values. \fITIP\fP is used for define tooltip column.
+\fISZ\fP size column type. Works exactly like \fINUM\fP column but shows human readable sizes instead of numbers.
+\fICHK\fP (checkboxes) and \fIRD\fP (radio toggle) are a boolean columns.
+\fIBAR\fP is a progress bar column. Value must be between \fI0\fP and \fI100\fP. If value is outside is range it will be croped to neares legal value.
+\fIHD\fP type means a hidden column. Such columns are not displayes in the list, only in output.
+\fIIMG\fP may be path to image or icon name from currnet GTK+ icon theme.
+Size of icons may be set in gtk config file at GTK_ICON_SIZE_MENU position of gtk-icon-sizes. Image field prints as empty value.
+
+Special column names \fI@fore@\fP, \fI@back@\fP and \fI@font@\fP sets corresponding rows attributes.
+Values of those columns don't show in results.
+.TP
+.B \-\-checklist
+Use check boxes for first column.
+.TP
+.B \-\-radiolist
+Use radio toggle for first column.
+.TP
+.B \-\-separator=\fISTRING\fP
+Set output separator characters.
+.TP
+.B \-\-multiple
+Allow multiple rows to be selected.
+.TP
+.B \-\-editable
+Allow changes to text.
+.TP
+.B \-\-editable-cols=\fILIST\fP
+Set the list of editable columns. \fILIST\fP must be a string of numbers separated by comma.
+.TP
+.B \-\-no-headers
+Do not show column headers.
+.TP
+.B \-\-no-click
+Disable sorting of column content by clicking on its header.
+.TP
+.B \-\-no-rules-hint
+Don't draw even and odd rows by a different colors. This option depends on your current gtk theme and may not work.
+.TP
+.B \-\-grid-lines=\fITYPE\fP
+Draw grid lines of type \fITYPE\fP in list dialog. \fITYPE\fp can be one of the \fIhor[izontal]\fP, \fIvert[ical]\fP of \fIboth\fP.
+.TP
+.B \-\-no-selection
+Disable selection in list.
+.TP
+.B \-\-print-all
+Print all data from the list.
+.TP
+.B \-\-print-column=\fINUMBER\fP
+Specify what column will be printed to standard output. \fI0\fP may be used to print all columns (this is default).
+.TP
+.B \-\-hide\-column=\fINUMBER\fP
+Hide a specific column.
+.TP
+.B \-\-expand\-column=\fINUMBER\fP
+Set the column expandable by default. \fI0\fP sets all columns expandable.
+.TP
+.B \-\-search\-column=\fINUMBER\fP
+Set the quick search column. \fI0\fP mean to disable searching. By default search mades on first column.
+.TP
+.B \-\-tooltip\-column=\fINUMBER\fP
+Set the column with popup tooltips.
+.TP
+.B \-\-sep\-column=\fINUMBER\fP
+Set the row separator column. If the cell value from this column equal to specified row separator value such row will be draw as separator.
+Separator value must be set.
+.TP
+.B \-\-sep\-value=\fITEXT\fP
+Set the \fITEXT\fP as a row separator value. This feature highly depends on your current GTK+ theme and may not work properly.
+.TP
+.B \-\-limit=\fINUMBER\fP
+Set the number of rows in list dialog. Will be shown only the last \fINUMBER\fP rows. This option will take effect only when data reading from stdin.
+.TP
+.B \-\-wrap-width=\fINUMBER\fP
+Set the width of column before wrapping to \fINUMBER\fP.
+.TP
+.B \-\-wrap-cols=\fILIST\fP
+Set the list of wrapped columns. \fILIST\fP must be a string of numbers separated by comma.
+.TP
+.B \-\-ellipsize=\fITYPE\fP
+Set ellipsize mode for text columns. \fITYPE\fP may be \fINONE\fP, \fISTART\fP, \fIMIDDLE\fP or \fIEND\fP.
+.TP
+.B \-\-ellipsize-cols=\fILIST\fP
+Set the list of ellipsized columns. \fILIST\fP must be a string of numbers separated by comma.
+.TP
+.B \-\-dclick-action=\fICMD\fP
+Set the \fICMD\fP as a double-click command. When user double-clicked on row, \fICMD\fP will be launched with values of all columns as an arguments. By default double-click selects row and act as \fIOK\fP button for simple lists, set the checkbox if \fI\-\-checklist\fP specified and do nothing when list run with \fI\-\-multiple\fP option.
+When double-click specified \fIEnter\fP acts as a double-click and \fICtrl+Enter\fP acts as an \fIOK\fP button.
+\fICMD\fP may contain a special character `%s' for setting a position for arguments. By default arguments will be concatenated to the end of \fICMD\fP.
+If \fICMD\fP starts with \fI@\fP, its output will replace values of current row.
+This option doesn't work with \fI--editable\fP.
+.TP
+.B \-\-select-action=\fICMD\fP
+Set the \fICMD\fP as a action when selection is changed. \fICMD\fP will be launched with values of all columns as an arguments.
+\fICMD\fP may contain a special character `%s' for setting a position for arguments. By default arguments will be concatenated to the end of \fICMD\fP.
+This option doesn't work with \fI--multiple\fP.
+.TP
+.B \-\-add-action=\fICMD\fP
+Set the \fICMD\fP as a action when new row is added from a context menu. Command launched without any additional arguments. Output of this command sets the new row values.
+.TP
+.B \-\-regex-search
+Use regular expressions in search for text fields.
+.TP
+.B \-\-listen
+Listen data from stdin even if command-line values was specified.
+.TP
+.B \-\-quoted-output
+Output values will be shell-style quoted.
+.TP
+.B \-\-float-precision=\fINUMBER\fP
+Set precision of floating point numbers. By default precision is three digits after point.
+.TP
+.B \-\-add-on-top
+Add new records at the top of the list.
+.TP
+.B \-\-tail
+Autoscroll to the end of the list when a new row will be added.
+.TP
+.B \-\-iec-format
+Use IEC (base 1024) units with for size values. With this option values will have suffixes KiB, MiB, GiB.
+.TP
+Sending FormFeed character to list clears it. This symbol may be sent as \fIecho \-e '\\f'\fP.
+
+.SS Multi progress bars dialog options
+.TP
+.B \-\-bar=\fILABEL[:TYPE]\fP
+Add progress bar. \fILABEL\fP is a text label for progress bar. \fITYPE\fP is a progress bar type.
+Types are: \fINORM\fP for normal progress bar, \fIRTL\fP for inverted progress bar and \fIPULSE\fP for pulsate progress bar.
+.TP
+.B \-\-vertical
+Set vertical orientation of progress bars.
+.TP
+.B \-\-align=\fITYPE\fP
+Set alignment of bar labels. Possible types are \fIleft\fP, \fIcenter\fP or \fIright\fP. Default is left.
+.TP
+.B \-\-auto\-close
+Close dialog when 100% has been reached for all of non-pulsating progress bars.
+.TP
+.B \-\-watch-bar\fINUMBER\fP
+Watch for 100% of bar \fINUMBER\fP for close dialog.
+.TP
+.B \-\-auto\-kill
+Kill parent process if cancel button is pressed.
+.PP
+Initial values for bars set as an extra arguments. Each lines with progress data passed to stdin must be started
+from \fIN:\fP where \fIN\fP is a number of progress bar.
+
+.SS Notebook options
+.TP
+.B \-\-key=\fIKEY\fP
+Set the key of the children.
+.TP
+.B \-\-tab=\fITEXT\fP
+Add tab with specified label to notebook. \fITEXT\fP may be in a form \fILABEL[!ICON[!TOOLTIP]]\fP
+where `!' is an item separator.
+.TP
+.B \-\-tab-pos=\fITYPE\fP
+Set the tabs position. Value may be \fItop\fP, \fIbottom\fP, \fIleft\fP, or \fIright\fP. Default is  \fItop\fP.
+.TP
+.B \-\-tab-borders=\fINUMBER\fP
+Set the borders width around widget in tabs.
+.TP
+.B \-\-active-tab=\fINUMBER\fP
+Set active tab.
+.PP
+See \fBNOTEBOOK and PANED\fP section for more about notebook dialog.
+
+.SS Notification options
+.TP
+.B \-\-command=\fICMD\fP
+Set the command running when clicked on the icon. Default action is \fIquit\fP if \fI\-\-listen\fP not specified.
+.TP
+.B \-\-listen
+Listen for commands on stdin. See \fBNOTIFICATION\fP section.
+.TP
+.B \-\-separator=\fISTRING\fP
+Set separator character for menu values. Default is \fI|\fP.
+.TP
+.B \-\-item-separator=\fISTRING\fP
+Set separator character for menu items. Default is \fI!\fP.
+.TP
+.B \-\-menu=\fISTRING\fP
+Set initial menu for right-click.
+.TP
+.B \-\-no-middle
+Disable exit on middle click.
+.TP
+.B \-\-hidden
+Doesn't show icon at startup.
+.PP
+See \fBNOTIFICATION\fP section for more about separators.
+
+.SS Paned options
+.TP
+.B \-\-key=\fIKEY\fP
+Set the key of the children.
+.TP
+.B \-\-orient=\fITYPE\fP
+Set orientation of panes inside dialog. \fITYPE\fP may be in \fIhor[izontal]\fP or \fIvert[ical]\fP.
+.TP
+.B \-\-splitter=\fIPOS\fP
+Set the initial splitter position.
+.PP
+See \fBNOTEBOOK and PANED\fP section for more about paned dialog.
+
+.SS Picture options
+.TP
+.B \-\-size=\fIVALUE\fP
+Set initial size of picture. Available values are \fIfit\fP for fitting image in window or \fIorig\fP for show picture in original size.
+.TP
+.B \-\-inc=\fiNUMBER\fp
+Set increment value for scaling image.
+.TP
+.B \-\-filename=\fIFILENAME\fP
+Set picture filename.
+.PP
+Some actions on a picture like scaling or rotating available from popup menu. Those actions can be made only on static images.
+
+.SS Print options
+.TP
+.B \-\-type=\fITYPE\fP
+Set source file type. \fITYPE\fP may be a \fITEXT\fP for text files, \fIIMAGE\fP for image files or \fIRAW\fP for files in postscript or pdf formats.
+.TP
+.B \-\-filename=\fIFILENAME\fP
+Set name or path to the source file.
+.TP
+.B \-\-headers
+Add headers to the top of page with filename and page number. This option doesn't work for \fIRAW\fP type.
+.TP
+.B \-\-add-preview
+Add \fIPreview\fP button to the print dialog. This option doesn't work for \fIRAW\fP type.
+.TP
+.B \-\-fontname=\fIFONTNAME\fP
+Set the font for printing text. \fIFONTNAME\fP is a string with font representation in the form \fI"[FAMILY-LIST] [STYLE-OPTIONS] [SIZE]"\fP. This option works only for \fITEXT\fP type.
+
+.SS Progress options
+.PP
+When the \-\-progress option is used, yad reads lines of progress data from stdin.
+When the lines begin with \fI#\fP the text after \fI#\fP is displayed in the progress
+bar label. Numeric values treats like a persents for progress bar.
+.TP
+.B \-\-progress-text=\fITEXT\fP
+Set text in progress bar to \fITEXT\fP.
+.TP
+.B \-\-percentage=\fINUMBER\fP
+Set initial percentage.
+.TP
+.B \-\-rtl
+Set Right-To-Left progress bar direction.
+.TP
+.B \-\-auto\-close
+Close dialog when 100% has been reached.
+.TP
+.B \-\-auto\-kill
+Kill parent process if cancel button is pressed.
+.TP
+.B \-\-pulsate
+Pulsate progress bar.
+.TP
+.B \-\-enable-log\fI[=TEXT]\fP
+Show log window. This window gathers all of lines from stdin, started from \fI#\fP instead of setting appropriate progress labels.
+Optional argument \fITEXT\fP is a text label for window expander.
+.TP
+.B \-\-log-on-top
+Place log window above progress bar.
+.TP
+.B \-\-log-expanded
+Start with expanded log window.
+.TP
+.B \-\-log-height
+Set the height of log window.
+
+.SS Multiprogress options
+.TP
+.B \-\-bar=\fILABEL[:TYPE]\fP
+Add the progress bar with type \fITYPE\fp. \fITYPE\fP can be one of the \fInorm\fP for average progress bar, \fIrtl\fP for progress bar with inverted direction, \fIpulse\fP for pulsating progress bar (m,oves on receiving data) or \fIperm\fP for permanent pulsatin progress bar. \fIprem\fP progress bar understant two commands - \fIstart\fP for start movement and \fIstop\fP for stop it.
+.TP
+.B \-\-watch-bar=\fINUMBER\fP
+Watch for specific bar for auto closing.
+.TP
+.B \-\-align=\fITYPE\fP
+Set alignment of bar labels. \fITYPE\fP can be \fIleft\fP, \fIcenter\fP or \fIright\fP.
+.TP
+.B \-\-auto-close
+Dismiss the dialog when 100% of all bars (or only watching bar) has been reached.
+.TP
+.B \-\-auto-kill
+Kill parent process if cancel button was pressed.
+
+.SS Text info options
+.TP
+.B \-\-filename=\fIFILENAME\fP
+Open specified file.
+.TP
+.B \-\-editable
+Allow changes to text.
+.TP
+.B \-\-fore=\fICOLOR\fP
+Set foreground color of text.
+.TP
+.B \-\-back=\fICOLOR\fP
+Set background color of text.
+.TP
+.B \-\-fontname=\fIFONTNAME\fP
+Set text font. \fIFONTNAME\fP must be in a Pango font description format. By default \fIMonospace\fP is used.
+.TP
+.B \-\-wrap
+Enable text wrapping.
+.TP
+.B \-\-justify=\fITYPE\fP
+Set justification. \fITYPE\fP may be \fIleft\fP, \fIright\fP, \fIcenter\fP or \fIfill\fP.
+Default is \fIleft\fP.
+.TP
+.B \-\-margins=\fINUMBER\fP
+Set text margins to \fINUMBER\fP.
+.TP
+.B \-\-tail
+Autoscroll to end when new text appears. Works only when text is read from stdin.
+.TP
+.B \-\-show-cursor
+Show cursor in read-only mode.
+.TP
+.B \-\-show-uri
+Make links in text clickable. Links opens with \fIxdg-open\fP command.
+.TP
+.B \-\-uri-color
+Set color for links. Default is \fIblue\fP.
+.TP
+.B \-\-lang=LANGUAGE
+Highlight syntax for specified \fILANGUAGE\fP. This option works only if yad builds with gtksourceview.
+.TP
+.B \-\-theme=THEME
+Set used theme to \fITHEME\fP. This option works only if yad builds with gtksourceview. Use option \fI\-\-show-themes\fP for get list of all available themes.
+.TP
+.B \-\-listen
+Listen data from stdin even if filename was specified.
+
+Sending FormFeed character to text dialog clears it. This symbol may be sent as \fIecho \-e '\\f'\fP.
+Pressing \fICtrl+S\fP popups the search entry in text dialog.
+
+.SS Scale options
+.TP
+.B \-\-value=\fIVALUE\fP
+Set initial value.
+.TP
+.B \-\-min\-value=\fIVALUE\fP
+Set minimum value.
+.TP
+.B \-\-max\-value=\fIVALUE\fP
+Set maximum value.
+.TP
+.B \-\-step=\fIVALUE\fP
+Set step size.
+.TP
+.B \-\-page=\fIVALUE\fP
+Set paging size. By default page value is STEP*10.
+.TP
+.B \-\-print\-partial
+Print partial values.
+.TP
+.B \-\-hide\-value
+Hide value.
+.TP
+.B \-\-vertical
+Show vertical scale.
+.TP
+.B \-\-invert
+Invert scale direction.
+.TP
+.B \-\-inc-buttons
+Show buttons on edges of a scale for increasing or decreasing scale value.
+.TP
+.B \-\-mark=\fI[NAME]:VALUE\fP
+Add a mark to scale. May be used multiply times. \fINAME\fP is an optional arguments for set label to mark.
+
+.SS File filters options
+.TP
+.B \-\-file-filter=\fINAME | PATTERN1 PATTERN2 ...\fP
+Add a filename filter. \fINAME\fP is a displayed filter name, \fIPATTERN\fP
+is a shell-style filename pattern (for example *.txt). This option may be used multiply times.
+.TP
+.B \-\-mime-filter=\fINAME | MIME1 MIME2 ...\fP
+Add a mime-type filter. \fINAME\fP is a displayed filter name, \fIPATTERN\fP
+is a name of mime type (for example text/plain). This option may be used multiply times.
+.TP
+.B \-\-image-filter=\fI[NAME]\fP
+Add filter for images supported by gdk-pixbuf library. \fINAME\fP in as optional name for this filter.
+.TP
+.B \-\-add-preview
+Add preview widget. Preview images loads from large or normal thumbnails according to XDG Thumbnails
+specification v0.8.0 (http://standards.freedesktop.org/thumbnail-spec/latest/) or creates by yad for image files and saves
+as large thumbnails.
+
+This options applies to all of yad's file chooser dialogs.
+
+.SS Miscellaneous options
+.TP
+.B \-?, \-\-help
+Show summary of options.
+.TP
+.B \-\-about
+Display an about dialog.
+.TP
+.B \-\-version
+Show version of program.
+.TP
+.B \-\-show-langs
+Show list of possible languages for spell checking. Available only if yad builds with \fIGtkSpell\fP support.
+.TP
+.B \-\-show-themes
+Show list of possible GtkSourceView themes. Available only if yad builds with \fIGtkSourceView\fP support.
+
+.PP
+Also the standard GTK+ options are accepted.
+
+.SH NOTEBOOK and PANED
+Notebook is a complex dialog which swallow other dialogs in his tabs.
+Dialogs identifies by unique key (integer) and must be runs in a special plug mode (\-\-plug option).
+Following example runs notebook dialog with two tabs, first has a simple text and second is an entry dialog.
+
+.nf
+#! /bin/sh
+.sp
+yad \-\-plug=12345 \-\-tabnum=1 \-\-text="first tab with text" &> res1 &
+yad \-\-plug=12345 \-\-tabnum=2 \-\-text="second tab" \-\-entry &> res2 &
+yad \-\-notebook \-\-key=12345 \-\-tab="Tab 1" \-\-tab="Tab 2"
+.fi
+
+NOTE: The order of output results for tabs is undefined!
+
+Paned works in a same manner as a notebook with one restriction - only first and secong plug dialogs
+will be swallowed to panes.
+
+.SH NOTIFICATION
+Allows commands to be sent to yad in the form \fBcommand:args\fP.
+Possible commands are \fIicon\fP, \fItooltip\fP, \fIvisible\fP, \fIaction\fP, \fImenu\fP and \fIquit\fP.
+.TP
+.B icon:ICONNAME
+Set notification icon to ICONNAME.
+.TP
+.B tooltip:STRING
+Set notification tooltip.
+.TP
+.B visible:[true|false|blink]
+Set notification icon to visible, invisible or blinking states.
+.TP
+.B action:COMMAND
+Specify the command running when click on the icon.
+Special string \fI"quit"\fP exit the program.
+.TP
+.B menu:STRING
+Set popup menu for notification icon.
+STRING must be in form \fIname1[!action1[!icon1]]|name2[!action2[!icon2]]...\fP.
+Empty name add separator to menu.
+Separator character for values (e.g. `|') sets with \-\-separator argument.
+Separator character for menu items (e.g. `!') sets with \-\-item-separator argument.
+.TP
+.B quit
+Exit the program. Middle click on icon also send \fIquit\fP command.
+
+.SH ENVIRONMENT VARIABLES
+.TP
+.B YAD_OPTIONS
+This variable can holds some default options for yad. All options in this
+variable may be redefined from command line.
+.TP
+.B YAD_PID
+This variable sets to the value of current dialog's pid and accessible in all
+dialog children.
+.TP
+.B YAD_XID
+This variable sets to the value of current dialog's X Window ID and accessible in all
+dialog children. This variable is not set in print and notification dialogs,
+and in a dialogs which acts as a notebook or paned children.
+
+.SH USER DEFINED SIGNALS
+.TP
+.B SIGUSR1
+Close dialog with 0 exit code.
+.TP
+.B SIGUSR2
+Close dialog with 1 exit code.
+
+.SH EXIT STATUS
+.TP
+.B 0
+The user has pressed \fIOK\fP button
+.TP
+.B 1
+The user has pressed \fICancel\fP button
+.TP
+.B 70
+The dialog has been closed because the timeout has been reached.
+.TP
+.B 252
+The dialog has been closed by pressing \fIEsc\fP or used the window functions to close the dialog
+.TP
+Exit codes for user-specified buttons must be specified in command line. Even exit code mean to print result, odd just return exit code.
+
+.SH WIDGETS NAMES
+.TP
+The look and feel of yad's dialogs can be customized through gtkrc file. Here is the names of yad's widgets:
+
+.TS
+tab (@);
+l l l.
+.B
+Widget name@Widget type@Description
+_
+yad-dialog-window@GtkDialog@Dialog window
+yad-dialog-image@GtkImage@Dialog image
+yad-dialog-label@GtkLabel@Dialog text
+yad-calendar-widget@GtkCalendar@Calendar widget
+yad-color-widget@GtkColorChooser@Color selection widget
+yad-color-palette@GtkTreeView@Predefined colors list
+yad-entry-label@GtkLabel@Entry label
+yad-entry-widget@GtkEntry@Entry widget
+yad-entry-spin@GtkSpinButton@Entry widget for numeric values
+yad-entry-combo@GtkComboBox@Entry widget with combo
+yad-entry-edit-combo@GtkComboBoxEntry@Entry widget with editable combo
+yad-file-widget@GtkFileChooser@File selection widget
+yad-font-widget@GtkFontChooser@Font selection widget
+yad-form-flabel@GtkLabel@Field label in form
+yad-form-button@GtkButton@Button field in form
+yad-form-entry@GtkEntrfy@Entry field in form
+yad-form-spin@GtkSpinButton@Numeric entry field in form
+yad-form-check@GtkCheckButton@Checkbox field in form
+yad-form-combo@GtkComboBox@Combo field in form
+yad-form-edit-combo@GtkComboBoxEntry@Editable combo field in form
+yad-form-file@GtkFileChooserButton@File or directory field in form
+yad-form-font@GtkFontChooserButton@Font field in form
+yad-form-color@GtkColorChooserButton@Color field in form
+yad-form-label@GtkLabel@Label field in form
+yad-form-scale@GtkScale@Scale widget in form
+yad-form-separator@GtkSeparator@Separator in form
+yad-form-text@GtkTextView@Multiline text field in form
+yad-icons-full@GtkIconView@Icons widget for normal mode
+yad-icons-compact@GtkTreeView@Icons widget for compact mode
+yad-list-widget@GtkTreeView@List widget
+yad-notebook-widget@GtkNotebook@Notebook widget
+yad-paned-widget@GtkPaned@Horizontal or vertical pane widget
+yad-progress-widget@GtkProgressBar@Progressbar widget
+yad-scale-widget@GtkScale@Scale widget
+yad-text-widget@GtkTextView@Text info widget
+yad-timeout-indicator@GtkProgreeBar@Timeout indicator
+.TE
+
+.SH FILES
+.TP
+.B yad.conf
+YAD default settings. \fIyad.conf\fP placed in \fI$XDG_CONFIG_HOME\fP or \fI$HOME/.config\fP
+directory. This file contain comments on every defaults and will be automatically
+recreated on yad'd start if it doesn't exists.
+
+.SH EXAMPLES
+Display a file selector with the title \fISelect a file to
+remove\fP. The file selected is returned on standard output.
+.IP
+yad  \-\-title="Select a file to remove" \-\-file-selection
+.PP
+Display a text entry dialog with the title \fISelect Host\fP and the
+text \fISelect the host you would like to flood-ping\fP. The entered
+text is returned on standard output.
+.IP
+yad  \-\-title "Select Host" \-\-entry \-\-text "Select the host you would like to flood-ping"
+.PP
+Display a dialog, asking \fIMicrosoft Windows has been found! Would
+you like to remove it?\fP. The return code will be 0 (true in shell)
+if \fIYES\fP is selected, and 1 (false) if \fINO\fP is selected.
+.IP
+yad  \-\-image "dialog-question" \-\-title "Alert" \-\-button=gtk-yes:0 \-\-button=gtk-no:1 \-\-text "Microsoft Windows has been found! Would you like to remove it?"
+.PP
+Show the search results in a list dialog with the title \fISearch Results\fP
+and the text \fIFinding all header files...\fP.
+.IP
+find . \-name '*.h' | yad \-\-list \-\-title "Search Results" \-\-text "Finding all header files.." \-\-column "Files"
+.PP
+Show an icon in the notification area
+.IP
+yad \-\-notification \-\-image=update.png \-\-text "System update necessary!" \-\-command "xterm \-e apt-get upgrade"
+.PP
+Display a weekly shopping list in a check list dialog with \fIApples\fP and \fIOranges\fP pre selected
+.IP
+yad \-\-list \-\-checklist \-\-column "Buy" \-\-column "Item" TRUE Apples TRUE Oranges FALSE Pears FALSE Toothpaste
+.PP
+Display a progress dialog while searching for all the postscript files in your home directory
+.IP
+find $HOME \-name '*.ps' | yad \-\-progress \-\-pulsate
+.PP
+Display a box with all of the installed desktop applications
+.IP
+yad \-\-icons \-\-read-dir=/usr/share/applications
+
+.SH DEVELOPMENT
+There are some developers features providing with YAD.
+.TP
+\fIYAD icon browser\fP is a graphical tool for discover icons in current or user-specified GTK+ icon theme. Launch it as
+.IP
+yad-icon-browser [theme]
+.PP
+When using autoconf you may use special m4 macro \fIAM_PATH_YAD\fP for looking for yad and check it version. Usage of this macro is
+.IP
+AM_PATH_YAD([MINIMUM-VERSION],\\
+[ACTION-IF-FOUND],\\
+[ACTION-IF-NOT-FOUND])
+.PP
+
+.SH AUTHORS
+\fBYad\fP was written by Victor Ananjevsky <ananasik@gmail.com>. Yad icon created by Bogdan Lisovich.
+
+.SH SEE ALSO
+\fBgdialog\fP(1), \fBdialog\fP(1), \fBzenity\fP(1)

@@ -1,0 +1,8 @@
+- add actions to list, text-info and icons dialogs
+- use optional gtksourceview in text-info dialog (done)
+- add slideshow to picture dialog (reading uris from stdin)
+- add single model for completion and combo-boxes
+- add menu for select encodings in html dialog
+- add reverse check column for list dialog
+- add option for output format of boolean values (upper, lower, num)
+- add tooltips for labels

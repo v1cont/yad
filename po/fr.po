@@ -1,0 +1,1394 @@
+# French translation for YAD
+# This file is distributed under the same license as the YAD package.
+#
+# Yannou90 <windaube.non.merci@gmail.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YAD\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-07 09:25+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Yannou90 <windaube.non.merci@gmail.com>\n"
+"Language-Team: Français\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../src/about.c:30
+msgid "translator-credits"
+msgstr ""
+"Stephen Kennedy <steve9000@users.sourceforge.net>, 2003\n"
+"Jonathan Ernst <jonathan@ernstfamily.ch>, 2006\n"
+"Claude Paroz <claude@2xlibre.net>, 2006-2010\n"
+"Robert-André Mauchin <zebob.m@pengzone.org>, 2007\n"
+"Bruno Brouard <annoa.b@gmail.com>, 2009-2010\n"
+"Yannou90 <windaube.non.merci@gmail.com>, 2011"
+
+#: ../src/about.c:32
+msgid ""
+"YAD is free software; you can redistribute it and/or modify it under the "
+"terms of the GNU General Public License as published by the Free Software "
+"Foundation; either version 3 of the License, or (at your option) any later "
+"version.\n"
+"\n"
+"YAD is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE. See the GNU General Public License for more "
+"details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License along with "
+"YAD. If not, see <http://www.gnu.org/licenses/>."
+msgstr ""
+"Yad est un logiciel libre; vous pouvez le redistribuer et/ou le modifier "
+"selon les termes de la Licence Publique Générale GNU publiée par la Free "
+"Software Foundation soit la version 3 de la Licence, ou (à votre choix) "
+"toute version ultérieure.\n"
+"\n"
+"Yad est distribué dans l'espoir qu'il sera utile, mais SANS AUCUNE GARANTIE: "
+"sans même la garantie implicite de COMMERCIALISATION ou D'ADAPTATION A UN "
+"OBJET PARTICULIER. Voir la Licence Publique Générale GNU pour plus de "
+"détails.\n"
+"\n"
+"Vous devriez avoir reçu un exemplaire de la Licence Publique Générale GNU "
+"avec Yad. Si non, voyez <http://www.gnu.org/licenses/>."
+
+#: ../src/about.c:50
+msgid ""
+"Yet Another Dialog\n"
+"(show dialog boxes from shell scripts)\n"
+"\n"
+"Based on Zenity code\n"
+msgstr ""
+"Yet Another dialogue\n"
+"(Afficher des boîtes de dialogue à partir de scripts shell)\n"
+"\n"
+"Basé sur le code Zenity\n"
+
+#: ../src/calendar.c:39 ../src/text.c:389
+#, c-format
+msgid "Cannot open file '%s': %s\n"
+msgstr "Impossible d'ouvrir le fichier '%s': %s\n"
+
+#: ../src/entry.c:172 ../src/scale.c:39
+#, c-format
+msgid "Maximum value must be greater than minimum value.\n"
+msgstr "La valeur minimale doit être inférieure à la valeur maximale.\n"
+
+#: ../src/entry.c:179 ../src/scale.c:48
+#, c-format
+msgid "Initial value less than minimal.\n"
+msgstr "Valeur initial inférieur à la minimal.\n"
+
+#: ../src/entry.c:184 ../src/scale.c:53
+#, c-format
+msgid "Initial value greater than maximum.\n"
+msgstr "Valeur initial supérieur à la maximal.\n"
+
+#: ../src/form.c:372
+msgid "Select files"
+msgstr "Sélectionner _tous les fichiers"
+
+#: ../src/form.c:380
+#, fuzzy
+msgid "Select folders"
+msgstr "Choisir un répertoire"
+
+#: ../src/form.c:443
+msgid "Select or create file"
+msgstr "Sélectionner ou créer le fichier"
+
+#: ../src/form.c:451
+msgid "Select or create folder"
+msgstr "Sélectionner ou créer le dossier"
+
+#: ../src/form.c:488
+msgid "Select date"
+msgstr "Sélectionner une date"
+
+#: ../src/form.c:689
+msgid "Select file"
+msgstr "Sélectionner le fichier"
+
+#: ../src/form.c:703
+msgid "Select folder"
+msgstr "Choisir un répertoire"
+
+#: ../src/icons.c:321
+#, c-format
+msgid "Unable to parse file %s: %s\n"
+msgstr "Impossible d'analyser le fichier %s: %s\n"
+
+#: ../src/icons.c:338
+#, c-format
+msgid "Unable to open directory %s: %s\n"
+msgstr "impossible d'ouvrir le répertoire  %s: %s\n"
+
+#: ../src/main.c:102 ../src/main.c:233
+#, c-format
+msgid "%d sec"
+msgstr "%d sec"
+
+#: ../src/main.c:656
+#, c-format
+msgid "Unable to parse command line: %s\n"
+msgstr "Impossible d'analyser la ligne de commande: %s\n"
+
+#: ../src/notification.c:118
+#, c-format
+msgid "Could not load notification icon '%s': %s\n"
+msgstr "Impossible de charger l'icône de notification '%s': %s\n"
+
+#: ../src/notification.c:301
+#, c-format
+msgid "Invalid UTF-8 in tooltip!\n"
+msgstr "Charactère UTF-8 invalide du tooltip!\n"
+
+#: ../src/notification.c:345
+#, c-format
+msgid "Unknown command '%s'\n"
+msgstr "Commande inconnue: '%s'\n"
+
+#: ../src/notification.c:380
+msgid "Yad notification"
+msgstr "Yad notification"
+
+#: ../src/list.c:856
+msgid "Add row"
+msgstr "Ajouter une ligne"
+
+#: ../src/list.c:863
+msgid "Delete row"
+msgstr "Supprimer la ligne"
+
+#: ../src/list.c:870
+#, fuzzy
+msgid "Duplicate row"
+msgstr "Supprimer la ligne"
+
+#: ../src/list.c:897
+#, c-format
+msgid "No column titles specified for List dialog.\n"
+msgstr "Pas de titre de colonne spécifié pour liste.\n"
+
+#: ../src/option.c:69
+msgid "Set the dialog title"
+msgstr "Définit le titre"
+
+#: ../src/option.c:70
+msgid "TITLE"
+msgstr "TITRE"
+
+#: ../src/option.c:75
+msgid "Set the window icon"
+msgstr "Définir l'icône de la fenêtre"
+
+#: ../src/option.c:76
+msgid "ICONPATH"
+msgstr "ICONPATH"
+
+#: ../src/option.c:81
+msgid "Set the width"
+msgstr "Définir la largeur"
+
+#: ../src/option.c:82
+msgid "WIDTH"
+msgstr "LARGEUR"
+
+#: ../src/option.c:87
+msgid "Set the height"
+msgstr "Définir la hauteur"
+
+#: ../src/option.c:88
+msgid "HEIGHT"
+msgstr "HAUTEUR"
+
+#: ../src/option.c:93
+msgid "Set the window geometry"
+msgstr "Définir la géométrie de la fenêtre"
+
+#: ../src/option.c:94
+msgid "WxH+X+Y"
+msgstr "WxH+X+Y"
+
+#: ../src/option.c:99
+msgid "Set dialog timeout in seconds"
+msgstr "Sélectionner le compte à rebourt en seconde de la boite de dialogue"
+
+#: ../src/option.c:100
+msgid "TIMEOUT"
+msgstr "EXPIRATION"
+
+#: ../src/option.c:105
+msgid "Show remaining time indicator (top, bottom, left, right)"
+msgstr "Voir indicateur de temps restant (haut, bas, gauche, droite)"
+
+#: ../src/option.c:106
+msgid "POS"
+msgstr "POS"
+
+#: ../src/option.c:111
+msgid "Set the dialog text"
+msgstr "Définir le texte"
+
+#: ../src/option.c:112 ../src/option.c:142 ../src/option.c:391
+#: ../src/option.c:397 ../src/option.c:403 ../src/option.c:543
+#: ../src/option.c:971 ../src/option.c:1010
+msgid "TEXT"
+msgstr "TEXTE"
+
+#: ../src/option.c:117
+#, fuzzy
+msgid "Set the dialog text alignment (left, center, right, fill)"
+msgstr ""
+"Définir l'alignement des étiquettes de champs (gauche, centre ou droite)"
+
+#: ../src/option.c:118 ../src/option.c:160 ../src/option.c:566
+#: ../src/option.c:738 ../src/option.c:820 ../src/option.c:863
+#: ../src/option.c:937 ../src/option.c:1138
+msgid "TYPE"
+msgstr "TYPE"
+
+#: ../src/option.c:123
+msgid "Set the dialog image"
+msgstr "Définir l'image"
+
+#: ../src/option.c:124 ../src/option.c:427 ../src/option.c:439
+msgid "IMAGE"
+msgstr "IMAGE"
+
+#: ../src/option.c:129
+msgid "Show image above main widget"
+msgstr "Afficher l'image du widget principal"
+
+#: ../src/option.c:135
+msgid "Use specified icon theme instead of default"
+msgstr "Utiliser un théme d'icone spécifique"
+
+#: ../src/option.c:136
+msgid "THEME"
+msgstr "THEME"
+
+#: ../src/option.c:141
+msgid "Hide main widget with expander"
+msgstr "Cacher le widget principal avec un extenseur"
+
+#: ../src/option.c:147
+msgid "Add dialog button (may be used multiple times)"
+msgstr "Ajouter un bouton de dialogue (peut être utilisé plusieurs fois)"
+
+#: ../src/option.c:148
+msgid "NAME:ID"
+msgstr "NOM:ID"
+
+#: ../src/option.c:153
+msgid "Don't show buttons"
+msgstr "Ne pas afficher les boutons"
+
+#: ../src/option.c:159
+msgid "Set buttons layout type (spread, edge, start, end or center)"
+msgstr ""
+
+#: ../src/option.c:165
+msgid "Don't use pango markup language in dialog's text"
+msgstr ""
+"Ne pas utiliser le langage de balisage Pango dans une boite de dialogue texte"
+
+#: ../src/option.c:172
+msgid "Add separator between dialog and buttons"
+msgstr "Ajouter un séparateur entre la boite de dialogue et les boutons"
+
+#: ../src/option.c:179
+msgid "Set window borders"
+msgstr "Définir les bordures de fenêtre"
+
+#: ../src/option.c:180 ../src/option.c:259 ../src/option.c:572
+#: ../src/option.c:744 ../src/option.c:750 ../src/option.c:756
+#: ../src/option.c:762 ../src/option.c:768 ../src/option.c:869
+msgid "NUMBER"
+msgstr "NOMBRE"
+
+#: ../src/option.c:185
+msgid "Always print result"
+msgstr "Toujours afficher le résultat"
+
+#: ../src/option.c:191
+msgid "Dialog text can be selected"
+msgstr "Le texte peut être sélectionné"
+
+#: ../src/option.c:198
+msgid "Set window sticky"
+msgstr "Définir la fenêtre comme collante"
+
+#: ../src/option.c:204
+msgid "Set window unresizable"
+msgstr "Fixer la géométrie de la fenêtre"
+
+#: ../src/option.c:210
+msgid "Place window on top"
+msgstr "Placer la fenêtre sur le dessus"
+
+#: ../src/option.c:216
+msgid "Place window on center of screen"
+msgstr "Centrer la fenêtre"
+
+#: ../src/option.c:222
+msgid "Place window at the mouse position"
+msgstr "Placer la fenêtre sous la souri"
+
+#: ../src/option.c:228
+msgid "Set window undecorated"
+msgstr "Ne pas décorer la fenêtre"
+
+#: ../src/option.c:234
+msgid "Don't show window in taskbar"
+msgstr "Ne pas montrer la fenêtre dans la barre de tâches"
+
+#: ../src/option.c:240
+#, fuzzy
+msgid "Set window maximized"
+msgstr "Fixer la géométrie de la fenêtre"
+
+#: ../src/option.c:246
+#, fuzzy
+msgid "Set window fulscreen"
+msgstr "Fixer la géométrie de la fenêtre"
+
+#: ../src/option.c:252
+msgid "Special type of dialog for XEMBED"
+msgstr ""
+
+#: ../src/option.c:253 ../src/option.c:851
+msgid "KEY"
+msgstr ""
+
+#: ../src/option.c:258
+msgid "Tab nubmer of this dialog"
+msgstr ""
+
+#: ../src/option.c:265
+#, fuzzy
+msgid "Send SIGNAL to parent"
+msgstr "Envoyer le signal TERM au parent"
+
+#: ../src/option.c:266
+msgid "SIGNAL"
+msgstr ""
+
+#: ../src/option.c:271
+msgid "Print X Window Id to the stderr"
+msgstr "Afficher l'ID de la fenêtre sur stderr"
+
+#: ../src/option.c:278
+msgid "Add path for search icons by name"
+msgstr ""
+
+#: ../src/option.c:279
+#, fuzzy
+msgid "PATH"
+msgstr "ICONPATH"
+
+#: ../src/option.c:288
+msgid "Display calendar dialog"
+msgstr "Afficher une boîte de dialogue de calendrier"
+
+#: ../src/option.c:294
+msgid "Set the calendar day"
+msgstr "Définir le jour du calendrier"
+
+#: ../src/option.c:295
+msgid "DAY"
+msgstr "JOUR"
+
+#: ../src/option.c:300
+msgid "Set the calendar month"
+msgstr "Définir le mois du calendrier"
+
+#: ../src/option.c:301
+msgid "MONTH"
+msgstr "MOIS"
+
+#: ../src/option.c:306
+msgid "Set the calendar year"
+msgstr "Définir l'année du calendrier"
+
+#: ../src/option.c:307
+msgid "YEAR"
+msgstr "ANNÉE"
+
+#: ../src/option.c:312 ../src/option.c:589
+msgid "Set the format for the returned date"
+msgstr "Régler le format de la date de retour"
+
+#: ../src/option.c:313 ../src/option.c:590 ../src/option.c:649
+msgid "PATTERN"
+msgstr "MOTIF"
+
+#: ../src/option.c:318
+msgid "Set the filename with dates details"
+msgstr "Régler le  fichier avec les détails de dates"
+
+#: ../src/option.c:319 ../src/option.c:347 ../src/option.c:467
+#: ../src/option.c:931 ../src/option.c:1156 ../src/option.c:1200
+msgid "FILENAME"
+msgstr "NOMDEFICHIER"
+
+#: ../src/option.c:328
+msgid "Display color selection dialog"
+msgstr "Afficher la boîte de sélection de couleur"
+
+#: ../src/option.c:334
+msgid "Alias for --color"
+msgstr "Alias pour --color"
+
+#: ../src/option.c:340
+msgid "Set initial color value"
+msgstr "Définir la valeur initial de la couleur"
+
+#: ../src/option.c:341 ../src/option.c:1114 ../src/option.c:1120
+msgid "COLOR"
+msgstr "COULEUR"
+
+#: ../src/option.c:346
+msgid "Set path to palette file. Default - "
+msgstr "Définir le chemin du fichier palette . Par défaut -"
+
+#: ../src/option.c:352
+msgid "Use #rrrrggggbbbb format instead of #rrggbb"
+msgstr "Utiliser le format #rrrrggggbbbb  en place de #rrggbb"
+
+#: ../src/option.c:362
+msgid "Display drag-n-drop box"
+msgstr "Afficher une boîte de glisser-déposer"
+
+#: ../src/option.c:368
+msgid "Use dialog text as tooltip"
+msgstr "Utiliser une boîte de dialogue texte comme tooltip"
+
+#: ../src/option.c:374
+msgid "Set command for process d-n-d data"
+msgstr "Définir la commande du processus d-n-d data"
+
+#: ../src/option.c:375 ../src/option.c:433 ../src/option.c:445
+#: ../src/option.c:774 ../src/option.c:885
+msgid "CMD"
+msgstr "CMD"
+
+#: ../src/option.c:384
+msgid "Display text entry or combo-box dialog"
+msgstr "Afficher une entrée de texte ou une liste déroulante"
+
+#: ../src/option.c:390
+msgid "Set the entry label"
+msgstr "Définir l’étiquette d'entrée"
+
+#: ../src/option.c:396
+msgid "Set the entry text"
+msgstr "Définir l'entrée"
+
+#: ../src/option.c:402
+msgid "Hide the entry text"
+msgstr "Cacher l'entrée"
+
+#: ../src/option.c:408
+msgid "Use completion instead of combo-box"
+msgstr "Utiliser l'autocomplétion plutôt qu'une liste déroulante"
+
+#: ../src/option.c:414
+msgid "Use spin button for text entry"
+msgstr "Utiliser un bouton pour l'entré de texte"
+
+#: ../src/option.c:420
+msgid "Allow changes to text in combo-box"
+msgstr "Autoriser les modifications au texte dans la liste déroulante"
+
+#: ../src/option.c:426
+msgid "Set the left entry icon"
+msgstr "Définir l'étiquette de l'entrée gauche de l'icône"
+
+#: ../src/option.c:432
+msgid "Set the left entry icon action"
+msgstr "Définir l'action de icône de gauche"
+
+#: ../src/option.c:438
+msgid "Set the right entry icon"
+msgstr "Définir l'étiquette de l'entrée droite de l'icône"
+
+#: ../src/option.c:444
+msgid "Set the right entry icon action"
+msgstr "Définir l'action de l'iône de droite"
+
+#: ../src/option.c:454
+msgid "Display file selection dialog"
+msgstr "Afficher la boîte de sélection de fichier"
+
+#: ../src/option.c:460
+msgid "Alias for --file"
+msgstr "Alias pour --file"
+
+#: ../src/option.c:466
+msgid "Set the filename"
+msgstr "Définir le nom de fichier"
+
+#: ../src/option.c:472
+msgid "Allow multiple files to be selected"
+msgstr "Autoriser plusieurs fichiers à être sélectionnés"
+
+#: ../src/option.c:478
+msgid "Activate directory-only selection"
+msgstr "Activer seulement la sélection de répertoire"
+
+#: ../src/option.c:484
+msgid "Activate save mode"
+msgstr "Activer le mode sauvegarde"
+
+#: ../src/option.c:490 ../src/option.c:577 ../src/option.c:713
+msgid "Set output separator character"
+msgstr "Définir le charactère séparateur en sortie"
+
+#: ../src/option.c:491 ../src/option.c:578 ../src/option.c:584
+#: ../src/option.c:714 ../src/option.c:897 ../src/option.c:903
+msgid "SEPARATOR"
+msgstr "SÉPARATEUR"
+
+#: ../src/option.c:496
+msgid "Confirm file selection if filename already exists"
+msgstr "Confirmer la sélection de fichier si le fichier existe"
+
+#: ../src/option.c:497
+msgid "[TEXT]"
+msgstr "[TEXTE]"
+
+#: ../src/option.c:502
+msgid "Sets a filename filter"
+msgstr "Définir le filtre de fichier"
+
+#: ../src/option.c:503
+msgid "NAME | PATTERN1 PATTERN2 ..."
+msgstr "NOM | REPERTOIRE1 REPERTOIRE2 ..."
+
+#: ../src/option.c:508
+#, fuzzy
+msgid "Enable preview"
+msgstr "Définir le texte initial"
+
+#: ../src/option.c:514 ../src/option.c:601 ../src/option.c:791
+#, fuzzy
+msgid "Quote dialogs output"
+msgstr "Définir le texte"
+
+#: ../src/option.c:524
+msgid "Display font selection dialog"
+msgstr "Afficher une boîte de dialogue de sélection de police d'écriture"
+
+#: ../src/option.c:530
+msgid "Alias for --font"
+msgstr "Alias pour --font"
+
+#: ../src/option.c:536
+msgid "Set initial font"
+msgstr "Définir la police d'écriture"
+
+#: ../src/option.c:537 ../src/option.c:955 ../src/option.c:1126
+msgid "FONTNAME"
+msgstr "NOMDEPOLICE"
+
+#: ../src/option.c:542
+msgid "Set preview text"
+msgstr "Définir le texte initial"
+
+#: ../src/option.c:552
+msgid "Display form dialog"
+msgstr "Afficher une boîte de type form"
+
+#: ../src/option.c:559
+#, fuzzy
+msgid ""
+"Add field to form (TYPE - H, RO, NUM, CHK, CB, CBE, FL, SFL, MFL, DIR, CDIR, "
+"MDIR, FN, DT, SCL, CLR, BTN, FBTN, LBL or TXT)"
+msgstr ""
+"Ajouter un champ à la forme (TYPE - H, RO, NUM, CHK, CB, CBE, FL, SFL, DIR, "
+"CDIR, FN, MFL, DT, CLR, BTN or LBL)"
+
+#: ../src/option.c:560 ../src/option.c:808
+msgid "LABEL[:TYPE]"
+msgstr "ETIQUETTE[:TYPE]"
+
+#: ../src/option.c:565
+#, fuzzy
+msgid "Set alignment of filed labels (left, center or right)"
+msgstr ""
+"Définir l'alignement des étiquettes de champs (gauche, centre ou droite)"
+
+#: ../src/option.c:571
+msgid "Set number of columns in form"
+msgstr "Définir le nombre de colonnes dans la boîte form"
+
+#: ../src/option.c:583
+msgid "Set separator character for combobox or scale data"
+msgstr ""
+"Définir le séparateur de charactère pour la liste déroulante ou les données "
+"d'échelle"
+
+#: ../src/option.c:595
+#, fuzzy
+msgid "Make form scrollable"
+msgstr "Rendre les URI clickable"
+
+#: ../src/option.c:611
+msgid "Display icons box dialog"
+msgstr "Afficher une boîte de type icône"
+
+#: ../src/option.c:617
+msgid "Read data from .desktop files in specified directory"
+msgstr "Lire les données des fichiers .desktop dans le répertoire spécifié"
+
+#: ../src/option.c:618
+msgid "DIRECTORY"
+msgstr "REPERTOIRE"
+
+#: ../src/option.c:623
+msgid "Use compact (list) view"
+msgstr "Utiliser la vue compacter (liste)"
+
+#: ../src/option.c:629
+msgid "Use GenericName field instead of Name for icon label"
+msgstr ""
+"Utiliser le nom générique plutôt que le nom pour  l'étiquette de l'icone"
+
+#: ../src/option.c:635
+msgid "Read data from stdin"
+msgstr "Lire les données de stdin"
+
+#: ../src/option.c:641
+msgid "Set the width of dialog items"
+msgstr "Définir la largeur du champs"
+
+#: ../src/option.c:648
+#, no-c-format
+msgid ""
+"Use specified pattern for launch command in terminal (default: xterm -e %s)"
+msgstr ""
+"Utiliser un motif spécifié pour la commande de lancement dans le terminal "
+"(par défaut: xterm-e% s)"
+
+#: ../src/option.c:654
+msgid "Sort items by name instead of filename"
+msgstr "Trier les éléments par nom plutôt que par fichier"
+
+#: ../src/option.c:660
+msgid "Sort items in descending order"
+msgstr "Trier les éléments par ordre décroissant"
+
+#: ../src/option.c:666
+msgid "Activate items by single click"
+msgstr ""
+
+#: ../src/option.c:676
+msgid "Display list dialog"
+msgstr "Afficher une boîte de type liste"
+
+#: ../src/option.c:682
+msgid "Don't show column headers"
+msgstr "Ne pas afficher les entêtes de colonnes"
+
+#: ../src/option.c:688
+#, fuzzy
+msgid "Set the column header (TYPE - TEXT, NUM, FLT, CHK, RD, IMG, HD or TIP)"
+msgstr "Définir l'entête de colonne (TYPE - TEXT, NUM, FLT, CHK, IMG or TIP)"
+
+#: ../src/option.c:689
+msgid "COLUMN[:TYPE]"
+msgstr "COLONNE[:TYPE]"
+
+#: ../src/option.c:694
+#, fuzzy
+msgid "Use checkboxes for first column"
+msgstr "Utiliser des cases à cocher pour la première colonne"
+
+#: ../src/option.c:700
+#, fuzzy
+msgid "Use radioboxes for first column"
+msgstr "Utiliser des cases à cocher pour la première colonne"
+
+#: ../src/option.c:706
+msgid "Disable clickable column headers"
+msgstr ""
+
+#: ../src/option.c:719
+msgid "Allow multiple rows to be selected"
+msgstr "Autoriser plusieurs lignes à être sélectionnés"
+
+#: ../src/option.c:725 ../src/option.c:1161
+msgid "Allow changes to text"
+msgstr "Autoriser l'édition de texte"
+
+#: ../src/option.c:731
+msgid "Print all data from list"
+msgstr "Afficher toute les données de la liste"
+
+#: ../src/option.c:737
+msgid "Set ellipsize mode for text columns (TYPE - NONE, START, MIDDLE or END)"
+msgstr ""
+"Définir le mode défilement automatique pour les colonnes  texte (TYPE - "
+"NONE, START, MIDDLE or END)"
+
+#: ../src/option.c:743
+msgid ""
+"Print a specific column. By default or if 0 is specified will be printed all "
+"columns"
+msgstr ""
+"Renvoyer une colonne spécifique. Par défaut ou si 0 est spécifié toutes les "
+"colonnes sont renvoyée"
+
+#: ../src/option.c:749
+msgid "Hide a specific column"
+msgstr "Cacher une colonne spécifique"
+
+#: ../src/option.c:755
+msgid "Set the column expandable by default. 0 sets all columns expandable"
+msgstr ""
+"Définirla colonne extensible par défaut. 0 définit toutes les colonnes comme "
+"extensible"
+
+#: ../src/option.c:761
+msgid ""
+"Set the quick search column. Default is first column. Set it to 0 for "
+"disable searching"
+msgstr ""
+"Définir la colonne de recherche rapide. Par défaut :  la première colonne. "
+"Réglez à 0 pour désactiver la recherche"
+
+#: ../src/option.c:767
+msgid "Set the limit of rows in list"
+msgstr "Définir la limite de lignes dans une liste"
+
+#: ../src/option.c:773
+msgid "Set double-click action"
+msgstr "Action sur un double clic"
+
+#: ../src/option.c:779
+msgid "Use regex in search"
+msgstr "Utiliser regex dans les recherches"
+
+#: ../src/option.c:785
+msgid "Listen for data on stdin in addition to command-line"
+msgstr ""
+
+#: ../src/option.c:801
+msgid "Display multi progress bars dialog"
+msgstr "Afficher une boîte de dialogue à barre de progression multiple "
+
+#: ../src/option.c:807
+msgid "Add the progress bar (TYPE - NORM, RTL or PULSE)"
+msgstr "Ajouter une barre de progression (TYPE - NORM, RTL or PULSE)"
+
+#: ../src/option.c:813
+msgid "Show vertical bars"
+msgstr "Afficher les barres verticales"
+
+#: ../src/option.c:819
+#, fuzzy
+msgid "Set alignment of bar labels (left, center or right)"
+msgstr ""
+"Définir l'alignement des étiquettes de champs (gauche, centre ou droite)"
+
+#: ../src/option.c:826
+#, fuzzy, no-c-format
+msgid "Dismiss the dialog when 100% of all bars has been reached"
+msgstr "Fermer la boîte de dialogue quand 100% sont atteint"
+
+#: ../src/option.c:833 ../src/option.c:996
+msgid "Kill parent process if cancel button is pressed"
+msgstr "Tuer le processus parent quand le bouton quitter est pressé"
+
+#: ../src/option.c:844
+#, fuzzy
+msgid "Display notebook dialog"
+msgstr "Afficher une boîte de type icône"
+
+#: ../src/option.c:850
+msgid "Identifier of embedded dialogs"
+msgstr ""
+
+#: ../src/option.c:856
+msgid "Add a tab to notebook"
+msgstr ""
+
+#: ../src/option.c:857
+msgid "LABEL"
+msgstr ""
+
+#: ../src/option.c:862
+#, fuzzy
+msgid "Set position of a notebook tabs (top, bottom, left or right)"
+msgstr "Voir indicateur de temps restant (haut, bas, gauche, droite)"
+
+#: ../src/option.c:868
+#, fuzzy
+msgid "Set tab borders"
+msgstr "Définir les bordures de fenêtre"
+
+#: ../src/option.c:878
+msgid "Display notification"
+msgstr "Utiliser la notification"
+
+#: ../src/option.c:884
+msgid "Set left-click action"
+msgstr "Action sur un  clic gauche"
+
+#: ../src/option.c:890
+msgid "Listen for commands on stdin"
+msgstr "Écouter les commandes sur stdin"
+
+#: ../src/option.c:896
+msgid "Set separator character for menu values"
+msgstr "Définir le séparateur pour les valeurs de menu"
+
+#: ../src/option.c:902
+msgid "Set separator character for menu items"
+msgstr "Définir le séparateur pour les champs du menu"
+
+#: ../src/option.c:908
+#, fuzzy
+msgid "Set initial popup menu"
+msgstr "Définir la police d'écriture"
+
+#: ../src/option.c:909
+msgid "STRING"
+msgstr ""
+
+#: ../src/option.c:914
+msgid "Disable exit on middle click"
+msgstr ""
+
+#: ../src/option.c:924
+#, fuzzy
+msgid "Display printing dialog"
+msgstr "Afficher une boîte de type liste"
+
+#: ../src/option.c:930
+#, fuzzy
+msgid "Source filename"
+msgstr "Définir le nom de fichier"
+
+#: ../src/option.c:936
+msgid "Set source type (TYPE - TEXT, IMAGE or RAW)"
+msgstr ""
+
+#: ../src/option.c:942
+msgid "Add headers to page"
+msgstr ""
+
+#: ../src/option.c:948
+msgid "Enable preview in print dialog"
+msgstr ""
+
+#: ../src/option.c:954 ../src/option.c:1125
+msgid "Use specified font"
+msgstr "Utiliser une police spécifiée"
+
+#: ../src/option.c:964
+msgid "Display progress indication dialog"
+msgstr "Afficher l'indication de progression"
+
+#: ../src/option.c:970
+msgid "Set progress text"
+msgstr "Définir le texte de progression"
+
+#: ../src/option.c:976
+msgid "Set initial percentage"
+msgstr "Définir le pourcentage initial"
+
+#: ../src/option.c:977
+msgid "PERCENTAGE"
+msgstr "POURCENTAGE"
+
+#: ../src/option.c:982
+msgid "Pulsate progress bar"
+msgstr "Barre de progression pulsative"
+
+#: ../src/option.c:989
+#, no-c-format
+msgid "Dismiss the dialog when 100% has been reached"
+msgstr "Fermer la boîte de dialogue quand 100% sont atteint"
+
+#: ../src/option.c:1003
+msgid "Right-To-Left progress bar direction"
+msgstr "Barre de progression altérnante"
+
+#: ../src/option.c:1009
+msgid "Show log window"
+msgstr ""
+
+#: ../src/option.c:1015
+msgid "Expand log window"
+msgstr ""
+
+#: ../src/option.c:1021
+#, fuzzy
+msgid "Place log window above progress bar"
+msgstr "Barre de progression pulsative"
+
+#: ../src/option.c:1027
+msgid "Height of log window"
+msgstr ""
+
+#: ../src/option.c:1037
+msgid "Display scale dialog"
+msgstr "Afficher une boîte de type échelle"
+
+#: ../src/option.c:1043
+msgid "Set initial value"
+msgstr "Définir la valeur initial"
+
+#: ../src/option.c:1044 ../src/option.c:1050 ../src/option.c:1056
+#: ../src/option.c:1062 ../src/option.c:1068
+msgid "VALUE"
+msgstr "VALEUR"
+
+#: ../src/option.c:1049
+msgid "Set minimum value"
+msgstr "Définir la valeur minimale"
+
+#: ../src/option.c:1055
+msgid "Set maximum value"
+msgstr "Définir la valeur maximale"
+
+#: ../src/option.c:1061
+msgid "Set step size"
+msgstr "Définir le pas"
+
+#: ../src/option.c:1067
+msgid "Set paging size"
+msgstr "Définir les dimensions de la page"
+
+#: ../src/option.c:1073
+msgid "Print partial values"
+msgstr "Afficher des valeurs partielles"
+
+#: ../src/option.c:1079
+msgid "Hide value"
+msgstr "Cacher la valeur"
+
+#: ../src/option.c:1085
+msgid "Show vertical scale"
+msgstr "Affiche l'échelle verticale"
+
+#: ../src/option.c:1091
+msgid "Invert direction"
+msgstr "Inverser la direction"
+
+#: ../src/option.c:1097
+msgid "Add mark to scale (may be used multiple times)"
+msgstr "Ajouter un marqueur à l'échelle (peut être utilisée plusieurs fois)"
+
+#: ../src/option.c:1098
+msgid "NAME:VALUE"
+msgstr "NOM: VALEUR"
+
+#: ../src/option.c:1107
+msgid "Display text information dialog"
+msgstr "Afficher une boîte d'information"
+
+#: ../src/option.c:1113
+msgid "Use specified color for text"
+msgstr "Utiliser une couleur spécifiée pour le texte"
+
+#: ../src/option.c:1119
+msgid "Use specified color for background"
+msgstr "Utiliser une couleur spécifiée pour le fond"
+
+#: ../src/option.c:1131
+msgid "Enable text wrapping"
+msgstr "Activer les sauts de ligne automatiques"
+
+#: ../src/option.c:1137
+msgid "Set justification (TYPE - left, right, center or fill)"
+msgstr "Définir le type (TYPE - gauche, droite, centre ou de remplissage)"
+
+#: ../src/option.c:1143
+msgid "Set text margins"
+msgstr "Définir la marge du texte"
+
+#: ../src/option.c:1144
+msgid "SIZE"
+msgstr "TAILLE"
+
+#: ../src/option.c:1149
+msgid "Autoscroll to end of text"
+msgstr "Sauter en fin de texte"
+
+#: ../src/option.c:1155
+msgid "Open file"
+msgstr "Ouvrir un fichier"
+
+#: ../src/option.c:1167
+msgid "Make URI clickable"
+msgstr "Rendre les URI clickable"
+
+#: ../src/option.c:1173
+msgid "Listen for data on stdin in addition to file"
+msgstr ""
+
+#: ../src/option.c:1183
+msgid "Show about dialog"
+msgstr "Afficher la boîte \"A propos\""
+
+#: ../src/option.c:1189
+msgid "Print version"
+msgstr "Afficher la version"
+
+#: ../src/option.c:1199
+msgid "Load extra arguments from file"
+msgstr ""
+
+#: ../src/option.c:1244 ../src/option.c:1459
+#, c-format
+msgid "Unknown align type: %s\n"
+msgstr "Type d'alignement inconnue: %s\n"
+
+#: ../src/option.c:1401
+#, c-format
+msgid "Mark %s doesn't have a value\n"
+msgstr "Le marqueur %s n'a pas de valeur\n"
+
+#: ../src/option.c:1444
+#, fuzzy, c-format
+msgid "Unknown buttons layout type: %s\n"
+msgstr "Type d'alignement inconnue: %s\n"
+
+#: ../src/option.c:1476
+#, c-format
+msgid "Unknown justification type: %s\n"
+msgstr "Type de justification inconnue: %s\n"
+
+#: ../src/option.c:1493
+#, fuzzy, c-format
+msgid "Unknown tab position type: %s\n"
+msgstr "Type d'alignement inconnue: %s\n"
+
+#: ../src/option.c:1529
+#, c-format
+msgid "Unknown ellipsize type: %s\n"
+msgstr "Type de défilement automatique inconnue: %s\n"
+
+#: ../src/option.c:1544
+#, fuzzy, c-format
+msgid "Unknown source type: %s\n"
+msgstr "Type de défilement automatique inconnue: %s\n"
+
+#: ../src/option.c:1555
+#, fuzzy
+msgid "Progress log"
+msgstr "Options de la barre de progression"
+
+#: ../src/option.c:1664
+#, fuzzy, c-format
+msgid "Unknown signal: %s\n"
+msgstr "Type d'alignement inconnue: %s\n"
+
+#: ../src/option.c:1807
+msgid "File exist. Overwrite?"
+msgstr "Le fichier existe. Écraser?"
+
+#: ../src/option.c:1900
+msgid "Yet another dialoging program"
+msgstr "Yet another dialoging program"
+
+#. Adds general option entries
+#: ../src/option.c:1904
+msgid "General options"
+msgstr "Options générales"
+
+#: ../src/option.c:1904
+msgid "Show general options"
+msgstr "Afficher les options générales"
+
+#. Adds calendar option entries
+#: ../src/option.c:1910
+msgid "Calendar options"
+msgstr "Options du calendrier"
+
+#: ../src/option.c:1910
+msgid "Show calendar options"
+msgstr "Afficher les options du calendrier"
+
+#. Adds color option entries
+#: ../src/option.c:1916
+msgid "Color selection options"
+msgstr "Options de la boîte de sélection de couleurs"
+
+#: ../src/option.c:1916
+msgid "Show color selection options"
+msgstr "Afficher les options de la boîte de sélection de couleurs"
+
+#. Adds dnd option entries
+#: ../src/option.c:1922
+msgid "DND options"
+msgstr "Options de la boîte de glisser/déposer"
+
+#: ../src/option.c:1922
+msgid "Show drag-n-drop options"
+msgstr "Afficher les options de la boîte de glisser/déposer"
+
+#. Adds entry option entries
+#: ../src/option.c:1928
+msgid "Text entry options"
+msgstr "Options de la boîte d'entrée"
+
+#: ../src/option.c:1928
+msgid "Show text entry options"
+msgstr "Afficher les options de la boîte d'entrée"
+
+#. Adds file selection option entries
+#: ../src/option.c:1934
+msgid "File selection options"
+msgstr "Options de la boîte de sélection de fichier"
+
+#: ../src/option.c:1934
+msgid "Show file selection options"
+msgstr "Afficher les options de la boîte de sélection de fichier"
+
+#. Add font selection option entries
+#: ../src/option.c:1940
+msgid "Font selection options"
+msgstr "Options de la boîte de sélection de police"
+
+#: ../src/option.c:1940
+msgid "Show font selection options"
+msgstr "Afficher les options de la boîte de sélection de police"
+
+#. Add form option entries
+#: ../src/option.c:1946
+msgid "Form options"
+msgstr "Options de types form"
+
+#: ../src/option.c:1946
+msgid "Show form options"
+msgstr "Afficher les options de types form"
+
+#. Add icons option entries
+#: ../src/option.c:1952
+msgid "Icons box options"
+msgstr "Options de la boîte de sélection d'icône"
+
+#: ../src/option.c:1952
+msgid "Show icons box options"
+msgstr "Afficher les options de la boîte de sélection d'icône"
+
+#. Adds list option entries
+#: ../src/option.c:1958
+msgid "List options"
+msgstr "Options de la boîte de type liste"
+
+#: ../src/option.c:1958
+msgid "Show list options"
+msgstr "Afficher les options de la boîte de sélection d'icône"
+
+#. Adds multi progress option entries
+#: ../src/option.c:1964
+msgid "Multi progress bars options"
+msgstr "Options des barres de progression multpile"
+
+#: ../src/option.c:1965
+#, fuzzy
+msgid "Show multi progress bars options"
+msgstr "Afficher les options des barres de progression multiples"
+
+#. Adds notebook option entries
+#: ../src/option.c:1971
+#, fuzzy
+msgid "Notebook options"
+msgstr "Options de la boîte de glisser/déposer"
+
+#: ../src/option.c:1971
+#, fuzzy
+msgid "Show notebook dialog options"
+msgstr "Afficher les options de la barre de progression"
+
+#. Adds notification option entries
+#: ../src/option.c:1977
+msgid "Notification icon options"
+msgstr "Options de la boîte de type icône"
+
+#: ../src/option.c:1978
+msgid "Show notification icon options"
+msgstr "Afficher les options de la boîte de type icône"
+
+#. Adds print option entries
+#: ../src/option.c:1984
+#, fuzzy
+msgid "Print dialog options"
+msgstr "Options de la barre de progression"
+
+#: ../src/option.c:1984
+#, fuzzy
+msgid "Show print dialog options"
+msgstr "Afficher les options de la barre de progression"
+
+#. Adds progress option entries
+#: ../src/option.c:1990
+msgid "Progress options"
+msgstr "Options de la barre de progression"
+
+#: ../src/option.c:1990
+msgid "Show progress options"
+msgstr "Afficher les options de la barre de progression"
+
+#. Adds scale option entries
+#: ../src/option.c:1996
+msgid "Scale options"
+msgstr "Options de la boîte échelle"
+
+#: ../src/option.c:1996
+msgid "Show scale options"
+msgstr "Afficher les options de la boîte échelle"
+
+#. Adds text option entries
+#: ../src/option.c:2002
+msgid "Text information options"
+msgstr "Options de la boîte de type information"
+
+#: ../src/option.c:2002
+msgid "Show text information options"
+msgstr "Afficher les options de la boîte de type information"
+
+#. Adds miscellaneous option entries
+#: ../src/option.c:2008
+msgid "Miscellaneous options"
+msgstr "Options diverses"
+
+#: ../src/option.c:2008
+msgid "Show miscellaneous options"
+msgstr "Afficher les options diverses"
+
+#: ../src/print.c:202 ../src/print.c:361
+#, fuzzy, c-format
+msgid "Printing failed: %s\n"
+msgstr "Impossible d'ouvrir le fichier %s: %s"
+
+#: ../src/print.c:230
+#, c-format
+msgid "File %s not found.\n"
+msgstr ""
+
+#: ../src/print.c:236
+#, c-format
+msgid "Filename is not specified.\n"
+msgstr ""
+
+#: ../src/print.c:377
+#, c-format
+msgid "Printer doesn't support ps format.\n"
+msgstr ""
+
+#: ../src/print.c:385
+#, c-format
+msgid "Printer doesn't support pdf format.\n"
+msgstr ""
+
+#: ../src/print.c:391
+#, c-format
+msgid "This file type is not supported for raw printing.\n"
+msgstr ""
+
+#: ../src/print.c:405
+#, c-format
+msgid "Load source file failed: %s\n"
+msgstr ""
+
+#: ../src/color.c:65
+#, fuzzy, c-format
+msgid "Can't open file %s: %s\n"
+msgstr "Impossible d'ouvrir le fichier %s: %s"
+
+#. create expander
+#: ../src/color.c:150
+msgid "Palette"
+msgstr "Palette"
+
+#: ../src/color.c:169
+msgid "Color"
+msgstr "Couleur"
+
+#: ../src/color.c:186
+msgid "Name"
+msgstr "Nom"
+
+#: ../src/text.c:418
+#, c-format
+msgid "Invalid UTF-8 data encountered reading file %s\n"
+msgstr "Données UTF-8 invalides rencontrées en lecture du fichier %s\n"
+
+#: ../src/browser.c:132
+msgid "scalable "
+msgstr "scalable "
+
+#: ../src/browser.c:142
+msgid "built-in"
+msgstr "Support intégré"
+
+#. initialize GTK+ and parse the command line arguments
+#: ../src/browser.c:200
+msgid "- Icon browser"
+msgstr "Navigateur d'icône"
+
+#: ../src/browser.c:213
+msgid "Icon browser"
+msgstr "Navigateur d'icône"
+
+#: ../src/browser.c:247
+msgid "<b>Name:</b>"
+msgstr ""
+
+#: ../src/browser.c:265
+msgid "<b>Sizes:</b>"
+msgstr ""
+
+#: ../src/browser.c:283
+msgid "<b>Filename:</b>"
+msgstr ""
+
+#: ../src/browser.c:325
+msgid "Category"
+msgstr "Catégorie"
+
+#: ../src/browser.c:356
+msgid "Icons"
+msgstr "Icônes"
+
+#: ../data/yad-icon-browser.desktop.in.h:1
+msgid "Icon Browser"
+msgstr "Navigateur d'Icônes"
+
+#: ../data/yad-icon-browser.desktop.in.h:2
+msgid "Inspect GTK Icon Theme"
+msgstr "Parcourir les icônes du thème GTK"
+
+#, fuzzy
+#~ msgid "Set alignment of tab labels (left, center or right)"
+#~ msgstr ""
+#~ "Définir l'alignement des étiquettes de champs (gauche, centre ou droite)"
+
+#~ msgid ""
+#~ "<b>Name:</b> %s\n"
+#~ "<b>Sizes:</b> %s\n"
+#~ "<b>Filename:</b> %s"
+#~ msgstr ""
+#~ "<b>Nom</b> %s\n"
+#~ "<b>Poids:</b> %s\n"
+#~ "<b>Nom de fichier:</b> %s"
+
+#, fuzzy
+#~ msgid "NUM"
+#~ msgstr "NOMBRE"
+
+#~ msgid "Alias to checklist (deprecated)"
+#~ msgstr "Alias ​​pour check-list (obsolète)"

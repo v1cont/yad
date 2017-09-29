@@ -1,0 +1,29 @@
+#! /bin/bash
+
+# Defaults
+APP="notification"
+TIMEOUT=600
+ICON="dialog-information"
+TITLE=
+BODY=
+
+# Parse command line
+OPTIND=1
+while getopts a:i:t: opt ; do
+    case "$opt" in
+        a) APP=$OPTARG ;;
+        i) ICON=$OPTARG ;;
+        t) TIMEOUT=$OPTARG ;;
+    esac
+done
+shift $(($OPTIND - 1))
+[[ "$1" == '--' ]] && shift
+
+TITLE="$1"
+shift
+BODY="$@"
+
+gdbus call --session --dest org.freedesktop.Notifications \
+      --object-path /org/freedesktop/Notifications \
+      --method org.freedesktop.Notifications.Notify \
+      "$APP" 0 "$ICON" "$TITLE" "$BODY" "[]" "{}" $TIMEOUT &> /dev/null
