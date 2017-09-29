@@ -1,5 +1,6 @@
 # Yet Another Dialog
 ====================
+
 Program allows you to display GTK+ dialog boxes from command line or 
 shell scripts. YAD depends on GTK+ only. Minimal GTK+ version is 2.16.0
 
@@ -14,6 +15,7 @@ and simple zenity-compatible wrapper
 
 # Building git version
 ======================
+
 Get git version with command
 
 svn checkout svn://svn.code.sf.net/p/yad-dialog/code/trunk yad-dialog-code
