@@ -23,7 +23,7 @@ svn checkout svn://svn.code.sf.net/p/yad-dialog/code/trunk yad-dialog-code
 Before run the standard ./configure && make && make install procedure
 you need to generate build scripts. This can be done by running command
 
-autoreconf -ivf
+autoreconf -ivf && intltoolize
 
 For successfully build you may need to install the following packages:
 * GNU Autotools (https://www.gnu.org/software/autoconf/ http://www.gnu.org/software/automake/)
