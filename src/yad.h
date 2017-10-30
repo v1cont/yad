@@ -368,6 +368,7 @@ typedef struct {
   gboolean middle;
   gboolean hidden;
   gchar *menu;
+  guint icon_size;
 } YadNotificationData;
 
 typedef struct {

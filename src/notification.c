@@ -40,7 +40,6 @@ static gchar *action = NULL;
 static GSList *menu_data = NULL;
 
 static gint exit_code;
-static gint icon_size = 16;
 
 static void
 free_menu_data (gpointer data, gpointer udata)
@@ -112,7 +111,8 @@ set_icon (void)
 
   if (g_file_test (icon, G_FILE_TEST_EXISTS))
     {
-      pixbuf = gdk_pixbuf_new_from_file_at_scale (icon, icon_size, icon_size, TRUE, &err);
+      pixbuf = gdk_pixbuf_new_from_file_at_scale (icon, options.notification_data.icon_size, 
+                                                  options.notification_data.icon_size, TRUE, &err);
       if (err)
         {
           g_printerr (_("Could not load notification icon '%s': %s\n"), icon, err->message);

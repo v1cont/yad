@@ -497,6 +497,8 @@ static GOptionEntry notification_options[] = {
     N_("Disable exit on middle click"), NULL },
   { "hidden", 0, 0, G_OPTION_ARG_NONE, &options.notification_data.hidden,
     N_("Doesn't show icon at startup"), NULL },
+  { "icon-size", 0, 0, G_OPTION_ARG_INT, &options.notification_data.icon_size,
+    N_("Set icon size for fully specified icons (default - 16)"), N_("SIZE") },
   { NULL }
 };
 
@@ -1580,6 +1582,7 @@ yad_options_init (void)
   options.notification_data.middle = TRUE;
   options.notification_data.hidden = FALSE;
   options.notification_data.menu = NULL;
+  options.notification_data.icon_size = 16;
 
   /* Initialize paned data */
   options.paned_data.orient = GTK_ORIENTATION_VERTICAL;
