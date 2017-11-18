@@ -44,7 +44,12 @@ drop_data_cb (GtkWidget * w, GdkDragContext * dc, gint x, gint y,
           gchar *dstr = g_uri_unescape_string (uris[i], NULL);
           if (options.common_data.command)
             {
-              gchar *action = g_strdup_printf ("%s '%s'", options.common_data.command, dstr);
+              gchar *action;
+
+              if (g_strstr_len (options.common_data.command, -1, "%s"))
+                action = g_strdup_printf (options.common_data.command, dstr);
+              else
+                action = g_strdup_printf ("%s '%s'", options.common_data.command, dstr);
               g_spawn_command_line_async (action, NULL);
               g_free (action);
             }
