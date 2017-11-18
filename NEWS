@@ -1,3 +1,14 @@
+Version 0.40.0
+    - add --exit-on-drop argument to dnd dialog
+    - use --response option to set default exit code
+    - add --iec-format option for size values
+    - add --escape-ok option
+    - add FormFeed handling in icon dialog
+    - use %s in command for dnd dialog
+    - fix parse numeric arguments in entry dialog
+    - add fix of progress log from BrandonH <bhaberfeld@gmail.com>
+    - add --icon-size option to notification dialog
+
 Version 0.39.0
     - add --active-tab to notebook widget
     - place value position of scale form field to the left
@@ -32,7 +43,7 @@ Version 0.37.0
     - add 'perm' type of bar in multiprogress dialog
 
 Version 0.36.3
-    - fix segfault when parse desktop files with missed or empty Comment field 
+    - fix segfault when parse desktop files with missed or empty Comment field
       in icons dialog
     - code and output cleanup
 
@@ -173,7 +184,7 @@ Version 0.26.0
     - add FBTN field type (relief buttons) to form dialog
     - add buttons with custom icons
     - add labels with icons for tab labels in notebook dialog
-    - remove --align option for notebook dialog 
+    - remove --align option for notebook dialog
     - numeric entries aligned to the right side
 
 Version 0.25.1
@@ -184,7 +195,7 @@ Version 0.25.0
     - add --menu option for notification icon
     - add --maximized and --fullscreen options
     - unify --listen option for different kind of dialogs
-    - replace --stdin option by --listen in icon dialog 
+    - replace --stdin option by --listen in icon dialog
 
 Vesrion 0.24.1
     - fix parsing menu in notification dialog
