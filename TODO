@@ -6,3 +6,4 @@
 - add reverse check column for list dialog
 - add option for output format of boolean values (upper, lower, num)
 - add tooltips for labels
+- add custom handlers for edit and delete actions in editable lists
