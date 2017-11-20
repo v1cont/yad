@@ -6,6 +6,7 @@ autom4te.cache/
 .deps/
 *.o
 *~
+#*#
 aclocal.m4
 config.h
 config.h.in
