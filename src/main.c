@@ -774,10 +774,10 @@ main (gint argc, gchar ** argv)
 #if !GLIB_CHECK_VERSION(2,36,0)
   g_type_init ();
 #endif
-  read_settings ();
 
   gtk_init (&argc, &argv);
   g_set_application_name ("YAD");
+  read_settings ();
   yad_options_init ();
 
   ctx = yad_create_context ();
@@ -830,12 +830,7 @@ main (gint argc, gchar ** argv)
 
   /* set default icons and icon theme */
   if (options.data.icon_theme)
-    {
-      settings.icon_theme = gtk_icon_theme_new ();
-      gtk_icon_theme_set_custom_theme (settings.icon_theme, options.data.icon_theme);
-    }
-  else
-    settings.icon_theme = gtk_icon_theme_get_default ();
+    gtk_icon_theme_set_custom_theme (settings.icon_theme, options.data.icon_theme);
   gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &w, &h);
   settings.big_fallback_image =
     gtk_icon_theme_load_icon (settings.icon_theme, "yad", MIN (w, h), GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);

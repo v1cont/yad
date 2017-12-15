@@ -52,6 +52,8 @@ read_settings (void)
 
   settings.print_settings = NULL;
   settings.page_setup = NULL;
+  
+  settings.icon_theme = gtk_icon_theme_get_default ();
 
   filename = g_build_filename (g_get_user_config_dir (), YAD_SETTINGS_FILE, NULL);
 
