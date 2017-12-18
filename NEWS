@@ -1,3 +1,7 @@
+Version 0.40.2
+    - fix --image-path option
+    - fix typos in man page
+
 Version 0.40.0
     - add --exit-on-drop argument to dnd dialog
     - use --response option to set default exit code
