@@ -138,7 +138,7 @@ Use specified GTK icon theme instead of default.
 Hide main widget with expander. \fITEXT\fP is an optional argument with expander's label.
 .TP
 .B \-\-button=\fIBUTTON:ID\fP
-Add the dialog button. May be used multiply times. \fIID\fP is an exit code or a command.
+Add the dialog button. May be used multiple times. \fIID\fP is an exit code or a command.
 \fIBUTTON\fP may be gtk stock item name for predefined buttons (like gtk-close or gtk-ok) or text in a form
 \fILABEL[!ICON[!TOOLTIP]]\fP where `!' is an item separator.
 Full list of stock items may be found in gtk-demo program, in snippet called \fI"Stock Items and Icon Browser"\fP.
@@ -212,7 +212,7 @@ If set, user can select dialog's text and copy it to clipboard.
 This option also affects on label fields in form dialog.
 .TP
 .B \-\-image-path=\fIPATH\fP
-Add specified path to the standard list of directories for looking for icons. This option can be used multiply times.
+Add specified path to the standard list of directories for looking for icons. This option can be used multiple times.
 .TP
 .B \-\-rest=\fIFILENAME\fP
 Read extra arguments from given file instead of command line. Each line of a file treats as a single argument.
@@ -922,17 +922,17 @@ Invert scale direction.
 Show buttons on edges of a scale for increasing or decreasing scale value.
 .TP
 .B \-\-mark=\fI[NAME]:VALUE\fP
-Add a mark to scale. May be used multiply times. \fINAME\fP is an optional arguments for set label to mark.
+Add a mark to scale. May be used multiple times. \fINAME\fP is an optional arguments for set label to mark.
 
 .SS File filters options
 .TP
 .B \-\-file-filter=\fINAME | PATTERN1 PATTERN2 ...\fP
 Add a filename filter. \fINAME\fP is a displayed filter name, \fIPATTERN\fP
-is a shell-style filename pattern (for example *.txt). This option may be used multiply times.
+is a shell-style filename pattern (for example *.txt). This option may be used multiple times.
 .TP
 .B \-\-mime-filter=\fINAME | MIME1 MIME2 ...\fP
 Add a mime-type filter. \fINAME\fP is a displayed filter name, \fIPATTERN\fP
-is a name of mime type (for example text/plain). This option may be used multiply times.
+is a name of mime type (for example text/plain). This option may be used multiple times.
 .TP
 .B \-\-image-filter=\fI[NAME]\fP
 Add filter for images supported by gdk-pixbuf library. \fINAME\fP in as optional name for this filter.
