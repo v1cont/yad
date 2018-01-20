@@ -162,7 +162,7 @@ text_size_allocate_cb (GtkWidget * w, GtkAllocation * al, gpointer data)
 void
 yad_exit (gint id)
 {
-  if (options.mode == YAD_MODE_FILE)
+  if ((options.mode == YAD_MODE_FILE) && !(id & 1))
     {
       /* show custom confirmation dialog */
       if (!file_confirm_overwrite (dialog))
