@@ -1,3 +1,6 @@
+Version 0.40.3
+    - shows overwrite confirmation dialog for save file dialog only on even button codes
+
 Version 0.40.2
     - fix --image-path option
     - fix typos in man page
