@@ -40,6 +40,9 @@
 #endif
 
 #ifdef HAVE_SOURCEVIEW
+#if GTK_CHECK_VERSION(3,0,0)
+#include <gtksourceview/gtksource.h>
+#else
 #include <gtksourceview/gtksourceview.h>
 #include <gtksourceview/gtksourcebuffer.h>
 #include <gtksourceview/gtksourcelanguage.h>
@@ -47,6 +50,7 @@
 #include <gtksourceview/gtksourcestylescheme.h>
 #include <gtksourceview/gtksourcestyleschememanager.h>
 #endif
+#endif /* HAVE_SOURCEVIEW */
 
 G_BEGIN_DECLS
 
