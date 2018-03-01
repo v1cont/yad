@@ -24,13 +24,21 @@
 
 #include <glib/gprintf.h>
 
+#ifdef USE_WEBKIT2
+#include <webkit2/webkit2.h>
+#else
 #include <webkit/webkit.h>
+#endif
 
 static WebKitWebView *view;
 
 static GString *inbuf;
 
+#ifdef USE_WEBKIT2
+static gboolean is_loaded = FALSE;
+#else
 static gboolean is_link = FALSE;
+#endif
 
 #ifndef PATH_MAX
 #define PATH_MAX 4096
@@ -72,6 +80,8 @@ load_uri (const gchar * uri)
   else
     g_printerr ("yad_html_load_uri: cannot load uri '%s'\n", uri);
 }
+
+#ifndef USE_WEBKIT2
 
 static gboolean
 link_cb (WebKitWebView * v, WebKitWebFrame * f, WebKitNetworkRequest * r,
@@ -149,6 +159,41 @@ link_hover_cb (WebKitWebView * v, const gchar * t, const gchar * link, gpointer 
   is_link = (link != NULL);
 }
 
+#else
+
+static void
+loaded_cb (WebKitWebView *v, WebKitLoadEvent ev, gpointer d)
+{
+  if (ev == WEBKIT_LOAD_FINISHED)
+    is_loaded = TRUE;
+}
+
+static gboolean
+policy_cb (WebKitWebView *v, WebKitPolicyDecision *pd, WebKitPolicyDecisionType pt, gpointer d)
+{
+  if (is_loaded && !options.html_data.browser)
+    {
+      WebKitNavigationAction *act = webkit_navigation_policy_decision_get_navigation_action (WEBKIT_NAVIGATION_POLICY_DECISION (pd));
+      webkit_policy_decision_ignore (pd);
+      if (webkit_navigation_action_get_navigation_type (act) == WEBKIT_NAVIGATION_TYPE_LINK_CLICKED)
+        {
+          WebKitURIRequest *r = webkit_navigation_action_get_request (act);
+          gchar *uri = (gchar *) webkit_uri_request_get_uri (r);
+
+          if (options.html_data.print_uri)
+            g_printf ("%s\n", uri);
+          else
+            g_app_info_launch_default_for_uri (uri, NULL, NULL);
+        }
+    }
+  else
+    return FALSE;
+
+  return TRUE;
+}
+
+#endif
+
 static void
 select_file_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev, gpointer d)
 {
@@ -222,6 +267,7 @@ menu_cb (WebKitWebView * view, GtkWidget * menu, WebKitHitTestResult * hit, gboo
 {
   GtkWidget *mi;
 
+#ifndef USE_WEBKIT2
   if (!is_link)
     {
       /* add open item */
@@ -244,6 +290,7 @@ menu_cb (WebKitWebView * view, GtkWidget * menu, WebKitHitTestResult * hit, gboo
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
       g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (gtk_main_quit), NULL);
     }
+#endif
 
   return FALSE;
 }
@@ -259,7 +306,11 @@ title_cb (GObject *obj, GParamSpec *spec, GtkWindow *dlg)
 static void
 icon_cb (GObject *obj, GParamSpec *spec, GtkWindow *dlg)
 {
+#ifdef USE_WEBKIT2
+  GdkPixbuf *pb = gdk_pixbuf_get_from_surface (webkit_web_view_get_favicon (view), 0, 0, -1, -1);
+#else
   GdkPixbuf *pb = webkit_web_view_try_get_favicon_pixbuf (view, 16, 16);
+#endif
   if (pb)
     {
       gtk_window_set_icon (dlg, pb);
@@ -271,6 +322,9 @@ static gboolean
 handle_stdin (GIOChannel * ch, GIOCondition cond, gpointer d)
 {
   gchar *buf;
+#ifdef USE_WEBKIT2
+  GBytes *data;
+#endif
   GError *err = NULL;
 
   switch (g_io_channel_read_line (ch, &buf, NULL, NULL, &err))
@@ -285,7 +339,14 @@ handle_stdin (GIOChannel * ch, GIOCondition cond, gpointer d)
       return FALSE;
 
     case G_IO_STATUS_EOF:
+#ifdef USE_WEBKIT2
+      data = g_bytes_new (inbuf->str, inbuf->len);
+      /*g_string_free (inbuf, TRUE); */ /* FIXME: IS THAT NEEDED ??? (and where) */
+      webkit_web_view_load_bytes (view, data, options.html_data.mime, options.html_data.encoding, NULL);
+      g_bytes_unref (data);
+#else
       webkit_web_view_load_string (view, inbuf->str, options.html_data.mime, options.html_data.encoding, NULL);
+#endif
       return FALSE;
 
     case G_IO_STATUS_AGAIN:
@@ -299,7 +360,11 @@ GtkWidget *
 html_create_widget (GtkWidget * dlg)
 {
   GtkWidget *sw;
+#ifdef USE_WEBKIT2
+  WebKitSettings *settings;
+#else
   WebKitWebSettings *settings;
+#endif
   SoupSession *sess;
 
   sw = gtk_scrolled_window_new (NULL, NULL);
@@ -308,7 +373,12 @@ html_create_widget (GtkWidget * dlg)
   view = WEBKIT_WEB_VIEW (webkit_web_view_new ());
   gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (view));
 
+#ifdef USE_WEBKIT2
+  settings = webkit_settings_new ();
+#else
   settings = webkit_web_settings_new ();
+#endif
+  
   g_object_set (G_OBJECT (settings), "default-encoding", g_get_codeset (), NULL);
   g_object_set (G_OBJECT (settings), "user-agent", options.html_data.user_agent, NULL);
   if (options.html_data.user_style)
@@ -318,8 +388,12 @@ html_create_widget (GtkWidget * dlg)
     }
   webkit_web_view_set_settings (view, settings);
 
+#ifdef USE_WEBKIT2
+  g_signal_connect (view, "decide-policy", G_CALLBACK (policy_cb), NULL);
+#else
   g_signal_connect (view, "hovering-over-link", G_CALLBACK (link_hover_cb), NULL);
   g_signal_connect (view, "navigation-policy-decision-requested", G_CALLBACK (link_cb), NULL);
+#endif
 
   if (options.html_data.browser)
     {
@@ -329,10 +403,26 @@ html_create_widget (GtkWidget * dlg)
       if (strcmp (options.data.window_icon, "yad") == 0)
         g_signal_connect (view, "icon-loaded", G_CALLBACK (icon_cb), dlg);
     }
+#ifdef USE_WEBKIT2
+  else
+    {
+      g_object_set (G_OBJECT(settings), "enable-caret-browsing", FALSE, NULL);
+      g_object_set (G_OBJECT(settings), "enable-developer-extras", FALSE, NULL);
+      g_object_set (G_OBJECT(settings), "enable-html5-database", FALSE, NULL);
+      g_object_set (G_OBJECT(settings), "enable-html5-local-storage", FALSE, NULL);
+      g_object_set (G_OBJECT(settings), "enable-offline-web-application-cache", FALSE, NULL);
+      g_object_set (G_OBJECT(settings), "enable-page-cache", FALSE, NULL);
+      g_object_set (G_OBJECT(settings), "enable-plugins", FALSE, NULL);
+      g_object_set (G_OBJECT (settings), "enable-private-browsing", TRUE, NULL);
+      g_signal_connect (view, "load-changed", G_CALLBACK (loaded_cb), NULL);
+    }
+#endif
 
+#ifndef USE_WEBKIT2
   sess = webkit_get_default_session ();
   soup_session_add_feature_by_type (sess, SOUP_TYPE_PROXY_RESOLVER_DEFAULT);
   g_object_set (G_OBJECT (sess), SOUP_SESSION_ACCEPT_LANGUAGE_AUTO, TRUE, NULL);
+#endif
 
   gtk_widget_show_all (sw);
   gtk_widget_grab_focus (GTK_WIDGET (view));

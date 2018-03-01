@@ -28,7 +28,7 @@ case "$with_gtk" in
         GTK_MODULE="gtk+-3.0"
         GTK_REQUIRED="3.0.0"
         GTK_PRINT="gtk+-unix-print-3.0"
-        WEBKIT="webkitgtk-3.0"
+        WEBKIT="webkit2gtk-4.0"
         SPELL="gtkspell3-3.0"
         SOURCEVIEW="gtksourceview-3.0"
         ;;
@@ -70,6 +70,9 @@ AM_CONDITIONAL([HTML], [test x$have_html = xyes])
 
 if test x$have_html = xyes; then
     AC_DEFINE([HAVE_HTML], [1], [Define this if you have webkit installed])
+    if test x$with_gtk = xgtk3; then
+        AC_DEFINE([USE_WEBKIT2], [1], [Define this if you use webkit2 API])
+    fi
 fi
 
 dnl gio support
