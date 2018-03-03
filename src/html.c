@@ -451,7 +451,7 @@ html_create_widget (GtkWidget * dlg)
       g_io_add_watch (ch, G_IO_IN | G_IO_HUP, handle_stdin, NULL);
     }
   else if (options.extra_data)
-    load_uri (options.extra_data);
+    load_uri (options.extra_data[0]);
 
   return sw;
 }
