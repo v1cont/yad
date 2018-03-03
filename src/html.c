@@ -379,7 +379,6 @@ html_create_widget (GtkWidget * dlg)
   settings = webkit_web_settings_new ();
 #endif
   
-  g_object_set (G_OBJECT (settings), "default-encoding", g_get_codeset (), NULL);
   g_object_set (G_OBJECT (settings), "user-agent", options.html_data.user_agent, NULL);
   if (options.html_data.user_style)
     {
@@ -389,8 +388,12 @@ html_create_widget (GtkWidget * dlg)
   webkit_web_view_set_settings (view, settings);
 
 #ifdef USE_WEBKIT2
+  webkit_settings_set_default_charset (settings, g_get_codeset ());
+
   g_signal_connect (view, "decide-policy", G_CALLBACK (policy_cb), NULL);
 #else
+  g_object_set (G_OBJECT (settings), "default-encoding", g_get_codeset (), NULL);
+
   g_signal_connect (view, "hovering-over-link", G_CALLBACK (link_hover_cb), NULL);
   g_signal_connect (view, "navigation-policy-decision-requested", G_CALLBACK (link_cb), NULL);
 #endif
@@ -401,7 +404,11 @@ html_create_widget (GtkWidget * dlg)
       if (!options.data.dialog_title)
         g_signal_connect (view, "notify::title", G_CALLBACK (title_cb), dlg);
       if (strcmp (options.data.window_icon, "yad") == 0)
+#ifdef USE_WEBKIT2
+        g_signal_connect (view, "notify::favicon", G_CALLBACK (icon_cb), dlg);        
+#else
         g_signal_connect (view, "icon-loaded", G_CALLBACK (icon_cb), dlg);
+#endif
     }
 #ifdef USE_WEBKIT2
   else
