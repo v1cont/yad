@@ -936,7 +936,7 @@ form_create_widget (GtkWidget * dlg)
             case YAD_FIELD_MDIR:
               e = gtk_entry_new ();
               gtk_widget_set_name (e, "yad-form-entry");
-              gtk_entry_set_icon_from_stock (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, "gtk-directory");
+              gtk_entry_set_icon_from_icon_name (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, "document-open");
               g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (select_files_cb), GINT_TO_POINTER (fld->type));
               g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
 #if !GTK_CHECK_VERSION(3,0,0)
@@ -954,7 +954,7 @@ form_create_widget (GtkWidget * dlg)
             case YAD_FIELD_DIR_CREATE:
               e = gtk_entry_new ();
               gtk_widget_set_name (e, "yad-form-entry");
-              gtk_entry_set_icon_from_stock (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, "gtk-directory");
+              gtk_entry_set_icon_from_icon_name (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, "document-open");
               g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (create_files_cb), GINT_TO_POINTER (fld->type));
               g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
 #if !GTK_CHECK_VERSION(3,0,0)

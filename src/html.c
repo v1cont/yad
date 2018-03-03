@@ -249,7 +249,7 @@ open_cb (GtkWidget * w, gpointer d)
   gtk_box_pack_start (GTK_BOX (cnt), lbl, TRUE, FALSE, 2);
 
   entry = gtk_entry_new ();
-  gtk_entry_set_icon_from_stock (GTK_ENTRY (entry), GTK_ENTRY_ICON_SECONDARY, "gtk-directory");
+  gtk_entry_set_icon_from_icon_name (GTK_ENTRY (entry), GTK_ENTRY_ICON_SECONDARY, "document-open");
   gtk_widget_show (entry);
   gtk_box_pack_start (GTK_BOX (cnt), entry, TRUE, FALSE, 2);
 
