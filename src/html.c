@@ -67,7 +67,7 @@ load_uri (const gchar * uri)
   else
     {
       if (g_uri_parse_scheme (uri) == NULL)
-        addr = g_strdup_printf ("http://%s", uri);
+        addr = g_strdup_printf ("https://%s", uri);
       else
         addr = g_strdup (uri);
     }
