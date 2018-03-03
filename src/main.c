@@ -191,7 +191,12 @@ create_layout (GtkWidget *dlg)
         g_object_unref (pb);
 
       gtk_widget_set_name (image, "yad-dialog-image");
+#if !GTK_CHECK_VERSION(3,0,0)
       gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0.0);
+#else
+      gtk_widget_set_halign (image, GTK_ALIGN_CENTER);
+      gtk_widget_set_valign (image, GTK_ALIGN_START);
+#endif
     }
 
   /* create text label */
@@ -214,22 +219,12 @@ create_layout (GtkWidget *dlg)
           gtk_label_set_selectable (GTK_LABEL (text), options.data.selectable_labels);
           gtk_label_set_justify (GTK_LABEL (text), options.data.text_align);
           gtk_widget_set_state (text, GTK_STATE_NORMAL);
-          switch (options.data.text_align)
-            {
-            case GTK_JUSTIFY_LEFT:
-            case GTK_JUSTIFY_FILL:
-              gtk_misc_set_alignment (GTK_MISC (text), 0.0, 0.5);
-              break;
-            case GTK_JUSTIFY_CENTER:
-              gtk_misc_set_alignment (GTK_MISC (text), 0.5, 0.5);
-              break;
-            case GTK_JUSTIFY_RIGHT:
-              gtk_misc_set_alignment (GTK_MISC (text), 1.0, 0.5);
-              break;
-            }
 #if !GTK_CHECK_VERSION(3,0,0)
+          gtk_misc_set_alignment (GTK_MISC (text), options.data.text_align, 0.5);
           if (!options.data.fixed)
             g_signal_connect (G_OBJECT (text), "size-allocate", G_CALLBACK (text_size_allocate_cb), NULL);
+#else
+          gtk_label_set_xalign (GTK_LABEL (text), options.data.text_align);
 #endif
         }
     }

@@ -244,7 +244,11 @@ open_cb (GtkWidget * w, gpointer d)
   cnt = gtk_dialog_get_content_area (GTK_DIALOG (dlg));
 
   lbl = gtk_label_new (_("Enter URI or file name:"));
-  gtk_misc_set_alignment (GTK_MISC (lbl), 0, 0);
+#if GTK_CHECK_VERSION(3,0,0)
+  gtk_misc_set_alignment (GTK_MISC (lbl), 0.0, 0.5);
+#else
+  gtk_label_set_xalign (GTK_LABEL (lbl), 0.0);
+#endif
   gtk_widget_show (lbl);
   gtk_box_pack_start (GTK_BOX (cnt), lbl, TRUE, FALSE, 2);
 
@@ -378,7 +382,7 @@ html_create_widget (GtkWidget * dlg)
 #else
   settings = webkit_web_settings_new ();
 #endif
-  
+
   g_object_set (G_OBJECT (settings), "user-agent", options.html_data.user_agent, NULL);
   if (options.html_data.user_style)
     {
@@ -405,7 +409,7 @@ html_create_widget (GtkWidget * dlg)
         g_signal_connect (view, "notify::title", G_CALLBACK (title_cb), dlg);
       if (strcmp (options.data.window_icon, "yad") == 0)
 #ifdef USE_WEBKIT2
-        g_signal_connect (view, "notify::favicon", G_CALLBACK (icon_cb), dlg);        
+        g_signal_connect (view, "notify::favicon", G_CALLBACK (icon_cb), dlg);
 #else
         g_signal_connect (view, "icon-loaded", G_CALLBACK (icon_cb), dlg);
 #endif

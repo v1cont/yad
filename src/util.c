@@ -52,7 +52,7 @@ read_settings (void)
 
   settings.print_settings = NULL;
   settings.page_setup = NULL;
-  
+
   settings.icon_theme = gtk_icon_theme_get_default ();
 
   filename = g_build_filename (g_get_user_config_dir (), YAD_SETTINGS_FILE, NULL);
@@ -392,8 +392,6 @@ get_label (gchar * str, guint border)
   if (gtk_stock_lookup (vals[0], &it))
     {
       l = gtk_label_new_with_mnemonic (it.label);
-      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
-
       i = gtk_image_new_from_pixbuf (get_pixbuf (it.stock_id, YAD_SMALL_ICON));
     }
   else
@@ -405,12 +403,16 @@ get_label (gchar * str, guint border)
             gtk_label_set_markup_with_mnemonic (GTK_LABEL (l), vals[0]);
           else
             gtk_label_set_text_with_mnemonic (GTK_LABEL (l), vals[0]);
-          gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
         }
 
       if (vals[1] && *vals[1])
         i = gtk_image_new_from_pixbuf (get_pixbuf (vals[1], YAD_SMALL_ICON));
     }
+#if !GTK_CHECK_VERSION(3,0,0)
+  gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
+#else
+  gtk_label_set_xalign (GTK_LABEL (l), 0.0);
+#endif
 
   if (i)
     gtk_box_pack_start (GTK_BOX (t), i, FALSE, FALSE, 1);

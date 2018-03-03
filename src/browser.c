@@ -245,54 +245,60 @@ main (gint argc, gchar * argv[])
 
   w = gtk_label_new (NULL);
   gtk_label_set_markup (GTK_LABEL (w), _("<b>Name:</b>"));
-  gtk_misc_set_alignment (GTK_MISC (w), 0, 0.5);
 #if !GTK_CHECK_VERSION(3,0,0)
+  gtk_misc_set_alignment (GTK_MISC (w), 0.0, 0.5);
   gtk_table_attach (GTK_TABLE (t), w, 1, 2, 0, 1, GTK_FILL, 0, 0, 0);
 #else
+  gtk_label_set_xalign (GTK_LABEL (w), 0.0);
   gtk_grid_attach (GTK_GRID (t), w, 1, 0, 1, 1);
 #endif
   data->lname = gtk_label_new (NULL);
   gtk_label_set_selectable (GTK_LABEL (data->lname), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (data->lname), 0, 0.5);
 #if !GTK_CHECK_VERSION(3,0,0)
+  gtk_misc_set_alignment (GTK_MISC (data->lname), 0.0, 0.5);
   gtk_table_attach (GTK_TABLE (t), data->lname, 2, 3, 0, 1, GTK_FILL | GTK_EXPAND, 0, 0, 0);
 #else
+  gtk_label_set_xalign (GTK_LABEL (data->lname), 0.0);
   gtk_grid_attach (GTK_GRID (t), data->lname, 2, 0, 1, 1);
   gtk_widget_set_hexpand (data->lname, TRUE);
 #endif
 
   w = gtk_label_new (NULL);
   gtk_label_set_markup (GTK_LABEL (w), _("<b>Sizes:</b>"));
-  gtk_misc_set_alignment (GTK_MISC (w), 0, 0.5);
 #if !GTK_CHECK_VERSION(3,0,0)
+  gtk_misc_set_alignment (GTK_MISC (w), 0.0, 0.5);
   gtk_table_attach (GTK_TABLE (t), w, 1, 2, 1, 2, GTK_FILL, 0, 0, 0);
 #else
+  gtk_label_set_xalign (GTK_LABEL (w), 0.0);
   gtk_grid_attach (GTK_GRID (t), w, 1, 1, 1, 1);
 #endif
   data->lsize = gtk_label_new (NULL);
   gtk_label_set_selectable (GTK_LABEL (data->lsize), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (data->lsize), 0, 0.5);
 #if !GTK_CHECK_VERSION(3,0,0)
+  gtk_misc_set_alignment (GTK_MISC (data->lsize), 0.0, 0.5);
   gtk_table_attach (GTK_TABLE (t), data->lsize, 2, 3, 1, 2, GTK_FILL | GTK_EXPAND, 0, 0, 0);
 #else
+  gtk_label_set_xalign (GTK_LABEL (data->lsize), 0.0);
   gtk_grid_attach (GTK_GRID (t), data->lsize, 2, 1, 1, 1);
   gtk_widget_set_hexpand (data->lsize, TRUE);
 #endif
 
   w = gtk_label_new (NULL);
   gtk_label_set_markup (GTK_LABEL (w), _("<b>Filename:</b>"));
-  gtk_misc_set_alignment (GTK_MISC (w), 0, 0.5);
 #if !GTK_CHECK_VERSION(3,0,0)
+  gtk_misc_set_alignment (GTK_MISC (w), 0.0, 0.5);
   gtk_table_attach (GTK_TABLE (t), w, 1, 2, 2, 3, GTK_FILL, 0, 0, 0);
 #else
+  gtk_label_set_xalign (GTK_LABEL (w), 0.0);
   gtk_grid_attach (GTK_GRID (t), w, 1, 2, 1, 1);
 #endif
   data->lfile = gtk_label_new (NULL);
   gtk_label_set_selectable (GTK_LABEL (data->lfile), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (data->lfile), 0, 0.5);
 #if !GTK_CHECK_VERSION(3,0,0)
+  gtk_misc_set_alignment (GTK_MISC (data->lfile), 0.0, 0.5);
   gtk_table_attach (GTK_TABLE (t), data->lfile, 2, 3, 2, 3, GTK_FILL | GTK_EXPAND, 0, 0, 0);
 #else
+  gtk_label_set_xalign (GTK_LABEL (data->lfile), 0.0);
   gtk_grid_attach (GTK_GRID (t), data->lfile, 2, 2, 1, 1);
   gtk_widget_set_hexpand (data->lfile, TRUE);
 #endif

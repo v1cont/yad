@@ -105,7 +105,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
               else if (value[1] && b->type == YAD_PROGRESS_PERM)
                 {
                   guint id;
-                  
+
                   if (strncmp (value[1], "start", 5) == 0)
                     {
                       id = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (pb), "id"));
@@ -122,8 +122,8 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                         {
                           g_source_remove (id);
                           g_object_set_data (G_OBJECT (pb), "id", GINT_TO_POINTER (0));
-                        }                      
-                    }                    
+                        }
+                    }
                 }
               else
                 {
@@ -224,7 +224,11 @@ multi_progress_create_widget (GtkWidget * dlg)
         gtk_label_set_text (GTK_LABEL (l), p->name);
       else
         gtk_label_set_markup (GTK_LABEL (l), p->name);
+#if !GTK_CHECK_VERSION(3,0,0)
       gtk_misc_set_alignment (GTK_MISC (l), options.common_data.align, 0.5);
+#else
+      gtk_label_set_xalign (GTK_LABEL (l), options.common_data.align);
+#endif
       if (options.common_data.vertical)
 #if !GTK_CHECK_VERSION(3,0,0)
         gtk_table_attach (GTK_TABLE (table), l, i, i + 1, 1, 2, GTK_FILL, 0, 2, 2);

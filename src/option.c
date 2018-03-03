@@ -688,13 +688,13 @@ static gboolean
 set_text_align (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
   if (strcasecmp (value, "left") == 0)
-    options.data.text_align = GTK_JUSTIFY_LEFT;
+    options.data.text_align = 0.0;
   else if (strcasecmp (value, "right") == 0)
-    options.data.text_align = GTK_JUSTIFY_RIGHT;
+    options.data.text_align = 1.0;
   else if (strcasecmp (value, "center") == 0)
-    options.data.text_align = GTK_JUSTIFY_CENTER;
+    options.data.text_align = 0.5;
   else if (strcasecmp (value, "fill") == 0)
-    options.data.text_align = GTK_JUSTIFY_FILL;
+    options.data.text_align = 0.0;
   else
     g_printerr (_("Unknown align type: %s\n"), value);
 
