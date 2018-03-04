@@ -351,7 +351,8 @@ add_columns (gint n_columns)
             column = gtk_tree_view_column_new_with_attributes (col->name, renderer, "text", i, NULL);
           else
             column = gtk_tree_view_column_new_with_attributes (col->name, renderer, "markup", i, NULL);
-          g_object_set (G_OBJECT (renderer), "ellipsize", col->ellipsize, NULL);
+          if (col->ellipsize)
+            g_object_set (G_OBJECT (renderer), "ellipsize", options.list_data.ellipsize, NULL);
           if (col->wrap)
             {
               g_object_set (G_OBJECT (renderer), "wrap-width", options.list_data.wrap_width, NULL);
