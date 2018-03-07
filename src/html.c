@@ -244,7 +244,7 @@ open_cb (GtkWidget * w, gpointer d)
   cnt = gtk_dialog_get_content_area (GTK_DIALOG (dlg));
 
   lbl = gtk_label_new (_("Enter URI or file name:"));
-#if GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(3,0,0)
   gtk_misc_set_alignment (GTK_MISC (lbl), 0.0, 0.5);
 #else
   gtk_label_set_xalign (GTK_LABEL (lbl), 0.0);
