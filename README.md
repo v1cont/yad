@@ -36,4 +36,4 @@ Additionally, you can build yad with the following libraries:
 * GtkSourceView - for enabling syntax highlighting in text-info dialog (https://wiki.gnome.org/Projects/GtkSourceView)
 * GtkSpell3 - for support spell checking in text fields (http://gtkspell.sourceforge.net/)
 
-Yad can be built angainst both 2 and 3 versions of GTK+ library. Preferred build with version 2
+Yad can be built against both 2 and 3 versions of GTK+ library. Preferred build with version 2
