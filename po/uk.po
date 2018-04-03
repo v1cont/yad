@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-30 16:34+0200\n"
+"POT-Creation-Date: 2018-03-04 06:26+0200\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -113,23 +113,23 @@ msgstr "Вибір або створення каталогу"
 msgid "Select date"
 msgstr "Вибір дати"
 
-#: ../src/form.c:865
+#: ../src/form.c:866
 msgid "Select file"
 msgstr "Вибір файлу"
 
-#: ../src/form.c:893
+#: ../src/form.c:894
 msgid "Select folder"
 msgstr "Вибір каталогу"
 
-#: ../src/html.c:161
+#: ../src/html.c:206
 msgid "YAD - Select File"
 msgstr "YAD - Вибір файлу"
 
-#: ../src/html.c:193
+#: ../src/html.c:238
 msgid "Open URI"
 msgstr "Відкрити URI"
 
-#: ../src/html.c:201
+#: ../src/html.c:246
 msgid "Enter URI or file name:"
 msgstr "Введіть URI або ім'я файлу:"
 
@@ -143,17 +143,17 @@ msgstr "Не можу розібрати файл %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Не можу відкрити каталог %s: %s\n"
 
-#: ../src/main.c:132 ../src/main.c:483
+#: ../src/main.c:132 ../src/main.c:478
 #, c-format
 msgid "%d sec"
 msgstr "%d сек"
 
-#: ../src/main.c:797 ../src/main.c:804
+#: ../src/main.c:792 ../src/main.c:799
 #, c-format
 msgid "Unable to parse YAD_OPTIONS: %s\n"
 msgstr "Не можу розібрати YAD_OPTIONS: %s\n"
 
-#: ../src/main.c:815
+#: ../src/main.c:810
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Не вдається розібрати командний рядок: %s\n"
@@ -177,19 +177,19 @@ msgstr "Невідома команда '%s'\n"
 msgid "Yad notification"
 msgstr "Діалог повідомлень"
 
-#: ../src/list.c:873
+#: ../src/list.c:874
 msgid "Add row"
 msgstr "Додати рядок"
 
-#: ../src/list.c:880
+#: ../src/list.c:881
 msgid "Delete row"
 msgstr "Видалити рядок"
 
-#: ../src/list.c:887
+#: ../src/list.c:888
 msgid "Duplicate row"
 msgstr "Скопіювати рядок"
 
-#: ../src/list.c:1032
+#: ../src/list.c:1033
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Не задані заголовки стовпчиків для діалогу зі списком\n"
@@ -1633,7 +1633,7 @@ msgstr "Віддзеркалити вертикально"
 msgid "Flip horizontal"
 msgstr "Віддзеркалити горизонтально"
 
-#: ../src/print.c:199 ../src/print.c:367
+#: ../src/print.c:199 ../src/print.c:371
 #, c-format
 msgid "Printing failed: %s\n"
 msgstr "Збій друку: %s\n"
@@ -1648,22 +1648,22 @@ msgstr "Файл %s не знайдено.\n"
 msgid "Filename is not specified.\n"
 msgstr "Файл не вказано.\n"
 
-#: ../src/print.c:383
+#: ../src/print.c:387
 #, c-format
 msgid "Printer doesn't support ps format.\n"
 msgstr "Принтер не підтримує формату ps.\n"
 
-#: ../src/print.c:391
+#: ../src/print.c:395
 #, c-format
 msgid "Printer doesn't support pdf format.\n"
 msgstr "Принтер не підтримує формату pdf.\n"
 
-#: ../src/print.c:397
+#: ../src/print.c:401
 #, c-format
 msgid "This file type is not supported for raw printing.\n"
 msgstr "Цей тип файлів не може бути надрукований.\n"
 
-#: ../src/print.c:411
+#: ../src/print.c:415
 #, c-format
 msgid "Load source file failed: %s\n"
 msgstr "Збій при завантажені файлу: %s\n"
@@ -1717,19 +1717,19 @@ msgstr "Навігатор іконок"
 msgid "<b>Name:</b>"
 msgstr "<b>Назва:</b>"
 
-#: ../src/browser.c:265
+#: ../src/browser.c:267
 msgid "<b>Sizes:</b>"
 msgstr "<b>Розміри:</b>"
 
-#: ../src/browser.c:283
+#: ../src/browser.c:287
 msgid "<b>Filename:</b>"
 msgstr "<b>Назва файлу:</b>"
 
-#: ../src/browser.c:325
+#: ../src/browser.c:331
 msgid "Category"
 msgstr "Категорія"
 
-#: ../src/browser.c:357
+#: ../src/browser.c:363
 msgid "Icons"
 msgstr "Іконки"
 
