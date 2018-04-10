@@ -225,6 +225,7 @@ typedef struct {
   GtkButtonBoxStyle buttons_layout;
   gint def_resp;
   /* window settings */
+  gchar *cursor_name;
   gboolean sticky;
   gboolean fixed;
   gboolean ontop;

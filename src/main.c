@@ -823,6 +823,13 @@ main (gint argc, gchar ** argv)
 #endif
     }
 
+  if(options.data.cursor_name)
+    gdk_window_set_cursor(
+	gdk_screen_get_root_window(
+	    gdk_display_get_default_screen(gdk_display_get_default())
+	),
+	gdk_cursor_new_from_name(gdk_display_get_default(),options.data.cursor_name)
+    );
   /* set default icons and icon theme */
   if (options.data.icon_theme)
     gtk_icon_theme_set_custom_theme (settings.icon_theme, options.data.icon_theme);

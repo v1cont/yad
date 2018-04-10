@@ -139,6 +139,8 @@ static GOptionEntry general_options[] = {
   { "selectable-labels", 0, 0, G_OPTION_ARG_NONE, &options.data.selectable_labels,
     N_("Dialog text can be selected"), NULL },
   /* window settings */
+  { "cursor", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_STRING, &options.data.cursor_name,
+    N_("Use specified cursor name on start"), N_("CURSORNAME") },
   { "sticky", 0, 0, G_OPTION_ARG_NONE, &options.data.sticky,
     N_("Set window sticky"), NULL },
   { "fixed", 0, 0, G_OPTION_ARG_NONE, &options.data.fixed,
@@ -1419,6 +1421,7 @@ yad_options_init (void)
   options.data.def_resp = YAD_RESPONSE_OK;
 
   /* Initialize window options */
+  options.data.cursor_name = NULL;
   options.data.sticky = FALSE;
   options.data.fixed = FALSE;
   options.data.ontop = FALSE;
