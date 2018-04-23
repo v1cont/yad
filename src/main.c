@@ -218,12 +218,13 @@ create_layout (GtkWidget *dlg)
           gtk_label_set_line_wrap (GTK_LABEL (text), TRUE);
           gtk_label_set_selectable (GTK_LABEL (text), options.data.selectable_labels);
           gtk_label_set_justify (GTK_LABEL (text), options.data.text_align);
-          gtk_widget_set_state (text, GTK_STATE_NORMAL);
 #if !GTK_CHECK_VERSION(3,0,0)
+          gtk_widget_set_state (text, GTK_STATE_NORMAL);
           gtk_misc_set_alignment (GTK_MISC (text), options.data.text_align, 0.5);
           if (!options.data.fixed)
             g_signal_connect (G_OBJECT (text), "size-allocate", G_CALLBACK (text_size_allocate_cb), NULL);
 #else
+          gtk_widget_set_state_flags (text, GTK_STATE_NORMAL, FALSE);
           gtk_label_set_xalign (GTK_LABEL (text), options.data.text_align);
 #endif
         }
@@ -359,6 +360,7 @@ create_dialog (void)
     gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_SPLASHSCREEN);
   gtk_window_set_title (GTK_WINDOW (dlg), options.data.dialog_title);
   gtk_widget_set_name (dlg, "yad-dialog-window");
+  gtk_window_set_default_size (GTK_WINDOW (dlg), options.data.width, options.data.height);
 
   g_signal_connect (G_OBJECT (dlg), "delete-event", G_CALLBACK (gtk_main_quit), NULL);
   g_signal_connect (G_OBJECT (dlg), "key-press-event", G_CALLBACK (keys_cb), NULL);
@@ -381,7 +383,6 @@ create_dialog (void)
   /* set window size and position */
   if (!options.data.geometry && !options.data.maximized && !options.data.fullscreen)
     {
-      gtk_window_set_default_size (GTK_WINDOW (dlg), options.data.width, options.data.height);
       if (options.data.center)
         gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER_ALWAYS);
       else if (options.data.mouse)
@@ -593,15 +594,23 @@ create_dialog (void)
   /* parse geometry or move window, if given. must be after showing widget */
   if (!options.data.maximized && !options.data.fullscreen)
     {
+      gtk_widget_realize (dlg);
       if (options.data.geometry)
         {
-          gtk_widget_realize (dlg);
           gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
           gtk_widget_show (dlg);
         }
       else
         {
-          gtk_widget_show (dlg);
+          /* if (options.data.width <= 0) */
+          /*   options.data.width = gdk_window_get_width (gtk_widget_get_window (dlg)); */
+          /* if (options.data.height <= 0) */
+          /*   options.data.height = gdk_window_get_height (gtk_widget_get_window (dlg)); */
+          /* gtk_window_resize (GTK_WINDOW (dlg), options.data.width, options.data.height); */
+          gtk_widget_set_size_request (dlg, options.data.width, options.data.height);
+          gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
+          gtk_widget_show_all (dlg);
+
           if (options.data.use_posx || options.data.use_posy)
             {
               gint ww, wh;
@@ -626,18 +635,13 @@ create_dialog (void)
         }
     }
   else
-    gtk_widget_show (dlg);
-
-  /* set maximized or fixed size after showing widget */
-  if (options.data.maximized)
-    gtk_window_maximize (GTK_WINDOW (dlg));
-  else if (options.data.fullscreen)
-    gtk_window_fullscreen (GTK_WINDOW (dlg));
-  else
     {
-      gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
-      if (options.data.fixed)
-        gtk_widget_set_size_request (dlg, options.data.width, options.data.height);
+      gtk_widget_show (dlg);
+      /* set maximized or fixed size after showing widget */
+      if (options.data.maximized)
+        gtk_window_maximize (GTK_WINDOW (dlg));
+      else if (options.data.fullscreen)
+        gtk_window_fullscreen (GTK_WINDOW (dlg));
     }
 
 #ifndef G_OS_WIN32

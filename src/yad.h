@@ -366,6 +366,7 @@ typedef struct {
   guint borders;
   GtkPositionType pos;
   guint active;
+  gboolean expand;
 } YadNotebookData;
 
 typedef struct {
