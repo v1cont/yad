@@ -1474,7 +1474,6 @@ yad_options_init (void)
   options.color_data.use_palette = FALSE;
   options.color_data.expand_palette = FALSE;
   options.color_data.palette = NULL;
-  options.color_data.extra = FALSE;
   options.color_data.alpha = FALSE;
   options.color_data.mode = YAD_COLOR_HEX;
 

@@ -107,11 +107,17 @@ expand_action (gchar * cmd)
                   break;
                 case YAD_FIELD_COLOR:
                   {
+#if !GTK_CHECK_VERSION(3,0,0)
                     GdkColor c;
                     GtkColorButton *cb = GTK_COLOR_BUTTON (g_slist_nth_data (fields, num));
-
                     gtk_color_button_get_color (cb, &c);
                     buf = get_color (&c, gtk_color_button_get_alpha (cb));
+#else
+                    GdkRGBA c;
+                    GtkColorChooser *cb = GTK_COLOR_CHOOSER (g_slist_nth_data (fields, num));
+                    gtk_color_chooser_get_rgba (cb, &c);
+                    buf = get_color (&c);
+#endif
                     arg = g_shell_quote (buf ? buf : "");
                     g_free (buf);
                     break;
@@ -1256,11 +1262,17 @@ form_print_field (guint fn)
     case YAD_FIELD_COLOR:
       {
         gchar *cs;
+#if !GTK_CHECK_VERSION(3,0,0)
         GdkColor c;
         GtkColorButton *cb = GTK_COLOR_BUTTON (g_slist_nth_data (fields, fn));
-
         gtk_color_button_get_color (cb, &c);
         cs = get_color (&c, gtk_color_button_get_alpha (cb));
+#else
+        GdkRGBA c;
+        GtkColorChooser *cb = GTK_COLOR_CHOOSER (g_slist_nth_data (fields, fn));
+        gtk_color_chooser_get_rgba (cb, &c);
+        cs = get_color (&c);        
+#endif
         if (options.common_data.quoted_output)
           {
             buf = g_shell_quote (cs ? cs : "");
