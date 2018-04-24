@@ -387,7 +387,7 @@ get_label (gchar * str, guint border)
 
   l = i = NULL;
 
-  a = gtk_alignment_new (0.0, 0.5, 0, 0);
+  a = gtk_alignment_new (0.5, 0.5, 0, 0);
   gtk_container_set_border_width (GTK_CONTAINER (a), border);
 
 #if !GTK_CHECK_VERSION(3,0,0)
