@@ -257,8 +257,6 @@ static GOptionEntry color_options[] = {
     N_("Expand user palette"), NULL },
   { "mode", 0, 0, G_OPTION_ARG_CALLBACK, set_color_mode,
     N_("Set output mode to MODE. Values are hex (default) or rgb"), N_("MODE") },
-  { "extra", 0, 0, G_OPTION_ARG_NONE, &options.color_data.extra,
-    N_("Use #rrrrggggbbbb format instead of #rrggbb"), NULL },
   { "alpha", 0, 0, G_OPTION_ARG_NONE, &options.color_data.alpha,
     N_("Add opacity to output color value"), NULL },
   { NULL }

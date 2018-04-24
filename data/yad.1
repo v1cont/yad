@@ -268,17 +268,14 @@ is a string with date details, which may include Pango markup.
 Set initial color value.
 .TP
 .B \-\-gtk-palette
-Show system palette inside color dialog.
-.TP
-.B \-\-extra
-Show extra information about color in returned string.
+Show system palette inside color dialog. For GTK+3 builds this option shows palette instead of color editor.
 .TP
 .B \-\-alpha
 Add opacity to output color string.
 .TP
 .B \-\-palette=\fI[FILENAME]\fP
 Show palette and set predefined colors from given filename.
-By default used \fI/etc/X11/rgb.txt\fP.
+By default yad use file \fI/etc/X11/rgb.txt\fP.
 .TP
 .B \-\-expand-palette
 Expander for list of user-defined colors will be initially opened.

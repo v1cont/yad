@@ -253,7 +253,6 @@ typedef struct {
   gboolean use_palette;
   gboolean expand_palette;
   gchar *palette;
-  gboolean extra;
   gboolean alpha;
   YadColorMode mode;
 } YadColorData;
@@ -613,7 +612,11 @@ void update_preview (GtkFileChooser *chooser, GtkWidget *p);
 void filechooser_mapped (GtkWidget *w, gpointer data);
 
 GdkPixbuf *get_pixbuf (gchar *name, YadIconSize size);
+#if GTK_CHECK_VERSION(3,0,0)
+gchar *get_color (GdkRGBA *c);
+#else
 gchar *get_color (GdkColor *c, guint64 alpha);
+#endif
 
 gchar **split_arg (const gchar *str);
 
@@ -626,8 +629,13 @@ gchar *escape_char (gchar *str, gchar ch);
 
 gboolean check_complete (GtkEntryCompletion *c, const gchar *key, GtkTreeIter *iter, gpointer data);
 
+#ifdef HAVE_SPELL
 void show_langs ();
+#endif
+
+#ifdef HAVE_SOURCEVIEW
 void show_themes ();
+#endif
 
 static inline void
 strip_new_line (gchar * str)

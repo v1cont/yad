@@ -188,31 +188,19 @@ get_pixbuf (gchar * name, YadIconSize size)
   return pb;
 }
 
+#if !GTK_CHECK_VERSION(3,0,0)
 gchar *
 get_color (GdkColor *c, guint64 alpha)
 {
-  gchar *cs;
   gchar *res = NULL;
 
   switch (options.color_data.mode)
     {
     case YAD_COLOR_HEX:
-      cs = gdk_color_to_string (c);
       if (options.color_data.alpha)
-        {
-          if (options.color_data.extra)
-            res = g_strdup_printf ("#%s%hx", cs + 1, alpha);
-          else
-            res = g_strdup_printf ("#%c%c%c%c%c%c%hx", cs[1], cs[2], cs[5], cs[6], cs[9], cs[10], alpha / 256);
-        }
+        res = g_strdup_printf ("#%hXhXhXhX", c->red, c->green, c->blue, alpha / 256);
       else
-        {
-          if (options.color_data.extra)
-            res = g_strdup_printf ("%s", cs);
-          else
-            res = g_strdup_printf ("#%c%c%c%c%c%c", cs[1], cs[2], cs[5], cs[6], cs[9], cs[10]);
-        }
-      g_free (cs);
+        res = g_strdup_printf ("#%hXhXhX", c->red, c->green, c->blue);
       break;
     case YAD_COLOR_RGB:
       if (options.color_data.alpha)
@@ -226,6 +214,27 @@ get_color (GdkColor *c, guint64 alpha)
 
   return res;
 }
+#else
+gchar *
+get_color (GdkRGBA *c)
+{
+  gchar *res = NULL;
+
+  switch (options.color_data.mode)
+    {
+    case YAD_COLOR_HEX:
+      if (options.color_data.alpha)
+        res = g_strdup_printf ("#%hXhXhXhX", c->red * 255, c->green * 255, c->blue * 255, c->alpha * 255);
+      else
+        res = g_strdup_printf ("#%hXhXhX", c->red * 255, c->green * 255, c->blue * 255);
+      break;
+    case YAD_COLOR_RGB:
+      res = gdk_rgba_to_string (c);
+      break;
+    }
+  return res;
+}
+#endif
 
 void
 update_preview (GtkFileChooser * chooser, GtkWidget *p)
