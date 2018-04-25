@@ -74,7 +74,10 @@ drop_data_cb (GtkWidget * w, GdkDragContext * dc, gint x, gint y,
               gchar *action, *arg;
 
               arg = g_shell_quote (dstr);
-              action = g_strdup_printf ("%s %s", options.common_data.command, arg);
+              if (g_strstr_len (options.common_data.command, -1, "%s"))
+                action = g_strdup_printf (options.common_data.command, arg);
+              else
+                action = g_strdup_printf ("%s %s", options.common_data.command, arg);
               g_free (arg);
               g_spawn_command_line_async (action, NULL);
               g_free (action);
