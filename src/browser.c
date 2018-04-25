@@ -236,7 +236,7 @@ main (gint argc, gchar * argv[])
 #endif
   gtk_box_pack_start (GTK_BOX (box), t, FALSE, FALSE, 2);
 
-  data->image = gtk_image_new_from_stock ("gtk-missing-image", GTK_ICON_SIZE_DIALOG);
+  data->image = gtk_image_new_from_icon_name ("image-missing", GTK_ICON_SIZE_DIALOG);
 #if !GTK_CHECK_VERSION(3,0,0)
   gtk_table_attach (GTK_TABLE (t), data->image, 0, 1, 0, 3, GTK_FILL, 0, 0, 0);
 #else
