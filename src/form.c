@@ -726,7 +726,12 @@ form_create_widget (GtkWidget * dlg)
           gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_NONE);
           gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), options.hscroll_policy, options.vscroll_policy);
 
+
+#if !GTK_CHECK_VERSION(3,0,0)
           gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (sw), tbl);
+#else
+          gtk_container_add (GTK_CONTAINER (sw), tbl);
+#endif
           w = sw;
         }
       else
