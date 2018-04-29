@@ -332,7 +332,7 @@ set_field_value (guint num, gchar * value)
         gtk_color_button_set_color (GTK_COLOR_BUTTON (w), &c);
 #else
         GdkRGBA c;
-        gdk_rgba_parse (value, &c);
+        gdk_rgba_parse (&c, value);
         gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (w), &c);
 #endif
         break;
