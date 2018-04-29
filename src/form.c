@@ -103,7 +103,11 @@ expand_action (gchar * cmd)
                   arg = g_shell_quote (gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, num))));
                   break;
                 case YAD_FIELD_FONT:
+#if !GTK_CHECK_VERSION(3,0,0)
                   arg = g_shell_quote (gtk_font_button_get_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, num))));
+#else
+                  arg = g_shell_quote (gtk_font_chooser_get_font (GTK_FONT_CHOOSER (g_slist_nth_data (fields, num))));
+#endif
                   break;
                 case YAD_FIELD_COLOR:
                   {
@@ -317,7 +321,11 @@ set_field_value (guint num, gchar * value)
       break;
 
     case YAD_FIELD_FONT:
+#if !GTK_CHECK_VERSION(3,0,0)
       gtk_font_button_set_font_name (GTK_FONT_BUTTON (w), value);
+#else
+      gtk_font_chooser_set_font (GTK_FONT_CHOOSER (w), value);
+#endif
       break;
 
     case YAD_FIELD_SCALE:
@@ -1262,13 +1270,20 @@ form_print_field (guint fn)
         }
       break;
     case YAD_FIELD_FONT:
-      if (options.common_data.quoted_output)
-        g_printf ("'%s'%s", gtk_font_button_get_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, fn))),
-                  options.common_data.separator);
-      else
-        g_printf ("%s%s", gtk_font_button_get_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, fn))),
-                  options.common_data.separator);
-      break;
+      {
+        gchar *fname;
+#if !GTK_CHECK_VERSION(3,0,0)
+        fname = gtk_font_button_get_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, fn)));
+#else
+        fname = gtk_font_chooser_get_font (GTK_FONT_CHOOSER (g_slist_nth_data (fields, fn)));
+#endif
+        if (options.common_data.quoted_output)
+          g_printf ("'%s'%s", fname, options.common_data.separator);
+        else
+          g_printf ("%s%s", fname, options.common_data.separator);
+        g_free (fname);
+        break;
+      }
     case YAD_FIELD_COLOR:
       {
         gchar *cs;
