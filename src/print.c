@@ -268,20 +268,11 @@ yad_print_run (void)
   gtk_window_set_skip_pager_hint (GTK_WINDOW (dlg), options.data.skip_taskbar);
 
   /* set window size and position */
-  if (!options.data.geometry)
-    {
-      gtk_window_set_default_size (GTK_WINDOW (dlg), options.data.width, options.data.height);
-      if (options.data.center)
-        gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-      else if (options.data.mouse)
-        gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_MOUSE);
-    }
-  else
-    {
-      /* parse geometry, if given. must be after showing widget */
-      gtk_widget_realize (dlg);
-      gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
-    }
+  gtk_window_set_default_size (GTK_WINDOW (dlg), options.data.width, options.data.height);
+  if (options.data.center)
+    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
+  else if (options.data.mouse)
+    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_MOUSE);
 
   /* create yad's top box */
   if (options.data.dialog_text || options.data.dialog_image)

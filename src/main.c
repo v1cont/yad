@@ -591,47 +591,76 @@ create_dialog (void)
 
   /* show widgets */
   gtk_widget_show_all (vbox);
+
   /* parse geometry or move window, if given. must be after showing widget */
   if (!options.data.maximized && !options.data.fullscreen)
     {
       gtk_widget_realize (dlg);
+      /* parse geometry string */
       if (options.data.geometry)
         {
-          gtk_window_parse_geometry (GTK_WINDOW (dlg), options.data.geometry);
-          gtk_widget_show (dlg);
-        }
-      else
-        {
-          /* if (options.data.width <= 0) */
-          /*   options.data.width = gdk_window_get_width (gtk_widget_get_window (dlg)); */
-          /* if (options.data.height <= 0) */
-          /*   options.data.height = gdk_window_get_height (gtk_widget_get_window (dlg)); */
-          /* gtk_window_resize (GTK_WINDOW (dlg), options.data.width, options.data.height); */
-          gtk_widget_set_size_request (dlg, options.data.width, options.data.height);
-          gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
-          gtk_widget_show_all (dlg);
+          gchar **geom;
 
-          if (options.data.use_posx || options.data.use_posy)
+          geom = g_new0 (gchar *, 5);
+
+          if (*options.data.geometry == '+' || *options.data.geometry == '-')
             {
-              gint ww, wh;
-              gtk_window_get_size (GTK_WINDOW (dlg), &ww, &wh);
-              /* place window to specified coordinates */
-              if (!options.data.use_posx)
-                gtk_window_get_position (GTK_WINDOW (dlg), &options.data.posx, NULL);
-              if (!options.data.use_posy)
-                gtk_window_get_position (GTK_WINDOW (dlg), NULL, &options.data.posy);
-              if (options.data.posx < 0)
+              geom = g_strsplit_set (options.data.geometry, "+-", 3);
+              if (geom[1])
                 {
-                  gint sw = gdk_screen_get_width (gdk_screen_get_default ());
-                  options.data.posx = sw - ww + options.data.posx;
+                  options.data.use_posx = TRUE;
+                  options.data.posx = atoi (geom[1]);
+                  if (geom[2])
+                    {
+                      options.data.use_posy = TRUE;
+                      options.data.posy = atoi (geom[2]);
+                    }
                 }
-              if (options.data.posy < 0)
-                {
-                  gint sh = gdk_screen_get_height (gdk_screen_get_default ());
-                  options.data.posy = sh - wh + options.data.posy;
-                }
-              gtk_window_move (GTK_WINDOW (dlg), options.data.posx, options.data.posy);
             }
+          else
+            {
+              geom = g_strsplit_set (options.data.geometry, "x+-", 4);
+              if (geom[0])
+                {
+                  options.data.width = atoi (geom[0]);
+                  if (geom[1])
+                    {
+                      options.data.height = atoi (geom[1]);
+                      if (geom[2])
+                        {
+                          options.data.use_posx = TRUE;
+                          options.data.posx = atoi (geom[2]);
+                          if (geom[3])
+                            {
+                              options.data.use_posy = TRUE;
+                              options.data.posy = atoi (geom[3]);
+                           }
+                        }
+                    }
+                }
+            }
+          g_strfreev (geom);
+        }
+
+      gtk_widget_set_size_request (dlg, options.data.width, options.data.height);
+      gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
+      gtk_widget_show_all (dlg);
+
+      if (options.data.use_posx || options.data.use_posy)
+        {
+          gint ww, wh, sw, sh;
+          gtk_window_get_size (GTK_WINDOW (dlg), &ww, &wh);
+          gdk_window_get_geometry (gdk_get_default_root_window (), NULL, NULL, &sw, &sh);
+          /* place window to specified coordinates */
+          if (!options.data.use_posx)
+            gtk_window_get_position (GTK_WINDOW (dlg), &options.data.posx, NULL);
+          if (!options.data.use_posy)
+            gtk_window_get_position (GTK_WINDOW (dlg), NULL, &options.data.posy);
+          if (options.data.posx < 0)
+            options.data.posx = sw - ww + options.data.posx;
+          if (options.data.posy < 0)
+            options.data.posy = sh - wh + options.data.posy;
+          gtk_window_move (GTK_WINDOW (dlg), options.data.posx, options.data.posy);
         }
     }
   else
