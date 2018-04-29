@@ -326,10 +326,15 @@ set_field_value (guint num, gchar * value)
 
     case YAD_FIELD_COLOR:
       {
+#if !GTK_CHECK_VERSION(3,0,0)
         GdkColor c;
-
         gdk_color_parse (value, &c);
         gtk_color_button_set_color (GTK_COLOR_BUTTON (w), &c);
+#else
+        GdkRGBA c;
+        gdk_rgba_parse (value, &c);
+        gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (w), &c);
+#endif
         break;
       }
 
@@ -1276,7 +1281,7 @@ form_print_field (guint fn)
         GdkRGBA c;
         GtkColorChooser *cb = GTK_COLOR_CHOOSER (g_slist_nth_data (fields, fn));
         gtk_color_chooser_get_rgba (cb, &c);
-        cs = get_color (&c);        
+        cs = get_color (&c);
 #endif
         if (options.common_data.quoted_output)
           {
