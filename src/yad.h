@@ -629,6 +629,8 @@ gchar *escape_char (gchar *str, gchar ch);
 
 gboolean check_complete (GtkEntryCompletion *c, const gchar *key, GtkTreeIter *iter, gpointer data);
 
+void parse_geometry ();
+
 #ifdef HAVE_SPELL
 void show_langs ();
 #endif

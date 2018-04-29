@@ -576,6 +576,59 @@ check_complete (GtkEntryCompletion *c, const gchar *key, GtkTreeIter *iter, gpoi
   return found;
 }
 
+void
+parse_geometry ()
+{
+  gchar *geom, *ptr;
+  gint w = -1, h = -1, x = 0, y = 0;
+  gboolean usexy = FALSE;
+  guint i = 0;
+
+  if (!options.data.geometry)
+    return;
+
+  geom = options.data.geometry;
+
+  if (geom[i] != '+' && geom[i] != '-')
+    {
+      ptr = geom + i;
+      w = atoi (ptr);
+
+      while (geom[i] && geom[i] != 'x') i++;
+
+      if (!geom[i])
+        return;
+
+      ptr = geom + i + 1;
+      h = atoi (ptr);
+
+      while (geom[i] && geom[i] != '-' && geom[i] != '+') i++;
+    }
+
+  if (geom[i])
+    {
+      usexy = TRUE;
+
+      ptr = geom + i;
+      x = atoi (ptr);
+
+      i++;
+      while (geom[i] && geom[i] != '-' && geom[i] != '+') i++;
+
+      if (!geom[i])
+        return;
+
+      ptr = geom + i;
+      y = atoi (ptr);
+    }
+
+  options.data.width = w;
+  options.data.height = h;
+  options.data.posx = x;
+  options.data.posy = y;
+  options.data.use_posx = options.data.use_posy = usexy;
+}
+
 #ifdef HAVE_SPELL
 void
 show_langs ()

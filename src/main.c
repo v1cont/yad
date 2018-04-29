@@ -381,7 +381,7 @@ create_dialog (void)
   gtk_container_set_border_width (GTK_CONTAINER (dlg), (guint) options.data.borders);
 
   /* set window size and position */
-  if (!options.data.geometry && !options.data.maximized && !options.data.fullscreen)
+  if (!options.data.maximized && !options.data.fullscreen)
     {
       if (options.data.center)
         gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER_ALWAYS);
@@ -596,51 +596,8 @@ create_dialog (void)
   if (!options.data.maximized && !options.data.fullscreen)
     {
       gtk_widget_realize (dlg);
-      /* parse geometry string */
-      if (options.data.geometry)
-        {
-          gchar **geom;
 
-          geom = g_new0 (gchar *, 5);
-
-          if (*options.data.geometry == '+' || *options.data.geometry == '-')
-            {
-              geom = g_strsplit_set (options.data.geometry, "+-", 3);
-              if (geom[1])
-                {
-                  options.data.use_posx = TRUE;
-                  options.data.posx = atoi (geom[1]);
-                  if (geom[2])
-                    {
-                      options.data.use_posy = TRUE;
-                      options.data.posy = atoi (geom[2]);
-                    }
-                }
-            }
-          else
-            {
-              geom = g_strsplit_set (options.data.geometry, "x+-", 4);
-              if (geom[0])
-                {
-                  options.data.width = atoi (geom[0]);
-                  if (geom[1])
-                    {
-                      options.data.height = atoi (geom[1]);
-                      if (geom[2])
-                        {
-                          options.data.use_posx = TRUE;
-                          options.data.posx = atoi (geom[2]);
-                          if (geom[3])
-                            {
-                              options.data.use_posy = TRUE;
-                              options.data.posy = atoi (geom[3]);
-                           }
-                        }
-                    }
-                }
-            }
-          g_strfreev (geom);
-        }
+      parse_geometry ();
 
       gtk_widget_set_size_request (dlg, options.data.width, options.data.height);
       gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
