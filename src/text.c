@@ -109,7 +109,7 @@ search_changed (GtkWidget * w, gpointer d)
 static void
 show_search ()
 {
-  GtkWidget *w, *f, *a, *e;
+  GtkWidget *w, *f, *e;
   GdkEvent *fev;
 
   w = gtk_window_new (GTK_WINDOW_POPUP);
@@ -123,16 +123,13 @@ show_search ()
 
   f = gtk_frame_new (NULL);
   gtk_frame_set_shadow_type (GTK_FRAME (f), GTK_SHADOW_ETCHED_IN);
+  gtk_container_set_border_width (GTK_CONTAINER (f), 1);
   gtk_container_add (GTK_CONTAINER (w), f);
-
-  a = gtk_alignment_new (0.5, 0.5, 1.0, 1.0);
-  gtk_alignment_set_padding (GTK_ALIGNMENT (a), 2, 2, 2, 2);
-  gtk_container_add (GTK_CONTAINER (f), a);
 
   e = gtk_entry_new ();
   if (pattern)
     gtk_entry_set_text (GTK_ENTRY (e), pattern);
-  gtk_container_add (GTK_CONTAINER (a), e);
+  gtk_container_add (GTK_CONTAINER (f), e);
 
   g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (do_search), w);
   g_signal_connect (G_OBJECT (e), "changed", G_CALLBACK (search_changed), NULL);
@@ -244,8 +241,6 @@ motion_cb (GtkWidget * w, GdkEventMotion * ev, gpointer d)
 
   if (tags)
     g_slist_free (tags);
-
-  gdk_window_get_pointer (gtk_widget_get_window (w), NULL, NULL, NULL);
 
   return FALSE;
 }
@@ -581,8 +576,8 @@ text_create_widget (GtkWidget * dlg)
       g_signal_connect (G_OBJECT (tag), "event", G_CALLBACK (tag_event_cb), NULL);
 
       /* Create cursors */
-      hand = gdk_cursor_new (GDK_HAND2);
-      normal = gdk_cursor_new (GDK_XTERM);
+      hand = gdk_cursor_new_for_display (gdk_display_get_default (), GDK_HAND2);
+      normal = gdk_cursor_new_for_display (gdk_display_get_default (), GDK_XTERM);
       g_signal_connect (G_OBJECT (text_view), "motion-notify-event", G_CALLBACK (motion_cb), NULL);
 
       g_signal_connect_after (G_OBJECT (text_buffer), "changed", G_CALLBACK (linkify_cb), regex);
