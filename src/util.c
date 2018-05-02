@@ -198,7 +198,7 @@ get_color (GdkColor *c, guint64 alpha)
     {
     case YAD_COLOR_HEX:
       if (options.color_data.alpha)
-        res = g_strdup_printf ("#%X%X%X%X", c->red & 0xFF, c->green & 0xFF, c->blue & 0xFF, (alpha / 256) & 0xFF);
+        res = g_strdup_printf ("#%X%X%X%X", c->red & 0xFF, c->green & 0xFF, c->blue & 0xFF, (guint) ((alpha / 256) & 0xFF));
       else
         res = g_strdup_printf ("#%X%X%X", c->red & 0xFF, c->green & 0xFF, c->blue & 0xFF);
       break;
@@ -583,7 +583,7 @@ show_langs ()
   GList *lng;
 
   for (lng = gtk_spell_checker_get_language_list (); lng; lng = lng->next)
-    g_print ("%s\n", lng->data);
+    g_print ("%s\n", (gchar *) lng->data);
 }
 #endif
 
