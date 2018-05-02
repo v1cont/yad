@@ -1041,6 +1041,7 @@ set_expander (const gchar * option_name, const gchar * value, gpointer data, GEr
     options.data.expander = g_strdup (value);
   else
     options.data.expander = "";
+
   return TRUE;
 }
 
@@ -1127,6 +1128,8 @@ set_posx (const gchar * option_name, const gchar * value, gpointer data, GError 
 {
   options.data.use_posx = TRUE;
   options.data.posx = atol (value);
+
+  return TRUE;
 }
 
 static gboolean
@@ -1134,6 +1137,8 @@ set_posy (const gchar * option_name, const gchar * value, gpointer data, GError 
 {
   options.data.use_posy = TRUE;
   options.data.posy = atol (value);
+
+  return TRUE;
 }
 
 static gboolean
@@ -1193,6 +1198,8 @@ set_scroll_policy (const gchar * option_name, const gchar * value, gpointer data
     options.hscroll_policy = pt;
   else
     options.vscroll_policy = pt;
+
+  return TRUE;
 }
 
 #if GLIB_CHECK_VERSION(2,30,0)
@@ -1200,6 +1207,8 @@ static gboolean
 set_size_format (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
   options.common_data.size_fmt = G_FORMAT_SIZE_IEC_UNITS;
+
+  return TRUE;
 }
 #endif
 
@@ -1210,6 +1219,8 @@ set_xid_file (const gchar * option_name, const gchar * value, gpointer data, GEr
   options.print_xid = TRUE;
   if (value && value[0])
     options.xid_file = g_strdup (value);
+
+  return TRUE;
 }
 
 static gboolean
