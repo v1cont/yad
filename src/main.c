@@ -650,7 +650,11 @@ create_dialog (void)
         {
           gint ww, wh, sw, sh;
           gtk_window_get_size (GTK_WINDOW (dlg), &ww, &wh);
+#if !GTK_CHECK_VERSION(3,0,0)
+          gdk_window_get_geometry (gdk_get_default_root_window (), NULL, NULL, &sw, &sh, NULL);
+#else
           gdk_window_get_geometry (gdk_get_default_root_window (), NULL, NULL, &sw, &sh);
+#endif
           /* place window to specified coordinates */
           if (!options.data.use_posx)
             gtk_window_get_position (GTK_WINDOW (dlg), &options.data.posx, NULL);
