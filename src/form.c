@@ -1273,7 +1273,7 @@ form_print_field (guint fn)
       {
         gchar *fname;
 #if !GTK_CHECK_VERSION(3,0,0)
-        fname = gtk_font_button_get_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, fn)));
+        fname = (gchar *) gtk_font_button_get_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, fn)));
 #else
         fname = gtk_font_chooser_get_font (GTK_FONT_CHOOSER (g_slist_nth_data (fields, fn)));
 #endif
