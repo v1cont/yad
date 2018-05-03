@@ -144,7 +144,7 @@ select_icon (GtkTreeSelection * sel, IconBrowserData * data)
   g_string_free (sizes, TRUE);
 
   if (info)
-    gtk_icon_info_free (info);
+    g_object_unref (info);
 }
 
 static void
@@ -353,7 +353,9 @@ main (gint argc, gchar * argv[])
 
   data->icon_list = gtk_tree_view_new ();
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (data->icon_list), TRUE);
+#if !GTK_CHECK_VERSION(3,0,0)
   gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (data->icon_list), TRUE);
+#endif
   gtk_container_add (GTK_CONTAINER (w), data->icon_list);
 
   sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (data->icon_list));
