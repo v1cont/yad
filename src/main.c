@@ -586,18 +586,18 @@ create_dialog (void)
     }
 
   /* show widgets */
+  if (options.data.width > 0)
+    gtk_widget_set_size_request (vbox, options.data.width, options.data.height);
   gtk_widget_show_all (vbox);
 
   /* parse geometry or move window, if given. must be after showing widget */
   if (!options.data.maximized && !options.data.fullscreen)
     {
-      gtk_widget_realize (dlg);
+      gtk_widget_show_all (dlg);
 
       parse_geometry ();
 
-      gtk_widget_set_size_request (dlg, options.data.width, options.data.height);
       gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
-      gtk_widget_show_all (dlg);
 
       if (options.data.use_posx || options.data.use_posy)
         {
