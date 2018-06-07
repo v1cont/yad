@@ -629,6 +629,54 @@ parse_geometry ()
   options.data.use_posx = options.data.use_posy = usexy;
 }
 
+gboolean
+get_bool_val (gchar *str)
+{
+  if (!str && !str[0])
+    return FALSE;
+
+  switch (str[0])
+    {
+    case '1':
+    case 't':
+    case 'T':
+    case 'y':
+    case 'Y':
+      if (strcasecmp (str, "t") == 0 || strcasecmp (str, "true") == 0 ||
+          strcasecmp (str, "y") == 0 || strcasecmp (str, "yes") == 0 ||
+          strcmp (str, "1") == 0)
+        return TRUE;
+      break;
+    case '0':
+    case 'f':
+    case 'F':
+    case 'n':
+    case 'N':
+      if (strcasecmp (str, "f") == 0 || strcasecmp (str, "false") == 0 ||
+          strcasecmp (str, "n") == 0 || strcasecmp (str, "no") == 0 ||
+          strcmp (str, "0") == 0)
+        return FALSE;
+      break;
+    case 'o':
+    case 'O':
+      if (strcasecmp (str, "on") == 0)
+        return TRUE;
+      else if (strcasecmp (str, "off") == 0)
+        return FALSE;
+      break;
+    default: ;
+    }
+
+ g_printerr ("yad: wrong boolean value '%s'\n", str);
+ return FALSE;
+}
+
+gchar *
+print_bool_val (gboolean val)
+{
+  return "";
+}
+
 #ifdef HAVE_SPELL
 void
 show_langs ()

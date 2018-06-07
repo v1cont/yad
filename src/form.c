@@ -240,10 +240,7 @@ set_field_value (guint num, gchar * value)
       break;
 
     case YAD_FIELD_CHECK:
-      if (g_ascii_strcasecmp (value, "TRUE") == 0)
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), TRUE);
-      else
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), FALSE);
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), get_bool_val (value));
       break;
 
     case YAD_FIELD_COMPLETE:

@@ -631,6 +631,9 @@ gboolean check_complete (GtkEntryCompletion *c, const gchar *key, GtkTreeIter *i
 
 void parse_geometry ();
 
+gboolean get_bool_val (gchar *str);
+gchar *print_bool_val (gboolean val);
+
 #ifdef HAVE_SPELL
 void show_langs ();
 #endif

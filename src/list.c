@@ -399,7 +399,7 @@ cell_set_data (GtkTreeIter *it, guint num, gchar *data)
     {
     case YAD_COLUMN_CHECK:
     case YAD_COLUMN_RADIO:
-        gtk_list_store_set (GTK_LIST_STORE (model), it, num, (strcasecmp (data, "true") == 0), -1);
+        gtk_list_store_set (GTK_LIST_STORE (model), it, num, get_bool_val (data), -1);
       break;
     case YAD_COLUMN_NUM:
     case YAD_COLUMN_SIZE:

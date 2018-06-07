@@ -218,10 +218,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                 g_object_unref (pb);
               break;
             case COL_TERM:
-              if (strcasecmp (string->str, "true") == 0)
-                gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, TRUE, -1);
-              else
-                gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, FALSE, -1);
+              gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, get_bool_val (string->str), -1);
               break;
             }
 
