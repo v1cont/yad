@@ -674,7 +674,34 @@ get_bool_val (gchar *str)
 gchar *
 print_bool_val (gboolean val)
 {
-  return "";
+  gchar *ret = "";
+
+  switch (options.common_data.bool_fmt)
+    {
+    case YAD_BOOL_FMT_UT:
+      ret = val ? "TRUE" : "FALSE";
+      break;
+    case YAD_BOOL_FMT_UY:
+      ret = val ? "YES" : "NO";
+      break;
+    case YAD_BOOL_FMT_UO:
+      ret = val ? "ON" : "OFF";
+      break;
+    case YAD_BOOL_FMT_LT:
+      ret = val ? "true" : "false";
+      break;
+    case YAD_BOOL_FMT_LY:
+      ret = val ? "yes" : "no";
+      break;
+    case YAD_BOOL_FMT_LO:
+      ret = val ? "on" : "off";
+      break;
+    case YAD_BOOL_FMT_1:
+      ret = val ? "1" : "0";
+      break;
+    }
+
+  return ret;
 }
 
 #ifdef HAVE_SPELL

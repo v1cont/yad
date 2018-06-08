@@ -449,7 +449,7 @@ cell_get_data (GtkTreeIter *it, guint num)
       {
         gboolean bval;
         gtk_tree_model_get (model, it, num, &bval, -1);
-        data = g_strdup (bval ? "TRUE" : "FALSE");
+        data = g_strdup (print_bool_val (bval));
         break;
       }
     case YAD_COLUMN_NUM:
@@ -1120,9 +1120,9 @@ print_col (GtkTreeModel * model, GtkTreeIter * iter, gint num)
         gboolean bval;
         gtk_tree_model_get (model, iter, num, &bval, -1);
         if (options.common_data.quoted_output)
-          g_printf ("'%s'", bval ? "TRUE" : "FALSE");
+          g_printf ("'%s'", print_bool_val (bval));
         else
-          g_printf ("%s", bval ? "TRUE" : "FALSE");
+          g_printf ("%s", print_bool_val (bval));
         break;
       }
     case YAD_COLUMN_NUM:

@@ -108,7 +108,7 @@ See \fIhttp://code.google.com/p/yad/wiki/TimeoutIndicator\fP for details.
 Send SIGNAL to parent process. Default value of SIGNAL is a SIGTERM.
 SIGNAL may be specified by it's number or symbolic name with or without SIG prefix.
 See signal(7) for details about signals.
-.TP 
+.TP
 .B \-\-print-xid=\fI[FILENAME]\fP
 Output X Window ID of a yad's window to the specified file or stderr.
 .TP
@@ -234,6 +234,17 @@ Enable spell checking in textview widgets
 .TP
 .B \-\-spell-lang=\fILANGUAGE\fP
 Set spell checking language to \fILANGUAGE\fP. By default language guesses from current locale. Use option \fI\-\-show-langs\fP for get list of all possible languages.
+.TP
+.B \-\-boot-fmt=\fITYPE\fP
+Set the output type of boolean values to \fITYPE\fP. Possible types are \fIT\fP, \fIt\fP, \fIY\fP, \fIy\fP, \fIO\fP, \fIo\fP and \fI1\fP.
+.br
+\fIT\fP and \fIt\fP - for \fItrue/false\fP pair in appropriate case.
+.br
+\fIY\fP and \fIy\fP - for \fIyes/no\fP pair in appropriate case.
+.br
+\fIO\fP and \fIo\fP - for \fIon/off\fP pair in appropriate case.
+.br
+\fI1\fP - for \fI1/0\fP pair in appropriate case.
 
 .SS Calendar options
 .TP

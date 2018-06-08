@@ -167,6 +167,16 @@ typedef enum {
   YAD_COMPLETE_REGEX
 } YadCompletionType;
 
+typedef enum {
+  YAD_BOOL_FMT_UT,
+  YAD_BOOL_FMT_UY,
+  YAD_BOOL_FMT_UO,
+  YAD_BOOL_FMT_LT,
+  YAD_BOOL_FMT_LY,
+  YAD_BOOL_FMT_LO,
+  YAD_BOOL_FMT_1
+} YadBoolFormat;
+
 typedef struct {
   gchar *name;
   gchar *cmd;
@@ -458,6 +468,7 @@ typedef struct {
 #if GLIB_CHECK_VERSION(2,30,0)
   GFormatSizeFlags size_fmt;
 #endif
+  YadBoolFormat bool_fmt;
   YadCompletionType complete;
   GList *filters;
   key_t key;

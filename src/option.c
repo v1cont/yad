@@ -51,6 +51,7 @@ static gboolean parse_signal (const gchar *, const gchar *, gpointer, GError **)
 #endif
 static gboolean add_image_path (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_complete_type (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_bool_fmt_type (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_grid_lines (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_scroll_policy (const gchar *, const gchar *, gpointer, GError **);
 #if GLIB_CHECK_VERSION(2,30,0)
@@ -213,6 +214,8 @@ static GOptionEntry common_options[] = {
     N_("Identifier of embedded dialogs"), N_("KEY") },
   { "complete", 0, 0, G_OPTION_ARG_CALLBACK, set_complete_type,
     N_("Set extended completion for entries (any, all, or regex)"), N_("TYPE") },
+  { "bool-fmt", 0, 0, G_OPTION_ARG_CALLBACK, set_bool_fmt_type,
+    N_("Set type of output for boolean values (T, t, Y, y, O, o, 1)"), N_("TYPE") },
 #if GLIB_CHECK_VERSION(2,30,0)
   { "iec-format", 0, G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, set_size_format,
     N_("Use IEC (base 1024) units with for size values"), NULL },
@@ -1166,6 +1169,39 @@ set_complete_type (const gchar * option_name, const gchar * value, gpointer data
 }
 
 static gboolean
+set_bool_fmt_type (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+{
+  switch (value[0])
+    {
+    case 'T':
+      options.common_data.bool_fmt = YAD_BOOL_FMT_UT;
+      break;
+    case 't':
+      options.common_data.bool_fmt = YAD_BOOL_FMT_LT;
+      break;
+    case 'Y':
+      options.common_data.bool_fmt = YAD_BOOL_FMT_UY;
+      break;
+    case 'y':
+      options.common_data.bool_fmt = YAD_BOOL_FMT_LY;
+      break;
+    case 'O':
+      options.common_data.bool_fmt = YAD_BOOL_FMT_UO;
+      break;
+    case 'o':
+      options.common_data.bool_fmt = YAD_BOOL_FMT_LO;
+      break;
+    case '1':
+      options.common_data.bool_fmt = YAD_BOOL_FMT_1;
+      break;
+    default:
+      g_printerr (_("Unknown boolean format type: %s\n"), value);
+    }
+
+  return TRUE;
+}
+
+static gboolean
 set_grid_lines (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
   if (strncasecmp (value, "hor", 3) == 0)
@@ -1463,6 +1499,7 @@ yad_options_init (void)
   options.common_data.num_output = FALSE;
   options.common_data.filters = NULL;
   options.common_data.key = -1;
+  options.common_data.bool_fmt = YAD_BOOL_FMT_UT;
   options.common_data.complete = YAD_COMPLETE_SIMPLE;
 #if GLIB_CHECK_VERSION(2,30,0)
   options.common_data.size_fmt = G_FORMAT_SIZE_DEFAULT;
