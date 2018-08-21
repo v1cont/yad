@@ -1,4 +1,4 @@
-# Yet Another Dialog
+Yet Another Dialog
 ====================
 
 Program allows you to display GTK+ dialog boxes from command line or 
@@ -13,8 +13,8 @@ Mailing list: http://groups.google.com/group/yad-common
 Some miscellaneous stuff can be found in data directory including notify-send script
 and simple zenity-compatible wrapper 
 
-# Building git version
-======================
+Building git version
+----------------------
 
 Get git version with command
 
