@@ -18,7 +18,7 @@ and simple zenity-compatible wrapper
 
 Get git version with command
 
-svn checkout svn://svn.code.sf.net/p/yad-dialog/code/trunk yad-dialog-code
+git clone https://github.com/v1cont/yad.git yad-dialog-code
 
 Before run the standard ./configure && make && make install procedure
 you need to generate build scripts. This can be done by running command
