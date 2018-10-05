@@ -153,7 +153,7 @@ Set buttons layout type. Possible types are: \fIspread\fP, \fIedge\fP, \fIstart\
 Default is \fIend\fP.
 .TP
 .B \-\-no-markup
-Don't use pango markup in dialog's text.
+Don't use pango markup in dialog text. List column tooltip markup can be disabled independently with \fI--tooltip-column\fP.
 .TP
 .B \-\-no-escape
 Don't close dialog if \fIEscape\fP was pressed.
@@ -546,7 +546,7 @@ When dialog wors in browser mode additional data in command line interprets as \
 .TP
 .B \-\-column=\fISTRING[:TYPE]\fP
 Set the column header. Types are \fITEXT\fP, \fINUM\fP, \fISZ\fP, \fIFLT\fP, \fICHK\fP, \fIRD\fP, \fIBAR\fP, \fIIMG\fP, \fIHD\fP or \fITIP\fP.
-\fITEXT\fP type is default. Use \fINUM\fP for integers and \fIFLT\fP for double values. \fITIP\fP is used for define tooltip column.
+\fITEXT\fP type is default. Use \fINUM\fP for integers and \fIFLT\fP for double values. \fITIP\fP is used for defining tooltip column.
 \fISZ\fP size column type. Works exactly like \fINUM\fP column but shows human readable sizes instead of numbers.
 \fICHK\fP (checkboxes) and \fIRD\fP (radio toggle) are a boolean columns.
 \fIBAR\fP is a progress bar column. Value must be between \fI0\fP and \fI100\fP. If value is outside is range it will be croped to neares legal value.
@@ -606,7 +606,7 @@ Set the column expandable by default. \fI0\fP sets all columns expandable.
 Set the quick search column. \fI0\fP mean to disable searching. By default search mades on first column.
 .TP
 .B \-\-tooltip\-column=\fINUMBER\fP
-Set the column with popup tooltips.
+Set the column with popup tooltips. Use a positive \fINUMBER\fP for pango markup or a negative \fINUMBER\fP for plain text.
 .TP
 .B \-\-sep\-column=\fINUMBER\fP
 Set the row separator column. If the cell value from this column equal to specified row separator value such row will be draw as separator.

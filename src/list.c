@@ -1015,6 +1015,75 @@ parse_cols_props ()
     }
 }
 
+static gboolean
+set_tooltip_query_cb (GtkWidget * w, gint x, gint y, gboolean keyboard_tip, GtkTooltip *tooltip, gpointer data)
+{
+  GValue value = G_VALUE_INIT;
+  GValue transformed = G_VALUE_INIT;
+  GtkTreeIter iter;
+  GtkTreePath *path;
+  GtkTreeModel *model;
+  GtkTreeView *tv = GTK_TREE_VIEW (w);
+
+  if (!gtk_tree_view_get_tooltip_context (GTK_TREE_VIEW (w), &x, &y, keyboard_tip, &model, &path, &iter))
+    return FALSE;
+
+  gtk_tree_model_get_value (model, &iter, options.list_data.tooltip_column - 1, &value);
+
+  g_value_init (&transformed, G_TYPE_STRING);
+
+  if (!g_value_transform (&value, &transformed))
+    {
+      g_value_unset (&value);
+      gtk_tree_path_free (path);
+      return FALSE;
+    }
+
+  g_value_unset (&value);
+
+  if (!g_value_get_string (&transformed))
+    {
+      g_value_unset (&transformed);
+      gtk_tree_path_free (path);
+      return FALSE;
+    }
+
+  gtk_tooltip_set_text (tooltip, g_value_get_string (&transformed));
+  gtk_tree_view_set_tooltip_row (tv, tooltip, path);
+
+  gtk_tree_path_free (path);
+  g_value_unset (&transformed);
+  return TRUE;
+}
+
+static void
+set_text_tooltip_column (GtkTreeView *tv, gint column)
+{
+  gint tooltip_column;
+
+  tooltip_column = gtk_tree_view_get_tooltip_column (GTK_TREE_VIEW(tv));
+
+  if (column == tooltip_column)
+    return;
+
+  if (column == -1)
+    {
+      g_signal_handlers_disconnect_by_func (tv, set_tooltip_query_cb, NULL);
+      gtk_widget_set_has_tooltip (GTK_WIDGET (tv), FALSE);
+    }
+  else
+    {
+      if (tooltip_column == -1)
+        {
+          g_signal_connect (tv, "query-tooltip", G_CALLBACK (set_tooltip_query_cb), NULL);
+          gtk_widget_set_has_tooltip (GTK_WIDGET (tv), TRUE);
+        }
+    }
+
+  gtk_tree_view_set_tooltip_column(GTK_TREE_VIEW (tv), column);
+  g_object_notify (G_OBJECT (tv), "tooltip-column");
+}
+
 GtkWidget *
 list_create_widget (GtkWidget * dlg)
 {
@@ -1061,7 +1130,16 @@ list_create_widget (GtkWidget * dlg)
 
   /* add tooltip column */
   if (options.list_data.tooltip_column > 0)
-    gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (list_view), options.list_data.tooltip_column - 1);
+    {
+      /* as markup text */
+      gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (list_view), options.list_data.tooltip_column - 1);
+    }
+  else if (options.list_data.tooltip_column < 0)
+    {
+      /* as plain text */
+      options.list_data.tooltip_column = - options.list_data.tooltip_column;
+      set_text_tooltip_column (GTK_TREE_VIEW (list_view), options.list_data.tooltip_column - 1);
+    }
 
   /* set search function for regex search */
   if (options.list_data.search_column != -1 && options.list_data.regex_search)

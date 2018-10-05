@@ -431,7 +431,7 @@ static GOptionEntry list_options[] = {
   { "search-column", 0, 0, G_OPTION_ARG_INT, &options.list_data.search_column,
     N_("Set the quick search column. Default is first column. Set it to 0 for disable searching"), N_("NUMBER") },
   { "tooltip-column", 0, 0, G_OPTION_ARG_INT, &options.list_data.tooltip_column,
-    N_("Set the tooltip column"), N_("NUMBER") },
+    N_("Set the tooltip column (use negative NUMBER for no pango markup)"), N_("NUMBER") },
   { "sep-column", 0, 0, G_OPTION_ARG_INT, &options.list_data.sep_column,
     N_("Set the row separator column"), N_("NUMBER") },
   { "sep-value", 0, 0, G_OPTION_ARG_STRING, &options.list_data.sep_value,
