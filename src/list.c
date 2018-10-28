@@ -1162,7 +1162,7 @@ print_col (GtkTreeModel * model, GtkTreeIter * iter, gint num)
             g_free (buf);
           }
         else
-          g_printf ("%s", val);
+          g_printf ("%s", val ? val : "");
         break;
       }
     }
