@@ -375,6 +375,8 @@ static GOptionEntry icons_options[] = {
     N_("Use compact (list) view"), NULL },
   { "generic", 0, 0, G_OPTION_ARG_NONE, &options.icons_data.generic,
     N_("Use GenericName field instead of Name for icon label"), NULL },
+  { "icon-width", 0, 0, G_OPTION_ARG_INT, &options.icons_data.icon_width,
+    N_("Set the width of full view dialog icons (use --item-width for padding)"), NULL },
   { "item-width", 0, 0, G_OPTION_ARG_INT, &options.icons_data.width,
     N_("Set the width of dialog items"), NULL },
   { "term", 0, 0, G_OPTION_ARG_STRING, &options.icons_data.term,

@@ -212,7 +212,21 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                 else
                   pb = NULL;
               else
-                pb = get_pixbuf (string->str, YAD_BIG_ICON);
+                {
+                  guint width, height, new_width, new_height;
+                  pb = get_pixbuf (string->str, YAD_BIG_ICON);
+                  width = gdk_pixbuf_get_width(pb);
+                  height = gdk_pixbuf_get_height(pb);
+                  if (width != options.icons_data.icon_width)
+                    {
+                      GdkPixbuf *new_pb;
+                      new_width = options.icons_data.icon_width;
+                      new_height = options.icons_data.icon_width * height / width;
+                      new_pb = gdk_pixbuf_scale_simple (pb, new_width, new_height, GDK_INTERP_BILINEAR);
+                      g_object_unref (pb);
+                      pb = new_pb;
+                    }
+                }
               gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, pb, -1);
               if (pb)
                 g_object_unref (pb);

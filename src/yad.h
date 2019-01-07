@@ -318,6 +318,7 @@ typedef struct {
   gboolean descend;
   gboolean sort_by_name;
   gboolean single_click;
+  guint icon_width;
   guint width;
   gchar *term;
 #ifdef HAVE_GIO
