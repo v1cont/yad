@@ -338,7 +338,21 @@ parse_desktop_file (gchar * filename)
               if (options.icons_data.compact)
                 ent->pixbuf = get_pixbuf (icon, YAD_SMALL_ICON);
               else
-                ent->pixbuf = get_pixbuf (icon, YAD_BIG_ICON);
+                {
+                  guint width, height, new_width, new_height;
+                  ent->pixbuf = get_pixbuf (icon, YAD_BIG_ICON);
+                  width = gdk_pixbuf_get_width(ent->pixbuf);
+                  height = gdk_pixbuf_get_height(ent->pixbuf);
+                  if (options.icons_data.icon_width && width != options.icons_data.icon_width)
+                    {
+                      GdkPixbuf *new_pb;
+                      new_width = options.icons_data.icon_width;
+                      new_height = options.icons_data.icon_width * height / width;
+                      new_pb = gdk_pixbuf_scale_simple (ent->pixbuf, new_width, new_height, GDK_INTERP_BILINEAR);
+                      g_object_unref (ent->pixbuf);
+                      ent->pixbuf = new_pb;
+                    }
+                }
               g_free (icon);
             }
         }
