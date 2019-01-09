@@ -602,6 +602,7 @@ gint yad_about (void);
 
 gboolean yad_send_notify (gboolean);
 
+void notebook_set_active_tab (void);
 void notebook_close_childs (void);
 void paned_close_childs (void);
 

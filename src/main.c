@@ -638,6 +638,10 @@ create_dialog (void)
         gtk_window_fullscreen (GTK_WINDOW (dlg));
     }
 
+  /* must be after showing widgets */
+  if (options.mode == YAD_MODE_NOTEBOOK)
+    notebook_set_active_tab ();
+
 #ifndef G_OS_WIN32
   /* print xid */
   if (options.print_xid)
