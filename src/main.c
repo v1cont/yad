@@ -39,7 +39,6 @@ static GtkWidget *dialog = NULL;
 static gint ret = YAD_RESPONSE_ESC;
 
 YadNTabs *tabs;
-gint t_sem;
 
 #ifndef G_OS_WIN32
 static void
@@ -675,6 +674,10 @@ create_plug (void)
       usleep (1000);
       tabs = get_tabs (options.plug, FALSE);
     }
+  while (!tabs[0].xid)
+    {
+      usleep (1000);
+    }
 
   win = gtk_plug_new (0);
   /* set window borders */
@@ -689,10 +692,9 @@ create_plug (void)
   gtk_widget_show_all (win);
 
   /* add plug data */
+  /* notebook/paned will count non-zero xids */
   tabs[options.tabnum].pid = getpid ();
   tabs[options.tabnum].xid = gtk_plug_get_id (GTK_PLUG (win));
-  /* FIXME: may be a race here */
-  tabs[0].xid++;
   shmdt (tabs);
 }
 

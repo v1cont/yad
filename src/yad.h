@@ -548,9 +548,8 @@ typedef struct {
 /* pointer to shared memory for tabbed dialog */
 /* 0 item used for special info: */
 /*   pid - memory id */
-/*   xid - count of registered tabs (for sync) */
+/*   xid - allow plugs to write shmem (for sync) */
 extern YadNTabs *tabs;
-extern gint t_sem;
 
 void yad_options_init (void);
 GOptionContext *yad_create_context (void);
