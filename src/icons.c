@@ -207,28 +207,13 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
               }
             case COL_PIXBUF:
               {
-                guint width, height, new_width, new_height;
                 if (options.icons_data.compact)
                   if (*string->str)
-                    pb = get_pixbuf (string->str, YAD_SMALL_ICON);
+                    pb = get_pixbuf_scaled (string->str, YAD_SMALL_ICON, options.icons_data.icon_width);
                   else
                     pb = NULL;
                 else
-                  pb = get_pixbuf (string->str, YAD_BIG_ICON);
-                if (pb)
-                  {
-                    width = gdk_pixbuf_get_width(pb);
-                    height = gdk_pixbuf_get_height(pb);
-                    if (options.icons_data.icon_width && width != options.icons_data.icon_width)
-                      {
-                        GdkPixbuf *new_pb;
-                        new_width = options.icons_data.icon_width;
-                        new_height = options.icons_data.icon_width * height / width;
-                        new_pb = gdk_pixbuf_scale_simple (pb, new_width, new_height, GDK_INTERP_BILINEAR);
-                        g_object_unref (pb);
-                        pb = new_pb;
-                      }
-                  }
+                  pb = get_pixbuf_scaled (string->str, YAD_BIG_ICON, options.icons_data.icon_width);
               }
               gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, pb, -1);
               if (pb)
@@ -338,22 +323,10 @@ parse_desktop_file (gchar * filename)
           icon = g_key_file_get_string (kf, "Desktop Entry", "Icon", NULL);
           if (icon)
             {
-                guint width, height, new_width, new_height;
-                if (options.icons_data.compact)
-                  ent->pixbuf = get_pixbuf (icon, YAD_SMALL_ICON);
-                else
-                  ent->pixbuf = get_pixbuf (icon, YAD_BIG_ICON);
-                width = gdk_pixbuf_get_width(ent->pixbuf);
-                height = gdk_pixbuf_get_height(ent->pixbuf);
-                if (options.icons_data.icon_width && width != options.icons_data.icon_width)
-                {
-                  GdkPixbuf *new_pb;
-                  new_width = options.icons_data.icon_width;
-                  new_height = options.icons_data.icon_width * height / width;
-                  new_pb = gdk_pixbuf_scale_simple (ent->pixbuf, new_width, new_height, GDK_INTERP_BILINEAR);
-                  g_object_unref (ent->pixbuf);
-                  ent->pixbuf = new_pb;
-                }
+              if (options.icons_data.compact)
+                ent->pixbuf = get_pixbuf_scaled (icon, YAD_SMALL_ICON, options.icons_data.icon_width);
+              else
+                ent->pixbuf = get_pixbuf_scaled (icon, YAD_BIG_ICON, options.icons_data.icon_width);
               g_free (icon);
             }
         }

@@ -188,6 +188,63 @@ get_pixbuf (gchar * name, YadIconSize size)
   return pb;
 }
 
+GdkPixbuf *
+get_pixbuf_scaled (gchar * name, YadIconSize size, gint w)
+{
+  gint h;
+  GdkPixbuf *pb = NULL;
+  GError *err = NULL;
+
+  if (g_file_test (name, G_FILE_TEST_EXISTS))
+    {
+      pb = gdk_pixbuf_new_from_file (name, &err);
+      if (!pb)
+        {
+          g_printerr ("yad_get_pixbuf_scaled(): %s\n", err->message);
+          g_error_free (err);
+        }
+    }
+  else
+    {
+      if (0 == w)
+        {
+          if (size == YAD_BIG_ICON)
+            gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &w, &h);
+          else
+            gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
+
+          w = MIN(w, h);
+        }
+
+      pb = gtk_icon_theme_load_icon (settings.icon_theme, name, w, GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+    }
+  if (pb)
+    {
+      /* gtk_icon_theme_load_icon may not give exactly the requested size but we want it exactly */
+      w = gdk_pixbuf_get_width(pb);
+      if (options.icons_data.icon_width && w != options.icons_data.icon_width)
+        {
+          gint new_w, new_h;
+          GdkPixbuf *new_pb;
+          h = gdk_pixbuf_get_height(pb);
+          new_w = options.icons_data.icon_width;
+          new_h = new_w * h / w;
+          new_pb = gdk_pixbuf_scale_simple (pb, new_w, new_h, GDK_INTERP_BILINEAR);
+          g_object_unref (pb);
+          pb = new_pb;
+        }
+    }
+  else
+    {
+      if (size == YAD_BIG_ICON)
+        pb = settings.big_fallback_image;
+      else
+        pb = settings.small_fallback_image;
+    }
+
+  return pb;
+}
+
 #if !GTK_CHECK_VERSION(3,0,0)
 gchar *
 get_color (GdkColor *c, guint64 alpha)

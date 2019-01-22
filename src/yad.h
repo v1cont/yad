@@ -613,6 +613,7 @@ void update_preview (GtkFileChooser *chooser, GtkWidget *p);
 void filechooser_mapped (GtkWidget *w, gpointer data);
 
 GdkPixbuf *get_pixbuf (gchar *name, YadIconSize size);
+GdkPixbuf *get_pixbuf_scaled (gchar *name, YadIconSize size, gint w);
 #if GTK_CHECK_VERSION(3,0,0)
 gchar *get_color (GdkRGBA *c);
 #else
