@@ -206,15 +206,13 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                 break;
               }
             case COL_PIXBUF:
-              {
-                if (options.icons_data.compact)
-                  if (*string->str)
-                    pb = get_pixbuf_scaled (string->str, YAD_SMALL_ICON, options.icons_data.icon_width);
-                  else
-                    pb = NULL;
+              if (options.icons_data.compact)
+                if (*string->str)
+                  pb = get_pixbuf_scaled (string->str, YAD_SMALL_ICON, options.icons_data.icon_width);
                 else
-                  pb = get_pixbuf_scaled (string->str, YAD_BIG_ICON, options.icons_data.icon_width);
-              }
+                  pb = NULL;
+              else
+                pb = get_pixbuf_scaled (string->str, YAD_BIG_ICON, options.icons_data.icon_width);
               gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, pb, -1);
               if (pb)
                 g_object_unref (pb);
