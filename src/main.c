@@ -604,6 +604,7 @@ create_dialog (void)
       gtk_widget_show_all (dlg);
 
       parse_geometry ();
+      gtk_window_resize (GTK_WINDOW (dlg), options.data.width, options.data.height);
 
       gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
 
