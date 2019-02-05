@@ -1,13 +1,13 @@
 # Ukrainian translation for YAD
 # This file is distributed under the same license as the YAD package.
 #
-# Victor Ananjevsky <ananasik@gmail.com>, 2011-2018.
+# Victor Ananjevsky <ananasik@gmail.com>, 2011-2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-08 12:56+0300\n"
+"POT-Creation-Date: 2019-02-05 20:15+0200\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -148,12 +148,12 @@ msgstr "Не можу відкрити каталог %s: %s\n"
 msgid "%d sec"
 msgstr "%d сек"
 
-#: ../src/main.c:780 ../src/main.c:787
+#: ../src/main.c:781 ../src/main.c:788
 #, c-format
 msgid "Unable to parse YAD_OPTIONS: %s\n"
 msgstr "Не можу розібрати YAD_OPTIONS: %s\n"
 
-#: ../src/main.c:798
+#: ../src/main.c:799
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Не вдається розібрати командний рядок: %s\n"
@@ -177,19 +177,19 @@ msgstr "Невідома команда '%s'\n"
 msgid "Yad notification"
 msgstr "Діалог повідомлень"
 
-#: ../src/list.c:874
+#: ../src/list.c:901
 msgid "Add row"
 msgstr "Додати рядок"
 
-#: ../src/list.c:879
+#: ../src/list.c:906
 msgid "Delete row"
 msgstr "Видалити рядок"
 
-#: ../src/list.c:884
+#: ../src/list.c:911
 msgid "Duplicate row"
 msgstr "Скопіювати рядок"
 
-#: ../src/list.c:1031
+#: ../src/list.c:1058
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Не задані заголовки стовпчиків для діалогу зі списком\n"
@@ -1715,31 +1715,31 @@ msgid "built-in"
 msgstr "вбудований"
 
 #. initialize GTK+ and parse the command line arguments
-#: ../src/browser.c:200
+#: ../src/browser.c:204
 msgid "- Icon browser"
 msgstr "- Навігатор іконок"
 
-#: ../src/browser.c:213
+#: ../src/browser.c:217
 msgid "Icon browser"
 msgstr "Навігатор іконок"
 
-#: ../src/browser.c:247
+#: ../src/browser.c:251
 msgid "<b>Name:</b>"
 msgstr "<b>Назва:</b>"
 
-#: ../src/browser.c:267
+#: ../src/browser.c:271
 msgid "<b>Sizes:</b>"
 msgstr "<b>Розміри:</b>"
 
-#: ../src/browser.c:287
+#: ../src/browser.c:291
 msgid "<b>Filename:</b>"
 msgstr "<b>Назва файлу:</b>"
 
-#: ../src/browser.c:331
+#: ../src/browser.c:335
 msgid "Category"
 msgstr "Категорія"
 
-#: ../src/browser.c:365
+#: ../src/browser.c:369
 msgid "Icons"
 msgstr "Іконки"
 
