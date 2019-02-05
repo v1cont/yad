@@ -70,11 +70,6 @@ notebook_create_widget (GtkWidget * dlg)
       gtk_container_child_set( GTK_CONTAINER (w), a, "tab-expand", options.notebook_data.expand, NULL);
     }
 
-  /* set active tab */
-  if (options.notebook_data.active <= 0)
-    options.notebook_data.active = 1;
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (w), options.notebook_data.active - 1);
-
   return w;
 }
 
@@ -98,6 +93,10 @@ notebook_swallow_childs (void)
       if (tabs[i].pid != -1)
         gtk_socket_add_id (GTK_SOCKET (s), tabs[i].xid);
     }
+
+  /* set active tab */
+  if (options.notebook_data.active > 0)
+    gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), options.notebook_data.active - 1);
 }
 
 void
