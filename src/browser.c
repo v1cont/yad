@@ -144,7 +144,11 @@ select_icon (GtkTreeSelection * sel, IconBrowserData * data)
   g_string_free (sizes, TRUE);
 
   if (info)
+#if !GTK_CHECK_VERSION(3,0,0)
+    gtk_icon_info_free(info);
+#else
     g_object_unref (info);
+#endif
 }
 
 static void
