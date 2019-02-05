@@ -888,7 +888,7 @@ popup_menu_cb (GtkWidget * w, GdkEventButton * ev, gpointer data)
 
           gtk_widget_show (menu);
         }
-#if GTK_CHECK_VERSION(3,0,0)
+#if GTK_CHECK_VERSION(3,22,0)
       gtk_menu_popup_at_pointer (GTK_MENU (menu), NULL);
 #else
       gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, ev->button, ev->time);
@@ -1162,7 +1162,7 @@ print_col (GtkTreeModel * model, GtkTreeIter * iter, gint num)
             g_free (buf);
           }
         else
-          g_printf ("%s", val);
+          g_printf ("%s", val ? val : "");
         break;
       }
     }
