@@ -75,6 +75,33 @@ list_activate_cb (GtkWidget *widget, GdkEventKey *event, gpointer data)
   return FALSE;
 }
 
+/* custom tooltip signal handler for no-markup mode */
+static gboolean
+tooltip_cb (GtkWidget *w, gint x, gint y, gboolean mode, GtkTooltip *tip, gpointer data)
+{
+  gchar *str;
+  gint bx, by;
+  GtkTreePath *path;
+  GtkTreeIter iter;
+  GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (w));
+
+  gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (w), x, y, &bx, &by);
+  if (!gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (w), bx, by, &path, NULL, NULL, NULL))
+    return FALSE;
+
+  gtk_tree_model_get_iter (model, &iter, path);
+  gtk_tree_path_free (path);
+
+  gtk_tree_model_get (model, &iter, options.list_data.tooltip_column - 1, &str, -1);
+  if (str)
+    {
+      gtk_tooltip_set_text (tip, str);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
 static void
 toggled_cb (GtkCellRendererToggle *cell, gchar *path_str, gpointer data)
 {
@@ -1061,7 +1088,15 @@ list_create_widget (GtkWidget * dlg)
 
   /* add tooltip column */
   if (options.list_data.tooltip_column > 0)
-    gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (list_view), options.list_data.tooltip_column - 1);
+    {
+      if (options.data.no_markup)
+        {
+          gtk_widget_set_has_tooltip (list_view, TRUE);
+          g_signal_connect (G_OBJECT (list_view), "query-tooltip", G_CALLBACK (tooltip_cb), NULL);
+        }
+      else
+        gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (list_view), options.list_data.tooltip_column - 1);
+    }
 
   /* set search function for regex search */
   if (options.list_data.search_column != -1 && options.list_data.regex_search)
