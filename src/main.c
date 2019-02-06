@@ -675,10 +675,9 @@ create_plug (void)
       usleep (1000);
       tabs = get_tabs (options.plug, FALSE);
     }
+
   while (!tabs[0].xid)
-    {
-      usleep (1000);
-    }
+    usleep (1000);
 
   win = gtk_plug_new (0);
   /* set window borders */
