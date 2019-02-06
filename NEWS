@@ -1,3 +1,11 @@
+Version 0.41.0
+    - add supoort for webkit2
+    - use https as a default protocol in html dialog
+    - html dialog in browser mode treats extra argument as url to load
+    - add --expand option to a notebook dialog
+    - improve gtk3 dialog
+    - many bug fixes (details in git changelog)
+
 Version 0.40.3
     - shows overwrite confirmation dialog for save file dialog only on even button codes
 
