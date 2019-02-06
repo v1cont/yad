@@ -370,6 +370,8 @@ get_tabs (key_t key, gboolean create)
           t[i].xid = 0;
         }
       t[0].pid = shmid;
+      /* lastly, allow plugs to write shmem */
+      t[0].xid = 1;
     }
 
   return t;

@@ -77,12 +77,24 @@ void
 notebook_swallow_childs (void)
 {
   guint i, n_tabs;
+  gboolean all_registered;
 
   n_tabs = g_slist_length (options.notebook_data.tabs);
 
-  /* wait until all children are register */
-  while (tabs[0].xid != n_tabs)
-    usleep (1000);
+  /* wait until all children are registered */
+  do
+    {
+      all_registered = TRUE;
+      for (i = 1; i <= n_tabs; i++)
+        if (!tabs[i].xid)
+          {
+            all_registered = FALSE;
+            break;
+          }
+      if (!all_registered)
+        usleep (1000);
+    }
+  while (!all_registered);
 
   for (i = 1; i <= n_tabs; i++)
     {
@@ -117,7 +129,7 @@ notebook_close_childs (void)
 {
   guint i, n_tabs;
   struct shmid_ds buf;
-  gboolean is_running = TRUE;
+  gboolean is_running;
 
   n_tabs = g_slist_length (options.notebook_data.tabs);
   for (i = 1; i <= n_tabs; i++)
@@ -127,7 +139,7 @@ notebook_close_childs (void)
     }
 
   /* wait for stop subprocesses */
-  while (is_running)
+  do
     {
       is_running = FALSE;
       for (i = 1; i <= n_tabs; i++)
@@ -138,8 +150,10 @@ notebook_close_childs (void)
               break;
             }
         }
-      usleep (1000);
+      if (is_running)
+        usleep (1000);
     }
+  while (is_running);
 
   /* cleanup shared memory */
   shmctl (tabs[0].pid, IPC_RMID, &buf);

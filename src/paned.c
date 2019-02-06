@@ -77,8 +77,8 @@ paned_swallow_childs (void)
   s1 = GTK_WIDGET (g_object_get_data (G_OBJECT (paned), "s1"));
   s2 = GTK_WIDGET (g_object_get_data (G_OBJECT (paned), "s2"));
 
-  /* wait until all children are register */
-  while (tabs[0].xid != 2)
+  /* wait until all children are registered */
+  while (!tabs[1].xid || !tabs[2].xid)
     usleep (1000);
 
   if (tabs[1].pid != -1)
