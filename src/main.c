@@ -600,9 +600,19 @@ create_dialog (void)
   /* parse geometry or move window, if given. must be after showing widget */
   if (!options.data.maximized && !options.data.fullscreen)
     {
+      gint cw, ch;
+    
       gtk_widget_show_all (dlg);
 
       parse_geometry ();
+
+      /* get current window size for gtk_window_resize */
+      gtk_window_get_size (GTK_WINDOW (dlg), &cw, &ch);
+      if (options.data.width == -1)
+        options.data.width = cw;
+      if (options.data.height == -1)
+        options.data.height = ch;
+    
       gtk_window_resize (GTK_WINDOW (dlg), options.data.width, options.data.height);
 
       gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
