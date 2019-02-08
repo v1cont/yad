@@ -624,8 +624,10 @@ parse_geometry ()
       y = atoi (ptr);
     }
 
-  options.data.width = w;
-  options.data.height = h;
+  if (w != -1)
+    options.data.width = w;
+  if (h != -1)
+    options.data.height = h;
   options.data.posx = x;
   options.data.posy = y;
   options.data.use_posx = options.data.use_posy = usexy;

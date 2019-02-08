@@ -355,7 +355,6 @@ create_dialog (void)
     gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_SPLASHSCREEN);
   gtk_window_set_title (GTK_WINDOW (dlg), options.data.dialog_title);
   gtk_widget_set_name (dlg, "yad-dialog-window");
-  gtk_window_set_default_size (GTK_WINDOW (dlg), options.data.width, options.data.height);
 
   g_signal_connect (G_OBJECT (dlg), "delete-event", G_CALLBACK (gtk_main_quit), NULL);
   g_signal_connect (G_OBJECT (dlg), "key-press-event", G_CALLBACK (keys_cb), NULL);
