@@ -453,6 +453,8 @@ static GOptionEntry list_options[] = {
     N_("Disable selection"), NULL },
   { "add-on-top", 0, 0, G_OPTION_ARG_NONE, &options.list_data.add_on_top,
     N_("Add new records on the top of a list"), NULL },
+  { "simple-tips", 0, 0, G_OPTION_ARG_NONE, &options.list_data.simple_tips,
+    N_("Don't use markup in tooltips"), NULL },
   { NULL }
 };
 
@@ -1614,6 +1616,7 @@ yad_options_init (void)
   options.list_data.clickable = TRUE;
   options.list_data.no_selection = FALSE;
   options.list_data.add_on_top = FALSE;
+  options.list_data.simple_tips = FALSE;
 
   /* Initialize multiprogress data */
   options.multi_progress_data.bars = NULL;

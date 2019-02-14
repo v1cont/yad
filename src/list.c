@@ -1089,7 +1089,7 @@ list_create_widget (GtkWidget * dlg)
   /* add tooltip column */
   if (options.list_data.tooltip_column > 0)
     {
-      if (options.data.no_markup)
+      if (options.list_data.simple_tips || options.data.no_markup)
         {
           gtk_widget_set_has_tooltip (list_view, TRUE);
           g_signal_connect (G_OBJECT (list_view), "query-tooltip", G_CALLBACK (tooltip_cb), NULL);
