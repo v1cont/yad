@@ -466,6 +466,7 @@ typedef struct {
   gboolean show_hidden;
   gboolean quoted_output;
   gboolean num_output;
+  gint icon_size;
 #if GLIB_CHECK_VERSION(2,30,0)
   GFormatSizeFlags size_fmt;
 #endif

@@ -111,8 +111,9 @@ set_icon (void)
 
   if (g_file_test (icon, G_FILE_TEST_EXISTS))
     {
-      pixbuf = gdk_pixbuf_new_from_file_at_scale (icon, options.notification_data.icon_size, 
-                                                  options.notification_data.icon_size, TRUE, &err);
+      gint isize = (options.common_data.icon_size > 0) ? options.common_data.icon_size : 16;
+
+      pixbuf = gdk_pixbuf_new_from_file_at_scale (icon, isize, isize, TRUE, &err);
       if (err)
         {
           g_printerr (_("Could not load notification icon '%s': %s\n"), icon, err->message);

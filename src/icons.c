@@ -45,6 +45,33 @@ typedef struct {
   gboolean in_term;
 } DEntry;
 
+static GdkPixbuf *
+scale_pixbuf (GdkPixbuf *pb)
+{
+  GdkPixbuf *res;
+
+  if (!pb)
+    return NULL;
+
+  if (options.common_data.icon_size > 0)
+    {
+      guint width, height;
+
+      width = gdk_pixbuf_get_width (pb);
+      height = gdk_pixbuf_get_height (pb);
+
+      if (options.common_data.icon_size != width || options.common_data.icon_size != height)
+        res = gdk_pixbuf_scale_simple (pb, options.common_data.icon_size,
+                                       options.common_data.icon_size, GDK_INTERP_BILINEAR);
+      else
+        res = g_object_ref (pb);
+    }
+  else
+    res = g_object_ref (pb);
+
+  return res;
+}
+
 static void
 select_cb (GObject * obj, gpointer data)
 {
@@ -148,7 +175,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 
       do
         {
-          GdkPixbuf *pb;
+          GdkPixbuf *spb = NULL;
           gint status;
 
           do
@@ -207,15 +234,22 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
               }
             case COL_PIXBUF:
               if (options.icons_data.compact)
-                if (*string->str)
-                  pb = get_pixbuf (string->str, YAD_SMALL_ICON);
-                else
-                  pb = NULL;
+                {
+                  if (*string->str)
+                    spb = get_pixbuf (string->str, YAD_SMALL_ICON);
+                }
               else
-                pb = get_pixbuf (string->str, YAD_BIG_ICON);
-              gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, pb, -1);
-              if (pb)
-                g_object_unref (pb);
+                {
+                  GdkPixbuf *pb = get_pixbuf (string->str, YAD_BIG_ICON);
+                  if (pb)
+                    {
+                      spb = scale_pixbuf (pb);
+                      g_object_unref (pb);
+                    }
+                }
+              gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, spb, -1);
+              if (spb)
+                g_object_unref (spb);
               break;
             case COL_TERM:
               gtk_list_store_set (GTK_LIST_STORE (model), &iter, column_count, get_bool_val (string->str), -1);
@@ -324,7 +358,12 @@ parse_desktop_file (gchar * filename)
               if (options.icons_data.compact)
                 ent->pixbuf = get_pixbuf (icon, YAD_SMALL_ICON);
               else
-                ent->pixbuf = get_pixbuf (icon, YAD_BIG_ICON);
+                {
+                  GdkPixbuf *pb = get_pixbuf (icon, YAD_BIG_ICON);
+                  ent->pixbuf = scale_pixbuf (pb);
+                  if (pb)
+                    g_object_unref (pb);
+                }
               g_free (icon);
             }
         }

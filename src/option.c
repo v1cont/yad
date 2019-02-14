@@ -380,6 +380,8 @@ static GOptionEntry icons_options[] = {
     N_("Use GenericName field instead of Name for icon label"), NULL },
   { "item-width", 0, 0, G_OPTION_ARG_INT, &options.icons_data.width,
     N_("Set the width of dialog items"), NULL },
+  { "icon-size", 0,  G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_INT, &options.common_data.icon_size,
+    N_("Force using specified icon size"), N_("SIZE") },
   { "term", 0, 0, G_OPTION_ARG_STRING, &options.icons_data.term,
     /* xgettext: no-c-format */
     N_("Use specified pattern for launch command in terminal (default: xterm -e %s)"), N_("PATTERN") },
@@ -502,7 +504,7 @@ static GOptionEntry notification_options[] = {
     N_("Disable exit on middle click"), NULL },
   { "hidden", 0, 0, G_OPTION_ARG_NONE, &options.notification_data.hidden,
     N_("Doesn't show icon at startup"), NULL },
-  { "icon-size", 0, 0, G_OPTION_ARG_INT, &options.notification_data.icon_size,
+  { "icon-size", 0,  G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_INT, &options.common_data.icon_size,
     N_("Set icon size for fully specified icons (default - 16)"), N_("SIZE") },
   { NULL }
 };
@@ -1503,6 +1505,7 @@ yad_options_init (void)
   options.common_data.key = -1;
   options.common_data.bool_fmt = YAD_BOOL_FMT_UT;
   options.common_data.complete = YAD_COMPLETE_SIMPLE;
+  options.common_data.icon_size = 0;
 #if GLIB_CHECK_VERSION(2,30,0)
   options.common_data.size_fmt = G_FORMAT_SIZE_DEFAULT;
 #endif
