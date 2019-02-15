@@ -1636,7 +1636,6 @@ yad_options_init (void)
   options.notification_data.middle = TRUE;
   options.notification_data.hidden = FALSE;
   options.notification_data.menu = NULL;
-  options.notification_data.icon_size = 16;
 
   /* Initialize paned data */
   options.paned_data.orient = GTK_ORIENTATION_VERTICAL;
