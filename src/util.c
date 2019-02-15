@@ -180,9 +180,9 @@ get_pixbuf (gchar * name, YadIconSize size)
   if (!pb)
     {
       if (size == YAD_BIG_ICON)
-        pb = settings.big_fallback_image;
+        pb = g_object_ref (settings.big_fallback_image);
       else
-        pb = settings.small_fallback_image;
+        pb = g_object_ref (settings.small_fallback_image);
     }
 
   return pb;
