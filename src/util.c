@@ -152,30 +152,28 @@ write_settings (void)
 }
 
 GdkPixbuf *
-get_pixbuf (gchar * name, YadIconSize size)
+get_pixbuf (gchar * name, YadIconSize size, gboolean force)
 {
   gint w, h;
   GdkPixbuf *pb = NULL;
   GError *err = NULL;
+
+  if (size == YAD_BIG_ICON)
+    gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &w, &h);
+  else
+    gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
 
   if (g_file_test (name, G_FILE_TEST_EXISTS))
     {
       pb = gdk_pixbuf_new_from_file (name, &err);
       if (!pb)
         {
-          g_printerr ("yad_get_pixbuf(): %s\n", err->message);
+          g_printerr ("yad: get_pixbuf(): %s\n", err->message);
           g_error_free (err);
         }
     }
   else
-    {
-      if (size == YAD_BIG_ICON)
-        gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &w, &h);
-      else
-        gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
-
-      pb = gtk_icon_theme_load_icon (settings.icon_theme, name, MIN (w, h), GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
-    }
+    pb = gtk_icon_theme_load_icon (settings.icon_theme, name, MIN (w, h), GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
 
   if (!pb)
     {
@@ -183,6 +181,21 @@ get_pixbuf (gchar * name, YadIconSize size)
         pb = g_object_ref (settings.big_fallback_image);
       else
         pb = g_object_ref (settings.small_fallback_image);
+    }
+
+  /* force scaling image to specific size */
+  if (force && pb)
+    {
+      gint iw = gdk_pixbuf_get_width (pb);
+      gint ih = gdk_pixbuf_get_height (pb);
+
+      if (w != iw || h != ih)
+        {
+          GdkPixbuf *spb;
+          spb = gdk_pixbuf_scale_simple (pb, w, h, GDK_INTERP_BILINEAR);
+          g_object_unref (pb);
+          pb = spb;
+        }
     }
 
   return pb;
@@ -403,7 +416,7 @@ get_label (gchar * str, guint border)
   if (gtk_stock_lookup (vals[0], &it))
     {
       l = gtk_label_new_with_mnemonic (it.label);
-      i = gtk_image_new_from_pixbuf (get_pixbuf (it.stock_id, YAD_SMALL_ICON));
+      i = gtk_image_new_from_pixbuf (get_pixbuf (it.stock_id, YAD_SMALL_ICON, TRUE));
     }
   else
     {
@@ -417,7 +430,7 @@ get_label (gchar * str, guint border)
         }
 
       if (vals[1] && *vals[1])
-        i = gtk_image_new_from_pixbuf (get_pixbuf (vals[1], YAD_SMALL_ICON));
+        i = gtk_image_new_from_pixbuf (get_pixbuf (vals[1], YAD_SMALL_ICON, TRUE));
     }
 
   if (i)

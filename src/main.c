@@ -180,7 +180,7 @@ create_layout (GtkWidget *dlg)
     {
       GdkPixbuf *pb = NULL;
 
-      pb = get_pixbuf (options.data.dialog_image, YAD_BIG_ICON);
+      pb = get_pixbuf (options.data.dialog_image, YAD_BIG_ICON, FALSE);
       image = gtk_image_new_from_pixbuf (pb);
       if (pb)
         g_object_unref (pb);

@@ -196,7 +196,7 @@ popup_menu_cb (GtkStatusIcon * icon, guint button, guint activate_time, gpointer
         {
           if (d->icon)
             {
-              GdkPixbuf *pb = get_pixbuf (d->icon, YAD_SMALL_ICON);
+              GdkPixbuf *pb = get_pixbuf (d->icon, YAD_SMALL_ICON, TRUE);
               item = gtk_image_menu_item_new_with_mnemonic (d->name);
               if (pb)
                 {

@@ -236,11 +236,11 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
               if (options.icons_data.compact)
                 {
                   if (*string->str)
-                    spb = get_pixbuf (string->str, YAD_SMALL_ICON);
+                    spb = get_pixbuf (string->str, YAD_SMALL_ICON, TRUE);
                 }
               else
                 {
-                  GdkPixbuf *pb = get_pixbuf (string->str, YAD_BIG_ICON);
+                  GdkPixbuf *pb = get_pixbuf (string->str, YAD_BIG_ICON, FALSE);
                   if (pb)
                     {
                       spb = scale_pixbuf (pb);
@@ -356,10 +356,10 @@ parse_desktop_file (gchar * filename)
           if (icon)
             {
               if (options.icons_data.compact)
-                ent->pixbuf = get_pixbuf (icon, YAD_SMALL_ICON);
+                ent->pixbuf = get_pixbuf (icon, YAD_SMALL_ICON, TRUE);
               else
                 {
-                  GdkPixbuf *pb = get_pixbuf (icon, YAD_BIG_ICON);
+                  GdkPixbuf *pb = get_pixbuf (icon, YAD_BIG_ICON, FALSE);
                   ent->pixbuf = scale_pixbuf (pb);
                   if (pb)
                     g_object_unref (pb);

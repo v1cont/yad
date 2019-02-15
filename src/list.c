@@ -447,7 +447,7 @@ cell_set_data (GtkTreeIter *it, guint num, gchar *data)
       }
     case YAD_COLUMN_IMAGE:
       {
-        GdkPixbuf *pb = get_pixbuf (data, YAD_SMALL_ICON);
+        GdkPixbuf *pb = get_pixbuf (data, YAD_SMALL_ICON, FALSE);
         if (pb)
           {
             gtk_list_store_set (GTK_LIST_STORE (model), it, num, pb, -1);
