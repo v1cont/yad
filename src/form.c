@@ -103,7 +103,7 @@ expand_action (gchar * cmd)
                   arg = g_shell_quote (gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, num))));
                   break;
                 case YAD_FIELD_FONT:
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(3,2,0)
                   arg = g_shell_quote (gtk_font_button_get_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, num))));
 #else
                   arg = g_shell_quote (gtk_font_chooser_get_font (GTK_FONT_CHOOSER (g_slist_nth_data (fields, num))));
@@ -111,7 +111,7 @@ expand_action (gchar * cmd)
                   break;
                 case YAD_FIELD_COLOR:
                   {
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(3,4,0)
                     GdkColor c;
                     GtkColorButton *cb = GTK_COLOR_BUTTON (g_slist_nth_data (fields, num));
                     gtk_color_button_get_color (cb, &c);
@@ -318,7 +318,7 @@ set_field_value (guint num, gchar * value)
       break;
 
     case YAD_FIELD_FONT:
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(3,2,0)
       gtk_font_button_set_font_name (GTK_FONT_BUTTON (w), value);
 #else
       gtk_font_chooser_set_font (GTK_FONT_CHOOSER (w), value);
@@ -331,7 +331,7 @@ set_field_value (guint num, gchar * value)
 
     case YAD_FIELD_COLOR:
       {
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(3,4,0)
         GdkColor c;
         gdk_color_parse (value, &c);
         gtk_color_button_set_color (GTK_COLOR_BUTTON (w), &c);
@@ -1269,7 +1269,7 @@ form_print_field (guint fn)
     case YAD_FIELD_FONT:
       {
         gchar *fname;
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(3,2,0)
         fname = (gchar *) gtk_font_button_get_font_name (GTK_FONT_BUTTON (g_slist_nth_data (fields, fn)));
 #else
         fname = gtk_font_chooser_get_font (GTK_FONT_CHOOSER (g_slist_nth_data (fields, fn)));
@@ -1284,7 +1284,7 @@ form_print_field (guint fn)
     case YAD_FIELD_COLOR:
       {
         gchar *cs;
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(3,4,0)
         GdkColor c;
         GtkColorButton *cb = GTK_COLOR_BUTTON (g_slist_nth_data (fields, fn));
         gtk_color_button_get_color (cb, &c);

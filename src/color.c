@@ -98,7 +98,7 @@ create_palette ()
 static void
 set_color (gchar *clr)
 {
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(3,4,0)
       GdkColor c;
       if (gdk_color_parse (clr, &c))
         gtk_color_selection_set_current_color (GTK_COLOR_SELECTION (color), &c);
@@ -128,7 +128,7 @@ color_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w;
 
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(3,4,0)
   w = gtk_vbox_new (FALSE, 2);
   color = gtk_color_selection_new ();
 #else
@@ -137,7 +137,7 @@ color_create_widget (GtkWidget * dlg)
 #endif
 
   gtk_widget_set_name (color, "yad-color-widget");
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(3,4,0)
   gtk_color_selection_set_has_palette (GTK_COLOR_SELECTION (color), options.color_data.gtk_palette);
 #else
   g_object_set (G_OBJECT (color), "show-editor", !options.color_data.gtk_palette, NULL);
@@ -218,7 +218,7 @@ color_create_widget (GtkWidget * dlg)
 void
 color_print_result (void)
 {
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(3,4,0)
   GdkColor c;
   guint64 alpha;
 #else
@@ -226,7 +226,7 @@ color_print_result (void)
 #endif
   gchar *cs;
 
-#if !GTK_CHECK_VERSION(3,0,0)
+#if !GTK_CHECK_VERSION(3,4,0)
   gtk_color_selection_get_current_color (GTK_COLOR_SELECTION (color), &c);
   alpha = gtk_color_selection_get_current_alpha (GTK_COLOR_SELECTION (color));
   cs = get_color (&c, alpha);
