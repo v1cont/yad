@@ -41,6 +41,8 @@ static GSList *menu_data = NULL;
 
 static gint exit_code;
 
+static void popup_menu_cb (GtkStatusIcon *, guint, guint, gpointer);
+
 static void
 free_menu_data (gpointer data, gpointer udata)
 {
@@ -140,7 +142,12 @@ activate_cb (GtkWidget * widget, YadData * data)
       gtk_main_quit ();
     }
   else if (action)
-    g_spawn_command_line_async (action, NULL);
+    {
+      if (g_ascii_strcasecmp (action, "menu") == 0)
+        popup_menu_cb (GTK_STATUS_ICON (widget), 1, GDK_CURRENT_TIME, data);
+      else
+        g_spawn_command_line_async (action, NULL);
+    }
 
   return TRUE;
 }
