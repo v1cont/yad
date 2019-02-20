@@ -121,7 +121,7 @@ file_create_widget (GtkWidget * dlg)
   for (filt = options.common_data.filters; filt; filt = filt->next)
     gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (w), GTK_FILE_FILTER (filt->data));
 
-  g_signal_connect (w, "map", G_CALLBACK (filechooser_mapped), NULL);
+  g_signal_connect (w, "map", G_CALLBACK (gtk_file_chooser_set_show_hidden), GINT_TO_POINTER (options.common_data.show_hidden));
   g_signal_connect (w, "file-activated", G_CALLBACK (file_activated_cb), dlg);
 
   return w;

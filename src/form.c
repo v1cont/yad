@@ -459,7 +459,7 @@ select_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
       gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dlg), TRUE);
       gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), path);
 
-      g_signal_connect (dlg, "map", G_CALLBACK (filechooser_mapped), NULL);
+      g_signal_connect (dlg, "map", G_CALLBACK (gtk_file_chooser_set_show_hidden), GINT_TO_POINTER (options.common_data.show_hidden));
 
       /* add preview */
       if (options.common_data.preview)
@@ -545,7 +545,7 @@ create_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
         }
       gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), path);
 
-      g_signal_connect (dlg, "map", G_CALLBACK (filechooser_mapped), NULL);
+      g_signal_connect (dlg, "map", G_CALLBACK (gtk_file_chooser_set_show_hidden), GINT_TO_POINTER (options.common_data.show_hidden));
 
       /* add preview */
       if (options.common_data.preview)

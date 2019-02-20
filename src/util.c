@@ -316,12 +316,6 @@ update_preview (GtkFileChooser * chooser, GtkWidget *p)
     gtk_file_chooser_set_preview_widget_active (chooser, FALSE);
 }
 
-void
-filechooser_mapped (GtkWidget *w, gpointer data)
-{
-  gtk_file_chooser_set_show_hidden (GTK_FILE_CHOOSER (w), options.common_data.show_hidden);
-}
-
 gchar **
 split_arg (const gchar * str)
 {
