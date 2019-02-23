@@ -8,6 +8,9 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 endif
 
 dist_man_MANS = yad.1
+if BUILD_PFD
+dist_man_MANS += pfd.1
+endif
 
 m4dir = $(datadir)/aclocal
 m4_DATA = yad.m4

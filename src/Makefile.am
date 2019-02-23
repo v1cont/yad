@@ -37,6 +37,14 @@ endif
 yad_CFLAGS = $(GTK_CFLAGS) $(HTML_CFLAGS) $(SPELL_CFLAGS) $(SOURCEVIEW_CFLAGS)
 yad_LDADD = $(GTK_LIBS) $(HTML_LIBS) $(SPELL_LIBS) $(SOURCEVIEW_LIBS)
 
+if BUILD_PFD
+bin_PROGRAMS += pfd
+
+pfd_SOURCES = pfd.c
+pfd_CFLAGS = $(PFD_CFLAGS)
+pfd_LDADD = $(PFD_LIBS)
+endif
+
 if BUILD_IB
 bin_PROGRAMS += yad-icon-browser
 

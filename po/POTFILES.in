@@ -20,4 +20,5 @@ src/color.c
 src/text.c
 src/browser.c
 src/notebook.c
+src/pfd.c
 data/yad-icon-browser.desktop.in

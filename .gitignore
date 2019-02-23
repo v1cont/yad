@@ -23,4 +23,5 @@ po/*.gmo
 po/stamp-it
 src/yad
 src/yad-icon-browser
+src/pfd
 stamp-h1

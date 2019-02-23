@@ -126,6 +126,18 @@ if test x$have_sourceview = xyes; then
     AC_DEFINE([HAVE_SOURCEVIEW], [1], [Define this if you need GtkSourceView support])
 fi
 
+dnl pfd
+AC_ARG_ENABLE([pfd],
+	[AS_HELP_STRING([--enable-pfd],
+			[Build pfd utility])],
+	[build_pfd=$enableval], [build_pfd=yes])
+if test x$build_pfd = xyes; then
+    PKG_CHECK_MODULES([PFD], [pango], [build_pfd=yes], [build_pfd=no])
+fi
+AC_SUBST([PFD_CFLAGS])
+AC_SUBST([PFD_LIBS])
+AM_CONDITIONAL([BUILD_PFD], [test x$build_pfd = xyes])
+
 dnl icon browser
 AC_ARG_ENABLE([icon-browser],
 	[AS_HELP_STRING([--enable-icon-browser],
@@ -177,5 +189,6 @@ echo "  HTML widget          - $have_html"
 echo "  Spell checking       - $have_spell"
 echo "  GtkSourceView        - $have_sourceview"
 echo "  GIO support          - $have_gio"
+echo "  pfd                  - $build_pfd"
 echo "  Icon browser         - $build_ib"
 echo
