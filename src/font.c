@@ -86,7 +86,7 @@ font_print_result (void)
           gchar *q2 = g_shell_quote (pango_font_face_get_face_name (face));
 
           g_printf ("%s%s%s%s%d\n", q1, options.common_data.separator, q2,
-                    options.common_data.separator, size / 1000);
+                    options.common_data.separator, size / PANGO_SCALE);
 
           g_free (q1);
           g_free (q2);
@@ -94,7 +94,7 @@ font_print_result (void)
       else
         {
           g_printf ("%s%s%s%s%d\n", pango_font_family_get_name (family), options.common_data.separator,
-                    pango_font_face_get_face_name (face), options.common_data.separator, size / 1000);
+                    pango_font_face_get_face_name (face), options.common_data.separator, size / PANGO_SCALE);
         }
     }
   else
