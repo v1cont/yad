@@ -1,3 +1,11 @@
+Version 0.42.0
+    - add pfd utility for fontnames transformation in scripts
+    - add 'menu' action for notification icon
+    - add --icon-size option to icon dialog
+    - add --simple-tips option to list dialog
+    - fixes in setting window size
+    - improve size scaling in separate output of font dialog
+
 Version 0.41.0
     - add supoort for webkit2
     - use https as a default protocol in html dialog
