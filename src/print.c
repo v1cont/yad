@@ -277,11 +277,7 @@ yad_print_run (void)
   /* create yad's top box */
   if (options.data.dialog_text || options.data.dialog_image)
     {
-#if !GTK_CHECK_VERSION(3,0,0)
-      box = gtk_hbox_new (FALSE, 0);
-#else
       box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-#endif
 
       if (options.data.dialog_image)
         {
@@ -306,11 +302,8 @@ yad_print_run (void)
             gtk_label_set_text (GTK_LABEL (lbl), buf);
           gtk_widget_set_name (lbl, "yad-dialog-label");
           gtk_label_set_selectable (GTK_LABEL (lbl), options.data.selectable_labels);
-#if !GTK_CHECK_VERSION(3,0,0)
-          gtk_misc_set_alignment (GTK_MISC (lbl), options.data.text_align, 0.5);
-#else
           gtk_label_set_xalign (GTK_LABEL (lbl), options.data.text_align);
-#endif
+
           if (options.data.geometry || options.data.width != -1)
             gtk_label_set_line_wrap (GTK_LABEL (lbl), TRUE);
           gtk_box_pack_start (GTK_BOX (box), lbl, TRUE, TRUE, 2);

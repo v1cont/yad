@@ -1,4 +1,4 @@
-AC_INIT([YAD], [0.42.0], [https://sourceforge.net/p/yad-dialog/tickets/], yad, [https://sourceforge.net/projects/yad-dialog/])
+AC_INIT([YAD], [0.99], [https://github.com/v1cont/yad/issues/], yad, [https://github.com/v1cont/yad/])
 AC_CONFIG_AUX_DIR([build])
 
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz no-dist-gzip])
@@ -15,37 +15,9 @@ IT_PROG_INTLTOOL([0.40.0])
 
 AC_PROG_CC
 
-AC_ARG_WITH([gtk],
-	[AS_HELP_STRING([--with-gtk=gtk2|gtk3],[set the GTK+ version to use (default - gtk2)])],
-	[case "$with_gtk" in
-        gtk2|gtk3) ;;
-        *) AC_MSG_ERROR([invalid gtk version specified]) ;;
-     esac],
-    [with_gtk=gtk2])
-
-case "$with_gtk" in
-    gtk3) 
-        GTK_MODULE="gtk+-3.0"
-        GTK_REQUIRED="3.0.0"
-        GTK_PRINT="gtk+-unix-print-3.0"
-        WEBKIT="webkit2gtk-4.0"
-        SPELL="gtkspell3-3.0"
-        SOURCEVIEW="gtksourceview-3.0"
-        ;;
-    gtk2)
-        GTK_MODULE="gtk+-2.0"
-        GTK_REQUIRED="2.16.0"
-        GTK_PRINT="gtk+-unix-print-2.0"
-        WEBKIT="webkit-1.0"
-        SPELL="gtkspell3-2.0"
-        SOURCEVIEW="gtksourceview-2.0"
-        ;;
-esac
-PKG_CHECK_MODULES([GTK], [$GTK_MODULE >= $GTK_REQUIRED $GTK_PRINT])
+PKG_CHECK_MODULES([GTK], [gtk+-3.0 >= 3.22.0 gtk+-unix-print-3.0])
 AC_SUBST([GTK_CFLAGS])
 AC_SUBST([GTK_LIBS])
-
-GTK_DISABLE_DEPRECATED
 
 dnl rgb.txt
 AC_ARG_WITH([rgb],
@@ -60,7 +32,7 @@ AC_ARG_ENABLE([html],
 			[Build YAD with HTML widget])],
 	[build_html=$enableval], [build_html=yes])
 if test x$build_html = xyes; then
-    PKG_CHECK_MODULES([HTML], [$WEBKIT], [have_html=yes], [have_html=no])
+    PKG_CHECK_MODULES([HTML], [webkit2gtk-4.0], [have_html=yes], [have_html=no])
 else
     have_html=no
 fi
@@ -69,10 +41,7 @@ AC_SUBST([HTML_LIBS])
 AM_CONDITIONAL([HTML], [test x$have_html = xyes])
 
 if test x$have_html = xyes; then
-    AC_DEFINE([HAVE_HTML], [1], [Define this if you have webkit installed])
-    if test x$with_gtk = xgtk3; then
-        AC_DEFINE([USE_WEBKIT2], [1], [Define this if you use webkit2 API])
-    fi
+    AC_DEFINE([HAVE_HTML], [1], [Define this if you have webkit2gt library])
 fi
 
 dnl gio support
@@ -95,10 +64,10 @@ fi
 dnl spell check
 AC_ARG_ENABLE([spell],
 	[AS_HELP_STRING([--enable-spell],
-			[Build YAD with Spell check support (default - no)])],
-	[with_spell=$enableval], [with_spell=no])
+			[Build YAD with Spell check support (default - yes)])],
+	[with_spell=$enableval], [with_spell=yes])
 if test x$with_spell = xyes; then
-    PKG_CHECK_MODULES([SPELL], [$SPELL], [have_spell=yes], [have_spell=no])
+    PKG_CHECK_MODULES([SPELL], [gtkspell-3.0], [have_spell=yes], [have_spell=no])
 else
     have_spell=no
 fi
@@ -112,10 +81,10 @@ fi
 dnl sourceview
 AC_ARG_ENABLE([sourceview],
 	[AS_HELP_STRING([--enable-sourceview],
-			[Build YAD with GtkSourceView support (default - no)])],
-	[with_sourceview=$enableval], [with_sourceview=no])
+			[Build YAD with GtkSourceView support (default - yes)])],
+	[with_sourceview=$enableval], [with_sourceview=yes])
 if test x$with_sourceview = xyes; then
-    PKG_CHECK_MODULES([SOURCEVIEW], [$SOURCEVIEW], [have_sourceview=yes], [have_sourceview=no])
+    PKG_CHECK_MODULES([SOURCEVIEW], [gtksourceview-3.0], [have_sourceview=yes], [have_sourceview=no])
 else
     have_sourceview=no
 fi
@@ -183,12 +152,11 @@ AC_OUTPUT
 
 echo
 echo "Build configuratioh:"
-echo "  GTK+ version         - $with_gtk"
-echo "  Path to rgb.txt      - $with_rgb"
 echo "  HTML widget          - $have_html"
-echo "  Spell checking       - $have_spell"
 echo "  GtkSourceView        - $have_sourceview"
+echo "  Spell checking       - $have_spell"
 echo "  GIO support          - $have_gio"
+echo "  Path to rgb.txt      - $with_rgb"
 echo "  pfd                  - $build_pfd"
 echo "  Icon browser         - $build_ib"
 echo

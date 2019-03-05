@@ -224,11 +224,7 @@ button_handler (GtkWidget *w, GdkEventButton *ev, gpointer data)
 {
   if (ev->button == 3)
     {
-#if GTK_CHECK_VERSION(3,22,0)
       gtk_menu_popup_at_pointer (GTK_MENU (popup_menu), NULL);
-#else
-      gtk_menu_popup (GTK_MENU (popup_menu), NULL, NULL, NULL, NULL, ev->button, ev->time);
-#endif
       return TRUE;
     }
 

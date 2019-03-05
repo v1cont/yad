@@ -28,29 +28,18 @@
 #include <gdk/gdkx.h>
 
 #include <gtk/gtk.h>
-#include <glib/gi18n.h>
+#include <gtk/gtkx.h>
 #include <gdk/gdkkeysyms.h>
 
-#if GTK_CHECK_VERSION(3,0,0)
-#include <gtk/gtkx.h>
-#endif
+#include <glib/gi18n.h>
 
 #ifdef HAVE_SPELL
 #include <gtkspell/gtkspell.h>
 #endif
 
 #ifdef HAVE_SOURCEVIEW
-#if GTK_CHECK_VERSION(3,0,0)
 #include <gtksourceview/gtksource.h>
-#else
-#include <gtksourceview/gtksourceview.h>
-#include <gtksourceview/gtksourcebuffer.h>
-#include <gtksourceview/gtksourcelanguage.h>
-#include <gtksourceview/gtksourcelanguagemanager.h>
-#include <gtksourceview/gtksourcestylescheme.h>
-#include <gtksourceview/gtksourcestyleschememanager.h>
 #endif
-#endif /* HAVE_SOURCEVIEW */
 
 G_BEGIN_DECLS
 
@@ -622,11 +611,7 @@ void write_settings (void);
 void update_preview (GtkFileChooser *chooser, GtkWidget *p);
 
 GdkPixbuf *get_pixbuf (gchar *name, YadIconSize size, gboolean force);
-#if GTK_CHECK_VERSION(3,0,0)
 gchar *get_color (GdkRGBA *c);
-#else
-gchar *get_color (GdkColor *c, guint64 alpha);
-#endif
 
 gchar **split_arg (const gchar *str);
 

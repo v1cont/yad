@@ -1,6 +1,5 @@
 AM_CPPFLAGS =                           \
-	-DLOCALEDIR=\""$(datadir)/locale"\"	\
-	@DISABLE_DEPRECATED@
+	-DLOCALEDIR=\""$(datadir)/locale"\"
 
 bin_PROGRAMS = yad
 

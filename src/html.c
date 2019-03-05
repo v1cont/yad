@@ -24,21 +24,13 @@
 
 #include <glib/gprintf.h>
 
-#ifdef USE_WEBKIT2
 #include <webkit2/webkit2.h>
-#else
-#include <webkit/webkit.h>
-#endif
 
 static WebKitWebView *view;
 
 static GString *inbuf;
 
-#ifdef USE_WEBKIT2
 static gboolean is_loaded = FALSE;
-#else
-static gboolean is_link = FALSE;
-#endif
 
 #ifndef PATH_MAX
 #define PATH_MAX 4096
@@ -81,86 +73,6 @@ load_uri (const gchar * uri)
     g_printerr ("yad_html_load_uri: cannot load uri '%s'\n", uri);
 }
 
-#ifndef USE_WEBKIT2
-
-static gboolean
-link_cb (WebKitWebView * v, WebKitWebFrame * f, WebKitNetworkRequest * r,
-         WebKitWebNavigationAction * act, WebKitWebPolicyDecision * pd, gpointer d)
-{
-  gchar *uri;
-
-  if (webkit_web_navigation_action_get_reason (act) != WEBKIT_WEB_NAVIGATION_REASON_LINK_CLICKED)
-    {
-      /* skip handling non clicked reasons */
-      webkit_web_policy_decision_use (pd);
-      return TRUE;
-    }
-
-  uri = (gchar *) webkit_network_request_get_uri (r);
-
-  if (!options.html_data.browser)
-    {
-      if (options.html_data.print_uri)
-        g_printf ("%s\n", uri);
-      else
-        {
-          gchar *cmd = g_strdup_printf (settings.open_cmd, uri);
-          g_spawn_command_line_async (cmd, NULL);
-          g_free (cmd);
-        }
-      webkit_web_policy_decision_ignore (pd);
-    }
-  else
-    {
-      if (options.html_data.uri_cmd)
-        {
-          gint ret = -1;
-          gchar *cmd = g_strdup_printf (options.html_data.uri_cmd, uri);
-          static gchar *vb = NULL, *vm = NULL;
-
-          /* set environment */
-          g_free (vb);
-          vb = g_strdup_printf ("%d", webkit_web_navigation_action_get_button (act));
-          g_setenv ("YAD_HTML_BUTTON", vb, TRUE);
-          g_free (vm);
-          vm = g_strdup_printf ("%d", webkit_web_navigation_action_get_modifier_state (act));
-          g_setenv ("YAD_HTML_KEYS", vm, TRUE);
-
-          /* run handler */
-          g_spawn_command_line_sync (cmd, NULL, NULL, &ret, NULL);
-          switch (ret)
-            {
-            case 0:
-              webkit_web_policy_decision_use (pd);
-              break;
-            case 1:
-              webkit_web_policy_decision_ignore (pd);
-              break;
-            case 2:
-              webkit_web_policy_decision_download (pd);
-              break;
-            default:
-              g_printerr ("html: undefined result of external uri handler\n");
-              webkit_web_policy_decision_ignore (pd);
-              break;
-            }
-          g_free (cmd);
-        }
-      else
-        webkit_web_policy_decision_use (pd);
-    }
-
-  return TRUE;
-}
-
-static void
-link_hover_cb (WebKitWebView * v, const gchar * t, const gchar * link, gpointer * d)
-{
-  is_link = (link != NULL);
-}
-
-#else
-
 static void
 loaded_cb (WebKitWebView *v, WebKitLoadEvent ev, gpointer d)
 {
@@ -191,8 +103,6 @@ policy_cb (WebKitWebView *v, WebKitPolicyDecision *pd, WebKitPolicyDecisionType 
 
   return TRUE;
 }
-
-#endif
 
 static void
 select_file_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev, gpointer d)
@@ -244,11 +154,7 @@ open_cb (GtkWidget * w, gpointer d)
   cnt = gtk_dialog_get_content_area (GTK_DIALOG (dlg));
 
   lbl = gtk_label_new (_("Enter URI or file name:"));
-#if !GTK_CHECK_VERSION(3,0,0)
-  gtk_misc_set_alignment (GTK_MISC (lbl), 0.0, 0.5);
-#else
   gtk_label_set_xalign (GTK_LABEL (lbl), 0.0);
-#endif
   gtk_widget_show (lbl);
   gtk_box_pack_start (GTK_BOX (cnt), lbl, TRUE, FALSE, 2);
 
@@ -270,31 +176,8 @@ static gboolean
 menu_cb (WebKitWebView * view, GtkWidget * menu, WebKitHitTestResult * hit, gboolean kb, gpointer d)
 {
   GtkWidget *mi;
-
-#ifndef USE_WEBKIT2
-  if (!is_link)
-    {
-      /* add open item */
-      mi = gtk_separator_menu_item_new ();
-      gtk_widget_show (mi);
-      gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), mi);
-
-      mi = gtk_image_menu_item_new_from_stock ("gtk-open", NULL);
-      gtk_widget_show (mi);
-      gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), mi);
-      g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (open_cb), NULL);
-
-      /* add quit item */
-      mi = gtk_separator_menu_item_new ();
-      gtk_widget_show (mi);
-      gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
-      mi = gtk_image_menu_item_new_from_stock ("gtk-quit", NULL);
-      gtk_widget_show (mi);
-      gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-      g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (gtk_main_quit), NULL);
-    }
-#endif
+  
+  /* FIXME: add custom menu items here */
 
   return FALSE;
 }
@@ -310,11 +193,8 @@ title_cb (GObject *obj, GParamSpec *spec, GtkWindow *dlg)
 static void
 icon_cb (GObject *obj, GParamSpec *spec, GtkWindow *dlg)
 {
-#ifdef USE_WEBKIT2
   GdkPixbuf *pb = gdk_pixbuf_get_from_surface (webkit_web_view_get_favicon (view), 0, 0, -1, -1);
-#else
-  GdkPixbuf *pb = webkit_web_view_try_get_favicon_pixbuf (view, 16, 16);
-#endif
+
   if (pb)
     {
       gtk_window_set_icon (dlg, pb);
@@ -326,9 +206,7 @@ static gboolean
 handle_stdin (GIOChannel * ch, GIOCondition cond, gpointer d)
 {
   gchar *buf;
-#ifdef USE_WEBKIT2
   GBytes *data;
-#endif
   GError *err = NULL;
 
   switch (g_io_channel_read_line (ch, &buf, NULL, NULL, &err))
@@ -343,14 +221,10 @@ handle_stdin (GIOChannel * ch, GIOCondition cond, gpointer d)
       return FALSE;
 
     case G_IO_STATUS_EOF:
-#ifdef USE_WEBKIT2
       data = g_bytes_new (inbuf->str, inbuf->len);
       /*g_string_free (inbuf, TRUE); */ /* FIXME: IS THAT NEEDED ??? (and where) */
       webkit_web_view_load_bytes (view, data, options.html_data.mime, options.html_data.encoding, NULL);
       g_bytes_unref (data);
-#else
-      webkit_web_view_load_string (view, inbuf->str, options.html_data.mime, options.html_data.encoding, NULL);
-#endif
       return FALSE;
 
     case G_IO_STATUS_AGAIN:
@@ -364,12 +238,7 @@ GtkWidget *
 html_create_widget (GtkWidget * dlg)
 {
   GtkWidget *sw;
-#ifdef USE_WEBKIT2
   WebKitSettings *settings;
-#else
-  WebKitWebSettings *settings;
-#endif
-  SoupSession *sess;
 
   sw = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), options.hscroll_policy, options.vscroll_policy);
@@ -377,11 +246,7 @@ html_create_widget (GtkWidget * dlg)
   view = WEBKIT_WEB_VIEW (webkit_web_view_new ());
   gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (view));
 
-#ifdef USE_WEBKIT2
   settings = webkit_settings_new ();
-#else
-  settings = webkit_web_settings_new ();
-#endif
 
   g_object_set (G_OBJECT (settings), "user-agent", options.html_data.user_agent, NULL);
   if (options.html_data.user_style)
@@ -391,16 +256,9 @@ html_create_widget (GtkWidget * dlg)
     }
   webkit_web_view_set_settings (view, settings);
 
-#ifdef USE_WEBKIT2
   webkit_settings_set_default_charset (settings, g_get_codeset ());
 
   g_signal_connect (view, "decide-policy", G_CALLBACK (policy_cb), NULL);
-#else
-  g_object_set (G_OBJECT (settings), "default-encoding", g_get_codeset (), NULL);
-
-  g_signal_connect (view, "hovering-over-link", G_CALLBACK (link_hover_cb), NULL);
-  g_signal_connect (view, "navigation-policy-decision-requested", G_CALLBACK (link_cb), NULL);
-#endif
 
   if (options.html_data.browser)
     {
@@ -408,13 +266,8 @@ html_create_widget (GtkWidget * dlg)
       if (!options.data.dialog_title)
         g_signal_connect (view, "notify::title", G_CALLBACK (title_cb), dlg);
       if (strcmp (options.data.window_icon, "yad") == 0)
-#ifdef USE_WEBKIT2
         g_signal_connect (view, "notify::favicon", G_CALLBACK (icon_cb), dlg);
-#else
-        g_signal_connect (view, "icon-loaded", G_CALLBACK (icon_cb), dlg);
-#endif
     }
-#ifdef USE_WEBKIT2
   else
     {
       g_object_set (G_OBJECT(settings), "enable-caret-browsing", FALSE, NULL);
@@ -427,13 +280,6 @@ html_create_widget (GtkWidget * dlg)
       g_object_set (G_OBJECT (settings), "enable-private-browsing", TRUE, NULL);
       g_signal_connect (view, "load-changed", G_CALLBACK (loaded_cb), NULL);
     }
-#endif
-
-#ifndef USE_WEBKIT2
-  sess = webkit_get_default_session ();
-  soup_session_add_feature_by_type (sess, SOUP_TYPE_PROXY_RESOLVER_DEFAULT);
-  g_object_set (G_OBJECT (sess), SOUP_SESSION_ACCEPT_LANGUAGE_AUTO, TRUE, NULL);
-#endif
 
   gtk_widget_show_all (sw);
   gtk_widget_grab_focus (GTK_WIDGET (view));

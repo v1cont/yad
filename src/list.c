@@ -46,11 +46,7 @@ yad_list_add_row (GtkListStore *m, GtkTreeIter *it)
 static gboolean
 list_activate_cb (GtkWidget *widget, GdkEventKey *event, gpointer data)
 {
-#if GTK_CHECK_VERSION(2,24,0)
   if (event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter)
-#else
-  if (event->keyval == GDK_Return || event->keyval == GDK_KP_Enter)
-#endif
     {
       if (options.list_data.dclick_action)
         {
@@ -915,11 +911,7 @@ popup_menu_cb (GtkWidget * w, GdkEventButton * ev, gpointer data)
 
           gtk_widget_show (menu);
         }
-#if GTK_CHECK_VERSION(3,22,0)
       gtk_menu_popup_at_pointer (GTK_MENU (menu), NULL);
-#else
-      gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, ev->button, ev->time);
-#endif
     }
   return FALSE;
 }
@@ -1071,9 +1063,6 @@ list_create_widget (GtkWidget * dlg)
   list_view = gtk_tree_view_new_with_model (model);
   gtk_widget_set_name (list_view, "yad-list-widget");
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (list_view), !options.list_data.no_headers);
-#if !GTK_CHECK_VERSION(3,0,0)
-  gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (list_view), options.list_data.rules_hint);
-#endif
   gtk_tree_view_set_grid_lines (GTK_TREE_VIEW (list_view), options.list_data.grid_lines);
   gtk_tree_view_set_reorderable (GTK_TREE_VIEW (list_view), options.common_data.editable);
   g_object_unref (model);

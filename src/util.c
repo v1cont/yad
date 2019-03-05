@@ -201,33 +201,6 @@ get_pixbuf (gchar * name, YadIconSize size, gboolean force)
   return pb;
 }
 
-#if !GTK_CHECK_VERSION(3,0,0)
-gchar *
-get_color (GdkColor *c, guint64 alpha)
-{
-  gchar *res = NULL;
-
-  switch (options.color_data.mode)
-    {
-    case YAD_COLOR_HEX:
-      if (options.color_data.alpha)
-        res = g_strdup_printf ("#%X%X%X%X", c->red & 0xFF, c->green & 0xFF, c->blue & 0xFF, (guint) ((alpha / 256) & 0xFF));
-      else
-        res = g_strdup_printf ("#%X%X%X", c->red & 0xFF, c->green & 0xFF, c->blue & 0xFF);
-      break;
-    case YAD_COLOR_RGB:
-      if (options.color_data.alpha)
-        res = g_strdup_printf ("rgba(%.1f, %.1f, %.1f, %.1f)", (double) c->red / 255.0, (double) c->green / 255.0,
-                               (double) c->blue / 255.0, (double) alpha / 255 / 255);
-      else
-        res = g_strdup_printf ("rgb(%.1f, %.1f, %.1f)", (double) c->red / 255.0, (double) c->green / 255.0,
-                               (double) c->blue / 255.0);
-      break;
-    }
-
-  return res;
-}
-#else
 gchar *
 get_color (GdkRGBA *c)
 {
@@ -247,7 +220,6 @@ get_color (GdkRGBA *c)
     }
   return res;
 }
-#endif
 
 void
 update_preview (GtkFileChooser * chooser, GtkWidget *p)
@@ -399,11 +371,7 @@ get_label (gchar * str, guint border)
   a = gtk_alignment_new (0.5, 0.5, 0, 0);
   gtk_container_set_border_width (GTK_CONTAINER (a), border);
 
-#if !GTK_CHECK_VERSION(3,0,0)
-  t = gtk_hbox_new (FALSE, 0);
-#else
   t = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-#endif
   gtk_container_add (GTK_CONTAINER (a), t);
 
   vals = g_strsplit_set (str, options.common_data.item_separator, 3);
@@ -431,11 +399,7 @@ get_label (gchar * str, guint border)
     gtk_box_pack_start (GTK_BOX (t), i, FALSE, FALSE, 1);
   if (l)
     {
-#if !GTK_CHECK_VERSION(3,0,0)
-      gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
-#else
       gtk_label_set_xalign (GTK_LABEL (l), 0.0);
-#endif
       gtk_box_pack_start (GTK_BOX (t), l, FALSE, FALSE, 1);
     }
 

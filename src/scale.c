@@ -108,20 +108,12 @@ scale_create_widget (GtkWidget * dlg)
                                               0.0);
   if (options.common_data.vertical)
     {
-#if GTK_CHECK_VERSION(3,0,0)
       scale = gtk_scale_new (GTK_ORIENTATION_VERTICAL, GTK_ADJUSTMENT (adj));
-#else
-      scale = gtk_vscale_new (GTK_ADJUSTMENT (adj));
-#endif
       gtk_range_set_inverted (GTK_RANGE (scale), !options.scale_data.invert);
     }
   else
     {
-#if GTK_CHECK_VERSION(3,0,0)
       scale = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, GTK_ADJUSTMENT (adj));
-#else
-      scale = gtk_hscale_new (GTK_ADJUSTMENT (adj));
-#endif
       gtk_range_set_inverted (GTK_RANGE (scale), options.scale_data.invert);
     }
   gtk_widget_set_name (scale, "yad-scale-widget");
@@ -146,21 +138,9 @@ scale_create_widget (GtkWidget * dlg)
 
   /* create container */
   if (options.common_data.vertical)
-    {
-#if GTK_CHECK_VERSION(3,0,0)
-      w = gtk_box_new (GTK_ORIENTATION_VERTICAL, 1);
-#else
-      w = gtk_vbox_new (FALSE, 1);
-#endif
-    }
+    w = gtk_box_new (GTK_ORIENTATION_VERTICAL, 1);
   else
-    {
-#if GTK_CHECK_VERSION(3,0,0)
-      w = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1);
-#else
-      w = gtk_hbox_new (FALSE, 1);
-#endif
-    }
+    w = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 1);
 
   /* create buttons */
   if (options.scale_data.buttons)

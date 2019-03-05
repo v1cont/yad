@@ -202,16 +202,9 @@ multi_progress_create_widget (GtkWidget * dlg)
   if (nbars < 1)
     return NULL;
 
-#if !GTK_CHECK_VERSION(3,0,0)
-  if (options.common_data.vertical)
-    table = gtk_table_new (2, nbars, FALSE);
-  else
-    table = gtk_table_new (nbars, 2, FALSE);
-#else
   table = gtk_grid_new ();
   gtk_grid_set_row_spacing (GTK_GRID (table), 2);
   gtk_grid_set_column_spacing (GTK_GRID (table), 2);
-#endif
 
   for (b = options.multi_progress_data.bars; b; b = b->next)
     {
@@ -224,30 +217,17 @@ multi_progress_create_widget (GtkWidget * dlg)
         gtk_label_set_text (GTK_LABEL (l), p->name);
       else
         gtk_label_set_markup (GTK_LABEL (l), p->name);
-#if !GTK_CHECK_VERSION(3,0,0)
-      gtk_misc_set_alignment (GTK_MISC (l), options.common_data.align, 0.5);
-#else
       gtk_label_set_xalign (GTK_LABEL (l), options.common_data.align);
-#endif
+
       if (options.common_data.vertical)
-#if !GTK_CHECK_VERSION(3,0,0)
-        gtk_table_attach (GTK_TABLE (table), l, i, i + 1, 1, 2, GTK_FILL, 0, 2, 2);
-#else
         gtk_grid_attach (GTK_GRID (table), l, i, 1, 1, 1);
-#endif
       else
-#if !GTK_CHECK_VERSION(3,0,0)
-        gtk_table_attach (GTK_TABLE (table), l, 0, 1, i, i + 1, GTK_FILL, 0, 2, 2);
-#else
         gtk_grid_attach (GTK_GRID (table), l, 0, i, 1, 1);
-#endif
 
       /* add progress bar */
       w = gtk_progress_bar_new ();
       gtk_widget_set_name (w, "yad-progress-widget");
-#if GTK_CHECK_VERSION(3,0,0)
       gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (w), TRUE);
-#endif
 
       if (p->type != YAD_PROGRESS_PULSE)
         {
@@ -266,41 +246,19 @@ multi_progress_create_widget (GtkWidget * dlg)
             }
         }
 
-#if GTK_CHECK_VERSION(3,0,0)
       gtk_progress_bar_set_inverted (GTK_PROGRESS_BAR (w), p->type == YAD_PROGRESS_RTL);
       if (options.common_data.vertical)
         gtk_orientable_set_orientation (GTK_ORIENTABLE (w), GTK_ORIENTATION_VERTICAL);
-#else
-      if (p->type == YAD_PROGRESS_RTL)
-        {
-          if (options.common_data.vertical)
-            gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (w), GTK_PROGRESS_TOP_TO_BOTTOM);
-          else
-            gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (w), GTK_PROGRESS_RIGHT_TO_LEFT);
-        }
-      else
-        {
-          if (options.common_data.vertical)
-            gtk_progress_bar_set_orientation (GTK_PROGRESS_BAR (w), GTK_PROGRESS_BOTTOM_TO_TOP);
-        }
-#endif
+
       if (options.common_data.vertical)
         {
-#if !GTK_CHECK_VERSION(3,0,0)
-          gtk_table_attach (GTK_TABLE (table), w, i, i + 1, 0, 1, 0, GTK_FILL | GTK_EXPAND, 2, 2);
-#else
           gtk_grid_attach (GTK_GRID (table), w, i, 0, 1, 1);
           gtk_widget_set_vexpand (w, TRUE);
-#endif
         }
       else
         {
-#if !GTK_CHECK_VERSION(3,0,0)
-          gtk_table_attach (GTK_TABLE (table), w, 1, 2, i, i + 1, GTK_FILL | GTK_EXPAND, 0, 2, 2);
-#else
           gtk_grid_attach (GTK_GRID (table), w, 1, i, 1, 1);
           gtk_widget_set_hexpand (w, TRUE);
-#endif
         }
 
       progress_bars = g_slist_append (progress_bars, w);

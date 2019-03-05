@@ -46,14 +46,7 @@ paned_create_widget (GtkWidget * dlg)
     exit (-1);
 
   /* create widget */
-#if !GTK_CHECK_VERSION(3,0,0)
-  if (options.paned_data.orient == GTK_ORIENTATION_HORIZONTAL)
-    paned = w = gtk_hpaned_new ();
-  else
-    paned = w = gtk_vpaned_new ();
-#else
   paned = w = gtk_paned_new (options.paned_data.orient);
-#endif
   gtk_widget_set_name (w, "yad-paned-widget");
 
   gtk_paned_set_position (GTK_PANED (w), options.paned_data.splitter);

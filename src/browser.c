@@ -40,11 +40,7 @@ typedef struct {
 static gboolean
 key_press_cb (GtkWidget * w, GdkEventKey * ev, gpointer data)
 {
-#if GTK_CHECK_VERSION(2,24,0)
   if (ev->keyval == GDK_KEY_Escape)
-#else
-  if (ev->keyval == GDK_Escape)
-#endif
     {
       gtk_main_quit ();
       return TRUE;
@@ -144,11 +140,7 @@ select_icon (GtkTreeSelection * sel, IconBrowserData * data)
   g_string_free (sizes, TRUE);
 
   if (info)
-#if !GTK_CHECK_VERSION(3,0,0)
-    gtk_icon_info_free(info);
-#else
     g_object_unref (info);
-#endif
 }
 
 static void
@@ -220,99 +212,54 @@ main (gint argc, gchar * argv[])
   g_signal_connect (G_OBJECT (data->win), "delete-event", G_CALLBACK (gtk_main_quit), NULL);
   g_signal_connect (G_OBJECT (data->win), "key-press-event", G_CALLBACK (key_press_cb), NULL);
 
-#if !GTK_CHECK_VERSION(3,0,0)
-  box = gtk_vbox_new (FALSE, 5);
-#else
   box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
-#endif
   gtk_container_add (GTK_CONTAINER (data->win), box);
   gtk_container_set_border_width (GTK_CONTAINER (data->win), 5);
 
   /* create icon info box */
-#if !GTK_CHECK_VERSION(3,0,0)
-  t = gtk_table_new (3, 3, FALSE);
-  gtk_table_set_col_spacings (GTK_TABLE (t), 5);
-  gtk_table_set_row_spacings (GTK_TABLE (t), 5);
-#else
   t = gtk_grid_new ();
   gtk_grid_set_row_spacing (GTK_GRID (t), 5);
   gtk_grid_set_column_spacing (GTK_GRID (t), 5);
-#endif
   gtk_box_pack_start (GTK_BOX (box), t, FALSE, FALSE, 2);
 
   data->image = gtk_image_new_from_icon_name ("image-missing", GTK_ICON_SIZE_DIALOG);
-#if !GTK_CHECK_VERSION(3,0,0)
-  gtk_table_attach (GTK_TABLE (t), data->image, 0, 1, 0, 3, GTK_FILL, 0, 0, 0);
-#else
   gtk_grid_attach (GTK_GRID (t), data->image, 0, 0, 1, 3);
-#endif
 
   w = gtk_label_new (NULL);
   gtk_label_set_markup (GTK_LABEL (w), _("<b>Name:</b>"));
-#if !GTK_CHECK_VERSION(3,0,0)
-  gtk_misc_set_alignment (GTK_MISC (w), 0.0, 0.5);
-  gtk_table_attach (GTK_TABLE (t), w, 1, 2, 0, 1, GTK_FILL, 0, 0, 0);
-#else
   gtk_label_set_xalign (GTK_LABEL (w), 0.0);
   gtk_grid_attach (GTK_GRID (t), w, 1, 0, 1, 1);
-#endif
+
   data->lname = gtk_label_new (NULL);
   gtk_label_set_selectable (GTK_LABEL (data->lname), TRUE);
-#if !GTK_CHECK_VERSION(3,0,0)
-  gtk_misc_set_alignment (GTK_MISC (data->lname), 0.0, 0.5);
-  gtk_table_attach (GTK_TABLE (t), data->lname, 2, 3, 0, 1, GTK_FILL | GTK_EXPAND, 0, 0, 0);
-#else
   gtk_label_set_xalign (GTK_LABEL (data->lname), 0.0);
   gtk_grid_attach (GTK_GRID (t), data->lname, 2, 0, 1, 1);
   gtk_widget_set_hexpand (data->lname, TRUE);
-#endif
 
   w = gtk_label_new (NULL);
   gtk_label_set_markup (GTK_LABEL (w), _("<b>Sizes:</b>"));
-#if !GTK_CHECK_VERSION(3,0,0)
-  gtk_misc_set_alignment (GTK_MISC (w), 0.0, 0.5);
-  gtk_table_attach (GTK_TABLE (t), w, 1, 2, 1, 2, GTK_FILL, 0, 0, 0);
-#else
   gtk_label_set_xalign (GTK_LABEL (w), 0.0);
   gtk_grid_attach (GTK_GRID (t), w, 1, 1, 1, 1);
-#endif
+
   data->lsize = gtk_label_new (NULL);
   gtk_label_set_selectable (GTK_LABEL (data->lsize), TRUE);
-#if !GTK_CHECK_VERSION(3,0,0)
-  gtk_misc_set_alignment (GTK_MISC (data->lsize), 0.0, 0.5);
-  gtk_table_attach (GTK_TABLE (t), data->lsize, 2, 3, 1, 2, GTK_FILL | GTK_EXPAND, 0, 0, 0);
-#else
   gtk_label_set_xalign (GTK_LABEL (data->lsize), 0.0);
   gtk_grid_attach (GTK_GRID (t), data->lsize, 2, 1, 1, 1);
   gtk_widget_set_hexpand (data->lsize, TRUE);
-#endif
 
   w = gtk_label_new (NULL);
   gtk_label_set_markup (GTK_LABEL (w), _("<b>Filename:</b>"));
-#if !GTK_CHECK_VERSION(3,0,0)
-  gtk_misc_set_alignment (GTK_MISC (w), 0.0, 0.5);
-  gtk_table_attach (GTK_TABLE (t), w, 1, 2, 2, 3, GTK_FILL, 0, 0, 0);
-#else
   gtk_label_set_xalign (GTK_LABEL (w), 0.0);
   gtk_grid_attach (GTK_GRID (t), w, 1, 2, 1, 1);
-#endif
+
   data->lfile = gtk_label_new (NULL);
   gtk_label_set_selectable (GTK_LABEL (data->lfile), TRUE);
-#if !GTK_CHECK_VERSION(3,0,0)
-  gtk_misc_set_alignment (GTK_MISC (data->lfile), 0.0, 0.5);
-  gtk_table_attach (GTK_TABLE (t), data->lfile, 2, 3, 2, 3, GTK_FILL | GTK_EXPAND, 0, 0, 0);
-#else
   gtk_label_set_xalign (GTK_LABEL (data->lfile), 0.0);
   gtk_grid_attach (GTK_GRID (t), data->lfile, 2, 2, 1, 1);
   gtk_widget_set_hexpand (data->lfile, TRUE);
-#endif
 
   /* create icon browser */
-#if !GTK_CHECK_VERSION(3,0,0)
-  p = gtk_hpaned_new ();
-#else
   p = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
-#endif
   gtk_paned_set_position (GTK_PANED (p), 150);
   gtk_box_pack_start (GTK_BOX (box), p, TRUE, TRUE, 2);
 
@@ -357,9 +304,6 @@ main (gint argc, gchar * argv[])
 
   data->icon_list = gtk_tree_view_new ();
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (data->icon_list), TRUE);
-#if !GTK_CHECK_VERSION(3,0,0)
-  gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (data->icon_list), TRUE);
-#endif
   gtk_container_add (GTK_CONTAINER (w), data->icon_list);
 
   sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (data->icon_list));

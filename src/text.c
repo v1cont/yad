@@ -88,11 +88,7 @@ do_search (GtkWidget * e, GtkWidget * w)
 static gboolean
 search_key_cb (GtkWidget * w, GdkEventKey * key, GtkWidget * win)
 {
-#if GTK_CHECK_VERSION(2,24,0)
   if (key->keyval == GDK_KEY_Escape)
-#else
-  if (key->keyval == GDK_Escape)
-#endif
     {
       gtk_widget_destroy (win);
       return TRUE;
@@ -144,26 +140,14 @@ show_search ()
   fev->focus_change.window = gtk_widget_get_window (e);
   if (fev->focus_change.window != NULL)
     g_object_ref (fev->focus_change.window);
-#if GTK_CHECK_VERSION(2,22,0)
   gtk_widget_send_focus_change (e, fev);
-#else
-  g_object_ref (e);
-  GTK_OBJECT_FLAGS (e) |= GTK_HAS_FOCUS;
-  gtk_widget_event (e, fev);
-  g_object_notify (G_OBJECT (e), "has-focus");
-  g_object_unref (e);
-#endif
   gdk_event_free (fev);
 }
 
 static gboolean
 key_press_cb (GtkWidget * w, GdkEventKey * key, gpointer data)
 {
-#if GTK_CHECK_VERSION(2,24,0)
   if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_S || key->keyval == GDK_KEY_s))
-#else
-  if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_S || key->keyval == GDK_s))
-#endif
     {
       show_search ();
       return TRUE;
@@ -472,28 +456,16 @@ text_create_widget (GtkWidget * dlg)
 
   if (options.text_data.fore)
     {
-#if GTK_CHECK_VERSION(3,0,0)
       GdkRGBA clr;
       if (gdk_rgba_parse (&clr, options.text_data.fore))
         gtk_widget_override_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
-#else
-      GdkColor clr;
-      if (gdk_color_parse (options.text_data.fore, &clr))
-        gtk_widget_modify_text (text_view, GTK_STATE_NORMAL, &clr);
-#endif
     }
 
   if (options.text_data.back)
     {
-#if GTK_CHECK_VERSION(3,0,0)
       GdkRGBA clr;
       if (gdk_rgba_parse (&clr, options.text_data.back))
         gtk_widget_override_background_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
-#else
-      GdkColor clr;
-      if (gdk_color_parse (options.text_data.back, &clr))
-        gtk_widget_modify_base (text_view, GTK_STATE_NORMAL, &clr);
-#endif
     }
 
 #ifdef HAVE_SOURCEVIEW
@@ -540,11 +512,7 @@ text_create_widget (GtkWidget * dlg)
   else
     fd = pango_font_description_from_string ("Monospace");
 
-#if GTK_CHECK_VERSION(3,0,0)
   gtk_widget_override_font (text_view, fd);
-#else
-  gtk_widget_modify_font (text_view, fd);
-#endif
   pango_font_description_free (fd);
 
 #ifdef HAVE_SPELL
