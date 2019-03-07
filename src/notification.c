@@ -174,7 +174,7 @@ popup_menu_item_activate_cb (GtkWidget * w, gpointer data)
 
   if (cmd)
     {
-      if (g_ascii_strcasecmp (cmd, "quit") == 0)
+      if (g_ascii_strcasecmp (g_strstrip (cmd), "quit") == 0)
         {
           exit_code = YAD_RESPONSE_OK;
           gtk_main_quit ();
