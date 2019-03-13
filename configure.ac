@@ -44,23 +44,6 @@ if test x$have_html = xyes; then
     AC_DEFINE([HAVE_HTML], [1], [Define this if you have webkit2gt library])
 fi
 
-dnl gio support
-AC_ARG_ENABLE([gio],
-	[AS_HELP_STRING([--enable-gio],
-			[Build YAD with GIO support])],
-	[build_gio=$enableval], [build_gio=yes])
-if test x$build_gio = xyes; then
-    PKG_CHECK_MODULES([GIO], [gio-2.0], [have_gio=yes], [have_gio=no])
-else
-    have_gio=no
-fi
-AC_SUBST([GIO_CFLAGS])
-AC_SUBST([GIO_LIBS])
-
-if test x$have_gio = xyes; then
-    AC_DEFINE([HAVE_GIO], [1], [Define this if you have glib gio framework])
-fi
-
 dnl spell check
 AC_ARG_ENABLE([spell],
 	[AS_HELP_STRING([--enable-spell],
@@ -155,7 +138,6 @@ echo "Build configuratioh:"
 echo "  HTML widget          - $have_html"
 echo "  GtkSourceView        - $have_sourceview"
 echo "  Spell checking       - $have_spell"
-echo "  GIO support          - $have_gio"
 echo "  Path to rgb.txt      - $with_rgb"
 echo "  pfd                  - $build_pfd"
 echo "  Icon browser         - $build_ib"
