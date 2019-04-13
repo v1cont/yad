@@ -927,13 +927,13 @@ popup_menu_cb (GtkWidget * w, GdkEventButton * ev, gpointer data)
 static gboolean
 row_sep_func (GtkTreeModel * m, GtkTreeIter * it, gpointer data)
 {
-  gchar *name;
+  gchar *value;
 
   if (!options.list_data.sep_value)
     return FALSE;
 
-  gtk_tree_model_get (m, it, options.list_data.sep_column - 1, &name, -1);
-  return (strcmp (name, options.list_data.sep_value) == 0);
+  gtk_tree_model_get (m, it, options.list_data.sep_column - 1, &value, -1);
+  return (value && strcmp (value, options.list_data.sep_value) == 0);
 }
 
 static inline void
