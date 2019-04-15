@@ -407,7 +407,7 @@ add_columns (gint n_columns)
         }
     }
 
-  if (options.list_data.checkbox && options.list_data.search_column)
+  if ((options.list_data.checkbox || options.list_data.radiobox) && options.list_data.search_column)
     options.list_data.search_column += 1;
   if (options.list_data.search_column <= n_columns)
     {
