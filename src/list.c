@@ -928,14 +928,15 @@ static gboolean
 row_sep_func (GtkTreeModel * m, GtkTreeIter * it, gpointer data)
 {
   gchar *value;
-  gint offset = -1;
 
   if (!options.list_data.sep_value)
     return FALSE;
 
-  if (options.list_data.checkbox || options.list_data.radiobox)
-    offset = 0;
-  gtk_tree_model_get (m, it, options.list_data.sep_column - offset, &value, -1);
+  YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, options.list_data.sep_column -1);
+  if (!col || col->type != YAD_COLUMN_TEXT)
+    return FALSE;
+
+  gtk_tree_model_get (m, it, options.list_data.sep_column - 1, &value, -1);
   return (value && strcmp (value, options.list_data.sep_value) == 0);
 }
 
