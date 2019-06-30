@@ -55,19 +55,16 @@ notebook_create_widget (GtkWidget * dlg)
   /* add tabs */
   for (tab = options.notebook_data.tabs; tab; tab = tab->next)
     {
-      GtkWidget *a, *s;
-
-      a = gtk_alignment_new (0.5, 0.5, 1, 1);
-      gtk_alignment_set_padding (GTK_ALIGNMENT (a),
-                                 options.notebook_data.borders, options.notebook_data.borders,
-                                 options.notebook_data.borders, options.notebook_data.borders);
+      GtkWidget *s;
 
       s = gtk_socket_new ();
-      gtk_container_add (GTK_CONTAINER (a), s);
-      g_object_set_data (G_OBJECT (a), "socket", s);
+      gtk_widget_set_margin_start (s, options.notebook_data.borders);
+      gtk_widget_set_margin_end (s, options.notebook_data.borders);
+      gtk_widget_set_margin_top (s, options.notebook_data.borders);
+      gtk_widget_set_margin_bottom (s, options.notebook_data.borders);
 
-      gtk_notebook_append_page (GTK_NOTEBOOK (w), a, get_label ((gchar *) tab->data, 0));
-      gtk_container_child_set( GTK_CONTAINER (w), a, "tab-expand", options.notebook_data.expand, NULL);
+      gtk_notebook_append_page (GTK_NOTEBOOK (w), s, get_label ((gchar *) tab->data, 0));
+      gtk_container_child_set (GTK_CONTAINER (w), s, "tab-expand", options.notebook_data.expand, NULL);
     }
 
   return w;
@@ -98,9 +95,7 @@ notebook_swallow_childs (void)
 
   for (i = 1; i <= n_tabs; i++)
     {
-      GtkWidget *s =
-        GTK_WIDGET (g_object_get_data
-                    (G_OBJECT (gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i - 1)), "socket"));
+      GtkWidget *s = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i - 1);
 
       if (tabs[i].pid != -1)
         gtk_socket_add_id (GTK_SOCKET (s), tabs[i].xid);
