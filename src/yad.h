@@ -417,8 +417,6 @@ typedef struct {
 } YadScaleData;
 
 typedef struct {
-  gchar *fore;
-  gchar *back;
   gboolean wrap;
   GtkJustification justify;
   gint margins;

@@ -595,10 +595,6 @@ static GOptionEntry scale_options[] = {
 static GOptionEntry text_options[] = {
   { "text-info", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &text_mode,
     N_("Display text information dialog"), NULL },
-  { "fore", 0, 0, G_OPTION_ARG_STRING, &options.text_data.fore,
-    N_("Use specified color for text"), N_("COLOR") },
-  { "back", 0, 0, G_OPTION_ARG_STRING, &options.text_data.back,
-    N_("Use specified color for background"), N_("COLOR") },
   { "wrap", 0, 0, G_OPTION_ARG_NONE, &options.text_data.wrap,
     N_("Enable text wrapping"), NULL },
   { "justify", 0, 0, G_OPTION_ARG_CALLBACK, set_justify,
@@ -1673,8 +1669,6 @@ yad_options_init (void)
   options.scale_data.marks = NULL;
 
   /* Initialize text data */
-  options.text_data.fore = NULL;
-  options.text_data.back = NULL;
   options.text_data.wrap = FALSE;
   options.text_data.justify = GTK_JUSTIFY_LEFT;
   options.text_data.margins = 0;

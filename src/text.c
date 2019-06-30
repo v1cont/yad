@@ -430,7 +430,6 @@ GtkWidget *
 text_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w;
-  PangoFontDescription *fd;
 
   w = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (w), GTK_SHADOW_ETCHED_IN);
@@ -447,26 +446,13 @@ text_create_widget (GtkWidget * dlg)
   gtk_text_view_set_justification (GTK_TEXT_VIEW (text_view), options.text_data.justify);
   gtk_text_view_set_left_margin (GTK_TEXT_VIEW (text_view), options.text_data.margins);
   gtk_text_view_set_right_margin (GTK_TEXT_VIEW (text_view), options.text_data.margins);
+  gtk_text_view_set_monospace (GTK_TEXT_VIEW (text_view), TRUE);
   gtk_text_view_set_editable (GTK_TEXT_VIEW (text_view), options.common_data.editable);
   if (!options.common_data.editable && options.text_data.hide_cursor)
     gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (text_view), FALSE);
 
   if (options.text_data.wrap)
     gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_WORD_CHAR);
-
-  if (options.text_data.fore)
-    {
-      GdkRGBA clr;
-      if (gdk_rgba_parse (&clr, options.text_data.fore))
-        gtk_widget_override_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
-    }
-
-  if (options.text_data.back)
-    {
-      GdkRGBA clr;
-      if (gdk_rgba_parse (&clr, options.text_data.back))
-        gtk_widget_override_background_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
-    }
 
 #ifdef HAVE_SOURCEVIEW
   if (options.source_data.theme)
@@ -505,15 +491,6 @@ text_create_widget (GtkWidget * dlg)
         g_printerr (_("Theme %s not found\n"), options.source_data.theme);
     }
 #endif
-
-  /* set font */
-  if (options.common_data.font)
-    fd = pango_font_description_from_string (options.common_data.font);
-  else
-    fd = pango_font_description_from_string ("Monospace");
-
-  gtk_widget_override_font (text_view, fd);
-  pango_font_description_free (fd);
 
 #ifdef HAVE_SPELL
   if (options.common_data.enable_spell)
