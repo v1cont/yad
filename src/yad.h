@@ -423,6 +423,7 @@ typedef struct {
   gboolean uri;
   gboolean hide_cursor;
   gchar *uri_color;
+  gboolean formatted;
 } YadTextData;
 
 #ifdef HAVE_SOURCEVIEW

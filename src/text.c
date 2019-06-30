@@ -317,11 +317,19 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
             {
               gchar *utftext =
                 g_convert_with_fallback (string->str, string->len, "UTF-8", "ISO-8859-1", NULL, NULL, NULL, NULL);
-              gtk_text_buffer_insert (GTK_TEXT_BUFFER (text_buffer), &end, utftext, -1);
+              if (options.text_data.formatted && !options.common_data.editable)
+                gtk_text_buffer_insert_markup (GTK_TEXT_BUFFER (text_buffer), &end, utftext, -1);
+              else
+                gtk_text_buffer_insert (GTK_TEXT_BUFFER (text_buffer), &end, utftext, -1);
               g_free (utftext);
             }
           else
-            gtk_text_buffer_insert (GTK_TEXT_BUFFER (text_buffer), &end, string->str, string->len);
+            {
+              if (options.text_data.formatted && !options.common_data.editable)
+                gtk_text_buffer_insert_markup (GTK_TEXT_BUFFER (text_buffer), &end, string->str, string->len);
+              else
+                gtk_text_buffer_insert (GTK_TEXT_BUFFER (text_buffer), &end, string->str, string->len);
+            }
 
           if (options.common_data.tail)
             {
@@ -354,52 +362,41 @@ fill_buffer_from_file ()
 #ifdef HAVE_SOURCEVIEW
   GtkSourceLanguage *lang;
 #endif
-  FILE *f;
-  gchar buf[2048];
-  gint remaining = 0;
+  gchar *buf;
+  gsize len;
+  GError *err = NULL;
 
   if (options.common_data.uri == NULL)
     return;
 
-  f = fopen (options.common_data.uri, "r");
-
-  if (f == NULL)
+  if (!g_file_get_contents (options.common_data.uri, &buf, &len, &err))
     {
-      g_printerr (_("Cannot open file '%s': %s\n"), options.common_data.uri, g_strerror (errno));
+      g_printerr (_("Cannot open file '%s': %s\n"), options.common_data.uri, err->message);
       return;
     }
 
-  gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (text_buffer), &iter, 0);
+    gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (text_buffer), &iter, 0);
 
-  while (!feof (f))
-    {
-      gint count;
-      const char *leftover;
-      int to_read = 2047 - remaining;
+    if (!g_utf8_validate (buf, -1, NULL))
+      {
+        gchar *utftext =
+          g_convert_with_fallback (buf, -1, "UTF-8", "ISO-8859-1", NULL, NULL, NULL, NULL);
+        if (options.text_data.formatted && !options.common_data.editable)
+          gtk_text_buffer_insert_markup (GTK_TEXT_BUFFER (text_buffer), &end, utftext, -1);
+        else
+          gtk_text_buffer_insert (GTK_TEXT_BUFFER (text_buffer), &end, utftext, -1);
+        g_free (utftext);
+      }
+    else
+      {
+        if (options.text_data.formatted && !options.common_data.editable)
+          gtk_text_buffer_insert_markup (GTK_TEXT_BUFFER (text_buffer), &end, buf, -1);
+        else
+          gtk_text_buffer_insert (GTK_TEXT_BUFFER (text_buffer), &end, buf, -1);
+      }
 
-      count = fread (buf + remaining, 1, to_read, f);
-      buf[count + remaining] = '\0';
-
-      g_utf8_validate (buf, count + remaining, &leftover);
-
-      g_assert (g_utf8_validate (buf, leftover - buf, NULL));
-      gtk_text_buffer_insert (GTK_TEXT_BUFFER (text_buffer), &iter, buf, leftover - buf);
-
-      remaining = (buf + remaining + count) - leftover;
-      memmove (buf, leftover, remaining);
-
-      if (remaining > 6 || count < to_read)
-        break;
-    }
-
-  if (remaining)
-    {
-      g_printerr (_("Invalid UTF-8 data encountered reading file %s\n"), options.common_data.uri);
-      return;
-    }
-
-  /* We had a newline in the buffer to begin with. (The buffer always contains
-   * a newline, so we delete to the end of the buffer to clean up.
+    /* We had a newline in the buffer to begin with. (The buffer always contains
+     * a newline, so we delete to the end of the buffer to clean up.
    */
 
   gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (text_buffer), &end);

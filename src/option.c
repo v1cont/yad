@@ -607,6 +607,8 @@ static GOptionEntry text_options[] = {
     N_("Make URI clickable"), NULL },
   { "uri-color", 0, 0, G_OPTION_ARG_STRING, &options.text_data.uri_color,
     N_("Use specified color for links"), N_("COLOR") },
+  { "formatted", 0, 0, G_OPTION_ARG_NONE, &options.text_data.formatted,
+    N_("Use pango markup"), NULL },
   { NULL }
 };
 
@@ -1674,6 +1676,7 @@ yad_options_init (void)
   options.text_data.margins = 0;
   options.text_data.hide_cursor = TRUE;
   options.text_data.uri_color = "blue";
+  options.text_data.formatted = FALSE;
 
 #ifdef HAVE_SOURCEVIEW
   /* Initialize sourceview data */
