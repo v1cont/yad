@@ -416,16 +416,16 @@ select_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
           dlg = gtk_file_chooser_dialog_new (_("Select files"),
                                              GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
                                              GTK_FILE_CHOOSER_ACTION_OPEN,
-                                             GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                             GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
+                                             _("Cancel"), GTK_RESPONSE_CANCEL,
+                                             _("OK"), GTK_RESPONSE_ACCEPT, NULL);
         }
       else
         {
           dlg = gtk_file_chooser_dialog_new (_("Select folders"),
                                              GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
                                              GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-                                             GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                             GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
+                                             _("Cancel"), GTK_RESPONSE_CANCEL,
+                                             _("OK"), GTK_RESPONSE_ACCEPT, NULL);
         }
       gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dlg), TRUE);
       gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), path);
@@ -503,16 +503,16 @@ create_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
           dlg = gtk_file_chooser_dialog_new (_("Select or create file"),
                                              GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
                                              GTK_FILE_CHOOSER_ACTION_SAVE,
-                                             GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                             GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
+                                             _("Cabcel"), GTK_RESPONSE_CANCEL,
+                                             _("OK"), GTK_RESPONSE_ACCEPT, NULL);
         }
       else
         {
           dlg = gtk_file_chooser_dialog_new (_("Select or create folder"),
                                              GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
                                              GTK_FILE_CHOOSER_ACTION_CREATE_FOLDER,
-                                             GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                             GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
+                                             _("Cancel"), GTK_RESPONSE_CANCEL,
+                                             _("OK"), GTK_RESPONSE_ACCEPT, NULL);
         }
       gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), path);
 
@@ -562,8 +562,8 @@ select_date_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * eve
       dlg = gtk_dialog_new_with_buttons (_("Select date"),
                                          GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                         GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
+                                         _("Cancel"), GTK_RESPONSE_CANCEL,
+                                         _("OK"), GTK_RESPONSE_ACCEPT, NULL);
       cal = gtk_calendar_new ();
       gtk_widget_show (cal);
       g_signal_connect (G_OBJECT (cal), "day-selected-double-click", G_CALLBACK (date_selected_cb), dlg);
@@ -914,7 +914,6 @@ form_create_widget (GtkWidget * dlg)
               g_signal_connect (G_OBJECT (e), "clicked", G_CALLBACK (button_clicked_cb), NULL);
               gtk_container_add (GTK_CONTAINER (e), get_label (fld->name, 2));
               gtk_widget_set_name (e, "yad-form-button");
-              gtk_button_set_alignment (GTK_BUTTON (e), 0.5, 0.5);
               if (fld->type == YAD_FIELD_BUTTON)
                 gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
               gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
