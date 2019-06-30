@@ -503,7 +503,7 @@ create_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
           dlg = gtk_file_chooser_dialog_new (_("Select or create file"),
                                              GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
                                              GTK_FILE_CHOOSER_ACTION_SAVE,
-                                             _("Cabcel"), GTK_RESPONSE_CANCEL,
+                                             _("Cancel"), GTK_RESPONSE_CANCEL,
                                              _("OK"), GTK_RESPONSE_ACCEPT, NULL);
         }
       else
