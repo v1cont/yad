@@ -29,6 +29,7 @@
 #include <sys/shm.h>
 
 #include "yad.h"
+#include "stock.h"
 
 YadSettings settings;
 
@@ -113,8 +114,7 @@ write_settings (void)
   g_key_file_set_integer (kf, "General", "timeout", settings.timeout);
   g_key_file_set_comment (kf, "General", "timeout", " Default timeout (0 for no timeout)", NULL);
   g_key_file_set_string (kf, "General", "timeout_indicator", settings.to_indicator);
-  g_key_file_set_comment (kf, "General", "timeout_indicator",
-                          " Position of timeout indicator (top, bottom, left, right, none)", NULL);
+  g_key_file_set_comment (kf, "General", "timeout_indicator", " Position of timeout indicator (top, bottom, left, right, none)", NULL);
   g_key_file_set_boolean (kf, "General", "show_remain", settings.show_remain);
   g_key_file_set_comment (kf, "General", "show_remain", " Show remain seconds in timeout indicator", NULL);
   g_key_file_set_boolean (kf, "General", "combo_always_editable", settings.combo_always_editable);
@@ -149,6 +149,12 @@ write_settings (void)
     g_printerr ("yad: cannot write settings file: %s\n", strerror (errno));
 
   g_free (context);
+}
+
+static gboolean
+stock_lookup (gchar *key, YadStock *it)
+{
+  return FALSE;
 }
 
 GdkPixbuf *
@@ -359,8 +365,8 @@ get_tabs (key_t key, gboolean create)
 GtkWidget *
 get_label (gchar * str, guint border)
 {
-  GtkWidget *a, *t, *i, *l;
-  GtkStockItem it;
+  GtkWidget *t, *i, *l;
+  YadStock it;
   gchar **vals;
 
   if (!str || !*str)
@@ -368,17 +374,14 @@ get_label (gchar * str, guint border)
 
   l = i = NULL;
 
-  a = gtk_alignment_new (0.5, 0.5, 0, 0);
-  gtk_container_set_border_width (GTK_CONTAINER (a), border);
-
   t = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_container_add (GTK_CONTAINER (a), t);
+  gtk_container_set_border_width (GTK_CONTAINER (t), border);
 
   vals = g_strsplit_set (str, options.common_data.item_separator, 3);
-  if (gtk_stock_lookup (vals[0], &it))
+  if (stock_lookup (vals[0], &it))
     {
       l = gtk_label_new_with_mnemonic (it.label);
-      i = gtk_image_new_from_pixbuf (get_pixbuf (it.stock_id, YAD_SMALL_ICON, TRUE));
+      i = gtk_image_new_from_pixbuf (get_pixbuf (it.icon, YAD_SMALL_ICON, TRUE));
     }
   else
     {
@@ -396,7 +399,8 @@ get_label (gchar * str, guint border)
     }
 
   if (i)
-    gtk_box_pack_start (GTK_BOX (t), i, FALSE, FALSE, 1);
+    gtk_container_add (GTK_CONTAINER (t), i);
+
   if (l)
     {
       gtk_label_set_xalign (GTK_LABEL (l), 0.0);
@@ -414,9 +418,9 @@ get_label (gchar * str, guint border)
 
   g_strfreev (vals);
 
-  gtk_widget_show_all (a);
+  gtk_widget_show_all (t);
 
-  return a;
+  return t;
 }
 
 gchar *

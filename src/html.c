@@ -64,13 +64,8 @@ load_uri (const gchar * uri)
         addr = g_strdup (uri);
     }
 
-  if (addr)
-    {
-      webkit_web_view_load_uri (view, addr);
-      g_free (addr);
-    }
-  else
-    g_printerr ("yad_html_load_uri: cannot load uri '%s'\n", uri);
+  webkit_web_view_load_uri (view, addr);
+  g_free (addr);
 }
 
 static void
@@ -105,7 +100,7 @@ policy_cb (WebKitWebView *v, WebKitPolicyDecision *pd, WebKitPolicyDecisionType 
 }
 
 static void
-select_file_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev, gpointer d)
+select_file_cb (GtkEntry *entry, GtkEntryIconPosition pos, GdkEventButton *ev, gpointer d)
 {
   GtkWidget *dlg;
   static gchar *dir = NULL;
@@ -116,7 +111,9 @@ select_file_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev,
   dlg = gtk_file_chooser_dialog_new (_("YAD - Select File"),
                                      GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
                                      GTK_FILE_CHOOSER_ACTION_OPEN,
-                                     GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, NULL);
+                                     _("OK"), GTK_RESPONSE_ACCEPT,
+                                     _("Cancel"), GTK_RESPONSE_CANCEL,
+                                     NULL);
   if (dir)
     gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), dir);
 
@@ -135,20 +132,22 @@ select_file_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev,
 }
 
 static void
-do_open_cb (GtkWidget * w, GtkDialog * dlg)
+do_open_cb (GtkWidget *w, GtkDialog *dlg)
 {
   gtk_dialog_response (dlg, GTK_RESPONSE_ACCEPT);
 }
 
 static void
-open_cb (GtkWidget * w, gpointer d)
+open_cb (GtkWidget *w, gpointer d)
 {
   GtkWidget *dlg, *cnt, *lbl, *entry;
 
   dlg = gtk_dialog_new_with_buttons (_("Open URI"),
                                      GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
                                      GTK_DIALOG_DESTROY_WITH_PARENT,
-                                     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
+                                     _("Cancel"), GTK_RESPONSE_REJECT,
+                                     _("Open"), GTK_RESPONSE_ACCEPT,
+                                     NULL);
   gtk_window_set_default_size (GTK_WINDOW (dlg), 350, -1);
 
   cnt = gtk_dialog_get_content_area (GTK_DIALOG (dlg));
@@ -173,10 +172,10 @@ open_cb (GtkWidget * w, gpointer d)
 }
 
 static gboolean
-menu_cb (WebKitWebView * view, GtkWidget * menu, WebKitHitTestResult * hit, gboolean kb, gpointer d)
+menu_cb (WebKitWebView *view, GtkWidget *menu, WebKitHitTestResult *hit, gboolean kb, gpointer d)
 {
   GtkWidget *mi;
-  
+
   /* FIXME: add custom menu items here */
 
   return FALSE;

@@ -27,6 +27,7 @@ yad_SOURCES = 			\
 	util.c			\
 	main.c			\
 	yad.h			\
+	stock.h			\
 	calendar.xpm
 
 if HTML
