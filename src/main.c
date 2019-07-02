@@ -434,7 +434,8 @@ create_dialog (void)
 
               btn = gtk_button_new ();
               gtk_container_add (GTK_CONTAINER (btn), get_label (b->name, 2));
-              gtk_button_set_alignment (GTK_BUTTON (btn), 0.5, 0.5);
+              gtk_widget_set_halign (btn, 0.5);
+              gtk_widget_set_valign (btn, 0.5);
               g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (b->response));
               g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), b->cmd);
               gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
@@ -457,34 +458,17 @@ create_dialog (void)
             }
           else
             {
-              if (gtk_alternative_dialog_button_order (NULL))
-                {
-                  /* add ok button */
-                  btn = gtk_button_new_from_stock (GTK_STOCK_OK);
-                  g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_OK));
-                  g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
-                  gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
+              /* add cancel button */
+              btn = gtk_button_new_from_stock (GTK_STOCK_CANCEL);
+              g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_CANCEL));
+              g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
+              gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
 
-                  /* add cancel button */
-                  btn = gtk_button_new_from_stock (GTK_STOCK_CANCEL);
-                  g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_CANCEL));
-                  g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
-                  gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
-                }
-              else
-                {
-                  /* add cancel button */
-                  btn = gtk_button_new_from_stock (GTK_STOCK_CANCEL);
-                  g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_CANCEL));
-                  g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
-                  gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
-
-                  /*add ok button */
-                  btn = gtk_button_new_from_stock (GTK_STOCK_OK);
-                  g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_OK));
-                  g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
-                  gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
-                }
+              /*add ok button */
+              btn = gtk_button_new_from_stock (GTK_STOCK_OK);
+              g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_OK));
+              g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
+              gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
             }
         }
       /* add buttons box to main window */
@@ -507,7 +491,7 @@ create_dialog (void)
   if (!options.data.maximized && !options.data.fullscreen)
     {
       gint cw, ch;
-    
+
       gtk_widget_show_all (dlg);
 
       parse_geometry ();
@@ -518,7 +502,7 @@ create_dialog (void)
         options.data.width = cw;
       if (options.data.height == -1)
         options.data.height = ch;
-    
+
       gtk_window_resize (GTK_WINDOW (dlg), options.data.width, options.data.height);
 
       gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
