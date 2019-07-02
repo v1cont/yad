@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-02 08:05+0300\n"
+"POT-Creation-Date: 2019-07-02 12:13+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -98,12 +98,12 @@ msgid "Select files"
 msgstr "Выбор файлов"
 
 #: ../src/form.c:419 ../src/form.c:427 ../src/form.c:506 ../src/form.c:514
-#: ../src/form.c:565 ../src/html.c:116 ../src/html.c:149
+#: ../src/form.c:565 ../src/html.c:116 ../src/html.c:149 ../src/stock.h:36
 msgid "Cancel"
 msgstr "Отмена"
 
 #: ../src/form.c:420 ../src/form.c:428 ../src/form.c:507 ../src/form.c:515
-#: ../src/form.c:566 ../src/html.c:115
+#: ../src/form.c:566 ../src/html.c:115 ../src/stock.h:42
 msgid "OK"
 msgstr "OK"
 
@@ -139,7 +139,7 @@ msgstr "YAD - Выбор файла"
 msgid "Open URI"
 msgstr "Открыть URI"
 
-#: ../src/html.c:150
+#: ../src/html.c:150 ../src/stock.h:43
 msgid "Open"
 msgstr "Открыть"
 
@@ -147,7 +147,7 @@ msgstr "Открыть"
 msgid "Enter URI or file name:"
 msgstr "Введите URI или имя файла:"
 
-#: ../src/html.c:202
+#: ../src/html.c:202 ../src/stock.h:45
 msgid "Quit"
 msgstr "Выход"
 
@@ -166,12 +166,12 @@ msgstr "Не могу открыть каталог %s: %s\n"
 msgid "%d sec"
 msgstr "%d сек"
 
-#: ../src/main.c:690 ../src/main.c:697
+#: ../src/main.c:684 ../src/main.c:691
 #, c-format
 msgid "Unable to parse YAD_OPTIONS: %s\n"
 msgstr "Не могу разобрать YAD_OPTIONS: %s\n"
 
-#: ../src/main.c:708
+#: ../src/main.c:702
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Не удается разобрать командную строку: %s\n"
@@ -1623,35 +1623,35 @@ msgstr "Дополнительные параметры"
 msgid "Show miscellaneous options"
 msgstr "Показывать дополнительные параметры"
 
-#: ../src/picture.c:177
+#: ../src/picture.c:182
 msgid "Fit to window"
 msgstr "По размерам окна"
 
-#: ../src/picture.c:182
+#: ../src/picture.c:187
 msgid "Original size"
 msgstr "Оригинальный размер"
 
-#: ../src/picture.c:187
+#: ../src/picture.c:192
 msgid "Increase size"
 msgstr "Увеличить"
 
-#: ../src/picture.c:192
+#: ../src/picture.c:197
 msgid "Decrease size"
 msgstr "Уменьшить"
 
-#: ../src/picture.c:201
+#: ../src/picture.c:206
 msgid "Rotate left"
 msgstr "Повернуть влево"
 
-#: ../src/picture.c:206
+#: ../src/picture.c:211
 msgid "Rotate right"
 msgstr "Повернуть вправо"
 
-#: ../src/picture.c:211
+#: ../src/picture.c:216
 msgid "Flip vertical"
 msgstr "Вывернуть вертикально"
 
-#: ../src/picture.c:216
+#: ../src/picture.c:221
 msgid "Flip horizontal"
 msgstr "Вывернуть горизонтально"
 
@@ -1780,6 +1780,66 @@ msgstr "не задан шрифт.\n"
 #, c-format
 msgid "cannot get font description for for string \"%s\"\n"
 msgstr "невозможно получить описание шрифта из строки \"%s\"\n"
+
+#: ../src/stock.h:33
+msgid "About"
+msgstr "О программе"
+
+#: ../src/stock.h:34
+msgid "Add"
+msgstr "Добавить"
+
+#: ../src/stock.h:35
+msgid "Apply"
+msgstr "Применить"
+
+#: ../src/stock.h:37
+msgid "Clear"
+msgstr "Очистить"
+
+#: ../src/stock.h:38
+msgid "Close"
+msgstr "Закрыть"
+
+#: ../src/stock.h:39
+msgid "Edit"
+msgstr "Редактировать"
+
+#: ../src/stock.h:40
+msgid "Execute"
+msgstr "Выполнить"
+
+#: ../src/stock.h:41
+msgid "No"
+msgstr "Нет"
+
+#: ../src/stock.h:44
+msgid "Print"
+msgstr "Печать"
+
+#: ../src/stock.h:46
+msgid "Refresh"
+msgstr "Обновить"
+
+#: ../src/stock.h:47
+msgid "Remove"
+msgstr "Удалить"
+
+#: ../src/stock.h:48
+msgid "Save"
+msgstr "Сохранить"
+
+#: ../src/stock.h:49
+msgid "Search"
+msgstr "Поиск"
+
+#: ../src/stock.h:50
+msgid "Settings"
+msgstr "Настройки"
+
+#: ../src/stock.h:51
+msgid "Yes"
+msgstr "Да"
 
 #: ../data/yad-icon-browser.desktop.in.h:1
 msgid "Icon Browser"
