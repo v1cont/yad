@@ -64,6 +64,7 @@ load_uri (const gchar * uri)
         addr = g_strdup (uri);
     }
 
+  is_loaded = FALSE;
   webkit_web_view_load_uri (view, addr);
   g_free (addr);
 }
@@ -138,7 +139,7 @@ do_open_cb (GtkWidget *w, GtkDialog *dlg)
 }
 
 static void
-open_cb (GtkWidget *w, gpointer d)
+open_cb (GSimpleAction *act, GVariant *param, gpointer d)
 {
   GtkWidget *dlg, *cnt, *lbl, *entry;
 
@@ -171,12 +172,35 @@ open_cb (GtkWidget *w, gpointer d)
   gtk_widget_destroy (dlg);
 }
 
-static gboolean
-menu_cb (WebKitWebView *view, GtkWidget *menu, WebKitHitTestResult *hit, gboolean kb, gpointer d)
+static void
+quit_cb (GSimpleAction *act, GVariant *param, gpointer d)
 {
-  GtkWidget *mi;
+  yad_exit (options.data.def_resp);
+}
 
-  /* FIXME: add custom menu items here */
+static gboolean
+menu_cb (WebKitWebView *view, WebKitContextMenu *menu, GdkEvent *ev, WebKitHitTestResult *hit, gpointer d)
+{
+  WebKitContextMenuItem *mi;
+  GSimpleAction *act;
+
+  mi = webkit_context_menu_item_new_separator ();
+  webkit_context_menu_prepend (menu, mi);
+
+  act = g_simple_action_new ("open", NULL);
+  g_signal_connect (G_OBJECT (act), "activate", G_CALLBACK (open_cb), NULL);
+
+  mi = webkit_context_menu_item_new_from_gaction (G_ACTION (act), _("Open URI"), NULL);
+  webkit_context_menu_prepend (menu, mi);
+
+  mi = webkit_context_menu_item_new_separator ();
+  webkit_context_menu_append (menu, mi);
+
+  act = g_simple_action_new ("quit", NULL);
+  g_signal_connect (G_OBJECT (act), "activate", G_CALLBACK (quit_cb), NULL);
+
+  mi = webkit_context_menu_item_new_from_gaction (G_ACTION (act), _("Quit"), NULL);
+  webkit_context_menu_append (menu, mi);
 
   return FALSE;
 }
