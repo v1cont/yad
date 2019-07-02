@@ -154,7 +154,25 @@ write_settings (void)
 static gboolean
 stock_lookup (gchar *key, YadStock *it)
 {
-  return FALSE;
+  gint i;
+  gboolean found = FALSE;
+
+  if (key == NULL || strncmp (key, "yad-", 4) != 0)
+    return FALSE;
+
+  for (i = 0; i < YAD_STOCK_COUNT; i++)
+    {
+      if (strcmp (key, yad_stock_items[i].key) == 0)
+        {
+          it->key = yad_stock_items[i].key;
+          it->label = yad_stock_items[i].label;
+          it->icon = yad_stock_items[i].icon;
+          found = TRUE;
+          break;
+        }
+    }
+
+  return found;
 }
 
 GdkPixbuf *
@@ -363,7 +381,7 @@ get_tabs (key_t key, gboolean create)
 }
 
 GtkWidget *
-get_label (gchar * str, guint border)
+get_label (gchar *str, guint border)
 {
   GtkWidget *t, *i, *l;
   YadStock it;
@@ -376,6 +394,9 @@ get_label (gchar * str, guint border)
 
   t = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_container_set_border_width (GTK_CONTAINER (t), border);
+  
+  gtk_widget_set_halign (t, GTK_ALIGN_CENTER);
+  gtk_widget_set_valign (t, GTK_ALIGN_CENTER);
 
   vals = g_strsplit_set (str, options.common_data.item_separator, 3);
   if (stock_lookup (vals[0], &it))

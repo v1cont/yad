@@ -29,7 +29,7 @@ typedef struct {
   gchar *icon;
 } YadStock;
 
-YadStock yad_stock_items[] = {
+const YadStock yad_stock_items[] = {
   { "yad-about", N_("About"), "help-about" },
   { "yad-add",  N_("Add"), "list-add" },
   { "yad-apply",  N_("Apply"), "gtk-apply" },

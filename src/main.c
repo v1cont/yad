@@ -420,6 +420,7 @@ create_dialog (void)
       GtkWidget *btn;
       /* create buttons container */
       GtkWidget *bbox = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_box_set_homogeneous (GTK_BOX (bbox), TRUE);
       gtk_container_set_border_width (GTK_CONTAINER (bbox), 2);
       gtk_box_set_spacing (GTK_BOX (bbox), 5);
       gtk_button_box_set_layout (GTK_BUTTON_BOX (bbox), options.data.buttons_layout);
@@ -434,11 +435,11 @@ create_dialog (void)
 
               btn = gtk_button_new ();
               gtk_container_add (GTK_CONTAINER (btn), get_label (b->name, 2));
-              gtk_widget_set_halign (btn, 0.5);
-              gtk_widget_set_valign (btn, 0.5);
+              //gtk_widget_set_halign (btn, GTK_ALIGN_FILL);
+              //gtk_widget_set_valign (btn, GTK_ALIGN_FILL);
               g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (b->response));
               g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), b->cmd);
-              gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
+              gtk_box_pack_start (GTK_BOX (bbox), btn, TRUE, TRUE, 0);
 
               tmp = tmp->next;
             }
@@ -450,25 +451,34 @@ create_dialog (void)
               options.mode == YAD_MODE_DND || options.mode == YAD_MODE_PICTURE)
             {
               /* add close button */
-              btn = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
+              btn = gtk_button_new ();
+              gtk_container_add (GTK_CONTAINER (btn), get_label ("yad-close", 2));
+              //gtk_widget_set_halign (btn, GTK_ALIGN_FILL);
+              //gtk_widget_set_valign (btn, GTK_ALIGN_FILL);              
               g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_OK));
               g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
-              gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
+              gtk_box_pack_start (GTK_BOX (bbox), btn, TRUE, TRUE, 0);
 
             }
           else
             {
               /* add cancel button */
-              btn = gtk_button_new_from_stock (GTK_STOCK_CANCEL);
+              btn = gtk_button_new ();
+              gtk_container_add (GTK_CONTAINER (btn), get_label ("yad-cancel", 2));
+              //gtk_widget_set_halign (btn, GTK_ALIGN_FILL);
+              //gtk_widget_set_valign (btn, GTK_ALIGN_FILL);
               g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_CANCEL));
               g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
-              gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
+              gtk_box_pack_start (GTK_BOX (bbox), btn, TRUE, TRUE, 0);
 
               /*add ok button */
-              btn = gtk_button_new_from_stock (GTK_STOCK_OK);
+              btn = gtk_button_new ();
+              gtk_container_add (GTK_CONTAINER (btn), get_label ("yad-ok", 2));
+              //gtk_widget_set_halign (btn, GTK_ALIGN_FILL);
+              //gtk_widget_set_valign (btn, GTK_ALIGN_FILL);
               g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_OK));
               g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
-              gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
+              gtk_box_pack_start (GTK_BOX (bbox), btn, TRUE, TRUE, 0);
             }
         }
       /* add buttons box to main window */
