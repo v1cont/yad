@@ -16,7 +16,6 @@ yad_SOURCES = 			\
 	list.c			\
 	multi-progress.c	\
 	notebook.c		\
-	notification.c		\
 	option.c		\
 	paned.c			\
 	picture.c       \
@@ -29,6 +28,10 @@ yad_SOURCES = 			\
 	yad.h			\
 	stock.h			\
 	calendar.xpm
+
+if TRAY
+yad_SOURCES += notification.c
+endif
 
 if HTML
 yad_SOURCES += html.c

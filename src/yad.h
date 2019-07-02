@@ -68,7 +68,9 @@ typedef enum {
   YAD_MODE_LIST,
   YAD_MODE_MULTI_PROGRESS,
   YAD_MODE_NOTEBOOK,
+#ifdef HAVE_TRAY
   YAD_MODE_NOTIFICATION,
+#endif
   YAD_MODE_PANED,
   YAD_MODE_PICTURE,
   YAD_MODE_PRINT,
@@ -365,11 +367,13 @@ typedef struct {
   gboolean expand;
 } YadNotebookData;
 
+#ifdef HAVE_TRAY
 typedef struct {
   gboolean middle;
   gboolean hidden;
   gchar *menu;
 } YadNotificationData;
+#endif
 
 typedef struct {
   GtkOrientation orient;
@@ -484,7 +488,9 @@ typedef struct {
   YadListData list_data;
   YadMultiProgressData multi_progress_data;
   YadNotebookData notebook_data;
+#ifdef HAVE_TRAY
   YadNotificationData notification_data;
+#endif
   YadPanedData paned_data;
   YadPictureData picture_data;
   YadPrintData print_data;
@@ -592,7 +598,9 @@ void text_print_result (void);
 
 void dnd_init (GtkWidget *w);
 
+#ifdef HAVE_TRAY
 gint yad_notification_run (void);
+#endif
 gint yad_print_run (void);
 gint yad_about (void);
 

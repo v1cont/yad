@@ -44,6 +44,17 @@ if test x$have_html = xyes; then
     AC_DEFINE([HAVE_HTML], [1], [Define this if you have webkit2gt library])
 fi
 
+dnl status icon widget
+AC_ARG_ENABLE([tray],
+	[AS_HELP_STRING([--enable-tray],
+			[Build YAD with status icon])],
+	[build_tray=$enableval], [build_tray=yes])
+AM_CONDITIONAL([TRAY], [test x$build_tray = xyes])
+
+if test x$build_tray = xyes; then
+    AC_DEFINE([HAVE_TRAY], [1], [Define this if you need status icon])
+fi
+
 dnl spell check
 AC_ARG_ENABLE([spell],
 	[AS_HELP_STRING([--enable-spell],
@@ -135,6 +146,7 @@ AC_OUTPUT
 
 echo
 echo "Build configuratioh:"
+echo "  Status icon          - $build_tray"
 echo "  HTML widget          - $have_html"
 echo "  GtkSourceView        - $have_sourceview"
 echo "  Spell checking       - $have_spell"

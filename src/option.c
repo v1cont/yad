@@ -80,7 +80,9 @@ static gboolean icons_mode = FALSE;
 static gboolean list_mode = FALSE;
 static gboolean multi_progress_mode = FALSE;
 static gboolean notebook_mode = FALSE;
+#ifdef HAVE_TRAY
 static gboolean notification_mode = FALSE;
+#endif
 static gboolean paned_mode = FALSE;
 static gboolean picture_mode = FALSE;
 static gboolean print_mode = FALSE;
@@ -491,6 +493,7 @@ static GOptionEntry notebook_options[] = {
   { NULL }
 };
 
+#ifdef HAVE_TRAY
 static GOptionEntry notification_options[] = {
   { "notification", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &notification_mode,
     N_("Display notification"), NULL },
@@ -504,6 +507,7 @@ static GOptionEntry notification_options[] = {
     N_("Set icon size for fully specified icons (default - 16)"), N_("SIZE") },
   { NULL }
 };
+#endif
 
 static GOptionEntry paned_options[] = {
   { "paned", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &paned_mode,
@@ -1385,8 +1389,10 @@ yad_set_mode (void)
     options.mode = YAD_MODE_MULTI_PROGRESS;
   else if (notebook_mode)
     options.mode = YAD_MODE_NOTEBOOK;
+#ifdef HAVE_TRAY
   else if (notification_mode)
     options.mode = YAD_MODE_NOTIFICATION;
+#endif
   else if (paned_mode)
     options.mode = YAD_MODE_PANED;
   else if (picture_mode)
@@ -1623,10 +1629,12 @@ yad_options_init (void)
   options.notebook_data.expand = FALSE;
   options.notebook_data.active = 1;
 
+#ifdef HAVE_TRAY
   /* Initialize notification data */
   options.notification_data.middle = TRUE;
   options.notification_data.hidden = FALSE;
   options.notification_data.menu = NULL;
+#endif
 
   /* Initialize paned data */
   options.paned_data.orient = GTK_ORIENTATION_VERTICAL;
@@ -1778,12 +1786,14 @@ yad_create_context (void)
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 
+#ifdef HAVE_TRAY
   /* Adds notification option entries */
   a_group = g_option_group_new ("notification", _("Notification icon options"),
                                 _("Show notification icon options"), NULL, NULL);
   g_option_group_add_entries (a_group, notification_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
+#endif
 
   /* Adds paned option entries */
   a_group = g_option_group_new ("paned", _("Paned dialog options"), _("Show paned dialog options"), NULL, NULL);
