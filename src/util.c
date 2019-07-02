@@ -381,7 +381,7 @@ get_tabs (key_t key, gboolean create)
 }
 
 GtkWidget *
-get_label (gchar *str, guint border)
+get_label (gchar *str, guint border, GtkWidget *w)
 {
   GtkWidget *t, *i, *l;
   YadStock it;
@@ -394,7 +394,7 @@ get_label (gchar *str, guint border)
 
   t = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_container_set_border_width (GTK_CONTAINER (t), border);
-  
+
   gtk_widget_set_halign (t, GTK_ALIGN_CENTER);
   gtk_widget_set_valign (t, GTK_ALIGN_CENTER);
 
@@ -424,6 +424,8 @@ get_label (gchar *str, guint border)
 
   if (l)
     {
+      if (w)
+        gtk_label_set_mnemonic_widget (GTK_LABEL (l), w);
       gtk_label_set_xalign (GTK_LABEL (l), 0.0);
       gtk_box_pack_start (GTK_BOX (t), l, FALSE, FALSE, 1);
     }

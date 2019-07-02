@@ -63,7 +63,7 @@ notebook_create_widget (GtkWidget * dlg)
       gtk_widget_set_margin_top (s, options.notebook_data.borders);
       gtk_widget_set_margin_bottom (s, options.notebook_data.borders);
 
-      gtk_notebook_append_page (GTK_NOTEBOOK (w), s, get_label ((gchar *) tab->data, 0));
+      gtk_notebook_append_page (GTK_NOTEBOOK (w), s, get_label ((gchar *) tab->data, 0, s));
       gtk_container_child_set (GTK_CONTAINER (w), s, "tab-expand", options.notebook_data.expand, NULL);
     }
 

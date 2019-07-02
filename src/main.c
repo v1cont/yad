@@ -434,7 +434,7 @@ create_dialog (void)
               YadButton *b = (YadButton *) tmp->data;
 
               btn = gtk_button_new ();
-              gtk_container_add (GTK_CONTAINER (btn), get_label (b->name, 2));
+              gtk_container_add (GTK_CONTAINER (btn), get_label (b->name, 2, btn));
               //gtk_widget_set_halign (btn, GTK_ALIGN_FILL);
               //gtk_widget_set_valign (btn, GTK_ALIGN_FILL);
               g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (b->response));
@@ -452,9 +452,9 @@ create_dialog (void)
             {
               /* add close button */
               btn = gtk_button_new ();
-              gtk_container_add (GTK_CONTAINER (btn), get_label ("yad-close", 2));
+              gtk_container_add (GTK_CONTAINER (btn), get_label ("yad-close", 2, btn));
               //gtk_widget_set_halign (btn, GTK_ALIGN_FILL);
-              //gtk_widget_set_valign (btn, GTK_ALIGN_FILL);              
+              //gtk_widget_set_valign (btn, GTK_ALIGN_FILL);
               g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_OK));
               g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
               gtk_box_pack_start (GTK_BOX (bbox), btn, TRUE, TRUE, 0);
@@ -464,7 +464,7 @@ create_dialog (void)
             {
               /* add cancel button */
               btn = gtk_button_new ();
-              gtk_container_add (GTK_CONTAINER (btn), get_label ("yad-cancel", 2));
+              gtk_container_add (GTK_CONTAINER (btn), get_label ("yad-cancel", 2, btn));
               //gtk_widget_set_halign (btn, GTK_ALIGN_FILL);
               //gtk_widget_set_valign (btn, GTK_ALIGN_FILL);
               g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_CANCEL));
@@ -473,7 +473,7 @@ create_dialog (void)
 
               /*add ok button */
               btn = gtk_button_new ();
-              gtk_container_add (GTK_CONTAINER (btn), get_label ("yad-ok", 2));
+              gtk_container_add (GTK_CONTAINER (btn), get_label ("yad-ok", 2, btn));
               //gtk_widget_set_halign (btn, GTK_ALIGN_FILL);
               //gtk_widget_set_valign (btn, GTK_ALIGN_FILL);
               g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_OK));
