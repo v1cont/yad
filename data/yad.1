@@ -136,11 +136,11 @@ Hide main widget with expander. \fITEXT\fP is an optional argument with expander
 .TP
 .B \-\-button=\fIBUTTON:ID\fP
 Add the dialog button. May be used multiple times. \fIID\fP is an exit code or a command.
-\fIBUTTON\fP may be gtk stock item name for predefined buttons (like gtk-close or gtk-ok) or text in a form
+\fIBUTTON\fP may be a yad stock item name for predefined buttons (like yad-close or yad-ok) or text in a form
 \fILABEL[!ICON[!TOOLTIP]]\fP where `!' is an item separator.
-Full list of stock items may be found in gtk-demo program, in snippet called \fI"Stock Items and Icon Browser"\fP.
+Full list of stock items may be found in section \fiSTOCK ITEMS\fP.
 If no buttons specified \fIOK\fP and \fICancel\fP buttons used. See \fBEXIT STATUS\fP section for more.
-If \fIID\fP have a non-numeric value it treats like a command and click on such button doesn't close the dialog.
+If \fIID\fP have a non-numeric value it treats as a command and click on such button doesn't close the dialog.
 .TP
 .B \-\-no-buttons
 Don't show buttons.
@@ -472,7 +472,7 @@ Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP
 .br
 \fBCLR\fP - color selection button. Output values for this field generates in the same manner as for color dialog.
 .br
-\fBBTN\fP - button field. Label may be in form text in a form \fILABEL[!ICON[!TOOLTIP]]\fP where `!' is an item separator. \fILABEL\fP is a text of button label or gtk stock id. \fIICON\fP is a buttons icon (stock id or file name). \fITOOLTIP\fP is an optional text for popup help string. Initial value is a command which is running when button is clicked. A special sympols \fI%N\fP in command are replaced by value of field \fIN\fP. If command starts with \fI@\fP, the output of command will be parsed and lines started with number and colon will be treats as a new field values.
+\fBBTN\fP - button field. Label may be in form text in a form \fILABEL[!ICON[!TOOLTIP]]\fP where `!' is an item separator. \fILABEL\fP is a text of button label or yad stock id. \fIICON\fP is a buttons icon (stock id or file name). \fITOOLTIP\fP is an optional text for popup help string. Initial value is a command which is running when button is clicked. A special sympols \fI%N\fP in command are replaced by value of field \fIN\fP. If command starts with \fI@\fP, the output of command will be parsed and lines started with number and colon will be treats as a new field values.
 A quoting style for value when \fIsh -c\fP is used \- a single quotes around command and double quotes around -c argument
 .br
 \fBFBTN\fP - same as button field, but with full relief of a button.
@@ -1019,10 +1019,41 @@ Separator character for menu items (e.g. `!') sets with \-\-item-separator argum
 .B quit
 Exit the program. Middle click on icon also send \fIquit\fP command.
 
+.SH STOCK ITEMS
+.TP
+This is a list of predefined items available in \fIyad\fP.
+
+.TS
+tab (@);
+l l l.
+.B
+ID@Label text@Icon name
+_
+yad-about@About@help-about
+yad-add@Add@list-add
+yad-apply@Apply@gtk-apply
+yad-cancel@Cancel@gtk-cancel
+yad-clear@Clear@document-clear
+yad-close@Close@window-close
+yad-edit@Edit@gtk-edit
+yad-execute@Execute@system-run
+yad-no@No@gtk-no
+yad-ok@OK@gtk-ok
+yad-open@Open@document-open
+yad-print@Print@document-print
+yad-quit@Quit@application-exit
+yad-refresh@Refresh@view-refresh
+yad-remove@Remove@list-remove
+yad-save@Save@document-save
+yad-search@Search@system-search
+yad-settings@Settings@gtk-preferences
+yad-yes@Yes@gtk-yes
+.TE
+
 .SH ENVIRONMENT VARIABLES
 .TP
 .B YAD_OPTIONS
-This variable can holds some default options for yad. All options in this
+This variable can holds some default options for \fIyad\fP. All options in this
 variable may be redefined from command line.
 .TP
 .B YAD_PID
