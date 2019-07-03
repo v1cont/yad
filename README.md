@@ -25,6 +25,8 @@ you need to generate build scripts. This can be done by running command
 
 autoreconf -ivf && intltoolize
 
+You must manually run gtk-update-icon-cache after installation.
+
 For successfully build you may need to install the following packages:
 * GNU Autotools (https://www.gnu.org/software/autoconf/ http://www.gnu.org/software/automake/)
 * Intltool >= 0.40.0 (http://freedesktop.org/wiki/Software/intltool/)
@@ -34,4 +36,4 @@ with appropriate *-dev* packages depending on your distro
 Additionally, you can build yad with the following libraries:
 * Webkit - for supporting HTML dialog (http://webkitgtk.org)
 * GtkSourceView - for enabling syntax highlighting in text-info dialog (https://wiki.gnome.org/Projects/GtkSourceView)
-* GtkSpell3 - for support spell checking in text fields (http://gtkspell.sourceforge.net/)
+* GSpell - for support spell checking in text fields (https://wiki.gnome.org/Projects/gspell)
