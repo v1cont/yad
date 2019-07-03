@@ -712,8 +712,11 @@ show_langs ()
 {
   GList *lng;
 
-  for (lng = gtk_spell_checker_get_language_list (); lng; lng = lng->next)
-    g_print ("%s\n", (gchar *) lng->data);
+  for (lng = gspell_language_get_available (); lng; lng = lng->next)
+    {
+      const GspellLanguage *l = lng->data;
+      g_print ("%s\n", gspell_language_get_code (l));
+    }
 }
 #endif
 

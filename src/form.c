@@ -975,9 +975,8 @@ form_create_widget (GtkWidget * dlg)
 #ifdef HAVE_SPELL
                 if (options.common_data.enable_spell)
                   {
-                    GtkSpellChecker *spell = gtk_spell_checker_new ();
-                    gtk_spell_checker_set_language (spell, options.common_data.spell_lang, NULL);
-                    gtk_spell_checker_attach (spell, GTK_TEXT_VIEW (e));
+                    GspellTextView *spell_view = gspell_text_view_get_from_gtk_text_view (GTK_TEXT_VIEW (e));
+                    gspell_text_view_basic_setup (spell_view);
                   }
 #endif
 

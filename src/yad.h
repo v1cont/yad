@@ -34,7 +34,7 @@
 #include <glib/gi18n.h>
 
 #ifdef HAVE_SPELL
-#include <gtkspell/gtkspell.h>
+#include <gspell/gspell.h>
 #endif
 
 #ifdef HAVE_SOURCEVIEW

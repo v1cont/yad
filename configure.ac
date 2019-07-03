@@ -61,7 +61,7 @@ AC_ARG_ENABLE([spell],
 			[Build YAD with Spell check support (default - yes)])],
 	[with_spell=$enableval], [with_spell=yes])
 if test x$with_spell = xyes; then
-    PKG_CHECK_MODULES([SPELL], [gtkspell-3.0], [have_spell=yes], [have_spell=no])
+    PKG_CHECK_MODULES([SPELL], [gspell-1], [have_spell=yes], [have_spell=no])
 else
     have_spell=no
 fi

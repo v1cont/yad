@@ -426,7 +426,7 @@ fill_buffer_from_stdin ()
 GtkWidget *
 text_create_widget (GtkWidget * dlg)
 {
-  GtkWidget *w;
+  GtkWidget *w, *tv;
 
   w = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (w), GTK_SHADOW_ETCHED_IN);
@@ -434,10 +434,10 @@ text_create_widget (GtkWidget * dlg)
 
 #ifdef HAVE_SOURCEVIEW
   text_buffer = (GObject *) gtk_source_buffer_new (NULL);
-  text_view = gtk_source_view_new_with_buffer (GTK_SOURCE_BUFFER (text_buffer));
+  tv = text_view = gtk_source_view_new_with_buffer (GTK_SOURCE_BUFFER (text_buffer));
 #else
   text_buffer = (GObject *) gtk_text_buffer_new (NULL);
-  text_view = gtk_text_view_new_with_buffer (GTK_TEXT_BUFFER (text_buffer));
+  tv = text_view = gtk_text_view_new_with_buffer (GTK_TEXT_BUFFER (text_buffer));
 #endif
   gtk_widget_set_name (text_view, "yad-text-widget");
   gtk_text_view_set_justification (GTK_TEXT_VIEW (text_view), options.text_data.justify);
@@ -492,9 +492,8 @@ text_create_widget (GtkWidget * dlg)
 #ifdef HAVE_SPELL
   if (options.common_data.enable_spell)
     {
-      GtkSpellChecker *spell = gtk_spell_checker_new ();
-      gtk_spell_checker_set_language (spell, options.common_data.spell_lang, NULL);
-      gtk_spell_checker_attach (spell, GTK_TEXT_VIEW (text_view));
+      GspellTextView *spell_view = gspell_text_view_get_from_gtk_text_view (GTK_TEXT_VIEW (text_view));
+      gspell_text_view_basic_setup (spell_view);;
     }
 #endif
 
@@ -525,7 +524,7 @@ text_create_widget (GtkWidget * dlg)
       g_signal_connect_after (G_OBJECT (text_buffer), "changed", G_CALLBACK (linkify_cb), regex);
     }
 
-  gtk_container_add (GTK_CONTAINER (w), text_view);
+  gtk_container_add (GTK_CONTAINER (w), tv);
 
   if (options.common_data.uri)
     fill_buffer_from_file ();
