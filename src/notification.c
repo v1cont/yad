@@ -44,14 +44,16 @@ static gint exit_code;
 static void popup_menu_cb (GtkStatusIcon *, guint, guint, gpointer);
 
 static void
-free_menu_data (gpointer data, gpointer udata)
+free_menu_data (gpointer data)
 {
   MenuData *m = (MenuData *) data;
 
-  g_free (m->name);
-  g_free (m->action);
-  g_free (m->icon);
-  g_free (m);
+  if (m) {
+    g_free (m->name);
+    g_free (m->action);
+    g_free (m->icon);
+    g_free (m);
+  }
 }
 
 static void
@@ -62,8 +64,7 @@ parse_menu_str (gchar * str)
 
   if (menu_data)
     {
-      g_slist_foreach (menu_data, free_menu_data, NULL);
-      g_slist_free (menu_data);
+      g_slist_free_full (menu_data, free_menu_data);
       menu_data = NULL;
     }
 
@@ -76,7 +77,14 @@ parse_menu_str (gchar * str)
 
       if (s[0])
         {
-          mdata->name = g_strdup (s[0]);
+          YadStock sit;
+          if (stock_lookup (s[0], &sit))
+            {
+              mdata->name = g_strdup (sit.label);
+              mdata->icon = g_strdup (sit.icon);
+            }
+          else
+              mdata->name = g_strdup (s[0]);
           if (s[1])
             {
               mdata->action = g_strdup (s[1]);
@@ -201,34 +209,39 @@ popup_menu_cb (GtkStatusIcon * icon, guint button, guint activate_time, gpointer
 
       if (d->name)
         {
+          GtkWidget *b, *i, *l;
+
+          item = gtk_menu_item_new ();
+          b = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 5);
+
           if (d->icon)
             {
               GdkPixbuf *pb = get_pixbuf (d->icon, YAD_SMALL_ICON, TRUE);
-              item = gtk_image_menu_item_new_with_mnemonic (d->name);
               if (pb)
                 {
-                  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), gtk_image_new_from_pixbuf (pb));
+                  i = gtk_image_new_from_pixbuf (pb);
+                  gtk_container_add (GTK_CONTAINER (b), i);
                   g_object_unref (pb);
                 }
             }
-          else
-            {
-              GtkStockItem it;
-              if (gtk_stock_lookup (d->name, &it))
-                item = gtk_image_menu_item_new_from_stock (d->name, NULL);
-              else
-                item = gtk_menu_item_new_with_mnemonic (d->name);
-            }
+          l = gtk_label_new_with_mnemonic (d->name);
+          gtk_label_set_xalign (GTK_LABEL (l), 0.0);
+          gtk_label_set_mnemonic_widget (GTK_LABEL (l), item);
+          gtk_box_pack_end (GTK_BOX (b), l, TRUE, TRUE, 0);
+
+          gtk_container_add (GTK_CONTAINER (item), b);
+
           g_signal_connect (GTK_MENU_ITEM (item), "activate",
                             G_CALLBACK (popup_menu_item_activate_cb), (gpointer) d->action);
         }
       else
         item = gtk_separator_menu_item_new ();
 
-      gtk_widget_show (item);
+      gtk_widget_show_all (item);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
     }
-  gtk_menu_popup (GTK_MENU (menu), NULL, NULL, gtk_status_icon_position_menu, icon, button, activate_time);
+
+  gtk_menu_popup_at_widget (GTK_MENU (menu), icon, GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, NULL);
 }
 
 static gboolean
