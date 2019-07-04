@@ -21,5 +21,4 @@ src/text.c
 src/browser.c
 src/notebook.c
 src/pfd.c
-src/stock.h
 data/yad-icon-browser.desktop.in

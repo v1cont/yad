@@ -29,9 +29,30 @@
 #include <sys/shm.h>
 
 #include "yad.h"
-#include "stock.h"
 
 YadSettings settings;
+
+const YadStock yad_stock_items[] = {
+  { "yad-about", N_("About"), "help-about" },
+  { "yad-add",  N_("Add"), "list-add" },
+  { "yad-apply",  N_("Apply"), "gtk-apply" },
+  { "yad-cancel",  N_("Cancel"), "gtk-cancel" },
+  { "yad-clear",  N_("Clear"), "document-clear" },
+  { "yad-close",  N_("Close"), "window-close" },
+  { "yad-edit",  N_("Edit"), "gtk-edit" },
+  { "yad-execute",  N_("Execute"), "system-run" },
+  { "yad-no",  N_("No"), "gtk-no" },
+  { "yad-ok",  N_("OK"), "gtk-ok" },
+  { "yad-open",  N_("Open"), "document-open" },
+  { "yad-print",  N_("Print"), "document-print" },
+  { "yad-quit",  N_("Quit"), "application-exit" },
+  { "yad-refresh",  N_("Refresh"), "view-refresh" },
+  { "yad-remove",  N_("Remove"), "list-remove" },
+  { "yad-save",  N_("Save"), "document-save" },
+  { "yad-search", N_("Search"), "system-search" },
+  { "yad-settings",  N_("Settings"), "gtk-preferences" },
+  { "yad-yes",  N_("Yes"), "gtk-yes" }
+};
 
 void
 read_settings (void)
@@ -151,7 +172,7 @@ write_settings (void)
   g_free (context);
 }
 
-static gboolean
+gboolean
 stock_lookup (gchar *key, YadStock *it)
 {
   gint i;

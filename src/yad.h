@@ -521,6 +521,7 @@ typedef struct {
 
 extern YadOptions options;
 
+/* SETTINGS */
 typedef struct {
   guint width;
   guint height;
@@ -543,6 +544,7 @@ typedef struct {
 
 extern YadSettings settings;
 
+/* TABS */
 typedef struct {
   pid_t pid;
   Window xid;
@@ -554,6 +556,18 @@ typedef struct {
 /*   xid - allow plugs to write shmem (for sync) */
 extern YadNTabs *tabs;
 
+/* STOCK ITEMS */
+#define YAD_STOCK_COUNT 19
+
+typedef struct {
+  gchar *key;
+  gchar *label;
+  gchar *icon;
+} YadStock;
+
+extern const YadStock yad_stock_items[];
+
+/* FUNCTION PROTOTYPES */
 void yad_options_init (void);
 GOptionContext *yad_create_context (void);
 void yad_set_mode (void);
@@ -620,6 +634,8 @@ gchar *get_color (GdkRGBA *c);
 gchar **split_arg (const gchar *str);
 
 YadNTabs *get_tabs (key_t key, gboolean create);
+
+gboolean stock_lookup (gchar *key, YadStock *it);
 
 GtkWidget *get_label (gchar *str, guint border, GtkWidget *w);
 
