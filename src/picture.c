@@ -178,6 +178,7 @@ create_popup_menu ()
   GtkWidget *mi;
 
   popup_menu = gtk_menu_new ();
+  gtk_menu_set_reserve_toggle_size (GTK_MENU (popup_menu), FALSE);
 
   mi = gtk_menu_item_new_with_label (_("Fit to window"));
   gtk_widget_show (mi);
