@@ -731,7 +731,7 @@ print_bool_val (gboolean val)
 void
 show_langs ()
 {
-  GList *lng;
+  const GList *lng;
 
   for (lng = gspell_language_get_available (); lng; lng = lng->next)
     {
