@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-02 12:13+0300\n"
+"POT-Creation-Date: 2019-07-04 08:01+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -98,12 +98,12 @@ msgid "Select files"
 msgstr "Выбор файлов"
 
 #: ../src/form.c:419 ../src/form.c:427 ../src/form.c:506 ../src/form.c:514
-#: ../src/form.c:565 ../src/html.c:116 ../src/html.c:149 ../src/stock.h:36
+#: ../src/form.c:565 ../src/html.c:116 ../src/html.c:149
 msgid "Cancel"
 msgstr "Отмена"
 
 #: ../src/form.c:420 ../src/form.c:428 ../src/form.c:507 ../src/form.c:515
-#: ../src/form.c:566 ../src/html.c:115 ../src/stock.h:42
+#: ../src/form.c:566 ../src/html.c:115
 msgid "OK"
 msgstr "OK"
 
@@ -139,7 +139,7 @@ msgstr "YAD - Выбор файла"
 msgid "Open URI"
 msgstr "Открыть URI"
 
-#: ../src/html.c:150 ../src/stock.h:43
+#: ../src/html.c:150
 msgid "Open"
 msgstr "Открыть"
 
@@ -147,7 +147,7 @@ msgstr "Открыть"
 msgid "Enter URI or file name:"
 msgstr "Введите URI или имя файла:"
 
-#: ../src/html.c:202 ../src/stock.h:45
+#: ../src/html.c:202
 msgid "Quit"
 msgstr "Выход"
 
@@ -1781,66 +1781,6 @@ msgstr "не задан шрифт.\n"
 msgid "cannot get font description for for string \"%s\"\n"
 msgstr "невозможно получить описание шрифта из строки \"%s\"\n"
 
-#: ../src/stock.h:33
-msgid "About"
-msgstr "О программе"
-
-#: ../src/stock.h:34
-msgid "Add"
-msgstr "Добавить"
-
-#: ../src/stock.h:35
-msgid "Apply"
-msgstr "Применить"
-
-#: ../src/stock.h:37
-msgid "Clear"
-msgstr "Очистить"
-
-#: ../src/stock.h:38
-msgid "Close"
-msgstr "Закрыть"
-
-#: ../src/stock.h:39
-msgid "Edit"
-msgstr "Редактировать"
-
-#: ../src/stock.h:40
-msgid "Execute"
-msgstr "Выполнить"
-
-#: ../src/stock.h:41
-msgid "No"
-msgstr "Нет"
-
-#: ../src/stock.h:44
-msgid "Print"
-msgstr "Печать"
-
-#: ../src/stock.h:46
-msgid "Refresh"
-msgstr "Обновить"
-
-#: ../src/stock.h:47
-msgid "Remove"
-msgstr "Удалить"
-
-#: ../src/stock.h:48
-msgid "Save"
-msgstr "Сохранить"
-
-#: ../src/stock.h:49
-msgid "Search"
-msgstr "Поиск"
-
-#: ../src/stock.h:50
-msgid "Settings"
-msgstr "Настройки"
-
-#: ../src/stock.h:51
-msgid "Yes"
-msgstr "Да"
-
 #: ../data/yad-icon-browser.desktop.in.h:1
 msgid "Icon Browser"
 msgstr "Броузер иконок"
@@ -1848,3 +1788,48 @@ msgstr "Броузер иконок"
 #: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
 msgstr "Исследование темы иконок GTK"
+
+#~ msgid "About"
+#~ msgstr "О программе"
+
+#~ msgid "Add"
+#~ msgstr "Добавить"
+
+#~ msgid "Apply"
+#~ msgstr "Применить"
+
+#~ msgid "Clear"
+#~ msgstr "Очистить"
+
+#~ msgid "Close"
+#~ msgstr "Закрыть"
+
+#~ msgid "Edit"
+#~ msgstr "Редактировать"
+
+#~ msgid "Execute"
+#~ msgstr "Выполнить"
+
+#~ msgid "No"
+#~ msgstr "Нет"
+
+#~ msgid "Print"
+#~ msgstr "Печать"
+
+#~ msgid "Refresh"
+#~ msgstr "Обновить"
+
+#~ msgid "Remove"
+#~ msgstr "Удалить"
+
+#~ msgid "Save"
+#~ msgstr "Сохранить"
+
+#~ msgid "Search"
+#~ msgstr "Поиск"
+
+#~ msgid "Settings"
+#~ msgstr "Настройки"
+
+#~ msgid "Yes"
+#~ msgstr "Да"
