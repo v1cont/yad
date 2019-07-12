@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-04 08:01+0300\n"
+"POT-Creation-Date: 2019-07-12 09:38+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -98,12 +98,12 @@ msgid "Select files"
 msgstr "Выбор файлов"
 
 #: ../src/form.c:419 ../src/form.c:427 ../src/form.c:506 ../src/form.c:514
-#: ../src/form.c:565 ../src/html.c:116 ../src/html.c:149
+#: ../src/form.c:565 ../src/html.c:116 ../src/html.c:149 ../src/util.c:37
 msgid "Cancel"
 msgstr "Отмена"
 
 #: ../src/form.c:420 ../src/form.c:428 ../src/form.c:507 ../src/form.c:515
-#: ../src/form.c:566 ../src/html.c:115
+#: ../src/form.c:566 ../src/html.c:115 ../src/util.c:43
 msgid "OK"
 msgstr "OK"
 
@@ -139,7 +139,7 @@ msgstr "YAD - Выбор файла"
 msgid "Open URI"
 msgstr "Открыть URI"
 
-#: ../src/html.c:150
+#: ../src/html.c:150 ../src/util.c:44
 msgid "Open"
 msgstr "Открыть"
 
@@ -147,7 +147,7 @@ msgstr "Открыть"
 msgid "Enter URI or file name:"
 msgstr "Введите URI или имя файла:"
 
-#: ../src/html.c:202
+#: ../src/html.c:202 ../src/util.c:46
 msgid "Quit"
 msgstr "Выход"
 
@@ -161,53 +161,53 @@ msgstr "Не могу разобрать файл %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Не могу открыть каталог %s: %s\n"
 
-#: ../src/main.c:118 ../src/main.c:391
+#: ../src/main.c:124 ../src/main.c:397
 #, c-format
 msgid "%d sec"
 msgstr "%d сек"
 
-#: ../src/main.c:684 ../src/main.c:691
+#: ../src/main.c:686 ../src/main.c:693
 #, c-format
 msgid "Unable to parse YAD_OPTIONS: %s\n"
 msgstr "Не могу разобрать YAD_OPTIONS: %s\n"
 
-#: ../src/main.c:702
+#: ../src/main.c:704
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Не удается разобрать командную строку: %s\n"
 
-#: ../src/notification.c:121
+#: ../src/notification.c:129
 #, c-format
 msgid "Could not load notification icon '%s': %s\n"
 msgstr "Не удается загрузить иконку '%s': %s\n"
 
-#: ../src/notification.c:304
+#: ../src/notification.c:319
 #, c-format
 msgid "Invalid UTF-8 in tooltip!\n"
 msgstr "Неверная последовательность UTF-8 в подсказке!\n"
 
-#: ../src/notification.c:330
+#: ../src/notification.c:345
 #, c-format
 msgid "Unknown command '%s'\n"
 msgstr "Неизвестная команда '%s'\n"
 
-#: ../src/notification.c:364
+#: ../src/notification.c:379
 msgid "Yad notification"
 msgstr "Диалог уведомлений"
 
-#: ../src/list.c:897
+#: ../src/list.c:898
 msgid "Add row"
 msgstr "Добавить строку"
 
-#: ../src/list.c:902
+#: ../src/list.c:903
 msgid "Delete row"
 msgstr "Удалить строку"
 
-#: ../src/list.c:907
+#: ../src/list.c:908
 msgid "Duplicate row"
 msgstr "Скопировать строку"
 
-#: ../src/list.c:1050
+#: ../src/list.c:1051
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Не заданы заголовоки колонок для диалога со списком\n"
@@ -1623,69 +1623,69 @@ msgstr "Дополнительные параметры"
 msgid "Show miscellaneous options"
 msgstr "Показывать дополнительные параметры"
 
-#: ../src/picture.c:182
+#: ../src/picture.c:183
 msgid "Fit to window"
 msgstr "По размерам окна"
 
-#: ../src/picture.c:187
+#: ../src/picture.c:188
 msgid "Original size"
 msgstr "Оригинальный размер"
 
-#: ../src/picture.c:192
+#: ../src/picture.c:193
 msgid "Increase size"
 msgstr "Увеличить"
 
-#: ../src/picture.c:197
+#: ../src/picture.c:198
 msgid "Decrease size"
 msgstr "Уменьшить"
 
-#: ../src/picture.c:206
+#: ../src/picture.c:207
 msgid "Rotate left"
 msgstr "Повернуть влево"
 
-#: ../src/picture.c:211
+#: ../src/picture.c:212
 msgid "Rotate right"
 msgstr "Повернуть вправо"
 
-#: ../src/picture.c:216
+#: ../src/picture.c:217
 msgid "Flip vertical"
 msgstr "Вывернуть вертикально"
 
-#: ../src/picture.c:221
+#: ../src/picture.c:222
 msgid "Flip horizontal"
 msgstr "Вывернуть горизонтально"
 
-#: ../src/print.c:199 ../src/print.c:355
+#: ../src/print.c:199 ../src/print.c:364
 #, c-format
 msgid "Printing failed: %s\n"
 msgstr "Сбой печати: %s\n"
 
-#: ../src/print.c:227
+#: ../src/print.c:229
 #, c-format
 msgid "File %s not found.\n"
 msgstr "Файл %s не найден.\n"
 
-#: ../src/print.c:233
+#: ../src/print.c:235
 #, c-format
 msgid "Filename is not specified.\n"
 msgstr "Не задано имя файла.\n"
 
-#: ../src/print.c:371
+#: ../src/print.c:380
 #, c-format
 msgid "Printer doesn't support ps format.\n"
 msgstr "Принтер не поддерживает формат ps.\n"
 
-#: ../src/print.c:379
+#: ../src/print.c:388
 #, c-format
 msgid "Printer doesn't support pdf format.\n"
 msgstr "Принтер не поддерживает формат pdf.\n"
 
-#: ../src/print.c:385
+#: ../src/print.c:394
 #, c-format
 msgid "This file type is not supported for raw printing.\n"
 msgstr "Этот тип файлов не поддерживается для прямой печати.\n"
 
-#: ../src/print.c:399
+#: ../src/print.c:408
 #, c-format
 msgid "Load source file failed: %s\n"
 msgstr "Сбой при загрузке исходного файла: %s\n"
@@ -1712,6 +1712,66 @@ msgstr "Название"
 #, c-format
 msgid "Theme %s not found\n"
 msgstr "Тема %s не найдена\n"
+
+#: ../src/util.c:34
+msgid "About"
+msgstr "О программе"
+
+#: ../src/util.c:35
+msgid "Add"
+msgstr "Добавить"
+
+#: ../src/util.c:36
+msgid "Apply"
+msgstr "Применить"
+
+#: ../src/util.c:38
+msgid "Clear"
+msgstr "Очистить"
+
+#: ../src/util.c:39
+msgid "Close"
+msgstr "Закрыть"
+
+#: ../src/util.c:40
+msgid "Edit"
+msgstr "Редактировать"
+
+#: ../src/util.c:41
+msgid "Execute"
+msgstr "Выполнить"
+
+#: ../src/util.c:42
+msgid "No"
+msgstr "Нет"
+
+#: ../src/util.c:45
+msgid "Print"
+msgstr "Печать"
+
+#: ../src/util.c:47
+msgid "Refresh"
+msgstr "Обновить"
+
+#: ../src/util.c:48
+msgid "Remove"
+msgstr "Удалить"
+
+#: ../src/util.c:49
+msgid "Save"
+msgstr "Сохранить"
+
+#: ../src/util.c:50
+msgid "Search"
+msgstr "Поиск"
+
+#: ../src/util.c:51
+msgid "Settings"
+msgstr "Настройки"
+
+#: ../src/util.c:52
+msgid "Yes"
+msgstr "Да"
 
 #: ../src/browser.c:128
 msgid "scalable "
@@ -1789,47 +1849,48 @@ msgstr "Броузер иконок"
 msgid "Inspect GTK Icon Theme"
 msgstr "Исследование темы иконок GTK"
 
-#~ msgid "About"
-#~ msgstr "О программе"
+#: ../data/yad.gschema.xml.in.h:1
+msgid "Default width of dialog window"
+msgstr "Ширина окна диалога по умолчанию"
 
-#~ msgid "Add"
-#~ msgstr "Добавить"
+#: ../data/yad.gschema.xml.in.h:2
+msgid "Default height of dialog window"
+msgstr "Высота окна диалога по умолчанию"
 
-#~ msgid "Apply"
-#~ msgstr "Применить"
+#: ../data/yad.gschema.xml.in.h:3
+msgid "Borders around dialog"
+msgstr "Ширина границ вокруг диалога"
 
-#~ msgid "Clear"
-#~ msgstr "Очистить"
+#: ../data/yad.gschema.xml.in.h:4
+msgid "Combo-box in entry dialog is always editable"
+msgstr "Поле выбора всегда изменяемо"
 
-#~ msgid "Close"
-#~ msgstr "Закрыть"
+#: ../data/yad.gschema.xml.in.h:6
+#, no-c-format
+msgid "Default terminal command (use %s for arguments placeholder)"
+msgstr ""
+"Команда запуска терминала по умолчанию (используйте %s для указания места "
+"размещения аргументов)"
 
-#~ msgid "Edit"
-#~ msgstr "Редактировать"
+#: ../data/yad.gschema.xml.in.h:8
+#, no-c-format
+msgid "Default open command (use %s for arguments placeholder)"
+msgstr ""
+"Команда открытия по умолчанию (используйте %s для указания места размещения "
+"аргументов)"
 
-#~ msgid "Execute"
-#~ msgstr "Выполнить"
+#: ../data/yad.gschema.xml.in.h:9
+msgid "Default date format (see strftime(3) for details)"
+msgstr "Формат даты по умолчанию (подробности в strftime(3))"
 
-#~ msgid "No"
-#~ msgstr "Нет"
+#: ../data/yad.gschema.xml.in.h:10
+msgid "Default color for URI in text-info dialog"
+msgstr "Цвет ссылок по умолчанию в текстовом диалоге"
 
-#~ msgid "Print"
-#~ msgstr "Печать"
+#: ../data/yad.gschema.xml.in.h:11
+msgid "Ignore unknown command-line options"
+msgstr "Игнорироввать неизвестные арументы в командной строке"
 
-#~ msgid "Refresh"
-#~ msgstr "Обновить"
-
-#~ msgid "Remove"
-#~ msgstr "Удалить"
-
-#~ msgid "Save"
-#~ msgstr "Сохранить"
-
-#~ msgid "Search"
-#~ msgstr "Поиск"
-
-#~ msgid "Settings"
-#~ msgstr "Настройки"
-
-#~ msgid "Yes"
-#~ msgstr "Да"
+#: ../data/yad.gschema.xml.in.h:12
+msgid "Maximum number of tabs in notebook dialog"
+msgstr "Максимальное количество вкладок в диалоге"

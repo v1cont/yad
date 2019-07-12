@@ -18,8 +18,9 @@ src/print.c
 src/progress.c
 src/color.c
 src/text.c
-src/browser.c
 src/notebook.c
+src/util.c
+src/browser.c
 src/pfd.c
 data/yad-icon-browser.desktop.in
 data/yad.gschema.xml.in
