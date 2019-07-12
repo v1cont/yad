@@ -108,6 +108,9 @@ AC_ARG_ENABLE([icon-browser],
 	[build_ib=$enableval], [build_ib=no])
 AM_CONDITIONAL([BUILD_IB], [test x$build_ib = xyes])
 
+# GSettings
+GLIB_GSETTINGS
+
 # *******************************
 # Internationalization
 # ******************************* 

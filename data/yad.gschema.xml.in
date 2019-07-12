@@ -1,0 +1,45 @@
+<schemalist>
+  <schema id="yad.settings" path="/yad/settings/" gettext-domain="yad">
+    <key name="width" type="i">
+      <default>-1</default>
+      <_summary>Default width of dialog window</_summary>
+    </key>
+    <key name="height" type="i">
+      <default>-1</default>
+      <_summary>Default height of dialog window</_summary>
+    </key>
+    <key name="border" type="i">
+      <default>5</default>
+      <_summary>Borders around dialog</_summary>
+    </key>
+    <key name="combo_always_editable" type="b">
+      <default>false</default>
+      <_summary>Combo-box in entry dialog is always editable</_summary>
+    </key>
+    <key name="terminal" type="s">
+      <default>'xterm -e "%s"'</default>
+      <_summary>Default terminal command (use %s for arguments placeholder)</_summary>
+    </key>
+    <key name="open_command" type="s">
+      <default>'xdg-open "%s"'</default>
+      <_summary>Default open command (use %s for arguments placeholder)</_summary>
+    </key>
+    <key name="date_format" type="s">
+      <default>'%x'</default>
+      <_summary>Default date format (see strftime(3) for details)</_summary>
+    </key>
+    <key name="uri_color" type="s">
+      <default>'blue'</default>
+      <_summary>Default color for URI in text-info dialog</_summary>
+    </key>
+    <key name="ignore_unknown_options" type="b">
+      <default>true</default>
+      <_summary>Ignore unknown command-line options</_summary>
+    </key>
+    <key name="max_tab" type="i">
+      <default>100</default>
+      <_summary>Maximum number of tabs in notebook dialog</_summary>
+    </key>
+  </schema>
+</schemalist>
+

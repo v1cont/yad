@@ -43,8 +43,6 @@
 
 G_BEGIN_DECLS
 
-#define YAD_SETTINGS_FILE "yad.conf"
-
 #define YAD_RESPONSE_OK         0
 #define YAD_RESPONSE_CANCEL     1
 #define YAD_RESPONSE_TIMEOUT   	70
@@ -520,29 +518,11 @@ typedef struct {
 } YadOptions;
 
 extern YadOptions options;
+extern GSettings *settings;
+extern GtkIconTheme *yad_icon_theme;
 
-/* SETTINGS */
-typedef struct {
-  guint width;
-  guint height;
-  guint timeout;
-  gchar *to_indicator;
-  gboolean show_remain;
-  gboolean combo_always_editable;
-  gboolean ignore_unknown;
-  GtkIconTheme *icon_theme;
-  GdkPixbuf *big_fallback_image;
-  GdkPixbuf *small_fallback_image;
-  gchar *term;
-  gchar *open_cmd;
-  gchar *date_format;
-  guint max_tab;
-
-  GtkPrintSettings *print_settings;
-  GtkPageSetup *page_setup;
-} YadSettings;
-
-extern YadSettings settings;
+extern GdkPixbuf *big_fallback_image;
+extern GdkPixbuf *small_fallback_image;
 
 /* TABS */
 typedef struct {

@@ -22,3 +22,4 @@ src/browser.c
 src/notebook.c
 src/pfd.c
 data/yad-icon-browser.desktop.in
+data/yad.gschema.xml.in

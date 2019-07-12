@@ -34,6 +34,12 @@
 #include "yad.h"
 
 YadOptions options;
+GSettings *settings;
+GtkIconTheme *yad_icon_theme;
+
+GdkPixbuf *big_fallback_image = NULL;
+GdkPixbuf *small_fallback_image = NULL;
+
 static GtkWidget *dialog = NULL;
 
 static gint ret = YAD_RESPONSE_ESC;
@@ -113,7 +119,7 @@ timeout_cb (gpointer data)
     {
       gdouble percent = ((gdouble) options.data.timeout - count) / (gdouble) options.data.timeout;
       gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (w), percent);
-      if (settings.show_remain)
+      if (g_settings_get_boolean (settings, "show_remain"))
         {
           gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout - count);
           gtk_progress_bar_set_text (GTK_PROGRESS_BAR (w), lbl);
@@ -386,7 +392,7 @@ create_dialog (void)
               gtk_box_pack_end (GTK_BOX (cbox), topb, FALSE, FALSE, 2);
             }
 
-          if (settings.show_remain)
+          if (g_settings_get_boolean (settings, "show_remain"))
             {
               gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout);
               gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (topb), TRUE);
@@ -656,7 +662,11 @@ main (gint argc, gchar ** argv)
 
   gtk_init (&argc, &argv);
   g_set_application_name ("YAD");
-  read_settings ();
+
+  settings = g_settings_new ("yad.settings");
+  
+  yad_icon_theme = gtk_icon_theme_get_default ();
+
   yad_options_init ();
 
   ctx = yad_create_context ();
@@ -708,13 +718,11 @@ main (gint argc, gchar ** argv)
 
   /* set default icons and icon theme */
   if (options.data.icon_theme)
-    gtk_icon_theme_set_custom_theme (settings.icon_theme, options.data.icon_theme);
+    gtk_icon_theme_set_custom_theme (yad_icon_theme, options.data.icon_theme);
   gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &w, &h);
-  settings.big_fallback_image =
-    gtk_icon_theme_load_icon (settings.icon_theme, "yad", MIN (w, h), GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+  big_fallback_image = gtk_icon_theme_load_icon (yad_icon_theme, "yad", MIN (w, h), GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
   gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
-  settings.small_fallback_image =
-    gtk_icon_theme_load_icon (settings.icon_theme, "yad", MIN (w, h), GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+  small_fallback_image = gtk_icon_theme_load_icon (yad_icon_theme, "yad", MIN (w, h), GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
 
   /* correct separators */
   str = g_strcompress (options.common_data.separator);

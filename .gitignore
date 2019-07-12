@@ -27,3 +27,5 @@ src/pfd
 stamp-h1
 *.tar.xz
 build.log
+*.gschema.xml
+*.gschema.valid

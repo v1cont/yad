@@ -30,8 +30,6 @@
 
 #include "yad.h"
 
-YadSettings settings;
-
 const YadStock yad_stock_items[] = {
   { "yad-about", N_("About"), "help-about" },
   { "yad-add",  N_("Add"), "list-add" },
@@ -53,124 +51,6 @@ const YadStock yad_stock_items[] = {
   { "yad-settings",  N_("Settings"), "gtk-preferences" },
   { "yad-yes",  N_("Yes"), "gtk-yes" }
 };
-
-void
-read_settings (void)
-{
-  GKeyFile *kf;
-  gchar *filename;
-
-  /* set defaults */
-  settings.width = settings.height = -1;
-  settings.timeout = 0;
-  settings.to_indicator = "none";
-  settings.show_remain = FALSE;
-  settings.combo_always_editable = FALSE;
-  settings.term = "xterm -e '%s'";
-  settings.open_cmd = "xdg-open '%s'";
-  settings.date_format = "%x";
-  settings.ignore_unknown = TRUE;
-  settings.max_tab = 100;
-
-  settings.print_settings = NULL;
-  settings.page_setup = NULL;
-
-  settings.icon_theme = gtk_icon_theme_get_default ();
-
-  filename = g_build_filename (g_get_user_config_dir (), YAD_SETTINGS_FILE, NULL);
-
-  if (g_file_test (filename, G_FILE_TEST_EXISTS))
-    {
-      kf = g_key_file_new ();
-
-      if (g_key_file_load_from_file (kf, filename, G_KEY_FILE_NONE, NULL))
-        {
-          if (g_key_file_has_key (kf, "General", "width", NULL))
-            settings.width = g_key_file_get_integer (kf, "General", "width", NULL);
-          if (g_key_file_has_key (kf, "General", "height", NULL))
-            settings.height = g_key_file_get_integer (kf, "General", "height", NULL);
-          if (g_key_file_has_key (kf, "General", "timeout", NULL))
-            settings.timeout = g_key_file_get_integer (kf, "General", "timeout", NULL);
-          if (g_key_file_has_key (kf, "General", "timeout_indicator", NULL))
-            settings.to_indicator = g_key_file_get_string (kf, "General", "timeout_indicator", NULL);
-          if (g_key_file_has_key (kf, "General", "show_remain", NULL))
-            settings.show_remain = g_key_file_get_boolean (kf, "General", "show_remain", NULL);
-          if (g_key_file_has_key (kf, "General", "combo_always_editable", NULL))
-            settings.combo_always_editable = g_key_file_get_boolean (kf, "General", "combo_always_editable", NULL);
-          if (g_key_file_has_key (kf, "General", "terminal", NULL))
-            settings.term = g_key_file_get_string (kf, "General", "terminal", NULL);
-          if (g_key_file_has_key (kf, "General", "open_command", NULL))
-            settings.open_cmd = g_key_file_get_string (kf, "General", "open_command", NULL);
-          if (g_key_file_has_key (kf, "General", "date_format", NULL))
-            settings.date_format = g_key_file_get_string (kf, "General", "date_format", NULL);
-          if (g_key_file_has_key (kf, "General", "ignore_unknown_options", NULL))
-            settings.ignore_unknown = g_key_file_get_boolean (kf, "General", "ignore_unknown_options", NULL);
-          if (g_key_file_has_key (kf, "General", "max_tab", NULL))
-            settings.max_tab = g_key_file_get_integer (kf, "General", "max_tab", NULL);
-
-          settings.print_settings = gtk_print_settings_new_from_key_file (kf, NULL, NULL);
-          settings.page_setup = gtk_page_setup_new_from_key_file (kf, NULL, NULL);
-        }
-
-      g_key_file_free (kf);
-    }
-  else
-    write_settings ();
-
-  g_free (filename);
-}
-
-void
-write_settings (void)
-{
-  GKeyFile *kf;
-  gchar *context;
-
-  kf = g_key_file_new ();
-
-  g_key_file_set_integer (kf, "General", "width", settings.width);
-  g_key_file_set_comment (kf, "General", "width", " Default dialog width", NULL);
-  g_key_file_set_integer (kf, "General", "height", settings.height);
-  g_key_file_set_comment (kf, "General", "height", " Default dialog height", NULL);
-  g_key_file_set_integer (kf, "General", "timeout", settings.timeout);
-  g_key_file_set_comment (kf, "General", "timeout", " Default timeout (0 for no timeout)", NULL);
-  g_key_file_set_string (kf, "General", "timeout_indicator", settings.to_indicator);
-  g_key_file_set_comment (kf, "General", "timeout_indicator", " Position of timeout indicator (top, bottom, left, right, none)", NULL);
-  g_key_file_set_boolean (kf, "General", "show_remain", settings.show_remain);
-  g_key_file_set_comment (kf, "General", "show_remain", " Show remain seconds in timeout indicator", NULL);
-  g_key_file_set_boolean (kf, "General", "combo_always_editable", settings.combo_always_editable);
-  g_key_file_set_comment (kf, "General", "combo_always_editable", " Combo-box in entry dialog is always editable", NULL);
-  g_key_file_set_string (kf, "General", "terminal", settings.term);
-  g_key_file_set_comment (kf, "General", "terminal", " Default terminal command (use %s for arguments placeholder)", NULL);
-  g_key_file_set_string (kf, "General", "open_command", settings.open_cmd);
-  g_key_file_set_comment (kf, "General", "open_command", " Default open command (use %s for arguments placeholder)", NULL);
-  g_key_file_set_string (kf, "General", "date_format", settings.date_format);
-  g_key_file_set_comment (kf, "General", "date_format", " Default date format (see strftime(3) for details)", NULL);
-  g_key_file_set_boolean (kf, "General", "ignore_unknown_options", settings.ignore_unknown);
-  g_key_file_set_comment (kf, "General", "ignore_unknown_options", " Ignore unknown command-line options", NULL);
-  g_key_file_set_integer (kf, "General", "max_tab", settings.max_tab);
-  g_key_file_set_comment (kf, "General", "max_tab", " Maximum number of tabs in notebook", NULL);
-
-  if (settings.print_settings)
-    gtk_print_settings_to_key_file (settings.print_settings, kf, NULL);
-  if (settings.page_setup)
-    gtk_page_setup_to_key_file (settings.page_setup, kf, NULL);
-
-  context = g_key_file_to_data (kf, NULL, NULL);
-
-  g_key_file_free (kf);
-
-  if (g_mkdir_with_parents (g_get_user_config_dir (), 0755) != -1)
-    {
-      gchar *filename = g_build_filename (g_get_user_config_dir (), YAD_SETTINGS_FILE, NULL);
-      g_file_set_contents (filename, context, -1, NULL);
-      g_free (filename);
-    }
-  else
-    g_printerr ("yad: cannot write settings file: %s\n", strerror (errno));
-
-  g_free (context);
-}
 
 gboolean
 stock_lookup (gchar *key, YadStock *it)
@@ -218,14 +98,14 @@ get_pixbuf (gchar * name, YadIconSize size, gboolean force)
         }
     }
   else
-    pb = gtk_icon_theme_load_icon (settings.icon_theme, name, MIN (w, h), GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+    pb = gtk_icon_theme_load_icon (yad_icon_theme, name, MIN (w, h), GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
 
   if (!pb)
     {
       if (size == YAD_BIG_ICON)
-        pb = g_object_ref (settings.big_fallback_image);
+        pb = g_object_ref (big_fallback_image);
       else
-        pb = g_object_ref (settings.small_fallback_image);
+        pb = g_object_ref (small_fallback_image);
     }
 
   /* force scaling image to specific size */
@@ -357,12 +237,13 @@ YadNTabs *
 get_tabs (key_t key, gboolean create)
 {
   YadNTabs *t = NULL;
-  int shmid, i;
+  int shmid, i, max_tab;
 
   /* get shared memory */
+  max_tab = g_settings_get_int (settings, "max_tab") + 1;
   if (create)
     {
-      if ((shmid = shmget (key, (settings.max_tab + 1) * sizeof (YadNTabs), IPC_CREAT | IPC_EXCL | 0644)) == -1)
+      if ((shmid = shmget (key, max_tab * sizeof (YadNTabs), IPC_CREAT | IPC_EXCL | 0644)) == -1)
         {
           g_printerr ("yad: cannot create shared memory for key %d: %s\n", key, strerror (errno));
           return NULL;
@@ -370,7 +251,7 @@ get_tabs (key_t key, gboolean create)
     }
   else
     {
-      if ((shmid = shmget (key, (settings.max_tab + 1) * sizeof (YadNTabs), 0)) == -1)
+      if ((shmid = shmget (key, max_tab * sizeof (YadNTabs), 0)) == -1)
         {
           if (errno != ENOENT)
             g_printerr ("yad: cannot get shared memory for key %d: %s\n", key, strerror (errno));
@@ -388,7 +269,7 @@ get_tabs (key_t key, gboolean create)
   /* initialize memory */
   if (create)
     {
-      for (i = 0; i < settings.max_tab + 1; i++)
+      for (i = 0; i < max_tab; i++)
         {
           t[i].pid = -1;
           t[i].xid = 0;

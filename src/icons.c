@@ -346,7 +346,7 @@ parse_desktop_file (gchar * filename)
               gchar *url = g_key_file_get_string (kf, "Desktop Entry", "URL", NULL);
               if (url)
                 {
-                  ent->command = g_strdup_printf (settings.open_cmd, url);
+                  ent->command = g_strdup_printf (g_settings_get_string (settings, "open_command"), url);
                   g_free (url);
                 }
             }
