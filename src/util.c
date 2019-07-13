@@ -66,7 +66,7 @@ stock_lookup (gchar *key, YadStock *it)
       if (strcmp (key, yad_stock_items[i].key) == 0)
         {
           it->key = yad_stock_items[i].key;
-          it->label = yad_stock_items[i].label;
+          it->label = _(yad_stock_items[i].label);
           it->icon = yad_stock_items[i].icon;
           found = TRUE;
           break;
