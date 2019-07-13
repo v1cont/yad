@@ -1582,7 +1582,7 @@ yad_options_init (void)
   options.icons_data.compact = FALSE;
   options.icons_data.generic = FALSE;
   options.icons_data.width = -1;
-  options.icons_data.term = g_settings_get_string (settings, "term");
+  options.icons_data.term = g_settings_get_string (settings, "terminal");
   options.icons_data.sort_by_name = FALSE;
   options.icons_data.descend = FALSE;
   options.icons_data.single_click = FALSE;
