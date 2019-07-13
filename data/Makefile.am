@@ -7,8 +7,8 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 endif
 
-gsettings_in_file = yad.gschema.xml.in
-gsettings_SCHEMAS = $(gsettings_in_file:.xml.in=.xml)
+gsettings_in_files = yad.gschema.xml.in
+gsettings_SCHEMAS = $(gsettings_in_files:.xml.in=.xml)
 @INTLTOOL_XML_NOMERGE_RULE@
 @GSETTINGS_RULES@
 
