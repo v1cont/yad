@@ -375,28 +375,31 @@ fill_buffer_from_file ()
       return;
     }
 
-    gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (text_buffer), &iter, 0);
+  if (len <= 0)
+    return;
 
-    if (!g_utf8_validate (buf, -1, NULL))
-      {
-        gchar *utftext =
-          g_convert_with_fallback (buf, -1, "UTF-8", "ISO-8859-1", NULL, NULL, NULL, NULL);
-        if (options.text_data.formatted && !options.common_data.editable)
-          gtk_text_buffer_insert_markup (GTK_TEXT_BUFFER (text_buffer), &end, utftext, -1);
-        else
-          gtk_text_buffer_insert (GTK_TEXT_BUFFER (text_buffer), &end, utftext, -1);
-        g_free (utftext);
-      }
-    else
-      {
-        if (options.text_data.formatted && !options.common_data.editable)
-          gtk_text_buffer_insert_markup (GTK_TEXT_BUFFER (text_buffer), &end, buf, -1);
-        else
-          gtk_text_buffer_insert (GTK_TEXT_BUFFER (text_buffer), &end, buf, -1);
-      }
+  gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (text_buffer), &iter, 0);
 
-    /* We had a newline in the buffer to begin with. (The buffer always contains
-     * a newline, so we delete to the end of the buffer to clean up.
+  if (!g_utf8_validate (buf, -1, NULL))
+    {
+      gchar *utftext =
+        g_convert_with_fallback (buf, -1, "UTF-8", "ISO-8859-1", NULL, NULL, NULL, NULL);
+      if (options.text_data.formatted && !options.common_data.editable)
+        gtk_text_buffer_insert_markup (GTK_TEXT_BUFFER (text_buffer), &end, utftext, -1);
+      else
+        gtk_text_buffer_insert (GTK_TEXT_BUFFER (text_buffer), &end, utftext, -1);
+      g_free (utftext);
+    }
+  else
+    {
+      if (options.text_data.formatted && !options.common_data.editable)
+        gtk_text_buffer_insert_markup (GTK_TEXT_BUFFER (text_buffer), &end, buf, -1);
+      else
+        gtk_text_buffer_insert (GTK_TEXT_BUFFER (text_buffer), &end, buf, -1);
+    }
+
+  /* We had a newline in the buffer to begin with. (The buffer always contains
+   * a newline, so we delete to the end of the buffer to clean up.
    */
 
   gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (text_buffer), &end);
