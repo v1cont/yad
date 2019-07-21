@@ -240,7 +240,7 @@ get_tabs (key_t key, gboolean create)
   int shmid, i, max_tab;
 
   /* get shared memory */
-  max_tab = g_settings_get_int (settings, "max_tab") + 1;
+  max_tab = g_settings_get_int (settings, "max-tab") + 1;
   if (create)
     {
       if ((shmid = shmget (key, max_tab * sizeof (YadNTabs), IPC_CREAT | IPC_EXCL | 0644)) == -1)

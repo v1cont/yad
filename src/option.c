@@ -1491,7 +1491,7 @@ yad_options_init (void)
   options.common_data.editable = FALSE;
   options.common_data.tail = FALSE;
   options.common_data.command = NULL;
-  options.common_data.date_format = g_settings_get_string (settings, "date_format");
+  options.common_data.date_format = g_settings_get_string (settings, "date-format");
   options.common_data.float_precision = 3;
   options.common_data.vertical = FALSE;
   options.common_data.align = 0.0;
@@ -1680,7 +1680,7 @@ yad_options_init (void)
   options.text_data.justify = GTK_JUSTIFY_LEFT;
   options.text_data.margins = 0;
   options.text_data.hide_cursor = TRUE;
-  options.text_data.uri_color = g_settings_get_string (settings, "uri_color");
+  options.text_data.uri_color = g_settings_get_string (settings, "uri-color");
   options.text_data.formatted = FALSE;
 
 #ifdef HAVE_SOURCEVIEW
@@ -1856,7 +1856,7 @@ yad_create_context (void)
   g_option_context_add_group (tmp_ctx, a_group);
 
   g_option_context_set_help_enabled (tmp_ctx, TRUE);
-  g_option_context_set_ignore_unknown_options (tmp_ctx, g_settings_get_boolean (settings, "ignore_unknown_options"));
+  g_option_context_set_ignore_unknown_options (tmp_ctx, g_settings_get_boolean (settings, "ignore-unknown-options"));
 
   return tmp_ctx;
 }

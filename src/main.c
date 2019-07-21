@@ -120,7 +120,7 @@ timeout_cb (gpointer data)
     {
       gdouble percent = ((gdouble) options.data.timeout - count) / (gdouble) options.data.timeout;
       gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (w), percent);
-      if (g_settings_get_boolean (settings, "show_remain"))
+      if (g_settings_get_boolean (settings, "show-remain"))
         {
           gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout - count);
           gtk_progress_bar_set_text (GTK_PROGRESS_BAR (w), lbl);
@@ -394,7 +394,7 @@ create_dialog (void)
               gtk_box_pack_end (GTK_BOX (cbox), topb, FALSE, FALSE, 2);
             }
 
-          if (g_settings_get_boolean (settings, "show_remain"))
+          if (g_settings_get_boolean (settings, "show-remain"))
             {
               gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout);
               gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (topb), TRUE);
