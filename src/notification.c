@@ -115,7 +115,9 @@ set_icon (void)
 
   if (icon == NULL)
     {
+      G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
       gtk_status_icon_set_from_icon_name (status_icon, "yad");
+      G_GNUC_END_IGNORE_DEPRECATIONS;
       return;
     }
 
@@ -131,14 +133,24 @@ set_icon (void)
         }
       if (pixbuf)
         {
+          G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
           gtk_status_icon_set_from_pixbuf (status_icon, pixbuf);
+          G_GNUC_END_IGNORE_DEPRECATIONS;
           g_object_unref (pixbuf);
         }
       else
-        gtk_status_icon_set_from_icon_name (status_icon, "yad");
+        {
+          G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
+          gtk_status_icon_set_from_icon_name (status_icon, "yad");
+          G_GNUC_END_IGNORE_DEPRECATIONS;
+        }
     }
   else
-    gtk_status_icon_set_from_icon_name (status_icon, icon);
+    {
+      G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
+      gtk_status_icon_set_from_icon_name (status_icon, icon);
+      G_GNUC_END_IGNORE_DEPRECATIONS;
+    }
 }
 
 static gboolean
@@ -301,18 +313,22 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
               g_free (icon);
               icon = g_strdup (value);
 
+              G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
               if (gtk_status_icon_get_visible (status_icon) && gtk_status_icon_is_embedded (status_icon))
                 set_icon ();
+              G_GNUC_END_IGNORE_DEPRECATIONS;
             }
           else if (!g_ascii_strcasecmp (command, "tooltip"))
             {
               if (g_utf8_validate (value, -1, NULL))
                 {
                   gchar *message = g_strcompress (value);
+                  G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
                   if (!options.data.no_markup)
                     gtk_status_icon_set_tooltip_markup (status_icon, message);
                   else
                     gtk_status_icon_set_tooltip_text (status_icon, message);
+                  G_GNUC_END_IGNORE_DEPRECATIONS;
                   g_free (message);
                 }
               else
@@ -320,10 +336,12 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
             }
           else if (!g_ascii_strcasecmp (command, "visible"))
             {
+              G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
               if (!g_ascii_strcasecmp (value, "false"))
                 gtk_status_icon_set_visible (status_icon, FALSE);
               else
                 gtk_status_icon_set_visible (status_icon, TRUE);
+              G_GNUC_END_IGNORE_DEPRECATIONS;
             }
           else if (!g_ascii_strcasecmp (command, "action"))
             {
@@ -366,8 +384,11 @@ yad_notification_run ()
 {
   GIOChannel *channel = NULL;
 
+  G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
   status_icon = gtk_status_icon_new ();
+  G_GNUC_END_IGNORE_DEPRECATIONS;
 
+  G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
   if (options.data.dialog_text)
     {
       if (!options.data.no_markup)
@@ -377,6 +398,7 @@ yad_notification_run ()
     }
   else
     gtk_status_icon_set_tooltip_text (status_icon, _("Yad notification"));
+  G_GNUC_END_IGNORE_DEPRECATIONS;
 
   if (options.data.dialog_image)
     icon = g_strdup (options.data.dialog_image);
@@ -407,7 +429,9 @@ yad_notification_run ()
     }
 
   /* Show icon and wait */
+  G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
   gtk_status_icon_set_visible (status_icon, !options.notification_data.hidden);
+  G_GNUC_END_IGNORE_DEPRECATIONS;
 
   if (options.data.timeout > 0)
     g_timeout_add_seconds (options.data.timeout, (GSourceFunc) timeout_cb, NULL);
