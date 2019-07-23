@@ -37,6 +37,9 @@ typedef struct {
   GHashTable *icons;
 } IconBrowserData;
 
+static gboolean show_regular = TRUE;
+static gboolean show_symbolic = FALSE;
+
 static gboolean
 key_press_cb (GtkWidget * w, GdkEventKey * ev, gpointer data)
 {
@@ -65,8 +68,22 @@ load_icon_cat (IconBrowserData * data, gchar * cat)
     {
       GtkTreeIter iter;
       GdkPixbuf *pb, *spb;
+      GtkIconInfo *info;
 
-      spb = pb = gtk_icon_theme_load_icon (data->theme, i->data, size, GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+      info = gtk_icon_theme_lookup_icon (data->theme, i->data, size, 0);
+      if (gtk_icon_info_is_symbolic (info))
+        {
+          if (!show_symbolic)
+            continue;
+        }
+      else
+        {
+          if (!show_regular)
+            continue;
+        }
+      g_object_unref (info);
+
+      spb = pb = gtk_icon_theme_load_icon (data->theme, i->data, size, 0, NULL);
 
       if (pb)
         {
@@ -85,9 +102,8 @@ load_icon_cat (IconBrowserData * data, gchar * cat)
 
       if (pb)
         g_object_unref (pb);
-      g_free (i->data);
     }
-  g_list_free (icons);
+  g_list_free_full (icons, g_free);
 
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store), 1, GTK_SORT_ASCENDING);
 
@@ -176,10 +192,13 @@ main (gint argc, gchar * argv[])
   GtkTreeViewColumn *col;
   GtkCellRenderer *r;
   GtkWidget *w, *p, *box, *t;
+  gboolean all = FALSE, symbolic = FALSE;
 
   GOptionEntry entrs[] = {
-    {G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &themes, NULL, NULL},
-    {NULL}
+    { "all", 'a', 0, G_OPTION_ARG_NONE, &all, _("Show all icons"), NULL },
+    { "symbolic", 's', 0, G_OPTION_ARG_NONE, &symbolic, _("Show only symbolic icons"), NULL },
+    { G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &themes, NULL, NULL },
+    { NULL }
   };
 
   data = g_new0 (IconBrowserData, 1);
@@ -194,6 +213,17 @@ main (gint argc, gchar * argv[])
 
   /* initialize GTK+ and parse the command line arguments */
   gtk_init_with_args (&argc, &argv, _("- Icon browser"), entrs, GETTEXT_PACKAGE, NULL);
+
+  if (all)
+    {
+      show_regular = TRUE;
+      show_symbolic = TRUE;
+    }
+  else if (symbolic)
+    {
+      show_regular = FALSE;
+      show_symbolic = TRUE;
+    }
 
   /* load icon theme */
   if (themes && themes[0])

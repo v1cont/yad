@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-21 08:51+0300\n"
+"POT-Creation-Date: 2019-07-23 14:11+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -176,22 +176,22 @@ msgstr "Не можу розібрати YAD_OPTIONS: %s\n"
 msgid "Unable to parse command line: %s\n"
 msgstr "Не вдається розібрати командний рядок: %s\n"
 
-#: ../src/notification.c:129
+#: ../src/notification.c:131
 #, c-format
 msgid "Could not load notification icon '%s': %s\n"
 msgstr "Не вдається завантажити іконку '%s': %s\n"
 
-#: ../src/notification.c:319
+#: ../src/notification.c:335
 #, c-format
 msgid "Invalid UTF-8 in tooltip!\n"
 msgstr "Неправильна послідовність UTF-8 у підказці!\n"
 
-#: ../src/notification.c:345
+#: ../src/notification.c:363
 #, c-format
 msgid "Unknown command '%s'\n"
 msgstr "Невідома команда '%s'\n"
 
-#: ../src/notification.c:379
+#: ../src/notification.c:400
 msgid "Yad notification"
 msgstr "Діалог повідомлень"
 
@@ -1782,40 +1782,48 @@ msgstr "Налаштування"
 msgid "Yes"
 msgstr "Так"
 
-#: ../src/browser.c:128
+#: ../src/browser.c:144
 msgid "scalable "
 msgstr "масштабований "
 
-#: ../src/browser.c:138
+#: ../src/browser.c:154
 msgid "built-in"
 msgstr "вбудований"
 
+#: ../src/browser.c:198
+msgid "Show all icons"
+msgstr "Показувати всі іконки"
+
+#: ../src/browser.c:199
+msgid "Show only symbolic icons"
+msgstr "Показувати тільки символьні іконки"
+
 #. initialize GTK+ and parse the command line arguments
-#: ../src/browser.c:196
+#: ../src/browser.c:215
 msgid "- Icon browser"
 msgstr "- Навігатор іконок"
 
-#: ../src/browser.c:209
+#: ../src/browser.c:239
 msgid "Icon browser"
 msgstr "Навігатор іконок"
 
-#: ../src/browser.c:229
+#: ../src/browser.c:259
 msgid "<b>Name:</b>"
 msgstr "<b>Назва:</b>"
 
-#: ../src/browser.c:240
+#: ../src/browser.c:270
 msgid "<b>Sizes:</b>"
 msgstr "<b>Розміри:</b>"
 
-#: ../src/browser.c:251
+#: ../src/browser.c:281
 msgid "<b>Filename:</b>"
 msgstr "<b>Назва файлу:</b>"
 
-#: ../src/browser.c:282
+#: ../src/browser.c:312
 msgid "Category"
 msgstr "Категорія"
 
-#: ../src/browser.c:313
+#: ../src/browser.c:343
 msgid "Icons"
 msgstr "Іконки"
 
