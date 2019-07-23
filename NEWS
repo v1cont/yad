@@ -1,3 +1,10 @@
+Version 2.0
+    - migrate to gsettings from config file
+    - add --keep-icon-size option
+    - icon browser shows only regular icons by default. this behavior can be changed from command line
+    - fix segfailt in text-info dialog when empty file is specified
+    - fix initial selection in selectable labels
+
 Version 1.0
     - completely removed support of gtk+-2.0
     - minimum required gtk+ version bump to 3.22.0
