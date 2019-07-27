@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-23 14:11+0300\n"
+"POT-Creation-Date: 2019-07-27 13:24+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -195,19 +195,23 @@ msgstr "Неизвестная команда '%s'\n"
 msgid "Yad notification"
 msgstr "Диалог уведомлений"
 
-#: ../src/list.c:898
+#: ../src/list.c:966
 msgid "Add row"
 msgstr "Добавить строку"
 
-#: ../src/list.c:903
+#: ../src/list.c:971
 msgid "Delete row"
 msgstr "Удалить строку"
 
-#: ../src/list.c:908
+#: ../src/list.c:978
+msgid "Edit row"
+msgstr "Редактировать строку"
+
+#: ../src/list.c:984
 msgid "Duplicate row"
 msgstr "Скопировать строку"
 
-#: ../src/list.c:1051
+#: ../src/list.c:1125
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Не заданы заголовоки колонок для диалога со списком\n"
@@ -986,8 +990,8 @@ msgid "Set select action"
 msgstr "Действие при выделении строки"
 
 #: ../src/option.c:451
-msgid "Set add action"
-msgstr "Действие при добавлении строки"
+msgid "Set row action"
+msgstr "Действие над строкой"
 
 #: ../src/option.c:453
 msgid "Use regex in search"

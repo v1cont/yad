@@ -345,7 +345,7 @@ typedef struct {
   gchar *ellipsize_cols;
   gchar *dclick_action;
   gchar *select_action;
-  gchar *add_action;
+  gchar *row_action;
   gboolean regex_search;
   gboolean clickable;
   gboolean no_selection;
