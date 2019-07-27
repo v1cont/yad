@@ -27,6 +27,7 @@
 static GtkWidget *list_view;
 
 static gint fore_col, back_col, font_col;
+static guint n_cols = 0;
 
 static gulong select_hndl = 0;
 
@@ -200,13 +201,13 @@ regex_search (GtkTreeModel *model, gint col, const gchar *key, GtkTreeIter *iter
 }
 
 static GtkTreeModel *
-create_model (gint n_columns)
+create_model ()
 {
   GtkListStore *store;
   GType *ctypes;
   gint i;
 
-  ctypes = g_new0 (GType, n_columns);
+  ctypes = g_new0 (GType, n_cols);
 
   if (options.list_data.checkbox)
     {
@@ -219,7 +220,7 @@ create_model (gint n_columns)
       col->type = YAD_COLUMN_RADIO;
     }
 
-  for (i = 0; i < n_columns; i++)
+  for (i = 0; i < n_cols; i++)
     {
       YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, i);
 
@@ -258,7 +259,7 @@ create_model (gint n_columns)
         }
     }
 
-  store = gtk_list_store_newv (n_columns, ctypes);
+  store = gtk_list_store_newv (n_cols, ctypes);
 
   return GTK_TREE_MODEL (store);
 }
@@ -296,13 +297,13 @@ size_col_format (GtkTreeViewColumn *col, GtkCellRenderer *cell, GtkTreeModel *mo
 }
 
 static void
-add_columns (gint n_columns)
+add_columns ()
 {
   gint i;
   GtkCellRenderer *renderer;
   GtkTreeViewColumn *column;
 
-  for (i = 0; i < n_columns; i++)
+  for (i = 0; i < n_cols; i++)
     {
       YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, i);
 
@@ -405,7 +406,7 @@ add_columns (gint n_columns)
 
   if (options.list_data.checkbox && !options.list_data.search_column)
     options.list_data.search_column += 1;
-  if (options.list_data.search_column <= n_columns)
+  if (options.list_data.search_column <= n_cols)
     {
       options.list_data.search_column -= 1;
       gtk_tree_view_set_search_column (GTK_TREE_VIEW (list_view), options.list_data.search_column);
@@ -510,12 +511,11 @@ cell_get_data (GtkTreeIter *it, guint num)
 }
 
 static gboolean
-handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
+handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
 {
   static GtkTreeIter iter;
   static gint column_count = 0;
   static gint row_count = 0;
-  gint n_columns = GPOINTER_TO_INT (data);
   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
 
   if ((condition == G_IO_IN) || (condition == G_IO_IN + G_IO_HUP))
@@ -568,7 +568,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 
           if (row_count == 0 && column_count == 0)
             yad_list_add_row (GTK_LIST_STORE (model), &iter);
-          else if (column_count == n_columns)
+          else if (column_count == n_cols)
             {
               /* We're starting a new row */
               column_count = 0;
@@ -598,7 +598,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 }
 
 static void
-fill_data (gint n_columns)
+fill_data ()
 {
   GtkTreeIter iter;
   GtkListStore *model = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (list_view)));
@@ -616,7 +616,7 @@ fill_data (gint n_columns)
           gint j;
 
           yad_list_add_row (model, &iter);
-          for (j = 0; j < n_columns; j++, i++)
+          for (j = 0; j < n_cols; j++, i++)
             {
               if (args[i] == NULL)
                 break;
@@ -633,12 +633,38 @@ fill_data (gint n_columns)
       channel = g_io_channel_unix_new (0);
       g_io_channel_set_encoding (channel, NULL, NULL);
       g_io_channel_set_flags (channel, G_IO_FLAG_NONBLOCK, NULL);
-      g_io_add_watch (channel, G_IO_IN | G_IO_HUP, handle_stdin, GINT_TO_POINTER (n_columns));
+      g_io_add_watch (channel, G_IO_IN | G_IO_HUP, handle_stdin, NULL);
     }
 }
 
+static gchar *
+get_data_as_string (GtkTreeIter *iter)
+{
+  GString *str;
+  gchar *res;
+  guint i;
+
+  str = g_string_new (NULL);
+
+  for (i = 0; i < n_cols; i++)
+    {
+      gchar *val = cell_get_data (iter, i);
+      if (val)
+        {
+          g_string_append_printf (str, "%s ", val);
+          g_free (val);
+        }
+    }
+
+  str->str[str->len-1] = '\0';
+  res = str->str;
+  g_string_free (str, FALSE);
+
+  return res;
+}
+
 static void
-double_click_cb (GtkTreeView * view, GtkTreePath * path, GtkTreeViewColumn * column, gpointer data)
+double_click_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *column, gpointer data)
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
@@ -647,28 +673,12 @@ double_click_cb (GtkTreeView * view, GtkTreePath * path, GtkTreeViewColumn * col
 
   if (options.list_data.dclick_action)
     {
-      gchar *cmd;
-      GString *args;
-      guint n_cols;
-
-      args = g_string_new ("");
-
-      n_cols = gtk_tree_model_get_n_columns (model);
+      gchar *cmd, *args = NULL;
 
       if (gtk_tree_model_get_iter (model, &iter, path))
-        {
-          gint i;
-
-          for (i = 0; i < n_cols; i++)
-            {
-              gchar *val = cell_get_data (&iter, i);
-              if (val)
-                {
-                  g_string_append_printf (args, " %s", val);
-                  g_free (val);
-                }
-            }
-        }
+        args = get_data_as_string (&iter);
+      else
+        args = g_strdup ("");
 
       if (g_strstr_len (options.list_data.dclick_action, -1, "%s"))
         {
@@ -676,11 +686,11 @@ double_click_cb (GtkTreeView * view, GtkTreePath * path, GtkTreeViewColumn * col
 
           if (!regex)
             regex = g_regex_new ("\%s", G_REGEX_OPTIMIZE, 0, NULL);
-          cmd = g_regex_replace_literal (regex, options.list_data.dclick_action, -1, 0, args->str, 0, NULL);
+          cmd = g_regex_replace_literal (regex, options.list_data.dclick_action, -1, 0, args, 0, NULL);
         }
       else
-        cmd = g_strdup_printf ("%s %s", options.list_data.dclick_action, args->str);
-      g_string_free (args, TRUE);
+        cmd = g_strdup_printf ("%s %s", options.list_data.dclick_action, args);
+      g_free (args);
 
       if (cmd[0] == '@')
         {
@@ -740,25 +750,14 @@ select_cb (GtkTreeSelection *sel, gpointer data)
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
-  gchar *cmd;
-  GString *args;
-  guint i, n_cols;
+  gchar *cmd, *args;
 
   if (!gtk_tree_selection_get_selected (sel, &model, &iter))
     return;
 
-  args = g_string_new ("");
-  n_cols = gtk_tree_model_get_n_columns (model);
-
-  for (i = 0; i < n_cols; i++)
-    {
-      gchar *val = cell_get_data (&iter, i);
-      if (val)
-        {
-          g_string_append_printf (args, " %s", val);
-          g_free (val);
-        }
-    }
+  args = get_data_as_string (&iter);
+  if (!args)
+    args = g_strdup ("");
 
   if (g_strstr_len (options.list_data.select_action, -1, "%s"))
     {
@@ -766,11 +765,11 @@ select_cb (GtkTreeSelection *sel, gpointer data)
 
       if (!regex)
         regex = g_regex_new ("\%s", G_REGEX_OPTIMIZE, 0, NULL);
-      cmd = g_regex_replace_literal (regex, options.list_data.select_action, -1, 0, args->str, 0, NULL);
+      cmd = g_regex_replace_literal (regex, options.list_data.select_action, -1, 0, args, 0, NULL);
     }
   else
-    cmd = g_strdup_printf ("%s %s", options.list_data.select_action, args->str);
-  g_string_free (args, TRUE);
+    cmd = g_strdup_printf ("%s %s", options.list_data.select_action, args);
+  g_free (args);
 
   g_spawn_command_line_async (cmd, NULL);
 
@@ -778,7 +777,7 @@ select_cb (GtkTreeSelection *sel, gpointer data)
 }
 
 static void
-add_row_cb (GtkMenuItem * item, gpointer data)
+add_row_cb (GtkMenuItem *item, gpointer data)
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
@@ -800,7 +799,7 @@ add_row_cb (GtkMenuItem * item, gpointer data)
       g_spawn_command_line_sync (options.list_data.add_action, &out, NULL, &exit, NULL);
       if (exit == 0)
         {
-          guint i, n_cols = gtk_tree_model_get_n_columns (model);
+          guint i;
           gchar **lines = g_strsplit (out, "\n", 0);
 
           for (i = 0; i < n_cols; i++)
@@ -817,7 +816,7 @@ add_row_cb (GtkMenuItem * item, gpointer data)
 }
 
 static void
-del_row_cb (GtkMenuItem * item, gpointer data)
+del_row_cb (GtkMenuItem *item, gpointer data)
 {
   GtkTreeIter iter;
   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
@@ -828,7 +827,7 @@ del_row_cb (GtkMenuItem * item, gpointer data)
 }
 
 static void
-copy_row_cb (GtkMenuItem * item, gpointer data)
+copy_row_cb (GtkMenuItem *item, gpointer data)
 {
   GtkTreeIter iter, new_iter;
   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
@@ -836,14 +835,11 @@ copy_row_cb (GtkMenuItem * item, gpointer data)
 
   if (gtk_tree_selection_get_selected (sel, NULL, &iter))
     {
-      gint i, n_columns;
-
-      /* decrease by 1 due to last ellipsize column */
-      n_columns = gtk_tree_model_get_n_columns (model);
+      gint i;
 
       gtk_list_store_insert_after (GTK_LIST_STORE (model), &new_iter, &iter);
 
-      for (i = 0; i < n_columns; i++)
+      for (i = 0; i < n_cols; i++)
         {
           GdkPixbuf *pb;
           gchar *tv;
@@ -883,7 +879,7 @@ copy_row_cb (GtkMenuItem * item, gpointer data)
 }
 
 static gboolean
-popup_menu_cb (GtkWidget * w, GdkEventButton * ev, gpointer data)
+popup_menu_cb (GtkWidget *w, GdkEventButton *ev, gpointer data)
 {
   static GtkWidget *menu = NULL;
   if (ev->button == 3)
@@ -918,7 +914,7 @@ popup_menu_cb (GtkWidget * w, GdkEventButton * ev, gpointer data)
 }
 
 static gboolean
-row_sep_func (GtkTreeModel * m, GtkTreeIter * it, gpointer data)
+row_sep_func (GtkTreeModel *m, GtkTreeIter *it, gpointer data)
 {
   gchar *name;
 
@@ -1036,17 +1032,15 @@ parse_cols_props ()
 }
 
 GtkWidget *
-list_create_widget (GtkWidget * dlg)
+list_create_widget (GtkWidget *dlg)
 {
   GtkWidget *w;
   GtkTreeModel *model;
-  gint n_columns;
 
   fore_col = back_col = font_col = -1;
 
-  n_columns = g_slist_length (options.list_data.columns);
-
-  if (n_columns == 0)
+  n_cols = g_slist_length (options.list_data.columns);
+  if (n_cols == 0)
     {
       g_printerr (_("No column titles specified for List dialog.\n"));
       return NULL;
@@ -1059,7 +1053,7 @@ list_create_widget (GtkWidget * dlg)
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (w), GTK_SHADOW_ETCHED_IN);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w), options.hscroll_policy, options.vscroll_policy);
 
-  model = create_model (n_columns);
+  model = create_model ();
 
   list_view = gtk_tree_view_new_with_model (model);
   gtk_widget_set_name (list_view, "yad-list-widget");
@@ -1070,7 +1064,7 @@ list_create_widget (GtkWidget * dlg)
 
   gtk_container_add (GTK_CONTAINER (w), list_view);
 
-  add_columns (n_columns);
+  add_columns ();
 
   /* add popup menu */
   if (options.common_data.editable)
@@ -1123,13 +1117,13 @@ list_create_widget (GtkWidget * dlg)
     }
 
   /* load data */
-  fill_data (n_columns);
+  fill_data ();
 
   return w;
 }
 
 static void
-print_col (GtkTreeModel * model, GtkTreeIter * iter, gint num)
+print_col (GtkTreeModel *model, GtkTreeIter *iter, gint num)
 {
   YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, num);
 
@@ -1195,12 +1189,11 @@ print_col (GtkTreeModel * model, GtkTreeIter * iter, gint num)
 }
 
 static void
-print_selected (GtkTreeModel * model, GtkTreePath * path, GtkTreeIter * iter, gpointer data)
+print_selected (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
-  gint i, n_cols, col;
+  gint i,col;
 
   col = options.list_data.print_column;
-  n_cols = gtk_tree_model_get_n_columns (model);
 
   if (col && col <= n_cols)
     print_col (model, iter, col - 1);
@@ -1213,10 +1206,10 @@ print_selected (GtkTreeModel * model, GtkTreePath * path, GtkTreeIter * iter, gp
 }
 
 static void
-print_all (GtkTreeModel * model)
+print_all (GtkTreeModel *model)
 {
   GtkTreeIter iter;
-  gint i, n_cols = gtk_tree_model_get_n_columns (model);
+  gint i;
 
   if (gtk_tree_model_get_iter_first (model, &iter))
     {
@@ -1279,7 +1272,7 @@ list_print_result (void)
                   if (chk)
                     {
                       gint i;
-                      for (i = 0; i < gtk_tree_model_get_n_columns (model); i++)
+                      for (i = 0; i < n_cols; i++)
                         print_col (model, &iter, i);
                       g_printf ("\n");
                     }
