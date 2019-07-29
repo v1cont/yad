@@ -12,6 +12,10 @@
       <default>5</default>
       <_summary>Borders around dialog</_summary>
     </key>
+    <key name="show-remain" type="b">
+      <default>false</default>
+      <_summary>Show remaining time and percentage in timeout progress bar</_summary>
+    </key>
     <key name="combo-always-editable" type="b">
       <default>false</default>
       <_summary>Combo-box in entry dialog is always editable</_summary>

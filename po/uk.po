@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-27 13:24+0300\n"
+"POT-Creation-Date: 2019-07-29 09:48+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -1883,35 +1883,39 @@ msgid "Borders around dialog"
 msgstr "Ширина рамки діалогу"
 
 #: ../data/yad.gschema.xml.in.h:4
+msgid "Show remaining time and percentage in timeout progress bar"
+msgstr "Відображати залишок часу та проценти у індикаторі часу що залишився"
+
+#: ../data/yad.gschema.xml.in.h:5
 msgid "Combo-box in entry dialog is always editable"
 msgstr "Поле вибору завжди можна редагувати"
 
-#: ../data/yad.gschema.xml.in.h:6
+#: ../data/yad.gschema.xml.in.h:7
 #, no-c-format
 msgid "Default terminal command (use %s for arguments placeholder)"
 msgstr ""
 "Команда термінала за умовчанням (%s використовується для розміщення "
 "аргументів)"
 
-#: ../data/yad.gschema.xml.in.h:8
+#: ../data/yad.gschema.xml.in.h:9
 #, no-c-format
 msgid "Default open command (use %s for arguments placeholder)"
 msgstr ""
 "Команда відкриття за умовчанням (%s використовується для розміщення "
 "аргументів)"
 
-#: ../data/yad.gschema.xml.in.h:9
+#: ../data/yad.gschema.xml.in.h:10
 msgid "Default date format (see strftime(3) for details)"
 msgstr "Формат дати за умовчанням (подробиці в strftime(3))"
 
-#: ../data/yad.gschema.xml.in.h:10
+#: ../data/yad.gschema.xml.in.h:11
 msgid "Default color for URI in text-info dialog"
 msgstr "Цвіт зсилок в текстовому діалозі за умовчанням"
 
-#: ../data/yad.gschema.xml.in.h:11
+#: ../data/yad.gschema.xml.in.h:12
 msgid "Ignore unknown command-line options"
 msgstr "Ігнорувати невідомі аргументи"
 
-#: ../data/yad.gschema.xml.in.h:12
+#: ../data/yad.gschema.xml.in.h:13
 msgid "Maximum number of tabs in notebook dialog"
 msgstr "Максимальна кількість вкладинок у діалозі"

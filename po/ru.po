@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-27 13:24+0300\n"
+"POT-Creation-Date: 2019-07-29 09:48+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -1878,35 +1878,40 @@ msgid "Borders around dialog"
 msgstr "Ширина границ вокруг диалога"
 
 #: ../data/yad.gschema.xml.in.h:4
+msgid "Show remaining time and percentage in timeout progress bar"
+msgstr ""
+"Полказывать оставшееся время и проценты в индикаторе оставшегося времени"
+
+#: ../data/yad.gschema.xml.in.h:5
 msgid "Combo-box in entry dialog is always editable"
 msgstr "Поле выбора всегда изменяемо"
 
-#: ../data/yad.gschema.xml.in.h:6
+#: ../data/yad.gschema.xml.in.h:7
 #, no-c-format
 msgid "Default terminal command (use %s for arguments placeholder)"
 msgstr ""
 "Команда запуска терминала по умолчанию (используйте %s для указания места "
 "размещения аргументов)"
 
-#: ../data/yad.gschema.xml.in.h:8
+#: ../data/yad.gschema.xml.in.h:9
 #, no-c-format
 msgid "Default open command (use %s for arguments placeholder)"
 msgstr ""
 "Команда открытия по умолчанию (используйте %s для указания места размещения "
 "аргументов)"
 
-#: ../data/yad.gschema.xml.in.h:9
+#: ../data/yad.gschema.xml.in.h:10
 msgid "Default date format (see strftime(3) for details)"
 msgstr "Формат даты по умолчанию (подробности в strftime(3))"
 
-#: ../data/yad.gschema.xml.in.h:10
+#: ../data/yad.gschema.xml.in.h:11
 msgid "Default color for URI in text-info dialog"
 msgstr "Цвет ссылок по умолчанию в текстовом диалоге"
 
-#: ../data/yad.gschema.xml.in.h:11
+#: ../data/yad.gschema.xml.in.h:12
 msgid "Ignore unknown command-line options"
 msgstr "Игнорироввать неизвестные арументы в командной строке"
 
-#: ../data/yad.gschema.xml.in.h:12
+#: ../data/yad.gschema.xml.in.h:13
 msgid "Maximum number of tabs in notebook dialog"
 msgstr "Максимальное количество вкладок в диалоге"
