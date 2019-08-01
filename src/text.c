@@ -358,7 +358,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 static void
 fill_buffer_from_file ()
 {
-  GtkTextIter iter, end;
+  GtkTextIter iter;
 #ifdef HAVE_SOURCEVIEW
   GtkSourceLanguage *lang;
 #endif
@@ -385,26 +385,19 @@ fill_buffer_from_file ()
       gchar *utftext =
         g_convert_with_fallback (buf, -1, "UTF-8", "ISO-8859-1", NULL, NULL, NULL, NULL);
       if (options.text_data.formatted && !options.common_data.editable)
-        gtk_text_buffer_insert_markup (GTK_TEXT_BUFFER (text_buffer), &end, utftext, -1);
+        gtk_text_buffer_insert_markup (GTK_TEXT_BUFFER (text_buffer), &iter, utftext, -1);
       else
-        gtk_text_buffer_insert (GTK_TEXT_BUFFER (text_buffer), &end, utftext, -1);
+        gtk_text_buffer_insert (GTK_TEXT_BUFFER (text_buffer), &iter, utftext, -1);
       g_free (utftext);
     }
   else
     {
       if (options.text_data.formatted && !options.common_data.editable)
-        gtk_text_buffer_insert_markup (GTK_TEXT_BUFFER (text_buffer), &end, buf, -1);
+        gtk_text_buffer_insert_markup (GTK_TEXT_BUFFER (text_buffer), &iter, buf, -1);
       else
-        gtk_text_buffer_insert (GTK_TEXT_BUFFER (text_buffer), &end, buf, -1);
+        gtk_text_buffer_insert (GTK_TEXT_BUFFER (text_buffer), &iter, buf, -1);
     }
-
-  /* We had a newline in the buffer to begin with. (The buffer always contains
-   * a newline, so we delete to the end of the buffer to clean up.
-   */
-
-  gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (text_buffer), &end);
-  gtk_text_buffer_delete (GTK_TEXT_BUFFER (text_buffer), &iter, &end);
-  gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (text_buffer), FALSE);
+  g_free (buf);
 
 #ifdef HAVE_SOURCEVIEW
   if (options.source_data.lang)
