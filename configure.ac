@@ -1,4 +1,4 @@
-AC_INIT([YAD], [2.0], [https://github.com/v1cont/yad/issues/], yad, [https://github.com/v1cont/yad/])
+AC_INIT([YAD], [3.0], [https://github.com/v1cont/yad/issues/], yad, [https://github.com/v1cont/yad/])
 AC_CONFIG_AUX_DIR([build])
 
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz no-dist-gzip])
