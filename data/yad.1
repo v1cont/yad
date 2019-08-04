@@ -452,7 +452,7 @@ Output data will be in shell-style quotes.
 .SS Form options
 .TP
 .B \-\-field=\fILABEL[:TYPE]\fP
-Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fICE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIMDIR\fP, \fIDT\fP, \fISCL\fP, \fICLR\fP, \fIBTN\fP, \fIFBTN\fP, \fILBL\fP or \fITXT\fP.
+Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fICE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIMDIR\fP, \fIDT\fP, \fISCL\fP, \fIAPP\fP, \fICLR\fP, \fIBTN\fP, \fIFBTN\fP, \fILBL\fP or \fITXT\fP.
 .br
 \fBH\fP - hidden field type. All characters are displayed as the invisible char.
 .br
@@ -485,6 +485,8 @@ Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP
 \fBDT\fP - date field.
 .br
 \fBSCL\fP - scale field. Value of this field in a range 0..100.
+.br
+\fBAPP\fP - application selection button. Input value for this field is mime-type. Output value - executable for selected application.
 .br
 \fBCLR\fP - color selection button. Output values for this field generates in the same manner as for color dialog.
 .br
@@ -1122,6 +1124,7 @@ yad-form-combo@GtkComboBox@Combo field in form
 yad-form-edit-combo@GtkComboBoxEntry@Editable combo field in form
 yad-form-file@GtkFileChooserButton@File or directory field in form
 yad-form-font@GtkFontChooserButton@Font field in form
+yad-form-app@GtkAppChooserButton@Application field in form
 yad-form-color@GtkColorChooserButton@Color field in form
 yad-form-label@GtkLabel@Label field in form
 yad-form-scale@GtkScale@Scale widget in form

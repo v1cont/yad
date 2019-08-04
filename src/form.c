@@ -19,7 +19,6 @@
 
 #include <ctype.h>
 #include <stdlib.h>
-#include <glib/gprintf.h>
 
 #include "yad.h"
 
@@ -101,6 +100,14 @@ expand_action (gchar * cmd)
                 case YAD_FIELD_FONT:
                   arg = g_shell_quote (gtk_font_chooser_get_font (GTK_FONT_CHOOSER (g_slist_nth_data (fields, num))));
                   break;
+                case YAD_FIELD_APP:
+                  {
+                    GList *wl = gtk_container_get_children (GTK_CONTAINER (g_slist_nth_data (fields, num)));
+                    GAppInfo *info = gtk_app_chooser_get_app_info (GTK_APP_CHOOSER (wl->data));
+                    arg =  g_shell_quote (g_app_info_get_executable (info));
+                    g_object_unref (info);
+                    break;
+                  }
                 case YAD_FIELD_COLOR:
                   {
                     GdkRGBA c;
@@ -305,6 +312,30 @@ set_field_value (guint num, gchar * value)
     case YAD_FIELD_SCALE:
       gtk_range_set_value (GTK_RANGE (w), atoi (value));
       break;
+
+    case YAD_FIELD_APP:
+      {
+        GtkWidget *b;
+        GList *wl;
+
+        for (wl = gtk_container_get_children (GTK_CONTAINER (w)); wl; wl = wl->next)
+          {
+            GtkWidget *cw = GTK_WIDGET (wl->data);
+            gtk_container_remove (GTK_CONTAINER (w), cw);
+            gtk_widget_destroy (cw);
+          }
+
+        printf ("set value %s for app field\n");
+
+        if (value && value[0])
+          b = gtk_app_chooser_button_new (value);
+        else
+          b = gtk_app_chooser_button_new ("text/plain");
+        gtk_widget_set_name (b, "yad-form-app");
+        gtk_box_pack_start (GTK_BOX (w), b, TRUE, TRUE, 0);
+        gtk_widget_show_all (w);
+        break;
+      }
 
     case YAD_FIELD_COLOR:
       {
@@ -849,6 +880,14 @@ form_create_widget (GtkWidget * dlg)
               fields = g_slist_append (fields, e);
               break;
 
+            case YAD_FIELD_APP:
+              e = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+              gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
+              gtk_widget_set_hexpand (e, TRUE);
+              gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
+              fields = g_slist_append (fields, e);
+              break;
+
             case YAD_FIELD_COLOR:
               e = gtk_color_button_new ();
               gtk_widget_set_name (e, "yad-form-color");
@@ -1110,6 +1149,35 @@ form_print_field (guint fn)
         else
           g_printf ("%s%s", fname ? fname : "", options.common_data.separator);
         g_free (fname);
+        break;
+      }
+    case YAD_FIELD_APP:
+      {
+        gchar *exec;
+        GAppInfo *info = NULL;
+        GList *wl = gtk_container_get_children (GTK_CONTAINER (g_slist_nth_data (fields, fn)));
+
+        if (wl)
+          {
+            info = gtk_app_chooser_get_app_info (GTK_APP_CHOOSER (wl->data));
+            if (info)
+              exec = (gchar *) g_app_info_get_executable (info);
+            else
+              exec = "";
+          }
+        else
+          exec = "";
+
+        if (options.common_data.quoted_output)
+          {
+            buf = g_shell_quote (exec);
+            g_printf ("%s%s", buf, options.common_data.separator);
+            g_free (buf);
+          }
+        else
+          g_printf ("%s%s", exec, options.common_data.separator);
+        if (info)
+          g_object_unref (info);
         break;
       }
     case YAD_FIELD_COLOR:

@@ -802,6 +802,8 @@ add_field (const gchar * option_name, const gchar * value, gpointer data, GError
         fld->type = YAD_FIELD_DIR_CREATE;
       else if (strcasecmp (fstr[1], "FN") == 0)
         fld->type = YAD_FIELD_FONT;
+      else if (strcasecmp (fstr[1], "APP") == 0)
+        fld->type = YAD_FIELD_APP;
       else if (strcasecmp (fstr[1], "CLR") == 0)
         fld->type = YAD_FIELD_COLOR;
       else if (strcasecmp (fstr[1], "MFL") == 0)
