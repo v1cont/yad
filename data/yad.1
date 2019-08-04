@@ -20,6 +20,9 @@ options starting with two dashes (`-').
 
 .SS Dialog options
 .TP
+.B \-\-app
+Display application selection dialog.
+.TP
 .B \-\-calendar
 Display calendar dialog.
 .TP
@@ -242,6 +245,19 @@ Set the output type of boolean values to \fITYPE\fP. Possible types are \fIT\fP,
 \fIO\fP and \fIo\fP - for \fIon/off\fP pair in appropriate case.
 .br
 \fI1\fP - for \fI1/0\fP pair.
+
+.SS Application selection options
+.TP
+.B \-\-enable-fallback
+Show fallback applications.
+.B \-\-enable-other
+Show other applications.
+.B \-\-enable-all
+Show all available applications.
+.B \-\-extened
+Shown extended information about choosen application. By default only executable is shown. In extended form the output fields are name, display name, description, icon and executable.
+
+Additional argument for application dialog is a mime-type. If mime-type is not specified \fItext/plain\fP will be used.
 
 .SS Calendar options
 .TP
@@ -683,30 +699,6 @@ Sending FormFeed character to list clears it. This symbol may be sent as \fIecho
 .B \-\-simple-tips
 Don't use markup in tooltips even if text has a valid markup.
 
-.SS Multi progress bars dialog options
-.TP
-.B \-\-bar=\fILABEL[:TYPE]\fP
-Add progress bar. \fILABEL\fP is a text label for progress bar. \fITYPE\fP is a progress bar type.
-Types are: \fINORM\fP for normal progress bar, \fIRTL\fP for inverted progress bar and \fIPULSE\fP for pulsate progress bar.
-.TP
-.B \-\-vertical
-Set vertical orientation of progress bars.
-.TP
-.B \-\-align=\fITYPE\fP
-Set alignment of bar labels. Possible types are \fIleft\fP, \fIcenter\fP or \fIright\fP. Default is left.
-.TP
-.B \-\-auto\-close
-Close dialog when 100% has been reached for all of non-pulsating progress bars.
-.TP
-.B \-\-watch-bar\fINUMBER\fP
-Watch for 100% of bar \fINUMBER\fP for close dialog.
-.TP
-.B \-\-auto\-kill
-Kill parent process if cancel button is pressed.
-.PP
-Initial values for bars set as an extra arguments. Each lines with progress data passed to stdin must be started
-from \fIN:\fP where \fIN\fP is a number of progress bar.
-
 .SS Notebook options
 .TP
 .B \-\-key=\fIKEY\fP
@@ -841,19 +833,26 @@ Set the height of log window.
 .SS Multiprogress options
 .TP
 .B \-\-bar=\fILABEL[:TYPE]\fP
-Add the progress bar with type \fITYPE\fp. \fITYPE\fP can be one of the \fInorm\fP for average progress bar, \fIrtl\fP for progress bar with inverted direction, \fIpulse\fP for pulsating progress bar (m,oves on receiving data) or \fIperm\fP for permanent pulsatin progress bar. \fIprem\fP progress bar understant two commands - \fIstart\fP for start movement and \fIstop\fP for stop it.
+Add progress bar. \fILABEL\fP is a text label for progress bar. \fITYPE\fP is a progress bar type.
+Types are: \fINORM\fP for normal progress bar, \fIRTL\fP for inverted progress bar and \fIPULSE\fP for pulsate progress bar.
 .TP
-.B \-\-watch-bar=\fINUMBER\fP
-Watch for specific bar for auto closing.
+.B \-\-vertical
+Set vertical orientation of progress bars.
 .TP
 .B \-\-align=\fITYPE\fP
-Set alignment of bar labels. \fITYPE\fP can be \fIleft\fP, \fIcenter\fP or \fIright\fP.
+Set alignment of bar labels. Possible types are \fIleft\fP, \fIcenter\fP or \fIright\fP. Default is left.
 .TP
-.B \-\-auto-close
-Dismiss the dialog when 100% of all bars (or only watching bar) has been reached.
+.B \-\-auto\-close
+Close dialog when 100% has been reached for all of non-pulsating progress bars.
 .TP
-.B \-\-auto-kill
-Kill parent process if cancel button was pressed.
+.B \-\-watch-bar\fINUMBER\fP
+Watch for 100% of bar \fINUMBER\fP for close dialog.
+.TP
+.B \-\-auto\-kill
+Kill parent process if cancel button is pressed.
+.PP
+Initial values for bars set as an extra arguments. Each lines with progress data passed to stdin must be started
+from \fIN:\fP where \fIN\fP is a number of progress bar.
 
 .SS Text info options
 .TP

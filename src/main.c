@@ -205,6 +205,9 @@ create_layout (GtkWidget *dlg)
   /* create main widget */
   switch (options.mode)
     {
+    case YAD_MODE_APP:
+      mw = app_create_widget (dlg);
+      break;
     case YAD_MODE_CALENDAR:
       mw = calendar_create_widget (dlg);
       break;
@@ -609,6 +612,9 @@ yad_print_result (void)
 {
   switch (options.mode)
     {
+    case YAD_MODE_APP:
+      app_print_result ();
+      break;
     case YAD_MODE_CALENDAR:
       calendar_print_result ();
       break;
@@ -666,7 +672,7 @@ main (gint argc, gchar ** argv)
   g_set_application_name ("YAD");
 
   settings = g_settings_new ("yad.settings");
-  
+
   yad_icon_theme = gtk_icon_theme_get_default ();
 
   yad_options_init ();

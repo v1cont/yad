@@ -66,6 +66,7 @@ static gboolean langs_mode = FALSE;
 #ifdef HAVE_SOURCEVIEW
 static gboolean themes_mode = FALSE;
 #endif
+static gboolean app_mode = FALSE;
 static gboolean calendar_mode = FALSE;
 static gboolean color_mode = FALSE;
 static gboolean dnd_mode = FALSE;
@@ -229,6 +230,19 @@ static GOptionEntry common_options[] = {
     N_("Set spell checking language"), N_("LANGUAGE") },
 #endif
   { NULL }
+};
+
+static GOptionEntry app_options[] = {
+  { "app", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &app_mode,
+    N_("Display application selection dialog"), NULL },
+  { "enable-fallback", 0, 0, G_OPTION_ARG_NONE, &options.app_data.show_fallback,
+    N_("Show fallback applications"), NULL },
+  { "enable-other", 0, 0, G_OPTION_ARG_NONE, &options.app_data.show_other,
+    N_("Show other applications"), NULL },
+  { "enable-all", 0, 0, G_OPTION_ARG_NONE, &options.app_data.show_all,
+    N_("Show all applications"), NULL },
+  { "extended", 0, 0, G_OPTION_ARG_NONE, &options.app_data.extended,
+    N_("Output all application data"), NULL },
 };
 
 static GOptionEntry calendar_options[] = {
@@ -1365,7 +1379,9 @@ parse_signal (const gchar * option_name, const gchar * value, gpointer data, GEr
 void
 yad_set_mode (void)
 {
-  if (calendar_mode)
+  if (app_mode)
+    options.mode = YAD_MODE_APP;
+  else if (calendar_mode)
     options.mode = YAD_MODE_CALENDAR;
   else if (color_mode)
     options.mode = YAD_MODE_COLOR;
@@ -1515,6 +1531,12 @@ yad_options_init (void)
   options.common_data.enable_spell = FALSE;
   options.common_data.spell_lang = NULL;
 #endif
+
+  /* Initialize application data */
+  options.app_data.show_fallback = FALSE;
+  options.app_data.show_other = FALSE;
+  options.app_data.show_all = FALSE;
+  options.app_data.extended = FALSE;
 
   /* Initialize calendar data */
   options.calendar_data.day = -1;
@@ -1711,6 +1733,12 @@ yad_create_context (void)
   /* Adds common option entries */
   a_group = g_option_group_new ("common", _("Common options"), _("Show common options"), NULL, NULL);
   g_option_group_add_entries (a_group, common_options);
+  g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+  g_option_context_add_group (tmp_ctx, a_group);
+
+  /* Adds app option entries */
+  a_group = g_option_group_new ("app", _("Application selection options"), _("Show application selection options"), NULL, NULL);
+  g_option_group_add_entries (a_group, app_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 

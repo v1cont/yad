@@ -32,6 +32,7 @@
 #include <gdk/gdkkeysyms.h>
 
 #include <glib/gi18n.h>
+#include <glib/gprintf.h>
 
 #ifdef HAVE_SPELL
 #include <gspell/gspell.h>
@@ -52,6 +53,7 @@ G_BEGIN_DECLS
 
 typedef enum {
   YAD_MODE_MESSAGE,
+  YAD_MODE_APP,
   YAD_MODE_CALENDAR,
   YAD_MODE_COLOR,
   YAD_MODE_DND,
@@ -237,6 +239,13 @@ typedef struct {
   gboolean focus;
   gboolean close_on_unfocus;
 } YadData;
+
+typedef struct {
+  gboolean show_fallback;
+  gboolean show_other;
+  gboolean show_all;
+  gboolean extended;
+} YadAppData;
 
 typedef struct {
   gint day;
@@ -473,6 +482,7 @@ typedef struct {
   YadData data;
   YadCommonData common_data;
 
+  YadAppData app_data;
   YadCalendarData calendar_data;
   YadColorData color_data;
   YadDNDData dnd_data;
@@ -555,6 +565,7 @@ void yad_set_mode (void);
 void yad_print_result (void);
 void yad_exit (gint id);
 
+GtkWidget *app_create_widget (GtkWidget *dlg);
 GtkWidget *calendar_create_widget (GtkWidget *dlg);
 GtkWidget *color_create_widget (GtkWidget *dlg);
 GtkWidget *entry_create_widget (GtkWidget *dlg);
@@ -579,6 +590,7 @@ void notebook_swallow_childs (void);
 void paned_swallow_childs (void);
 void picture_fit_to_window (void);
 
+void app_print_result (void);
 void calendar_print_result (void);
 void color_print_result (void);
 void entry_print_result (void);

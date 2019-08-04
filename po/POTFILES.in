@@ -1,4 +1,5 @@
 src/about.c
+src/app.c
 src/calendar.c
 src/entry.c
 src/file.c

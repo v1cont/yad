@@ -1,13 +1,13 @@
-AM_CPPFLAGS =                           \
-	-DLOCALEDIR=\""$(datadir)/locale"\"
+AM_CPPFLAGS = -DLOCALEDIR=\""$(datadir)/locale"\"
 
 bin_PROGRAMS = yad
 
-yad_SOURCES = 			\
+yad_SOURCES = 		\
 	about.c			\
+	app.c			\
 	calendar.c		\
 	color.c			\
-	dnd.c           	\
+	dnd.c           \
 	entry.c			\
 	file.c			\
 	font.c			\
