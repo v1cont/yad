@@ -264,8 +264,6 @@ static GOptionEntry calendar_options[] = {
 static GOptionEntry color_options[] = {
   { "color", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &color_mode,
     N_("Display color selection dialog"), NULL },
-  { "color-selection", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &color_mode,
-    N_("Alias for --color"), NULL },
   { "init-color", 0, 0, G_OPTION_ARG_STRING, &options.color_data.init_color,
     N_("Set initial color value"), N_("COLOR") },
   { "gtk-palette", 0, 0, G_OPTION_ARG_NONE, &options.color_data.gtk_palette,
@@ -318,8 +316,6 @@ static GOptionEntry entry_options[] = {
 static GOptionEntry file_options[] = {
   { "file", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &file_mode,
     N_("Display file selection dialog"), NULL },
-  { "file-selection", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &file_mode,
-    N_("Alias for --file"), NULL },
   { "directory", 0, 0, G_OPTION_ARG_NONE, &options.file_data.directory,
     N_("Activate directory-only selection"), NULL },
   { "save", 0, 0, G_OPTION_ARG_NONE, &options.file_data.save,
@@ -332,8 +328,6 @@ static GOptionEntry file_options[] = {
 static GOptionEntry font_options[] = {
   { "font", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &font_mode,
     N_("Display font selection dialog"), NULL },
-  { "font-selection", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &font_mode,
-    N_("Alias for --font"), NULL },
   { "preview", 0, 0, G_OPTION_ARG_STRING, &options.font_data.preview,
     N_("Set text string for preview"), N_("TEXT") },
   { "separate-output", 0, 0, G_OPTION_ARG_NONE, &options.font_data.separate_output,
