@@ -26,6 +26,13 @@
 static GtkWidget *font;
 
 static void
+font_activated_cb (GtkFontChooser *w, gchar *fn, gpointer d)
+{
+  if (options.plug == -1)
+    yad_exit (options.data.def_resp);
+}
+
+static void
 realize_cb (GtkWidget * w, gpointer d)
 {
   gtk_font_chooser_set_font (GTK_FONT_CHOOSER (w), options.common_data.font);
@@ -41,6 +48,8 @@ font_create_widget (GtkWidget * dlg)
 
   if (options.font_data.preview)
     gtk_font_chooser_set_preview_text (GTK_FONT_CHOOSER (w), options.font_data.preview);
+
+  g_signal_connect (G_OBJECT (w), "font-activated", G_CALLBACK (font_activated_cb), NULL);
 
   /* font must be set after widget inserted in toplevel */
   if (options.common_data.font)
