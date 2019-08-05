@@ -22,8 +22,6 @@
 
 #include "yad.h"
 
-#include <glib/gprintf.h>
-
 #include <webkit2/webkit2.h>
 
 static WebKitWebView *view;

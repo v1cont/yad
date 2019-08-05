@@ -34,6 +34,10 @@
 #include <glib/gi18n.h>
 #include <glib/gprintf.h>
 
+#ifdef HAVE_HTML
+#include <webkit2/webkit2.h>
+#endif
+
 #ifdef HAVE_SPELL
 #include <gspell/gspell.h>
 #endif
