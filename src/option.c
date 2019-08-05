@@ -540,8 +540,8 @@ static GOptionEntry progress_options[] = {
     N_("Set alignment of bar labels (left, center or right)"), N_("TYPE") },
   { "progress-text", 0, 0, G_OPTION_ARG_STRING, &options.progress_data.progress_text,
     N_("Set progress text"), N_("TEXT") },
-  { "percentage", 0, 0, G_OPTION_ARG_INT, &options.progress_data.percentage,
-    N_("Set initial percentage"), N_("PERCENTAGE") },
+  { "hide-text", 0, G_OPTION_FLAG_REVERSE, G_OPTION_ARG_NONE, &options.progress_data.show_text,
+    N_("Show text on progress bar"), NULL },
   { "pulsate", 0, 0, G_OPTION_ARG_NONE, &options.progress_data.pulsate,
     N_("Pulsate progress bar"), NULL },
   { "auto-close", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_NONE, &options.progress_data.autoclose,
@@ -1653,7 +1653,7 @@ yad_options_init (void)
   options.progress_data.bars = NULL;
   options.progress_data.watch_bar = 0;
   options.progress_data.progress_text = NULL;
-  options.progress_data.percentage = 0;
+  options.progress_data.show_text = TRUE;
   options.progress_data.pulsate = FALSE;
   options.progress_data.autoclose = FALSE;
 #ifndef G_OS_WIN32

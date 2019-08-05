@@ -126,7 +126,10 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
                   gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (progress_log), &end, 0, FALSE, 0, 0);
                 }
               else
-                gtk_progress_bar_set_text (pb, match);
+                {
+                  if (options.progress_data.show_text)
+                    gtk_progress_bar_set_text (pb, match);
+                }
               g_free (match);
             }
           else
@@ -241,9 +244,12 @@ progress_create_widget (GtkWidget *dlg)
       else
         bar->type = YAD_PROGRESS_NORMAL;
 
+      if (options.progress_data.progress_text)
+        bar->name = options.progress_data.progress_text;
+
       options.progress_data.bars = g_slist_append (options.progress_data.bars, bar);
       nbars = 1;
-      
+
       options.progress_data.watch_bar = 1;
 
       single_mode = TRUE;
@@ -274,7 +280,7 @@ progress_create_widget (GtkWidget *dlg)
       /* add progress bar */
       w = gtk_progress_bar_new ();
       gtk_widget_set_name (w, "yad-progress-widget");
-      gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (w), TRUE);
+      gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (w), options.progress_data.show_text);
 
       if (p->type != YAD_PROGRESS_PULSE)
         {

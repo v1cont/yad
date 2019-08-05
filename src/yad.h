@@ -406,8 +406,8 @@ typedef struct {
 #ifndef G_OS_WIN32
   gboolean autokill;
 #endif
-  guint percentage;
   gboolean rtl;
+  gboolean show_text;
   gchar *log;
   gboolean log_expanded;
   gboolean log_on_top;
