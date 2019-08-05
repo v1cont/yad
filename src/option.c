@@ -79,7 +79,6 @@ static gboolean html_mode = FALSE;
 #endif
 static gboolean icons_mode = FALSE;
 static gboolean list_mode = FALSE;
-static gboolean multi_progress_mode = FALSE;
 static gboolean notebook_mode = FALSE;
 #ifdef HAVE_TRAY
 static gboolean notification_mode = FALSE;
@@ -468,25 +467,6 @@ static GOptionEntry list_options[] = {
   { NULL }
 };
 
-static GOptionEntry multi_progress_options[] = {
-  { "multi-progress", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &multi_progress_mode,
-    N_("Display multi progress bars dialog"), NULL },
-  { "bar", 0, 0, G_OPTION_ARG_CALLBACK, add_bar,
-    N_("Add the progress bar (norm, rtl, pulse or perm)"), N_("LABEL[:TYPE]") },
-  { "watch-bar", 0, 0, G_OPTION_ARG_INT, &options.multi_progress_data.watch_bar,
-    N_("Watch for specific bar for auto close"), N_("NUMBER") },
-  { "align", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_CALLBACK, set_align,
-    N_("Set alignment of bar labels (left, center or right)"), N_("TYPE") },
-  { "auto-close", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_NONE, &options.progress_data.autoclose,
-    /* xgettext: no-c-format */
-    N_("Dismiss the dialog when 100% of all bars has been reached"), NULL },
-#ifndef G_OS_WIN32
-  { "auto-kill", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_NONE, &options.progress_data.autokill,
-    N_("Kill parent process if cancel button is pressed"), NULL },
-#endif
-  { NULL }
-};
-
 static GOptionEntry notebook_options[] = {
   { "notebook", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &notebook_mode,
     N_("Display notebook dialog"), NULL },
@@ -552,6 +532,12 @@ static GOptionEntry print_options[] = {
 static GOptionEntry progress_options[] = {
   { "progress", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &progress_mode,
     N_("Display progress indication dialog"), NULL },
+  { "bar", 0, 0, G_OPTION_ARG_CALLBACK, add_bar,
+    N_("Add the progress bar (norm, rtl, pulse or perm)"), N_("LABEL[:TYPE]") },
+  { "watch-bar", 0, 0, G_OPTION_ARG_INT, &options.progress_data.watch_bar,
+    N_("Watch for specific bar for auto close"), N_("NUMBER") },
+  { "align", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_CALLBACK, set_align,
+    N_("Set alignment of bar labels (left, center or right)"), N_("TYPE") },
   { "progress-text", 0, 0, G_OPTION_ARG_STRING, &options.progress_data.progress_text,
     N_("Set progress text"), N_("TEXT") },
   { "percentage", 0, 0, G_OPTION_ARG_INT, &options.progress_data.percentage,
@@ -848,7 +834,7 @@ add_bar (const gchar * option_name, const gchar * value, gpointer data, GError *
     }
   else
     bar->type = YAD_PROGRESS_NORMAL;
-  options.multi_progress_data.bars = g_slist_append (options.multi_progress_data.bars, bar);
+  options.progress_data.bars = g_slist_append (options.progress_data.bars, bar);
 
   g_strfreev (bstr);
   return TRUE;
@@ -1399,8 +1385,6 @@ yad_set_mode (void)
     options.mode = YAD_MODE_ICONS;
   else if (list_mode)
     options.mode = YAD_MODE_LIST;
-  else if (multi_progress_mode)
-    options.mode = YAD_MODE_MULTI_PROGRESS;
   else if (notebook_mode)
     options.mode = YAD_MODE_NOTEBOOK;
 #ifdef HAVE_TRAY
@@ -1639,10 +1623,6 @@ yad_options_init (void)
   options.list_data.add_on_top = FALSE;
   options.list_data.simple_tips = FALSE;
 
-  /* Initialize multiprogress data */
-  options.multi_progress_data.bars = NULL;
-  options.multi_progress_data.watch_bar = 0;
-
   /* Initialize notebook data */
   options.notebook_data.tabs = NULL;
   options.notebook_data.borders = 5;
@@ -1670,6 +1650,8 @@ yad_options_init (void)
   options.print_data.headers = FALSE;
 
   /* Initialize progress data */
+  options.progress_data.bars = NULL;
+  options.progress_data.watch_bar = 0;
   options.progress_data.progress_text = NULL;
   options.progress_data.percentage = 0;
   options.progress_data.pulsate = FALSE;
@@ -1797,13 +1779,6 @@ yad_create_context (void)
   /* Adds list option entries */
   a_group = g_option_group_new ("list", _("List options"), _("Show list options"), NULL, NULL);
   g_option_group_add_entries (a_group, list_options);
-  g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
-  g_option_context_add_group (tmp_ctx, a_group);
-
-  /* Adds multi progress option entries */
-  a_group = g_option_group_new ("multi-progress", _("Multi progress bars options"),
-                                _("Show multi progress bars options"), NULL, NULL);
-  g_option_group_add_entries (a_group, multi_progress_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 

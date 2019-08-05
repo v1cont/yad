@@ -237,9 +237,6 @@ create_layout (GtkWidget *dlg)
     case YAD_MODE_LIST:
       mw = list_create_widget (dlg);
       break;
-    case YAD_MODE_MULTI_PROGRESS:
-      mw = multi_progress_create_widget (dlg);
-      break;
     case YAD_MODE_NOTEBOOK:
       if (options.plug == -1)
         mw = notebook_create_widget (dlg);
@@ -456,8 +453,7 @@ create_dialog (void)
         }
       else
         {
-          if (options.mode == YAD_MODE_PROGRESS || options.mode == YAD_MODE_MULTI_PROGRESS ||
-              options.mode == YAD_MODE_DND || options.mode == YAD_MODE_PICTURE)
+          if (options.mode == YAD_MODE_PROGRESS || options.mode == YAD_MODE_DND || options.mode == YAD_MODE_PICTURE)
             {
               /* add close button */
               btn = gtk_button_new ();
@@ -871,8 +867,7 @@ main (gint argc, gchar ** argv)
       /* autokill option for progress dialog */
       if (!options.kill_parent)
         {
-          if ((options.mode == YAD_MODE_PROGRESS || options.mode == YAD_MODE_MULTI_PROGRESS) &&
-              options.progress_data.autokill && ret != YAD_RESPONSE_OK)
+          if (options.mode == YAD_MODE_PROGRESS && options.progress_data.autokill && ret != YAD_RESPONSE_OK)
             kill (getppid (), SIGHUP);
         }
 #endif

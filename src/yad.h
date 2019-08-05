@@ -70,7 +70,6 @@ typedef enum {
 #endif
   YAD_MODE_ICONS,
   YAD_MODE_LIST,
-  YAD_MODE_MULTI_PROGRESS,
   YAD_MODE_NOTEBOOK,
 #ifdef HAVE_TRAY
   YAD_MODE_NOTIFICATION,
@@ -368,11 +367,6 @@ typedef struct {
 } YadListData;
 
 typedef struct {
-  GSList *bars;
-  gint watch_bar;
-} YadMultiProgressData;
-
-typedef struct {
   GSList *tabs;
   guint borders;
   GtkPositionType pos;
@@ -404,6 +398,8 @@ typedef struct {
 } YadPrintData;
 
 typedef struct {
+  GSList *bars;
+  gint watch_bar;
   gchar *progress_text;
   gboolean pulsate;
   gboolean autoclose;
@@ -500,7 +496,6 @@ typedef struct {
 #endif
   YadIconsData icons_data;
   YadListData list_data;
-  YadMultiProgressData multi_progress_data;
   YadNotebookData notebook_data;
 #ifdef HAVE_TRAY
   YadNotificationData notification_data;
@@ -582,7 +577,6 @@ GtkWidget *html_create_widget (GtkWidget *dlg);
 #endif
 GtkWidget *icons_create_widget (GtkWidget *dlg);
 GtkWidget *list_create_widget (GtkWidget *dlg);
-GtkWidget *multi_progress_create_widget (GtkWidget *dlg);
 GtkWidget *notebook_create_widget (GtkWidget *dlg);
 GtkWidget *paned_create_widget (GtkWidget *dlg);
 GtkWidget *picture_create_widget (GtkWidget *dlg);
