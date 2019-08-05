@@ -295,8 +295,8 @@ static GOptionEntry entry_options[] = {
     N_("Set the entry label"), N_("TEXT") },
   { "entry-text", 0, 0, G_OPTION_ARG_STRING, &options.entry_data.entry_text,
     N_("Set the entry text"), N_("TEXT") },
-  { "hide-text", 0, 0, G_OPTION_ARG_NONE, &options.entry_data.hide_text,
-    N_("Hide the entry text"), N_("TEXT") },
+  { "hide-text", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_NONE, &options.common_data.hide_text,
+    N_("Hide the entry text"), NULL },
   { "completion", 0, 0, G_OPTION_ARG_NONE, &options.entry_data.completion,
     N_("Use completion instead of combo-box"), NULL },
   { "numeric", 0, 0, G_OPTION_ARG_NONE, &options.entry_data.numeric,
@@ -540,8 +540,8 @@ static GOptionEntry progress_options[] = {
     N_("Set alignment of bar labels (left, center or right)"), N_("TYPE") },
   { "progress-text", 0, 0, G_OPTION_ARG_STRING, &options.progress_data.progress_text,
     N_("Set progress text"), N_("TEXT") },
-  { "hide-text", 0, G_OPTION_FLAG_REVERSE, G_OPTION_ARG_NONE, &options.progress_data.show_text,
-    N_("Show text on progress bar"), NULL },
+  { "hide-text", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_NONE, &options.common_data.hide_text,
+    N_("Hide text on progress bar"), NULL },
   { "pulsate", 0, 0, G_OPTION_ARG_NONE, &options.progress_data.pulsate,
     N_("Pulsate progress bar"), NULL },
   { "auto-close", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_NONE, &options.progress_data.autoclose,
@@ -1499,6 +1499,7 @@ yad_options_init (void)
   options.common_data.show_hidden = FALSE;
   options.common_data.quoted_output = FALSE;
   options.common_data.num_output = FALSE;
+  options.common_data.hide_text = FALSE;
   options.common_data.filters = NULL;
   options.common_data.key = -1;
   options.common_data.bool_fmt = YAD_BOOL_FMT_UT;
@@ -1541,7 +1542,6 @@ yad_options_init (void)
   /* Initialize entry data */
   options.entry_data.entry_text = NULL;
   options.entry_data.entry_label = NULL;
-  options.entry_data.hide_text = FALSE;
   options.entry_data.completion = FALSE;
   options.entry_data.numeric = FALSE;
   options.entry_data.licon = NULL;
@@ -1653,7 +1653,6 @@ yad_options_init (void)
   options.progress_data.bars = NULL;
   options.progress_data.watch_bar = 0;
   options.progress_data.progress_text = NULL;
-  options.progress_data.show_text = TRUE;
   options.progress_data.pulsate = FALSE;
   options.progress_data.autoclose = FALSE;
 #ifndef G_OS_WIN32
