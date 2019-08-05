@@ -12,7 +12,6 @@ src/notification.c
 src/scale.c
 src/list.c
 src/option.c
-src/multi-progress.c
 src/paned.c
 src/picture.c
 src/print.c
