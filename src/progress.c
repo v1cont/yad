@@ -116,7 +116,10 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
 
                   logline = g_strdup_printf ("%s\n", match);    /* add new line */
                   gtk_text_buffer_get_end_iter (log_buffer, &end);
-                  gtk_text_buffer_insert (log_buffer, &end, logline, -1);
+                  if (options.data.no_markup)
+                    gtk_text_buffer_insert (log_buffer, &end, logline, -1);
+                  else
+                    gtk_text_buffer_insert_markup (log_buffer, &end, logline, -1);
                   g_free (logline);
 
                   /* scroll to end */
