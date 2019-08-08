@@ -135,9 +135,9 @@ get_color (GdkRGBA *c)
     {
     case YAD_COLOR_HEX:
       if (options.color_data.alpha)
-        res = g_strdup_printf ("#%X%X%X%X", (int) (c->red * 255), (int) (c->green * 255), (int) (c->blue * 255), (int) (c->alpha * 255));
+        res = g_strdup_printf ("#%02X%02X%02X%02X", (int) (c->red * 255), (int) (c->green * 255), (int) (c->blue * 255), (int) (c->alpha * 255));
       else
-        res = g_strdup_printf ("#%X%X%X", (int) (c->red * 255), (int) (c->green * 255), (int) (c->blue * 255));
+        res = g_strdup_printf ("#%02X%02X%02X", (int) (c->red * 255), (int) (c->green * 255), (int) (c->blue * 255));
       break;
     case YAD_COLOR_RGB:
       res = gdk_rgba_to_string (c);
