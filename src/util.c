@@ -211,9 +211,9 @@ get_color (GdkColor *c, guint64 alpha)
     {
     case YAD_COLOR_HEX:
       if (options.color_data.alpha)
-        res = g_strdup_printf ("#%X%X%X%X", c->red & 0xFF, c->green & 0xFF, c->blue & 0xFF, (guint) ((alpha / 256) & 0xFF));
+        res = g_strdup_printf ("#%02X%02X%02X%02X", c->red & 0xFF, c->green & 0xFF, c->blue & 0xFF, (guint) ((alpha / 256) & 0xFF));
       else
-        res = g_strdup_printf ("#%X%X%X", c->red & 0xFF, c->green & 0xFF, c->blue & 0xFF);
+        res = g_strdup_printf ("#%02X%02X%02X", c->red & 0xFF, c->green & 0xFF, c->blue & 0xFF);
       break;
     case YAD_COLOR_RGB:
       if (options.color_data.alpha)
