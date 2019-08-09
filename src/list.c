@@ -407,13 +407,10 @@ add_columns (gint n_columns)
         }
     }
 
-  if (options.list_data.checkbox && !options.list_data.search_column)
+  if ((options.list_data.checkbox || options.list_data.radiobox) && !options.list_data.search_column)
     options.list_data.search_column += 1;
   if (options.list_data.search_column <= n_columns)
-    {
-      options.list_data.search_column -= 1;
-      gtk_tree_view_set_search_column (GTK_TREE_VIEW (list_view), options.list_data.search_column);
-    }
+    gtk_tree_view_set_search_column (GTK_TREE_VIEW (list_view), options.list_data.search_column - 1);
 }
 
 static void
