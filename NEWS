@@ -1,3 +1,12 @@
+Version 4.0
+    - font can be selected with double-click in font dialog
+    - add application chooser dialog and application chooser field in form dialog
+    - add tree mode in list dialog
+    - multi-progress dialog features merged with progress dialog. separate multi-progres dialog no longer exists
+    - enable markup in progress log window
+    - fix output of color values in hex notation
+    - removed *-selection aliases for --file, --color and --font dialogs
+
 Version 3.0
     - add user defined handlers for all editing actions in list dialog. --add-action parameter renamed to --row-action
     - fix loading text from file in text-info dialog
