@@ -418,8 +418,6 @@ static GOptionEntry list_options[] = {
     N_("Don't show column headers"), NULL },
   { "no-click", 0, G_OPTION_FLAG_REVERSE, G_OPTION_ARG_NONE, &options.list_data.clickable,
     N_("Disable clickable column headers"), NULL },
-  { "no-rules-hint", 0, G_OPTION_FLAG_REVERSE, G_OPTION_ARG_NONE, &options.list_data.rules_hint,
-    N_("Disable rules hints"), NULL },
   { "grid-lines", 0, 0, G_OPTION_ARG_CALLBACK, set_grid_lines,
     N_("Set grid lines (hor[izontal], vert[ical] or both)"), N_("TYPE") },
   { "print-all", 0, 0, G_OPTION_ARG_NONE, &options.list_data.print_all,
@@ -1599,7 +1597,6 @@ yad_options_init (void)
   options.list_data.checkbox = FALSE;
   options.list_data.radiobox = FALSE;
   options.list_data.print_all = FALSE;
-  options.list_data.rules_hint = TRUE;
   options.list_data.grid_lines = GTK_TREE_VIEW_GRID_LINES_NONE;
   options.list_data.print_column = 0;
   options.list_data.hide_column = 0;
