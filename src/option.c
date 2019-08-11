@@ -410,6 +410,8 @@ static GOptionEntry list_options[] = {
     N_("Display list dialog"), NULL },
   { "column", 0, 0, G_OPTION_ARG_CALLBACK, add_column,
     N_("Set the column header (see man page for list of possible types)"), N_("COLUMN[:TYPE]") },
+  { "tree", 0, 0, G_OPTION_ARG_NONE, &options.list_data.tree_mode,
+    N_("Enbale tree mode"), NULL },
   { "checklist", 0, 0, G_OPTION_ARG_NONE, &options.list_data.checkbox,
     N_("Use checkboxes for first column"), NULL },
   { "radiolist", 0, 0, G_OPTION_ARG_NONE, &options.list_data.radiobox,
@@ -454,6 +456,8 @@ static GOptionEntry list_options[] = {
     N_("Set select action"), N_("CMD") },
   { "row-action", 0, 0, G_OPTION_ARG_STRING, &options.list_data.row_action,
     N_("Set row action"), N_("CMD") },
+  { "tree-expanded", 0, 0, G_OPTION_ARG_NONE, &options.list_data.tree_expanded,
+    N_("Expand all tree nodes"), NULL },
   { "regex-search", 0, 0, G_OPTION_ARG_NONE, &options.list_data.regex_search,
     N_("Use regex in search"), NULL },
   { "no-selection", 0, 0, G_OPTION_ARG_NONE, &options.list_data.no_selection,
@@ -1593,9 +1597,10 @@ yad_options_init (void)
 
   /* Initialize list data */
   options.list_data.columns = NULL;
-  options.list_data.no_headers = FALSE;
+  options.list_data.tree_mode = FALSE;
   options.list_data.checkbox = FALSE;
   options.list_data.radiobox = FALSE;
+  options.list_data.no_headers = FALSE;
   options.list_data.print_all = FALSE;
   options.list_data.grid_lines = GTK_TREE_VIEW_GRID_LINES_NONE;
   options.list_data.print_column = 0;
@@ -1614,6 +1619,7 @@ yad_options_init (void)
   options.list_data.dclick_action = NULL;
   options.list_data.select_action = NULL;
   options.list_data.row_action = NULL;
+  options.list_data.tree_expanded = FALSE;
   options.list_data.regex_search = FALSE;
   options.list_data.clickable = TRUE;
   options.list_data.no_selection = FALSE;

@@ -336,9 +336,10 @@ typedef struct {
 
 typedef struct {
   GSList *columns;
-  gboolean no_headers;
+  gboolean tree_mode;
   gboolean checkbox;
   gboolean radiobox;
+  gboolean no_headers;
   gboolean print_all;
   GtkTreeViewGridLines grid_lines;
   gint print_column;
@@ -357,6 +358,7 @@ typedef struct {
   gchar *dclick_action;
   gchar *select_action;
   gchar *row_action;
+  gboolean tree_expanded;
   gboolean regex_search;
   gboolean clickable;
   gboolean no_selection;

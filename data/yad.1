@@ -585,6 +585,9 @@ Size of icons may be set in gtk config file at GTK_ICON_SIZE_MENU position of gt
 Special column names \fI@fore@\fP, \fI@back@\fP and \fI@font@\fP sets corresponding rows attributes.
 Values of those columns don't show in results.
 .TP
+.B \-\-tree
+Enbale tree mode. In this mode extra data in form \fIROW_ID[:PARENT_ID]\fP must be passed to yad before each row. See \fBEXAMPLES\fP for details.
+.TP
 .B \-\-checklist
 Use check boxes for the first column. Output checked rows instead of selected rows. Disable multiple selection.
 .TP
@@ -673,6 +676,9 @@ This option doesn't work with \fI--multiple\fP.
 .B \-\-row-action=\fICMD\fP
 Set the \fICMD\fP as a action when the row is added, modified or removed. First argument for the command is the name of action (\fIadd\fP, \fIedit\fP or \fIdel\fP).
 The rest of command line is data from selected row. Output of this command sets the new row values.
+.TP
+.B \-\-tree-expanded
+Expand all tree nodes at startup.
 .TP
 .B \-\-regex-search
 Use regular expressions in search for text fields.
@@ -1175,6 +1181,10 @@ find $HOME \-name '*.ps' | yad \-\-progress \-\-pulsate
 Display a box with all of the installed desktop applications
 .IP
 yad \-\-icons \-\-read-dir=/usr/share/applications
+.PP
+Display list in tree mode
+.IP
+yad --list --tree --column "Items" f Fruits 1:f Apple 2:f Lemon v Vegetables 3:v Popato 4:v Onion
 
 .SH DEVELOPMENT
 There are some developers features providing with YAD.
