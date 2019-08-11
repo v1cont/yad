@@ -538,13 +538,13 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
     {
       GError *err = NULL;
       GString *string = g_string_new (NULL);
+      gboolean node_added = FALSE;
 
       while (channel->is_readable != TRUE);
 
       do
         {
           gint status;
-          gboolean skip_row = FALSE;
 
           do
             {
@@ -589,8 +589,16 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
             {
               if (options.list_data.tree_mode)
                 {
-                  gchar **ids = g_strsplit (string->str, ":", 2);
-                  yad_list_add_row (GTK_TREE_STORE (model), &iter, ids[0], ids[1]);
+                  if (!node_added)
+                    {
+                      gchar **ids = g_strsplit (string->str, ":", 2);
+                      printf ("add node %s\n", string->str);
+                      yad_list_add_row (GTK_TREE_STORE (model), &iter, ids[0], ids[1]);
+                      node_added = TRUE;
+                      continue;
+                    }
+                  else
+                    node_added = FALSE;
                 }
               else
                 yad_list_add_row (GTK_TREE_STORE (model), &iter, NULL, NULL);
@@ -598,6 +606,21 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
           else if (column_count == n_cols)
             {
               /* We're starting a new row */
+              if (options.list_data.tree_mode)
+                {
+                  if (!node_added)
+                    {
+                      gchar **ids = g_strsplit (string->str, ":", 2);
+                      printf ("add node %s\n", string->str);
+                      yad_list_add_row (GTK_TREE_STORE (model), &iter, ids[0], ids[1]);
+                      node_added = TRUE;
+                      continue;
+                    }
+                  else
+                    node_added = FALSE;
+                }
+              else
+                yad_list_add_row (GTK_TREE_STORE (model), &iter, NULL, NULL);
               column_count = 0;
               row_count++;
               if (options.list_data.limit && row_count >= options.list_data.limit)
@@ -605,20 +628,10 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
                   gtk_tree_model_get_iter_first (model, &iter);
                   gtk_tree_store_remove (GTK_TREE_STORE (model), &iter);
                 }
-              if (options.list_data.tree_mode)
-                {
-                  gchar **ids = g_strsplit (string->str, ":", 2);
-                  yad_list_add_row (GTK_TREE_STORE (model), &iter, ids[0], ids[1]);
-                }
-              else
-                yad_list_add_row (GTK_TREE_STORE (model), &iter, NULL, NULL);
             }
 
-          if (!skip_row)
-            {
-              cell_set_data (&iter, column_count, string->str);
-              column_count++;
-            }
+          cell_set_data (&iter, column_count, string->str);
+          column_count++;
         }
       while (g_io_channel_get_buffer_condition (channel) == G_IO_IN);
       g_string_free (string, TRUE);
