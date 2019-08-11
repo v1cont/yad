@@ -204,7 +204,7 @@ popup_menu_item_activate_cb (GtkWidget * w, gpointer data)
 }
 
 static void
-popup_menu_cb (GtkStatusIcon * icon, guint button, guint activate_time, gpointer data)
+popup_menu_cb (GtkStatusIcon *icon, guint button, guint activate_time, gpointer data)
 {
   GtkWidget *menu;
   GtkWidget *item;
@@ -254,7 +254,7 @@ popup_menu_cb (GtkStatusIcon * icon, guint button, guint activate_time, gpointer
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
     }
 
-  gtk_menu_popup_at_widget (GTK_MENU (menu), GTK_WIDGET (icon), GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST, NULL);
+  gtk_menu_popup_at_pointer (GTK_MENU (menu), NULL);
 }
 
 static gboolean
