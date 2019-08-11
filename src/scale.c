@@ -18,12 +18,14 @@
  */
 
 #include "yad.h"
+#include <math.h>
 
 enum {
   PLUS_BTN = 0,
   MINUS_BTN,
 };
 
+static GtkAdjustment *adj;
 static GtkWidget *scale;
 static GtkWidget *plus_btn = NULL;
 static GtkWidget *minus_btn = NULL;
@@ -31,6 +33,14 @@ static GtkWidget *minus_btn = NULL;
 static void
 value_changed_cb (GtkWidget * w, gpointer data)
 {
+  /* Make sure the new value corresponds to a step in the range. This is needed
+   * since the user can move the slider with the mouse which doesn't obey the
+   * step constraint like the keyboard or buttons
+   */
+  gdouble value = gtk_adjustment_get_value ((GtkAdjustment *)adj);
+  gdouble new_value = (gdouble) round(value/options.scale_data.step) * options.scale_data.step;
+  gtk_adjustment_set_value ((GtkAdjustment *)adj, new_value);
+
   if (options.scale_data.print_partial)
     g_print ("%.0f\n", gtk_range_get_value (GTK_RANGE (scale)));
 
@@ -72,7 +82,6 @@ GtkWidget *
 scale_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w;
-  GtkAdjustment *adj;
   gint page;
 
   if (options.scale_data.min_value >= options.scale_data.max_value)

@@ -111,6 +111,8 @@ AM_CONDITIONAL([BUILD_IB], [test x$build_ib = xyes])
 # GSettings
 GLIB_GSETTINGS
 
+AC_SEARCH_LIBS(round, m)
+
 # *******************************
 # Internationalization
 # ******************************* 
