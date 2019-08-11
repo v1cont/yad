@@ -1,3 +1,6 @@
+Version 4.1
+    - fix handling tree data from stdin in list dialog
+
 Version 4.0
     - font can be selected with double-click in font dialog
     - add application chooser dialog and application chooser field in form dialog
