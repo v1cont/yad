@@ -637,6 +637,9 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
       g_string_free (string, TRUE);
     }
 
+  if (options.list_data.tree_expanded)
+    gtk_tree_view_expand_all (GTK_TREE_VIEW (list_view));
+
   if ((condition != G_IO_IN) && (condition != G_IO_IN + G_IO_HUP))
     {
       g_io_channel_shutdown (channel, TRUE, NULL);
