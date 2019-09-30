@@ -171,7 +171,11 @@ tag_event_cb (GtkTextTag * tag, GObject * obj, GdkEvent * ev, GtkTextIter * iter
           gtk_text_iter_forward_to_tag_toggle (&end, tag);
 
           url = gtk_text_iter_get_text (&start, &end);
+#ifndef STANDALONE
           cmdline = g_strdup_printf (g_settings_get_string (settings, "open-command"), url);
+#else
+          cmdline = g_strdup_printf (OPEN_CMD, url);
+#endif
           g_free (url);
 
           g_spawn_command_line_async (cmdline, NULL);

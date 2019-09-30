@@ -35,6 +35,10 @@ if HTML
 yad_SOURCES += html.c
 endif
 
+if STANDALONE
+yad_SOURCES += defaults.h
+endif
+
 yad_CFLAGS = $(GTK_CFLAGS) $(HTML_CFLAGS) $(SPELL_CFLAGS) $(SOURCEVIEW_CFLAGS)
 yad_LDADD = $(GTK_LIBS) $(HTML_LIBS) $(SPELL_LIBS) $(SOURCEVIEW_LIBS)
 

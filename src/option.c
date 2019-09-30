@@ -1443,8 +1443,12 @@ yad_options_init (void)
   /* Initialize general data */
   options.data.dialog_title = NULL;
   options.data.window_icon = "yad";
+#ifndef STANDALONE
   options.data.width = g_settings_get_int (settings, "width");
   options.data.height = g_settings_get_int (settings, "height");
+#else
+  options.data.width = options.data.height = -1;
+#endif
   options.data.use_posx = FALSE;
   options.data.posx = 0;
   options.data.use_posy = FALSE;
@@ -1460,7 +1464,11 @@ yad_options_init (void)
   options.data.buttons = NULL;
   options.data.no_buttons = FALSE;
   options.data.buttons_layout = GTK_BUTTONBOX_END;
-  options.data.borders = g_settings_get_int (settings, "border");;
+#ifndef STANDALONE
+  options.data.borders = g_settings_get_int (settings, "border");
+#else
+  options.data.borders = BORDERS;
+#endif
   options.data.no_markup = FALSE;
   options.data.no_escape = FALSE;
   options.data.escape_ok = FALSE;
@@ -1492,7 +1500,11 @@ yad_options_init (void)
   options.common_data.editable = FALSE;
   options.common_data.tail = FALSE;
   options.common_data.command = NULL;
+#ifndef STANDALONE
   options.common_data.date_format = g_settings_get_string (settings, "date-format");
+#else
+  options.common_data.date_format = DATE_FMT;
+#endif
   options.common_data.float_precision = 3;
   options.common_data.vertical = FALSE;
   options.common_data.align = 0.0;
@@ -1589,7 +1601,11 @@ yad_options_init (void)
   options.icons_data.compact = FALSE;
   options.icons_data.generic = FALSE;
   options.icons_data.width = -1;
+#ifndef STANDALONE
   options.icons_data.term = g_settings_get_string (settings, "terminal");
+#else
+  options.icons_data.term = TERM_CMD;
+#endif
   options.icons_data.sort_by_name = FALSE;
   options.icons_data.descend = FALSE;
   options.icons_data.single_click = FALSE;
@@ -1685,7 +1701,11 @@ yad_options_init (void)
   options.text_data.justify = GTK_JUSTIFY_LEFT;
   options.text_data.margins = 0;
   options.text_data.hide_cursor = TRUE;
+#ifndef STANDALONE
   options.text_data.uri_color = g_settings_get_string (settings, "uri-color");
+#else
+  options.text_data.uri_color = URI_COLOR;
+#endif
   options.text_data.formatted = FALSE;
 
 #ifdef HAVE_SOURCEVIEW
@@ -1860,7 +1880,11 @@ yad_create_context (void)
   g_option_context_add_group (tmp_ctx, a_group);
 
   g_option_context_set_help_enabled (tmp_ctx, TRUE);
+#ifndef STANDALONE
   g_option_context_set_ignore_unknown_options (tmp_ctx, g_settings_get_boolean (settings, "ignore-unknown-options"));
+#else
+  g_option_context_set_ignore_unknown_options (tmp_ctx, TRUE);
+#endif
 
   return tmp_ctx;
 }

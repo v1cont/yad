@@ -46,6 +46,10 @@
 #include <gtksourceview/gtksource.h>
 #endif
 
+#ifdef STANDALONE
+#include "defaults.h"
+#endif
+
 G_BEGIN_DECLS
 
 #define YAD_RESPONSE_OK         0
@@ -529,8 +533,11 @@ typedef struct {
 } YadOptions;
 
 extern YadOptions options;
-extern GSettings *settings;
 extern GtkIconTheme *yad_icon_theme;
+
+#ifndef STANDALONE
+extern GSettings *settings;
+#endif
 
 extern GdkPixbuf *big_fallback_image;
 extern GdkPixbuf *small_fallback_image;

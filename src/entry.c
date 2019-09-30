@@ -188,7 +188,13 @@ entry_create_widget (GtkWidget * dlg)
     {
       gint active, i;
 
-      if (options.common_data.editable || g_settings_get_boolean (settings, "combo-always-editable"))
+      if (options.common_data.editable || 
+#ifndef STANDALONE
+          g_settings_get_boolean (settings, "combo-always-editable")
+#else
+          COMBO_ALWAYS_EDIT
+#endif
+         )
         {
           c = gtk_combo_box_text_new_with_entry ();
           gtk_widget_set_name (c, "yad-entry-edit-combo");

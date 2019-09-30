@@ -34,8 +34,11 @@
 #include "yad.h"
 
 YadOptions options;
-GSettings *settings;
 GtkIconTheme *yad_icon_theme;
+
+#ifndef STANDALONE
+GSettings *settings;
+#endif
 
 GdkPixbuf *big_fallback_image = NULL;
 GdkPixbuf *small_fallback_image = NULL;
@@ -120,7 +123,11 @@ timeout_cb (gpointer data)
     {
       gdouble percent = ((gdouble) options.data.timeout - count) / (gdouble) options.data.timeout;
       gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (w), percent);
+#ifndef STANDALONE
       if (g_settings_get_boolean (settings, "show-remain"))
+#else
+      if (SHOW_REMAIN)
+#endif
         {
           gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout - count);
           gtk_progress_bar_set_text (GTK_PROGRESS_BAR (w), lbl);
@@ -394,7 +401,11 @@ create_dialog (void)
               gtk_box_pack_end (GTK_BOX (cbox), topb, FALSE, FALSE, 2);
             }
 
+#ifndef STANDALONE
           if (g_settings_get_boolean (settings, "show-remain"))
+#else
+          if (SHOW_REMAIN)
+#endif
             {
               gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout);
               gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (topb), TRUE);
@@ -667,7 +678,9 @@ main (gint argc, gchar ** argv)
   gtk_init (&argc, &argv);
   g_set_application_name ("YAD");
 
+#ifndef STANDALONE
   settings = g_settings_new ("yad.settings");
+#endif
 
   yad_icon_theme = gtk_icon_theme_get_default ();
 

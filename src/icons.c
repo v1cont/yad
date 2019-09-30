@@ -346,7 +346,11 @@ parse_desktop_file (gchar * filename)
               gchar *url = g_key_file_get_string (kf, "Desktop Entry", "URL", NULL);
               if (url)
                 {
+#ifndef STANDALONE
                   ent->command = g_strdup_printf (g_settings_get_string (settings, "open-command"), url);
+#else
+                  ent->command = g_strdup_printf (OPEN_CMD, url);
+#endif
                   g_free (url);
                 }
             }
