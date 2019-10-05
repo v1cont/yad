@@ -1433,6 +1433,12 @@ yad_options_init (void)
   options.xid_file = NULL;
 #endif
 
+#ifndef STANDALONE
+  options.debug = g_settings_get_boolean (settings, "debug");
+#else
+  options.debug = FALSE;
+#endif
+
   options.hscroll_policy = GTK_POLICY_AUTOMATIC;
   options.vscroll_policy = GTK_POLICY_AUTOMATIC;
 
@@ -1881,7 +1887,10 @@ yad_create_context (void)
 
   g_option_context_set_help_enabled (tmp_ctx, TRUE);
 #ifndef STANDALONE
-  g_option_context_set_ignore_unknown_options (tmp_ctx, g_settings_get_boolean (settings, "ignore-unknown-options"));
+  if (!options.debug)
+    g_option_context_set_ignore_unknown_options (tmp_ctx, g_settings_get_boolean (settings, "ignore-unknown-options"));
+  else
+    g_option_context_set_ignore_unknown_options (tmp_ctx, FALSE);
 #else
   g_option_context_set_ignore_unknown_options (tmp_ctx, TRUE);
 #endif

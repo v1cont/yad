@@ -36,13 +36,17 @@
       <default>'blue'</default>
       <_summary>Default color for URI in text-info dialog</_summary>
     </key>
+    <key name="max-tab" type="i">
+      <default>100</default>
+      <_summary>Maximum number of tabs in notebook dialog</_summary>
+    </key>
     <key name="ignore-unknown-options" type="b">
       <default>true</default>
       <_summary>Ignore unknown command-line options</_summary>
     </key>
-    <key name="max-tab" type="i">
-      <default>100</default>
-      <_summary>Maximum number of tabs in notebook dialog</_summary>
+    <key name="debug" type="b">
+      <default>false</default>
+      <_summary>Enable debug mode with information about deprecated features</_summary>
     </key>
   </schema>
 </schemalist>

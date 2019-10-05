@@ -525,6 +525,8 @@ typedef struct {
   key_t plug;
   guint tabnum;
 
+  gboolean debug;
+
 #ifndef G_OS_WIN32
   guint kill_parent;
   gboolean print_xid;
