@@ -256,15 +256,17 @@ yad_print_run (void)
     pcap |= GTK_PRINT_CAPABILITY_PREVIEW;
   gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dlg), pcap);
 
-  uri = g_build_filename (g_get_current_dir (), "yad.pdf", NULL);
-  gtk_print_settings_set (print_settings, "output-uri", g_filename_to_uri (uri, NULL, NULL));
-  g_free (uri);
-
   if (print_settings)
     gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dlg), print_settings);
+  else
+    print_settings = gtk_print_settings_new ();
 
   if (page_setup)
     gtk_print_unix_dialog_set_page_setup (GTK_PRINT_UNIX_DIALOG (dlg), page_setup);
+
+  uri = g_build_filename (g_get_current_dir (), "yad.pdf", NULL);
+  gtk_print_settings_set (print_settings, "output-uri", g_filename_to_uri (uri, NULL, NULL));
+  g_free (uri);
 
   /* set window behavior */
   gtk_widget_set_name (dlg, "yad-dialog-window");
