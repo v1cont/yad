@@ -592,7 +592,6 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
                   if (!node_added)
                     {
                       gchar **ids = g_strsplit (string->str, ":", 2);
-                      printf ("add node %s\n", string->str);
                       yad_list_add_row (GTK_TREE_STORE (model), &iter, ids[0], ids[1]);
                       node_added = TRUE;
                       continue;
@@ -611,7 +610,6 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
                   if (!node_added)
                     {
                       gchar **ids = g_strsplit (string->str, ":", 2);
-                      printf ("add node %s\n", string->str);
                       yad_list_add_row (GTK_TREE_STORE (model), &iter, ids[0], ids[1]);
                       node_added = TRUE;
                       continue;
