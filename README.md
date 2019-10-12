@@ -6,8 +6,8 @@ shell scripts. YAD depends on GTK+ only. Minimal GTK+ version is 3.22.0
 
 This software is licensed under the GPL v.3
 
-Project homepage: https://sourceforge.net/projects/yad-dialog/  
-Example usage: https://sourceforge.net/p/yad-dialog/wiki/browse_pages/  
+Project homepage: https://github.com/v1cont/yad
+Complex examples: https://sanana.kiev.ua/index.php/yad
 Mailing list: http://groups.google.com/group/yad-common
 
 Some miscellaneous stuff can be found in data directory including notify-send script
