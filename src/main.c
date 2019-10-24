@@ -901,6 +901,7 @@ main (gint argc, gchar ** argv)
 
     case YAD_MODE_VERSION:
       g_print ("%s (GTK+ %d.%d.%d)\n", VERSION, gtk_major_version, gtk_minor_version, gtk_micro_version);
+      ret = 0;
       break;
 
 #ifdef HAVE_SPELL
