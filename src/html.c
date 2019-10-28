@@ -48,8 +48,7 @@ load_uri (const gchar * uri)
         addr = g_filename_to_uri (uri, NULL, NULL);
       else
         {
-          gchar *afn = g_new0 (gchar, PATH_MAX);
-          realpath (uri, afn);
+          gchar *afn = realpath (uri, NULL);
           addr = g_filename_to_uri (afn, NULL, NULL);
           g_free (afn);
         }
