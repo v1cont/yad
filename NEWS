@@ -1,3 +1,12 @@
+Version 5.0
+    - add debug mode. this feature can be turned on through gsettings.
+      in this mode yad will warn about obsolete or nonexistent options
+    - add configure option --enable-standalone for build yad without gsettings support
+    - fix expanding tree nodes for stdin data
+    - some fixes in print dialog
+    - fix --uri-handler option in html dialog
+    - fix wrong autoclose behavior in progress dialog
+
 Version 4.1
     - fix handling tree data from stdin in list dialog
 
