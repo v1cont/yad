@@ -660,7 +660,7 @@ create_dialog (void)
 
       if (xf)
         {
-          fprintf (xf, "0x%lX", GDK_WINDOW_XID (gtk_widget_get_window (dlg)));
+          fprintf (xf, "0x%lX\n", GDK_WINDOW_XID (gtk_widget_get_window (dlg)));
 
           if (options.xid_file)
             fclose (xf);
