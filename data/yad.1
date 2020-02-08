@@ -881,7 +881,13 @@ Show cursor in read-only mode.
 .B \-\-show-uri
 Make links in text clickable. Links opens with \fIxdg-open\fP command.
 .TP
-.B \-\-uri-color
+.B \-\-fore=\fICOLOR\fP
+Set default color for text.
+.TP
+.B \-\-back=\fICOLOR\fP
+Set default color for background.
+.TP
+.B \-\-uri-color=\fICOLOR\fP
 Set color for links. Default is \fIblue\fP.
 .TP
 .B \-\-lang=LANGUAGE
@@ -893,6 +899,7 @@ Set used theme to \fITHEME\fP. This option works only if yad builds with gtksour
 .B \-\-listen
 Listen data from stdin even if filename was specified.
 
+If \fIfontname\fP option is specified for text dialog, the description of font must be in CSS style (not in a Pango style).
 Sending FormFeed character to text dialog clears it. This symbol may be sent as \fIecho \-e '\\f'\fP.
 Pressing \fICtrl+S\fP popups the search entry in text dialog.
 

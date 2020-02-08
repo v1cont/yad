@@ -601,6 +601,10 @@ static GOptionEntry text_options[] = {
     N_("Set justification (left, right, center or fill)"), N_("TYPE") },
   { "margins", 0, 0, G_OPTION_ARG_INT, &options.text_data.margins,
     N_("Set text margins"), N_("SIZE") },
+  { "fore", 0, 0, G_OPTION_ARG_STRING, &options.text_data.fore,
+    N_("Use specified color for text"), N_("COLOR") },
+  { "back", 0, 0, G_OPTION_ARG_STRING, &options.text_data.back,
+    N_("Use specified color for background"), N_("COLOR") },
   { "show-cursor", 0, G_OPTION_FLAG_REVERSE, G_OPTION_ARG_NONE, &options.text_data.hide_cursor,
     N_("Show cursor in read-only mode"), NULL },
   { "show-uri", 0, 0, G_OPTION_ARG_NONE, &options.text_data.uri,
@@ -1707,6 +1711,8 @@ yad_options_init (void)
   options.text_data.justify = GTK_JUSTIFY_LEFT;
   options.text_data.margins = 0;
   options.text_data.hide_cursor = TRUE;
+  options.text_data.fore = NULL;
+  options.text_data.back = NULL;
 #ifndef STANDALONE
   options.text_data.uri_color = g_settings_get_string (settings, "uri-color");
 #else

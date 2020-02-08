@@ -439,6 +439,8 @@ typedef struct {
   gboolean hide_cursor;
   gchar *uri_color;
   gboolean formatted;
+  gchar *fore;
+  gchar *back;
 } YadTextData;
 
 #ifdef HAVE_SOURCEVIEW

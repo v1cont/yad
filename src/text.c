@@ -449,6 +449,30 @@ text_create_widget (GtkWidget * dlg)
   if (options.text_data.wrap)
     gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_WORD_CHAR);
 
+  if (options.common_data.font || options.text_data.fore || options.text_data.back)
+    {
+      GtkCssProvider *provider;
+      GtkStyleContext *context;
+      GString *css;
+
+      css = g_string_new ("textview, textview text {\n");
+      if (options.common_data.font)
+        g_string_append_printf (css, " font: %s;\n", options.common_data.font);
+      if (options.text_data.fore)
+        g_string_append_printf (css, " color: %s;\n", options.text_data.fore);
+      if (options.text_data.back)
+        g_string_append_printf (css, " background-color: %s;\n", options.text_data.back);
+      g_string_append (css, "}\n");
+
+      provider = gtk_css_provider_new ();
+      gtk_css_provider_load_from_data (provider, css->str, -1, NULL);
+      context = gtk_widget_get_style_context (text_view);
+      gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (provider),
+                                      GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+      g_string_free (css, TRUE);
+    }
+
 #ifdef HAVE_SOURCEVIEW
   if (options.source_data.theme)
     {
