@@ -233,6 +233,8 @@ typedef struct {
   gboolean keep_icon_size;
   GtkButtonBoxStyle buttons_layout;
   gint def_resp;
+  gboolean use_interp;
+  gchar *interp;
   /* window settings */
   gboolean sticky;
   gboolean fixed;
@@ -651,6 +653,9 @@ void parse_geometry ();
 
 gboolean get_bool_val (gchar *str);
 gchar *print_bool_val (gboolean val);
+
+gint run_command_sync (gchar *cmd, gchar **out);
+void run_command_async (gchar *cmd);
 
 #ifdef HAVE_SPELL
 void show_langs ();

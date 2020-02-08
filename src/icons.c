@@ -134,14 +134,12 @@ activate_cb (GtkWidget * view, GtkTreePath * path, gpointer data)
     {
       if (in_term)
         {
-          gchar *tcmd;
-
-          tcmd = g_strdup_printf (options.icons_data.term, cmd);
-          g_spawn_command_line_async (tcmd, NULL);
+          gchar *tcmd = g_strdup_printf (options.icons_data.term, cmd);
+          run_command_async (tcmd);
           g_free (tcmd);
         }
       else
-        g_spawn_command_line_async (cmd, NULL);
+        run_command_async (cmd);
     }
 }
 

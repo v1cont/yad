@@ -178,7 +178,7 @@ tag_event_cb (GtkTextTag * tag, GObject * obj, GdkEvent * ev, GtkTextIter * iter
 #endif
           g_free (url);
 
-          g_spawn_command_line_async (cmdline, NULL);
+          run_command_async (cmdline);
 
           g_free (cmdline);
           return TRUE;

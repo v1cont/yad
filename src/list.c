@@ -756,7 +756,7 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *column
           gchar *data = NULL;
           gint exit;
 
-          g_spawn_command_line_sync (cmd + 1, &data, NULL, &exit, NULL);
+          exit = run_command_sync (cmd + 1, &data);
           if (exit == 0)
             {
               gint i;
@@ -774,7 +774,7 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *column
           g_free (data);
         }
       else
-        g_spawn_command_line_async (cmd, NULL);
+        run_command_async (cmd);
 
       g_free (cmd);
     }
@@ -832,7 +832,7 @@ select_cb (GtkTreeSelection *sel, gpointer data)
     cmd = g_strdup_printf ("%s %s", options.list_data.select_action, args);
   g_free (args);
 
-  g_spawn_command_line_async (cmd, NULL);
+  run_command_async (cmd);
 
   g_free (cmd);
 }
@@ -870,7 +870,7 @@ add_row_cb (GtkMenuItem *item, gpointer data)
 
       /* run command */
       cmd = g_strdup_printf ("%s add", options.list_data.row_action);
-      g_spawn_command_line_sync (cmd, &out, NULL, &exit, NULL);
+      exit = run_command_sync (cmd, &out);
       g_free (cmd);
       if (exit == 0)
         {
@@ -913,7 +913,7 @@ edit_row_cb (GtkMenuItem *item, gpointer data)
       args = get_data_as_string (&iter);
       cmd = g_strdup_printf ("%s edit %s", options.list_data.row_action, args);
       g_free (args);
-      g_spawn_command_line_sync (cmd, &out, NULL, &exit, NULL);
+      exit = run_command_sync (cmd, &out);
       g_free (cmd);
       if (exit == 0)
         {
@@ -956,7 +956,7 @@ del_row_cb (GtkMenuItem *item, gpointer data)
           args = get_data_as_string (&iter);
           cmd = g_strdup_printf ("%s del %s", options.list_data.row_action, args);
           g_free (args);
-          g_spawn_command_line_sync (cmd, NULL, NULL, &exit, NULL);
+          exit = run_command_sync (cmd, NULL);
           g_free (cmd);
           if (exit == 0)
             gtk_tree_store_remove (GTK_TREE_STORE (model), &iter);

@@ -373,7 +373,7 @@ button_clicked_cb (GtkButton * b, gpointer data)
           gchar *data;
           gint exit = 1;
           GString *cmd = expand_action (action + 1);
-          g_spawn_command_line_sync (cmd->str, &data, NULL, &exit, NULL);
+          exit = run_command_sync (cmd->str, &data);
           if (exit == 0)
             {
               guint i = 0;
@@ -402,7 +402,7 @@ button_clicked_cb (GtkButton * b, gpointer data)
       else
         {
           GString *cmd = expand_action (action);
-          g_spawn_command_line_async (cmd->str, NULL);
+          run_command_async (cmd->str);
           g_string_free (cmd, TRUE);
         }
     }

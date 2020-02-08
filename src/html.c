@@ -121,7 +121,7 @@ policy_cb (WebKitWebView *v, WebKitPolicyDecision *pd, WebKitPolicyDecisionType 
       g_setenv ("YAD_HTML_STATE", v2, TRUE);
 
       cmd = g_strdup_printf ("%s '%s'", options.html_data.uri_cmd, uri);
-      g_spawn_command_line_sync (cmd, NULL, NULL, &status, NULL);
+      status = run_command_sync (cmd, NULL);
       g_free (cmd);
 
       g_unsetenv ("YAD_HTML_BUTTON");
