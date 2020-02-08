@@ -1925,8 +1925,8 @@ msgstr "Максимальное количество вкладок в диал
 
 #: ../data/yad.gschema.xml.in.h:13
 msgid "Ignore unknown command-line options"
-msgstr "Игнорироввать неизвестные арументы в командной строке"
+msgstr "Игнорировать неизвестные арументы в командной строке"
 
 #: ../data/yad.gschema.xml.in.h:14
 msgid "Enable debug mode with information about deprecated features"
-msgstr ""
+msgstr "Разрешить режим отладки с информированием об устаревших функциях"

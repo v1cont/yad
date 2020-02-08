@@ -1933,4 +1933,4 @@ msgstr "Ігнорувати невідомі аргументи"
 
 #: ../data/yad.gschema.xml.in.h:14
 msgid "Enable debug mode with information about deprecated features"
-msgstr ""
+msgstr "Дозволити режим налагодження з інформуванням про застарілі функції"
