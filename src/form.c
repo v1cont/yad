@@ -325,8 +325,6 @@ set_field_value (guint num, gchar * value)
             gtk_widget_destroy (cw);
           }
 
-        printf ("set value %s for app field\n");
-
         if (value && value[0])
           b = gtk_app_chooser_button_new (value);
         else
