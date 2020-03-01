@@ -51,6 +51,14 @@ paned_create_widget (GtkWidget * dlg)
 
   gtk_paned_set_position (GTK_PANED (w), options.paned_data.splitter);
 
+#ifdef GDK_WINDOWING_X11
+  if (!GDK_IS_X11_WINDOW (gtk_widget_get_window (w)))
+    {
+      g_printerr("paned only works with X11\n");
+      exit (-1);
+    }
+#endif
+
   s = gtk_socket_new ();
   gtk_paned_add1 (GTK_PANED (w), s);
   g_object_set_data (G_OBJECT (w), "s1", s);
