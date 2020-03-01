@@ -555,26 +555,32 @@ create_dialog (void)
     }
 
 #ifndef G_OS_WIN32
+#ifdef GDK_WINDOWING_X11
   /* print xid */
   if (options.print_xid)
     {
-      FILE *xf;
-
-      if (options.xid_file)
-        xf = fopen (options.xid_file, "w");
-      else
-        xf = stderr;
-
-      if (xf)
+      GdkWindow *window = gtk_widget_get_window (dlg);
+      if (GDK_IS_X11_WINDOW (window))
         {
-          fprintf (xf, "0x%lX", GDK_WINDOW_XID (gtk_widget_get_window (dlg)));
+          FILE *xf;
 
           if (options.xid_file)
-            fclose (xf);
+            xf = fopen (options.xid_file, "w");
           else
-            fflush (xf);
+            xf = stderr;
+
+          if (xf)
+            {
+              fprintf (xf, "0x%lX", GDK_WINDOW_XID (window));
+
+              if (options.xid_file)
+                fclose (xf);
+              else
+                fflush (xf);
+            }
         }
     }
+#endif
 #endif
 
   return dlg;
@@ -666,6 +672,9 @@ main (gint argc, gchar ** argv)
   GError *err = NULL;
   gint w, h;
   gchar *str;
+#ifndef G_OS_WIN32
+  GdkWindow *window;
+#endif
 
   setlocale (LC_ALL, "");
 
@@ -835,9 +844,15 @@ main (gint argc, gchar ** argv)
       dialog = create_dialog ();
 
 #ifndef G_OS_WIN32
-      /* add YAD_XID variable */
-      str = g_strdup_printf ("0x%X", (guint) GDK_WINDOW_XID (gtk_widget_get_window (dialog)));
-      g_setenv ("YAD_XID", str, TRUE);
+#ifdef GDK_WINDOWING_X11
+      window = gtk_widget_get_window (dialog);
+      if (GDK_IS_X11_WINDOW (window))
+        {
+          /* add YAD_XID variable */
+          str = g_strdup_printf ("0x%X", (guint) GDK_WINDOW_XID (window));
+          g_setenv ("YAD_XID", str, TRUE);
+	}
+#endif
 #endif
 
       /* make some specific init actions */
