@@ -52,6 +52,14 @@ notebook_create_widget (GtkWidget * dlg)
   gtk_notebook_set_tab_pos (GTK_NOTEBOOK (w), options.notebook_data.pos);
   gtk_container_set_border_width (GTK_CONTAINER (w), 5);
 
+#ifdef GDK_WINDOWING_X11
+  if (!GDK_IS_X11_WINDOW (gtk_widget_get_window (w)))
+    {
+      g_printerr("notebook only works with X11\n");
+      exit (-1);
+    }
+#endif
+
   /* add tabs */
   for (tab = options.notebook_data.tabs; tab; tab = tab->next)
     {
