@@ -100,6 +100,9 @@ expand_action (gchar * cmd)
                 case YAD_FIELD_FONT:
                   arg = g_shell_quote (gtk_font_chooser_get_font (GTK_FONT_CHOOSER (g_slist_nth_data (fields, num))));
                   break;
+                case YAD_FIELD_LINK:
+                  arg = g_shell_quote (gtk_link_button_get_uri (GTK_LINK_BUTTON (g_slist_nth_data (fields, num))));
+                  break;
                 case YAD_FIELD_APP:
                   {
                     GList *wl = gtk_container_get_children (GTK_CONTAINER (g_slist_nth_data (fields, num)));
@@ -346,6 +349,10 @@ set_field_value (guint num, gchar * value)
     case YAD_FIELD_BUTTON:
     case YAD_FIELD_FULL_BUTTON:
       g_object_set_data_full (G_OBJECT (w), "cmd", g_strdup (value), g_free);
+      break;
+
+    case YAD_FIELD_LINK:
+      gtk_link_button_set_uri (GTK_LINK_BUTTON (w), value);
       break;
 
     case YAD_FIELD_TEXT:
@@ -745,7 +752,8 @@ form_create_widget (GtkWidget * dlg)
           /* add field label */
           l = NULL;
           if (fld->type != YAD_FIELD_CHECK && fld->type != YAD_FIELD_BUTTON &&
-              fld->type != YAD_FIELD_FULL_BUTTON && fld->type != YAD_FIELD_LABEL && fld->type != YAD_FIELD_TEXT)
+              fld->type != YAD_FIELD_FULL_BUTTON && fld->type != YAD_FIELD_LINK &&
+              fld->type != YAD_FIELD_LABEL && fld->type != YAD_FIELD_TEXT)
             {
               gchar *buf = g_strcompress (fld->name);
               l = gtk_label_new (NULL);
@@ -957,6 +965,16 @@ form_create_widget (GtkWidget * dlg)
               gtk_widget_set_hexpand (e, TRUE);
               fields = g_slist_append (fields, e);
               break;
+
+            case YAD_FIELD_LINK:
+                {
+                  gchar *buf = g_strcompress (fld->name);
+                  e = gtk_link_button_new_with_label ("", buf);
+                  gtk_widget_set_name (e, "yad-form-link");
+                  gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
+                  gtk_widget_set_hexpand (e, TRUE);
+                  fields = g_slist_append (fields, e);
+                }
 
             case YAD_FIELD_LABEL:
               if (fld->name[0])
@@ -1203,6 +1221,17 @@ form_print_field (guint fn)
                   options.common_data.separator);
       else
         g_printf ("%d%s", (gint) gtk_range_get_value (GTK_RANGE (g_slist_nth_data (fields, fn))),
+                  options.common_data.separator);
+      break;
+    case YAD_FIELD_LINK:
+      if (options.common_data.quoted_output)
+        {
+          buf = g_shell_quote (gtk_link_button_get_uri (GTK_LINK_BUTTON (g_slist_nth_data (fields, fn))));
+          g_printf ("%s%s", buf, options.common_data.separator);
+          g_free (buf);
+        }
+      else
+        g_printf ("%s%s", gtk_link_button_get_uri (GTK_LINK_BUTTON (g_slist_nth_data (fields, fn))),
                   options.common_data.separator);
       break;
     case YAD_FIELD_BUTTON:
