@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2019, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2020, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #include <ctype.h>
@@ -967,14 +967,15 @@ form_create_widget (GtkWidget * dlg)
               break;
 
             case YAD_FIELD_LINK:
-                {
-                  gchar *buf = g_strcompress (fld->name);
-                  e = gtk_link_button_new_with_label ("", buf);
-                  gtk_widget_set_name (e, "yad-form-link");
-                  gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
-                  gtk_widget_set_hexpand (e, TRUE);
-                  fields = g_slist_append (fields, e);
-                }
+              {
+                gchar *buf = g_strcompress (fld->name[0] ? fld->name : _("Link"));
+                e = gtk_link_button_new_with_label ("", buf);
+                gtk_widget_set_name (e, "yad-form-link");
+                gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
+                gtk_widget_set_hexpand (e, TRUE);
+                fields = g_slist_append (fields, e);
+                break;
+              }
 
             case YAD_FIELD_LABEL:
               if (fld->name[0])
