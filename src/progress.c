@@ -31,8 +31,16 @@ static GtkWidget *progress_log;
 static GtkTextBuffer *log_buffer;
 
 static gboolean
+pulsate_progress_bar (gpointer user_data)
+{
+  gtk_progress_bar_pulse (GTK_PROGRESS_BAR (progress_bar));
+  return TRUE;
+}
+
+static gboolean
 handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 {
+  static guint pulsate_timeout = 0;
   float percentage = 0.0;
 
   if ((condition == G_IO_IN) || (condition == G_IO_IN + G_IO_HUP))
@@ -41,6 +49,12 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
       GError *err = NULL;
 
       string = g_string_new (NULL);
+
+      if (options.progress_data.pulsate)
+        {
+          if (pulsate_timeout == 0)
+            pulsate_timeout = g_timeout_add (100, pulsate_progress_bar, NULL);
+        }
 
       while (channel->is_readable != TRUE) ;
 
@@ -112,9 +126,6 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                 }
             }
 
-          if (options.progress_data.pulsate)
-            gtk_progress_bar_pulse (GTK_PROGRESS_BAR (progress_bar));
-
         }
       while (g_io_channel_get_buffer_condition (channel) == G_IO_IN);
       g_string_free (string, TRUE);
@@ -124,13 +135,18 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
     {
       gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar), 1.0);
 
+      if (options.progress_data.pulsate)
+        {
+          g_source_remove (pulsate_timeout);
+          pulsate_timeout = 0;
+        }
+
       if (options.progress_data.autoclose && options.plug == -1)
         yad_exit (options.data.def_resp);
 
       g_io_channel_shutdown (channel, TRUE, NULL);
       return FALSE;
     }
-
   return TRUE;
 }
 
