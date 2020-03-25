@@ -382,6 +382,8 @@ static GOptionEntry icons_options[] = {
     N_("Set the width of dialog items"), NULL },
   { "icon-size", 0,  G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_INT, &options.common_data.icon_size,
     N_("Force using specified icon size"), N_("SIZE") },
+  { "icon-width", 0,  G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_INT, &options.common_data.icon_size,
+    N_("Alias for --icon-size"), N_("SIZE") },
   { "term", 0, 0, G_OPTION_ARG_STRING, &options.icons_data.term,
     /* xgettext: no-c-format */
     N_("Use specified pattern for launch command in terminal (default: xterm -e %s)"), N_("PATTERN") },
