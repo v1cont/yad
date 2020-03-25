@@ -84,7 +84,11 @@ picture_fit_to_window ()
     {
       GdkPixbuf *pb = gdk_pixbuf_scale_simple (g_object_ref (orig_pb), width * factor, height * factor, GDK_INTERP_HYPER);
       if (pb)
-        gtk_image_set_from_pixbuf (GTK_IMAGE (picture), pb);
+        {
+          GdkPixbuf *old_pb = gtk_image_get_pixbuf (GTK_IMAGE (picture));
+          gtk_image_set_from_pixbuf (GTK_IMAGE (picture), pb);
+          g_object_unref (old_pb);
+        }
     }
 }
 
@@ -110,6 +114,7 @@ change_size_cb (GtkWidget *w, gint type)
       break;
     case SIZE_ORIG:
       gtk_image_set_from_pixbuf (GTK_IMAGE (picture), orig_pb);
+      g_object_unref (pb);
       break;
     case SIZE_INC:
       new_pb = gdk_pixbuf_scale_simple (pb, width + options.picture_data.inc,
