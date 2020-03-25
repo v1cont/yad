@@ -22,6 +22,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <pango/pango.h>
+#include <locale.h>
 
 typedef enum {
   PANGO_SPEC,
