@@ -207,13 +207,21 @@ get_color (GdkColor *c, guint64 alpha)
 {
   gchar *res = NULL;
 
+  /*
+   * Empirical learning about GTK-2 GtkColorButton and gtk_color_button_get_color():
+   * - Individual HEX channel values return as 0xABAB where AB represents the value
+   *   EXCEPTION: colors picked with the wheel return channels as 0xABCD where AB reflects the value but CD is garbage
+   * - Sometimes a wheel selection returns the red channel AB value off by 1
+   *   This can be worked-around by picking from the wheel disk with the eyedropper
+   */
+
   switch (options.color_data.mode)
     {
     case YAD_COLOR_HEX:
       if (options.color_data.alpha)
-        res = g_strdup_printf ("#%02X%02X%02X%02X", c->red & 0xFF, c->green & 0xFF, c->blue & 0xFF, (guint) ((alpha / 256) & 0xFF));
+        res = g_strdup_printf ("#%02X%02X%02X%02X", (c->red >> 8u) & 0xFF, (c->green >> 8u) & 0xFF, (c->blue >> 8u) & 0xFF, (guint) ((alpha / 256) & 0xFF));
       else
-        res = g_strdup_printf ("#%02X%02X%02X", c->red & 0xFF, c->green & 0xFF, c->blue & 0xFF);
+        res = g_strdup_printf ("#%02X%02X%02X", (c->red >> 8u) & 0xFF, (c->green >> 8u) & 0xFF, (c->blue >> 8u) & 0xFF);
       break;
     case YAD_COLOR_RGB:
       if (options.color_data.alpha)
