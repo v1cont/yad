@@ -127,31 +127,40 @@ notebook_print_result (void)
 void
 notebook_close_childs (void)
 {
-  guint i, n_tabs;
+  guint i, j, n_tabs, signal;
   struct shmid_ds buf;
   gboolean is_running;
 
   n_tabs = g_slist_length (options.notebook_data.tabs);
-  for (i = 1; i <= n_tabs; i++)
-    {
-      if (tabs[i].pid != -1)
-        kill (tabs[i].pid, SIGUSR2);
-    }
-
-  /* wait for stop subprocesses */
+  signal = SIGUSR2;
+  /* wait forever for subprocesses to exit */
   do
     {
       is_running = FALSE;
       for (i = 1; i <= n_tabs; i++)
         {
-          if (tabs[i].pid != -1 && kill (tabs[i].pid, 0) == 0)
-            {
-              is_running = TRUE;
-              break;
-            }
+          if (tabs[i].pid != -1)
+            kill (tabs[i].pid, signal);
         }
-      if (is_running)
-        usleep (1000);
+
+      /* wait max 1 s for subprocesses to exit */
+      for (j = 1; j <= 1000; j++)
+        {
+          for (i = 1; i <= n_tabs; i++)
+            {
+              if (tabs[i].pid != -1 && kill (tabs[i].pid, 0) == 0)
+                {
+                  is_running = TRUE;
+                  break;
+                }
+            }
+          if (!is_running)
+            break;
+          usleep (1000);
+        }
+
+      /* forcefully after 1 s */
+      signal = SIGTERM;
     }
   while (is_running);
 
