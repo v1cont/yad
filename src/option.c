@@ -147,7 +147,9 @@ static GOptionEntry general_options[] = {
   { "on-top", 0, 0, G_OPTION_ARG_NONE, &options.data.ontop,
     N_("Place window on top"), NULL },
   { "center", 0, 0, G_OPTION_ARG_NONE, &options.data.center,
-    N_("Place window on center of screen"), NULL },
+    N_("Place window in the center of the screen"), NULL },
+  { "center-keep", 0, 0, G_OPTION_ARG_NONE, &options.data.center_keep,
+    N_("Keep window centered (old behavior)"), NULL },
   { "mouse", 0, 0, G_OPTION_ARG_NONE, &options.data.mouse,
     N_("Place window at the mouse position"), NULL },
   { "undecorated", 0, 0, G_OPTION_ARG_NONE, &options.data.undecorated,
@@ -1476,6 +1478,7 @@ yad_options_init (void)
   options.data.fixed = FALSE;
   options.data.ontop = FALSE;
   options.data.center = FALSE;
+  options.data.center_keep = FALSE;
   options.data.mouse = FALSE;
   options.data.undecorated = FALSE;
   options.data.skip_taskbar = FALSE;

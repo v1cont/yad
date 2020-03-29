@@ -239,6 +239,7 @@ typedef struct {
   gboolean fixed;
   gboolean ontop;
   gboolean center;
+  gboolean center_keep;
   gboolean mouse;
   gboolean undecorated;
   gboolean skip_taskbar;

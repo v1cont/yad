@@ -377,7 +377,7 @@ create_dialog (void)
   /* set window size and position */
   if (!options.data.maximized && !options.data.fullscreen)
     {
-      if (options.data.center)
+      if (options.data.center_keep)
         gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER_ALWAYS);
       else if (options.data.mouse)
         gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_MOUSE);
@@ -616,7 +616,7 @@ create_dialog (void)
 
       gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
 
-      if (options.data.use_posx || options.data.use_posy)
+      if (options.data.use_posx || options.data.use_posy || options.data.center)
         {
           gint ww, wh, sw, sh;
           gtk_window_get_size (GTK_WINDOW (dlg), &ww, &wh);
@@ -626,15 +626,22 @@ create_dialog (void)
           gdk_window_get_geometry (gdk_get_default_root_window (), NULL, NULL, &sw, &sh);
 #endif
           /* place window to specified coordinates */
-          if (!options.data.use_posx)
-            gtk_window_get_position (GTK_WINDOW (dlg), &options.data.posx, NULL);
-          if (!options.data.use_posy)
-            gtk_window_get_position (GTK_WINDOW (dlg), NULL, &options.data.posy);
-          if (options.data.posx < 0)
-            options.data.posx = sw - ww + options.data.posx;
-          if (options.data.posy < 0)
-            options.data.posy = sh - wh + options.data.posy;
-          gtk_window_move (GTK_WINDOW (dlg), options.data.posx, options.data.posy);
+          if (options.data.center)
+            {
+              gtk_window_move (GTK_WINDOW (dlg), (sw - options.data.width) / 2, (sh - options.data.height) / 2);
+            }
+          else
+            {
+              if (!options.data.use_posx)
+                gtk_window_get_position (GTK_WINDOW (dlg), &options.data.posx, NULL);
+              if (!options.data.use_posy)
+                gtk_window_get_position (GTK_WINDOW (dlg), NULL, &options.data.posy);
+              if (options.data.posx < 0)
+                options.data.posx = sw - ww + options.data.posx;
+              if (options.data.posy < 0)
+                options.data.posy = sh - wh + options.data.posy;
+              gtk_window_move (GTK_WINDOW (dlg), options.data.posx, options.data.posy);
+            }
         }
     }
   else
