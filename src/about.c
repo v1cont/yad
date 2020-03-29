@@ -23,8 +23,16 @@ gint
 yad_about (void)
 {
   GtkWidget *dialog;
-  const gchar *const authors[] = {
+  const gchar *const authors_et_al[] = {
     "Victor Ananjevsky <ananasik@gmail.com>",
+    PACKAGE_URL " ",
+    "step http://github.com/step-/yad/" " ",
+    NULL
+  };
+  gchar * roles[] = {
+    _("Author:\n\t%s"),
+    _("Homepage:\n\t%s"),
+    _("Maintainer GTK+ 2:\n\t%s"),
     NULL
   };
   const gchar *translators = N_("translator-credits");
@@ -38,7 +46,11 @@ yad_about (void)
        "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the "
        "GNU General Public License for more details.\n\n"
        "You should have received a copy of the GNU General Public License "
-       "along with YAD. If not, see <http://www.gnu.org/licenses/>.");
+       "along with YAD. If not, see http://www.gnu.org/licenses/\x20.");
+
+  gchar **p, **q;
+  for (p = (gchar **) authors_et_al, q = roles; *p && *q; p++, q++)
+    *q = g_strdup_printf (*q, *p);
 
   gchar *comments = g_strdup_printf (_("Yet Another Dialog\n"
                                        "(show dialog boxes from shell scripts)\n"
@@ -52,7 +64,8 @@ yad_about (void)
 #ifdef HAVE_SPELL
                                        "Built with GtkSpell\n"
 #endif
-                                       "Using GTK+ %d.%d.%d\n"),
+                                       "Using GTK+ %d.%d.%d\n\n"
+                                       "CLICK CREDITS FOR LINKS\n"),
                                      gtk_major_version, gtk_minor_version, gtk_micro_version);
 
   dialog = gtk_about_dialog_new ();
@@ -60,13 +73,13 @@ yad_about (void)
   g_object_set (G_OBJECT (dialog),
                 "name", PACKAGE_NAME,
                 "version", PACKAGE_VERSION,
-                "copyright", "Copyright \xc2\xa9 2008-2019, Victor Ananjevsky <ananasik@gmail.com>",
+                "copyright", "Copyright \xc2\xa9 2008-2019, Victor Ananjevsky",
                 "comments", comments,
-                "authors", authors,
-                "website", PACKAGE_URL,
+                "authors", roles,
+                "website", "",
                 "translator-credits", translators,
-                "wrap-license", TRUE, 
-                "license", license, 
+                "wrap-license", TRUE,
+                "license", license,
                 "logo-icon-name", "yad",
                 NULL);
 
