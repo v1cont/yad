@@ -811,7 +811,11 @@ main (gint argc, gchar ** argv)
     }
 
 #ifndef GDK_WINDOWING_X11
-  if (options.mode == YAD_MODE_NOTEBOOK || options.mode == YAD_MODE_PANED)
+  if (options.mode == YAD_MODE_NOTEBOOK || options.mode == YAD_MODE_PANED
+#ifdef HAVE_TRAY
+      || options.mode == YAD_MODE_NOTIFICATION
+#endif
+      )
     {
       g_printerr ("This mode not supported outside X11");
       return 1;
