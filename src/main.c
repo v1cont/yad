@@ -554,7 +554,7 @@ create_dialog (void)
         gtk_window_fullscreen (GTK_WINDOW (dlg));
     }
 
-#ifndef G_OS_WIN32
+#ifdef GDK_WINDOWING_X11
   /* print xid */
   if (options.print_xid)
     {
@@ -790,6 +790,15 @@ main (gint argc, gchar ** argv)
   signal (SIGUSR2, sa_usr2);
 #endif
 
+#ifndef GDK_WINDOWING_X11
+  if (options.plug != -1)
+    {
+      options.plug = -1;
+      if (options.debug)
+        g_printerr ("YAD: WARNING: --plug mode not supported outside X11");
+    }
+#endif
+
   /* plug mode */
   if (options.plug != -1)
     {
@@ -798,6 +807,14 @@ main (gint argc, gchar ** argv)
       shmdt (tabs);
       return ret;
     }
+
+#ifndef GDK_WINDOWING_X11
+  if (options.mode == YAD_MODE_NOTEBOOK || options.mode == YAD_MODE_PANED)
+    {
+      g_printerr ("This mode not supported outside X11");
+      return 1;
+    }
+#endif
 
   switch (options.mode)
     {
@@ -834,7 +851,7 @@ main (gint argc, gchar ** argv)
     default:
       dialog = create_dialog ();
 
-#ifndef G_OS_WIN32
+#ifdef GDK_WINDOWING_X11
       /* add YAD_XID variable */
       str = g_strdup_printf ("0x%X", (guint) GDK_WINDOW_XID (gtk_widget_get_window (dialog)));
       g_setenv ("YAD_XID", str, TRUE);
