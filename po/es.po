@@ -1347,4 +1347,4 @@ msgstr "Explorador de Iconos"
 
 #: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
-msgstr "Incpeccionar tema de íconos GTK"
+msgstr "Inspeccionar tema de íconos GTK"
