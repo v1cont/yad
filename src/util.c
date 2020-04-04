@@ -632,7 +632,7 @@ run_command_sync (gchar *cmd, gchar **out)
   if (!g_spawn_command_line_sync (full_cmd, out, NULL, &ret, &err))
     {
       if (options.debug)
-        g_printerr (_("WARNING: Run command failed: %s"), err->message);
+        g_printerr (_("WARNING: Run command failed: %s\n"), err->message);
       g_error_free (err);
     }
 
@@ -659,7 +659,7 @@ run_command_async (gchar *cmd)
   if (!g_spawn_command_line_async (full_cmd, &err))
     {
       if (options.debug)
-        g_printerr (_("WARNING: Run command failed: %s"), err->message);
+        g_printerr (_("WARNING: Run command failed: %s\n"), err->message);
       g_error_free (err);
     }
 
