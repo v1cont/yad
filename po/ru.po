@@ -1,13 +1,13 @@
 # Russian translation for YAD
 # This file is distributed under the same license as the YAD package.
 #
-# Victor Ananjevsky <ananasik@gmail.com>, 2009-2019.
+# Victor Ananjevsky <ananasik@gmail.com>, 2009-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-03 14:17+0300\n"
+"POT-Creation-Date: 2020-04-04 08:14+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -165,7 +165,7 @@ msgstr "Не могу разобрать файл %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Не могу открыть каталог %s: %s\n"
 
-#: ../src/main.c:132 ../src/main.c:442
+#: ../src/main.c:134 ../src/main.c:444
 #, c-format
 msgid "%d sec"
 msgstr "%d сек"
@@ -179,6 +179,16 @@ msgstr "Не могу разобрать YAD_OPTIONS: %s\n"
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Не удается разобрать командную строку: %s\n"
+
+#: ../src/main.c:805
+#, c-format
+msgid "WARNING: --plug mode not supported outside X11\n"
+msgstr "ВНИМАНИЕ: Режим --plug поддерживается только в X11\n"
+
+#: ../src/main.c:825
+#, c-format
+msgid "WARNING: This mode not supported outside X11\n"
+msgstr "ВНИМАНИЕ: Этот режим поддерживается только в X11\n"
 
 #: ../src/notification.c:130
 #, c-format
@@ -218,6 +228,15 @@ msgstr "Редактировать строку"
 #: ../src/list.c:1065
 msgid "Duplicate row"
 msgstr "Скопировать строку"
+
+#: ../src/list.c:1206
+#, c-format
+msgid ""
+"WARNING: You are use --checklist or --radiolist option. Those options "
+"obsoleted and will be removed in the future\n"
+msgstr ""
+"ВНИМАНИЕ: Используются опции --checklist или --radiolist. Эти опции устарели "
+"и будут удалены в следующих выпусках\n"
 
 #: ../src/list.c:1212
 #, c-format
@@ -1719,6 +1738,15 @@ msgstr "Этот тип файлов не поддерживается для п
 msgid "Load source file failed: %s\n"
 msgstr "Сбой при загрузке исходного файла: %s\n"
 
+#: ../src/progress.c:248
+#, c-format
+msgid ""
+"WARNING: You are usinge old-style progress dialog. This features is obsolete "
+"now, please use --bar style instead\n"
+msgstr ""
+"ВНИМАНИЕ: Используется старый стиль описания диалога прогресса. Эта "
+"возможность устарела, используйте опцию --bar\n"
+
 #: ../src/color.c:63
 #, c-format
 msgid "Can't open file %s: %s\n"
@@ -1801,6 +1829,11 @@ msgstr "Настройки"
 #: ../src/util.c:52
 msgid "Yes"
 msgstr "Да"
+
+#: ../src/util.c:635 ../src/util.c:662
+#, c-format
+msgid "WARNING: Run command failed: %s\n"
+msgstr "ВНИМАНИЕ: Сбой при запуске команды: %s\n"
 
 #: ../src/browser.c:144
 msgid "scalable "

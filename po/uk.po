@@ -1,13 +1,13 @@
 # Ukrainian translation for YAD
 # This file is distributed under the same license as the YAD package.
 #
-# Victor Ananjevsky <ananasik@gmail.com>, 2011-2019.
+# Victor Ananjevsky <ananasik@gmail.com>, 2011-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-03 14:17+0300\n"
+"POT-Creation-Date: 2020-04-04 08:14+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -165,7 +165,7 @@ msgstr "Не можу розібрати файл %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Не можу відкрити каталог %s: %s\n"
 
-#: ../src/main.c:132 ../src/main.c:442
+#: ../src/main.c:134 ../src/main.c:444
 #, c-format
 msgid "%d sec"
 msgstr "%d сек"
@@ -179,6 +179,16 @@ msgstr "Не можу розібрати YAD_OPTIONS: %s\n"
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Не вдається розібрати командний рядок: %s\n"
+
+#: ../src/main.c:805
+#, c-format
+msgid "WARNING: --plug mode not supported outside X11\n"
+msgstr "УВАГА: Опція --plug підтримується тільки в X11\n"
+
+#: ../src/main.c:825
+#, c-format
+msgid "WARNING: This mode not supported outside X11\n"
+msgstr "УВАГА: Цей режим підтримується тільки в X11\n"
 
 #: ../src/notification.c:130
 #, c-format
@@ -218,6 +228,15 @@ msgstr "Редагувати рядок"
 #: ../src/list.c:1065
 msgid "Duplicate row"
 msgstr "Скопіювати рядок"
+
+#: ../src/list.c:1206
+#, c-format
+msgid ""
+"WARNING: You are use --checklist or --radiolist option. Those options "
+"obsoleted and will be removed in the future\n"
+msgstr ""
+"УВАГА: Використовуються опції --checklist або --radiolist. Ці опції "
+"застаріли та будуть видалені у майбутніх випусках\n"
 
 #: ../src/list.c:1212
 #, c-format
@@ -771,7 +790,8 @@ msgstr "Відобразити діалог форми вводу"
 #: ../src/option.c:344
 msgid "Add field to form (see man page for list of possible types)"
 msgstr ""
-"Додати поле до форми (дивись сторінку керівництва для отримання списку типів)"
+"Додати поле до форми (дивись сторінку керівництва для отримання списку "
+"можливих типів)"
 
 #: ../src/option.c:344 ../src/option.c:541
 msgid "LABEL[:TYPE]"
@@ -1724,6 +1744,15 @@ msgstr "Цей тип файлів не може бути надруковани
 msgid "Load source file failed: %s\n"
 msgstr "Збій при завантажені файлу: %s\n"
 
+#: ../src/progress.c:248
+#, c-format
+msgid ""
+"WARNING: You are usinge old-style progress dialog. This features is obsolete "
+"now, please use --bar style instead\n"
+msgstr ""
+"УВАГА: Використовується старий стиль діалога прогреса. Ця можливість "
+"застаріла, будь ласка застосуйте опцію --bar\n"
+
 #: ../src/color.c:63
 #, c-format
 msgid "Can't open file %s: %s\n"
@@ -1806,6 +1835,11 @@ msgstr "Налаштування"
 #: ../src/util.c:52
 msgid "Yes"
 msgstr "Так"
+
+#: ../src/util.c:635 ../src/util.c:662
+#, c-format
+msgid "WARNING: Run command failed: %s\n"
+msgstr "УВАГА: Збій при запуску команди: %s\n"
 
 #: ../src/browser.c:144
 msgid "scalable "
