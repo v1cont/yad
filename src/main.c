@@ -802,7 +802,7 @@ main (gint argc, gchar ** argv)
     {
       options.plug = -1;
       if (options.debug)
-        g_printerr ("YAD: WARNING: --plug mode not supported outside X11");
+        g_printerr (_("WARNING: --plug mode not supported outside X11\n"));
     }
 
   /* plug mode */
@@ -822,7 +822,7 @@ main (gint argc, gchar ** argv)
 #endif
          )
         {
-          g_printerr ("This mode not supported outside X11");
+          g_printerr (_("WARNING: This mode not supported outside X11\n"));
           return 1;
         }
     }

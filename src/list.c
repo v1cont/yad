@@ -1203,7 +1203,7 @@ list_create_widget (GtkWidget *dlg)
   if (options.debug)
     {
       if (options.list_data.checkbox || options.list_data.radiobox)
-        g_printerr ("YAD: WARNING: You are use --checklist or --radiolist option. Those options obsoleted and will be removed in the future");
+        g_printerr (_("WARNING: You are use --checklist or --radiolist option. Those options obsoleted and will be removed in the future\n"));
     }
 
   n_cols = g_slist_length (options.list_data.columns);

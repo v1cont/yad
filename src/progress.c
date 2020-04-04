@@ -245,7 +245,7 @@ progress_create_widget (GtkWidget *dlg)
       YadProgressBar *bar = g_new0 (YadProgressBar, 1);
 
       if (options.debug)
-        g_printerr ("YAD: WARNING: You are usinge old-style progress dialog. This features is obsolete now, please use --bar style instead");
+        g_printerr (_("WARNING: You are usinge old-style progress dialog. This features is obsolete now, please use --bar style instead\n"));
 
       if (options.progress_data.pulsate)
         bar->type = YAD_PROGRESS_PULSE;
