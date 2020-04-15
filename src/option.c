@@ -57,6 +57,7 @@ static gboolean set_scroll_policy (const gchar *, const gchar *, gpointer, GErro
 #if GLIB_CHECK_VERSION(2,30,0)
 static gboolean set_size_format (const gchar *, const gchar *, gpointer, GError **);
 #endif
+static gboolean set_interp (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -141,6 +142,8 @@ static GOptionEntry general_options[] = {
     N_("Dialog text can be selected"), NULL },
   { "keep-icon-size", 0, 0, G_OPTION_ARG_NONE, &options.data.keep_icon_size,
     N_("Don't scale icons"), NULL },
+  { "use-interp", 0, G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, set_interp,
+    N_("Run commands under specified interpreter (default: bash -c '%s')"), N_("CMD") },
   /* window settings */
   { "sticky", 0, 0, G_OPTION_ARG_NONE, &options.data.sticky,
     N_("Set window sticky"), NULL },
@@ -410,6 +413,8 @@ static GOptionEntry list_options[] = {
     N_("Display list dialog"), NULL },
   { "column", 0, 0, G_OPTION_ARG_CALLBACK, add_column,
     N_("Set the column header (see man page for list of possible types)"), N_("COLUMN[:TYPE]") },
+  { "tree", 0, 0, G_OPTION_ARG_NONE, &options.list_data.tree_mode,
+    N_("Enbale tree mode"), NULL },
   { "checklist", 0, 0, G_OPTION_ARG_NONE, &options.list_data.checkbox,
     N_("Use checkboxes for first column"), NULL },
   { "radiolist", 0, 0, G_OPTION_ARG_NONE, &options.list_data.radiobox,
@@ -418,8 +423,6 @@ static GOptionEntry list_options[] = {
     N_("Don't show column headers"), NULL },
   { "no-click", 0, G_OPTION_FLAG_REVERSE, G_OPTION_ARG_NONE, &options.list_data.clickable,
     N_("Disable clickable column headers"), NULL },
-  { "no-rules-hint", 0, G_OPTION_FLAG_REVERSE, G_OPTION_ARG_NONE, &options.list_data.rules_hint,
-    N_("Disable rules hints"), NULL },
   { "grid-lines", 0, 0, G_OPTION_ARG_CALLBACK, set_grid_lines,
     N_("Set grid lines (hor[izontal], vert[ical] or both)"), N_("TYPE") },
   { "print-all", 0, 0, G_OPTION_ARG_NONE, &options.list_data.print_all,
@@ -456,6 +459,8 @@ static GOptionEntry list_options[] = {
     N_("Set select action"), N_("CMD") },
   { "row-action", 0, 0, G_OPTION_ARG_STRING, &options.list_data.row_action,
     N_("Set row action"), N_("CMD") },
+  { "tree-expanded", 0, 0, G_OPTION_ARG_NONE, &options.list_data.tree_expanded,
+    N_("Expand all tree nodes"), NULL },
   { "regex-search", 0, 0, G_OPTION_ARG_NONE, &options.list_data.regex_search,
     N_("Use regex in search"), NULL },
   { "no-selection", 0, 0, G_OPTION_ARG_NONE, &options.list_data.no_selection,
@@ -599,6 +604,10 @@ static GOptionEntry text_options[] = {
     N_("Set justification (left, right, center or fill)"), N_("TYPE") },
   { "margins", 0, 0, G_OPTION_ARG_INT, &options.text_data.margins,
     N_("Set text margins"), N_("SIZE") },
+  { "fore", 0, 0, G_OPTION_ARG_STRING, &options.text_data.fore,
+    N_("Use specified color for text"), N_("COLOR") },
+  { "back", 0, 0, G_OPTION_ARG_STRING, &options.text_data.back,
+    N_("Use specified color for background"), N_("COLOR") },
   { "show-cursor", 0, G_OPTION_FLAG_REVERSE, G_OPTION_ARG_NONE, &options.text_data.hide_cursor,
     N_("Show cursor in read-only mode"), NULL },
   { "show-uri", 0, 0, G_OPTION_ARG_NONE, &options.text_data.uri,
@@ -798,6 +807,8 @@ add_field (const gchar * option_name, const gchar * value, gpointer data, GError
         fld->type = YAD_FIELD_BUTTON;
       else if (strcasecmp (fstr[1], "FBTN") == 0)
         fld->type = YAD_FIELD_FULL_BUTTON;
+      else if (strcasecmp (fstr[1], "LINK") == 0)
+        fld->type = YAD_FIELD_LINK;
       else if (strcasecmp (fstr[1], "LBL") == 0)
         fld->type = YAD_FIELD_LABEL;
       else if (strcasecmp (fstr[1], "TXT") == 0)
@@ -1248,6 +1259,17 @@ set_size_format (const gchar * option_name, const gchar * value, gpointer data, 
 }
 #endif
 
+static gboolean
+set_interp (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+{
+  options.data.use_interp = TRUE;
+
+  if (value)
+    options.data.interp = g_strdup (value);
+
+  return TRUE;
+}
+
 #ifndef G_OS_WIN32
 static gboolean
 set_xid_file (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
@@ -1431,6 +1453,12 @@ yad_options_init (void)
   options.xid_file = NULL;
 #endif
 
+#ifndef STANDALONE
+  options.debug = g_settings_get_boolean (settings, "debug");
+#else
+  options.debug = FALSE;
+#endif
+
   options.hscroll_policy = GTK_POLICY_AUTOMATIC;
   options.vscroll_policy = GTK_POLICY_AUTOMATIC;
 
@@ -1441,8 +1469,12 @@ yad_options_init (void)
   /* Initialize general data */
   options.data.dialog_title = NULL;
   options.data.window_icon = "yad";
+#ifndef STANDALONE
   options.data.width = g_settings_get_int (settings, "width");
   options.data.height = g_settings_get_int (settings, "height");
+#else
+  options.data.width = options.data.height = -1;
+#endif
   options.data.use_posx = FALSE;
   options.data.posx = 0;
   options.data.use_posy = FALSE;
@@ -1458,7 +1490,11 @@ yad_options_init (void)
   options.data.buttons = NULL;
   options.data.no_buttons = FALSE;
   options.data.buttons_layout = GTK_BUTTONBOX_END;
-  options.data.borders = g_settings_get_int (settings, "border");;
+#ifndef STANDALONE
+  options.data.borders = g_settings_get_int (settings, "border");
+#else
+  options.data.borders = BORDERS;
+#endif
   options.data.no_markup = FALSE;
   options.data.no_escape = FALSE;
   options.data.escape_ok = FALSE;
@@ -1466,6 +1502,8 @@ yad_options_init (void)
   options.data.selectable_labels = FALSE;
   options.data.keep_icon_size = FALSE;
   options.data.def_resp = YAD_RESPONSE_OK;
+  options.data.use_interp = FALSE;
+  options.data.interp = "bash -c '%s'";
 
   /* Initialize window options */
   options.data.sticky = FALSE;
@@ -1490,7 +1528,11 @@ yad_options_init (void)
   options.common_data.editable = FALSE;
   options.common_data.tail = FALSE;
   options.common_data.command = NULL;
+#ifndef STANDALONE
   options.common_data.date_format = g_settings_get_string (settings, "date-format");
+#else
+  options.common_data.date_format = DATE_FMT;
+#endif
   options.common_data.float_precision = 3;
   options.common_data.vertical = FALSE;
   options.common_data.align = 0.0;
@@ -1587,7 +1629,11 @@ yad_options_init (void)
   options.icons_data.compact = FALSE;
   options.icons_data.generic = FALSE;
   options.icons_data.width = -1;
+#ifndef STANDALONE
   options.icons_data.term = g_settings_get_string (settings, "terminal");
+#else
+  options.icons_data.term = TERM_CMD;
+#endif
   options.icons_data.sort_by_name = FALSE;
   options.icons_data.descend = FALSE;
   options.icons_data.single_click = FALSE;
@@ -1595,11 +1641,11 @@ yad_options_init (void)
 
   /* Initialize list data */
   options.list_data.columns = NULL;
-  options.list_data.no_headers = FALSE;
+  options.list_data.tree_mode = FALSE;
   options.list_data.checkbox = FALSE;
   options.list_data.radiobox = FALSE;
+  options.list_data.no_headers = FALSE;
   options.list_data.print_all = FALSE;
-  options.list_data.rules_hint = TRUE;
   options.list_data.grid_lines = GTK_TREE_VIEW_GRID_LINES_NONE;
   options.list_data.print_column = 0;
   options.list_data.hide_column = 0;
@@ -1617,6 +1663,7 @@ yad_options_init (void)
   options.list_data.dclick_action = NULL;
   options.list_data.select_action = NULL;
   options.list_data.row_action = NULL;
+  options.list_data.tree_expanded = FALSE;
   options.list_data.regex_search = FALSE;
   options.list_data.clickable = TRUE;
   options.list_data.no_selection = FALSE;
@@ -1682,7 +1729,13 @@ yad_options_init (void)
   options.text_data.justify = GTK_JUSTIFY_LEFT;
   options.text_data.margins = 0;
   options.text_data.hide_cursor = TRUE;
+  options.text_data.fore = NULL;
+  options.text_data.back = NULL;
+#ifndef STANDALONE
   options.text_data.uri_color = g_settings_get_string (settings, "uri-color");
+#else
+  options.text_data.uri_color = URI_COLOR;
+#endif
   options.text_data.formatted = FALSE;
 
 #ifdef HAVE_SOURCEVIEW
@@ -1857,7 +1910,14 @@ yad_create_context (void)
   g_option_context_add_group (tmp_ctx, a_group);
 
   g_option_context_set_help_enabled (tmp_ctx, TRUE);
-  g_option_context_set_ignore_unknown_options (tmp_ctx, g_settings_get_boolean (settings, "ignore-unknown-options"));
+#ifndef STANDALONE
+  if (!options.debug)
+    g_option_context_set_ignore_unknown_options (tmp_ctx, g_settings_get_boolean (settings, "ignore-unknown-options"));
+  else
+    g_option_context_set_ignore_unknown_options (tmp_ctx, FALSE);
+#else
+  g_option_context_set_ignore_unknown_options (tmp_ctx, TRUE);
+#endif
 
   return tmp_ctx;
 }

@@ -164,7 +164,11 @@ Don't close dialog if \fIEscape\fP was pressed.
 \fIEscape\fP acts like pressing \fIOK\fP button.
 .TP
 .B \-\-always-print-result
-Print result for any of the return codes. This options doesn't work if timeout was reached or \fIEscape\fP was pressed.
+Print result for any of the return codes. This option doesn't work if timeout was reached or \fIEscape\fP was pressed.
+.TP
+.B \-\-use-interp=\fI[INTERP]\fP
+All commands runs unter specified interpreter. Default is \fIbash -c '%s'\fP. This option can reduse quoting in commands. If \fI%s\fP is specified, it will be replaced by the command.
+Otherwise command will be appended to the end of command line.
 .TP
 .B \-\-borders=\fINUM\fP
 Set dialog window borders.
@@ -494,6 +498,8 @@ A quoting style for value when \fIsh -c\fP is used \- a single quotes around com
 .br
 \fBFBTN\fP - same as button field, but with full relief of a button.
 .br
+\fBLINK\fP - link button field.
+.br
 \fBLBL\fP - text label. If field name is empty, horizontal separator line will be shown.
 .br
 \fBTXT\fP - multiline text entry. This field is always occupy all of form width.
@@ -585,6 +591,9 @@ Size of icons may be set in gtk config file at GTK_ICON_SIZE_MENU position of gt
 Special column names \fI@fore@\fP, \fI@back@\fP and \fI@font@\fP sets corresponding rows attributes.
 Values of those columns don't show in results.
 .TP
+.B \-\-tree
+Enbale tree mode. In this mode extra data in form \fIROW_ID[:PARENT_ID]\fP must be passed to yad before each row. See \fBEXAMPLES\fP for details.
+.TP
 .B \-\-checklist
 Use check boxes for the first column. Output checked rows instead of selected rows. Disable multiple selection.
 .TP
@@ -673,6 +682,9 @@ This option doesn't work with \fI--multiple\fP.
 .B \-\-row-action=\fICMD\fP
 Set the \fICMD\fP as a action when the row is added, modified or removed. First argument for the command is the name of action (\fIadd\fP, \fIedit\fP or \fIdel\fP).
 The rest of command line is data from selected row. Output of this command sets the new row values.
+.TP
+.B \-\-tree-expanded
+Expand all tree nodes at startup.
 .TP
 .B \-\-regex-search
 Use regular expressions in search for text fields.
@@ -875,7 +887,13 @@ Show cursor in read-only mode.
 .B \-\-show-uri
 Make links in text clickable. Links opens with \fIxdg-open\fP command.
 .TP
-.B \-\-uri-color
+.B \-\-fore=\fICOLOR\fP
+Set default color for text.
+.TP
+.B \-\-back=\fICOLOR\fP
+Set default color for background.
+.TP
+.B \-\-uri-color=\fICOLOR\fP
 Set color for links. Default is \fIblue\fP.
 .TP
 .B \-\-lang=LANGUAGE
@@ -887,6 +905,7 @@ Set used theme to \fITHEME\fP. This option works only if yad builds with gtksour
 .B \-\-listen
 Listen data from stdin even if filename was specified.
 
+If \fIfontname\fP option is specified for text dialog, the description of font must be in CSS style (not in a Pango style).
 Sending FormFeed character to text dialog clears it. This symbol may be sent as \fIecho \-e '\\f'\fP.
 Pressing \fICtrl+S\fP popups the search entry in text dialog.
 
@@ -1111,6 +1130,7 @@ yad-form-spin@GtkSpinButton@Numeric entry field in form
 yad-form-check@GtkCheckButton@Checkbox field in form
 yad-form-combo@GtkComboBox@Combo field in form
 yad-form-edit-combo@GtkComboBoxEntry@Editable combo field in form
+yad-form-link@GtkLinkButton@Link field in form
 yad-form-file@GtkFileChooserButton@File or directory field in form
 yad-form-font@GtkFontChooserButton@Font field in form
 yad-form-app@GtkAppChooserButton@Application field in form
@@ -1175,6 +1195,10 @@ find $HOME \-name '*.ps' | yad \-\-progress \-\-pulsate
 Display a box with all of the installed desktop applications
 .IP
 yad \-\-icons \-\-read-dir=/usr/share/applications
+.PP
+Display list in tree mode
+.IP
+yad --list --tree --column "Items" f Fruits 1:f Apple 2:f Lemon v Vegetables 3:v Popato 4:v Onion
 
 .SH DEVELOPMENT
 There are some developers features providing with YAD.

@@ -48,8 +48,7 @@ load_uri (const gchar * uri)
         addr = g_filename_to_uri (uri, NULL, NULL);
       else
         {
-          gchar *afn = g_new0 (gchar, PATH_MAX);
-          realpath (uri, afn);
+          gchar *afn = realpath (uri, NULL);
           addr = g_filename_to_uri (afn, NULL, NULL);
           g_free (afn);
         }
@@ -77,19 +76,78 @@ loaded_cb (WebKitWebView *v, WebKitLoadEvent ev, gpointer d)
 static gboolean
 policy_cb (WebKitWebView *v, WebKitPolicyDecision *pd, WebKitPolicyDecisionType pt, gpointer d)
 {
-  if (is_loaded && !options.html_data.browser)
+  const gchar *uri;
+
+  if (!is_loaded)
+    return FALSE;
+
+  if (!options.html_data.browser)
     {
       WebKitNavigationAction *act = webkit_navigation_policy_decision_get_navigation_action (WEBKIT_NAVIGATION_POLICY_DECISION (pd));
       webkit_policy_decision_ignore (pd);
       if (webkit_navigation_action_get_navigation_type (act) == WEBKIT_NAVIGATION_TYPE_LINK_CLICKED)
         {
           WebKitURIRequest *r = webkit_navigation_action_get_request (act);
-          gchar *uri = (gchar *) webkit_uri_request_get_uri (r);
 
+          uri = webkit_uri_request_get_uri (r);
           if (options.html_data.print_uri)
             g_printf ("%s\n", uri);
           else
             g_app_info_launch_default_for_uri (uri, NULL, NULL);
+        }
+    }
+  else if (options.html_data.uri_cmd)
+    {
+      gchar *v1, *v2, *cmd;
+      gint status;
+
+      if (pt == WEBKIT_POLICY_DECISION_TYPE_RESPONSE)
+        {
+          WebKitURIRequest *r = webkit_response_policy_decision_get_request (WEBKIT_RESPONSE_POLICY_DECISION (pd));
+          uri =  webkit_uri_request_get_uri (r);
+          v1 = g_strdup ("");
+          v2 = g_strdup ("");
+        }
+      else
+        {
+          WebKitNavigationAction *act = webkit_navigation_policy_decision_get_navigation_action (WEBKIT_NAVIGATION_POLICY_DECISION (pd));
+          WebKitURIRequest *r = webkit_navigation_action_get_request (act);
+          uri =  webkit_uri_request_get_uri (r);
+          v1 = g_strdup_printf ("%d", webkit_navigation_action_get_mouse_button (act));
+          v2 = g_strdup_printf ("%d", webkit_navigation_action_get_modifiers (act));
+        }
+
+      g_setenv ("YAD_HTML_BUTTON", v1, TRUE);
+      g_setenv ("YAD_HTML_STATE", v2, TRUE);
+
+      cmd = g_strdup_printf ("%s '%s'", options.html_data.uri_cmd, uri);
+      status = run_command_sync (cmd, NULL);
+      g_free (cmd);
+
+      g_unsetenv ("YAD_HTML_BUTTON");
+      g_unsetenv ("YAD_HTML_STATE");
+
+      g_free (v1);
+      g_free (v2);
+
+      /* actial exit code in a highest byte */
+      switch (status >> 8)
+        {
+        case 0:
+          webkit_policy_decision_use (pd);
+          break;
+        case 1:
+          webkit_policy_decision_ignore (pd);
+          break;
+        case 2:
+          if (pt == WEBKIT_POLICY_DECISION_TYPE_RESPONSE)
+            webkit_policy_decision_download (pd);
+          else
+            webkit_policy_decision_use (pd);
+          break;
+        default:
+          g_printerr ("yad: wrong return code (%d) from uri handler\n", status >> 8);
+          return FALSE;
         }
     }
   else
@@ -280,6 +338,7 @@ html_create_widget (GtkWidget * dlg)
   webkit_settings_set_default_charset (settings, g_get_codeset ());
 
   g_signal_connect (view, "decide-policy", G_CALLBACK (policy_cb), NULL);
+  g_signal_connect (view, "load-changed", G_CALLBACK (loaded_cb), NULL);
 
   if (options.html_data.browser)
     {
@@ -299,7 +358,6 @@ html_create_widget (GtkWidget * dlg)
       g_object_set (G_OBJECT(settings), "enable-page-cache", FALSE, NULL);
       g_object_set (G_OBJECT(settings), "enable-plugins", FALSE, NULL);
       g_object_set (G_OBJECT (settings), "enable-private-browsing", TRUE, NULL);
-      g_signal_connect (view, "load-changed", G_CALLBACK (loaded_cb), NULL);
     }
 
   gtk_widget_show_all (sw);

@@ -34,8 +34,11 @@
 #include "yad.h"
 
 YadOptions options;
-GSettings *settings;
 GtkIconTheme *yad_icon_theme;
+
+#ifndef STANDALONE
+GSettings *settings;
+#endif
 
 GdkPixbuf *big_fallback_image = NULL;
 GdkPixbuf *small_fallback_image = NULL;
@@ -44,6 +47,8 @@ static GtkWidget *dialog = NULL;
 static GtkWidget *text = NULL;
 
 static gint ret = YAD_RESPONSE_ESC;
+
+static gboolean is_x11 = FALSE;
 
 YadNTabs *tabs;
 
@@ -96,7 +101,7 @@ static void
 btn_cb (GtkWidget *b, gchar *cmd)
 {
   if (cmd)
-    g_spawn_command_line_async (cmd, NULL);
+    run_command_async (cmd);
   else
     {
       gint resp = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (b), "resp"));
@@ -120,7 +125,11 @@ timeout_cb (gpointer data)
     {
       gdouble percent = ((gdouble) options.data.timeout - count) / (gdouble) options.data.timeout;
       gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (w), percent);
+#ifndef STANDALONE
       if (g_settings_get_boolean (settings, "show-remain"))
+#else
+      if (SHOW_REMAIN)
+#endif
         {
           gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout - count);
           gtk_progress_bar_set_text (GTK_PROGRESS_BAR (w), lbl);
@@ -294,6 +303,38 @@ create_layout (GtkWidget *dlg)
   return layout;
 }
 
+static void
+realize_cb (GtkWidget *dlg, gpointer d)
+{
+  gint cw, ch;
+  /* get current window size for gtk_window_resize */
+  gtk_window_get_size (GTK_WINDOW (dlg), &cw, &ch);
+  if (options.data.width == -1)
+    options.data.width = cw;
+  if (options.data.height == -1)
+    options.data.height = ch;
+
+  gtk_window_resize (GTK_WINDOW (dlg), options.data.width, options.data.height);
+  gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
+
+  if (options.data.use_posx || options.data.use_posy)
+    {
+      gint ww, wh, sw, sh;
+      gtk_window_get_size (GTK_WINDOW (dlg), &ww, &wh);
+      gdk_window_get_geometry (gdk_get_default_root_window (), NULL, NULL, &sw, &sh);
+      /* place window to specified coordinates */
+      if (!options.data.use_posx)
+        gtk_window_get_position (GTK_WINDOW (dlg), &options.data.posx, NULL);
+      if (!options.data.use_posy)
+        gtk_window_get_position (GTK_WINDOW (dlg), NULL, &options.data.posy);
+      if (options.data.posx < 0)
+        options.data.posx = sw - ww + options.data.posx;
+      if (options.data.posy < 0)
+        options.data.posy = sh - wh + options.data.posy;
+      gtk_window_move (GTK_WINDOW (dlg), options.data.posx, options.data.posy);
+    }
+}
+
 static GtkWidget *
 create_dialog (void)
 {
@@ -394,7 +435,11 @@ create_dialog (void)
               gtk_box_pack_end (GTK_BOX (cbox), topb, FALSE, FALSE, 2);
             }
 
+#ifndef STANDALONE
           if (g_settings_get_boolean (settings, "show-remain"))
+#else
+          if (SHOW_REMAIN)
+#endif
             {
               gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout);
               gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (topb), TRUE);
@@ -499,39 +544,9 @@ create_dialog (void)
   /* parse geometry or move window, if given. must be after showing widget */
   if (!options.data.maximized && !options.data.fullscreen)
     {
-      gint cw, ch;
-
-      gtk_widget_show_all (dlg);
-
       parse_geometry ();
-
-      /* get current window size for gtk_window_resize */
-      gtk_window_get_size (GTK_WINDOW (dlg), &cw, &ch);
-      if (options.data.width == -1)
-        options.data.width = cw;
-      if (options.data.height == -1)
-        options.data.height = ch;
-
-      gtk_window_resize (GTK_WINDOW (dlg), options.data.width, options.data.height);
-
-      gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
-
-      if (options.data.use_posx || options.data.use_posy)
-        {
-          gint ww, wh, sw, sh;
-          gtk_window_get_size (GTK_WINDOW (dlg), &ww, &wh);
-          gdk_window_get_geometry (gdk_get_default_root_window (), NULL, NULL, &sw, &sh);
-          /* place window to specified coordinates */
-          if (!options.data.use_posx)
-            gtk_window_get_position (GTK_WINDOW (dlg), &options.data.posx, NULL);
-          if (!options.data.use_posy)
-            gtk_window_get_position (GTK_WINDOW (dlg), NULL, &options.data.posy);
-          if (options.data.posx < 0)
-            options.data.posx = sw - ww + options.data.posx;
-          if (options.data.posy < 0)
-            options.data.posy = sh - wh + options.data.posy;
-          gtk_window_move (GTK_WINDOW (dlg), options.data.posx, options.data.posy);
-        }
+      g_signal_connect (G_OBJECT (dlg), "realize", G_CALLBACK (realize_cb), NULL);
+      gtk_widget_show_all (dlg);
     }
   else
     {
@@ -543,9 +558,8 @@ create_dialog (void)
         gtk_window_fullscreen (GTK_WINDOW (dlg));
     }
 
-#ifndef G_OS_WIN32
   /* print xid */
-  if (options.print_xid)
+  if (is_x11 && options.print_xid)
     {
       FILE *xf;
 
@@ -564,7 +578,6 @@ create_dialog (void)
             fflush (xf);
         }
     }
-#endif
 
   return dlg;
 }
@@ -667,7 +680,9 @@ main (gint argc, gchar ** argv)
   gtk_init (&argc, &argv);
   g_set_application_name ("YAD");
 
+#ifndef STANDALONE
   settings = g_settings_new ("yad.settings");
+#endif
 
   yad_icon_theme = gtk_icon_theme_get_default ();
 
@@ -709,6 +724,12 @@ main (gint argc, gchar ** argv)
       return -1;
     }
   yad_set_mode ();
+
+  /* check for current GDK backend */
+#ifdef GDK_WINDOWING_X11
+  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+    is_x11 = TRUE;
+#endif
 
   /* parse custom gtkrc */
   if (options.gtkrc_file)
@@ -777,6 +798,13 @@ main (gint argc, gchar ** argv)
   signal (SIGUSR2, sa_usr2);
 #endif
 
+  if (!is_x11 && options.plug != -1)
+    {
+      options.plug = -1;
+      if (options.debug)
+        g_printerr (_("WARNING: --plug mode not supported outside X11\n"));
+    }
+
   /* plug mode */
   if (options.plug != -1)
     {
@@ -784,6 +812,19 @@ main (gint argc, gchar ** argv)
       gtk_main ();
       shmdt (tabs);
       return ret;
+    }
+
+  if (!is_x11)
+    {
+      if (options.mode == YAD_MODE_NOTEBOOK || options.mode == YAD_MODE_PANED
+#ifdef HAVE_TRAY
+          || options.mode == YAD_MODE_NOTIFICATION
+#endif
+         )
+        {
+          g_printerr (_("WARNING: This mode not supported outside X11\n"));
+          return 1;
+        }
     }
 
   switch (options.mode)
@@ -821,11 +862,12 @@ main (gint argc, gchar ** argv)
     default:
       dialog = create_dialog ();
 
-#ifndef G_OS_WIN32
-      /* add YAD_XID variable */
-      str = g_strdup_printf ("0x%X", (guint) GDK_WINDOW_XID (gtk_widget_get_window (dialog)));
-      g_setenv ("YAD_XID", str, TRUE);
-#endif
+      if (is_x11)
+        {
+          /* add YAD_XID variable */
+          str = g_strdup_printf ("0x%X", (guint) GDK_WINDOW_XID (gtk_widget_get_window (dialog)));
+          g_setenv ("YAD_XID", str, TRUE);
+        }
 
       /* make some specific init actions */
       if (options.mode == YAD_MODE_NOTEBOOK)

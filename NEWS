@@ -1,3 +1,32 @@
+Version 6.0
+    - add --use-interp option. this feature can reduce quoting in command arguments
+    - add link field to --form dialog
+    - returning customizable options for --text-info dialog
+    - fix yad behavior outside X11 (spetial thanks to Michael Weiser)
+    - improve dialog window placement
+    - update translations
+
+Version 5.0
+    - add debug mode. this feature can be turned on through gsettings.
+      in this mode yad will warn about obsolete or nonexistent options
+    - add configure option --enable-standalone for build yad without gsettings support
+    - fix expanding tree nodes for stdin data
+    - some fixes in print dialog
+    - fix --uri-handler option in html dialog
+    - fix wrong autoclose behavior in progress dialog
+
+Version 4.1
+    - fix handling tree data from stdin in list dialog
+
+Version 4.0
+    - font can be selected with double-click in font dialog
+    - add application chooser dialog and application chooser field in form dialog
+    - add tree mode in list dialog
+    - multi-progress dialog features merged with progress dialog. separate multi-progres dialog no longer exists
+    - enable markup in progress log window
+    - fix output of color values in hex notation
+    - removed *-selection aliases for --file, --color and --font dialogs
+
 Version 3.0
     - add user defined handlers for all editing actions in list dialog. --add-action parameter renamed to --row-action
     - fix loading text from file in text-info dialog

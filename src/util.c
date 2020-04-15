@@ -240,7 +240,11 @@ get_tabs (key_t key, gboolean create)
   int shmid, i, max_tab;
 
   /* get shared memory */
+#ifndef STANDALONE
   max_tab = g_settings_get_int (settings, "max-tab") + 1;
+#else
+  max_tab = MAX_TABS + 1;
+#endif
   if (create)
     {
       if ((shmid = shmget (key, max_tab * sizeof (YadNTabs), IPC_CREAT | IPC_EXCL | 0644)) == -1)
@@ -606,6 +610,60 @@ print_bool_val (gboolean val)
     }
 
   return ret;
+}
+
+gint
+run_command_sync (gchar *cmd, gchar **out)
+{
+  gint ret = 0;
+  gchar *full_cmd = NULL;
+  GError *err = NULL;
+
+  if (options.data.use_interp)
+    {
+      if (g_strstr_len (options.data.interp, -1, "%s") != NULL)
+        full_cmd = g_strdup_printf (options.data.interp, cmd);
+      else
+        full_cmd = g_strdup_printf ("%s %s", options.data.interp, cmd);
+    }
+  else
+    full_cmd = g_strdup (cmd);
+
+  if (!g_spawn_command_line_sync (full_cmd, out, NULL, &ret, &err))
+    {
+      if (options.debug)
+        g_printerr (_("WARNING: Run command failed: %s\n"), err->message);
+      g_error_free (err);
+    }
+
+  g_free (full_cmd);
+  return ret;
+}
+
+void
+run_command_async (gchar *cmd)
+{
+  gchar *full_cmd = NULL;
+  GError *err = NULL;
+
+  if (options.data.use_interp)
+    {
+      if (g_strstr_len (options.data.interp, -1, "%s") != NULL)
+        full_cmd = g_strdup_printf (options.data.interp, cmd);
+      else
+        full_cmd = g_strdup_printf ("%s %s", options.data.interp, cmd);
+    }
+  else
+    full_cmd = g_strdup (cmd);
+
+  if (!g_spawn_command_line_async (full_cmd, &err))
+    {
+      if (options.debug)
+        g_printerr (_("WARNING: Run command failed: %s\n"), err->message);
+      g_error_free (err);
+    }
+
+  g_free (full_cmd);
 }
 
 #ifdef HAVE_SPELL

@@ -134,14 +134,12 @@ activate_cb (GtkWidget * view, GtkTreePath * path, gpointer data)
     {
       if (in_term)
         {
-          gchar *tcmd;
-
-          tcmd = g_strdup_printf (options.icons_data.term, cmd);
-          g_spawn_command_line_async (tcmd, NULL);
+          gchar *tcmd = g_strdup_printf (options.icons_data.term, cmd);
+          run_command_async (tcmd);
           g_free (tcmd);
         }
       else
-        g_spawn_command_line_async (cmd, NULL);
+        run_command_async (cmd);
     }
 }
 
@@ -346,7 +344,11 @@ parse_desktop_file (gchar * filename)
               gchar *url = g_key_file_get_string (kf, "Desktop Entry", "URL", NULL);
               if (url)
                 {
+#ifndef STANDALONE
                   ent->command = g_strdup_printf (g_settings_get_string (settings, "open-command"), url);
+#else
+                  ent->command = g_strdup_printf (OPEN_CMD, url);
+#endif
                   g_free (url);
                 }
             }

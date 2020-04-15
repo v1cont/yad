@@ -222,6 +222,10 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
   if ((condition != G_IO_IN) && (condition != G_IO_IN + G_IO_HUP))
     {
       g_io_channel_shutdown (channel, TRUE, NULL);
+
+      if (options.progress_data.autoclose && options.plug == -1)
+         yad_exit (options.data.def_resp);
+
       return FALSE;
     }
   return TRUE;
@@ -239,6 +243,9 @@ progress_create_widget (GtkWidget *dlg)
   if (nbars < 1)
     {
       YadProgressBar *bar = g_new0 (YadProgressBar, 1);
+
+      if (options.debug)
+        g_printerr (_("WARNING: You are usinge old-style progress dialog. This features is obsolete now, please use --bar style instead\n"));
 
       if (options.progress_data.pulsate)
         bar->type = YAD_PROGRESS_PULSE;

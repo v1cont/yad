@@ -46,6 +46,10 @@
 #include <gtksourceview/gtksource.h>
 #endif
 
+#ifdef STANDALONE
+#include "defaults.h"
+#endif
+
 G_BEGIN_DECLS
 
 #define YAD_RESPONSE_OK         0
@@ -113,6 +117,7 @@ typedef enum {
   YAD_FIELD_SCALE,
   YAD_FIELD_BUTTON,
   YAD_FIELD_FULL_BUTTON,
+  YAD_FIELD_LINK,
   YAD_FIELD_LABEL,
   YAD_FIELD_TEXT
 } YadFieldType;
@@ -229,6 +234,8 @@ typedef struct {
   gboolean keep_icon_size;
   GtkButtonBoxStyle buttons_layout;
   gint def_resp;
+  gboolean use_interp;
+  gchar *interp;
   /* window settings */
   gboolean sticky;
   gboolean fixed;
@@ -336,11 +343,11 @@ typedef struct {
 
 typedef struct {
   GSList *columns;
-  gboolean no_headers;
+  gboolean tree_mode;
   gboolean checkbox;
   gboolean radiobox;
+  gboolean no_headers;
   gboolean print_all;
-  gboolean rules_hint;
   GtkTreeViewGridLines grid_lines;
   gint print_column;
   gint hide_column;
@@ -358,6 +365,7 @@ typedef struct {
   gchar *dclick_action;
   gchar *select_action;
   gchar *row_action;
+  gboolean tree_expanded;
   gboolean regex_search;
   gboolean clickable;
   gboolean no_selection;
@@ -434,6 +442,8 @@ typedef struct {
   gboolean hide_cursor;
   gchar *uri_color;
   gboolean formatted;
+  gchar *fore;
+  gchar *back;
 } YadTextData;
 
 #ifdef HAVE_SOURCEVIEW
@@ -520,6 +530,8 @@ typedef struct {
   key_t plug;
   guint tabnum;
 
+  gboolean debug;
+
 #ifndef G_OS_WIN32
   guint kill_parent;
   gboolean print_xid;
@@ -528,8 +540,11 @@ typedef struct {
 } YadOptions;
 
 extern YadOptions options;
-extern GSettings *settings;
 extern GtkIconTheme *yad_icon_theme;
+
+#ifndef STANDALONE
+extern GSettings *settings;
+#endif
 
 extern GdkPixbuf *big_fallback_image;
 extern GdkPixbuf *small_fallback_image;
@@ -639,6 +654,9 @@ void parse_geometry ();
 
 gboolean get_bool_val (gchar *str);
 gchar *print_bool_val (gboolean val);
+
+gint run_command_sync (gchar *cmd, gchar **out);
+void run_command_async (gchar *cmd);
 
 #ifdef HAVE_SPELL
 void show_langs ();

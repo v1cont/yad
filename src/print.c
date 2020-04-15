@@ -245,6 +245,11 @@ yad_print_run (void)
     }
   g_free (fn);
 
+  if (!print_settings)
+    print_settings = gtk_print_settings_new ();
+  if (!page_setup)
+    page_setup = gtk_page_setup_new ();
+
   /* create print dialog */
   dlg = gtk_print_unix_dialog_new (options.data.dialog_title, NULL);
   gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_NORMAL);
@@ -260,11 +265,8 @@ yad_print_run (void)
   gtk_print_settings_set (print_settings, "output-uri", g_filename_to_uri (uri, NULL, NULL));
   g_free (uri);
 
-  if (print_settings)
-    gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dlg), print_settings);
-
-  if (page_setup)
-    gtk_print_unix_dialog_set_page_setup (GTK_PRINT_UNIX_DIALOG (dlg), page_setup);
+  gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dlg), print_settings);
+  gtk_print_unix_dialog_set_page_setup (GTK_PRINT_UNIX_DIALOG (dlg), page_setup);
 
   /* set window behavior */
   gtk_widget_set_name (dlg, "yad-dialog-window");

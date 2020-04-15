@@ -171,10 +171,14 @@ tag_event_cb (GtkTextTag * tag, GObject * obj, GdkEvent * ev, GtkTextIter * iter
           gtk_text_iter_forward_to_tag_toggle (&end, tag);
 
           url = gtk_text_iter_get_text (&start, &end);
+#ifndef STANDALONE
           cmdline = g_strdup_printf (g_settings_get_string (settings, "open-command"), url);
+#else
+          cmdline = g_strdup_printf (OPEN_CMD, url);
+#endif
           g_free (url);
 
-          g_spawn_command_line_async (cmdline, NULL);
+          run_command_async (cmdline);
 
           g_free (cmdline);
           return TRUE;
@@ -444,6 +448,30 @@ text_create_widget (GtkWidget * dlg)
 
   if (options.text_data.wrap)
     gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_WORD_CHAR);
+
+  if (options.common_data.font || options.text_data.fore || options.text_data.back)
+    {
+      GtkCssProvider *provider;
+      GtkStyleContext *context;
+      GString *css;
+
+      css = g_string_new ("textview, textview text {\n");
+      if (options.common_data.font)
+        g_string_append_printf (css, " font: %s;\n", options.common_data.font);
+      if (options.text_data.fore)
+        g_string_append_printf (css, " color: %s;\n", options.text_data.fore);
+      if (options.text_data.back)
+        g_string_append_printf (css, " background-color: %s;\n", options.text_data.back);
+      g_string_append (css, "}\n");
+
+      provider = gtk_css_provider_new ();
+      gtk_css_provider_load_from_data (provider, css->str, -1, NULL);
+      context = gtk_widget_get_style_context (text_view);
+      gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (provider),
+                                      GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+      g_string_free (css, TRUE);
+    }
 
 #ifdef HAVE_SOURCEVIEW
   if (options.source_data.theme)

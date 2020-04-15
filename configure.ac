@@ -1,4 +1,4 @@
-AC_INIT([YAD], [3.0], [https://github.com/v1cont/yad/issues/], yad, [https://github.com/v1cont/yad/])
+AC_INIT([YAD], [6.0], [https://github.com/v1cont/yad/issues/], yad, [https://github.com/v1cont/yad/])
 AC_CONFIG_AUX_DIR([build])
 
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz no-dist-gzip])
@@ -89,6 +89,16 @@ if test x$have_sourceview = xyes; then
     AC_DEFINE([HAVE_SOURCEVIEW], [1], [Define this if you need GtkSourceView support])
 fi
 
+dnl icon browser
+AC_ARG_ENABLE([standalone],
+	[AS_HELP_STRING([--enable-standalone],
+			[Build standalone YAD binary (wihtout gsettings)])],
+	[build_sa=$enableval], [build_sa=no])
+AM_CONDITIONAL([STANDALONE], [test x$build_sa = xyes])
+if test x$build_sa = xyes; then
+    AC_DEFINE([STANDALONE], [1], [Define this if you need standalone YAD binary])
+fi
+
 dnl pfd
 AC_ARG_ENABLE([pfd],
 	[AS_HELP_STRING([--enable-pfd],
@@ -156,6 +166,7 @@ echo "  HTML widget          - $have_html"
 echo "  GtkSourceView        - $have_sourceview"
 echo "  Spell checking       - $have_spell"
 echo "  Path to rgb.txt      - $with_rgb"
+echo "  Standalone build     - $build_sa"
 echo "  pfd                  - $build_pfd"
 echo "  Icon browser         - $build_ib"
 echo
