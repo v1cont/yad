@@ -432,6 +432,7 @@ typedef struct {
   gboolean invert;
   gboolean buttons;
   GSList *marks;
+  gboolean enforce_step;
 } YadScaleData;
 
 typedef struct {
