@@ -1725,7 +1725,8 @@ yad_options_init (void)
   options.scale_data.invert = FALSE;
   options.scale_data.buttons = FALSE;
   options.scale_data.marks = NULL;
-
+  options.scale_data.enforce_step = FALSE;
+  
   /* Initialize text data */
   options.text_data.wrap = FALSE;
   options.text_data.justify = GTK_JUSTIFY_LEFT;
