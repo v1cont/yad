@@ -469,9 +469,9 @@ static GOptionEntry list_options[] = {
     N_("Add new records on the top of a list"), NULL },
   { "simple-tips", 0, 0, G_OPTION_ARG_NONE, &options.list_data.simple_tips,
     N_("Don't use markup in tooltips"), NULL },
-   { "header-tips", 0, 0, G_OPTION_ARG_NONE, &options.list_data.header_tips,
+  { "header-tips", 0, 0, G_OPTION_ARG_NONE, &options.list_data.header_tips,
     N_("Use column name as a header tooltip"), NULL },
- { NULL }
+  { NULL }
 };
 
 static GOptionEntry notebook_options[] = {
