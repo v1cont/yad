@@ -371,6 +371,7 @@ typedef struct {
   gboolean no_selection;
   gboolean add_on_top;
   gboolean simple_tips;
+  gboolean header_tips;
 } YadListData;
 
 typedef struct {
