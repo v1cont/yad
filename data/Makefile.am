@@ -22,4 +22,4 @@ m4_DATA = yad.m4
 
 EXTRA_DIST = $(desktop_in_files) $(gsettings_in_files) zenity.sh notify-send
 
-DISTCLEAN_FILES = $(desktop_DATA) $(gsettings_SCHEMAS) $(m4_DATA) yad.spec
+DISTCLEANFILES = $(desktop_DATA) $(gsettings_SCHEMAS) $(m4_DATA) yad.spec
