@@ -115,7 +115,7 @@ dnl icon browser
 AC_ARG_ENABLE([icon-browser],
 	[AS_HELP_STRING([--enable-icon-browser],
 			[Build YAD icon browser])],
-	[build_ib=$enableval], [build_ib=no])
+	[build_ib=$enableval], [build_ib=yes])
 AM_CONDITIONAL([BUILD_IB], [test x$build_ib = xyes])
 
 # GSettings
