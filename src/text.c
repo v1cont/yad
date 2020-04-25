@@ -452,14 +452,12 @@ text_create_widget (GtkWidget * dlg)
     {
       GtkCssProvider *provider;
       GtkStyleContext *context;
-      GtkSettings *gst;
-      gchar *font, *df;
       GString *css;
 
       css = g_string_new (".view, .view text {\n");
       if (options.common_data.font)
         {
-          font = pango_to_css (options.common_data.font);
+          gchar *font = pango_to_css (options.common_data.font);
           g_string_append_printf (css, "font: %s;\n", font);
           g_free (font);
         }
@@ -468,15 +466,6 @@ text_create_widget (GtkWidget * dlg)
       if (options.text_data.back)
         g_string_append_printf (css, "background-color: %s;\n", options.text_data.back);
       g_string_append (css, "}\n");
-
-      /* set normal font for popup menu */
-      gst = gtk_settings_get_default ();
-      g_object_get (G_OBJECT (gst), "gtk-font-name", &df, NULL);
-      font = pango_to_css (df);
-      g_string_append_printf (css, ".view window.popup {\nfont: %s;\n}\n", font);
-      g_free (font);
-
-      printf (css->str);
 
       provider = gtk_css_provider_new ();
       gtk_css_provider_load_from_data (provider, css->str, -1, NULL);
