@@ -666,6 +666,96 @@ run_command_async (gchar *cmd)
   g_free (full_cmd);
 }
 
+gchar *
+pango_to_css (gchar *font)
+{
+  PangoFontDescription *desc;
+  PangoFontMask mask;
+  GString *str;
+  gchar *res;
+
+  str = g_string_new (NULL);
+
+  desc = pango_font_description_from_string (font);
+  mask = pango_font_description_get_set_fields (desc);
+
+  if (mask & PANGO_FONT_MASK_STYLE)
+    {
+      switch (pango_font_description_get_style (desc))
+        {
+        case PANGO_STYLE_OBLIQUE:
+          g_string_append (str, "oblique ");
+          break;
+        case PANGO_STYLE_ITALIC:
+          g_string_append (str, "italic ");
+          break;
+        }
+    }
+  if (mask & PANGO_FONT_MASK_VARIANT)
+    {
+      if (pango_font_description_get_variant (desc) == PANGO_VARIANT_SMALL_CAPS)
+        g_string_append (str, "small-caps ");
+    }
+
+  if (mask & PANGO_FONT_MASK_WEIGHT)
+    {
+      switch (pango_font_description_get_weight (desc))
+        {
+        case PANGO_WEIGHT_THIN:
+          g_string_append (str, "Thin ");
+          break;
+        case PANGO_WEIGHT_ULTRALIGHT:
+          g_string_append (str, "Ultralight ");
+          break;
+        case PANGO_WEIGHT_LIGHT:
+          g_string_append (str, "Light ");
+          break;
+        case PANGO_WEIGHT_SEMILIGHT:
+          g_string_append (str, "Semilight ");
+          break;
+        case PANGO_WEIGHT_BOOK:
+          g_string_append (str, "Book ");
+          break;
+        case PANGO_WEIGHT_MEDIUM:
+          g_string_append (str, "Medium ");
+          break;
+        case PANGO_WEIGHT_SEMIBOLD:
+          g_string_append (str, "Semibold ");
+          break;
+        case PANGO_WEIGHT_BOLD:
+          g_string_append (str, "Bold ");
+          break;
+        case PANGO_WEIGHT_ULTRABOLD:
+          g_string_append (str, "Ultrabold ");
+          break;
+        case PANGO_WEIGHT_HEAVY:
+          g_string_append (str, "Heavy ");
+          break;
+        case PANGO_WEIGHT_ULTRAHEAVY:
+          g_string_append (str, "Ultraheavy ");
+          break;
+        }
+    }
+
+  if (mask & PANGO_FONT_MASK_SIZE)
+    {
+      if (pango_font_description_get_size_is_absolute (desc))
+        g_string_append_printf (str, "%dpx ", pango_font_description_get_size (desc) / PANGO_SCALE);
+      else
+        g_string_append_printf (str, "%dpt ", pango_font_description_get_size (desc) / PANGO_SCALE);
+    }
+
+  if (mask & PANGO_FONT_MASK_FAMILY)
+    g_string_append (str, pango_font_description_get_family (desc));
+
+  if (str->str)
+    res = str->str;
+  else
+    res = g_strdup (font);
+
+  return res;
+}
+
 #ifdef HAVE_SPELL
 void
 show_langs ()

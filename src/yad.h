@@ -660,6 +660,8 @@ gchar *print_bool_val (gboolean val);
 gint run_command_sync (gchar *cmd, gchar **out);
 void run_command_async (gchar *cmd);
 
+gchar * pango_to_css (gchar *font);
+
 #ifdef HAVE_SPELL
 void show_langs ();
 #endif

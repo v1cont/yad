@@ -441,7 +441,6 @@ text_create_widget (GtkWidget * dlg)
   gtk_text_view_set_justification (GTK_TEXT_VIEW (text_view), options.text_data.justify);
   gtk_text_view_set_left_margin (GTK_TEXT_VIEW (text_view), options.text_data.margins);
   gtk_text_view_set_right_margin (GTK_TEXT_VIEW (text_view), options.text_data.margins);
-  gtk_text_view_set_monospace (GTK_TEXT_VIEW (text_view), TRUE);
   gtk_text_view_set_editable (GTK_TEXT_VIEW (text_view), options.common_data.editable);
   if (!options.common_data.editable && options.text_data.hide_cursor)
     gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (text_view), FALSE);
@@ -453,22 +452,36 @@ text_create_widget (GtkWidget * dlg)
     {
       GtkCssProvider *provider;
       GtkStyleContext *context;
+      GtkSettings *gst;
+      gchar *font, *df;
       GString *css;
 
-      css = g_string_new ("textview, textview text {\n");
+      css = g_string_new (".view, .view text {\n");
       if (options.common_data.font)
-        g_string_append_printf (css, " font: %s;\n", options.common_data.font);
+        {
+          font = pango_to_css (options.common_data.font);
+          g_string_append_printf (css, "font: %s;\n", font);
+          g_free (font);
+        }
       if (options.text_data.fore)
-        g_string_append_printf (css, " color: %s;\n", options.text_data.fore);
+        g_string_append_printf (css, "color: %s;\n", options.text_data.fore);
       if (options.text_data.back)
-        g_string_append_printf (css, " background-color: %s;\n", options.text_data.back);
+        g_string_append_printf (css, "background-color: %s;\n", options.text_data.back);
       g_string_append (css, "}\n");
+
+      /* set normal font for popup menu */
+      gst = gtk_settings_get_default ();
+      g_object_get (G_OBJECT (gst), "gtk-font-name", &df, NULL);
+      font = pango_to_css (df);
+      g_string_append_printf (css, ".view window.popup {\nfont: %s;\n}\n", font);
+      g_free (font);
+
+      printf (css->str);
 
       provider = gtk_css_provider_new ();
       gtk_css_provider_load_from_data (provider, css->str, -1, NULL);
       context = gtk_widget_get_style_context (text_view);
-      gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (provider),
-                                      GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+      gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
       g_string_free (css, TRUE);
     }
