@@ -21,6 +21,9 @@
 #define _GNU_SOURCE 1
 #endif
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
@@ -165,38 +168,60 @@ update_preview (GtkFileChooser * chooser, GtkWidget *p)
     {
       gchar *file;
       GChecksum *chs;
-      GdkPixbuf *pb;
+      GdkPixbuf *pb = NULL;
 
       chs = g_checksum_new (G_CHECKSUM_MD5);
       g_checksum_update (chs, (const guchar *) uri, -1);
       /* first try to get preview from large thumbnail */
       file = g_strdup_printf ("%s/%s.png", large_path, g_checksum_get_string (chs));
-      if (g_file_test (file, G_FILE_TEST_EXISTS))
+      if (options.common_data.large_preview && g_file_test (file, G_FILE_TEST_EXISTS))
         pb = gdk_pixbuf_new_from_file (file, NULL);
       else
         {
           /* try to get preview from normal thumbnail */
           g_free (file);
           file = g_strdup_printf ("%s/%s.png", normal_path, g_checksum_get_string (chs));
-          if (g_file_test (file, G_FILE_TEST_EXISTS))
+          if (!options.common_data.large_preview && g_file_test (file, G_FILE_TEST_EXISTS))
             pb = gdk_pixbuf_new_from_file (file, NULL);
           else
             {
               /* try to create it */
               g_free (file);
               file = g_filename_from_uri (uri, NULL, NULL);
-              pb = gdk_pixbuf_new_from_file_at_size (file, 256, 256, NULL);
-              g_free (file);
+              if (options.common_data.large_preview)
+                pb = gdk_pixbuf_new_from_file_at_scale (file, 256, 256, TRUE, NULL);
+              else
+                pb = gdk_pixbuf_new_from_file_at_scale (file, 128, 128, TRUE, NULL);
               if (pb)
                 {
+                  struct stat st;
+                  gchar *smtime;
+
+                  stat (file, &st);
+                  smtime = g_strdup_printf ("%d", st.st_mtime);
+                  g_free (file);
+
                   /* save thumbnail */
-                  g_mkdir_with_parents (large_path, 0755);
-                  file = g_strdup_printf ("%s/%s.png", large_path, g_checksum_get_string (chs));
-                  gdk_pixbuf_save (pb, file, "png", NULL, NULL);
+                  if (options.common_data.large_preview)
+                    {
+                      g_mkdir_with_parents (large_path, 0755);
+                      file = g_strdup_printf ("%s/%s.png", large_path, g_checksum_get_string (chs));
+                    }
+                  else
+                    {
+                      g_mkdir_with_parents (normal_path, 0755);
+                      file = g_strdup_printf ("%s/%s.png", normal_path, g_checksum_get_string (chs));
+                    }
+                  gdk_pixbuf_save (pb, file, "png", NULL,
+                                   "tEXt::Thumb::URI", uri,
+                                   "tEXt::Thumb::MTime", smtime,
+                                   NULL);
+                  g_free (smtime);
                 }
             }
         }
       g_checksum_free (chs);
+      g_free (file);
 
       if (pb)
         {

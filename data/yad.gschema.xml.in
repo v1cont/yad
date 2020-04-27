@@ -40,6 +40,10 @@
       <default>100</default>
       <_summary>Maximum number of tabs in notebook dialog</_summary>
     </key>
+    <key name="large-preview" type="b">
+      <default>false</default>
+      <_summary>Use large previews in file selection dialogs</_summary>
+    </key>
     <key name="ignore-unknown-options" type="b">
       <default>true</default>
       <_summary>Ignore unknown command-line options</_summary>

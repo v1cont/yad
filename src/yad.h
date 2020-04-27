@@ -470,6 +470,7 @@ typedef struct {
   gdouble align;
   gboolean listen;
   gboolean preview;
+  gboolean large_preview;
   gboolean show_hidden;
   gboolean quoted_output;
   gboolean num_output;
