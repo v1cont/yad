@@ -1,6 +1,6 @@
-.TH YAD 1 "June 3, 2017"  "yad" "User Commands"
+.TH YAD 1 "April 27, 2020"  "yad" "User Commands"
 .SH NAME
-yad \- display GTK+ dialogs in shell scripts
+yad \- display GTK+ dialogs from shell scripts or command-line
 
 .SH SYNOPSIS
 .B yad
@@ -970,7 +970,7 @@ Add preview widget. Preview images loads from normal (default) or large thumbnai
 specification v0.8.0 (http://standards.freedesktop.org/thumbnail-spec/latest/) or creates by yad for image files and saves
 as normal or large thumbnails.
 .TP \--large-preview
-Use large previews by default. This option can be permanently turned on througn yad settings.
+Use large previews by default. This option can be permanently turned on through yad settings.
 
 This options applies to all of yad's file chooser dialogs.
 
@@ -1160,12 +1160,9 @@ yad-text-widget@GtkTextView@Text info widget
 yad-timeout-indicator@GtkProgreeBar@Timeout indicator
 .TE
 
-.SH FILES
-.TP
-.B yad.conf
-YAD default settings. \fIyad.conf\fP placed in \fI$XDG_CONFIG_HOME\fP or \fI$HOME/.config\fP
-directory. This file contain comments on every defaults and will be automatically
-recreated on yad'd start if it doesn't exists.
+.SH SETTINGS
+YAD keeps settings in gsettings database. Use \fIgsettings list-keys yad.settings\fP to get list of available settings.
+Settings values can be obtained by \fIgsettings get yad.settings <key>\fP and changed by \fIgsettings set yad.settings <key> <new-value>\fP
 
 .SH EXAMPLES
 Display a file selector with the title \fISelect a file to
