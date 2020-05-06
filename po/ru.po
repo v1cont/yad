@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 07:00+0300\n"
+"POT-Creation-Date: 2020-05-06 20:28+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -1847,48 +1847,52 @@ msgstr "Да"
 msgid "WARNING: Run command failed: %s\n"
 msgstr "ВНИМАНИЕ: Сбой при запуске команды: %s\n"
 
-#: ../src/browser.c:144
+#: ../src/browser.c:160
 msgid "scalable "
 msgstr "масштабируемый "
 
-#: ../src/browser.c:154
+#: ../src/browser.c:170
 msgid "built-in"
 msgstr "встроенный"
 
-#: ../src/browser.c:198
+#: ../src/browser.c:214
 msgid "Show all icons"
 msgstr "Показывать все иконки"
 
-#: ../src/browser.c:199
+#: ../src/browser.c:215
 msgid "Show only symbolic icons"
 msgstr "Показывать только символьные иконки"
 
+#: ../src/browser.c:216
+msgid "Select and print icon on double-click"
+msgstr "Выбрать и вывести иконку по двойному щелчку"
+
 #. initialize GTK+ and parse the command line arguments
-#: ../src/browser.c:215
+#: ../src/browser.c:232
 msgid "- Icon browser"
 msgstr "- Броузер иконок"
 
-#: ../src/browser.c:239
+#: ../src/browser.c:256
 msgid "Icon browser"
 msgstr "Броузер иконок"
 
-#: ../src/browser.c:259
+#: ../src/browser.c:276
 msgid "<b>Name:</b>"
 msgstr "<b>Имя:</b>"
 
-#: ../src/browser.c:270
+#: ../src/browser.c:287
 msgid "<b>Sizes:</b>"
 msgstr "<b>Размеры:</b>"
 
-#: ../src/browser.c:281
+#: ../src/browser.c:298
 msgid "<b>Filename:</b>"
 msgstr "<b>Имя файла:</b>"
 
-#: ../src/browser.c:312
+#: ../src/browser.c:329
 msgid "Category"
 msgstr "Категория"
 
-#: ../src/browser.c:343
+#: ../src/browser.c:363
 msgid "Icons"
 msgstr "Иконки"
 

@@ -111,6 +111,22 @@ load_icon_cat (IconBrowserData * data, gchar * cat)
 }
 
 static void
+print_icon (GtkTreeView *tv, GtkTreePath *path, GtkTreeViewColumn *col, IconBrowserData *data)
+{
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gchar *icon;
+
+  model = gtk_tree_view_get_model (tv);
+  gtk_tree_model_get_iter (model, &iter, path);
+  gtk_tree_model_get (model, &iter, 1, &icon, -1);
+
+  g_print ("%s\n", icon);
+
+  gtk_main_quit ();
+}
+
+static void
 select_icon (GtkTreeSelection * sel, IconBrowserData * data)
 {
   GtkTreeModel *model;
@@ -192,11 +208,12 @@ main (gint argc, gchar * argv[])
   GtkTreeViewColumn *col;
   GtkCellRenderer *r;
   GtkWidget *w, *p, *box, *t;
-  gboolean all = FALSE, symbolic = FALSE;
+  gboolean all = FALSE, symbolic = FALSE, interactive = FALSE;
 
   GOptionEntry entrs[] = {
     { "all", 'a', 0, G_OPTION_ARG_NONE, &all, _("Show all icons"), NULL },
     { "symbolic", 's', 0, G_OPTION_ARG_NONE, &symbolic, _("Show only symbolic icons"), NULL },
+    { "interactive", 'i', 0, G_OPTION_ARG_NONE, &interactive, _("Select and print icon on double-click"), NULL },
     { G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &themes, NULL, NULL },
     { NULL }
   };
@@ -338,6 +355,9 @@ main (gint argc, gchar * argv[])
 
   sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (data->icon_list));
   g_signal_connect (G_OBJECT (sel), "changed", G_CALLBACK (select_icon), data);
+
+  if (interactive)
+    g_signal_connect (G_OBJECT (data->icon_list), "row-activated", G_CALLBACK (print_icon), data);
 
   col = gtk_tree_view_column_new ();
   gtk_tree_view_column_set_title (col, _("Icons"));

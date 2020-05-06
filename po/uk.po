@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-27 07:00+0300\n"
+"POT-Creation-Date: 2020-05-06 20:28+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -1853,48 +1853,52 @@ msgstr "Так"
 msgid "WARNING: Run command failed: %s\n"
 msgstr "УВАГА: Збій при запуску команди: %s\n"
 
-#: ../src/browser.c:144
+#: ../src/browser.c:160
 msgid "scalable "
 msgstr "масштабований "
 
-#: ../src/browser.c:154
+#: ../src/browser.c:170
 msgid "built-in"
 msgstr "вбудований"
 
-#: ../src/browser.c:198
+#: ../src/browser.c:214
 msgid "Show all icons"
 msgstr "Показувати всі іконки"
 
-#: ../src/browser.c:199
+#: ../src/browser.c:215
 msgid "Show only symbolic icons"
 msgstr "Показувати тільки символьні іконки"
 
+#: ../src/browser.c:216
+msgid "Select and print icon on double-click"
+msgstr "Обрати та вівести іконку по подвійному натисканню"
+
 #. initialize GTK+ and parse the command line arguments
-#: ../src/browser.c:215
+#: ../src/browser.c:232
 msgid "- Icon browser"
 msgstr "- Навігатор іконок"
 
-#: ../src/browser.c:239
+#: ../src/browser.c:256
 msgid "Icon browser"
 msgstr "Навігатор іконок"
 
-#: ../src/browser.c:259
+#: ../src/browser.c:276
 msgid "<b>Name:</b>"
 msgstr "<b>Назва:</b>"
 
-#: ../src/browser.c:270
+#: ../src/browser.c:287
 msgid "<b>Sizes:</b>"
 msgstr "<b>Розміри:</b>"
 
-#: ../src/browser.c:281
+#: ../src/browser.c:298
 msgid "<b>Filename:</b>"
 msgstr "<b>Назва файлу:</b>"
 
-#: ../src/browser.c:312
+#: ../src/browser.c:329
 msgid "Category"
 msgstr "Категорія"
 
-#: ../src/browser.c:343
+#: ../src/browser.c:363
 msgid "Icons"
 msgstr "Іконки"
 
@@ -1985,7 +1989,9 @@ msgstr "Максимальна кількість вкладинок у діал
 
 #: ../data/yad.gschema.xml.in.h:13
 msgid "Use large previews in file selection dialogs"
-msgstr "Використовувати крупний розмір зображень попереднього перегляду у діалогах вибору файла"
+msgstr ""
+"Використовувати крупний розмір зображень попереднього перегляду у діалогах "
+"вибору файла"
 
 #: ../data/yad.gschema.xml.in.h:14
 msgid "Ignore unknown command-line options"
