@@ -131,6 +131,8 @@ notebook_close_childs (void)
     {
       if (tabs[i].pid != -1)
         kill (tabs[i].pid, SIGUSR2);
+      else
+        break;
     }
 
   /* wait for stop subprocesses */

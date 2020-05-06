@@ -105,7 +105,7 @@ paned_close_childs (void)
   while (is_running)
     {
       is_running = FALSE;
-      for (i = 1; i <= 3; i++)
+      for (i = 1; i < 3; i++)
         {
           if (tabs[i].pid != -1 && kill (tabs[i].pid, 0) == 0)
             {
@@ -113,7 +113,8 @@ paned_close_childs (void)
               break;
             }
         }
-      usleep (1000);
+      if (is_running)
+        usleep (1000);
     }
 
   /* cleanup shared memory */
