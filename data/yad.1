@@ -170,6 +170,9 @@ Print result for any of the return codes. This option doesn't work if timeout wa
 All commands runs unter specified interpreter. Default is \fIbash -c '%s'\fP. This option can reduse quoting in commands. If \fI%s\fP is specified, it will be replaced by the command.
 Otherwise command will be appended to the end of command line.
 .TP
+.B \-\-uri-handler=\fICMD\fP
+Use \fICMD\fP as uri handler. By default yad uses \fIopen-command\fP parameter from settings. URI adds to the end of specified command-line.
+.TP
 .B \-\-borders=\fINUM\fP
 Set dialog window borders.
 .TP
@@ -973,7 +976,7 @@ This options applies to all of yad's file chooser dialogs.
 Add preview widget. Preview images loads from normal (default) or large thumbnails according to XDG Thumbnails
 specification v0.8.0 (http://standards.freedesktop.org/thumbnail-spec/latest/) or creates by yad for image files and saves
 as normal or large thumbnails.
-.TP 
+.TP
 .B \-\-large-preview
 Use large previews by default. This option can be permanently turned on through yad settings.
 .TP

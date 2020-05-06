@@ -144,6 +144,8 @@ static GOptionEntry general_options[] = {
     N_("Don't scale icons"), NULL },
   { "use-interp", 0, G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, set_interp,
     N_("Run commands under specified interpreter (default: bash -c '%s')"), N_("CMD") },
+  { "uri-handler", 0, 0, G_OPTION_ARG_STRING, &options.data.uri_handler,
+    N_("Set URI handler"), N_("CMD") },
   /* window settings */
   { "sticky", 0, 0, G_OPTION_ARG_NONE, &options.data.sticky,
     N_("Set window sticky"), NULL },
@@ -1510,6 +1512,11 @@ yad_options_init (void)
   options.data.def_resp = YAD_RESPONSE_OK;
   options.data.use_interp = FALSE;
   options.data.interp = "bash -c '%s'";
+#ifndef STANDALONE
+  options.data.uri_handler = g_settings_get_string (settings, "open-command");
+#else
+  options.data.uri_handler = OPEN_CMD;
+#endif
 
   /* Initialize window options */
   options.data.sticky = FALSE;

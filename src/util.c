@@ -781,6 +781,19 @@ pango_to_css (gchar *font)
   return res;
 }
 
+void
+open_uri (gchar *uri)
+{
+  gchar *cmdline;
+
+  if (!uri && !uri[0])
+    return;
+
+  cmdline = g_strdup_printf ("%s '$s'", options.data.uri_handler, uri);
+  run_command_async (cmdline);
+  g_free (cmdline);
+}
+
 #ifdef HAVE_SPELL
 void
 show_langs ()

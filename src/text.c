@@ -159,7 +159,7 @@ tag_event_cb (GtkTextTag * tag, GObject * obj, GdkEvent * ev, GtkTextIter * iter
 {
   GtkTextIter start = *iter;
   GtkTextIter end = *iter;
-  gchar *url, *cmdline;
+  gchar *url;
 
   if (ev->type == GDK_BUTTON_PRESS)
     {
@@ -171,16 +171,9 @@ tag_event_cb (GtkTextTag * tag, GObject * obj, GdkEvent * ev, GtkTextIter * iter
           gtk_text_iter_forward_to_tag_toggle (&end, tag);
 
           url = gtk_text_iter_get_text (&start, &end);
-#ifndef STANDALONE
-          cmdline = g_strdup_printf (g_settings_get_string (settings, "open-command"), url);
-#else
-          cmdline = g_strdup_printf (OPEN_CMD, url);
-#endif
+          open_uri (url);
           g_free (url);
 
-          run_command_async (cmdline);
-
-          g_free (cmdline);
           return TRUE;
         }
     }

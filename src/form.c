@@ -632,6 +632,13 @@ select_date_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * eve
   gtk_widget_grab_focus (GTK_WIDGET (entry));
 }
 
+static void
+link_clicked_cb (GtkLinkButton *btn, gpointer data)
+{
+  const gchar *uri = gtk_link_button_get_uri (btn);
+  open_uri (uri);
+}
+
 static gboolean
 handle_stdin (GIOChannel * ch, GIOCondition cond, gpointer data)
 {
@@ -971,6 +978,7 @@ form_create_widget (GtkWidget * dlg)
                 gchar *buf = g_strcompress (fld->name[0] ? fld->name : _("Link"));
                 e = gtk_link_button_new_with_label ("", buf);
                 gtk_widget_set_name (e, "yad-form-link");
+                g_signal_connect (G_OBJECT (e), "activate-link", G_CALLBACK (link_clicked_cb), NULL);
                 gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
                 gtk_widget_set_hexpand (e, TRUE);
                 fields = g_slist_append (fields, e);
