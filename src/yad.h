@@ -665,7 +665,7 @@ void run_command_async (gchar *cmd);
 
 gchar * pango_to_css (gchar *font);
 
-void open_uri (gchar *uri);
+void open_uri (const gchar *uri);
 
 #ifdef HAVE_SPELL
 void show_langs ();

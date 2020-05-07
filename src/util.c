@@ -782,7 +782,7 @@ pango_to_css (gchar *font)
 }
 
 void
-open_uri (gchar *uri)
+open_uri (const gchar *uri)
 {
   gchar *cmdline;
 
