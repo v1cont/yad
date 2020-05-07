@@ -959,7 +959,6 @@ form_create_widget (GtkWidget * dlg)
 
             case YAD_FIELD_APP:
               e = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-              gtk_widget_set_name (e, "yad-form-app");
               if (fld->tip)
                 {
                   if (!options.data.no_markup)
