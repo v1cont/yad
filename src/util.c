@@ -792,7 +792,7 @@ open_uri (const gchar *uri)
   if (g_strstr_len (options.data.uri_handler, -1, "%s") != NULL)
     cmdline = g_strdup_printf (options.data.uri_handler, uri);
   else
-    cmdline = g_strdup_printf ("%s '$s'", options.data.uri_handler, uri);
+    cmdline = g_strdup_printf ("%s '%s'", options.data.uri_handler, uri);
   run_command_async (cmdline);
   g_free (cmdline);
 }

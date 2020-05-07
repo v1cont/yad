@@ -632,11 +632,12 @@ select_date_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * eve
   gtk_widget_grab_focus (GTK_WIDGET (entry));
 }
 
-static void
+static gboolean
 link_clicked_cb (GtkLinkButton *btn, gpointer data)
 {
   const gchar *uri = gtk_link_button_get_uri (btn);
   open_uri (uri);
+  return TRUE;
 }
 
 static gboolean
