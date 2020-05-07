@@ -769,10 +769,19 @@ static gboolean
 add_field (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
   YadField *fld;
+  gchar **names;
   gchar **fstr = split_arg (value);
 
   fld = g_new0 (YadField, 1);
-  fld->name = g_strdup (fstr[0]);
+
+  names = g_strsplit (fstr[0], options.common_data.item_separator, 2);
+  fld->name = g_strdup (names[0]);
+  if (names[1])
+    fld->tip = g_strdup (names[1]);
+  else
+    fld->tip = NULL;
+  g_strfreev (names);
+
   if (fstr[1])
     {
       if (strcasecmp (fstr[1], "H") == 0)
