@@ -1939,7 +1939,7 @@ msgstr "неможливо отримати опис шрифта зі стрі�
 
 #: ../data/yad-icon-browser.desktop.in.h:1
 msgid "Icon Browser"
-msgstr "Павігатор іконок"
+msgstr "Навігатор іконок"
 
 #: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
