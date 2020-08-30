@@ -212,7 +212,8 @@ set_field_value (guint num, gchar * value)
                   gdouble min, max;
                   min = g_ascii_strtod (s1[0], NULL);
                   max = g_ascii_strtod (s1[1], NULL);
-                  gtk_spin_button_set_range (GTK_SPIN_BUTTON (w), min, max);
+                  if (min < max)
+                    gtk_spin_button_set_range (GTK_SPIN_BUTTON (w), min, max);
                 }
               g_strfreev (s1);
               if (s[2])
