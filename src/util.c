@@ -565,7 +565,7 @@ parse_geometry ()
 gboolean
 get_bool_val (gchar *str)
 {
-  if (!str && !str[0])
+  if (!str || !str[0])
     return FALSE;
 
   switch (str[0])
