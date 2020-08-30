@@ -753,6 +753,8 @@ add_column (const gchar * option_name, const gchar * value, gpointer data, GErro
             col->type = YAD_COLUMN_BAR;
           else if (strcasecmp (cstr[1], "SZ") == 0)
             col->type = YAD_COLUMN_SIZE;
+          else if (strcasecmp (cstr[1], "TIP") == 0)
+            col->type = YAD_COLUMN_TIP;
           else
             col->type = YAD_COLUMN_TEXT;
         }

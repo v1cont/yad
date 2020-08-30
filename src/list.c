@@ -437,6 +437,9 @@ add_columns ()
             gtk_tree_view_column_add_attribute (column, renderer, "font", font_col);
           gtk_tree_view_column_set_sort_column_id (column, i);
           gtk_tree_view_column_set_resizable (column, TRUE);
+          
+          if (col->type == YAD_COLUMN_TIP)
+            options.list_data.tooltip_column = i + 1;
           break;
         }
       g_object_set_data (G_OBJECT (renderer), "column", GINT_TO_POINTER (i));
