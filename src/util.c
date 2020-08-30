@@ -786,7 +786,7 @@ open_uri (const gchar *uri)
 {
   gchar *cmdline;
 
-  if (!uri && !uri[0])
+  if (!uri || !uri[0])
     return;
 
   if (g_strstr_len (options.data.uri_handler, -1, "%s") != NULL)
