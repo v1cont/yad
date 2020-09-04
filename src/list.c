@@ -574,7 +574,8 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
       GString *string = g_string_new (NULL);
       gboolean node_added = FALSE;
 
-      while (channel->is_readable != TRUE);
+      while (channel->is_readable != TRUE)
+        gtk_main_iteration ();
 
       do
         {
