@@ -1,3 +1,18 @@
+Version 7.0
+    - add --enforce-step option to scale dialog
+    - add tooltips and markup to column headers in list dialog
+    - add pango-style font definition to text-info dialog
+    - add --large-preview options for better thumbnails handling
+    - add --interactive option to icon browser for printing selected icons on stdout
+    - add custom uri handler (--uri-handler option)
+    - improve killing children algo for notebook and paden dialogs
+    - add tooltips for form fields
+    - fix :tip column in list dialog
+    - fixes and cleanups in miscellaneous functions
+    - fix parsing numeric ranges in for dialog
+    - fixes in man page
+    - build icon browser by default
+
 Version 6.0
     - add --use-interp option. this feature can reduce quoting in command arguments
     - add link field to --form dialog
