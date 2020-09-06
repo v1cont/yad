@@ -289,7 +289,7 @@ get_tabs (key_t key, gboolean create)
     }
 
   /* attach shared memory */
-  if ((t = shmat (shmid, NULL, 0)) == (YadNTabs *) - 1)
+  if ((t = shmat (shmid, NULL, 0)) == (YadNTabs *) -1)
     {
       g_printerr ("yad: cannot attach shared memory for key %d: %s\n", key, strerror (errno));
       return NULL;
@@ -298,7 +298,7 @@ get_tabs (key_t key, gboolean create)
   /* initialize memory */
   if (create)
     {
-      for (i = 0; i < max_tab; i++)
+      for (i = 1; i < max_tab; i++)
         {
           t[i].pid = -1;
           t[i].xid = 0;
