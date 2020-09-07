@@ -170,7 +170,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
       GString *string = g_string_new (NULL);
 
       while (channel->is_readable != TRUE)
-        gtk_main_iteration ();
+        usleep (100);
 
       do
         {

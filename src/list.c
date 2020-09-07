@@ -575,7 +575,7 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
       gboolean node_added = FALSE;
 
       while (channel->is_readable != TRUE)
-        gtk_main_iteration ();
+        usleep (100);
 
       do
         {

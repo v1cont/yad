@@ -55,7 +55,7 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
       string = g_string_new (NULL);
 
       while (channel->is_readable != TRUE)
-        gtk_main_iteration ();
+        usleep (100);
 
       do
         {
@@ -69,7 +69,6 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
 
               while (gtk_events_pending ())
                 gtk_main_iteration ();
-
             }
           while (status == G_IO_STATUS_AGAIN);
 
