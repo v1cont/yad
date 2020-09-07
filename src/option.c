@@ -784,7 +784,8 @@ add_field (const gchar * option_name, const gchar * value, gpointer data, GError
     }
   else
     {
-      fld->name = g_strdup (names[0]);
+      if (names[0] && *names[0])
+        fld->name = g_strdup (names[0]);
       if (names[1])
         fld->tip = g_strdup (names[1]);
     }

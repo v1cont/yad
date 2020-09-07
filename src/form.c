@@ -1108,7 +1108,7 @@ form_create_widget (GtkWidget * dlg)
               }
 
             case YAD_FIELD_LABEL:
-              if (fld->name[0])
+              if (fld->name && fld->name[0])
                 {
                   gchar *buf = g_strcompress (fld->name);
                   e = gtk_label_new (NULL);
