@@ -120,7 +120,8 @@ paned_close_childs (void)
               break;
             }
         }
-      usleep (1000);
+      if (is_running)
+        usleep (1000);
     }
 
   /* cleanup shared memory */
