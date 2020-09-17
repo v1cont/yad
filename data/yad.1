@@ -863,16 +863,16 @@ Kill parent process if cancel button was pressed.
 .SS Text info options
 .TP
 .B \-\-filename=\fIFILENAME\fP
-Open specified file.
+Open specified file.  Filename extension determines syntax language if yad was built with \fIGtkSourceView\fP support. Use option \fI\-\-lang\fP to override extension.
 .TP
 .B \-\-editable
 Allow changes to text.
 .TP
 .B \-\-fore=\fICOLOR\fP
-Set foreground color of text.
+Set text foreground color.  This option is ignored if any of \fI\-\-lang\fP and \fI\-\-filename\fP are given and yad was built with \fIGtkSourceView\fP support.
 .TP
 .B \-\-back=\fICOLOR\fP
-Set background color of text.
+Set text background color.  This option is ignored if any of \fI\-\-lang\fP and \fI\-\-filename\fP are given and yad was built with \fIGtkSourceView\fP support.
 .TP
 .B \-\-fontname=\fIFONTNAME\fP
 Set text font. \fIFONTNAME\fP must be in a Pango font description format. By default \fIMonospace\fP is used.
@@ -900,10 +900,10 @@ Make links in text clickable. Links opens with \fIxdg-open\fP command.
 Set color for links. Default is \fIblue\fP.
 .TP
 .B \-\-lang=LANGUAGE
-Highlight syntax for specified \fILANGUAGE\fP. This option works only if yad builds with gtksourceview.
+Highlight syntax for specified \fILANGUAGE\fP. This option works only if yad was built with \fIGtkSourceView\fP support.
 .TP
 .B \-\-theme=THEME
-Set used theme to \fITHEME\fP. This option works only if yad builds with gtksourceview. Use option \fI\-\-show-themes\fP for get list of all available themes.
+Set highlight theme to \fITHEME\fP. This option needs any of \fI\-\-lang\fP or \fI\-\-filename\fP. It works only if yad was built with \fIGtkSourceView\fP support. Use option \fI\-\-show-themes\fP to list all available themes.
 .TP
 .B \-\-listen
 Listen data from stdin even if filename was specified.
@@ -975,13 +975,13 @@ Show summary of options.
 Display an about dialog.
 .TP
 .B \-\-version
-Show version of program.
+Show program version and exit. Use \fI\-\-about\fP to view build options.
 .TP
 .B \-\-show-langs
-Show list of possible languages for spell checking. Available only if yad builds with \fIGtkSpell\fP support.
+Show list of possible languages for spell checking. Available only if yad was built with \fIGtkSpell\fP support.
 .TP
 .B \-\-show-themes
-Show list of possible GtkSourceView themes. Available only if yad builds with \fIGtkSourceView\fP support.
+Show list of possible highlight themes. Available only if yad was built with \fIGtkSourceView\fP support.
 
 .PP
 Also the standard GTK+ options are accepted.

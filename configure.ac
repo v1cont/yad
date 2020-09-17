@@ -1,5 +1,5 @@
 # write PACKAGE_URL as "http" not "https" for About dialog to display a clickable link in the Credits tab.
-AC_INIT([YAD], [0.42.15], [https://github.com/v1cont/yad/issues], yad, [http://github.com/v1cont/yad])
+AC_INIT([YAD], [0.42.16], [https://github.com/v1cont/yad/issues], yad, [http://github.com/v1cont/yad])
 AC_CONFIG_AUX_DIR([build])
 
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz no-dist-gzip])
@@ -25,7 +25,7 @@ AC_ARG_WITH([gtk],
     [with_gtk=gtk2])
 
 case "$with_gtk" in
-    gtk3) 
+    gtk3)
         GTK_MODULE="gtk+-3.0"
         GTK_REQUIRED="3.0.0"
         GTK_PRINT="gtk+-unix-print-3.0"
@@ -148,7 +148,7 @@ AM_CONDITIONAL([BUILD_IB], [test x$build_ib = xyes])
 
 # *******************************
 # Internationalization
-# ******************************* 
+# *******************************
 
 GETTEXT_PACKAGE=yad
 AC_SUBST([GETTEXT_PACKAGE])
@@ -165,7 +165,7 @@ AC_SUBST([AM_LDFLAGS])
 # *******************************
 
 AC_CONFIG_FILES([
-Makefile 
+Makefile
 po/Makefile.in
 src/Makefile
 data/Makefile

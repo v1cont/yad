@@ -424,10 +424,15 @@ fill_buffer_from_file ()
 
 #ifdef HAVE_SOURCEVIEW
   if (options.source_data.lang)
+  {
     lang = gtk_source_language_manager_get_language (gtk_source_language_manager_get_default (), options.source_data.lang);
-  else
+    gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (text_buffer), lang);
+  }
+  else if (options.common_data.uri)
+  {
     lang = gtk_source_language_manager_guess_language (gtk_source_language_manager_get_default (), options.common_data.uri, NULL);
-  gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (text_buffer), lang);
+    gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (text_buffer), lang);
+  }
 #endif
 }
 
@@ -453,8 +458,16 @@ text_create_widget (GtkWidget * dlg)
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w), options.hscroll_policy, options.vscroll_policy);
 
 #ifdef HAVE_SOURCEVIEW
-  text_buffer = (GObject *) gtk_source_buffer_new (NULL);
-  text_view = gtk_source_view_new_with_buffer (GTK_SOURCE_BUFFER (text_buffer));
+  if (options.source_data.lang || options.common_data.uri)
+  {
+    text_buffer = (GObject *) gtk_source_buffer_new (NULL);
+    text_view = gtk_source_view_new_with_buffer (GTK_SOURCE_BUFFER (text_buffer));
+  }
+  else
+  {
+    text_buffer = (GObject *) gtk_text_buffer_new (NULL);
+    text_view = gtk_text_view_new_with_buffer (GTK_TEXT_BUFFER (text_buffer));
+  }
 #else
   text_buffer = (GObject *) gtk_text_buffer_new (NULL);
   text_view = gtk_text_view_new_with_buffer (GTK_TEXT_BUFFER (text_buffer));
@@ -470,34 +483,8 @@ text_create_widget (GtkWidget * dlg)
   if (options.text_data.wrap)
     gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_WORD_CHAR);
 
-  if (options.text_data.fore)
-    {
-#if GTK_CHECK_VERSION(3,0,0)
-      GdkRGBA clr;
-      if (gdk_rgba_parse (&clr, options.text_data.fore))
-        gtk_widget_override_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
-#else
-      GdkColor clr;
-      if (gdk_color_parse (options.text_data.fore, &clr))
-        gtk_widget_modify_text (text_view, GTK_STATE_NORMAL, &clr);
-#endif
-    }
-
-  if (options.text_data.back)
-    {
-#if GTK_CHECK_VERSION(3,0,0)
-      GdkRGBA clr;
-      if (gdk_rgba_parse (&clr, options.text_data.back))
-        gtk_widget_override_background_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
-#else
-      GdkColor clr;
-      if (gdk_color_parse (options.text_data.back, &clr))
-        gtk_widget_modify_base (text_view, GTK_STATE_NORMAL, &clr);
-#endif
-    }
-
 #ifdef HAVE_SOURCEVIEW
-  if (options.source_data.theme)
+  if (options.source_data.theme && (options.source_data.lang || options.common_data.uri))
     {
       GtkSourceStyleScheme *scheme = NULL;
       GtkSourceStyleSchemeManager *mgr;
@@ -533,6 +520,32 @@ text_create_widget (GtkWidget * dlg)
         g_printerr (_("Theme %s not found\n"), options.source_data.theme);
     }
 #endif
+
+  if (options.text_data.fore)
+    {
+#if GTK_CHECK_VERSION(3,0,0)
+      GdkRGBA clr;
+      if (gdk_rgba_parse (&clr, options.text_data.fore))
+        gtk_widget_override_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
+#else
+      GdkColor clr;
+      if (gdk_color_parse (options.text_data.fore, &clr))
+        gtk_widget_modify_text (text_view, GTK_STATE_NORMAL, &clr);
+#endif
+    }
+
+  if (options.text_data.back)
+    {
+#if GTK_CHECK_VERSION(3,0,0)
+      GdkRGBA clr;
+      if (gdk_rgba_parse (&clr, options.text_data.back))
+        gtk_widget_override_background_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
+#else
+      GdkColor clr;
+      if (gdk_color_parse (options.text_data.back, &clr))
+        gtk_widget_modify_base (text_view, GTK_STATE_NORMAL, &clr);
+#endif
+    }
 
   /* set font */
   if (options.common_data.font)
