@@ -764,7 +764,13 @@ form_create_widget (GtkWidget * dlg)
               fld->type != YAD_FIELD_FULL_BUTTON && fld->type != YAD_FIELD_LINK &&
               fld->type != YAD_FIELD_LABEL && fld->type != YAD_FIELD_TEXT)
             {
-              gchar *buf = g_strcompress (fld->name);
+              gchar *buf;
+
+              if (fld->name)
+                buf = g_strcompress (fld->name);
+              else
+                buf = g_strdup ("");
+
               l = gtk_label_new (NULL);
               if (!options.data.no_markup)
                 {
@@ -800,7 +806,7 @@ form_create_widget (GtkWidget * dlg)
                   else
                     gtk_widget_set_tooltip_text (e, fld->tip);
                 }
-             g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
+              g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
               if (fld->type == YAD_FIELD_HIDDEN)
                 gtk_entry_set_visibility (GTK_ENTRY (e), FALSE);
               else if (fld->type == YAD_FIELD_READ_ONLY)
@@ -847,7 +853,11 @@ form_create_widget (GtkWidget * dlg)
 
             case YAD_FIELD_CHECK:
               {
-                gchar *buf = g_strcompress (fld->name);
+                gchar *buf;
+                if (fld->name)
+                  buf = g_strcompress (fld->name);
+                else
+                  buf = g_strdup ("");
                 e = gtk_check_button_new_with_label (buf);
                 gtk_widget_set_name (e, "yad-form-check");
                 if (fld->tip)
@@ -1090,7 +1100,12 @@ form_create_widget (GtkWidget * dlg)
 
             case YAD_FIELD_LINK:
               {
-                gchar *buf = g_strcompress (fld->name[0] ? fld->name : _("Link"));
+                gchar *buf;
+                if (fld->name)
+                  buf = g_strdup (fld->name[0] ? fld->name : _("Link"));
+                else
+                  buf = g_strdup (_("Link"));
+
                 e = gtk_link_button_new_with_label ("", buf);
                 gtk_widget_set_name (e, "yad-form-link");
                 if (fld->tip)
@@ -1104,6 +1119,7 @@ form_create_widget (GtkWidget * dlg)
                 gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
                 gtk_widget_set_hexpand (e, TRUE);
                 fields = g_slist_append (fields, e);
+                g_free (buf);
                 break;
               }
 
@@ -1142,7 +1158,12 @@ form_create_widget (GtkWidget * dlg)
             case YAD_FIELD_TEXT:
               {
                 GtkWidget *l, *sw, *b;
-                gchar *ltxt = g_strcompress (fld->name);
+                gchar *ltxt;
+
+                if (fld->name)
+                  ltxt = g_strcompress (fld->name);
+                else
+                  ltxt = g_strdup ("");
 
                 b = gtk_box_new (GTK_ORIENTATION_VERTICAL, 2);
                 l = gtk_label_new ("");

@@ -779,14 +779,17 @@ add_field (const gchar * option_name, const gchar * value, gpointer data, GError
   names = g_strsplit (fstr[0], options.common_data.item_separator, 3);
   if (names[1] && names[2])
     {
-      fld->name = g_strdup_printf ("%s%s%s", names[0], options.common_data.item_separator, names[1]);
+      fld->name = g_strdup_printf ("%s%s%s",
+                                   *names[0] ? names[0] : "",
+                                   options.common_data.item_separator,
+                                   *names[1] ? names[1] : "");
       fld->tip = g_strdup (names[2]);
     }
   else
     {
       if (names[0] && *names[0])
         fld->name = g_strdup (names[0]);
-      if (names[1])
+      if (names[1] && *names[1])
         fld->tip = g_strdup (names[1]);
     }
   g_strfreev (names);
