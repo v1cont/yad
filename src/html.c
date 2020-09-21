@@ -96,7 +96,7 @@ policy_cb (WebKitWebView *v, WebKitPolicyDecision *pd, WebKitPolicyDecisionType 
             g_app_info_launch_default_for_uri (uri, NULL, NULL);
         }
     }
-  else if (options.html_data.uri_cmd)
+  else if (options.data.uri_handler && options.data.uri_handler[0])
     {
       gchar *v1, *v2, *cmd;
       gint status;
@@ -120,7 +120,10 @@ policy_cb (WebKitWebView *v, WebKitPolicyDecision *pd, WebKitPolicyDecisionType 
       g_setenv ("YAD_HTML_BUTTON", v1, TRUE);
       g_setenv ("YAD_HTML_STATE", v2, TRUE);
 
-      cmd = g_strdup_printf ("%s '%s'", options.html_data.uri_cmd, uri);
+      if (g_strstr_len (options.data.uri_handler, -1, "%s") != NULL)
+        cmd = g_strdup_printf (options.data.uri_handler, uri);
+      else
+        cmd = g_strdup_printf ("%s '%s'", options.data.uri_handler, uri);
       status = run_command_sync (cmd, NULL);
       g_free (cmd);
 
