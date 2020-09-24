@@ -1,3 +1,8 @@
+Version 7.2
+    - fix parsing field names for form dialog
+    - fix uri-handler for html dialog
+    - add file: scheme for uri regexp in text-info dialog
+
 Version 7.1
     - fix parsing field names for form dialog
 
