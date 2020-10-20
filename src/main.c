@@ -532,15 +532,6 @@ create_dialog (void)
   /* show widgets */
   gtk_widget_show_all (vbox);
 
-  if (options.data.width > 0)
-    gtk_widget_set_size_request (vbox, options.data.width, options.data.height);
-  else
-    {
-      gint mw, nw;
-      gtk_widget_get_preferred_width (vbox, &mw, &nw);
-      gtk_widget_set_size_request (vbox, nw, -1);
-    }
-
   /* parse geometry or move window, if given. must be after showing widget */
   if (!options.data.maximized && !options.data.fullscreen)
     {
