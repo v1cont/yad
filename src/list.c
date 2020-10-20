@@ -35,14 +35,13 @@ static inline void
 yad_list_add_row (GtkTreeStore *m, GtkTreeIter *it, gchar *row_id, gchar *par_id)
 {
   GtkTreePath *row_path;
-  GtkTreeIter *parent = NULL;
+  GtkTreeIter pit, *parent = NULL;
 
   if (par_id && par_id[0])
     {
       GtkTreePath *par_path = g_hash_table_lookup (row_hash, par_id);
       if (par_path)
         {
-          GtkTreeIter pit;
           if (gtk_tree_model_get_iter (GTK_TREE_MODEL (m), &pit, par_path))
             parent = &pit;
         }
