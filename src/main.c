@@ -561,7 +561,7 @@ create_dialog (void)
 
       if (xf)
         {
-          fprintf (xf, "0x%lX", GDK_WINDOW_XID (gtk_widget_get_window (dlg)));
+          fprintf (xf, "0x%lX\n", GDK_WINDOW_XID (gtk_widget_get_window (dlg)));
 
           if (options.xid_file)
             fclose (xf);
@@ -856,7 +856,7 @@ main (gint argc, gchar ** argv)
       if (is_x11)
         {
           /* add YAD_XID variable */
-          str = g_strdup_printf ("0x%X", (guint) GDK_WINDOW_XID (gtk_widget_get_window (dialog)));
+          str = g_strdup_printf ("0x%lX", GDK_WINDOW_XID (gtk_widget_get_window (dialog)));
           g_setenv ("YAD_XID", str, TRUE);
         }
 
