@@ -218,8 +218,6 @@ main (gint argc, gchar * argv[])
     { NULL }
   };
 
-  data = g_new0 (IconBrowserData, 1);
-
 #ifdef ENABLE_NLS
   bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
