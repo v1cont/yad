@@ -1,3 +1,7 @@
+Version 7.3
+    - fix parsing separator field for form dialog (thanks to Dmitry Butskoy)
+    - fix handling user defined size of dialog with --width and --height arguments
+
 Version 7.2
     - fix parsing field names for form dialog
     - fix uri-handler for html dialog
