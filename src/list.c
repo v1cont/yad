@@ -436,7 +436,7 @@ add_columns ()
             gtk_tree_view_column_add_attribute (column, renderer, "font", font_col);
           gtk_tree_view_column_set_sort_column_id (column, i);
           gtk_tree_view_column_set_resizable (column, TRUE);
-          
+
           if (col->type == YAD_COLUMN_TIP)
             options.list_data.tooltip_column = i + 1;
           break;
@@ -757,7 +757,7 @@ get_data_as_string (GtkTreeIter *iter)
 static void edit_row_cb (GtkMenuItem *item, gpointer data);
 
 static void
-double_click_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *column, gpointer data)
+double_click_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *column, gpointer d)
 {
   GtkTreeModel *model;
   GtkTreeIter iter;

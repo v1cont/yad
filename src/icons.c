@@ -311,8 +311,7 @@ parse_desktop_file (gchar * filename)
               ext_pos = g_strrstr (nm, ".desktop");
               if (ext_pos)
                 *ext_pos = '\000';
-              ent->name = g_strdup (nm);
-              g_free (nm);
+              ent->name = nm;
             }
 
           /* get tooltip */

@@ -198,8 +198,8 @@ motion_cb (GtkWidget * w, GdkEventMotion * ev, gpointer d)
   tags = gtk_text_iter_get_tags (&iter);
   for (tagp = tags; tagp != NULL; tagp = tagp->next)
     {
-      GtkTextTag *tag = tagp->data;
-      gint link = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (tag), "is_link"));
+      GtkTextTag *t = tagp->data;
+      gint link = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (t), "is_link"));
 
       if (link)
         {

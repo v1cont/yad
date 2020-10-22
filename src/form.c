@@ -169,7 +169,7 @@ expand_action (gchar * cmd)
 }
 
 static void
-set_field_value (guint num, gchar * value)
+set_field_value (guint num, gchar *value)
 {
   GtkWidget *w;
   gchar **s;
@@ -370,7 +370,7 @@ set_field_value (guint num, gchar * value)
 }
 
 static void
-button_clicked_cb (GtkButton * b, gpointer data)
+button_clicked_cb (GtkButton * b, gpointer d)
 {
   gchar *action = (gchar *) g_object_get_data (G_OBJECT (b), "cmd");
 
@@ -1157,7 +1157,7 @@ form_create_widget (GtkWidget * dlg)
 
             case YAD_FIELD_TEXT:
               {
-                GtkWidget *l, *sw, *b;
+                GtkWidget *sw, *b;
                 gchar *ltxt;
 
                 if (fld->name)
@@ -1440,7 +1440,7 @@ form_print_result (void)
       guint j, rows;
 
       rows = n_fields / options.form_data.columns;
-      rows += (n_fields % options.form_data.columns ? 1 : 0);
+      rows += ((n_fields % options.form_data.columns) ? 1 : 0);
       for (i = 0; i < rows; i++)
         {
           for (j = 0; j < options.form_data.columns; j++)

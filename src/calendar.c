@@ -43,14 +43,14 @@ parse_details ()
   /* read details file */
   while (!feof (f))
     {
-      gchar buf[4096], **dtl;
+      gchar buf[4096];
 
       /* read string */
       memset (buf, 0, 4096);
       fgets (buf, 4096, f);
       if (strlen (buf) > 0)
         {
-          dtl = g_strsplit (buf, " ", 2);
+          gchar **dtl = g_strsplit (buf, " ", 2);
           g_hash_table_insert (details, dtl[0], dtl[1]);
         }
     }
@@ -75,7 +75,8 @@ get_details (GtkCalendar * cal, guint year, guint month, guint day, gpointer dat
 
   if (str)
     return g_strdup (str);
-  return str;
+
+  return NULL;
 }
 
 static void

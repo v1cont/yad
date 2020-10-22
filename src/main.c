@@ -270,16 +270,11 @@ create_layout (GtkWidget *dlg)
     }
 
   /* add expander */
-  imw = NULL;
   if (mw && options.data.expander)
     {
-      exp = gtk_expander_new_with_mnemonic (options.data.expander);
+      imw = exp = gtk_expander_new_with_mnemonic (options.data.expander);
       gtk_expander_set_expanded (GTK_EXPANDER (exp), FALSE);
-      if (mw)
-        {
-          gtk_container_add (GTK_CONTAINER (exp), mw);
-          imw = exp;
-        }
+      gtk_container_add (GTK_CONTAINER (exp), mw);
     }
   else
     imw = mw;

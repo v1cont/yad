@@ -310,11 +310,10 @@ progress_create_widget (GtkWidget *dlg)
         }
 
       gtk_progress_bar_set_inverted (GTK_PROGRESS_BAR (w), p->type == YAD_PROGRESS_RTL);
-      if (options.common_data.vertical)
-        gtk_orientable_set_orientation (GTK_ORIENTABLE (w), GTK_ORIENTATION_VERTICAL);
 
       if (options.common_data.vertical)
         {
+          gtk_orientable_set_orientation (GTK_ORIENTABLE (w), GTK_ORIENTATION_VERTICAL);
           gtk_grid_attach (GTK_GRID (table), w, i, 0, 1, 1);
           gtk_widget_set_vexpand (w, TRUE);
         }

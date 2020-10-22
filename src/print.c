@@ -163,12 +163,13 @@ draw_page_image (GtkPrintOperation * op, GtkPrintContext * cnt, gint page, gpoin
 
   pw = gtk_print_context_get_width (cnt);
   ph = gtk_print_context_get_height (cnt);
-  if (options.print_data.headers)
-    ph -= HEADER_HEIGHT + HEADER_GAP;
 
   /* create header */
   if (options.print_data.headers)
-    draw_header (cnt, 1, 1);
+    {
+      ph -= HEADER_HEIGHT + HEADER_GAP;
+      draw_header (cnt, 1, 1);
+    }
 
   /* scale image to page size */
   pb = gdk_pixbuf_new_from_file (options.common_data.uri, NULL);
@@ -425,7 +426,7 @@ yad_print_run (void)
   fn = g_build_filename (g_get_user_config_dir (), "yad", NULL);
   g_mkdir_with_parents (fn, 0700);
   g_free (fn);
-  
+
   fn = g_build_filename (g_get_user_config_dir (), "yad", "print.conf", NULL);
   gtk_print_settings_to_file (print_settings, fn, NULL);
   gtk_page_setup_to_file (page_setup, fn, NULL);

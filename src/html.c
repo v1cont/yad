@@ -320,7 +320,7 @@ GtkWidget *
 html_create_widget (GtkWidget * dlg)
 {
   GtkWidget *sw;
-  WebKitSettings *settings;
+  WebKitSettings *wk_settings;
 
   sw = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), options.hscroll_policy, options.vscroll_policy);
@@ -328,17 +328,17 @@ html_create_widget (GtkWidget * dlg)
   view = WEBKIT_WEB_VIEW (webkit_web_view_new ());
   gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (view));
 
-  settings = webkit_settings_new ();
+  wk_settings = webkit_settings_new ();
 
-  g_object_set (G_OBJECT (settings), "user-agent", options.html_data.user_agent, NULL);
+  g_object_set (G_OBJECT (wk_settings), "user-agent", options.html_data.user_agent, NULL);
   if (options.html_data.user_style)
     {
       gchar *uri = g_filename_to_uri (options.html_data.user_style, NULL, NULL);
-      g_object_set (G_OBJECT (settings), "user-stylesheet-uri", uri, NULL);
+      g_object_set (G_OBJECT (wk_settings), "user-stylesheet-uri", uri, NULL);
     }
-  webkit_web_view_set_settings (view, settings);
+  webkit_web_view_set_settings (view, wk_settings);
 
-  webkit_settings_set_default_charset (settings, g_get_codeset ());
+  webkit_settings_set_default_charset (wk_settings, g_get_codeset ());
 
   g_signal_connect (view, "decide-policy", G_CALLBACK (policy_cb), NULL);
   g_signal_connect (view, "load-changed", G_CALLBACK (loaded_cb), NULL);
@@ -353,14 +353,14 @@ html_create_widget (GtkWidget * dlg)
     }
   else
     {
-      g_object_set (G_OBJECT(settings), "enable-caret-browsing", FALSE, NULL);
-      g_object_set (G_OBJECT(settings), "enable-developer-extras", FALSE, NULL);
-      g_object_set (G_OBJECT(settings), "enable-html5-database", FALSE, NULL);
-      g_object_set (G_OBJECT(settings), "enable-html5-local-storage", FALSE, NULL);
-      g_object_set (G_OBJECT(settings), "enable-offline-web-application-cache", FALSE, NULL);
-      g_object_set (G_OBJECT(settings), "enable-page-cache", FALSE, NULL);
-      g_object_set (G_OBJECT(settings), "enable-plugins", FALSE, NULL);
-      g_object_set (G_OBJECT (settings), "enable-private-browsing", TRUE, NULL);
+      g_object_set (G_OBJECT (wk_settings), "enable-caret-browsing", FALSE, NULL);
+      g_object_set (G_OBJECT (wk_settings), "enable-developer-extras", FALSE, NULL);
+      g_object_set (G_OBJECT (wk_settings), "enable-html5-database", FALSE, NULL);
+      g_object_set (G_OBJECT (wk_settings), "enable-html5-local-storage", FALSE, NULL);
+      g_object_set (G_OBJECT (wk_settings), "enable-offline-web-application-cache", FALSE, NULL);
+      g_object_set (G_OBJECT (wk_settings), "enable-page-cache", FALSE, NULL);
+      g_object_set (G_OBJECT (wk_settings), "enable-plugins", FALSE, NULL);
+      g_object_set (G_OBJECT (wk_settings), "enable-private-browsing", TRUE, NULL);
     }
 
   gtk_widget_show_all (sw);
