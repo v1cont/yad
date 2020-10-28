@@ -205,7 +205,7 @@ create_layout (GtkWidget *dlg)
           gtk_label_set_line_wrap (GTK_LABEL (text), TRUE);
           gtk_label_set_selectable (GTK_LABEL (text), options.data.selectable_labels);
           gtk_label_set_justify (GTK_LABEL (text), options.data.text_align);
-          gtk_widget_set_state_flags (text, GTK_STATE_NORMAL, FALSE);
+          gtk_widget_set_state_flags (text, GTK_STATE_FLAG_NORMAL, FALSE);
           gtk_label_set_xalign (GTK_LABEL (text), options.data.text_align);
           gtk_widget_set_can_focus (text, FALSE);
         }

@@ -198,7 +198,7 @@ update_preview (GtkFileChooser * chooser, GtkWidget *p)
                   gchar *smtime;
 
                   stat (file, &st);
-                  smtime = g_strdup_printf ("%d", st.st_mtime);
+                  smtime = g_strdup_printf ("%lu", st.st_mtime);
                   g_free (file);
 
                   /* save thumbnail */

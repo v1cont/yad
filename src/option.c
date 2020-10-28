@@ -1118,7 +1118,7 @@ set_orient (const gchar * option_name, const gchar * value, gpointer data, GErro
   if (strncasecmp (value, "hor", 3) == 0)
     options.paned_data.orient = GTK_ORIENTATION_HORIZONTAL;
   else if (strncasecmp (value, "vert", 4) == 0)
-    options.print_data.type = GTK_ORIENTATION_VERTICAL;
+    options.paned_data.orient = GTK_ORIENTATION_VERTICAL;
   else
     g_printerr (_("Unknown orientation: %s\n"), value);
 
