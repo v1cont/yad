@@ -47,7 +47,8 @@ parse_details ()
 
       /* read string */
       memset (buf, 0, 4096);
-      fgets (buf, 4096, f);
+      if (fgets (buf, 4096, f) == NULL)
+        break;
       if (strlen (buf) > 0)
         {
           gchar **dtl = g_strsplit (buf, " ", 2);
