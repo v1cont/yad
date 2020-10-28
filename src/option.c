@@ -1268,7 +1268,7 @@ set_scroll_policy (const gchar * option_name, const gchar * value, gpointer data
   else
     g_printerr (_("Unknown scrollbar policy type: %s\n"), value);
 
-  if (option_name[0] == 'h')
+  if (strcmp (option_name, "--hscroll-policy") == 0)
     options.hscroll_policy = pt;
   else
     options.vscroll_policy = pt;
