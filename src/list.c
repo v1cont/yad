@@ -1117,7 +1117,7 @@ row_sep_func (GtkTreeModel *m, GtkTreeIter *it, gpointer data)
     return FALSE;
 
   gtk_tree_model_get (m, it, options.list_data.sep_column - 1, &name, -1);
-  return (strcmp (name, options.list_data.sep_value) == 0);
+  return (name && strcmp (name, options.list_data.sep_value) == 0);
 }
 
 static inline void
