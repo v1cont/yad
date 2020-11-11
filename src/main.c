@@ -593,6 +593,9 @@ create_plug (void)
   if (box)
     gtk_container_add (GTK_CONTAINER (win), box);
 
+  if (options.data.width != -1 || options.data.height != -1)
+    gtk_widget_set_size_request(GTK_CONTAINER(win), options.data.width, options.data.height);
+
   gtk_widget_show_all (win);
 
   /* add plug data */
