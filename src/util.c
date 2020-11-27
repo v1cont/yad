@@ -714,6 +714,7 @@ pango_to_css (gchar *font)
         case PANGO_STYLE_ITALIC:
           g_string_append (str, "italic ");
           break;
+        default: ;
         }
     }
   if (mask & PANGO_FONT_MASK_VARIANT)
@@ -759,6 +760,7 @@ pango_to_css (gchar *font)
         case PANGO_WEIGHT_ULTRAHEAVY:
           g_string_append (str, "Ultraheavy ");
           break;
+        default: ;
         }
     }
 
