@@ -221,6 +221,7 @@ typedef struct {
   guint timeout;
   gchar *to_indicator;
   gchar *dialog_text;
+  guint text_width;
   gdouble text_align;
   gchar *dialog_image;
   gchar *icon_theme;

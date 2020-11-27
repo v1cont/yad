@@ -112,6 +112,8 @@ static GOptionEntry general_options[] = {
     N_("Show remaining time indicator (top, bottom, left, right)"), N_("POS") },
   { "text", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_STRING, &options.data.dialog_text,
     N_("Set the dialog text"), N_("TEXT") },
+  { "text-width", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_INT, &options.data.text_width,
+    N_("Set the dialog text width in characters"), N_("NUMBER") },
   { "text-align", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_CALLBACK, set_text_align,
     N_("Set the dialog text alignment (left, center, right, fill)"), N_("TYPE") },
   { "image", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_FILENAME, &options.data.dialog_image,
@@ -1508,6 +1510,7 @@ yad_options_init (void)
   options.data.posy = 0;
   options.data.geometry = NULL;
   options.data.dialog_text = NULL;
+  options.data.text_width = 0;
   options.data.text_align = GTK_JUSTIFY_LEFT;
   options.data.dialog_image = NULL;
   options.data.icon_theme = NULL;

@@ -195,12 +195,6 @@ create_layout (GtkWidget *dlg)
           gchar *buf = g_strcompress (options.data.dialog_text);
 
           text = gtk_label_new (NULL);
-          if (!options.data.no_markup)
-            gtk_label_set_markup (GTK_LABEL (text), buf);
-          else
-            gtk_label_set_text (GTK_LABEL (text), buf);
-          g_free (buf);
-
           gtk_widget_set_name (text, "yad-dialog-label");
           gtk_label_set_line_wrap (GTK_LABEL (text), TRUE);
           gtk_label_set_selectable (GTK_LABEL (text), options.data.selectable_labels);
@@ -208,6 +202,15 @@ create_layout (GtkWidget *dlg)
           gtk_widget_set_state_flags (text, GTK_STATE_FLAG_NORMAL, FALSE);
           gtk_label_set_xalign (GTK_LABEL (text), options.data.text_align);
           gtk_widget_set_can_focus (text, FALSE);
+
+          if (options.data.text_width > 0)
+            gtk_label_set_max_width_chars (GTK_LABEL (text), options.data.text_width);
+
+          if (!options.data.no_markup)
+            gtk_label_set_markup (GTK_LABEL (text), buf);
+          else
+            gtk_label_set_text (GTK_LABEL (text), buf);
+          g_free (buf);
         }
     }
 
