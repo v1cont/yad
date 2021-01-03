@@ -150,6 +150,13 @@ unfocus_cb (GtkWidget *w, GdkEventFocus *ev, gpointer d)
   return FALSE;
 }
 
+static gboolean
+link_cb (GtkLabel *l, gchar *uri, gpointer d)
+{
+  open_uri (uri);
+  return TRUE;
+}
+
 void
 yad_exit (gint id)
 {
@@ -207,7 +214,10 @@ create_layout (GtkWidget *dlg)
             gtk_label_set_width_chars (GTK_LABEL (text), options.data.text_width);
 
           if (!options.data.no_markup)
-            gtk_label_set_markup (GTK_LABEL (text), buf);
+            {
+              gtk_label_set_markup (GTK_LABEL (text), buf);
+              g_signal_connect (G_OBJECT (text), "activate-link", G_CALLBACK (link_cb), NULL);
+            }
           else
             gtk_label_set_text (GTK_LABEL (text), buf);
           g_free (buf);
