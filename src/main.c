@@ -204,7 +204,7 @@ create_layout (GtkWidget *dlg)
           gtk_widget_set_can_focus (text, FALSE);
 
           if (options.data.text_width > 0)
-            gtk_label_set_max_width_chars (GTK_LABEL (text), options.data.text_width);
+            gtk_label_set_width_chars (GTK_LABEL (text), options.data.text_width);
 
           if (!options.data.no_markup)
             gtk_label_set_markup (GTK_LABEL (text), buf);
