@@ -348,7 +348,7 @@ html_create_widget (GtkWidget * dlg)
       g_signal_connect (view, "context-menu", G_CALLBACK (menu_cb), NULL);
       if (!options.data.dialog_title)
         g_signal_connect (view, "notify::title", G_CALLBACK (title_cb), dlg);
-      if (strcmp (options.data.window_icon, "yad") == 0)
+      if (!options.data.window_icon)
         g_signal_connect (view, "notify::favicon", G_CALLBACK (icon_cb), dlg);
     }
   else

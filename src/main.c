@@ -367,6 +367,8 @@ create_dialog (void)
       else
         gtk_window_set_icon_name (GTK_WINDOW (dlg), options.data.window_icon);
     }
+  else
+    gtk_window_set_icon_name (GTK_WINDOW (dlg), "yad");
 
   /* set window borders */
   if (options.data.borders < 0)

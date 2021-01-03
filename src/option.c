@@ -1497,7 +1497,7 @@ yad_options_init (void)
 
   /* Initialize general data */
   options.data.dialog_title = NULL;
-  options.data.window_icon = "yad";
+  options.data.window_icon = NULL;
 #ifndef STANDALONE
   options.data.width = g_settings_get_int (settings, "width");
   options.data.height = g_settings_get_int (settings, "height");
