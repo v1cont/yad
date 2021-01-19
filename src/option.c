@@ -22,7 +22,6 @@
 #include "yad.h"
 
 static gboolean add_button (const gchar *, const gchar *, gpointer, GError **);
-static gboolean set_text_align (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_column (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_field (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_bar (const gchar *, const gchar *, gpointer, GError **);
