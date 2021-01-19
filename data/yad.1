@@ -229,8 +229,11 @@ Read extra arguments from given file instead of command line. Each line of a fil
 .B \-\-response=\fINUMBER\fP
 Set default exit code to \fINUMBER\fP instead of \fI0\fP.
 .TP
+.B \-\-css=\fISTRING\fP
+Read and parse additional GTK+ CSS styles from given data. If \fISTRING\fP is filename, the content of file is loaded. If not \fISTRING\fP treats like CSS data.
+.TP
 .B \-\-gtkrc=\fIFILENAME\fP
-Read and parse additional GTK+ CSS styles from given file.
+Read and parse additional GTK+ CSS styles from given file. This option is deprecated. Use \fB--css\fP instead.
 .TP
 .B \-\-hscroll-policy=\fITYPE\fP
 Set the policy type for horizontal scrollbars. \fITYPE\fP can be one of the \fIauto\fP, \fIalways\fP or \fInever\fP. Default is \fIauto\fP.
@@ -259,10 +262,13 @@ Set the output type of boolean values to \fITYPE\fP. Possible types are \fIT\fP,
 .TP
 .B \-\-enable-fallback
 Show fallback applications.
+.TP
 .B \-\-enable-other
 Show other applications.
+.TP
 .B \-\-enable-all
 Show all available applications.
+.TP
 .B \-\-extened
 Shown extended information about choosen application. By default only executable is shown. In extended form the output fields are name, display name, description, icon and executable.
 
