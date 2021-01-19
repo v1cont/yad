@@ -525,6 +525,7 @@ typedef struct {
   YadSourceData source_data;
 #endif
 
+  gchar *css;
   gchar *gtkrc_file;
 
   GtkPolicyType hscroll_policy;

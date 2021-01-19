@@ -746,10 +746,26 @@ main (gint argc, gchar ** argv)
     is_x11 = TRUE;
 #endif
 
-  /* parse custom gtkrc */
-  if (options.gtkrc_file)
+  /* parse custom css */
+  if (options.css)
     {
       GtkCssProvider *css = gtk_css_provider_new ();
+
+      if (g_file_test (options.css, G_FILE_TEST_EXISTS))
+        gtk_css_provider_load_from_path (css, options.css, NULL);
+      else
+        gtk_css_provider_load_from_data (css, options.css, -1, NULL);
+      gtk_style_context_add_provider_for_screen (gdk_screen_get_default (), GTK_STYLE_PROVIDER (css),
+                                                 GTK_STYLE_PROVIDER_PRIORITY_USER);
+      g_object_unref (css);
+    }
+  else if (options.gtkrc_file)
+    {
+      GtkCssProvider *css = gtk_css_provider_new ();
+
+      if (options.debug)
+        g_printerr (_("WARNING: Using gtkrc option is deprecated, please use --css instead\n"));
+
       gtk_css_provider_load_from_path (css, options.gtkrc_file, NULL);
       gtk_style_context_add_provider_for_screen (gdk_screen_get_default (), GTK_STYLE_PROVIDER (css),
                                                  GTK_STYLE_PROVIDER_PRIORITY_USER);
