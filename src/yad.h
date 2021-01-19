@@ -222,7 +222,7 @@ typedef struct {
   gchar *to_indicator;
   gchar *dialog_text;
   guint text_width;
-  gdouble text_align;
+  GtkJustification text_align;
   gchar *dialog_image;
   gchar *icon_theme;
   gchar *expander;

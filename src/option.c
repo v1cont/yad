@@ -114,7 +114,7 @@ static GOptionEntry general_options[] = {
     N_("Set the dialog text"), N_("TEXT") },
   { "text-width", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_INT, &options.data.text_width,
     N_("Set the dialog text width in characters"), N_("NUMBER") },
-  { "text-align", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_CALLBACK, set_text_align,
+  { "text-align", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_CALLBACK, set_justify,
     N_("Set the dialog text alignment (left, center, right, fill)"), N_("TYPE") },
   { "image", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_FILENAME, &options.data.dialog_image,
     N_("Set the dialog image"), N_("IMAGE") },
@@ -703,23 +703,6 @@ add_button (const gchar * option_name, const gchar * value, gpointer data, GErro
 }
 
 static gboolean
-set_text_align (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
-{
-  if (strcasecmp (value, "left") == 0)
-    options.data.text_align = 0.0;
-  else if (strcasecmp (value, "right") == 0)
-    options.data.text_align = 1.0;
-  else if (strcasecmp (value, "center") == 0)
-    options.data.text_align = 0.5;
-  else if (strcasecmp (value, "fill") == 0)
-    options.data.text_align = 0.0;
-  else
-    g_printerr (_("Unknown align type: %s\n"), value);
-
-  return TRUE;
-}
-
-static gboolean
 add_column (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
   YadColumn *col;
@@ -1046,14 +1029,21 @@ set_align (const gchar * option_name, const gchar * value, gpointer data, GError
 static gboolean
 set_justify (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
+  GtkJustification *just;
+
+  if (strcasecmp (option_name, "justify") == 0)
+    just = &options.text_data.justify;
+  else
+    just = &options.data.text_align;
+
   if (strcasecmp (value, "left") == 0)
-    options.text_data.justify = GTK_JUSTIFY_LEFT;
+    *just = GTK_JUSTIFY_LEFT;
   else if (strcasecmp (value, "right") == 0)
-    options.text_data.justify = GTK_JUSTIFY_RIGHT;
+    *just = GTK_JUSTIFY_RIGHT;
   else if (strcasecmp (value, "center") == 0)
-    options.text_data.justify = GTK_JUSTIFY_CENTER;
+    *just = GTK_JUSTIFY_CENTER;
   else if (strcasecmp (value, "fill") == 0)
-    options.text_data.justify = GTK_JUSTIFY_FILL;
+    *just = GTK_JUSTIFY_FILL;
   else
     g_printerr (_("Unknown justification type: %s\n"), value);
 
