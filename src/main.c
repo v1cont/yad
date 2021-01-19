@@ -219,10 +219,10 @@ create_layout (GtkWidget *dlg)
               gtk_label_set_xalign (GTK_LABEL (text), 0.0);
               break;
             case GTK_JUSTIFY_RIGHT:
-              gtk_label_set_xalign (GTK_LABEL (text), 0.5);
+              gtk_label_set_xalign (GTK_LABEL (text), 1.0);
               break;
             case GTK_JUSTIFY_CENTER:
-              gtk_label_set_xalign (GTK_LABEL (text), 1.0);
+              gtk_label_set_xalign (GTK_LABEL (text), 0.5);
               break;
             }
           gtk_label_set_justify (GTK_LABEL (text), options.data.text_align);
