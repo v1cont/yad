@@ -1,3 +1,11 @@
+Version 8.0
+    - add --text-width option for more flexible wrapping long strings in dialog text
+    - handle URIs in dialog text
+    - add --css option (--gtkrc marked as deprecated)
+    - lots of bug fixes
+
+    Special thanks to Dmitry Butskoy for a lots of contributions
+
 Version 7.3
     - fix parsing separator field for form dialog (thanks to Dmitry Butskoy)
     - fix handling user defined size of dialog with --width and --height arguments
