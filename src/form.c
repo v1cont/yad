@@ -389,7 +389,7 @@ button_clicked_cb (GtkButton * b, gpointer data)
                     {
                       gchar **ln = g_strsplit (ptr, ":", 2);
                       fn = g_ascii_strtoll (ln[0], NULL, 10);
-                      if (fn && ln[1])
+                      if (fn && fn <= n_fields && ln[1])
                         set_field_value (fn - 1, ln[1]);
                       g_strfreev (ln);
                     }
