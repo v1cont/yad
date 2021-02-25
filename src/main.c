@@ -525,7 +525,7 @@ create_dialog (void)
               YadButton *b = (YadButton *) tmp->data;
 
               btn = gtk_button_new ();
-              gtk_container_add (GTK_CONTAINER (btn), get_label (b->name, 2));
+              gtk_container_add (GTK_CONTAINER (btn), get_label (b->name, 2, btn));
               gtk_button_set_alignment (GTK_BUTTON (btn), 0.5, 0.5);
               g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (b->response));
               g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), b->cmd);

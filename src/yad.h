@@ -633,7 +633,7 @@ gchar **split_arg (const gchar *str);
 
 YadNTabs *get_tabs (key_t key, gboolean create);
 
-GtkWidget *get_label (gchar *str, guint border);
+GtkWidget *get_label (gchar *str, guint border, GtkWidget *w);
 
 gchar *escape_str (gchar *str);
 gchar *escape_char (gchar *str, gchar ch);

@@ -393,7 +393,7 @@ get_tabs (key_t key, gboolean create)
 }
 
 GtkWidget *
-get_label (gchar * str, guint border)
+get_label (gchar *str, guint border, GtkWidget *w)
 {
   GtkWidget *a, *t, *i, *l;
   GtkStockItem it;
@@ -439,6 +439,8 @@ get_label (gchar * str, guint border)
     gtk_box_pack_start (GTK_BOX (t), i, FALSE, FALSE, 1);
   if (l)
     {
+      if (w)
+        gtk_label_set_mnemonic_widget (GTK_LABEL (l), w);
 #if !GTK_CHECK_VERSION(3,0,0)
       gtk_misc_set_alignment (GTK_MISC (l), 0.0, 0.5);
 #else

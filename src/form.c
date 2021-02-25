@@ -1032,7 +1032,7 @@ form_create_widget (GtkWidget * dlg)
             case YAD_FIELD_FULL_BUTTON:
               e = gtk_button_new ();
               g_signal_connect (G_OBJECT (e), "clicked", G_CALLBACK (button_clicked_cb), NULL);
-              gtk_container_add (GTK_CONTAINER (e), get_label (fld->name, 2));
+              gtk_container_add (GTK_CONTAINER (e), get_label (fld->name, 2, e));
               gtk_widget_set_name (e, "yad-form-button");
               gtk_button_set_alignment (GTK_BUTTON (e), 0.5, 0.5);
               if (fld->type == YAD_FIELD_BUTTON)
