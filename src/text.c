@@ -291,7 +291,8 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
       gint status;
 
       string = g_string_new (NULL);
-      while (channel->is_readable != TRUE);
+      while (channel->is_readable != TRUE)
+        usleep (100);
 
       do
         {

@@ -56,7 +56,8 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
             pulsate_timeout = g_timeout_add (100, pulsate_progress_bar, NULL);
         }
 
-      while (channel->is_readable != TRUE) ;
+      while (channel->is_readable != TRUE)
+        usleep (100);
 
       do
         {
