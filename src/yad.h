@@ -232,6 +232,7 @@ typedef struct {
   gboolean escape_ok;
   gboolean always_print;
   gboolean selectable_labels;
+  gboolean keep_icon_size;
   GtkButtonBoxStyle buttons_layout;
   gint def_resp;
   /* window settings */

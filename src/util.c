@@ -152,7 +152,7 @@ write_settings (void)
 }
 
 GdkPixbuf *
-get_pixbuf (gchar * name, YadIconSize size, gboolean force)
+get_pixbuf (gchar *name, YadIconSize size, gboolean force)
 {
   gint w, h;
   GdkPixbuf *pb = NULL;
@@ -184,7 +184,7 @@ get_pixbuf (gchar * name, YadIconSize size, gboolean force)
     }
 
   /* force scaling image to specific size */
-  if (force && pb)
+  if (!options.data.keep_icon_size && force && pb)
     {
       gint iw = gdk_pixbuf_get_width (pb);
       gint ih = gdk_pixbuf_get_height (pb);

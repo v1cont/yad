@@ -139,6 +139,8 @@ static GOptionEntry general_options[] = {
     N_("Set default return code"), N_("NUMBER") },
   { "selectable-labels", 0, 0, G_OPTION_ARG_NONE, &options.data.selectable_labels,
     N_("Dialog text can be selected"), NULL },
+  { "keep-icon-size", 0, 0, G_OPTION_ARG_NONE, &options.data.keep_icon_size,
+    N_("Don't scale icons"), NULL },
   /* window settings */
   { "sticky", 0, 0, G_OPTION_ARG_NONE, &options.data.sticky,
     N_("Set window sticky"), NULL },
@@ -1471,6 +1473,7 @@ yad_options_init (void)
   options.data.escape_ok = FALSE;
   options.data.always_print = FALSE;
   options.data.selectable_labels = FALSE;
+  options.data.keep_icon_size = FALSE;
   options.data.def_resp = YAD_RESPONSE_OK;
 
   /* Initialize window options */
