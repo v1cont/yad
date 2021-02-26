@@ -665,6 +665,8 @@ get_data_as_string (GtkTreeIter *iter)
   return res;
 }
 
+static void edit_row_cb (GtkMenuItem *item, gpointer data);
+
 static void
 double_click_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *column, gpointer data)
 {
@@ -700,7 +702,7 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *column
           gint exit;
 
           g_spawn_command_line_sync (cmd + 1, &data, NULL, &exit, NULL);
-          if (exit == 0)
+          if (exit == 0 && data != NULL)
             {
               gint i;
               gchar **lines = g_strsplit (data, "\n", 0);
@@ -721,6 +723,8 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *column
 
       g_free (cmd);
     }
+  else if (options.common_data.editable && options.list_data.row_action)
+    edit_row_cb (NULL, NULL);
   else
     {
       if (options.list_data.checkbox)
@@ -783,11 +787,12 @@ add_row_cb (GtkMenuItem *item, gpointer data)
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
+  gchar *cmd;
 
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
   yad_list_add_row (GTK_LIST_STORE (model), &iter);
 
-  if (options.list_data.add_action)
+  if (options.list_data.row_action)
     {
       gchar *out = NULL;
       gint exit;
@@ -798,8 +803,53 @@ add_row_cb (GtkMenuItem *item, gpointer data)
         gtk_main_iteration ();
 
       /* run command */
-      g_spawn_command_line_sync (options.list_data.add_action, &out, NULL, &exit, NULL);
-      if (exit == 0)
+      cmd = g_strdup_printf ("%s add", options.list_data.row_action);
+      g_spawn_command_line_sync (cmd, &out, NULL, &exit, NULL);
+      g_free (cmd);
+      if (exit == 0 && out != NULL)
+        {
+          guint i;
+          gchar **lines = g_strsplit (out, "\n", 0);
+
+          for (i = 0; i < n_cols; i++)
+            {
+              if (lines[i] == NULL)
+                break;
+
+              cell_set_data (&iter, i, lines[i]);
+            }
+          g_strfreev (lines);
+        }
+      g_free (out);
+    }
+}
+
+static void
+edit_row_cb (GtkMenuItem *item, gpointer data)
+{
+  GtkTreeIter iter;
+  GtkTreeSelection *sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (list_view));
+
+  if (!gtk_tree_selection_get_selected (sel, NULL, &iter))
+    return;
+
+  if (options.list_data.row_action)
+    {
+      gchar *cmd, *args, *out = NULL;
+      gint exit;
+
+      /* hide menu first */
+      gtk_menu_popdown (GTK_MENU (data));
+      while (gtk_events_pending ())
+        gtk_main_iteration ();
+
+      /* run command */
+      args = get_data_as_string (&iter);
+      cmd = g_strdup_printf ("%s edit %s", options.list_data.row_action, args);
+      g_free (args);
+      g_spawn_command_line_sync (cmd, &out, NULL, &exit, NULL);
+      g_free (cmd);
+      if (exit == 0 && out != NULL)
         {
           guint i;
           gchar **lines = g_strsplit (out, "\n", 0);
@@ -825,7 +875,29 @@ del_row_cb (GtkMenuItem *item, gpointer data)
   GtkTreeSelection *sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (list_view));
 
   if (gtk_tree_selection_get_selected (sel, NULL, &iter))
-    gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+    {
+      if (options.list_data.row_action)
+        {
+          gchar *cmd, *args;
+          gint exit;
+
+          /* hide menu first */
+          gtk_menu_popdown (GTK_MENU (data));
+          while (gtk_events_pending ())
+            gtk_main_iteration ();
+
+          /* run command */
+          args = get_data_as_string (&iter);
+          cmd = g_strdup_printf ("%s del %s", options.list_data.row_action, args);
+          g_free (args);
+          g_spawn_command_line_sync (cmd, NULL, NULL, &exit, NULL);
+          g_free (cmd);
+          if (exit == 0)
+            gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+        }
+      else
+        gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+    }
 }
 
 static void
@@ -902,6 +974,14 @@ popup_menu_cb (GtkWidget *w, GdkEventButton *ev, gpointer data)
           gtk_widget_show (item);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
           g_signal_connect (G_OBJECT (item), "activate", G_CALLBACK (del_row_cb), menu);
+
+          if (options.list_data.row_action)
+            {
+              item = gtk_menu_item_new_with_label (_("Edit row"));
+              gtk_widget_show (item);
+              gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+              g_signal_connect (G_OBJECT (item), "activate", G_CALLBACK (edit_row_cb), menu);
+            }
 
           item = gtk_menu_item_new_with_label (_("Duplicate row"));
           gtk_widget_show (item);

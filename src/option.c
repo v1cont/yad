@@ -453,8 +453,8 @@ static GOptionEntry list_options[] = {
     N_("Set double-click action"), N_("CMD") },
   { "select-action", 0, 0, G_OPTION_ARG_STRING, &options.list_data.select_action,
     N_("Set select action"), N_("CMD") },
-  { "add-action", 0, 0, G_OPTION_ARG_STRING, &options.list_data.add_action,
-    N_("Set add action"), N_("CMD") },
+  { "row-action", 0, 0, G_OPTION_ARG_STRING, &options.list_data.row_action,
+    N_("Set row action"), N_("CMD") },
   { "regex-search", 0, 0, G_OPTION_ARG_NONE, &options.list_data.regex_search,
     N_("Use regex in search"), NULL },
   { "no-selection", 0, 0, G_OPTION_ARG_NONE, &options.list_data.no_selection,
@@ -1622,7 +1622,7 @@ yad_options_init (void)
   options.list_data.ellipsize_cols = NULL;
   options.list_data.dclick_action = NULL;
   options.list_data.select_action = NULL;
-  options.list_data.add_action = NULL;
+  options.list_data.row_action = NULL;
   options.list_data.regex_search = FALSE;
   options.list_data.clickable = TRUE;
   options.list_data.no_selection = FALSE;

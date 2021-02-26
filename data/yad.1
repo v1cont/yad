@@ -663,7 +663,8 @@ Set the \fICMD\fP as a action when selection is changed. \fICMD\fP will be launc
 This option doesn't work with \fI--multiple\fP.
 .TP
 .B \-\-add-action=\fICMD\fP
-Set the \fICMD\fP as a action when new row is added from a context menu. Command launched without any additional arguments. Output of this command sets the new row values.
+Set the \fICMD\fP as an action when a row is added, modified or removed from the context menu. The first argument passed to the command is the action name (\fIadd\fP, \fIedit\fP or \fIdel\fP).
+The rest of the command line is data from the selected row. Output of this command sets the new row values.
 .TP
 .B \-\-regex-search
 Use regular expressions in search for text fields.
