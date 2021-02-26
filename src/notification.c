@@ -195,6 +195,8 @@ popup_menu_cb (GtkStatusIcon * icon, guint button, guint activate_time, gpointer
     return;
 
   menu = gtk_menu_new ();
+  gtk_menu_set_reserve_toggle_size (GTK_MENU (menu), FALSE);
+
   for (m = menu_data; m; m = m->next)
     {
       MenuData *d = (MenuData *) m->data;

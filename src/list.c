@@ -895,6 +895,7 @@ popup_menu_cb (GtkWidget * w, GdkEventButton * ev, gpointer data)
       if (menu == NULL)
         {
           menu = gtk_menu_new ();
+          gtk_menu_set_reserve_toggle_size (GTK_MENU (menu), FALSE);
 
           item = gtk_menu_item_new_with_label (_("Add row"));
           gtk_widget_show (item);
