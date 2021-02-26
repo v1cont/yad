@@ -35,6 +35,7 @@
 
 YadOptions options;
 static GtkWidget *dialog = NULL;
+static GtkWidget *text = NULL;
 
 static gint ret = YAD_RESPONSE_ESC;
 
@@ -171,9 +172,9 @@ yad_exit (gint id)
 static GtkWidget *
 create_layout (GtkWidget *dlg)
 {
-  GtkWidget *image, *text, *mw, *imw, *layout, *exp, *box;
+  GtkWidget *image, *mw, *imw, *layout, *exp, *box;
 
-  layout = image = text = mw = exp = NULL;
+  layout = image = mw = exp = NULL;
 
   /* create image */
   if (options.data.dialog_image)
@@ -222,6 +223,7 @@ create_layout (GtkWidget *dlg)
           gtk_widget_set_state_flags (text, GTK_STATE_NORMAL, FALSE);
           gtk_label_set_xalign (GTK_LABEL (text), options.data.text_align);
 #endif
+          gtk_widget_set_can_focus (text, FALSE);
         }
     }
 
@@ -600,7 +602,7 @@ create_dialog (void)
   if (!options.data.maximized && !options.data.fullscreen)
     {
       gint cw, ch;
-    
+
       gtk_widget_show_all (dlg);
 
       parse_geometry ();
@@ -611,7 +613,7 @@ create_dialog (void)
         options.data.width = cw;
       if (options.data.height == -1)
         options.data.height = ch;
-    
+
       gtk_window_resize (GTK_WINDOW (dlg), options.data.width, options.data.height);
 
       gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
@@ -950,6 +952,9 @@ main (gint argc, gchar ** argv)
           if (options.picture_data.size == YAD_PICTURE_FIT)
             picture_fit_to_window ();
         }
+
+      if (text && options.data.selectable_labels)
+        gtk_label_select_region (GTK_LABEL (text), 0, 0);
 
       /* run main loop */
       gtk_main ();
