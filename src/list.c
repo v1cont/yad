@@ -20,8 +20,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include <glib/gprintf.h>
-
 #include "yad.h"
 
 static GtkWidget *list_view;

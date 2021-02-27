@@ -22,8 +22,6 @@
 
 #include "yad.h"
 
-#include <glib/gprintf.h>
-
 #ifdef USE_WEBKIT2
 #include <webkit2/webkit2.h>
 #else

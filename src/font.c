@@ -17,10 +17,6 @@
  * Copyright (C) 2008-2019, Victor Ananjevsky <ananasik@gmail.com>
  */
 
-#include <errno.h>
-
-#include <glib/gprintf.h>
-
 #include "yad.h"
 
 static GtkWidget *font;

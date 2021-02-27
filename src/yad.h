@@ -28,11 +28,16 @@
 #include <gdk/gdkx.h>
 
 #include <gtk/gtk.h>
-#include <glib/gi18n.h>
-#include <gdk/gdkkeysyms.h>
-
 #if GTK_CHECK_VERSION(3,0,0)
 #include <gtk/gtkx.h>
+#endif
+#include <gdk/gdkkeysyms.h>
+
+#include <glib/gi18n.h>
+#include <glib/gprintf.h>
+
+#ifdef HAVE_HTML
+#include <webkit2/webkit2.h>
 #endif
 
 #ifdef HAVE_SPELL
@@ -554,6 +559,7 @@ typedef struct {
 
 extern YadSettings settings;
 
+/* TABS */
 typedef struct {
   pid_t pid;
   Window xid;
@@ -565,6 +571,7 @@ typedef struct {
 /*   xid - allow plugs to write shmem (for sync) */
 extern YadNTabs *tabs;
 
+/* FUNCTION PROTOTYPES */
 void yad_options_init (void);
 GOptionContext *yad_create_context (void);
 void yad_set_mode (void);
