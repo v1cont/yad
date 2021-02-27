@@ -269,7 +269,7 @@ entry_create_widget (GtkWidget * dlg)
       if (options.entry_data.entry_text)
         gtk_entry_set_text (GTK_ENTRY (entry), options.entry_data.entry_text);
 
-      if (options.entry_data.hide_text)
+      if (options.common_data.hide_text)
         g_object_set (G_OBJECT (entry), "visibility", FALSE, NULL);
 
       if (options.entry_data.completion)

@@ -93,7 +93,10 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
                   gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (progress_log), &end, 0, FALSE, 0, 0);
                 }
               else
-                gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress_bar), match);
+                {
+                  if (!options.common_data.hide_text)
+                    gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress_bar), match);
+                }
               g_free (match);
             }
           else if (!options.progress_data.pulsate)
@@ -158,7 +161,7 @@ progress_create_widget (GtkWidget * dlg)
   if (options.progress_data.percentage > 100)
     options.progress_data.percentage = 100;
   gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar), options.progress_data.percentage / 100.0);
-  if (options.progress_data.progress_text)
+  if (options.progress_data.progress_text && !options.common_data.hide_text)
     gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress_bar), options.progress_data.progress_text);
 #if GTK_CHECK_VERSION(3,0,0)
   gtk_progress_bar_set_inverted (GTK_PROGRESS_BAR (progress_bar), options.progress_data.rtl);

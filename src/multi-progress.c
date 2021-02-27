@@ -95,7 +95,8 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
               /* We have a comment, so let's try to change the label */
               match = g_strcompress (value[1] + 1);
               strip_new_line (match);
-              gtk_progress_bar_set_text (pb, match);
+              if (!options.common_data.hide_text)
+                gtk_progress_bar_set_text (pb, match);
               g_free (match);
             }
           else

@@ -284,8 +284,8 @@ static GOptionEntry entry_options[] = {
     N_("Set the entry label"), N_("TEXT") },
   { "entry-text", 0, 0, G_OPTION_ARG_STRING, &options.entry_data.entry_text,
     N_("Set the entry text"), N_("TEXT") },
-  { "hide-text", 0, 0, G_OPTION_ARG_NONE, &options.entry_data.hide_text,
-    N_("Hide the entry text"), N_("TEXT") },
+  { "hide-text", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_NONE, &options.common_data.hide_text,
+    N_("Hide the entry text"), NULL },
   { "completion", 0, 0, G_OPTION_ARG_NONE, &options.entry_data.completion,
     N_("Use completion instead of combo-box"), NULL },
   { "numeric", 0, 0, G_OPTION_ARG_NONE, &options.entry_data.numeric,
@@ -544,6 +544,8 @@ static GOptionEntry progress_options[] = {
     N_("Display progress indication dialog"), NULL },
   { "progress-text", 0, 0, G_OPTION_ARG_STRING, &options.progress_data.progress_text,
     N_("Set progress text"), N_("TEXT") },
+  { "hide-text", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_NONE, &options.common_data.hide_text,
+    N_("Hide text on progress bar"), NULL },
   { "percentage", 0, 0, G_OPTION_ARG_INT, &options.progress_data.percentage,
     N_("Set initial percentage"), N_("PERCENTAGE") },
   { "pulsate", 0, 0, G_OPTION_ARG_NONE, &options.progress_data.pulsate,
@@ -1503,6 +1505,7 @@ yad_options_init (void)
   options.common_data.show_hidden = FALSE;
   options.common_data.quoted_output = FALSE;
   options.common_data.num_output = FALSE;
+  options.common_data.hide_text = FALSE;
   options.common_data.filters = NULL;
   options.common_data.key = -1;
   options.common_data.bool_fmt = YAD_BOOL_FMT_UT;
@@ -1539,7 +1542,6 @@ yad_options_init (void)
   /* Initialize entry data */
   options.entry_data.entry_text = NULL;
   options.entry_data.entry_label = NULL;
-  options.entry_data.hide_text = FALSE;
   options.entry_data.completion = FALSE;
   options.entry_data.numeric = FALSE;
   options.entry_data.licon = NULL;

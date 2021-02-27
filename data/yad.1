@@ -813,12 +813,14 @@ Set the font for printing text. \fIFONTNAME\fP is a string with font representat
 .SS Progress options
 .PP
 When the \-\-progress option is used, yad reads lines of progress data from stdin.
-When the lines begin with \fI#\fP the text after \fI#\fP is displayed in the progress
-bar label. Numeric values treats like a persents for progress bar.
+When a line begins with \fI#\fP the text after \fI#\fP is displayed inside the progress
+bar. Numeric values set the percentage of the progress bar.
 .TP
 .B \-\-progress-text=\fITEXT\fP
-Set text in progress bar to \fITEXT\fP.
+Set initial text inside the progress bar to \fITEXT\fP.
 .TP
+.B \-\-hide-text
+Hide text inside the progress bar.
 .B \-\-percentage=\fINUMBER\fP
 Set initial percentage.
 .TP
@@ -835,7 +837,7 @@ Kill parent process if cancel button is pressed.
 Pulsate progress bar.
 .TP
 .B \-\-enable-log\fI[=TEXT]\fP
-Show log window. This window gathers all of lines from stdin, started from \fI#\fP instead of setting appropriate progress labels.
+Show log window. This window gathers all stdin lines that start with \fI#\fP instead of setting progress bar text.
 Optional argument \fITEXT\fP is a text label for window expander.
 .TP
 .B \-\-log-on-top
@@ -850,7 +852,12 @@ Set the height of log window.
 .SS Multiprogress options
 .TP
 .B \-\-bar=\fILABEL[:TYPE]\fP
-Add the progress bar with type \fITYPE\fp. \fITYPE\fP can be one of the \fInorm\fP for average progress bar, \fIrtl\fP for progress bar with inverted direction, \fIpulse\fP for pulsating progress bar (m,oves on receiving data) or \fIperm\fP for permanent pulsatin progress bar. \fIprem\fP progress bar understant two commands - \fIstart\fP for start movement and \fIstop\fP for stop it.
+Add a progress bar of type \fITYPE\fP. \fITYPE\fP can be one of \fINORM\fP for a regular progress bar, \fIRTL\fP for a progress bar with right-to-left text, \fIPULSE\fP for a pulsating progress bar (reacts on receiving data) and \fIPERM\fP for a progress bar that keeps pulsating. A \fIPERM\fP progress bar understands two commands - \fIstart\fP to start pulsating and \fIstop\fP to stop it.
+.PP
+The initial percentages of each bar are set as command-line arguments. Lines of progress data passed via stdin must start with
+\fIN:\fP where \fIN\fP is the progress bar number.
+When a line continues with \fI#\fP the text after \fI#\fP is displayed inside the progress
+bar. Numeric values set the percentage of the progress bar.
 .TP
 .B \-\-watch-bar=\fINUMBER\fP
 Watch for specific bar for auto closing.
@@ -859,10 +866,12 @@ Watch for specific bar for auto closing.
 Set alignment of bar labels. \fITYPE\fP can be \fIleft\fP, \fIcenter\fP or \fIright\fP.
 .TP
 .B \-\-auto-close
-Dismiss the dialog when 100% of all bars (or only watching bar) has been reached.
+Dismiss the dialog when 100% of all bars (or only of the watched bar) has been reached.
 .TP
 .B \-\-auto-kill
 Kill parent process if cancel button was pressed.
+.B \-\-hide-text
+Hide label text of all progress bars.
 
 .SS Text info options
 .TP
