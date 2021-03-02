@@ -1,4 +1,4 @@
-.TH YAD 1 "February 26, 2021"  "yad GTK+ 2.0" "User Commands"
+.TH YAD 1 "March 1, 2021"  "yad GTK+ 2.0" "User Commands"
 .SH NAME
 yad \- display GTK+ dialogs in shell scripts
 
@@ -692,30 +692,6 @@ Sending FormFeed character to list clears it. This symbol may be sent as \fIecho
 .B \-\-simple-tips
 Don't use markup in tooltips even if text has a valid markup.
 
-.SS Multi progress bars dialog options
-.TP
-.B \-\-bar=\fILABEL[:TYPE]\fP
-Add progress bar. \fILABEL\fP is a text label for progress bar. \fITYPE\fP is a progress bar type.
-Types are: \fINORM\fP for normal progress bar, \fIRTL\fP for inverted progress bar and \fIPULSE\fP for pulsate progress bar.
-.TP
-.B \-\-vertical
-Set vertical orientation of progress bars.
-.TP
-.B \-\-align=\fITYPE\fP
-Set alignment of bar labels. Possible types are \fIleft\fP, \fIcenter\fP or \fIright\fP. Default is left.
-.TP
-.B \-\-auto\-close
-Close dialog when 100% has been reached for all of non-pulsating progress bars.
-.TP
-.B \-\-watch-bar\fINUMBER\fP
-Watch for 100% of bar \fINUMBER\fP for close dialog.
-.TP
-.B \-\-auto\-kill
-Kill parent process if cancel button is pressed.
-.PP
-Initial values for bars set as an extra arguments. Each lines with progress data passed to stdin must be started
-from \fIN:\fP where \fIN\fP is a number of progress bar.
-
 .SS Notebook options
 .TP
 .B \-\-key=\fIKEY\fP
@@ -812,20 +788,38 @@ Set the font for printing text. \fIFONTNAME\fP is a string with font representat
 
 .SS Progress options
 .PP
-When the \-\-progress option is used, yad reads lines of progress data from stdin.
-When a line begins with \fI#\fP the text after \fI#\fP is displayed inside the progress
-bar. Numeric values set the percentage of the progress bar.
+When the \-\-progress option is used, yad reads lines of progress data from stdin,
+and operates in either \fIsingle-bar\fP mode or in multi-bar \fImode\fP.
+.PP
+In \fIsingle-bar\fP mode, when a line begins with \fI#\fP the text after \fI#\fP is a text label for the progress bar.
+Numeric values set the percentage of the progress bar.
+.PP
+In \fImulti-bar\fP mode, entered when at least one \-\-bar option is given, the initial percentages of each bar are set as command-line arguments.
+Lines of progress data passed via stdin must start with \fIN:\fP where \fIN\fP is the progress bar number.
+When a line continues with \fI#\fP the text after \fI#\fP is a text label for the progress bar.
+Numeric values set the percentage of the progress bar.
+.TP
+.B \-\-bar=\fILABEL[:TYPE]\fP
+Add a progress bar. \fILABEL\fP is a text label for the progress bar. \fITYPE\fP is a progress bar type.
+Types are: \fINORM\fP for normal progress bar, \fIRTL\fP for inverted progress bar and \fIPULSE\fP for pulsate progress bar.
+If no bars are specified, the progress dialog works in \fIsingle-bar\fP mode.
+.TP
+.B \-\-vertical
+Set vertical orientation of progress bars.
+.TP
+.B \-\-align=\fITYPE\fP
+Set alignment of bar labels. Possible types are \fIleft\fP, \fIcenter\fP or \fIright\fP. Default is left.
 .TP
 .B \-\-progress-text=\fITEXT\fP
-Set initial text inside the progress bar to \fITEXT\fP.
+Set the label of the progress bar to \fITEXT\fP. This option works only in \fIsingle-bar\fP mode.
 .TP
 .B \-\-hide-text
-Hide text inside the progress bar.
+Hide text in progress bars.
 .B \-\-percentage=\fINUMBER\fP
-Set initial percentage.
+Set initial percentage. This option works only in \fIsingle-bar\fP mode.
 .TP
 .B \-\-rtl
-Set Right-To-Left progress bar direction.
+Set Right-To-Left progress bar direction. This option works only in \fIsingle-bar\fP mode.
 .TP
 .B \-\-auto\-close
 Close dialog when 100% has been reached.
@@ -834,33 +828,23 @@ Close dialog when 100% has been reached.
 Kill parent process if cancel button is pressed.
 .TP
 .B \-\-pulsate
-Pulsate progress bar.
+Pulsate progress bar. This option works only in \fIsingle-bar\fP mode.
 .TP
 .B \-\-enable-log\fI[=TEXT]\fP
 Show log window. This window gathers all stdin lines that start with \fI#\fP instead of setting progress bar text.
-Optional argument \fITEXT\fP is a text label for window expander.
+Optional argument \fITEXT\fP is a text label for the window expander.
 .TP
 .B \-\-log-on-top
-Place log window above progress bar.
+Place log window above the progress bar. (Deprecated)
 .TP
 .B \-\-log-expanded
 Start with expanded log window.
 .TP
 .B \-\-log-height
-Set the height of log window.
-
-.SS Multiprogress options
-.TP
-.B \-\-bar=\fILABEL[:TYPE]\fP
-Add a progress bar of type \fITYPE\fP. \fITYPE\fP can be one of \fINORM\fP for a regular progress bar, \fIRTL\fP for a progress bar with right-to-left text, \fIPULSE\fP for a pulsating progress bar (reacts on receiving data) and \fIPERM\fP for a progress bar that keeps pulsating. A \fIPERM\fP progress bar understands two commands - \fIstart\fP to start pulsating and \fIstop\fP to stop it.
-.PP
-The initial percentages of each bar are set as command-line arguments. Lines of progress data passed via stdin must start with
-\fIN:\fP where \fIN\fP is the progress bar number.
-When a line continues with \fI#\fP the text after \fI#\fP is displayed inside the progress
-bar. Numeric values set the percentage of the progress bar.
+Set the height of the log window.
 .TP
 .B \-\-watch-bar=\fINUMBER\fP
-Watch for specific bar for auto closing.
+Watch only this bar to determine auto-closing.
 .TP
 .B \-\-align=\fITYPE\fP
 Set alignment of bar labels. \fITYPE\fP can be \fIleft\fP, \fIcenter\fP or \fIright\fP.
@@ -870,8 +854,6 @@ Dismiss the dialog when 100% of all bars (or only of the watched bar) has been r
 .TP
 .B \-\-auto-kill
 Kill parent process if cancel button was pressed.
-.B \-\-hide-text
-Hide label text of all progress bars.
 
 .SS Text info options
 .TP

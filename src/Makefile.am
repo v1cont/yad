@@ -15,7 +15,6 @@ yad_SOURCES = 			\
 	form.c			\
 	icons.c			\
 	list.c			\
-	multi-progress.c	\
 	notebook.c		\
 	notification.c		\
 	option.c		\
