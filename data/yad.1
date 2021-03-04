@@ -20,6 +20,9 @@ options starting with two dashes (`-').
 
 .SS Dialog options
 .TP
+.B \-\-about
+Display about dialog.
+.TP
 .B \-\-app
 Display application selection dialog.
 .TP
@@ -257,6 +260,36 @@ Set the output type of boolean values to \fITYPE\fP. Possible types are \fIT\fP,
 \fIO\fP and \fIo\fP - for \fIon/off\fP pair in appropriate case.
 .br
 \fI1\fP - for \fI1/0\fP pair.
+
+.SS Custom about dialog options
+.TP
+.B \-\-pname=\fISTRING\fP
+Set programm name.
+.TP
+.B \-\-image=\fIIMAGE\fP
+Set programm icon name.
+.TP
+.B \-\-version=\fISTRING\fP
+Set programm version string.
+.TP
+.B \-\-copyright=\fISTRING\fP
+Set programm copyrightstring.
+.TP
+.B \-\-comments=\fISTRING\fP
+Set programm detailed description.
+.TP
+.B \-\-license=\fISTRING\fP
+Set programm license. The value of this option can be one of predefined licenses (\fIGPL2\fP, \fIGPL3\fP, \fILGPL2\fP, \fILGPL3\fP, \fIBSD\fP, \fIMIT\fP or \fIARTISTIC\fP,),
+file name with license text or arbitrary string.
+.TP
+.B \-\-authors=\fISTRING\fP
+Set list of programm authors separated by comma.
+.TP
+.B \-\-website=\fIURI\fP
+Set a link to programm website.
+.TP
+.B \-\-website-label=\fILABEL\fP
+Set a label for programm website link.
 
 .SS Application selection options
 .TP
