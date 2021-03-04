@@ -263,6 +263,17 @@ typedef struct {
 } YadAppData;
 
 typedef struct {
+  gchar *name;
+  gchar *version;
+  gchar *copyright;
+  gchar *comments;
+  gchar *license;
+  gchar *authors;
+  gchar *website;
+  gchar *website_lbl;
+} YadAboutData;
+
+typedef struct {
   gint day;
   gint month;
   gint year;
@@ -498,6 +509,7 @@ typedef struct {
   YadData data;
   YadCommonData common_data;
 
+  YadAboutData about_data;
   YadAppData app_data;
   YadCalendarData calendar_data;
   YadColorData color_data;

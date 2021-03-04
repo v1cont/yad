@@ -239,6 +239,28 @@ static GOptionEntry common_options[] = {
   { NULL }
 };
 
+static GOptionEntry about_options[] = {
+  { "about", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &about_mode,
+    N_("Display about dialog"), NULL },
+  { "pname", 0, 0, G_OPTION_ARG_STRING, &options.about_data.name,
+    N_("Set application name"), N_("STRING") },
+  { "version", 0, 0, G_OPTION_ARG_STRING, &options.about_data.version,
+    N_("Set application version"), N_("STRING") },
+  { "copyright", 0, 0, G_OPTION_ARG_STRING, &options.about_data.copyright,
+    N_("Set application copyright string"), N_("STRING") },
+  { "comments", 0, 0, G_OPTION_ARG_STRING, &options.about_data.comments,
+    N_("Set application comments string"), N_("TEXT") },
+  { "license", 0, 0, G_OPTION_ARG_STRING, &options.about_data.license,
+    N_("Set application license"), N_("TEXT") },
+  { "authors", 0, 0, G_OPTION_ARG_STRING, &options.about_data.authors,
+    N_("Set application authors"), N_("LIST") },
+  { "website", 0, 0, G_OPTION_ARG_STRING, &options.about_data.website,
+    N_("Set application website"), N_("URI") },
+  { "website-label", 0, 0, G_OPTION_ARG_STRING, &options.about_data.website_lbl,
+    N_("Set application website label"), N_("STRING") },
+  { NULL }
+};
+
 static GOptionEntry app_options[] = {
   { "app", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &app_mode,
     N_("Display application selection dialog"), NULL },
@@ -647,8 +669,6 @@ static GOptionEntry filter_options[] = {
 };
 
 static GOptionEntry misc_options[] = {
-  { "about", 0, 0, G_OPTION_ARG_NONE, &about_mode,
-    N_("Show about dialog"), NULL },
   { "version", 0, 0, G_OPTION_ARG_NONE, &version_mode,
     N_("Print version"), NULL },
 #ifdef HAVE_SPELL
@@ -1587,6 +1607,15 @@ yad_options_init (void)
   options.common_data.spell_lang = NULL;
 #endif
 
+  /* initialize about data */
+  options.about_data.name = NULL;
+  options.about_data.copyright = NULL;
+  options.about_data.comments = NULL;
+  options.about_data.license = NULL;
+  options.about_data.authors = NULL;
+  options.about_data.website = NULL;
+  options.about_data.website_lbl = NULL;
+
   /* Initialize application data */
   options.app_data.show_fallback = FALSE;
   options.app_data.show_other = FALSE;
@@ -1796,6 +1825,12 @@ yad_create_context (void)
   /* Adds common option entries */
   a_group = g_option_group_new ("common", _("Common options"), _("Show common options"), NULL, NULL);
   g_option_group_add_entries (a_group, common_options);
+  g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+  g_option_context_add_group (tmp_ctx, a_group);
+
+  /* Adds about option entries */
+  a_group = g_option_group_new ("about", _("About dialog options"), _("Show custom about dialog options"), NULL, NULL);
+  g_option_group_add_entries (a_group, about_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 
