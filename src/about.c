@@ -113,11 +113,17 @@ yad_about (void)
                                      gtk_major_version, gtk_minor_version, gtk_micro_version);
 
   dialog = gtk_about_dialog_new ();
+  if (options.data.window_icon)
+    gtk_window_set_icon_name (GTK_WINDOW (dialog), options.data.window_icon);
+  else
+    gtk_window_set_icon_name (GTK_WINDOW (dialog), "yad");
 
   if (options.about_data.name != NULL)
     {
       /* custom about dialog */
       gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG (dialog), options.about_data.name);
+      if (options.data.dialog_image)
+        gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG (dialog), options.data.dialog_image);
       if (options.about_data.version)
         gtk_about_dialog_set_version (GTK_ABOUT_DIALOG (dialog), options.about_data.version);
       if (options.about_data.copyright)
@@ -134,7 +140,6 @@ yad_about (void)
     }
   else
     {
-      gtk_window_set_icon_name (GTK_WINDOW (dialog), "yad");
       g_object_set (G_OBJECT (dialog),
                     "name", PACKAGE_NAME,
                     "version", PACKAGE_VERSION,
