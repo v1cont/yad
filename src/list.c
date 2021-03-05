@@ -833,8 +833,18 @@ add_row_cb (GtkMenuItem *item, gpointer data)
   gchar *cmd;
 
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
-  /* FIXME: add id for new row here */
-  yad_list_add_row (GTK_TREE_STORE (model), &iter, NULL, NULL);
+  if (g_object_get_data (G_OBJECT (item), "child") != NULL)
+    {
+      GtkTreeIter parent;
+      GtkTreeSelection *sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (list_view));
+
+      if (gtk_tree_selection_get_selected (sel, NULL, &parent))
+        gtk_tree_store_append (GTK_TREE_STORE (model), &iter, &parent);
+      else
+        gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
+    }
+  else
+    gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
 
   if (options.list_data.row_action)
     {
@@ -1017,6 +1027,15 @@ popup_menu_cb (GtkWidget *w, GdkEventButton *ev, gpointer data)
           gtk_widget_show (item);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
           g_signal_connect (G_OBJECT (item), "activate", G_CALLBACK (add_row_cb), menu);
+
+          if (options.list_data.tree_mode)
+            {
+              item = gtk_menu_item_new_with_label (_("Add child row"));
+              gtk_widget_show (item);
+              gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+              g_object_set_data (G_OBJECT (item), "child", "1");
+              g_signal_connect (G_OBJECT (item), "activate", G_CALLBACK (add_row_cb), menu);
+            }
 
           item = gtk_menu_item_new_with_label (_("Delete row"));
           gtk_widget_show (item);
