@@ -1,4 +1,4 @@
-.TH YAD 1 "March 1, 2021"  "yad GTK+ 2.0" "User Commands"
+.TH YAD 1 "March 5, 2021"  "yad GTK+ 2.0" "User Commands"
 .SH NAME
 yad \- display GTK+ dialogs in shell scripts
 
@@ -577,6 +577,9 @@ Size of icons may be set in gtk config file at GTK_ICON_SIZE_MENU position of gt
 Special column names \fI@fore@\fP, \fI@back@\fP and \fI@font@\fP sets corresponding rows attributes.
 Values of those columns don't show in results.
 .TP
+.B \-\-tree
+Enbale tree mode. In this mode extra data in form \fIROW_ID[:PARENT_ID]\fP must be passed to yad before each row. See \fBEXAMPLES\fP for details.
+.TP
 .B \-\-checklist
 Use check boxes for the first column. Output checked rows instead of selected rows. Disable multiple selection.
 .TP
@@ -665,6 +668,9 @@ This option doesn't work with \fI--multiple\fP.
 .B \-\-add-action=\fICMD\fP
 Set the \fICMD\fP as an action when a row is added, modified or removed from the context menu. The first argument passed to the command is the action name (\fIadd\fP, \fIedit\fP or \fIdel\fP).
 The rest of the command line is data from the selected row. Output of this command sets the new row values.
+.TP
+.B \-\-tree-expanded
+Expand all tree nodes at startup.
 .TP
 .B \-\-regex-search
 Use regular expressions in search for text fields.
@@ -1158,6 +1164,10 @@ find $HOME \-name '*.ps' | yad \-\-progress \-\-pulsate
 Display a box with all of the installed desktop applications
 .IP
 yad \-\-icons \-\-read-dir=/usr/share/applications
+.PP
+Display list in tree mode
+.IP
+yad --list --tree --column "Items" f Fruits 1:f Apple 2:f Lemon v Vegetables 3:v Popato 4:v Onion
 
 .SH DEVELOPMENT
 There are some developers features providing with YAD.
