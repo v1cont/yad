@@ -208,11 +208,10 @@ get_color (GdkColor *c, guint64 alpha)
   gchar *res = NULL;
 
   /*
-   * Empirical learning about GTK-2 GtkColorButton and gtk_color_button_get_color():
-   * - Individual HEX channel values return as 0xABAB where AB represents the value
-   *   EXCEPTION: colors picked with the wheel return channels as 0xABCD where AB reflects the value but CD is garbage
-   * - Sometimes a wheel selection returns the red channel AB value off by 1
-   *   This can be worked-around by picking from the wheel disk with the eyedropper
+   * As observed GTK-2.24.32's color picker (GtkColorButton and gtk_color_button_get_color()):
+   * - returns individual HEX channel values as 0xABAB where AB is the color value
+   *   but picking from the wheel returns 0xABCD where AB is the color value and CD is garbage
+   * - sometimes selecting from the wheel returns red's AB off by 1; work-around: pick from the wheel using the eyedropper
    */
 
   switch (options.color_data.mode)
