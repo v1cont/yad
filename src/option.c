@@ -1684,6 +1684,7 @@ yad_options_init (void)
   options.html_data.encoding = NULL;
   options.html_data.user_agent = "YAD-Webkit (" VERSION ")";
   options.html_data.user_style = NULL;
+  options.html_data.wk_props = NULL;
 #endif
 
   /* Initialize icons data */
