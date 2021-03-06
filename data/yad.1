@@ -304,7 +304,7 @@ Show all available applications.
 .TP
 .B \-\-extened
 Shown extended information about choosen application. By default only executable is shown. In extended form the output fields are name, display name, description, icon and executable.
-
+.PP
 Additional argument for application dialog is a mime-type. If mime-type is not specified \fItext/plain\fP will be used.
 
 .SS Calendar options
@@ -618,8 +618,11 @@ Set user agent string. Default is \fIYAD-Webkit (@VERSION@)\fP
 .TP
 .B \-\-user-style=\fIURI\fP
 Set path or uri to custom user styles. Path to local file can be an absolute file name or uri with \fIfile://\fP prefix.
+.TP
+.B \-\-wk-prop=\fIPROP\fP
+Set additional WebKit setting. This option may be used multiply times. Setting \fIPROP\fP must be in a form "setting-name value". First character of value must be a type identifier \fIb\fP for booleans, \fIi\fP for integers and \fIs\fP for strings. The values itself following by a colon. List of possible settings can be found on this page - https://webkitgtk.org/reference/webkit2gtk/stable/WebKitSettings.html
 .PP
-When dialog wors in browser mode additional data in command line interprets as \fIURI\fP.
+When dialog works in browser mode additional data in command line interprets as \fIURI\fP.
 
 .SS List options
 .TP
@@ -759,7 +762,7 @@ Don't use markup in tooltips even if text has a valid markup.
 .TP
 .B \-\-header-tips
 Use header name as a fallback tooltip text.
-.TP
+.PP
 Sending FormFeed character to list clears it. This symbol may be sent as \fIecho \-e '\\f'\fP.
 
 .SS Notebook options

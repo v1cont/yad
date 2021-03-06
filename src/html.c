@@ -316,6 +316,41 @@ handle_stdin (GIOChannel * ch, GIOCondition cond, gpointer d)
   return FALSE;
 }
 
+static void
+set_user_props (WebKitSettings *wk_settings)
+{
+  gint i;
+
+  if (!options.html_data.wk_props)
+    return;
+
+  for (i = 0; options.html_data.wk_props[i] != NULL; i++)
+    {
+      gchar **prop = g_strsplit (options.html_data.wk_props[i], " ", 2);
+
+      if (prop[0] && prop[1])
+        {
+          switch (prop[1][0])
+            {
+            case 'b':
+              g_object_set (G_OBJECT (wk_settings), prop[0], (strcmp (prop[1] + 2, "true") == 0), NULL);
+              break;
+            case 'i':
+              g_object_set (G_OBJECT (wk_settings), prop[0], atol (prop[1] + 2), NULL);
+              break;
+            case 's':
+              g_object_set (G_OBJECT (wk_settings), prop[0], prop[1] + 2, NULL);
+              break;
+            default:
+              if (options.debug)
+                g_warning ("Wrong value '%s' for setting '%s'\n", prop[1], prop[0]);
+            }
+        }
+
+      g_strfreev (prop);
+    }
+}
+
 GtkWidget *
 html_create_widget (GtkWidget * dlg)
 {
@@ -353,15 +388,18 @@ html_create_widget (GtkWidget * dlg)
     }
   else
     {
-      g_object_set (G_OBJECT (wk_settings), "enable-caret-browsing", FALSE, NULL);
-      g_object_set (G_OBJECT (wk_settings), "enable-developer-extras", FALSE, NULL);
-      g_object_set (G_OBJECT (wk_settings), "enable-html5-database", FALSE, NULL);
-      g_object_set (G_OBJECT (wk_settings), "enable-html5-local-storage", FALSE, NULL);
-      g_object_set (G_OBJECT (wk_settings), "enable-offline-web-application-cache", FALSE, NULL);
-      g_object_set (G_OBJECT (wk_settings), "enable-page-cache", FALSE, NULL);
-      g_object_set (G_OBJECT (wk_settings), "enable-plugins", FALSE, NULL);
-      g_object_set (G_OBJECT (wk_settings), "enable-private-browsing", TRUE, NULL);
+      g_object_set (G_OBJECT (wk_settings),
+                    "enable-caret-browsing", FALSE,
+                    "enable-developer-extras", FALSE,
+                    "enable-html5-database", FALSE,
+                    "enable-html5-local-storage", FALSE,
+                    "enable-offline-web-application-cache", FALSE,
+                    "enable-page-cache", FALSE,
+                    "enable-plugins", FALSE,
+                    NULL);
     }
+
+  set_user_props (wk_settings);
 
   gtk_widget_show_all (sw);
   gtk_widget_grab_focus (GTK_WIDGET (view));

@@ -340,6 +340,7 @@ typedef struct {
   gchar *encoding;
   gchar *user_agent;
   gchar *user_style;
+  gchar **wk_props;
 } YadHtmlData;
 #endif
 
