@@ -389,6 +389,7 @@ html_create_widget (GtkWidget * dlg)
   else
     {
       g_object_set (G_OBJECT (wk_settings),
+                    "enable-write-console-messages-to-stdout", TRUE,
                     "enable-caret-browsing", FALSE,
                     "enable-developer-extras", FALSE,
                     "enable-html5-database", FALSE,
