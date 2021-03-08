@@ -317,7 +317,12 @@ create_layout (GtkWidget *dlg)
 
   gtk_box_pack_start (GTK_BOX (layout), box, FALSE, FALSE, 0);
   if (imw)
-    gtk_box_pack_start (GTK_BOX (layout), imw, TRUE, TRUE, 0);
+    {
+      if (options.mode == YAD_MODE_ENTRY)
+        gtk_box_pack_start (GTK_BOX (layout), imw, TRUE, FALSE, 0);
+      else
+        gtk_box_pack_start (GTK_BOX (layout), imw, TRUE, TRUE, 0);
+    }
 
   if (options.mode == YAD_MODE_DND)
     dnd_init (layout);
