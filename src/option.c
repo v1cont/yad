@@ -25,7 +25,6 @@ static gboolean add_button (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_column (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_field (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_bar (const gchar *, const gchar *, gpointer, GError **);
-static gboolean add_tab (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_scale_mark (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_palette (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_confirm_overwrite (const gchar *, const gchar *, gpointer, GError **);
@@ -504,7 +503,7 @@ static GOptionEntry list_options[] = {
 static GOptionEntry notebook_options[] = {
   { "notebook", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &notebook_mode,
     N_("Display notebook dialog"), NULL },
-  { "tab", 0, 0, G_OPTION_ARG_CALLBACK, add_tab,
+  { "tab", 0, 0, G_OPTION_ARG_STRING_ARRAY, &options.notebook_data.tabs,
     N_("Add a tab to notebook"), N_("LABEL") },
   { "tab-pos", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_CALLBACK, set_tab_pos,
     N_("Set position of a notebook tabs (top, bottom, left or right)"), N_("TYPE") },
@@ -514,6 +513,8 @@ static GOptionEntry notebook_options[] = {
     N_("Set active tab"), N_("NUMBER") },
   { "expand", 0, 0, G_OPTION_ARG_NONE, &options.notebook_data.expand,
     N_("Expand tabs"), NULL },
+  { "stack", 0, 0, G_OPTION_ARG_NONE, &options.notebook_data.stack,
+    N_("Use stack mode"), NULL },
   { NULL }
 };
 
@@ -883,13 +884,6 @@ add_bar (const gchar * option_name, const gchar * value, gpointer data, GError *
   options.progress_data.bars = g_slist_append (options.progress_data.bars, bar);
 
   g_strfreev (bstr);
-  return TRUE;
-}
-
-static gboolean
-add_tab (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
-{
-  options.notebook_data.tabs = g_slist_append (options.notebook_data.tabs, g_strdup (value));
   return TRUE;
 }
 
@@ -1738,8 +1732,9 @@ yad_options_init (void)
   options.notebook_data.tabs = NULL;
   options.notebook_data.borders = 5;
   options.notebook_data.pos = GTK_POS_TOP;
-  options.notebook_data.expand = FALSE;
   options.notebook_data.active = 1;
+  options.notebook_data.expand = FALSE;
+  options.notebook_data.stack = FALSE;
 
 #ifdef HAVE_TRAY
   /* Initialize notification data */

@@ -34,12 +34,13 @@
 #include "yad.h"
 
 static GtkWidget *notebook;
+static guint n_tabs = 0;
 
 GtkWidget *
 notebook_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w;
-  GSList *tab;
+  guint i;
 
   /* get shared memory */
   tabs = get_tabs (options.common_data.key, TRUE);
@@ -47,13 +48,43 @@ notebook_create_widget (GtkWidget * dlg)
     exit (-1);
 
   /* create widget */
-  w = notebook = gtk_notebook_new ();
-  gtk_widget_set_name (w, "yad-notebook-widget");
-  gtk_notebook_set_tab_pos (GTK_NOTEBOOK (w), options.notebook_data.pos);
-  gtk_container_set_border_width (GTK_CONTAINER (w), 5);
+  if (options.notebook_data.stack)
+    {
+      GtkWidget *ss;
+
+      w = gtk_box_new (GTK_ORIENTATION_VERTICAL, 2);
+
+      notebook = gtk_stack_new ();
+      gtk_widget_set_name (w, "yad-stack-widget");
+      gtk_stack_set_homogeneous (GTK_STACK (w), TRUE);
+
+      ss = gtk_stack_switcher_new ();
+      gtk_box_set_homogeneous (GTK_BOX (ss), options.notebook_data.expand);
+      gtk_stack_switcher_set_stack (GTK_STACK_SWITCHER (ss), GTK_STACK (notebook));
+
+      if (options.notebook_data.pos == GTK_POS_BOTTOM)
+        {
+          gtk_box_pack_start (GTK_BOX (w), notebook, TRUE, TRUE, 2);
+          gtk_box_pack_start (GTK_BOX (w), ss, FALSE, FALSE, 2);
+        }
+      else
+        {
+          gtk_box_pack_start (GTK_BOX (w), ss, FALSE, FALSE, 2);
+          gtk_box_pack_start (GTK_BOX (w), notebook, TRUE, TRUE, 2);
+        }
+
+      gtk_widget_set_halign (ss, GTK_ALIGN_CENTER);
+    }
+  else
+    {
+      w = notebook = gtk_notebook_new ();
+      gtk_widget_set_name (w, "yad-notebook-widget");
+      gtk_notebook_set_tab_pos (GTK_NOTEBOOK (w), options.notebook_data.pos);
+    }
+  //gtk_container_set_border_width (GTK_CONTAINER (w), 5);
 
   /* add tabs */
-  for (tab = options.notebook_data.tabs; tab; tab = tab->next)
+  for (i = 0; options.notebook_data.tabs[i] != NULL; i++)
     {
       GtkWidget *s;
 
@@ -63,9 +94,15 @@ notebook_create_widget (GtkWidget * dlg)
       gtk_widget_set_margin_top (s, options.notebook_data.borders);
       gtk_widget_set_margin_bottom (s, options.notebook_data.borders);
 
-      gtk_notebook_append_page (GTK_NOTEBOOK (w), s, get_label ((gchar *) tab->data, 0, s));
-      gtk_container_child_set (GTK_CONTAINER (w), s, "tab-expand", options.notebook_data.expand, NULL);
+      if (options.notebook_data.stack)
+        gtk_stack_add_titled (GTK_STACK (notebook), s, options.notebook_data.tabs[i], options.notebook_data.tabs[i]);
+      else
+        {
+          gtk_notebook_append_page (GTK_NOTEBOOK (w), s, get_label (options.notebook_data.tabs[i], 0, NULL));
+          gtk_container_child_set (GTK_CONTAINER (w), s, "tab-expand", options.notebook_data.expand, NULL);
+        }
     }
+  n_tabs = i;
 
   return w;
 }
@@ -73,10 +110,9 @@ notebook_create_widget (GtkWidget * dlg)
 void
 notebook_swallow_childs (void)
 {
-  guint i, n_tabs;
+  guint i;
   gboolean all_registered;
-
-  n_tabs = g_slist_length (options.notebook_data.tabs);
+  GtkWidget *s;
 
   /* wait until all children are registered */
   do
@@ -95,23 +131,33 @@ notebook_swallow_childs (void)
 
   for (i = 1; i <= n_tabs; i++)
     {
-      GtkWidget *s = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i - 1);
+      if (options.notebook_data.stack)
+        s = gtk_stack_get_child_by_name (GTK_STACK (notebook), options.notebook_data.tabs[i - 1]);
+      else
+        s = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i - 1);
 
-      if (tabs[i].pid != -1)
+      if (tabs[i].pid != -1 && s)
         gtk_socket_add_id (GTK_SOCKET (s), tabs[i].xid);
     }
 
   /* set active tab */
   if (options.notebook_data.active > 0)
-    gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), options.notebook_data.active - 1);
+    {
+      if (options.notebook_data.stack)
+        {
+          s = gtk_stack_get_child_by_name (GTK_STACK (notebook), options.notebook_data.tabs[options.notebook_data.active - 1]);
+          gtk_stack_set_visible_child (GTK_STACK (notebook), s);
+        }
+      else
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), options.notebook_data.active - 1);
+    }
 }
 
 void
 notebook_print_result (void)
 {
-  guint i, n_tabs;
+  guint i;
 
-  n_tabs = g_slist_length (options.notebook_data.tabs);
   for (i = 1; i <= n_tabs; i++)
     {
       if (tabs[i].pid != -1)
@@ -122,11 +168,10 @@ notebook_print_result (void)
 void
 notebook_close_childs (void)
 {
-  guint i, n_tabs;
+  guint i;
   struct shmid_ds buf;
   gboolean is_running;
 
-  n_tabs = g_slist_length (options.notebook_data.tabs);
   for (i = 1; i <= n_tabs; i++)
     {
       if (tabs[i].pid != -1)

@@ -771,11 +771,12 @@ Sending FormFeed character to list clears it. This symbol may be sent as \fIecho
 Set the key of the children.
 .TP
 .B \-\-tab=\fITEXT\fP
-Add tab with specified label to notebook. \fITEXT\fP may be in a form \fILABEL[!ICON[!TOOLTIP]]\fP
-where `!' is an item separator.
+Add tab with specified label to notebook. \fITEXT\fP may be in a form \fILABEL[!ICON[!TOOLTIP]]\fP where `!' is an item separator.
+For stack mode \fITEXT\fP for label uses as is.
 .TP
 .B \-\-tab-pos=\fITYPE\fP
-Set the tabs position. Value may be \fItop\fP, \fIbottom\fP, \fIleft\fP, or \fIright\fP. Default is  \fItop\fP.
+Set the tabs position. Value may be \fItop\fP, \fIbottom\fP, \fIleft\fP, or \fIright\fP. Default is \fItop\fP.
+For stack mode only \fItop\fP or \fIbottom\fP positions available.
 .TP
 .B \-\-tab-borders=\fINUMBER\fP
 Set the borders width around widget in tabs.
@@ -785,6 +786,9 @@ Set active tab.
 .TP
 .B \-\-expand
 Expand all tabs to full width of a dialog window.
+.TP
+.B \-\-stack
+Use stack mode (GtkStack instead of GtkNotebook). 
 .PP
 See \fBNOTEBOOK and PANED\fP section for more about notebook dialog.
 

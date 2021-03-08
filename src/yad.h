@@ -390,11 +390,12 @@ typedef struct {
 } YadListData;
 
 typedef struct {
-  GSList *tabs;
+  gchar **tabs;
   guint borders;
   GtkPositionType pos;
   guint active;
   gboolean expand;
+  gboolean stack;
 } YadNotebookData;
 
 #ifdef HAVE_TRAY
