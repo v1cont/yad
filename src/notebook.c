@@ -36,6 +36,19 @@
 static GtkWidget *notebook;
 static guint n_tabs = 0;
 
+static void
+stack_switch_cb (GObject *obj, GParamSpec *p, gpointer d)
+{
+  GtkWidget *s = gtk_stack_get_visible_child (GTK_STACK (notebook));
+  gtk_widget_child_focus (s, GTK_DIR_TAB_FORWARD);
+}
+
+static void
+notebook_switch_cb (GtkNotebook *nb, GtkWidget *s, guint pn, gpointer d)
+{
+  gtk_widget_child_focus (s, GTK_DIR_TAB_FORWARD);
+}
+
 GtkWidget *
 notebook_create_widget (GtkWidget * dlg)
 {
@@ -82,7 +95,6 @@ notebook_create_widget (GtkWidget * dlg)
       gtk_widget_set_name (w, "yad-notebook-widget");
       gtk_notebook_set_tab_pos (GTK_NOTEBOOK (w), options.notebook_data.pos);
     }
-  //gtk_container_set_border_width (GTK_CONTAINER (w), 5);
 
   /* add tabs */
   for (i = 0; options.notebook_data.tabs[i] != NULL; i++)
@@ -141,6 +153,12 @@ notebook_swallow_childs (void)
       if (tabs[i].pid != -1 && s)
         gtk_socket_add_id (GTK_SOCKET (s), tabs[i].xid);
     }
+
+  /* add signal handler for passing focus to a child */
+  if (options.notebook_data.stack)
+    g_signal_connect (G_OBJECT (notebook), "notify::visible-child", G_CALLBACK (stack_switch_cb), NULL);
+  else
+    g_signal_connect (G_OBJECT (notebook), "switch-page", G_CALLBACK (notebook_switch_cb), NULL);
 
   /* set active tab */
   if (options.notebook_data.active > 0)
