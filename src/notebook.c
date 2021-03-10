@@ -59,6 +59,7 @@ notebook_create_widget (GtkWidget * dlg)
       gtk_stack_set_homogeneous (GTK_STACK (notebook), TRUE);
 
       ss = gtk_stack_switcher_new ();
+      gtk_widget_set_name (ss, "yad-stack-switcher-widget");
       gtk_box_set_homogeneous (GTK_BOX (ss), options.notebook_data.expand);
       gtk_stack_switcher_set_stack (GTK_STACK_SWITCHER (ss), GTK_STACK (notebook));
 
