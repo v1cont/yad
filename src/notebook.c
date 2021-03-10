@@ -55,8 +55,8 @@ notebook_create_widget (GtkWidget * dlg)
       w = gtk_box_new (GTK_ORIENTATION_VERTICAL, 2);
 
       notebook = gtk_stack_new ();
-      gtk_widget_set_name (w, "yad-stack-widget");
-      gtk_stack_set_homogeneous (GTK_STACK (w), TRUE);
+      gtk_widget_set_name (notebook, "yad-stack-widget");
+      gtk_stack_set_homogeneous (GTK_STACK (notebook), TRUE);
 
       ss = gtk_stack_switcher_new ();
       gtk_box_set_homogeneous (GTK_BOX (ss), options.notebook_data.expand);
@@ -93,6 +93,7 @@ notebook_create_widget (GtkWidget * dlg)
       gtk_widget_set_margin_end (s, options.notebook_data.borders);
       gtk_widget_set_margin_top (s, options.notebook_data.borders);
       gtk_widget_set_margin_bottom (s, options.notebook_data.borders);
+      gtk_widget_set_can_focus (s, TRUE);
 
       if (options.notebook_data.stack)
         gtk_stack_add_titled (GTK_STACK (notebook), s, options.notebook_data.tabs[i], options.notebook_data.tabs[i]);
