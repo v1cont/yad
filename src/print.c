@@ -21,6 +21,7 @@
 #include <unistd.h>
 
 #include <gtk/gtkunixprint.h>
+#include <errno.h>
 
 #include "yad.h"
 
@@ -207,6 +208,39 @@ static void
 size_allocate_cb (GtkWidget * w, GtkAllocation * al, gpointer data)
 {
   gtk_widget_set_size_request (w, al->width, -1);
+}
+
+static gint
+save_settings (GtkPrintSettings *print_settings, GtkPageSetup *page_setup)
+{
+  GKeyFile *kf;
+  gchar *fn, *contents;
+  gint ret = 0;
+
+  kf = g_key_file_new ();
+
+  if (print_settings)
+    gtk_print_settings_to_key_file (print_settings, kf, NULL);
+
+  if (page_setup)
+    gtk_page_setup_to_key_file (page_setup, kf, NULL);
+
+  contents = g_key_file_to_data (kf, NULL, NULL);
+  g_key_file_free (kf);
+
+  fn = g_build_filename (g_get_user_config_dir (), "yad", NULL);
+  g_mkdir_with_parents (fn, 0700);
+  g_free (fn);
+
+  fn = g_build_filename (g_get_user_config_dir (), "yad", "print.conf", NULL);
+  ret = (gint) g_file_set_contents (fn, contents, -1, NULL);
+  g_free (fn);
+  g_free (contents);
+
+  if (!ret)
+    g_printerr (_("Cannot save print settings file: %s\n"), strerror (errno));
+
+  return ret;
 }
 
 gint
@@ -430,15 +464,8 @@ yad_print_run (void)
 
   gtk_widget_destroy (dlg);
 
-  /* save print settings */
-  fn = g_build_filename (g_get_user_config_dir (), "yad", NULL);
-  g_mkdir_with_parents (fn, 0700);
-  g_free (fn);
-
-  fn = g_build_filename (g_get_user_config_dir (), "yad", "print.conf", NULL);
-  gtk_print_settings_to_file (print_settings, fn, NULL);
-  gtk_page_setup_to_file (page_setup, fn, NULL);
-  g_free (fn);
+  if (0 == ret)
+    ret = save_settings(print_settings, page_setup);
 
   return ret;
 }
