@@ -163,12 +163,13 @@ draw_page_image (GtkPrintOperation * op, GtkPrintContext * cnt, gint page, gpoin
 
   pw = gtk_print_context_get_width (cnt);
   ph = gtk_print_context_get_height (cnt);
-  if (options.print_data.headers)
-    ph -= HEADER_HEIGHT + HEADER_GAP;
 
   /* create header */
   if (options.print_data.headers)
-    draw_header (cnt, 1, 1);
+    {
+      ph -= HEADER_HEIGHT + HEADER_GAP;
+      draw_header (cnt, 1, 1);
+    }
 
   /* scale image to page size */
   pb = gdk_pixbuf_new_from_file (options.common_data.uri, NULL);
@@ -213,9 +214,11 @@ yad_print_run (void)
 {
   GtkWidget *dlg;
   GtkWidget *box, *img, *lbl;
-  gchar *uri, *job_name = NULL;
+  gchar *uri, *fn, *job_name = NULL;
   GtkPrintCapabilities pcap;
   GtkPrintOperationAction act = GTK_PRINT_OPERATION_ACTION_PRINT;
+  GtkPrintSettings *print_settings = NULL;
+  GtkPageSetup *page_setup = NULL;
   gint resp, ret = 0;
   GError *err = NULL;
 
@@ -234,6 +237,20 @@ yad_print_run (void)
       return 1;
     }
 
+  /* load previously saved print settings */
+  fn = g_build_filename (g_get_user_config_dir (), "yad", "print.conf", NULL);
+  if (g_file_test (fn, G_FILE_TEST_EXISTS))
+    {
+      print_settings = gtk_print_settings_new_from_file (fn, NULL);
+      page_setup = gtk_page_setup_new_from_file (fn, NULL);
+    }
+  g_free (fn);
+
+  if (!print_settings)
+    print_settings = gtk_print_settings_new ();
+  if (!page_setup)
+    page_setup = gtk_page_setup_new ();
+
   /* create print dialog */
   dlg = gtk_print_unix_dialog_new (options.data.dialog_title, NULL);
   gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_NORMAL);
@@ -245,17 +262,13 @@ yad_print_run (void)
     pcap |= GTK_PRINT_CAPABILITY_PREVIEW;
   gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dlg), pcap);
 
-  if (!settings.print_settings)
-    settings.print_settings = gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (dlg));
-
   uri = g_build_filename (g_get_current_dir (), "yad.pdf", NULL);
-  gtk_print_settings_set (settings.print_settings, "output-uri", g_filename_to_uri (uri, NULL, NULL));
+  gtk_print_settings_set (print_settings, "output-uri", g_filename_to_uri (uri, NULL, NULL));
   g_free (uri);
 
-  gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dlg), settings.print_settings);
 
-  if (settings.page_setup)
-    gtk_print_unix_dialog_set_page_setup (GTK_PRINT_UNIX_DIALOG (dlg), settings.page_setup);
+  gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dlg), print_settings);
+  gtk_print_unix_dialog_set_page_setup (GTK_PRINT_UNIX_DIALOG (dlg), page_setup);
 
   /* set window behavior */
   gtk_widget_set_name (dlg, "yad-dialog-window");
@@ -332,16 +345,16 @@ yad_print_run (void)
         case GTK_RESPONSE_APPLY:   /* ask for preview */
           act = GTK_PRINT_OPERATION_ACTION_PREVIEW;
         case GTK_RESPONSE_OK:      /* run print */
-          settings.print_settings = gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (dlg));
-          settings.page_setup = gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG (dlg));
+          print_settings = gtk_print_unix_dialog_get_settings (GTK_PRINT_UNIX_DIALOG (dlg));
+          page_setup = gtk_print_unix_dialog_get_page_setup (GTK_PRINT_UNIX_DIALOG (dlg));
           job_name = g_strdup_printf ("yad-%s-%d", g_path_get_basename (options.common_data.uri), getpid ());
           if (options.print_data.type != YAD_PRINT_RAW)
             {
               /* print text or image */
               GtkPrintOperation *op = gtk_print_operation_new ();
               gtk_print_operation_set_unit (op, GTK_UNIT_POINTS);
-              gtk_print_operation_set_print_settings (op, settings.print_settings);
-              gtk_print_operation_set_default_page_setup (op, settings.page_setup);
+              gtk_print_operation_set_print_settings (op, print_settings);
+              gtk_print_operation_set_default_page_setup (op, page_setup);
               gtk_print_operation_set_job_name (op, job_name);
 
               switch (options.print_data.type)
@@ -395,7 +408,7 @@ yad_print_run (void)
               if (ret == 1)
                 break;
 
-              job = gtk_print_job_new (job_name, prnt, settings.print_settings, settings.page_setup);
+              job = gtk_print_job_new (job_name, prnt, print_settings, page_setup);
               if (gtk_print_job_set_source_file (job, options.common_data.uri, &err))
                 {
                   gtk_print_job_send (job, (GtkPrintJobCompleteFunc) raw_print_done, &ret, NULL);
@@ -416,6 +429,16 @@ yad_print_run (void)
   while (resp == GTK_RESPONSE_APPLY);
 
   gtk_widget_destroy (dlg);
-  write_settings ();
+
+  /* save print settings */
+  fn = g_build_filename (g_get_user_config_dir (), "yad", NULL);
+  g_mkdir_with_parents (fn, 0700);
+  g_free (fn);
+
+  fn = g_build_filename (g_get_user_config_dir (), "yad", "print.conf", NULL);
+  gtk_print_settings_to_file (print_settings, fn, NULL);
+  gtk_page_setup_to_file (page_setup, fn, NULL);
+  g_free (fn);
+
   return ret;
 }

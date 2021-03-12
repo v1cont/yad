@@ -549,9 +549,6 @@ typedef struct {
   gchar *open_cmd;
   gchar *date_format;
   guint max_tab;
-
-  GtkPrintSettings *print_settings;
-  GtkPageSetup *page_setup;
 } YadSettings;
 
 extern YadSettings settings;
