@@ -7,18 +7,24 @@ shell scripts. YAD depends on GTK+ only. The minimum GTK+ version is 2.16.0.
 
 This software is licensed under the GPL v.3
 
-This branch (maintain-gtk2) was forked from the upstream project at release
-0.42 (d0021d0) to continue GTK+ 2 support for the Fatdog64 Linux distribution.
-It should serve other minimal distributions that rely on GTK+ 2, and package yad.
+This branch (maintain-gtk2) is maintained independently from the upstream
+[project](https://github.com/v1cont/yad), and can be considered a fork at release
+0.42 (d0021d0) aimed at continuing GTK+ 2 support mainly for the
+[Fatdog64](http://distro.ibiblio.org/fatdog/web/) Linux distribution. It can
+benefit other light distributions that need a GTK+ 2 build of yad.
 
-In the spirit of a maintainance project, the focus is on fixing bugs.
-New features are considered but rarely added.
+In the spirit of maintainance project, backporting upstream bug fixes takes
+precedence.  New upstream features can be added as my time permits, and if they
+are compatible with GTK+ 2.  Read [feature comparison](feature-comparison.md).
+
+Note about version numbers.  This fork is versioned with the major.minor number
+frozen at the split from upstream, `0.42`, followed by a counter of the
+"release-quality" commits in this fork.
 
 Building the git version
 ----------------------
 
-While this branch can be built against either of version 2 and version 3 of the
-GTK+ library, it is only maintained and tested for GTK+ 2.
+While this branch can be built against GTK+ 2 and GTK+ 3, it is only tested on GTK+ 2.
 
 Get the latest source code with command:
 
@@ -29,7 +35,7 @@ git clone https://github.com/step-/yad.git yad_gtk2
 Generate build scripts, configure and build the project:
 
 ```sh
-cd yad &&
+cd yad_gtk2 &&
 git checkout maintain-gtk2 &&
 autoreconf -ivf &&
 intltoolize &&
