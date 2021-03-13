@@ -19,8 +19,7 @@ are compatible with GTK+ 2.  Read [feature comparison](feature-comparison.md).
 
 Note about version numbers.  This fork is versioned with the major.minor number
 frozen at the split from upstream, `0.42`, followed by a counter of the
-"significant" commits in this fork. This fork makes no formal releases but a
-counter bump can be considered as such.
+"release-quality" commits in this fork.
 
 Building the git version
 ----------------------

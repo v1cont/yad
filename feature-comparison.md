@@ -32,11 +32,11 @@ is extracted from the upstream [NEWS](https://github.com/v1cont/NEWS) file.
 
 Note about version numbers.  This fork is versioned with the major.minor number
 frozen at the split from upstream, `0.42`, followed by a counter of the
-"significant" commits in this fork. This fork makes no formal releases but a
-counter bump can be considered as such. The version numbers below refer to
-upstream releases.
+"release-quality" commits in this fork.
 
 ---
+
+The version numbers below refer to upstream releases.
 
 Version 8.0
 
