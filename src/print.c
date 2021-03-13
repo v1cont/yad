@@ -296,10 +296,13 @@ yad_print_run (void)
     pcap |= GTK_PRINT_CAPABILITY_PREVIEW;
   gtk_print_unix_dialog_set_manual_capabilities (GTK_PRINT_UNIX_DIALOG (dlg), pcap);
 
-  uri = g_build_filename (g_get_current_dir (), "yad.pdf", NULL);
-  gtk_print_settings_set (print_settings, "output-uri", g_filename_to_uri (uri, NULL, NULL));
-  g_free (uri);
-
+  uri = (gchar *) gtk_print_settings_get(print_settings, "output-uri");
+  if (uri == NULL)
+    {
+      uri = g_build_filename (g_get_current_dir (), "yad.pdf", NULL);
+      gtk_print_settings_set (print_settings, "output-uri", g_filename_to_uri (uri, NULL, NULL));
+      g_free (uri);
+    }
 
   gtk_print_unix_dialog_set_settings (GTK_PRINT_UNIX_DIALOG (dlg), print_settings);
   gtk_print_unix_dialog_set_page_setup (GTK_PRINT_UNIX_DIALOG (dlg), page_setup);
@@ -409,6 +412,10 @@ yad_print_run (void)
                   g_printerr (_("Printing failed: %s\n"), err->message);
                   ret = 1;
                 }
+
+              /* for a CUPS printer op could display another print settings/page setup dialog */
+              print_settings = gtk_print_operation_get_print_settings (op);
+              page_setup = gtk_print_operation_get_default_page_setup (op);
             }
           else
             {
