@@ -210,12 +210,12 @@ size_allocate_cb (GtkWidget * w, GtkAllocation * al, gpointer data)
   gtk_widget_set_size_request (w, al->width, -1);
 }
 
-static gint
+static gboolean
 save_settings (GtkPrintSettings *print_settings, GtkPageSetup *page_setup)
 {
   GKeyFile *kf;
   gchar *fn, *contents;
-  gint ret = 0;
+  gboolean res = 0;
 
   kf = g_key_file_new ();
 
@@ -233,14 +233,14 @@ save_settings (GtkPrintSettings *print_settings, GtkPageSetup *page_setup)
   g_free (fn);
 
   fn = g_build_filename (g_get_user_config_dir (), "yad", "print.conf", NULL);
-  ret = (gint) g_file_set_contents (fn, contents, -1, NULL);
+  res = g_file_set_contents (fn, contents, -1, NULL);
   g_free (fn);
   g_free (contents);
 
-  if (!ret)
+  if (!res)
     g_printerr (_("Cannot save print settings file: %s\n"), strerror (errno));
 
-  return ret;
+  return res;
 }
 
 gint
@@ -472,7 +472,7 @@ yad_print_run (void)
   gtk_widget_destroy (dlg);
 
   if (0 == ret)
-    ret = save_settings(print_settings, page_setup);
+    ret = ! save_settings(print_settings, page_setup);
 
   return ret;
 }
