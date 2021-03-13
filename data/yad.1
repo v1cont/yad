@@ -94,7 +94,7 @@ Set the Y position of dialog window. \fINUMBER\fP can be negative.
 .B \-\-geometry=\fIWIDTHxHEIGHT+X+Y\fP
 Use standard X Window geometry notation for placing dialog.
 When this option is used, \fIwidth\fP, \fIheight\fP, \fIposx\fP, \fIposy\fP, \fImouse\fP and \fIcenter\fP options are
-ignored. This option is obsolete for gtk3 builds.
+ignored.
 .TP
 .B \-\-timeout=\fITIMEOUT\fP
 Set the dialog timeout in seconds.
@@ -584,7 +584,7 @@ Enbale tree mode. In this mode extra data in form \fIROW_ID[:PARENT_ID]\fP must 
 Use check boxes for the first column. Output checked rows instead of selected rows. Disable multiple selection.
 .TP
 .B \-\-radiolist
-Same as \fI--checklist\fP but with a radio toggle for the first column.
+Same as \fI\-\-checklist\fP but with a radio toggle for the first column.
 .TP
 .B \-\-separator=\fISTRING\fP
 Set output separator characters.
@@ -665,7 +665,7 @@ Set the \fICMD\fP as a action when selection is changed. \fICMD\fP will be launc
 \fICMD\fP may contain a special character `%s' for setting a position for arguments. By default arguments will be concatenated to the end of \fICMD\fP.
 This option doesn't work with \fI--multiple\fP.
 .TP
-.B \-\-add-action=\fICMD\fP
+.B \-\-row-action=\fICMD\fP
 Set the \fICMD\fP as an action when a row is added, modified or removed from the context menu. The first argument passed to the command is the action name (\fIadd\fP, \fIedit\fP or \fIdel\fP).
 The rest of the command line is data from the selected row. Output of this command sets the new row values.
 .TP
