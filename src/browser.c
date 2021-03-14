@@ -214,7 +214,7 @@ main (gint argc, gchar * argv[])
     { "all", 'a', 0, G_OPTION_ARG_NONE, &all, _("Show all icons"), NULL },
     { "symbolic", 's', 0, G_OPTION_ARG_NONE, &symbolic, _("Show only symbolic icons"), NULL },
     { "interactive", 'i', 0, G_OPTION_ARG_NONE, &interactive, _("Select and print icon on double-click"), NULL },
-    { G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &themes, NULL, NULL },
+    { G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &themes, NULL, N_("THEME") },
     { NULL }
   };
 
