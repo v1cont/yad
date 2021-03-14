@@ -13,8 +13,8 @@ gsettings_SCHEMAS = $(gsettings_in_files:.xml.in=.xml)
 @GSETTINGS_RULES@
 
 dist_man_MANS = yad.1
-if BUILD_PFD
-dist_man_MANS += pfd.1
+if BUILD_TOOLS
+dist_man_MANS += yad-tools.1
 endif
 
 m4dir = $(datadir)/aclocal

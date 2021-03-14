@@ -1,13 +1,13 @@
 # Ukrainian translation for YAD
 # This file is distributed under the same license as the YAD package.
 #
-# Victor Ananjevsky <ananasik@gmail.com>, 2011-2020.
+# Victor Ananjevsky <ananasik@gmail.com>, 2011-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-08 18:01+0200\n"
+"POT-Creation-Date: 2021-03-14 10:48+0200\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -139,32 +139,32 @@ msgstr "Не можу розібрати файл %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Не можу відкрити каталог %s: %s\n"
 
-#: ../src/main.c:134 ../src/main.c:468
+#: ../src/main.c:134 ../src/main.c:473
 #, c-format
 msgid "%d sec"
 msgstr "%d сек"
 
-#: ../src/main.c:720 ../src/main.c:727
+#: ../src/main.c:725 ../src/main.c:732
 #, c-format
 msgid "Unable to parse YAD_OPTIONS: %s\n"
 msgstr "Не можу розібрати YAD_OPTIONS: %s\n"
 
-#: ../src/main.c:738
+#: ../src/main.c:743
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Не вдається розібрати командний рядок: %s\n"
 
-#: ../src/main.c:767
+#: ../src/main.c:772
 #, c-format
 msgid "WARNING: Using gtkrc option is deprecated, please use --css instead\n"
 msgstr "УВАГА: Опція gtkrc застаріла, використовуйте --css замість неї\n"
 
-#: ../src/main.c:836
+#: ../src/main.c:841
 #, c-format
 msgid "WARNING: --plug mode not supported outside X11\n"
 msgstr "УВАГА: Опція --plug підтримується тільки в X11\n"
 
-#: ../src/main.c:856
+#: ../src/main.c:861
 #, c-format
 msgid "WARNING: This mode not supported outside X11\n"
 msgstr "УВАГА: Цей режим підтримується тільки в X11\n"
@@ -320,7 +320,7 @@ msgstr "Задати вирівнювання тексту діалогу (left,
 #: ../src/option.c:453 ../src/option.c:463 ../src/option.c:509
 #: ../src/option.c:541 ../src/option.c:551 ../src/option.c:561
 #: ../src/option.c:575 ../src/option.c:636 ../src/option.c:690
-#: ../src/option.c:692
+#: ../src/option.c:692 ../src/tools.c:60
 msgid "TYPE"
 msgstr "ТИП"
 
@@ -336,7 +336,8 @@ msgstr "ЗОБРАЖЕННЯ"
 msgid "Use specified icon theme instead of default"
 msgstr "Використовувати вказану тему іконок"
 
-#: ../src/option.c:120 ../src/option.c:659
+#: ../src/option.c:120 ../src/option.c:659 ../src/browser.c:217
+#: ../src/tools.c:61
 msgid "THEME"
 msgstr "ТЕМА"
 
@@ -938,6 +939,7 @@ msgid "Force using specified icon size"
 msgstr "Примусово використовувати розмір іконки"
 
 #: ../src/option.c:422 ../src/option.c:532 ../src/option.c:638
+#: ../src/tools.c:59
 msgid "SIZE"
 msgstr "РОЗМІР"
 
@@ -1382,7 +1384,7 @@ msgstr "Додати фільтр для зображень"
 msgid "[NAME]"
 msgstr "[ІМ'Я]"
 
-#: ../src/option.c:676 ../src/pfd.c:85
+#: ../src/option.c:676 ../src/tools.c:45
 msgid "Print version"
 msgstr "Вивести версію"
 
@@ -1951,36 +1953,82 @@ msgstr "Категорія"
 msgid "Icons"
 msgstr "Іконки"
 
-#: ../src/pfd.c:83
+#: ../src/tools.c:46
+msgid "STRING ..."
+msgstr "РЯДОК ..."
+
+#: ../src/tools.c:51
+msgid "Pango fonts description tools"
+msgstr "Конвертація опису шрифта"
+
+#: ../src/tools.c:52
 msgid "Print font name in xft format"
 msgstr "Вивести назву шрифта у форматі xft"
 
-#: ../src/pfd.c:84
+#: ../src/tools.c:53
 msgid "Print font name in pango format"
 msgstr "Вивести назву шрифта у форматі pango"
 
-#: ../src/pfd.c:86
-msgid "FONT"
-msgstr "НАЗВА_ШРИФТУ"
+#: ../src/tools.c:58
+msgid "Icon tools"
+msgstr "Іконки"
 
-#: ../src/pfd.c:105
-msgid "- convert font description"
-msgstr "- конвертація описа шрифта"
+#: ../src/tools.c:59
+msgid "Use specified icon size"
+msgstr "Використовувати заданий розмір іконки"
 
-#: ../src/pfd.c:109
+#: ../src/tools.c:60
+msgid "Get icon size from GtkIconSize type"
+msgstr "Отримати розмір іконки с типу GtkIconSize"
+
+#: ../src/tools.c:61
+msgid "Use icon theme"
+msgstr "Використовувати вказану тему іконок"
+
+#: ../src/tools.c:140
+#, c-format
+msgid "no font specified\n"
+msgstr "шрифт не вказано\n"
+
+#: ../src/tools.c:148
+#, c-format
+msgid "cannot get font description for for string \"%s\"\n"
+msgstr "неможливо отримати опис шрифта зі стрічки \"%s\"\n"
+
+#: ../src/tools.c:250
+#, c-format
+msgid "no icon specified\n"
+msgstr "іконку не вказано\n"
+
+#: ../src/tools.c:293
+msgid "- yad miscellaneous tools"
+msgstr "- додаткові інструменти yad"
+
+#: ../src/tools.c:296
+msgid "PFD mode"
+msgstr "Режим PFD"
+
+#: ../src/tools.c:296
+msgid "Show pfd mode options"
+msgstr "Показувати параметри режиму pfd"
+
+#: ../src/tools.c:301
+msgid "Icon mode"
+msgstr "Режим іконок"
+
+#: ../src/tools.c:301
+msgid "Show icon mode options"
+msgstr "Показувати параметри режиму іконок"
+
+#: ../src/tools.c:308
 #, c-format
 msgid "option parsing failed: %s\n"
 msgstr "збій при розборі аргументів: %s\n"
 
-#: ../src/pfd.c:121
+#: ../src/tools.c:324
 #, c-format
-msgid "no font specified\n"
-msgstr "шрифт не вказано.\n"
-
-#: ../src/pfd.c:129
-#, c-format
-msgid "cannot get font description for for string \"%s\"\n"
-msgstr "неможливо отримати опис шрифта зі стрічки \"%s\"\n"
+msgid "no mode specified\n"
+msgstr "режим не вказано\n"
 
 #: ../data/yad-icon-browser.desktop.in.h:1
 msgid "Icon Browser"
@@ -2049,3 +2097,6 @@ msgstr "Ігнорувати невідомі аргументи"
 #: ../data/yad.gschema.xml.in.h:15
 msgid "Enable debug mode with information about deprecated features"
 msgstr "Дозволити режим налагодження з інформуванням про застарілі функції"
+
+#~ msgid "FONT"
+#~ msgstr "НАЗВА_ШРИФТУ"

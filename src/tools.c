@@ -19,20 +19,51 @@
 
 #include <config.h>
 
-#include <glib.h>
+#include <gtk/gtk.h>
 #include <glib/gi18n.h>
-#include <pango/pango.h>
-#include <locale.h>
 
 typedef enum {
   PANGO_SPEC,
   XFT_SPEC
 } FontType;
 
+static gboolean set_font_type (const gchar *name, const gchar *val, gpointer d, GError **err);
+static gboolean set_size_type (const gchar *name, const gchar *val, gpointer d, GError **err);
+
 static FontType font_type = XFT_SPEC;
 
+static gboolean pfd_mode = FALSE;
+static gboolean icon_mode = FALSE;
+static gboolean ver = FALSE;
+
+static guint icon_size = 24;
+static gchar *icon_theme_name = NULL;
+
+static gchar **args = NULL;
+
+static GOptionEntry ents[] = {
+  { "version", 'v', 0, G_OPTION_ARG_NONE, &ver, N_("Print version"), NULL },
+  { G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &args, NULL, N_("STRING ...") },
+  { NULL }
+};
+
+static GOptionEntry pfd_ents[] = {
+  { "pfd", 'f', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &pfd_mode, N_("Pango fonts description tools"), NULL },
+  { "xft", 'x', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, set_font_type, N_("Print font name in xft format"), NULL },
+  { "pango", 'p', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, set_font_type, N_("Print font name in pango format"), NULL },
+  { NULL }
+};
+
+static GOptionEntry icon_ents[] = {
+  { "icon", 'i', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &icon_mode, N_("Icon tools"), NULL },
+  { "size", 's', 0, G_OPTION_ARG_INT, &icon_size, N_("Use specified icon size"), N_("SIZE") },
+  { "type", 't', 0, G_OPTION_ARG_CALLBACK, set_size_type, N_("Get icon size from GtkIconSize type"), N_("TYPE") },
+  { "theme", 0, 0, G_OPTION_ARG_STRING, &icon_theme_name, N_("Use icon theme"), N_("THEME") },
+  { NULL }
+};
+
 static gboolean
-set_type (const gchar *name, const gchar *val, gpointer d, GError **err)
+set_font_type (const gchar *name, const gchar *val, gpointer d, GError **err)
 {
   gint i = 1;
 
@@ -47,6 +78,28 @@ set_type (const gchar *name, const gchar *val, gpointer d, GError **err)
     return FALSE;
 
   return TRUE;
+}
+
+static gboolean
+set_size_type (const gchar *name, const gchar *val, gpointer d, GError **err)
+{
+  gint w = 0, h = 0;
+
+  if (strcasecmp (val, "MENU") == 0)
+    gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
+  else if (strcasecmp (val, "BUTTON") == 0)
+    gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
+  else if (strcasecmp (val, "SMALL_TOOLBAR") == 0)
+    gtk_icon_size_lookup (GTK_ICON_SIZE_SMALL_TOOLBAR, &w, &h);
+  else if (strcasecmp (val, "LARGE_TOOLBAR") == 0)
+    gtk_icon_size_lookup (GTK_ICON_SIZE_LARGE_TOOLBAR, &w, &h);
+  else if (strcasecmp (val, "DND") == 0)
+    gtk_icon_size_lookup (GTK_ICON_SIZE_DND, &w, &h);
+  else if (strcasecmp (val, "DIALOG") == 0)
+    gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &w, &h);
+
+  if (w && h)
+    icon_size = MIN (w, h);
 }
 
 static gchar *
@@ -77,56 +130,22 @@ parse_font (gchar *fn)
   return pfd->str;
 }
 
-static gchar **fonts = NULL;
-static gboolean ver = FALSE;
-static GOptionEntry ents[] = {
-  { "xft", 'x', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, set_type, N_("Print font name in xft format"), NULL },
-  { "pango", 'p', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, set_type, N_("Print font name in pango format"), NULL },
-  { "version", 'v', 0, G_OPTION_ARG_NONE, &ver, N_("Print version"), NULL },
-  { G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &fonts, 0, N_("FONT") },
-  { NULL }
-};
-
-int
-main (int argc, char *argv[])
+static gint
+run_pfd_mode ()
 {
-  GOptionContext *ctx;
-  GError *err = NULL;
   PangoFontDescription *fnd = NULL;
 
-  setlocale (LC_ALL, "");
-
-#ifdef ENABLE_NLS
-  bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE);
-#endif
-
-  ctx = g_option_context_new (_("- convert font description"));
-  g_option_context_add_main_entries (ctx, ents, GETTEXT_PACKAGE);
-  if (!g_option_context_parse (ctx, &argc, &argv, &err))
-    {
-      g_printerr (_("option parsing failed: %s\n"), err->message);
-      return 1;
-    }
-
-  if (ver)
-    {
-      g_print ("%s\n", VERSION);
-      return 0;
-    }
-
-  if (!fonts || !fonts[0])
+  if (!args || !args[0])
     {
       g_printerr (_("no font specified\n"));
       return 1;
     }
 
   /* parse font */
-  fnd = pango_font_description_from_string (parse_font (fonts[0]));
+  fnd = pango_font_description_from_string (parse_font (args[0]));
   if (!fnd)
     {
-      g_printerr (_("cannot get font description for for string \"%s\"\n"), fonts[0]);
+      g_printerr (_("cannot get font description for for string \"%s\"\n"), args[0]);
       return 1;
     }
 
@@ -217,4 +236,94 @@ main (int argc, char *argv[])
     }
 
   return 0;
+}
+
+static gint
+run_icon_mode ()
+{
+  GtkIconTheme *theme;
+  GtkIconInfo *ii;
+  const gchar *filename;
+
+  if (!args || !args[0])
+    {
+      g_printerr (_("no icon specified\n"));
+      return 1;
+    }
+
+  if (icon_theme_name)
+    {
+      theme = gtk_icon_theme_new ();
+      gtk_icon_theme_set_custom_theme (theme, icon_theme_name);
+    }
+  else
+    theme = gtk_icon_theme_get_default ();
+
+  ii = gtk_icon_theme_lookup_icon (theme, args[0], icon_size, 0);
+  if (ii == NULL)
+    return 1;
+
+  filename = gtk_icon_info_get_filename (ii);
+  if (filename)
+    g_print ("%s\n", filename);
+  else
+    return 1;
+
+  return 0;
+}
+
+int
+main (int argc, char *argv[])
+{
+  GOptionContext *ctx;
+  GOptionGroup *grp;
+  GError *err = NULL;
+  gint ret = 0;
+
+  setlocale (LC_ALL, "");
+
+#ifdef ENABLE_NLS
+  bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+  textdomain (GETTEXT_PACKAGE);
+#endif
+
+  gtk_init (&argc, &argv);
+
+  ctx = g_option_context_new (_("- yad miscellaneous tools"));
+  g_option_context_add_main_entries (ctx, ents, GETTEXT_PACKAGE);
+
+  grp = g_option_group_new ("pfd", _("PFD mode"), _("Show pfd mode options"), NULL, NULL);
+  g_option_group_add_entries (grp, pfd_ents);
+  g_option_group_set_translation_domain (grp, GETTEXT_PACKAGE);
+  g_option_context_add_group (ctx, grp);
+
+  grp = g_option_group_new ("icon", _("Icon mode"), _("Show icon mode options"), NULL, NULL);
+  g_option_group_add_entries (grp, icon_ents);
+  g_option_group_set_translation_domain (grp, GETTEXT_PACKAGE);
+  g_option_context_add_group (ctx, grp);
+
+  if (!g_option_context_parse (ctx, &argc, &argv, &err))
+    {
+      g_printerr (_("option parsing failed: %s\n"), err->message);
+      return 1;
+    }
+
+  if (ver)
+    {
+      g_print ("%s\n", VERSION);
+      return 0;
+    }
+
+  if (pfd_mode)
+    ret = run_pfd_mode ();
+  else if (icon_mode)
+    ret = run_icon_mode ();
+  else
+    {
+      g_printerr (_("no mode specified\n"));
+      return 1;
+    }
+
+  return ret;
 }

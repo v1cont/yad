@@ -21,6 +21,6 @@ src/text.c
 src/notebook.c
 src/util.c
 src/browser.c
-src/pfd.c
+src/tools.c
 data/yad-icon-browser.desktop.in
 data/yad.gschema.xml.in

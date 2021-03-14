@@ -1,22 +1,43 @@
-.TH PFD "1" "February 2019" "pfd" "User Commands"
+.TH YAD-TOOLS "1" "March 2021" "yad-tools" "User Commands"
+
 .SH NAME
-pfd \- convert font description between xft and pango formats
+yad-tools \- show some miscellaneous stuff.
+
 .SH SYNOPSIS
-.B pfd
-.RI [ OPTIONS ] 
-.RI FONT
+.B yad-tools
+.RI [OPTIONS]
+.RI STRING
+
 .SH DESCRIPTION
-\fBpfd\fR is a small command-line utility to transform font names from pango to xft specification and vice versa.
+\fByad-tools\fR is a small command-line utility for getting information that may be usefull in scripts.
+
 .SH OPTIONS
+
+.SS General options
+.TP
+\fB\-f\fR, \fB\-\-pfd\fR
+This mode is intended to transform font names from pango to xft specification and vice versa.
+Additional argument is font name.
+.TP
+\fB\-i\fR, \fB\-\-icon\fR
+This mode is intended to get full path to icon file from icon name.
+Additional argument is icon name.
+
+.SS PFD mode options
 .TP
 \fB\-x\fR, \fB\-\-xft\fR
 Print font name in xft format. This is default.
 .TP
 \fB\-p\fR, \fB\-\-pango\fR
 Print font name in pango format.
+
+.SS Icon mode options
 .TP
-\fB\-h\fR, \fB\-\-help\fR
-Print help.
+\fB\-s\fR, \fB\-\-size\fR=\fISIZE\fP
+Use specified icon size. Default is 24.
 .TP
-\fB\-v\fR, \fB\-\-version\fR
-Print current version.
+\fB\-t\fR, \fB\-\-type\fR=\fITYPE\fP
+Obtain icon size from one of predefined GTK+ types. \fITYPE\fP is one of the following \fImenu\fP, \fIbutton\fP, \fIsmall_toolbar\fP, \fIlarge_toolbar\fP, \fIdnd\fP or \fIdialog\fP,
+.TP
+\fB\-\-theme\fR=\fITHEME\fP
+Use specified icon theme instead of default.

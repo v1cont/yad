@@ -89,27 +89,23 @@ if test x$have_sourceview = xyes; then
     AC_DEFINE([HAVE_SOURCEVIEW], [1], [Define this if you need GtkSourceView support])
 fi
 
-dnl icon browser
+dnl standalone build
 AC_ARG_ENABLE([standalone],
 	[AS_HELP_STRING([--enable-standalone],
 			[Build standalone YAD binary (wihtout gsettings)])],
 	[build_sa=$enableval], [build_sa=no])
 AM_CONDITIONAL([STANDALONE], [test x$build_sa = xyes])
+
 if test x$build_sa = xyes; then
     AC_DEFINE([STANDALONE], [1], [Define this if you need standalone YAD binary])
 fi
 
-dnl pfd
-AC_ARG_ENABLE([pfd],
-	[AS_HELP_STRING([--enable-pfd],
-			[Build pfd utility])],
-	[build_pfd=$enableval], [build_pfd=yes])
-if test x$build_pfd = xyes; then
-    PKG_CHECK_MODULES([PFD], [pango], [build_pfd=yes], [build_pfd=no])
-fi
-AC_SUBST([PFD_CFLAGS])
-AC_SUBST([PFD_LIBS])
-AM_CONDITIONAL([BUILD_PFD], [test x$build_pfd = xyes])
+dnl tools
+AC_ARG_ENABLE([tools],
+	[AS_HELP_STRING([--enable-tools],
+			[Build yad-tools utility])],
+	[build_tools=$enableval], [build_tools=yes])
+AM_CONDITIONAL([BUILD_TOOLS], [test x$build_tools = xyes])
 
 dnl icon browser
 AC_ARG_ENABLE([icon-browser],
@@ -167,6 +163,6 @@ echo "  GtkSourceView        - $have_sourceview"
 echo "  Spell checking       - $have_spell"
 echo "  Path to rgb.txt      - $with_rgb"
 echo "  Standalone build     - $build_sa"
-echo "  pfd                  - $build_pfd"
+echo "  Tools                - $build_tools"
 echo "  Icon browser         - $build_ib"
 echo
