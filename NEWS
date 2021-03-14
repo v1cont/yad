@@ -1,3 +1,14 @@
+Version 9.0
+    - implement user's customizable --about dialog
+    - fix passing focus to children in notebook and paned dialogs
+    - add --stack mode to notebook dialog
+    - add --focused option to paned dialog for selectin focused pane
+    - don't vertically expand entry in entry dialog
+    - fix setting splitter position in paned dialog
+    - add --wk-prop to html dialog and made js output enabled by default
+    - add yad-tools utility instead fo pfd. pfd now is a wrapper script (just for backward compatibility)
+    - add --align-buttons option for aligning labels on button fields in form dialog
+
 Version 8.0
     - add --text-width option for more flexible wrapping long strings in dialog text
     - handle URIs in dialog text
