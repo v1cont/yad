@@ -55,13 +55,11 @@ msgstr "Не можу відкрити файл %s: %s\n"
 msgid "Maximum value must be greater than minimum value.\n"
 msgstr "Максимальне значення повинне бути більше за мінімальне.\n"
 
-# # FIXME: "Initial value IS less than minimal.\n" 
 #: ../src/entry.c:175 ../src/scale.c:98
 #, c-format
 msgid "Initial value less than minimal.\n"
 msgstr "Початкове значення - менше за мінімальне.\n"
 
-# # FIXME: "Initial value IS greater than maximum.\n"
 #: ../src/entry.c:180 ../src/scale.c:103
 #, c-format
 msgid "Initial value greater than maximum.\n"
