@@ -50,7 +50,7 @@ paned_create_widget (GtkWidget * dlg)
   gtk_widget_set_name (w, "yad-paned-widget");
 
   s = gtk_socket_new ();
-  gtk_widget_set_can_focus (s, TRUE);  
+  gtk_widget_set_can_focus (s, TRUE);
   gtk_paned_add1 (GTK_PANED (w), s);
   g_object_set_data (G_OBJECT (w), "s1", s);
 
@@ -82,8 +82,19 @@ paned_swallow_childs (void)
   /* must be after embedding children */
   if (options.paned_data.splitter > 0)
     gtk_paned_set_position (GTK_PANED (paned), options.paned_data.splitter);
-    
-  gtk_widget_child_focus (s1, GTK_DIR_TAB_FORWARD);
+
+  switch (options.paned_data.focused)
+    {
+    case 1:
+      gtk_widget_child_focus (s1, GTK_DIR_TAB_FORWARD);
+      break;
+    case 2:
+      gtk_widget_child_focus (s2, GTK_DIR_TAB_FORWARD);
+      break;
+    default:
+      if (options.debug)
+        g_printerr (_("WARNING: wrong focused pane number %d. Must be 1 or 2\n"), options.paned_data.focused);
+    }
 }
 
 void

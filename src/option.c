@@ -541,6 +541,8 @@ static GOptionEntry paned_options[] = {
     N_("Set orientation (hor[izontal] or vert[ical])"), N_("TYPE") },
   { "splitter", 0, 0, G_OPTION_ARG_INT, &options.paned_data.splitter,
     N_("Set initial splitter position"), N_("POS") },
+  { "focused", 0, 0, G_OPTION_ARG_INT, &options.paned_data.focused,
+    N_("Set focused pane (1 or 2)"), N_("PANE") },
   { NULL }
 };
 
@@ -1746,6 +1748,7 @@ yad_options_init (void)
   /* Initialize paned data */
   options.paned_data.orient = GTK_ORIENTATION_VERTICAL;
   options.paned_data.splitter = -1;
+  options.paned_data.focused = 1;
 
   /* Initialize picture data */
   options.picture_data.size = YAD_PICTURE_ORIG;
