@@ -380,6 +380,8 @@ static GOptionEntry form_options[] = {
     N_("Set focused field"), N_("NUMBER") },
   { "cycle-read", 0, 0, G_OPTION_ARG_NONE, &options.form_data.cycle_read,
     N_("Cycled reading of stdin data"), NULL },
+  { "align-buttons", 0, 0, G_OPTION_ARG_NONE, &options.form_data.align_buttons,
+    N_("Align labels on button fields"), NULL },
   { NULL }
 };
 
@@ -1670,6 +1672,7 @@ yad_options_init (void)
   options.form_data.output_by_row = FALSE;
   options.form_data.focus_field = 1;
   options.form_data.cycle_read = FALSE;
+  options.form_data.align_buttons = FALSE;
 
 #ifdef HAVE_HTML
   /* Initialize html data */

@@ -1090,7 +1090,10 @@ form_create_widget (GtkWidget * dlg)
                     gtk_widget_set_tooltip_text (e, fld->tip);
                 }
               g_signal_connect (G_OBJECT (e), "clicked", G_CALLBACK (button_clicked_cb), NULL);
-              gtk_container_add (GTK_CONTAINER (e), get_label (fld->name, 2, e));
+              l = get_label (fld->name, 2, e);
+              gtk_container_add (GTK_CONTAINER (e), l);
+              if (options.form_data.align_buttons)
+                gtk_widget_set_halign (l, options.common_data.align);
               if (fld->type == YAD_FIELD_BUTTON)
                 gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
               gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
