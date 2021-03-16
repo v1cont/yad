@@ -243,7 +243,7 @@ static GOptionEntry about_options[] = {
     N_("Display about dialog"), NULL },
   { "pname", 0, 0, G_OPTION_ARG_STRING, &options.about_data.name,
     N_("Set application name"), N_("STRING") },
-  { "version", 0, 0, G_OPTION_ARG_STRING, &options.about_data.version,
+  { "pversion", 0, 0, G_OPTION_ARG_STRING, &options.about_data.version,
     N_("Set application version"), N_("STRING") },
   { "copyright", 0, 0, G_OPTION_ARG_STRING, &options.about_data.copyright,
     N_("Set application copyright string"), N_("STRING") },
