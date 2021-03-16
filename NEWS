@@ -1,3 +1,6 @@
+Version 9.1
+    - fix --version option
+
 Version 9.0
     - implement user's customizable --about dialog
     - fix passing focus to children in notebook and paned dialogs
