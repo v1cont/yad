@@ -1,0 +1,10 @@
+option('rgb-file',  type: 'string',     value: '/etc/X11/rgb.txt', description: 'Path to rgb.txt file')
+
+option('tray',      type: 'boolean',    value: true,    description: 'Build with status icon.')
+option('standalone',type: 'boolean',    value: true,    description: 'Build without gsettings.')
+option('tools',     type: 'boolean',    value: true,    description: 'Build yad-tools utility.')
+option('icons',     type: 'boolean',    value: true,    description: 'Build the icon browser.')
+
+option('html',      type: 'feature',    value: 'auto',  description: 'Build with HTML widget.')
+option('spell',     type: 'feature',    value: 'auto',  description: 'Build with Spell check support.')
+option('sourceview',type: 'feature',    value: 'auto',  description: 'Build with GTKSourceView support.')
