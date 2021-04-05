@@ -1056,6 +1056,38 @@ copy_row_cb (GtkMenuItem *item, gpointer data)
     }
 }
 
+static void
+move_row_up_cb (GtkMenuItem *item, gpointer data)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
+  GtkTreeSelection *sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (list_view));
+
+  if (gtk_tree_selection_get_selected (sel, NULL, &iter))
+    {
+      GtkTreeIter *prev = gtk_tree_iter_copy (&iter);
+      if (gtk_tree_model_iter_previous (model, prev))
+        gtk_tree_store_move_before (GTK_TREE_STORE (model), &iter, prev);
+      gtk_tree_iter_free (prev);
+    }
+}
+
+static void
+move_row_down_cb (GtkMenuItem *item, gpointer data)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
+  GtkTreeSelection *sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (list_view));
+
+  if (gtk_tree_selection_get_selected (sel, NULL, &iter))
+    {
+      GtkTreeIter *next = gtk_tree_iter_copy (&iter);
+      if (gtk_tree_model_iter_next (model, next))
+        gtk_tree_store_move_after (GTK_TREE_STORE (model), &iter, next);
+      gtk_tree_iter_free (next);
+    }
+}
+
 static gboolean
 popup_menu_cb (GtkWidget *w, GdkEventButton *ev, gpointer data)
 {
@@ -1100,6 +1132,20 @@ popup_menu_cb (GtkWidget *w, GdkEventButton *ev, gpointer data)
           gtk_widget_show (item);
           gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
           g_signal_connect (G_OBJECT (item), "activate", G_CALLBACK (copy_row_cb), menu);
+
+          item = gtk_separator_menu_item_new ();
+          gtk_widget_show (item);
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+
+          item = gtk_menu_item_new_with_label (_("Move row up"));
+          gtk_widget_show (item);
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+          g_signal_connect (G_OBJECT (item), "activate", G_CALLBACK (move_row_up_cb), menu);
+
+          item = gtk_menu_item_new_with_label (_("Move row down"));
+          gtk_widget_show (item);
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+          g_signal_connect (G_OBJECT (item), "activate", G_CALLBACK (move_row_down_cb), menu);
 
           gtk_widget_show (menu);
         }

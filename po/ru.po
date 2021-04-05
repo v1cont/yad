@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-14 14:59+0200\n"
+"POT-Creation-Date: 2021-04-05 10:41+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -186,27 +186,35 @@ msgstr "Неизвестная команда '%s'\n"
 msgid "Yad notification"
 msgstr "Диалог уведомлений"
 
-#: ../src/list.c:1072
+#: ../src/list.c:1104
 msgid "Add row"
 msgstr "Добавить строку"
 
-#: ../src/list.c:1079
+#: ../src/list.c:1111
 msgid "Add child row"
 msgstr "Добавить дочернюю строку"
 
-#: ../src/list.c:1086
+#: ../src/list.c:1118
 msgid "Delete row"
 msgstr "Удалить строку"
 
-#: ../src/list.c:1093
+#: ../src/list.c:1125
 msgid "Edit row"
 msgstr "Редактировать строку"
 
-#: ../src/list.c:1099
+#: ../src/list.c:1131
 msgid "Duplicate row"
 msgstr "Скопировать строку"
 
-#: ../src/list.c:1240
+#: ../src/list.c:1140
+msgid "Move row up"
+msgstr "Переместить строку вверх"
+
+#: ../src/list.c:1145
+msgid "Move row down"
+msgstr "Переместить строку вниз"
+
+#: ../src/list.c:1286
 #, c-format
 msgid ""
 "WARNING: You are use --checklist or --radiolist option. Those options "
@@ -215,7 +223,7 @@ msgstr ""
 "ВНИМАНИЕ: Используются опции --checklist или --radiolist. Эти опции устарели "
 "и будут удалены в следующих выпусках\n"
 
-#: ../src/list.c:1246
+#: ../src/list.c:1292
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Не заданы заголовоки колонок для диалога со списком\n"
