@@ -1131,7 +1131,7 @@ popup_menu_cb (GtkWidget *w, GdkEventButton *ev, gpointer data)
               item = gtk_menu_item_new_with_label (_("Edit row"));
               gtk_widget_show (item);
               gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-              g_signal_connect (G_OBJECT (item), "activate", G_CALLBACK (del_row_cb), menu);
+              g_signal_connect (G_OBJECT (item), "activate", G_CALLBACK (edit_row_cb), menu);
             }
 
           item = gtk_menu_item_new_with_label (_("Duplicate row"));
