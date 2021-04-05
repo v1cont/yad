@@ -1545,7 +1545,7 @@ yad_options_init (void)
   options.data.keep_icon_size = FALSE;
   options.data.def_resp = YAD_RESPONSE_OK;
   options.data.use_interp = FALSE;
-  options.data.interp = "bash -c '%s'";
+  options.data.interp = "bash -c \"%s\"";
 #ifndef STANDALONE
   options.data.uri_handler = g_settings_get_string (settings, "open-command");
 #else
