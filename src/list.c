@@ -898,9 +898,12 @@ add_row_cb (GtkMenuItem *item, gpointer data)
       gint exit;
 
       /* hide menu first */
-      gtk_menu_popdown (GTK_MENU (data));
-      while (gtk_events_pending ())
-        gtk_main_iteration ();
+      if (data)
+        {
+          gtk_menu_popdown (GTK_MENU (data));
+          while (gtk_events_pending ())
+            gtk_main_iteration ();
+        }
 
       /* run command */
       cmd = g_strdup_printf ("%s add", options.list_data.row_action);
@@ -939,9 +942,12 @@ edit_row_cb (GtkMenuItem *item, gpointer data)
       gint exit;
 
       /* hide menu first */
-      gtk_menu_popdown (GTK_MENU (data));
-      while (gtk_events_pending ())
-        gtk_main_iteration ();
+      if (data)
+        {
+          gtk_menu_popdown (GTK_MENU (data));
+          while (gtk_events_pending ())
+            gtk_main_iteration ();
+        }
 
       /* run command */
       args = get_data_as_string (&iter);
