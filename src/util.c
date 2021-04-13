@@ -239,7 +239,7 @@ update_preview (GtkFileChooser * chooser, GtkWidget *p)
 }
 
 gchar **
-split_arg (const gchar * str)
+split_arg (const gchar *str)
 {
   gchar **res;
   gchar *p_col;
@@ -637,31 +637,56 @@ print_bool_val (gboolean val)
   return ret;
 }
 
-gint
-run_command_sync (gchar *cmd, gchar **out)
+typedef struct {
+  gchar *cmd;
+  gchar **out;
+} RunData;
+
+static gboolean run_lock = FALSE;
+static gint ret = 0;
+
+static void
+run_thread (RunData *d)
 {
-  gint ret = 0;
-  gchar *full_cmd = NULL;
   GError *err = NULL;
 
-  if (options.data.use_interp)
-    {
-      if (g_strstr_len (options.data.interp, -1, "%s") != NULL)
-        full_cmd = g_strdup_printf (options.data.interp, cmd);
-      else
-        full_cmd = g_strdup_printf ("%s %s", options.data.interp, cmd);
-    }
-  else
-    full_cmd = g_strdup (cmd);
-
-  if (!g_spawn_command_line_sync (full_cmd, out, NULL, &ret, &err))
+  if (!g_spawn_command_line_sync (d->cmd, d->out, NULL, &ret, &err))
     {
       if (options.debug)
         g_printerr (_("WARNING: Run command failed: %s\n"), err->message);
       g_error_free (err);
     }
+  run_lock = FALSE;
+}
 
-  g_free (full_cmd);
+gint
+run_command_sync (gchar *cmd, gchar **out)
+{
+  RunData *d;
+
+  d = g_new0 (RunData, 1);
+
+  if (options.data.use_interp)
+    {
+      if (g_strstr_len (options.data.interp, -1, "%s") != NULL)
+        d->cmd = g_strdup_printf (options.data.interp, cmd);
+      else
+        d->cmd = g_strdup_printf ("%s %s", options.data.interp, cmd);
+    }
+  else
+    d->cmd = g_strdup (cmd);
+  d->out = out;
+
+  run_lock = TRUE;
+  ret = 0;
+  g_thread_new ("run_sync", (GThreadFunc) run_thread, d);
+
+  while (run_lock != FALSE)
+    gtk_main_iteration ();
+
+  g_free (d->cmd);
+  g_free (d);
+
   return ret;
 }
 
