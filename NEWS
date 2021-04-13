@@ -1,3 +1,6 @@
+Version 9.3
+    - fix freezing main window on --row-action in list or @cmd in form dialogs
+
 Version 9.2
     - some fixes of menu in editable lists
     - add two additional item to menu in editable lists - "move up" and "move down"
