@@ -987,6 +987,27 @@ Set background color for marks of second type to \fICOLOR\fP. Default is pink.
 .TP
 .B \-\-right-margin=\fI[POS]\fP
 Enable mark of right margin. Optional argument \fIPOS\fP is a margin position in characters. Default is 80.
+.TP
+.B \-\-brackets
+Highlight matching brackets.
+.TP
+.B \-\-indent
+Enable autoindent. This option also sets \fITAB\fP key as indent key.
+.TP
+.B \-\-smart-he=\fITYPE\fP
+Set behavior of \fIHOME\fP and \fIEND\fP keys. The \fITYPE\fP is one of \fInewer\fP, \fIbefore\fP, \fIafter\fP or \fIalways\fP.
+.TP
+.B \-\-smart-bs
+Enable smart mode for \fIBackSpace\fP. If this option is enabled BackSpace will delete spaces to the next tab position.
+.TP
+.B \-\-tab-width
+Set tabulation step.
+.TP
+.B \-\-indent-width
+Set indentation step.
+.TP
+.B \-\-spaces
+Insert spaces instead of tabulation.
 .PP
 If \fIfontname\fP option is specified for text dialog, the description of font must be in CSS style (not in a Pango style).
 Sending FormFeed character to text dialog clears it. This symbol may be sent as \fIecho \-e '\\f'\fP.

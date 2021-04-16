@@ -563,6 +563,18 @@ text_create_widget (GtkWidget * dlg)
       gtk_source_view_set_show_right_margin (GTK_SOURCE_VIEW (text_view), TRUE);
       gtk_source_view_set_right_margin_position (GTK_SOURCE_VIEW (text_view), options.source_data.right_margin);
     }
+  if (options.source_data.indent)
+    {
+      gtk_source_view_set_auto_indent (GTK_SOURCE_VIEW (text_view), TRUE);
+      gtk_source_view_set_indent_on_tab (GTK_SOURCE_VIEW (text_view), TRUE);
+    }
+  gtk_source_view_set_tab_width (GTK_SOURCE_VIEW (text_view), options.source_data.tab_width);
+  gtk_source_view_set_indent_width (GTK_SOURCE_VIEW (text_view), options.source_data.indent_width);
+  gtk_source_view_set_smart_home_end (GTK_SOURCE_VIEW (text_view), options.source_data.smart_he);
+  gtk_source_view_set_smart_backspace (GTK_SOURCE_VIEW (text_view), options.source_data.smart_bs);
+  gtk_source_view_set_insert_spaces_instead_of_tabs (GTK_SOURCE_VIEW (text_view), options.source_data.spaces);
+
+  gtk_source_buffer_set_highlight_matching_brackets (GTK_SOURCE_BUFFER (text_buffer), options.source_data.brackets);
 #endif
 
 #ifdef HAVE_SPELL

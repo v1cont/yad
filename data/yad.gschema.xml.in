@@ -106,7 +106,7 @@
     <key name="smart-bs" type="b">
       <default>false</default>
       <_summary>Use smart backspace</_summary>
-    </key> 
+    </key>
     <key name="tab-width" type="i">
       <default>8</default>
       <_summary>Default tabulation width</_summary>
@@ -116,10 +116,6 @@
       <_summary>Default indentation width</_summary>
     </key>
     <key name="spaces" type="b">
-      <default>false</default>
-      <_summary>Show space characters</_summary>
-    </key>
-    <key name="ins-spaces" type="b">
       <default>true</default>
       <_summary>Insert spaces instead of tabs</_summary>
     </key>

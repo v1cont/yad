@@ -38,6 +38,7 @@ GtkIconTheme *yad_icon_theme;
 
 #ifndef STANDALONE
 GSettings *settings;
+GSettings *sv_settings;
 #endif
 
 GdkPixbuf *big_fallback_image = NULL;
@@ -702,6 +703,7 @@ main (gint argc, gchar ** argv)
 
 #ifndef STANDALONE
   settings = g_settings_new ("yad.settings");
+  sv_settings = g_settings_new ("yad.sourceview");
 #endif
 
   yad_icon_theme = gtk_icon_theme_get_default ();

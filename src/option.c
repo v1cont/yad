@@ -58,6 +58,7 @@ static gboolean set_size_format (const gchar *, const gchar *, gpointer, GError 
 static gboolean set_interp (const gchar *, const gchar *, gpointer, GError **);
 #ifdef HAVE_SOURCEVIEW
 static gboolean set_right_margin (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_smart_homend (const gchar *, const gchar *, gpointer, GError **);
 #endif
 
 static gboolean about_mode = FALSE;
@@ -676,6 +677,20 @@ static GOptionEntry source_options[] = {
     N_("Set color for second type marks"), N_("COLOR") },
   { "right-margin", 0, G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, set_right_margin,
     N_("Set position of right margin"), N_("[POS]") },
+  { "brackets", 0, 0, G_OPTION_ARG_NONE, &options.source_data.brackets,
+    N_("Highlight matching brackets"), NULL },
+  { "indent", 0, 0, G_OPTION_ARG_NONE, &options.source_data.indent,
+    N_("Use autoindent"), NULL },
+  { "tab-width", 0, 0, G_OPTION_ARG_INT, &options.source_data.tab_width,
+    N_("Set tabulation width"), N_("VALUE") },
+  { "indent-width", 0, 0, G_OPTION_ARG_INT, &options.source_data.indent_width,
+    N_("Set indentation width"), N_("VALUE") },
+  { "smart-he", 0, 0, G_OPTION_ARG_CALLBACK, set_smart_homend,
+    N_("Set smart Home/End behavior"), N_("TYPE") },
+  { "smart-bs", 0, 0, G_OPTION_ARG_NONE, &options.source_data.smart_bs,
+    N_("Enable smart backspace"), NULL },
+  { "spaces", 0, 0, G_OPTION_ARG_NONE, &options.source_data.spaces,
+    N_("Insert spaces instead of tabs"), NULL },
   { NULL }
 };
 #endif
@@ -1334,6 +1349,23 @@ set_right_margin (const gchar * option_name, const gchar * value, gpointer data,
   else
     options.source_data.right_margin = RIGHT_MARGIN;
 }
+
+static gboolean
+set_smart_homend (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+{
+  if (strcasecmp (value, "never") == 0)
+    options.source_data.smart_he = GTK_SOURCE_SMART_HOME_END_DISABLED;
+  else if (strcasecmp (value, "before") == 0)
+    options.source_data.smart_he = GTK_SOURCE_SMART_HOME_END_BEFORE;
+  else if (strcasecmp (value, "after") == 0)
+    options.source_data.smart_he = GTK_SOURCE_SMART_HOME_END_AFTER;
+  else if (strcasecmp (value, "always") == 0)
+    options.source_data.smart_he = GTK_SOURCE_SMART_HOME_END_ALWAYS;
+  else
+    g_printerr (_("Unknown smart Home/End mode: %s\n"), value);
+
+  return TRUE;
+}
 #endif
 
 #ifndef G_OS_WIN32
@@ -1833,18 +1865,37 @@ yad_options_init (void)
 #ifdef HAVE_SOURCEVIEW
   /* Initialize sourceview data */
   options.source_data.lang = NULL;
+#ifndef STANDALONE
+  options.source_data.theme = g_settings_get_string (sv_settings, "theme");;
+  options.source_data.line_num = g_settings_get_boolean (sv_settings, "line-num");
+  options.source_data.line_hl = g_settings_get_boolean (sv_settings, "line-hl");
+  options.source_data.line_marks = g_settings_get_boolean (sv_settings, "line-marks");
+  options.source_data.m1_color = g_settings_get_string (sv_settings, "mark1-color");
+  options.source_data.m2_color = g_settings_get_string (sv_settings, "mark2-color");
+  options.source_data.right_margin = g_settings_get_int (sv_settings, "right-margin");
+  options.source_data.brackets = g_settings_get_boolean (sv_settings, "brackets");
+  options.source_data.indent = g_settings_get_boolean (sv_settings, "indent");
+  options.source_data.tab_width = g_settings_get_int (sv_settings, "tab-width");
+  options.source_data.indent_width = g_settings_get_int (sv_settings, "indent-width");
+  options.source_data.smart_he = g_settings_get_enum (sv_settings, "homend");
+  options.source_data.smart_bs = g_settings_get_boolean (sv_settings, "smart-bs");
+  options.source_data.spaces = g_settings_get_boolean (sv_settings, "spaces");
+#else
   options.source_data.theme = NULL;
   options.source_data.line_num = FALSE;
   options.source_data.line_hl = FALSE;
   options.source_data.line_marks = FALSE;
-#ifndef STANDALONE
-  options.source_data.m1_color = g_settings_get_string (settings, "mark1-color");
-  options.source_data.m2_color = g_settings_get_string (settings, "mark2-color");
-#else
   options.source_data.m1_color = MARK1_COLOR;
   options.source_data.m2_color = MARK2_COLOR;
-#endif
   options.source_data.right_margin = 0;
+  options.source_data.brackets = FALSE;
+  options.source_data.indent = FALSE;
+  options.source_data.tab_width = 8;
+  options.source_data.indent_width = 4;
+  options.source_data.smart_he = GTK_SOURCE_SMART_HOME_END_DISABLED;
+  options.source_data.smart_bs = FALSE;
+  options.source_data.spaces = FALSE;
+#endif
 #endif
 }
 

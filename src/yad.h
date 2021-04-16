@@ -478,9 +478,16 @@ typedef struct {
   gboolean line_num;
   gboolean line_hl;
   gboolean line_marks;
-  guint right_margin;
   gchar *m1_color;
   gchar *m2_color;
+  guint right_margin;
+  gboolean brackets;
+  gboolean indent;
+  gint tab_width;
+  gint indent_width;
+  GtkSourceSmartHomeEndType smart_he;
+  gboolean smart_bs;
+  gboolean spaces;
 } YadSourceData;
 #endif
 
@@ -578,6 +585,7 @@ extern GtkIconTheme *yad_icon_theme;
 
 #ifndef STANDALONE
 extern GSettings *settings;
+extern GSettings *sv_settings;
 #endif
 
 extern GdkPixbuf *big_fallback_image;
