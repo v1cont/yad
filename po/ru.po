@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 12:41+0300\n"
+"POT-Creation-Date: 2021-04-16 14:47+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -1372,11 +1372,11 @@ msgstr "ЯЗЫК"
 msgid "Use specified theme"
 msgstr "Использовать указанную тему"
 
-#: ../src/option.c:668
+#: ../src/option.c:668 ../data/yad.gschema.xml.in.h:17
 msgid "Show line numbers"
 msgstr "Показывать номера строк"
 
-#: ../src/option.c:670
+#: ../src/option.c:670 ../data/yad.gschema.xml.in.h:18
 msgid "Highlight current line"
 msgstr "Подсвечивать текущую строку"
 
@@ -2127,25 +2127,65 @@ msgid "Default color for URI in text-info dialog"
 msgstr "Цвет ссылок по умолчанию в текстовом диалоге"
 
 #: ../data/yad.gschema.xml.in.h:12
-msgid "Default color for first type of text marks in text-info dialog"
-msgstr "Цвет для меток первого типа в текстовом диалоге"
-
-#: ../data/yad.gschema.xml.in.h:13
-msgid "Default color for second type of text marks in text-info dialog"
-msgstr "Цвет для меток второго типа в текстовом диалоге"
-
-#: ../data/yad.gschema.xml.in.h:14
 msgid "Maximum number of tabs in notebook dialog"
 msgstr "Максимальное количество вкладок в диалоге"
 
-#: ../data/yad.gschema.xml.in.h:15
+#: ../data/yad.gschema.xml.in.h:13
 msgid "Use large previews in file selection dialogs"
 msgstr "Использовать крупный размер при предпросмотре в диалогах выбора файлов"
 
-#: ../data/yad.gschema.xml.in.h:16
+#: ../data/yad.gschema.xml.in.h:14
 msgid "Ignore unknown command-line options"
 msgstr "Игнорировать неизвестные арументы в командной строке"
 
-#: ../data/yad.gschema.xml.in.h:17
+#: ../data/yad.gschema.xml.in.h:15
 msgid "Enable debug mode with information about deprecated features"
 msgstr "Разрешить режим отладки с информированием об устаревших функциях"
+
+#: ../data/yad.gschema.xml.in.h:16
+msgid "Default color theme for text-info dialog"
+msgstr "Цветовая тема по умолчанию в текстовом диалоге"
+
+#: ../data/yad.gschema.xml.in.h:19
+msgid "Enable line marks mode"
+msgstr "Разрешить пометки строк"
+
+#: ../data/yad.gschema.xml.in.h:20
+msgid "Default color for first type of text marks in text-info dialog"
+msgstr "Цвет для меток первого типа в текстовом диалоге"
+
+#: ../data/yad.gschema.xml.in.h:21
+msgid "Default color for second type of text marks in text-info dialog"
+msgstr "Цвет для меток второго типа в текстовом диалоге"
+
+#: ../data/yad.gschema.xml.in.h:22
+msgid "Set right margin at position"
+msgstr "Установить правую границу в позиции"
+
+#: ../data/yad.gschema.xml.in.h:23
+msgid "Highlight matching brackets"
+msgstr "Подсвечивать парные скобки"
+
+#: ../data/yad.gschema.xml.in.h:24
+msgid "Use autoindent"
+msgstr "Использовать автовыравнивание"
+
+#: ../data/yad.gschema.xml.in.h:25
+msgid "Smart Home/End behavior"
+msgstr "Поведение умных клавиш Home/End"
+
+#: ../data/yad.gschema.xml.in.h:26
+msgid "Default tabulation width"
+msgstr "Ширина табуляции по умолчанию"
+
+#: ../data/yad.gschema.xml.in.h:27
+msgid "Default indentation width"
+msgstr "Ширина выравнивания по умолчанию"
+
+#: ../data/yad.gschema.xml.in.h:28
+msgid "Show space characters"
+msgstr "Отображать пробельные символы"
+
+#: ../data/yad.gschema.xml.in.h:29
+msgid "Insert spaces instead of tabs"
+msgstr "Вставлять пробелы вместо табуляции"

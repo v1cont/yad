@@ -1,4 +1,12 @@
 <schemalist>
+
+  <enum id="yad.homend">
+    <value nick="never" value="0"/>
+    <value nick="before" value="1"/>
+    <value nick="after" value="2"/>
+    <value nick="always" value="3"/>
+  </enum>
+
   <schema id="yad.settings" path="/yad/settings/" gettext-domain="yad">
     <key name="width" type="i">
       <default>-1</default>
@@ -36,14 +44,6 @@
       <default>'blue'</default>
       <_summary>Default color for URI in text-info dialog</_summary>
     </key>
-    <key name="mark1-color" type="s">
-      <default>'lightgreen'</default>
-      <_summary>Default color for first type of text marks in text-info dialog</_summary>
-    </key>
-    <key name="mark2-color" type="s">
-      <default>'pink'</default>
-      <_summary>Default color for second type of text marks in text-info dialog</_summary>
-    </key>
     <key name="max-tab" type="i">
       <default>100</default>
       <_summary>Maximum number of tabs in notebook dialog</_summary>
@@ -61,5 +61,64 @@
       <_summary>Enable debug mode with information about deprecated features</_summary>
     </key>
   </schema>
-</schemalist>
 
+  <schema id="yad.sourceview" path="/yad/sourceview/" gettext-domain="yad">
+    <key name="theme" type="s">
+      <default>''</default>
+      <_summary>Default color theme for text-info dialog</_summary>
+    </key>
+    <key name="line-num" type="b">
+      <default>false</default>
+      <_summary>Show line numbers</_summary>
+    </key>
+    <key name="line-hl" type="b">
+      <default>false</default>
+      <_summary>Highlight current line</_summary>
+    </key>
+    <key name="line-marks" type="b">
+      <default>false</default>
+      <_summary>Enable line marks mode</_summary>
+    </key>
+    <key name="mark1-color" type="s">
+      <default>'lightgreen'</default>
+      <_summary>Default color for first type of text marks in text-info dialog</_summary>
+    </key>
+    <key name="mark2-color" type="s">
+      <default>'pink'</default>
+      <_summary>Default color for second type of text marks in text-info dialog</_summary>
+    </key>
+    <key name="right-margin" type="i">
+      <default>0</default>
+      <_summary>Set right margin at position</_summary>
+    </key>
+    <key name="brackets" type="b">
+      <default>false</default>
+      <_summary>Highlight matching brackets</_summary>
+    </key>
+    <key name="indent" type="b">
+      <default>false</default>
+      <_summary>Use autoindent</_summary>
+    </key>
+    <key name="homend" enum="yad.homend">
+      <default>'after'</default>
+      <_summary>Smart Home/End behavior</_summary>
+    </key>
+    <key name="tab-width" type="i">
+      <default>8</default>
+      <_summary>Default tabulation width</_summary>
+    </key>
+    <key name="indent-width" type="i">
+      <default>4</default>
+      <_summary>Default indentation width</_summary>
+    </key>
+    <key name="spaces" type="b">
+      <default>false</default>
+      <_summary>Show space characters</_summary>
+    </key>
+    <key name="ins-spaces" type="b">
+      <default>true</default>
+      <_summary>Insert spaces instead of tabs</_summary>
+    </key>
+  </schema>
+
+</schemalist>
