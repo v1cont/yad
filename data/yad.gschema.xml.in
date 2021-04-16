@@ -103,7 +103,7 @@
       <default>'never'</default>
       <_summary>Smart Home/End behavior</_summary>
     </key>
-    <key name="smart_bs" type="b">
+    <key name="smart-bs" type="b">
       <default>false</default>
       <_summary>Use smart backspace</_summary>
     </key> 
