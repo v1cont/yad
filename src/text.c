@@ -469,6 +469,8 @@ text_create_widget (GtkWidget * dlg)
   if (options.text_data.wrap)
     gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_WORD_CHAR);
 
+  gtk_text_view_set_monospace (GTK_TEXT_VIEW (text_view), TRUE);
+
   if (options.common_data.font || options.text_data.fore || options.text_data.back)
     {
       GtkCssProvider *provider;
