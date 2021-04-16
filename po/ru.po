@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 14:47+0300\n"
+"POT-Creation-Date: 2021-04-16 16:21+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -2175,17 +2175,21 @@ msgid "Smart Home/End behavior"
 msgstr "Поведение умных клавиш Home/End"
 
 #: ../data/yad.gschema.xml.in.h:26
+msgid "Use smart backspace"
+msgstr "Использовать умный backspace"
+
+#: ../data/yad.gschema.xml.in.h:27
 msgid "Default tabulation width"
 msgstr "Ширина табуляции по умолчанию"
 
-#: ../data/yad.gschema.xml.in.h:27
+#: ../data/yad.gschema.xml.in.h:28
 msgid "Default indentation width"
 msgstr "Ширина выравнивания по умолчанию"
 
-#: ../data/yad.gschema.xml.in.h:28
+#: ../data/yad.gschema.xml.in.h:29
 msgid "Show space characters"
 msgstr "Отображать пробельные символы"
 
-#: ../data/yad.gschema.xml.in.h:29
+#: ../data/yad.gschema.xml.in.h:30
 msgid "Insert spaces instead of tabs"
 msgstr "Вставлять пробелы вместо табуляции"

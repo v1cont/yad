@@ -100,9 +100,13 @@
       <_summary>Use autoindent</_summary>
     </key>
     <key name="homend" enum="yad.homend">
-      <default>'after'</default>
+      <default>'never'</default>
       <_summary>Smart Home/End behavior</_summary>
     </key>
+    <key name="smart_bs" type="b">
+      <default>false</default>
+      <_summary>Use smart backspace</_summary>
+    </key> 
     <key name="tab-width" type="i">
       <default>8</default>
       <_summary>Default tabulation width</_summary>
