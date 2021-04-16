@@ -10,7 +10,7 @@ Project homepage: https://github.com/v1cont/yad
 Complex examples: https://sanana.kiev.ua/index.php/yad  
 Mailing list: http://groups.google.com/group/yad-common  
 
-Some miscellaneous stuff can be found in data directory including notify-send script
+Some miscellaneous stuff can be found in data/misc directory including notify-send script
 and simple zenity-compatible wrapper 
 
 A fresh gtk2 branch of YAD can be obtained from this repository - https://github.com/step-/yad
