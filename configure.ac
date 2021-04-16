@@ -78,7 +78,7 @@ AC_ARG_ENABLE([sourceview],
 			[Build YAD with GtkSourceView support (default - yes)])],
 	[with_sourceview=$enableval], [with_sourceview=yes])
 if test x$with_sourceview = xyes; then
-    PKG_CHECK_MODULES([SOURCEVIEW], [gtksourceview-3.0], [have_sourceview=yes], [have_sourceview=no])
+    PKG_CHECK_MODULES([SOURCEVIEW], [gtksourceview-3.0 >= 3.18.0], [have_sourceview=yes], [have_sourceview=no])
 else
     have_sourceview=no
 fi
