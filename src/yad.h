@@ -59,6 +59,11 @@ G_BEGIN_DECLS
 
 #define YAD_URL_REGEX "(http|https|ftp|file)://[a-zA-Z0-9./_%#&-]+"
 
+#define RIGHT_MARGIN     80  /* default right margin position for GtkSourceView */
+
+#define SV_MARK1 "one"
+#define SV_MARK2 "two"
+
 typedef enum {
   YAD_MODE_MESSAGE,
   YAD_MODE_APP,
@@ -470,6 +475,12 @@ typedef struct {
 typedef struct {
   gchar *lang;
   gchar *theme;
+  gboolean line_num;
+  gboolean line_hl;
+  gboolean line_marks;
+  guint right_margin;
+  gchar *m1_color;
+  gchar *m2_color;
 } YadSourceData;
 #endif
 

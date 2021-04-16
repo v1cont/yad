@@ -36,6 +36,14 @@
       <default>'blue'</default>
       <_summary>Default color for URI in text-info dialog</_summary>
     </key>
+    <key name="mark1-color" type="s">
+      <default>'lightgreen'</default>
+      <_summary>Default color for first type of text marks in text-info dialog</_summary>
+    </key>
+    <key name="mark2-color" type="s">
+      <default>'pink'</default>
+      <_summary>Default color for second type of text marks in text-info dialog</_summary>
+    </key>
     <key name="max-tab" type="i">
       <default>100</default>
       <_summary>Maximum number of tabs in notebook dialog</_summary>

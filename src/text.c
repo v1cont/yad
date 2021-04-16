@@ -260,6 +260,33 @@ linkify_cb (GtkTextBuffer * buf, GRegex * regex)
   g_free (text);
 }
 
+#if HAVE_SOURCEVIEW
+static void
+line_mark_activated (GtkSourceGutter *gutter, GtkTextIter *iter, GdkEventButton *ev, gpointer d)
+{
+  GSList *mark_list;
+  const gchar *mark_type;
+
+  if (ev->button == 1)
+    mark_type = SV_MARK1;
+  else if (ev->button == 3)
+    mark_type = SV_MARK2;
+  else
+    return;
+
+  /* get the marks already in the line */
+  mark_list = gtk_source_buffer_get_source_marks_at_line (GTK_SOURCE_BUFFER (text_buffer),
+                                                          gtk_text_iter_get_line (iter), mark_type);
+
+  if (mark_list != NULL)
+    gtk_text_buffer_delete_mark (GTK_TEXT_BUFFER (text_buffer), GTK_TEXT_MARK (mark_list->data));
+  else
+    gtk_source_buffer_create_source_mark (GTK_SOURCE_BUFFER (text_buffer), NULL, mark_type, iter);
+
+  g_slist_free (mark_list);
+}
+#endif
+
 static gboolean
 handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 {
@@ -504,6 +531,37 @@ text_create_widget (GtkWidget * dlg)
         gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (text_buffer), scheme);
       else
         g_printerr (_("Theme %s not found\n"), options.source_data.theme);
+    }
+
+  gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (text_view), options.source_data.line_num);
+  gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (text_view), options.source_data.line_hl);
+  if (options.source_data.line_marks)
+    {
+      GdkRGBA color;
+      GtkSourceMarkAttributes *attr;
+
+      gtk_source_view_set_show_line_marks (GTK_SOURCE_VIEW (text_view), TRUE);
+
+      gdk_rgba_parse (&color, options.source_data.m1_color);
+      attr = gtk_source_mark_attributes_new ();
+      gtk_source_mark_attributes_set_background (attr, &color);
+      gtk_source_mark_attributes_set_icon_name (attr, "checkbox-checked-symbolic");
+      gtk_source_view_set_mark_attributes (GTK_SOURCE_VIEW (text_view), SV_MARK1, attr, 0);
+      g_object_unref (attr);
+
+      gdk_rgba_parse (&color, options.source_data.m2_color);
+      attr = gtk_source_mark_attributes_new ();
+      gtk_source_mark_attributes_set_background (attr, &color);
+      gtk_source_mark_attributes_set_icon_name (attr, "checkbox-checked-symbolic");
+      gtk_source_view_set_mark_attributes (GTK_SOURCE_VIEW (text_view), SV_MARK2, attr, 0);
+      g_object_unref (attr);
+
+      g_signal_connect (G_OBJECT (text_view), "line-mark-activated", G_CALLBACK (line_mark_activated), NULL);
+    }
+  if (options.source_data.right_margin > 0)
+    {
+      gtk_source_view_set_show_right_margin (GTK_SOURCE_VIEW (text_view), TRUE);
+      gtk_source_view_set_right_margin_position (GTK_SOURCE_VIEW (text_view), options.source_data.right_margin);
     }
 #endif
 

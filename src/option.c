@@ -56,6 +56,9 @@ static gboolean set_scroll_policy (const gchar *, const gchar *, gpointer, GErro
 static gboolean set_size_format (const gchar *, const gchar *, gpointer, GError **);
 #endif
 static gboolean set_interp (const gchar *, const gchar *, gpointer, GError **);
+#ifdef HAVE_SOURCEVIEW
+static gboolean set_right_margin (const gchar *, const gchar *, gpointer, GError **);
+#endif
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -661,6 +664,18 @@ static GOptionEntry source_options[] = {
     N_("Use specified langauge for syntax highlighting"), N_("LANG") },
   { "theme", 0, 0, G_OPTION_ARG_STRING, &options.source_data.theme,
     N_("Use specified theme"), N_("THEME") },
+  { "line-num", 0, 0, G_OPTION_ARG_NONE, &options.source_data.line_num,
+    N_("Show line numbers"), NULL },
+  { "line-hl", 0, 0, G_OPTION_ARG_NONE, &options.source_data.line_hl,
+    N_("Highlight current line"), NULL },
+  { "line-marks", 0, 0, G_OPTION_ARG_NONE, &options.source_data.line_marks,
+    N_("Enable line marks"), NULL },
+  { "mark1-color", 0, 0, G_OPTION_ARG_STRING, &options.source_data.m1_color,
+    N_("Set color for first type marks"), N_("COLOR") },
+  { "mark2-color", 0, 0, G_OPTION_ARG_STRING, &options.source_data.m1_color,
+    N_("Set color for second type marks"), N_("COLOR") },
+  { "right-margin", 0, G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, set_right_margin,
+    N_("Set position of right margin"), N_("[POS]") },
   { NULL }
 };
 #endif
@@ -1310,6 +1325,17 @@ set_interp (const gchar * option_name, const gchar * value, gpointer data, GErro
   return TRUE;
 }
 
+#if HAVE_SOURCEVIEW
+static gboolean
+set_right_margin (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+{
+  if (value)
+    options.source_data.right_margin = atoi (value);
+  else
+    options.source_data.right_margin = RIGHT_MARGIN;
+}
+#endif
+
 #ifndef G_OS_WIN32
 static gboolean
 set_xid_file (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
@@ -1808,6 +1834,17 @@ yad_options_init (void)
   /* Initialize sourceview data */
   options.source_data.lang = NULL;
   options.source_data.theme = NULL;
+  options.source_data.line_num = FALSE;
+  options.source_data.line_hl = FALSE;
+  options.source_data.line_marks = FALSE;
+#ifndef STANDALONE
+  options.source_data.m1_color = g_settings_get_string (settings, "mark1-color");
+  options.source_data.m2_color = g_settings_get_string (settings, "mark2-color");
+#else
+  options.source_data.m1_color = MARK1_COLOR;
+  options.source_data.m2_color = MARK2_COLOR;
+#endif
+  options.source_data.right_margin = 0;
 #endif
 }
 

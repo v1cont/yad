@@ -56,4 +56,12 @@
 #define MAX_TABS 100
 #endif
 
+#ifndef MARK1_COLOR
+#define MARK1_COLOR "lightgreen"
+#endif
+
+#ifndef MARK2_COLOR
+#define MARK2_COLOR "pink"
+#endif
+
 #endif /* __YAD_DEFS_H__ */

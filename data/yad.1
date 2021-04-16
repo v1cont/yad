@@ -959,15 +959,35 @@ Set default color for background.
 .B \-\-uri-color=\fICOLOR\fP
 Set color for links. Default is \fIblue\fP.
 .TP
-.B \-\-lang=LANGUAGE
-Highlight syntax for specified \fILANGUAGE\fP. This option works only if yad builds with gtksourceview.
-.TP
-.B \-\-theme=THEME
-Set used theme to \fITHEME\fP. This option works only if yad builds with gtksourceview. Use option \fI\-\-show-themes\fP for get list of all available themes.
-.TP
 .B \-\-listen
 Listen data from stdin even if filename was specified.
-
+.TP
+Next options works only if yad builds with GtkSourceView.
+.TP
+.B \-\-lang=\fILANGUAGE\fP
+Highlight syntax for specified \fILANGUAGE\fP.
+.TP
+.B \-\-theme=\fITHEME\fP
+Set used theme to \fITHEME\fP. Use option \fI\-\-show-themes\fP for get list of all available themes.
+.TP
+.B \-\-line-num
+Show line numbers.
+.TP
+.B \-\-line-hl
+Highlight current line.
+.TP
+.B \-\-line-marks
+Enable line marks mode. There are two types of marks. First type sets by left mouse button and second by the right mouse button.
+.TP
+.B \-\-mark1-color=\fICOLOR\fP
+Set background color for marks of first type to \fICOLOR\fP. Default is lightgreen.
+.TP
+.B \-\-mark2-color=\fICOLOR\fP
+Set background color for marks of second type to \fICOLOR\fP. Default is pink.
+.TP
+.B \-\-right-margin=\fI[POS]\fP
+Enable mark of right margin. Optional argument \fIPOS\fP is a margin position in characters. Default is 80.
+.PP
 If \fIfontname\fP option is specified for text dialog, the description of font must be in CSS style (not in a Pango style).
 Sending FormFeed character to text dialog clears it. This symbol may be sent as \fIecho \-e '\\f'\fP.
 Pressing \fICtrl+S\fP popups the search entry in text dialog.
