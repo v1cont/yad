@@ -23,7 +23,9 @@
 #include <config.h>
 
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <sys/ipc.h>
+#include <fcntl.h>
 
 #include <gdk/gdkx.h>
 
@@ -33,6 +35,7 @@
 
 #include <glib/gi18n.h>
 #include <glib/gprintf.h>
+#include <glib/gstdio.h>
 
 #ifdef HAVE_HTML
 #include <webkit2/webkit2.h>
@@ -469,6 +472,7 @@ typedef struct {
   gboolean formatted;
   gchar *fore;
   gchar *back;
+  gboolean in_place;
 } YadTextData;
 
 #ifdef HAVE_SOURCEVIEW

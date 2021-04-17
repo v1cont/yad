@@ -650,6 +650,8 @@ static GOptionEntry text_options[] = {
     N_("Use specified color for links"), N_("COLOR") },
   { "formatted", 0, 0, G_OPTION_ARG_NONE, &options.text_data.formatted,
     N_("Use pango markup"), NULL },
+  { "in-place", 0, 0, G_OPTION_ARG_NONE, &options.text_data.in_place,
+    N_("Save file instead of print on exit"), NULL },
   { NULL }
 };
 
@@ -1839,6 +1841,7 @@ yad_options_init (void)
   options.text_data.uri_color = URI_COLOR;
 #endif
   options.text_data.formatted = FALSE;
+  options.text_data.in_place = FALSE;
 
 #ifdef HAVE_SOURCEVIEW
   /* Initialize sourceview data */

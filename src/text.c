@@ -644,6 +644,29 @@ text_print_result (void)
 
   gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (text_buffer), &start, &end);
   text = gtk_text_buffer_get_text (GTK_TEXT_BUFFER (text_buffer), &start, &end, 0);
-  g_print ("%s", text);
+  if (options.text_data.in_place && options.common_data.uri)
+    {
+      GStatBuf st;
+      GError *err = NULL;
+
+      /* g_file_set_contents changes the file permissions. so it must kept and restore after file saving */
+      if (g_stat (options.common_data.uri, &st) == 0)
+        {
+          if (!g_file_set_contents (options.common_data.uri, text, -1, &err))
+            {
+              g_printerr ("Cannot save file %s: %s\n", options.common_data.uri, err->message);
+              g_error_free (err);
+            }
+          else
+            {
+              /* restore permissions */
+              g_chmod (options.common_data.uri, st.st_mode);
+            }
+        }
+      else
+        g_printerr ("Cannot stat file %s\n", options.common_data.uri);
+    }
+  else
+    g_print ("%s", text);
   g_free (text);
 }
