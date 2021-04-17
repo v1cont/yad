@@ -742,6 +742,8 @@ form_create_widget (GtkWidget * dlg)
       gtk_grid_set_row_spacing (GTK_GRID (tbl), 5);
       gtk_grid_set_column_spacing (GTK_GRID (tbl), 5);
 
+      gtk_grid_set_row_homogeneous (GTK_GRID (tbl), TRUE);
+
       if (options.form_data.scroll)
         {
           GtkWidget *sw = gtk_scrolled_window_new (NULL, NULL);
