@@ -22,6 +22,14 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
+#ifdef HAVE_SPELL
+#include <gspell/gspell.h>
+#endif
+
+#ifdef HAVE_SOURCEVIEW
+#include <gtksourceview/gtksource.h>
+#endif
+
 typedef enum {
   PANGO_SPEC,
   XFT_SPEC
@@ -35,6 +43,12 @@ static FontType font_type = XFT_SPEC;
 static gboolean pfd_mode = FALSE;
 static gboolean icon_mode = FALSE;
 static gboolean ver = FALSE;
+#ifdef HAVE_SPELL
+static gboolean langs_mode = FALSE;
+#endif
+#ifdef HAVE_SOURCEVIEW
+static gboolean themes_mode = FALSE;
+#endif
 
 static guint icon_size = 24;
 static gchar *icon_theme_name = NULL;
@@ -43,6 +57,12 @@ static gchar **args = NULL;
 
 static GOptionEntry ents[] = {
   { "version", 'v', 0, G_OPTION_ARG_NONE, &ver, N_("Print version"), NULL },
+#ifdef HAVE_SPELL
+  { "show-langs", 0, 0, G_OPTION_ARG_NONE, &langs_mode, N_("Show list of spell languages"), NULL },
+#endif
+#ifdef HAVE_SOURCEVIEW
+  { "show-themes", 0, 0, G_OPTION_ARG_NONE, &themes_mode, N_("Show list of GtkSourceView themes"), NULL },
+#endif
   { G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &args, NULL, N_("STRING ...") },
   { NULL }
 };
@@ -272,6 +292,45 @@ run_icon_mode ()
   return 0;
 }
 
+#ifdef HAVE_SPELL
+static gint
+show_langs ()
+{
+  const GList *lng;
+
+  for (lng = gspell_language_get_available (); lng; lng = lng->next)
+    {
+      const GspellLanguage *l = lng->data;
+      g_print ("%s\n", gspell_language_get_code (l));
+    }
+    
+  return 0;
+}
+#endif
+
+#ifdef HAVE_SOURCEVIEW
+static gint
+show_themes ()
+{
+  GtkSourceStyleSchemeManager *sm;
+  const gchar **si;
+  guint i = 0;
+
+  sm = gtk_source_style_scheme_manager_get_default ();
+  if ((si = (const gchar **) gtk_source_style_scheme_manager_get_scheme_ids (sm)) == NULL)
+    return 1;
+
+  while (si[i])
+    {
+      GtkSourceStyleScheme *s = gtk_source_style_scheme_manager_get_scheme (sm, si[i]);
+      g_print ("%s\n", gtk_source_style_scheme_get_name (s));
+      i++;
+    }
+    
+  return 0;
+}
+#endif
+
 int
 main (int argc, char *argv[])
 {
@@ -319,6 +378,14 @@ main (int argc, char *argv[])
     ret = run_pfd_mode ();
   else if (icon_mode)
     ret = run_icon_mode ();
+#ifdef HAVE_SPELL
+  else if (langs_mode)
+    ret = show_langs ();
+#endif
+#ifdef HAVE_SOURCEVIEW
+  else if (themes_mode)
+    ret = show_themes ();
+#endif
   else
     {
       g_printerr (_("no mode specified\n"));

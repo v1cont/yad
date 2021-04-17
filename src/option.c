@@ -63,12 +63,6 @@ static gboolean set_smart_homend (const gchar *, const gchar *, gpointer, GError
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
-#ifdef HAVE_SPELL
-static gboolean langs_mode = FALSE;
-#endif
-#ifdef HAVE_SOURCEVIEW
-static gboolean themes_mode = FALSE;
-#endif
 static gboolean app_mode = FALSE;
 static gboolean calendar_mode = FALSE;
 static gboolean color_mode = FALSE;
@@ -708,14 +702,6 @@ static GOptionEntry filter_options[] = {
 static GOptionEntry misc_options[] = {
   { "version", 0, 0, G_OPTION_ARG_NONE, &version_mode,
     N_("Print version"), NULL },
-#ifdef HAVE_SPELL
-  { "show-langs", 0, 0, G_OPTION_ARG_NONE, &langs_mode,
-    N_("Show list of spell languages"), NULL },
-#endif
-#ifdef HAVE_SOURCEVIEW
-  { "show-themes", 0, 0, G_OPTION_ARG_NONE, &themes_mode,
-    N_("Show list of GtkSourceView themes"), NULL },
-#endif
   { "css", 0, 0, G_OPTION_ARG_STRING, &options.css,
     N_("Load additional CSS settings from file or string"), N_("STRING") },
   { "gtkrc", 0, 0, G_OPTION_ARG_FILENAME, &options.gtkrc_file,
@@ -1527,14 +1513,6 @@ yad_set_mode (void)
     options.mode = YAD_MODE_ABOUT;
   else if (version_mode)
     options.mode = YAD_MODE_VERSION;
-#ifdef HAVE_SPELL
-  else if (langs_mode)
-    options.mode = YAD_MODE_LANGS;
-#endif
-#ifdef HAVE_SOURCEVIEW
-  else if (themes_mode)
-    options.mode = YAD_MODE_THEMES;
-#endif
 }
 
 void

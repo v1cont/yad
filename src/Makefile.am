@@ -46,8 +46,8 @@ if BUILD_TOOLS
 bin_PROGRAMS += yad-tools
 
 yad_tools_SOURCES = tools.c
-yad_tools_CFLAGS = $(GTK_CFLAGS)
-yad_tools_LDADD = $(GTK_LIBS)
+yad_tools_CFLAGS = $(GTK_CFLAGS) $(SPELL_CFLAGS) $(SOURCEVIEW_CFLAGS)
+yad_tools_LDADD = $(GTK_LIBS) $(SPELL_LIBS) $(SOURCEVIEW_LIBS)
 endif
 
 if BUILD_IB
