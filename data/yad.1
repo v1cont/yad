@@ -1,4 +1,5 @@
-.TH YAD 1 "April 27, 2020"  "yad" "User Commands"
+.TH YAD 1 "April 2021"  "yad" "User Commands"
+
 .SH NAME
 yad \- display GTK+ dialogs from shell scripts or command-line
 
@@ -248,7 +249,7 @@ Set the policy type for vertical scrollbars. \fITYPE\fP can be one of the \fIaut
 Enable spell checking in textview widgets
 .TP
 .B \-\-spell-lang=\fILANGUAGE\fP
-Set spell checking language to \fILANGUAGE\fP. By default language guesses from current locale. Use option \fI\-\-show-langs\fP for get list of all possible languages.
+Set spell checking language to \fILANGUAGE\fP. By default language guesses from current locale. Use \fIyad-tools(1)\fP to get list of all possible languages.
 .TP
 .B \-\-bool-fmt=\fITYPE\fP
 Set the output type of boolean values to \fITYPE\fP. Possible types are \fIT\fP, \fIt\fP, \fIY\fP, \fIy\fP, \fIO\fP, \fIo\fP and \fI1\fP.
@@ -968,7 +969,7 @@ Next options works only if yad builds with GtkSourceView.
 Highlight syntax for specified \fILANGUAGE\fP.
 .TP
 .B \-\-theme=\fITHEME\fP
-Set used theme to \fITHEME\fP. Use option \fI\-\-show-themes\fP for get list of all available themes.
+Set used theme to \fITHEME\fP. Use \fIyad-tools(1)\fP to get list of all available themes.
 .TP
 .B \-\-line-num
 Show line numbers.
@@ -1090,13 +1091,6 @@ Display an about dialog.
 .TP
 .B \-\-version
 Show version of program.
-.TP
-.B \-\-show-langs
-Show list of possible languages for spell checking. Available only if yad builds with \fIGtkSpell\fP support.
-.TP
-.B \-\-show-themes
-Show list of possible GtkSourceView themes. Available only if yad builds with \fIGtkSourceView\fP support.
-
 .PP
 Also the standard GTK+ options are accepted.
 
