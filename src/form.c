@@ -71,6 +71,7 @@ expand_action (gchar * cmd)
                 case YAD_FIELD_MFILE:
                 case YAD_FIELD_MDIR:
                 case YAD_FIELD_DATE:
+                case YAD_FIELD_ICON:
                   buf = escape_char ((gchar *) gtk_entry_get_text (GTK_ENTRY (g_slist_nth_data (fields, num))), '"');
                   arg = g_shell_quote (buf ? buf : "");
                   g_free (buf);
@@ -195,6 +196,7 @@ set_field_value (guint num, gchar *value)
     case YAD_FIELD_FILE_SAVE:
     case YAD_FIELD_DIR_CREATE:
     case YAD_FIELD_DATE:
+    case YAD_FIELD_ICON:
       gtk_entry_set_text (GTK_ENTRY (w), value);
       break;
 
@@ -641,6 +643,44 @@ link_clicked_cb (GtkLinkButton *btn, gpointer data)
   return TRUE;
 }
 
+static void
+select_icon_cb (GtkEntry *e, GtkEntryIconPosition pos, GdkEventButton *ev, gpointer d)
+{
+  gchar *ib;
+
+  if (ev->button !=1 || pos != GTK_ENTRY_ICON_SECONDARY)
+    return;
+
+  ib = g_find_program_in_path ("yad-icon-browser");
+  if (ib)
+    {
+      gint exit;
+      gchar *cmd;
+      gchar *out = NULL;
+
+      cmd = g_strdup_printf ("%s -i", ib);
+      g_free (ib);
+
+      exit = run_command_sync (cmd, &out);
+      g_free (cmd);
+      if (exit == 0)
+        {
+          strip_new_line (out);
+          gtk_entry_set_text (e, out);
+          g_free (out);
+        }
+    }
+}
+
+static void
+set_icon_cb (GtkEntry *e, gpointer d)
+{
+  const gchar *icon = gtk_entry_get_text (e);
+
+  if (icon && *icon)
+    gtk_entry_set_icon_from_icon_name (e, GTK_ENTRY_ICON_PRIMARY, icon);
+}
+
 static gboolean
 handle_stdin (GIOChannel * ch, GIOCondition cond, gpointer data)
 {
@@ -799,6 +839,7 @@ form_create_widget (GtkWidget * dlg)
             case YAD_FIELD_HIDDEN:
             case YAD_FIELD_READ_ONLY:
             case YAD_FIELD_COMPLETE:
+            case YAD_FIELD_ICON:
               e = gtk_entry_new ();
               gtk_widget_set_name (e, "yad-form-entry");
               if (fld->tip)
@@ -830,6 +871,13 @@ form_create_widget (GtkWidget * dlg)
 
                   g_object_unref (m);
                   g_object_unref (c);
+                }
+              else if (fld->type == YAD_FIELD_ICON)
+                {
+                  gtk_entry_set_icon_from_icon_name (GTK_ENTRY (e), GTK_ENTRY_ICON_PRIMARY, "image-missing");
+                  gtk_entry_set_icon_from_icon_name (GTK_ENTRY (e), GTK_ENTRY_ICON_SECONDARY, "insert-image");
+                  g_signal_connect (G_OBJECT (e), "changed", G_CALLBACK (set_icon_cb), NULL);
+                  g_signal_connect (G_OBJECT (e), "icon-press", G_CALLBACK (select_icon_cb), NULL);
                 }
 
               gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
@@ -1267,6 +1315,7 @@ form_print_field (guint fn)
     case YAD_FIELD_FILE_SAVE:
     case YAD_FIELD_DIR_CREATE:
     case YAD_FIELD_DATE:
+    case YAD_FIELD_ICON:
       if (options.common_data.quoted_output)
         {
           buf = g_shell_quote (gtk_entry_get_text (GTK_ENTRY (g_slist_nth_data (fields, fn))));

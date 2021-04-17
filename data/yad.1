@@ -537,6 +537,8 @@ Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP
 .br
 \fBAPP\fP - application selection button. Input value for this field is mime-type. Output value - executable for selected application.
 .br
+\fBICON\fP - icon field. Like average entry field but has two icons. Left shows current icon and right is clickable and calls \fIyad-con-browser\fP for choosing icon.
+.br
 \fBCLR\fP - color selection button. Output values for this field generates in the same manner as for color dialog.
 .br
 \fBBTN\fP - button field. Label may be in form text in a form \fILABEL[!ICON[!TOOLTIP]]\fP where `!' is an item separator. \fILABEL\fP is a text of button label or yad stock id. \fIICON\fP is a buttons icon (stock id or file name). \fITOOLTIP\fP is an optional text for popup help string. Initial value is a command which is running when button is clicked. A special sympols \fI%N\fP in command are replaced by value of field \fIN\fP. If command starts with \fI@\fP, the output of command will be parsed and lines started with number and colon will be treats as a new field values.
@@ -1330,4 +1332,4 @@ AM_PATH_YAD([MINIMUM-VERSION],\\
 \fBYad\fP was written by Victor Ananjevsky <ananasik@gmail.com>. Yad icon created by Bogdan Lisovich.
 
 .SH SEE ALSO
-\fBgdialog\fP(1), \fBdialog\fP(1), \fBzenity\fP(1)
+\fBgdialog\fP(1), \fBdialog\fP(1), \fBzenity\fP(1), \fByad-tools\fP(1)
