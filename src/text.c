@@ -587,7 +587,7 @@ text_create_widget (GtkWidget * dlg)
     }
 #endif
 
-  /* Add submit on ctrl+enter */
+  /* Add keyboard handler */
   g_signal_connect (text_view, "key-press-event", G_CALLBACK (key_press_cb), dlg);
 
   /* Initialize linkifying */

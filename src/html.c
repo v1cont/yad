@@ -202,8 +202,7 @@ open_cb (GSimpleAction *act, GVariant *param, gpointer d)
 {
   GtkWidget *dlg, *cnt, *lbl, *entry;
 
-  dlg = gtk_dialog_new_with_buttons (_("Open URI"),
-                                     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (view))),
+  dlg = gtk_dialog_new_with_buttons (_("Open URI"), GTK_WINDOW (d),
                                      GTK_DIALOG_DESTROY_WITH_PARENT,
                                      _("Cancel"), GTK_RESPONSE_REJECT,
                                      _("Open"), GTK_RESPONSE_ACCEPT,
@@ -247,7 +246,7 @@ menu_cb (WebKitWebView *view, WebKitContextMenu *menu, GdkEvent *ev, WebKitHitTe
   webkit_context_menu_prepend (menu, mi);
 
   act = g_simple_action_new ("open", NULL);
-  g_signal_connect (G_OBJECT (act), "activate", G_CALLBACK (open_cb), NULL);
+  g_signal_connect (G_OBJECT (act), "activate", G_CALLBACK (open_cb), d);
 
   mi = webkit_context_menu_item_new_from_gaction (G_ACTION (act), _("Open URI"), NULL);
   webkit_context_menu_prepend (menu, mi);
@@ -256,10 +255,22 @@ menu_cb (WebKitWebView *view, WebKitContextMenu *menu, GdkEvent *ev, WebKitHitTe
   webkit_context_menu_append (menu, mi);
 
   act = g_simple_action_new ("quit", NULL);
-  g_signal_connect (G_OBJECT (act), "activate", G_CALLBACK (quit_cb), NULL);
+  g_signal_connect (G_OBJECT (act), "activate", G_CALLBACK (quit_cb), d);
 
   mi = webkit_context_menu_item_new_from_gaction (G_ACTION (act), _("Quit"), NULL);
   webkit_context_menu_append (menu, mi);
+
+  return FALSE;
+}
+
+static gboolean
+key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer d)
+{
+  if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_O || key->keyval == GDK_KEY_o))
+    {
+      open_cb (NULL, NULL, d);
+      return TRUE;
+    }
 
   return FALSE;
 }
@@ -380,7 +391,8 @@ html_create_widget (GtkWidget * dlg)
 
   if (options.html_data.browser)
     {
-      g_signal_connect (view, "context-menu", G_CALLBACK (menu_cb), NULL);
+      g_signal_connect (view, "context-menu", G_CALLBACK (menu_cb), dlg);
+      g_signal_connect (view, "key-press-event", G_CALLBACK (key_press_cb), dlg);
       if (!options.data.dialog_title)
         g_signal_connect (view, "notify::title", G_CALLBACK (title_cb), dlg);
       if (!options.data.window_icon)
