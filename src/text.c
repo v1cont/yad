@@ -145,7 +145,7 @@ show_search ()
 static gboolean
 key_press_cb (GtkWidget * w, GdkEventKey * key, gpointer data)
 {
-  if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_S || key->keyval == GDK_KEY_s))
+  if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_F || key->keyval == GDK_KEY_f))
     {
       show_search ();
       return TRUE;
