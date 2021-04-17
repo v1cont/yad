@@ -1,0 +1,136 @@
+#! @BASH@
+# -*- mode: sh -*-
+#
+# YAD settings editor. This file is part of YAD
+#
+# YAD is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# YAD is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of  MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# YAD. If not, see <https://www.gnu.org/licenses/>.
+#
+# Copyright (C) 2021, Victor Ananjevsky <ananasik@gmail.com>
+#
+
+TEXTDOMAIN=@GETTEXT_PACKAGE@
+TEXTDOMAINDIR=@prefix@/share/locale
+
+res1=$(mktemp --tmpdir ys-tab1.XXXXXXXX)
+res2=$(mktemp --tmpdir ys-tab2.XXXXXXXX)
+trap "rm -f $res1 $res2" EXIT
+
+KEY=$RANDOM
+
+# first tab (values at the end due to possible hyphens)
+yad --plug=$KEY --tabnum=1 --bool-fmt=t --quoted-output --separator=" " --form --scroll \
+    --text=$"Main YAD settings and default values\n\n" \
+    --field=$"Width of dialog window::NUM" \
+    --field=$"Height of dialog window::NUM" \
+    --field=$"Border width around dialog::NUM" \
+    --field=$"Show remaining time and percentage in timeout progress bar:CHK" \
+    --field=$"Combo-box in entry dialog is always editable:CHK" \
+    --field=$"Default terminal command:" \
+    --field=$"Default open command:" \
+    --field=$"Default date format:" \
+    --field=$"Default URI color in text-info dialog::CLR" \
+    --field=$"Maximum number of tabs in notebook dialog::NUM" \
+    --field=$"Use large previews in file selection dialogs:CHK" \
+    --field=$"Ignore unknown command-line options:CHK" \
+    --field=$"Enable debug mode with information about deprecated features:CHK" \
+    -- \
+    "$(gsettings get yad.settings width)!-1..32767" \
+    "$(gsettings get yad.settings height)!-1..32767" \
+    $(gsettings get yad.settings border) \
+    $(gsettings get yad.settings show-remain) \
+    $(gsettings get yad.settings combo-always-editable) \
+    "$(eval echo $(gsettings get yad.settings terminal))" \
+    "$(eval echo $(gsettings get yad.settings open-command))" \
+    "$(eval echo $(gsettings get yad.settings date-format))" \
+    "$(eval echo $(gsettings get yad.settings uri-color))" \
+    $(gsettings get yad.settings max-tab) \
+    $(gsettings get yad.settings large-preview) \
+    $(gsettings get yad.settings ignore-unknown-options) \
+    $(gsettings get yad.settings debug) > $res1 &
+
+# get list for themes
+eval SV_THEME=$(gsettings get yad.sourceview theme)
+themes=$"<Empty>!"
+for t in $(yad-tools --show-themes); do
+    [[ $t == $SV_THEME ]] && themes+="^$t!" || themes+="$t!"
+done
+
+# get list for home/end
+eval HE==$(gsettings get yad.sourceview homend)
+for b in never before after always; do
+    [[ $b == $HE ]] && homend+="^$b!" || homend+="$b!"
+done
+
+# second tab
+yad --plug=$KEY --tabnum=2 --bool-fmt=t --quoted-output --separator=" " --form --scroll \
+    --text=$"YAD settings for text editor\nThis settings only usefull when YAD built with GtkSourceView\n\n" \
+    --field=$"Default theme for text-info dialog::CB" ${themes%?} \
+    --field=$"Show line numbers:CHK" $(gsettings get yad.sourceview line-num) \
+    --field=$"Hightlight current line:CHK" $(gsettings get yad.sourceview line-hl) \
+    --field=$"Enable line mars mode:CHK" $(gsettings get yad.sourceview line-marks) \
+    --field=$"Color of first type marks::CLR" "$(eval echo $(gsettings get yad.sourceview mark1-color))" \
+    --field=$"Color of second type marks::CLR" "$(eval echo $(gsettings get yad.sourceview mark2-color))" \
+    --field=$"Right margin position::NUM" $(gsettings get yad.sourceview right-margin) \
+    --field=$"Highlight matching brackets:CHK" $(gsettings get yad.sourceview brackets) \
+    --field=$"Use autoindentation:CHK" $(gsettings get yad.sourceview indent) \
+    --field=$"Smart Home/End behavior::CB" ${homend%?} \
+    --field=$"Use smart backspace:CHK" $(gsettings get yad.sourceview smart-bs) \
+    --field=$"Tabulation width::NUM" $(gsettings get yad.sourceview tab-width) \
+    --field=$"Indentation width::NUM" $(gsettings get yad.sourceview indent-width) \
+    --field=$"Insert spaces instead of tabulation:CHK" $(gsettings get yad.sourceview spaces) > $res2 &
+
+# main dialog
+yad --title=$"YAD settings" --key=$KEY --width=475 --height=600 --image=preferences-other \
+    --button=$"Load defaults!view-refresh:3" --button="yad-save:0" --button="yad-close:1" \
+    --text=$"<span size='xx-large' weight='bold'>YAD settings editor</span>" --text-align=center \
+    --notebook --stack --expand --tab=$"Main" --tab=$"Editor"
+
+if [[ $? -eq 0 ]]; then
+    eval r1=($(< $res1))
+    eval r2=($(< $res2))
+
+    # Main settings
+    gsettings set yad.settings width ${r1[0]}
+    gsettings set yad.settings height ${r1[1]}
+    gsettings set yad.settings border ${r1[2]}
+    gsettings set yad.settings show-remain ${r1[3]}
+    gsettings set yad.settings combo-always-editable ${r1[4]}
+    gsettings set yad.settings terminal "${r1[5]}"
+    gsettings set yad.settings open-command "${r1[6]}"
+    gsettings set yad.settings date-format "${r1[7]}"
+    gsettings set yad.settings uri-color ${r1[8]}
+    gsettings set yad.settings max-tab ${r1[9]}
+    gsettings set yad.settings large-preview ${r1[10]}
+    gsettings set yad.settings ignore-unknown-options ${r1[11]}
+    gsettings set yad.settings debug ${r1[12]}
+
+    # GtkSourceView settings
+    gsettings get yad.sourceview theme "${r2[0]}"
+    gsettings get yad.sourceview line-num ${r2[1]}
+    gsettings get yad.sourceview line-hl ${r2[2]}
+    gsettings get yad.sourceview line-marks ${r2[3]}
+    gsettings get yad.sourceview mark1-color ${r2[4]}
+    gsettings get yad.sourceview mark2-color ${r2[5]}
+    gsettings get yad.sourceview right-margin ${r2[6]}
+    gsettings get yad.sourceview brackets ${r2[7]}
+    gsettings get yad.sourceview indent ${r2[8]}
+    gsettings get yad.sourceview homend ${r2[9]}
+    gsettings get yad.sourceview smart-bs ${r2[10]}
+    gsettings get yad.sourceview tab-width ${r2[11]}
+    gsettings get yad.sourceview indent-width ${r2[12]}
+    gsettings get yad.sourceview spaces ${r2[13]}
+elif [[ $? -eq 3 ]]; then
+    # Load default settings
+    gsettings reset-recursively yad.settings
+    gsettings reset-recursively yad.sourceview
+fi

@@ -2,6 +2,10 @@ AM_CPPFLAGS = -DLOCALEDIR=\""$(datadir)/locale"\"
 
 bin_PROGRAMS = yad
 
+if !STANDALONE
+bin_SCRIPTS = yad-settings
+endif
+
 yad_SOURCES = 		\
 	about.c			\
 	app.c			\

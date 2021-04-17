@@ -15,6 +15,8 @@ IT_PROG_INTLTOOL([0.40.0])
 
 AC_PROG_CC
 
+AC_PATH_TOOL([BASH], [bash])
+
 PKG_CHECK_MODULES([GTK], [gtk+-3.0 >= 3.22.0 gtk+-unix-print-3.0])
 AC_SUBST([GTK_CFLAGS])
 AC_SUBST([GTK_LIBS])
@@ -137,10 +139,15 @@ AC_SUBST([AM_LDFLAGS])
 
 # *******************************
 
+AC_CONFIG_LINKS([
+src/yad-settings.sh:src/yad-settings.in
+])
+
 AC_CONFIG_FILES([
 Makefile 
 po/Makefile.in
 src/Makefile
+src/yad-settings
 data/Makefile
 data/icons/Makefile
 data/icons/16x16/Makefile

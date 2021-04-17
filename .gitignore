@@ -12,7 +12,7 @@ config.h
 config.h.in
 config.log
 config.status
-data/yad-icon-browser.desktop
+data/*.desktop
 data/yad.m4
 data/yad.spec
 po/.intltool-merge-cache
@@ -24,6 +24,8 @@ po/stamp-it
 src/yad
 src/yad-icon-browser
 src/yad-tools
+src/yad-settings
+src/*.sh
 stamp-h1
 *.tar.xz
 build.log

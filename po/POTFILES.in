@@ -22,5 +22,7 @@ src/notebook.c
 src/util.c
 src/browser.c
 src/tools.c
+src/yad-settings.sh
 data/yad-icon-browser.desktop.in
+data/yad-settings.desktop.in
 data/yad.gschema.xml.in
