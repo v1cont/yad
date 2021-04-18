@@ -142,13 +142,201 @@ show_search ()
   gdk_event_free (fev);
 }
 
+/* early prototype for use in open_file_cb() */
+static void fill_buffer_from_file ();
+
+static void
+open_file_cb (GtkWidget *w, gpointer d)
+{
+  GtkWidget *dlg;
+  static gchar *dir = NULL;
+
+  if (!dir && options.common_data.uri)
+    dir = g_path_get_dirname (options.common_data.uri);
+
+  dlg = gtk_file_chooser_dialog_new (_("YAD - Select File"),
+                                     GTK_WINDOW (gtk_widget_get_toplevel (text_view)),
+                                     GTK_FILE_CHOOSER_ACTION_OPEN,
+                                     _("Cancel"), GTK_RESPONSE_CANCEL,
+                                     _("OK"), GTK_RESPONSE_ACCEPT,
+                                     NULL);
+  if (dir)
+    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), dir);
+
+  if (gtk_dialog_run (GTK_DIALOG (dlg)) == GTK_RESPONSE_ACCEPT)
+    {
+      /* set new filename and load it */
+      if (options.common_data.uri)
+        g_free (options.common_data.uri);
+      options.common_data.uri = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dlg));
+      fill_buffer_from_file ();
+
+      /* keep current dir */
+      g_free (dir);
+      dir = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dlg));
+    }
+
+  gtk_widget_destroy (dlg);
+}
+
+static void
+save_file_cb (GtkWidget *w, gpointer d)
+{
+  GtkTextIter start, end;
+  gchar *text;
+  GStatBuf st;
+  gint mode = -1;
+  GError *err = NULL;
+
+  gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (text_buffer), &start, &end);
+  text = gtk_text_buffer_get_text (GTK_TEXT_BUFFER (text_buffer), &start, &end, 0);
+
+  /* g_file_set_contents changes the file permissions. so it must be kept and restore after file saving */
+  if (g_stat (options.common_data.uri, &st) == 0)
+    mode = st.st_mode;
+
+  if (!g_file_set_contents (options.common_data.uri, text, -1, &err))
+    {
+      g_printerr ("Cannot save file %s: %s\n", options.common_data.uri, err->message);
+      g_error_free (err);
+    }
+  else
+    {
+      /* restore permissions */
+      if (mode != -1)
+        g_chmod (options.common_data.uri, st.st_mode);
+    }
+
+  g_free (text);
+}
+
+static void
+save_as_file_cb (GtkWidget *w, gpointer d)
+{
+  GtkWidget *dlg;
+  static gchar *dir = NULL;
+
+  if (!dir && options.common_data.uri)
+    dir = g_path_get_dirname (options.common_data.uri);
+
+  dlg = gtk_file_chooser_dialog_new (_("YAD - Select File"),
+                                     GTK_WINDOW (gtk_widget_get_toplevel (text_view)),
+                                     GTK_FILE_CHOOSER_ACTION_SAVE,
+                                     _("Cancel"), GTK_RESPONSE_CANCEL,
+                                     _("OK"), GTK_RESPONSE_ACCEPT,
+                                     NULL);
+
+  gtk_file_chooser_set_create_folders (GTK_FILE_CHOOSER (dlg), TRUE);
+
+  if (dir)
+    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), dir);
+
+  if (options.common_data.uri)
+    gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (dlg), options.common_data.uri);
+  else
+    gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dlg), "Untitled.txt");
+
+  if (gtk_dialog_run (GTK_DIALOG (dlg)) == GTK_RESPONSE_ACCEPT)
+    {
+      /* set new filename and save it */
+      if (options.common_data.uri)
+        g_free (options.common_data.uri);
+      options.common_data.uri = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dlg));
+      save_file_cb (w, d);
+
+      /* keep current dir */
+      g_free (dir);
+      dir = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dlg));
+    }
+
+  gtk_widget_destroy (dlg);
+}
+
+static void
+quit_cb (GtkWidget *w, gpointer d)
+{
+  yad_exit (options.data.def_resp);
+}
+
+static void
+menu_popup_cb (GtkTextView *w, GtkWidget *popup, gpointer d)
+{
+  if (!GTK_IS_MENU (popup))
+    return;
+
+  if (options.text_data.file_op)
+    {
+      GtkWidget *mitem;
+
+      /* on top */
+      mitem = gtk_separator_menu_item_new ();
+      gtk_menu_shell_prepend (GTK_MENU_SHELL (popup), mitem);
+      gtk_widget_show (mitem);
+
+      if (options.common_data.editable)
+        {
+          mitem = gtk_menu_item_new_with_mnemonic (_("Save _as..."));
+          gtk_menu_shell_prepend (GTK_MENU_SHELL (popup), mitem);
+          g_signal_connect (G_OBJECT (mitem), "activate", G_CALLBACK (save_as_file_cb), NULL);
+          gtk_widget_show (mitem);
+
+          mitem = gtk_menu_item_new_with_mnemonic (_("_Save"));
+          gtk_menu_shell_prepend (GTK_MENU_SHELL (popup), mitem);
+          g_signal_connect (G_OBJECT (mitem), "activate", G_CALLBACK (save_file_cb), NULL);
+          gtk_widget_show (mitem);
+
+          if (!options.common_data.uri)
+            gtk_widget_set_sensitive (mitem, FALSE);
+        }
+
+      mitem = gtk_menu_item_new_with_mnemonic (_("_Open..."));
+      gtk_menu_shell_prepend (GTK_MENU_SHELL (popup), mitem);
+      g_signal_connect (G_OBJECT (mitem), "activate", G_CALLBACK (open_file_cb), NULL);
+      gtk_widget_show (mitem);
+
+      /* at bootom */
+      mitem = gtk_separator_menu_item_new ();
+      gtk_menu_shell_append (GTK_MENU_SHELL (popup), mitem);
+      gtk_widget_show (mitem);
+
+      mitem = gtk_menu_item_new_with_mnemonic (_("_Quit"));
+      gtk_menu_shell_append (GTK_MENU_SHELL (popup), mitem);
+      g_signal_connect (G_OBJECT (mitem), "activate", G_CALLBACK (quit_cb), NULL);
+      gtk_widget_show (mitem);
+    }
+}
+
 static gboolean
-key_press_cb (GtkWidget * w, GdkEventKey * key, gpointer data)
+key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer d)
 {
   if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_F || key->keyval == GDK_KEY_f))
     {
       show_search ();
       return TRUE;
+    }
+  else if (options.text_data.file_op)
+    {
+      if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_O || key->keyval == GDK_KEY_o))
+        {
+          open_file_cb (NULL, NULL);
+          return TRUE;
+        }
+      else if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_S || key->keyval == GDK_KEY_s))
+        {
+          save_file_cb (NULL, NULL);
+          return TRUE;
+        }
+      else if ((key->state & GDK_CONTROL_MASK) && (key->state & GDK_SHIFT_MASK) &&
+               (key->keyval == GDK_KEY_S || key->keyval == GDK_KEY_s))
+        {
+          save_as_file_cb (NULL, NULL);
+          return TRUE;
+        }
+      else if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_Q || key->keyval == GDK_KEY_q))
+        {
+          quit_cb (NULL, NULL);
+          return TRUE;
+        }
     }
 
   return FALSE;
@@ -499,7 +687,7 @@ text_create_widget (GtkWidget * dlg)
     }
 
 #ifdef HAVE_SOURCEVIEW
-  if (options.source_data.theme)
+  if (options.source_data.theme && *options.source_data.theme)
     {
       GtkSourceStyleScheme *scheme = NULL;
       GtkSourceStyleSchemeManager *mgr;
@@ -590,6 +778,9 @@ text_create_widget (GtkWidget * dlg)
   /* Add keyboard handler */
   g_signal_connect (text_view, "key-press-event", G_CALLBACK (key_press_cb), dlg);
 
+  if (options.text_data.file_op)
+    g_signal_connect_after (text_view, "populate-popup", G_CALLBACK (menu_popup_cb), dlg);
+
   /* Initialize linkifying */
   if (options.text_data.uri)
     {
@@ -636,37 +827,19 @@ text_create_widget (GtkWidget * dlg)
 void
 text_print_result (void)
 {
-  GtkTextIter start, end;
-  gchar *text;
-
   if (!options.common_data.editable)
     return;
 
-  gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (text_buffer), &start, &end);
-  text = gtk_text_buffer_get_text (GTK_TEXT_BUFFER (text_buffer), &start, &end, 0);
   if (options.text_data.in_place && options.common_data.uri)
-    {
-      GStatBuf st;
-      GError *err = NULL;
-
-      /* g_file_set_contents changes the file permissions. so it must kept and restore after file saving */
-      if (g_stat (options.common_data.uri, &st) == 0)
-        {
-          if (!g_file_set_contents (options.common_data.uri, text, -1, &err))
-            {
-              g_printerr ("Cannot save file %s: %s\n", options.common_data.uri, err->message);
-              g_error_free (err);
-            }
-          else
-            {
-              /* restore permissions */
-              g_chmod (options.common_data.uri, st.st_mode);
-            }
-        }
-      else
-        g_printerr ("Cannot stat file %s\n", options.common_data.uri);
-    }
+    save_file_cb (NULL, NULL);
   else
-    g_print ("%s", text);
-  g_free (text);
+    {
+      GtkTextIter start, end;
+      gchar *text;
+
+      gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (text_buffer), &start, &end);
+      text = gtk_text_buffer_get_text (GTK_TEXT_BUFFER (text_buffer), &start, &end, 0);
+      g_print ("%s", text);
+      g_free (text);
+    }
 }

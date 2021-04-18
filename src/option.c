@@ -652,6 +652,8 @@ static GOptionEntry text_options[] = {
     N_("Use pango markup"), NULL },
   { "in-place", 0, 0, G_OPTION_ARG_NONE, &options.text_data.in_place,
     N_("Save file instead of print on exit"), NULL },
+  { "file-op", 0, 0, G_OPTION_ARG_NONE, &options.text_data.file_op,
+    N_("Enable file operations"), NULL },
   { NULL }
 };
 
@@ -1844,6 +1846,7 @@ yad_options_init (void)
 #endif
   options.text_data.formatted = FALSE;
   options.text_data.in_place = FALSE;
+  options.text_data.file_op = FALSE;
 
 #ifdef HAVE_SOURCEVIEW
   /* Initialize sourceview data */

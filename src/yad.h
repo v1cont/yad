@@ -474,6 +474,7 @@ typedef struct {
   gchar *fore;
   gchar *back;
   gboolean in_place;
+  gboolean file_op;
 } YadTextData;
 
 #ifdef HAVE_SOURCEVIEW
