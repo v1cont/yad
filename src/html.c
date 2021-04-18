@@ -171,8 +171,8 @@ select_file_cb (GtkEntry *entry, GtkEntryIconPosition pos, GdkEventButton *ev, g
   dlg = gtk_file_chooser_dialog_new (_("YAD - Select File"),
                                      GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
                                      GTK_FILE_CHOOSER_ACTION_OPEN,
-                                     _("OK"), GTK_RESPONSE_ACCEPT,
                                      _("Cancel"), GTK_RESPONSE_CANCEL,
+                                     _("OK"), GTK_RESPONSE_ACCEPT,
                                      NULL);
   if (dir)
     gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), dir);
