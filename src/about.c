@@ -107,7 +107,7 @@ yad_about (void)
                                        "Built with GtkSourceView\n"
 #endif
 #ifdef HAVE_SPELL
-                                       "Built with GtkSpell\n"
+                                       "Built with GSpell\n"
 #endif
                                        "Using GTK+ %d.%d.%d\n"),
                                      gtk_major_version, gtk_minor_version, gtk_micro_version);
