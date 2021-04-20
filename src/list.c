@@ -493,7 +493,12 @@ cell_set_data (GtkTreeIter *it, guint num, gchar *data)
       }
     case YAD_COLUMN_IMAGE:
       {
-        GdkPixbuf *pb = get_pixbuf (data, YAD_SMALL_ICON, FALSE);
+        GdkPixbuf *pb;
+        
+        if (g_file_test (data, G_FILE_TEST_EXISTS))
+          pb = get_pixbuf (data, YAD_SMALL_ICON, FALSE);
+        else
+          pb = get_pixbuf (data, YAD_SMALL_ICON, TRUE);
         if (pb)
           {
             gtk_tree_store_set (GTK_TREE_STORE (model), it, num, pb, -1);
