@@ -640,7 +640,7 @@ Set the column header. Types are \fITEXT\fP, \fINUM\fP, \fISZ\fP, \fIFLT\fP, \fI
 \fIBAR\fP is a progress bar column. Value must be between \fI0\fP and \fI100\fP. If value is outside is range it will be croped to neares legal value.
 \fIHD\fP type means a hidden column. Such columns are not displayes in the list, only in output.
 \fIIMG\fP may be path to image or icon name from currnet GTK+ icon theme.
-Size of icons may be set in gtk config file at GTK_ICON_SIZE_MENU position of gtk-icon-sizes. Image field prints as empty value.
+Size of icons may be set in gtk config file at GTK_ICON_SIZE_MENU position of gtk-icon-sizes. Images specified by icon names will be scaled to \fIGTK_ICON_SIZE_MENU\fP until \-\-force-icon-size option is not sets. Image field prints as empty value.
 
 Special column names \fI@fore@\fP, \fI@back@\fP and \fI@font@\fP sets corresponding rows attributes.
 Values of those columns don't show in results.
