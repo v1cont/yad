@@ -579,6 +579,13 @@ fill_buffer_from_file ()
     lang = gtk_source_language_manager_guess_language (gtk_source_language_manager_get_default (), options.common_data.uri, NULL);
   gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (text_buffer), lang);
 #endif
+
+  if (options.common_data.editable)
+    {
+      /* move cursor at the beginnging of a buffer */
+      gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (text_buffer), &iter, 0);
+      gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (text_buffer), &iter);
+    }
 }
 
 static void
