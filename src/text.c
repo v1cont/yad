@@ -118,10 +118,13 @@ open_file_cb (GtkWidget *w, gpointer d)
 
   if (gtk_dialog_run (GTK_DIALOG (dlg)) == GTK_RESPONSE_ACCEPT)
     {
-      /* set new filename and load it */
+      /* set new filename */
       if (options.common_data.uri)
         g_free (options.common_data.uri);
       options.common_data.uri = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dlg));
+
+      /* load file */
+      gtk_text_buffer_set_text (GTK_TEXT_BUFFER (text_buffer), "", -1);
       fill_buffer_from_file ();
 
       /* keep current dir */
