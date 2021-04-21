@@ -44,6 +44,9 @@ GSettings *sv_settings;
 GdkPixbuf *big_fallback_image = NULL;
 GdkPixbuf *small_fallback_image = NULL;
 
+/* global flag for temporary disable ESC handling (needed for searchbar) */
+gboolean ignore_esc = FALSE;
+
 static GtkWidget *dialog = NULL;
 static GtkWidget *text = NULL;
 
@@ -82,11 +85,15 @@ keys_cb (GtkWidget *w, GdkEventKey *ev, gpointer d)
   switch (ev->keyval)
     {
     case GDK_KEY_Escape:
-      if (options.data.escape_ok)
-          yad_exit (options.data.def_resp);
-      else if (!options.data.no_escape)
-         yad_exit (YAD_RESPONSE_ESC);
-      return TRUE;
+      if (!ignore_esc)
+        {
+          if (options.data.escape_ok)
+            yad_exit (options.data.def_resp);
+          else if (!options.data.no_escape)
+            yad_exit (YAD_RESPONSE_ESC);
+          return TRUE;
+        }
+      break;
     case GDK_KEY_Return:
     case GDK_KEY_KP_Enter:
       if (ev->state & GDK_CONTROL_MASK)
@@ -94,7 +101,9 @@ keys_cb (GtkWidget *w, GdkEventKey *ev, gpointer d)
           yad_exit (options.data.def_resp);
           return TRUE;
         }
+      break;
      }
+
    return FALSE;
 }
 

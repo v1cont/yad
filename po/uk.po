@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-18 09:24+0300\n"
+"POT-Creation-Date: 2021-04-18 14:26+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -45,7 +45,7 @@ msgstr ""
 "Вбудована підтримка GtkSpell\n"
 "Використовується GTK+ %d.%d.%d\n"
 
-#: ../src/calendar.c:39 ../src/text.c:585
+#: ../src/calendar.c:39 ../src/text.c:589
 #, c-format
 msgid "Cannot open file '%s': %s\n"
 msgstr "Не можу відкрити файл %s: %s\n"
@@ -70,13 +70,13 @@ msgid "Select files"
 msgstr "Вибір файлу"
 
 #: ../src/form.c:458 ../src/form.c:466 ../src/form.c:545 ../src/form.c:553
-#: ../src/form.c:604 ../src/html.c:175 ../src/html.c:207 ../src/text.c:160
-#: ../src/text.c:225 ../src/util.c:40
+#: ../src/form.c:604 ../src/html.c:174 ../src/html.c:207 ../src/text.c:162
+#: ../src/text.c:227 ../src/util.c:40
 msgid "Cancel"
 msgstr "Відміна"
 
 #: ../src/form.c:459 ../src/form.c:467 ../src/form.c:546 ../src/form.c:554
-#: ../src/form.c:605 ../src/html.c:174 ../src/text.c:161 ../src/text.c:226
+#: ../src/form.c:605 ../src/html.c:175 ../src/text.c:163 ../src/text.c:228
 #: ../src/util.c:46
 msgid "OK"
 msgstr "OK"
@@ -109,7 +109,7 @@ msgstr "Вибір каталогу"
 msgid "Link"
 msgstr "Посилання"
 
-#: ../src/html.c:171 ../src/text.c:157 ../src/text.c:222
+#: ../src/html.c:171 ../src/text.c:159 ../src/text.c:224
 msgid "YAD - Select File"
 msgstr "YAD - Вибір файлу"
 
@@ -1921,23 +1921,23 @@ msgstr "Колір"
 msgid "Name"
 msgstr "Назва"
 
-#: ../src/text.c:278
+#: ../src/text.c:280
 msgid "Save _as..."
 msgstr "Зберегти _як..."
 
-#: ../src/text.c:283
+#: ../src/text.c:285
 msgid "_Save"
 msgstr "_Зберегти"
 
-#: ../src/text.c:292
+#: ../src/text.c:294
 msgid "_Open..."
 msgstr "_Відкрити..."
 
-#: ../src/text.c:302
+#: ../src/text.c:304
 msgid "_Quit"
 msgstr "В_ихід"
 
-#: ../src/text.c:723
+#: ../src/text.c:730
 #, c-format
 msgid "Theme %s not found\n"
 msgstr "Теми %s не знайдено\n"
@@ -2006,6 +2006,10 @@ msgstr "Так"
 #, c-format
 msgid "WARNING: Run command failed: %s\n"
 msgstr "УВАГА: Збій при запуску команди: %s\n"
+
+#: ../src/util.c:860
+msgid "Case _sensitive"
+msgstr "Враховувати _регістр"
 
 #: ../src/browser.c:160
 msgid "scalable "

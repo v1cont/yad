@@ -586,6 +586,18 @@ typedef struct {
 #endif
 } YadOptions;
 
+/* Searvh bar */
+typedef struct {
+  GtkWidget *bar;
+  GtkWidget *entry;
+  GtkWidget *next;
+  GtkWidget *prev;
+  GtkWidget *case_toggle;
+  gboolean case_sensitive;
+  gboolean new_search;
+  const gchar *str;
+} YadSearchBar;
+
 extern YadOptions options;
 extern GtkIconTheme *yad_icon_theme;
 
@@ -596,6 +608,8 @@ extern GSettings *sv_settings;
 
 extern GdkPixbuf *big_fallback_image;
 extern GdkPixbuf *small_fallback_image;
+
+extern gboolean ignore_esc;
 
 /* TABS */
 typedef struct {
@@ -709,6 +723,8 @@ void run_command_async (gchar *cmd);
 gchar * pango_to_css (gchar *font);
 
 void open_uri (const gchar *uri);
+
+YadSearchBar * create_search_bar ();
 
 static inline void
 strip_new_line (gchar * str)

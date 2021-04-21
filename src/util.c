@@ -823,3 +823,53 @@ open_uri (const gchar *uri)
   run_command_async (cmdline);
   g_free (cmdline);
 }
+
+static void
+case_toggle_cb (GtkToggleButton *b, YadSearchBar *sb)
+{
+  sb->case_sensitive = !sb->case_sensitive;
+  gtk_toggle_button_set_active (b, sb->case_sensitive);
+}
+
+YadSearchBar *
+create_search_bar ()
+{
+  YadSearchBar *sb;
+  GtkWidget *b;
+
+  sb = g_new0 (YadSearchBar, 1);
+  sb->new_search = TRUE;
+
+  if (!sb)
+    return NULL;
+
+  sb->bar = gtk_search_bar_new ();
+  gtk_search_bar_set_show_close_button (GTK_SEARCH_BAR (sb->bar), TRUE);
+  gtk_widget_show (sb->bar);
+
+  b = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
+  gtk_container_add (GTK_CONTAINER (sb->bar), b);
+  gtk_widget_show (b);
+
+  sb->entry = gtk_search_entry_new ();
+  gtk_box_pack_start (GTK_BOX (b), sb->entry, TRUE, TRUE, 0);
+  gtk_search_bar_connect_entry (GTK_SEARCH_BAR (sb->bar), GTK_ENTRY (sb->entry));
+  gtk_widget_show (sb->bar);
+
+  sb->next = gtk_button_new_from_icon_name ("go-down", GTK_ICON_SIZE_BUTTON);
+  gtk_box_pack_start (GTK_BOX (b), sb->next, FALSE, FALSE, 0);
+  gtk_widget_show (sb->next);
+
+  sb->prev = gtk_button_new_from_icon_name ("go-up", GTK_ICON_SIZE_BUTTON);
+  gtk_box_pack_start (GTK_BOX (b), sb->prev, FALSE, FALSE, 0);
+  gtk_widget_show (sb->prev);
+
+  sb->case_toggle = gtk_check_button_new_with_mnemonic (_("Case _sensitive"));
+  gtk_box_pack_start (GTK_BOX (b), sb->case_toggle, FALSE, FALSE, 0);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sb->case_toggle), sb->case_sensitive);
+  gtk_widget_show (sb->case_toggle);
+
+  g_signal_connect (G_OBJECT (sb->case_toggle), "toggled", G_CALLBACK (case_toggle_cb), sb);
+
+  return sb;
+}

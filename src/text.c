@@ -25,126 +25,79 @@ static GtkWidget *text_view;
 static GObject *text_buffer;
 static GtkTextTag *tag;
 static GdkCursor *hand, *normal;
-static gchar *pattern = NULL;
-static gboolean new_search = TRUE;
+static YadSearchBar *search_bar;
+static GtkTextIter search_pos;
+static gboolean text_changed = FALSE;
 
 /* searching */
 static void
-do_search (GtkWidget * e, GtkWidget * w)
+do_find_next (GtkWidget *w, gpointer d)
 {
-  static gchar *text = NULL;
-  static guint offset;
-  static GRegex *regex = NULL;
-  GMatchInfo *match = NULL;
-  GtkTextIter begin, end;
+  GtkTextIter match_start, match_end;
+  GtkTextSearchFlags sflags;
 
-  g_free (pattern);
-  pattern = g_strdup (gtk_entry_get_text (GTK_ENTRY (e)));
-  gtk_widget_destroy (w);
-  gtk_widget_queue_draw (text_view);
-
-  if (new_search || gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (text_buffer)))
-    {
-      /* get the text */
-      g_free (text);
-      gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (text_buffer), &begin, &end);
-      text = gtk_text_buffer_get_text (GTK_TEXT_BUFFER (text_buffer), &begin, &end, FALSE);
-      offset = 0;
-      /* compile new regex */
-      if (regex)
-        g_regex_unref (regex);
-      regex = g_regex_new (pattern, G_REGEX_EXTENDED | G_REGEX_OPTIMIZE, G_REGEX_MATCH_NOTEMPTY, NULL);
-      new_search = FALSE;
-    }
-
-  /* search and select if found */
-  if (g_regex_match (regex, text + offset, G_REGEX_MATCH_NOTEMPTY, &match))
-    {
-      gint sp, ep, spos, epos;
-
-      g_match_info_fetch_pos (match, 0, &sp, &ep);
-
-      /* positions are in bytes, not character, so here we must normalize it */
-      spos = g_utf8_pointer_to_offset (text, text + sp + offset);
-      epos = g_utf8_pointer_to_offset (text, text + ep + offset);
-
-      gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (text_buffer), &begin, spos);
-      gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (text_buffer), &end, epos);
-
-      gtk_text_buffer_select_range (GTK_TEXT_BUFFER (text_buffer), &begin, &end);
-      gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &begin, 0, FALSE, 0, 0);
-
-      offset += epos;
-
-      g_match_info_free (match);
-      match = NULL;
-    }
+  if (search_bar->case_sensitive)
+    sflags = GTK_TEXT_SEARCH_TEXT_ONLY;
   else
-    new_search = TRUE;
-}
+    sflags = GTK_TEXT_SEARCH_TEXT_ONLY | GTK_TEXT_SEARCH_CASE_INSENSITIVE;
 
-static gboolean
-search_key_cb (GtkWidget * w, GdkEventKey * key, GtkWidget * win)
-{
-  if (key->keyval == GDK_KEY_Escape)
+  if (search_bar->new_search)
     {
-      gtk_widget_destroy (win);
-      return TRUE;
+      gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (text_buffer), &search_pos,
+                                        gtk_text_buffer_get_insert (GTK_TEXT_BUFFER (text_buffer)));
     }
-  return FALSE;
+
+  if (gtk_text_iter_forward_search (&search_pos, search_bar->str, sflags, &match_start, &match_end, NULL))
+    {
+      gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &match_start, 0.0, FALSE, 0.0, 0.0);
+      gtk_text_buffer_select_range (GTK_TEXT_BUFFER (text_buffer), &match_start, &match_end);
+      search_pos = match_end;
+    }
+
+  search_bar->new_search = FALSE;
 }
 
 static void
-search_changed (GtkWidget * w, gpointer d)
+do_find_prev (GtkWidget *w, gpointer d)
 {
-  new_search = TRUE;
+  GtkTextIter match_start, match_end;
+  GtkTextSearchFlags sflags;
+
+  if (search_bar->case_sensitive)
+    sflags = GTK_TEXT_SEARCH_TEXT_ONLY;
+  else
+    sflags = GTK_TEXT_SEARCH_TEXT_ONLY | GTK_TEXT_SEARCH_CASE_INSENSITIVE;
+
+  if (gtk_text_iter_backward_search (&search_pos, search_bar->str, sflags, &match_start, &match_end, NULL))
+    {
+      gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &match_start, 0.0, FALSE, 0.0, 0.0);
+      gtk_text_buffer_select_range (GTK_TEXT_BUFFER (text_buffer), &match_start, &match_end);
+      search_pos = match_start;
+    }
 }
 
 static void
-show_search ()
+search_changed_cb (GtkWidget *w, gpointer d)
 {
-  GtkWidget *w, *f, *e;
-  GdkEvent *fev;
+  search_bar->new_search = TRUE;
+  search_bar->str = gtk_entry_get_text (GTK_ENTRY (search_bar->entry));
+  do_find_next (NULL, NULL);
+}
 
-  w = gtk_window_new (GTK_WINDOW_POPUP);
-  gtk_window_set_transient_for (GTK_WINDOW (w), GTK_WINDOW (gtk_widget_get_toplevel (text_view)));
-  gtk_window_set_position (GTK_WINDOW (w), GTK_WIN_POS_CENTER_ON_PARENT);
-  /* next two lines needs for get focus to search window */
-  gtk_window_set_type_hint (GTK_WINDOW (w), GDK_WINDOW_TYPE_HINT_UTILITY);
-  gtk_window_set_modal (GTK_WINDOW (w), TRUE);
-
-  g_signal_connect (G_OBJECT (w), "key-press-event", G_CALLBACK (search_key_cb), w);
-
-  f = gtk_frame_new (NULL);
-  gtk_frame_set_shadow_type (GTK_FRAME (f), GTK_SHADOW_ETCHED_IN);
-  gtk_container_set_border_width (GTK_CONTAINER (f), 1);
-  gtk_container_add (GTK_CONTAINER (w), f);
-
-  e = gtk_entry_new ();
-  if (pattern)
-    gtk_entry_set_text (GTK_ENTRY (e), pattern);
-  gtk_container_add (GTK_CONTAINER (f), e);
-
-  g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (do_search), w);
-  g_signal_connect (G_OBJECT (e), "changed", G_CALLBACK (search_changed), NULL);
-  g_signal_connect (G_OBJECT (e), "key-press-event", G_CALLBACK (search_key_cb), w);
-
-  gtk_widget_show_all (w);
-
-  /* send focus event to search entry (so complex due to popup window) */
-  fev = gdk_event_new (GDK_FOCUS_CHANGE);
-  fev->focus_change.type = GDK_FOCUS_CHANGE;
-  fev->focus_change.in = TRUE;
-  fev->focus_change.window = gtk_widget_get_window (e);
-  if (fev->focus_change.window != NULL)
-    g_object_ref (fev->focus_change.window);
-  gtk_widget_send_focus_change (e, fev);
-  gdk_event_free (fev);
+static void
+stop_search_cb (GtkWidget *w, YadSearchBar *sb)
+{
+  ignore_esc = FALSE;
+  gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (search_bar->bar), FALSE);
+  gtk_widget_grab_focus (text_view);
+  gtk_text_iter_backward_char (&search_pos);
+  gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (text_buffer), &search_pos);
 }
 
 /* early prototype for use in open_file_cb() */
 static void fill_buffer_from_file ();
 
+/* file operations */
 static void
 open_file_cb (GtkWidget *w, gpointer d)
 {
@@ -174,6 +127,8 @@ open_file_cb (GtkWidget *w, gpointer d)
       /* keep current dir */
       g_free (dir);
       dir = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dlg));
+
+      text_changed = FALSE;
     }
 
   gtk_widget_destroy (dlg);
@@ -205,6 +160,7 @@ save_file_cb (GtkWidget *w, gpointer d)
       /* restore permissions */
       if (mode != -1)
         g_chmod (options.common_data.uri, st.st_mode);
+      text_changed = FALSE;
     }
 
   g_free (text);
@@ -311,8 +267,9 @@ key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer d)
 {
   if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_F || key->keyval == GDK_KEY_f))
     {
-      show_search ();
-      return TRUE;
+      ignore_esc = TRUE;
+      gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (search_bar->bar), TRUE);
+      return gtk_search_bar_handle_event (GTK_SEARCH_BAR (search_bar->bar), (GdkEvent *) key);
     }
   else if (options.text_data.file_op)
     {
@@ -342,6 +299,7 @@ key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer d)
   return FALSE;
 }
 
+/* mouse actions */
 static gboolean
 tag_event_cb (GtkTextTag * tag, GObject * obj, GdkEvent * ev, GtkTextIter * iter, gpointer d)
 {
@@ -475,6 +433,7 @@ line_mark_activated (GtkSourceGutter *gutter, GtkTextIter *iter, GdkEventButton 
 }
 #endif
 
+/* data loading */
 static gboolean
 handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 {
@@ -630,14 +589,23 @@ fill_buffer_from_stdin ()
   g_io_add_watch (channel, G_IO_IN | G_IO_HUP, handle_stdin, NULL);
 }
 
+static void
+text_changed_cb (GtkTextBuffer *b, gpointer d)
+{
+  text_changed = TRUE;
+}
+
 GtkWidget *
 text_create_widget (GtkWidget * dlg)
 {
-  GtkWidget *w, *tv;
+  GtkWidget *w, *sw, *tv;
 
-  w = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (w), GTK_SHADOW_ETCHED_IN);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w), options.hscroll_policy, options.vscroll_policy);
+  w = gtk_box_new (GTK_ORIENTATION_VERTICAL, 2);
+
+  sw = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), options.hscroll_policy, options.vscroll_policy);
+  gtk_box_pack_start (GTK_BOX (w), sw, TRUE, TRUE, 0);
 
 #ifdef HAVE_SOURCEVIEW
   text_buffer = (GObject *) gtk_source_buffer_new (NULL);
@@ -779,7 +747,10 @@ text_create_widget (GtkWidget * dlg)
   g_signal_connect (text_view, "key-press-event", G_CALLBACK (key_press_cb), dlg);
 
   if (options.text_data.file_op)
-    g_signal_connect_after (text_view, "populate-popup", G_CALLBACK (menu_popup_cb), dlg);
+    {
+      g_signal_connect (G_OBJECT (text_buffer), "changed", G_CALLBACK (text_changed_cb), NULL);
+      g_signal_connect_after (G_OBJECT (text_view), "populate-popup", G_CALLBACK (menu_popup_cb), dlg);
+    }
 
   /* Initialize linkifying */
   if (options.text_data.uri)
@@ -805,7 +776,7 @@ text_create_widget (GtkWidget * dlg)
       g_signal_connect_after (G_OBJECT (text_buffer), "changed", G_CALLBACK (linkify_cb), regex);
     }
 
-  gtk_container_add (GTK_CONTAINER (w), tv);
+  gtk_container_add (GTK_CONTAINER (sw), tv);
 
   if (options.common_data.uri)
     fill_buffer_from_file ();
@@ -819,6 +790,18 @@ text_create_widget (GtkWidget * dlg)
 
       gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (text_buffer), &iter, 0);
       gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (text_buffer), &iter);
+    }
+
+  /* create search bar */
+  if ((search_bar = create_search_bar ()) != NULL)
+    {
+      gtk_box_pack_start (GTK_BOX (w), search_bar->bar, FALSE, FALSE, 0);
+      g_signal_connect (G_OBJECT (search_bar->entry), "search-changed", G_CALLBACK (search_changed_cb), NULL);
+      g_signal_connect (G_OBJECT (search_bar->entry), "stop-search", G_CALLBACK (stop_search_cb), NULL);
+      g_signal_connect (G_OBJECT (search_bar->entry), "next-match", G_CALLBACK (do_find_next), NULL);
+      g_signal_connect (G_OBJECT (search_bar->entry), "previous-match", G_CALLBACK (do_find_prev), NULL);
+      g_signal_connect (G_OBJECT (search_bar->next), "clicked", G_CALLBACK (do_find_next), NULL);
+      g_signal_connect (G_OBJECT (search_bar->prev), "clicked", G_CALLBACK (do_find_prev), NULL);
     }
 
   return w;
