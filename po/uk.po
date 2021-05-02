@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-18 14:26+0300\n"
+"POT-Creation-Date: 2021-05-02 11:50+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -32,7 +32,7 @@ msgid ""
 "\n"
 "Built with Webkit\n"
 "Built with GtkSourceView\n"
-"Built with GtkSpell\n"
+"Built with GSpell\n"
 "Using GTK+ %d.%d.%d\n"
 msgstr ""
 "Yet Another Dialog\n"
@@ -42,10 +42,10 @@ msgstr ""
 "\n"
 "Вбудована підтримка Webkit\n"
 "Вбудована підтримка GtkSourceView\n"
-"Вбудована підтримка GtkSpell\n"
+"Вбудована підтримка GSpell\n"
 "Використовується GTK+ %d.%d.%d\n"
 
-#: ../src/calendar.c:39 ../src/text.c:589
+#: ../src/calendar.c:39 ../src/text.c:554
 #, c-format
 msgid "Cannot open file '%s': %s\n"
 msgstr "Не можу відкрити файл %s: %s\n"
@@ -70,13 +70,13 @@ msgid "Select files"
 msgstr "Вибір файлу"
 
 #: ../src/form.c:458 ../src/form.c:466 ../src/form.c:545 ../src/form.c:553
-#: ../src/form.c:604 ../src/html.c:174 ../src/html.c:207 ../src/text.c:162
-#: ../src/text.c:227 ../src/util.c:40
+#: ../src/form.c:604 ../src/html.c:174 ../src/html.c:207 ../src/text.c:120
+#: ../src/text.c:191 ../src/util.c:40
 msgid "Cancel"
 msgstr "Відміна"
 
 #: ../src/form.c:459 ../src/form.c:467 ../src/form.c:546 ../src/form.c:554
-#: ../src/form.c:605 ../src/html.c:175 ../src/text.c:163 ../src/text.c:228
+#: ../src/form.c:605 ../src/html.c:175 ../src/text.c:121 ../src/text.c:192
 #: ../src/util.c:46
 msgid "OK"
 msgstr "OK"
@@ -109,7 +109,7 @@ msgstr "Вибір каталогу"
 msgid "Link"
 msgstr "Посилання"
 
-#: ../src/html.c:171 ../src/text.c:159 ../src/text.c:224
+#: ../src/html.c:171 ../src/text.c:117 ../src/text.c:188
 msgid "YAD - Select File"
 msgstr "YAD - Вибір файлу"
 
@@ -139,32 +139,32 @@ msgstr "Не можу розібрати файл %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Не можу відкрити каталог %s: %s\n"
 
-#: ../src/main.c:135 ../src/main.c:474
+#: ../src/main.c:144 ../src/main.c:483
 #, c-format
 msgid "%d sec"
 msgstr "%d сек"
 
-#: ../src/main.c:727 ../src/main.c:734
+#: ../src/main.c:736 ../src/main.c:743
 #, c-format
 msgid "Unable to parse YAD_OPTIONS: %s\n"
 msgstr "Не можу розібрати YAD_OPTIONS: %s\n"
 
-#: ../src/main.c:745
+#: ../src/main.c:754
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Не вдається розібрати командний рядок: %s\n"
 
-#: ../src/main.c:774
+#: ../src/main.c:783
 #, c-format
 msgid "WARNING: Using gtkrc option is deprecated, please use --css instead\n"
 msgstr "УВАГА: Опція gtkrc застаріла, використовуйте --css замість неї\n"
 
-#: ../src/main.c:843
+#: ../src/main.c:852
 #, c-format
 msgid "WARNING: --plug mode not supported outside X11\n"
 msgstr "УВАГА: Опція --plug підтримується тільки в X11\n"
 
-#: ../src/main.c:863
+#: ../src/main.c:872
 #, c-format
 msgid "WARNING: This mode not supported outside X11\n"
 msgstr "УВАГА: Цей режим підтримується тільки в X11\n"
@@ -188,35 +188,35 @@ msgstr "Невідома команда '%s'\n"
 msgid "Yad notification"
 msgstr "Діалог повідомлень"
 
-#: ../src/list.c:1110
+#: ../src/list.c:1115
 msgid "Add row"
 msgstr "Додати рядок"
 
-#: ../src/list.c:1117
+#: ../src/list.c:1122
 msgid "Add child row"
 msgstr "Додати дочірній рядок"
 
-#: ../src/list.c:1124
+#: ../src/list.c:1129
 msgid "Delete row"
 msgstr "Видалити рядок"
 
-#: ../src/list.c:1131
+#: ../src/list.c:1136
 msgid "Edit row"
 msgstr "Редагувати рядок"
 
-#: ../src/list.c:1137
+#: ../src/list.c:1142
 msgid "Duplicate row"
 msgstr "Скопіювати рядок"
 
-#: ../src/list.c:1146
+#: ../src/list.c:1151
 msgid "Move row up"
 msgstr "Перемістити рядок вгору"
 
-#: ../src/list.c:1151
+#: ../src/list.c:1156
 msgid "Move row down"
 msgstr "Перемістити рядок вниз"
 
-#: ../src/list.c:1292
+#: ../src/list.c:1297
 #, c-format
 msgid ""
 "WARNING: You are use --checklist or --radiolist option. Those options "
@@ -225,7 +225,7 @@ msgstr ""
 "УВАГА: Використовуються опції --checklist або --radiolist. Ці опції "
 "застаріли та будуть видалені у майбутніх випусках\n"
 
-#: ../src/list.c:1298
+#: ../src/list.c:1303
 #, c-format
 msgid "No column titles specified for List dialog.\n"
 msgstr "Не задані заголовки стовпчиків для діалогу зі списком\n"
@@ -1921,23 +1921,23 @@ msgstr "Колір"
 msgid "Name"
 msgstr "Назва"
 
-#: ../src/text.c:280
+#: ../src/text.c:244
 msgid "Save _as..."
 msgstr "Зберегти _як..."
 
-#: ../src/text.c:285
+#: ../src/text.c:249
 msgid "_Save"
 msgstr "_Зберегти"
 
-#: ../src/text.c:294
+#: ../src/text.c:258
 msgid "_Open..."
 msgstr "_Відкрити..."
 
-#: ../src/text.c:304
+#: ../src/text.c:268
 msgid "_Quit"
 msgstr "В_ихід"
 
-#: ../src/text.c:730
+#: ../src/text.c:708
 #, c-format
 msgid "Theme %s not found\n"
 msgstr "Теми %s не знайдено\n"
@@ -2007,7 +2007,7 @@ msgstr "Так"
 msgid "WARNING: Run command failed: %s\n"
 msgstr "УВАГА: Збій при запуску команди: %s\n"
 
-#: ../src/util.c:860
+#: ../src/util.c:867
 msgid "Case _sensitive"
 msgstr "Враховувати _регістр"
 
