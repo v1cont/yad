@@ -625,6 +625,9 @@ Set user agent string. Default is \fIYAD-Webkit (@VERSION@)\fP
 .B \-\-user-style=\fIURI\fP
 Set path or uri to custom user styles. Path to local file can be an absolute file name or uri with \fIfile://\fP prefix.
 .TP
+.B \-\-disable-search
+Disable search bar.
+.TP
 .B \-\-wk-prop=\fIPROP\fP
 Set additional WebKit setting. This option may be used multiply times. Setting \fIPROP\fP must be in a form "setting-name value". First character of value must be a type identifier \fIb\fP for booleans, \fIi\fP for integers and \fIs\fP for strings. The values itself following by a colon. List of possible settings can be found on this page - https://webkitgtk.org/reference/webkit2gtk/stable/WebKitSettings.html
 .PP
@@ -970,6 +973,9 @@ Save file on exit instead of print it content on stdout. This option works only 
 .TP
 .B \-\-file-op
 Enable file operations. This option adds open and save menu items to popup menu, This option works only in editable mode.
+.TP
+.B \-\-disable-search
+Disable search bar.
 .TP
 Next options works only if yad builds with GtkSourceView.
 .TP

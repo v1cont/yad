@@ -223,6 +223,8 @@ static GOptionEntry common_options[] = {
     N_("Set extended completion for entries (any, all, or regex)"), N_("TYPE") },
   { "bool-fmt", 0, 0, G_OPTION_ARG_CALLBACK, set_bool_fmt_type,
     N_("Set type of output for boolean values (T, t, Y, y, O, o, 1)"), N_("TYPE") },
+  { "disable-search", 0, G_OPTION_FLAG_REVERSE, G_OPTION_ARG_NONE, &options.common_data.enable_search,
+    N_("Disable search in text and html dialogs"), NULL },
 #if GLIB_CHECK_VERSION(2,30,0)
   { "iec-format", 0, G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, set_size_format,
     N_("Use IEC (base 1024) units with for size values"), NULL },
@@ -1641,6 +1643,7 @@ yad_options_init (void)
   options.common_data.bool_fmt = YAD_BOOL_FMT_UT;
   options.common_data.complete = YAD_COMPLETE_SIMPLE;
   options.common_data.icon_size = 0;
+  options.common_data.enable_search = TRUE;
 #if GLIB_CHECK_VERSION(2,30,0)
   options.common_data.size_fmt = G_FORMAT_SIZE_DEFAULT;
 #endif
