@@ -25,6 +25,8 @@
 #include <webkit2/webkit2.h>
 
 static WebKitWebView *view;
+static WebKitFindController *find_ctl = NULL;;
+static YadSearchBar *search_bar = NULL;
 
 static GString *inbuf;
 
@@ -33,6 +35,49 @@ static gboolean is_loaded = FALSE;
 #ifndef PATH_MAX
 #define PATH_MAX 4096
 #endif
+
+/* searching */
+static void
+do_find_next (GtkWidget *w, gpointer d)
+{
+  webkit_find_controller_search_next (find_ctl);
+}
+
+static void
+do_find_prev (GtkWidget *w, gpointer d)
+{
+  webkit_find_controller_search_previous (find_ctl);
+}
+
+static void
+search_changed_cb (GtkWidget *w, gpointer d)
+{
+  WebKitFindOptions fopts = WEBKIT_FIND_OPTIONS_WRAP_AROUND;
+
+  if (!find_ctl)
+    find_ctl = webkit_web_view_get_find_controller (view);
+  search_bar->new_search = TRUE;
+  search_bar->str = gtk_entry_get_text (GTK_ENTRY (search_bar->entry));
+
+  if (!search_bar->case_sensitive)
+    fopts |= WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE;
+
+  webkit_find_controller_search (find_ctl, search_bar->str, fopts, G_MAXUINT);
+}
+
+static void
+stop_search_cb (GtkWidget *w, YadSearchBar *sb)
+{
+  if (find_ctl)
+    {
+      webkit_find_controller_search_finish (find_ctl);
+      find_ctl = NULL;
+    }
+
+  gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (search_bar->bar), FALSE);
+  gtk_widget_grab_focus (GTK_WIDGET (view));
+  ignore_esc = FALSE;
+}
 
 static void
 load_uri (const gchar * uri)
@@ -271,6 +316,15 @@ key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer d)
       open_cb (NULL, NULL, d);
       return TRUE;
     }
+  else if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_F || key->keyval == GDK_KEY_f))
+    {
+      if (search_bar == NULL)
+        return FALSE;
+
+      ignore_esc = TRUE;
+      gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (search_bar->bar), TRUE);
+      return gtk_search_bar_handle_event (GTK_SEARCH_BAR (search_bar->bar), (GdkEvent *) key);
+    }
 
   return FALSE;
 }
@@ -365,11 +419,14 @@ set_user_props (WebKitSettings *wk_settings)
 GtkWidget *
 html_create_widget (GtkWidget * dlg)
 {
-  GtkWidget *sw;
+  GtkWidget *w, *sw;
   WebKitSettings *wk_settings;
+
+  w = gtk_box_new (GTK_ORIENTATION_VERTICAL, 2);
 
   sw = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), options.hscroll_policy, options.vscroll_policy);
+  gtk_box_pack_start (GTK_BOX (w), sw, TRUE, TRUE, 0);
 
   view = WEBKIT_WEB_VIEW (webkit_web_view_new ());
   gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (view));
@@ -417,6 +474,22 @@ html_create_widget (GtkWidget * dlg)
   gtk_widget_show_all (sw);
   gtk_widget_grab_focus (GTK_WIDGET (view));
 
+  /* create search bar */
+  if (options.common_data.enable_search)
+    {
+      if ((search_bar = create_search_bar ()) != NULL)
+        {
+          gtk_box_pack_start (GTK_BOX (w), search_bar->bar, FALSE, FALSE, 0);
+          g_signal_connect (G_OBJECT (search_bar->entry), "search-changed", G_CALLBACK (search_changed_cb), NULL);
+          g_signal_connect (G_OBJECT (search_bar->entry), "stop-search", G_CALLBACK (stop_search_cb), NULL);
+          g_signal_connect (G_OBJECT (search_bar->entry), "next-match", G_CALLBACK (do_find_next), NULL);
+          g_signal_connect (G_OBJECT (search_bar->entry), "previous-match", G_CALLBACK (do_find_prev), NULL);
+          g_signal_connect (G_OBJECT (search_bar->next), "clicked", G_CALLBACK (do_find_next), NULL);
+          g_signal_connect (G_OBJECT (search_bar->prev), "clicked", G_CALLBACK (do_find_prev), NULL);
+        }
+    }
+
+  /* load data */
   if (options.html_data.uri)
     load_uri (options.html_data.uri);
   else if (!options.html_data.browser)
@@ -432,5 +505,5 @@ html_create_widget (GtkWidget * dlg)
   else if (options.extra_data)
     load_uri (options.extra_data[0]);
 
-  return sw;
+  return w;
 }
