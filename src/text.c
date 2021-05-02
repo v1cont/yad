@@ -28,6 +28,7 @@ static GdkCursor *hand, *normal;
 static YadSearchBar *search_bar;
 static GtkTextIter search_pos;
 static gboolean text_changed = FALSE;
+static gboolean search_changed = FALSE;
 
 /* searching */
 static void
@@ -52,6 +53,7 @@ do_find_next (GtkWidget *w, gpointer d)
       gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &match_start, 0.0, FALSE, 0.0, 0.0);
       gtk_text_buffer_select_range (GTK_TEXT_BUFFER (text_buffer), &match_start, &match_end);
       search_pos = match_end;
+      search_changed = TRUE;
     }
 
   search_bar->new_search = FALSE;
@@ -73,6 +75,7 @@ do_find_prev (GtkWidget *w, gpointer d)
       gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &match_start, 0.0, FALSE, 0.0, 0.0);
       gtk_text_buffer_select_range (GTK_TEXT_BUFFER (text_buffer), &match_start, &match_end);
       search_pos = match_start;
+      search_changed = TRUE;
     }
 }
 
@@ -90,8 +93,12 @@ stop_search_cb (GtkWidget *w, YadSearchBar *sb)
   ignore_esc = FALSE;
   gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (search_bar->bar), FALSE);
   gtk_widget_grab_focus (text_view);
-  gtk_text_iter_backward_char (&search_pos);
-  gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (text_buffer), &search_pos);
+  if (search_changed)
+    {
+      gtk_text_iter_backward_char (&search_pos);
+      gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (text_buffer), &search_pos);
+    }
+  search_changed = FALSE;
 }
 
 /* early prototype for use in open_file_cb() */
