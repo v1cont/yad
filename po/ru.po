@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-03 09:22+0300\n"
+"POT-Creation-Date: 2021-05-03 11:06+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -1391,11 +1391,11 @@ msgstr "ЯЗЫК"
 msgid "Use specified theme"
 msgstr "Использовать указанную тему"
 
-#: ../src/option.c:671 ../data/yad.gschema.xml.in.h:17
+#: ../src/option.c:671 ../data/yad.gschema.xml.in.h:18
 msgid "Show line numbers"
 msgstr "Показывать номера строк"
 
-#: ../src/option.c:673 ../data/yad.gschema.xml.in.h:18
+#: ../src/option.c:673 ../data/yad.gschema.xml.in.h:19
 msgid "Highlight current line"
 msgstr "Подсвечивать текущую строку"
 
@@ -1419,11 +1419,11 @@ msgstr "Задать положение правой границы"
 msgid "[POS]"
 msgstr "[ПОЗИЦИЯ]"
 
-#: ../src/option.c:683 ../data/yad.gschema.xml.in.h:23
+#: ../src/option.c:683 ../data/yad.gschema.xml.in.h:24
 msgid "Highlight matching brackets"
 msgstr "Подсвечивать парные скобки"
 
-#: ../src/option.c:685 ../data/yad.gschema.xml.in.h:24
+#: ../src/option.c:685 ../data/yad.gschema.xml.in.h:25
 msgid "Use autoindent"
 msgstr "Использовать автовыравнивание"
 
@@ -1443,7 +1443,7 @@ msgstr "Задать поведение умных Home/End"
 msgid "Enable smart backspace"
 msgstr "Использовать умный backspace"
 
-#: ../src/option.c:695 ../data/yad.gschema.xml.in.h:29
+#: ../src/option.c:695 ../data/yad.gschema.xml.in.h:30
 msgid "Insert spaces instead of tabs"
 msgstr "Вставлять пробелы вместо табуляции"
 
@@ -1829,35 +1829,35 @@ msgstr "Показывать дополнительные параметры"
 msgid "WARNING: wrong focused pane number %d. Must be 1 or 2\n"
 msgstr "ВНИМАНИЕ: неверный номер панели %d. Должен быть 1 или 2\n"
 
-#: ../src/picture.c:183
+#: ../src/picture.c:185
 msgid "Fit to window"
 msgstr "По размерам окна"
 
-#: ../src/picture.c:188
+#: ../src/picture.c:190
 msgid "Original size"
 msgstr "Оригинальный размер"
 
-#: ../src/picture.c:193
+#: ../src/picture.c:195
 msgid "Increase size"
 msgstr "Увеличить"
 
-#: ../src/picture.c:198
+#: ../src/picture.c:200
 msgid "Decrease size"
 msgstr "Уменьшить"
 
-#: ../src/picture.c:207
+#: ../src/picture.c:209
 msgid "Rotate left"
 msgstr "Повернуть влево"
 
-#: ../src/picture.c:212
+#: ../src/picture.c:214
 msgid "Rotate right"
 msgstr "Повернуть вправо"
 
-#: ../src/picture.c:217
+#: ../src/picture.c:219
 msgid "Flip vertical"
 msgstr "Вывернуть вертикально"
 
-#: ../src/picture.c:222
+#: ../src/picture.c:224
 msgid "Flip horizontal"
 msgstr "Вывернуть горизонтально"
 
@@ -2009,7 +2009,7 @@ msgstr "Да"
 msgid "WARNING: Run command failed: %s\n"
 msgstr "ВНИМАНИЕ: Сбой при запуске команды: %s\n"
 
-#: ../src/util.c:886
+#: ../src/util.c:888
 msgid "Case _sensitive"
 msgstr "Учитывать _регистр"
 
@@ -2199,19 +2199,23 @@ msgstr ""
 "Использовать крупный размер при предпросмотре в диалогах выбора файлов:CHK"
 
 #: ../src/yad-settings.sh:44
+msgid "Search entry width::NUM"
+msgstr "Ширина поля поиска::NUM"
+
+#: ../src/yad-settings.sh:45
 msgid "Ignore unknown command-line options:CHK"
 msgstr "Игнорировать неизвестные арументы в командной строке:CHK"
 
-#: ../src/yad-settings.sh:45
+#: ../src/yad-settings.sh:46
 msgid "Enable debug mode with information about deprecated features:CHK"
 msgstr "Разрешить режим отладки с информированием об устаревших функциях:CHK"
 
-#: ../src/yad-settings.sh:63
+#: ../src/yad-settings.sh:65
 msgid "<Empty>!"
 msgstr "<Пусто>!"
 
 #. second tab
-#: ../src/yad-settings.sh:76
+#: ../src/yad-settings.sh:78
 msgid ""
 "YAD settings for text editor\\nThis settings only usefull when YAD built "
 "with GtkSourceView\\n\\n"
@@ -2219,80 +2223,80 @@ msgstr ""
 "Настройки YAD для текстового редактора\\nЭти настройки используются только "
 "если YAD собран с GtkSourceView\\n\\n"
 
-#: ../src/yad-settings.sh:77
+#: ../src/yad-settings.sh:79
 msgid "Default theme for text-info dialog::CB"
 msgstr "Цветовая тема по умолчанию::CB"
 
-#: ../src/yad-settings.sh:78
+#: ../src/yad-settings.sh:80
 msgid "Show line numbers:CHK"
 msgstr "Показывать номера строк:CHK"
 
-#: ../src/yad-settings.sh:79
+#: ../src/yad-settings.sh:81
 msgid "Hightlight current line:CHK"
 msgstr "Подсвечивать текущую строку;CHK"
 
-#: ../src/yad-settings.sh:80
+#: ../src/yad-settings.sh:82
 msgid "Enable line mars mode:CHK"
 msgstr "Разрешить пометки строк:CHK"
 
-#: ../src/yad-settings.sh:81
+#: ../src/yad-settings.sh:83
 msgid "Color of first type marks::CLR"
 msgstr "Задать цвет меток первого типа::CLR"
 
-#: ../src/yad-settings.sh:82
+#: ../src/yad-settings.sh:84
 msgid "Color of second type marks::CLR"
 msgstr "Задать цвет меток второго типа::CLR"
 
-#: ../src/yad-settings.sh:83
+#: ../src/yad-settings.sh:85
 msgid "Right margin position::NUM"
 msgstr "Позиция правой границы::NUM"
 
-#: ../src/yad-settings.sh:84
+#: ../src/yad-settings.sh:86
 msgid "Highlight matching brackets:CHK"
 msgstr "Подсвечивать парные скобки:CHK"
 
-#: ../src/yad-settings.sh:85
+#: ../src/yad-settings.sh:87
 msgid "Use autoindentation:CHK"
 msgstr "Использовать автовыравнивание:CHK"
 
-#: ../src/yad-settings.sh:86
+#: ../src/yad-settings.sh:88
 msgid "Smart Home/End behavior::CB"
 msgstr "Поведение умных клавиш Home/End::CB"
 
-#: ../src/yad-settings.sh:87
+#: ../src/yad-settings.sh:89
 msgid "Use smart backspace:CHK"
 msgstr "Использовать умный backspace:CHK"
 
-#: ../src/yad-settings.sh:88
+#: ../src/yad-settings.sh:90
 msgid "Tabulation width::NUM"
 msgstr "Ширина табуляции::NUM"
 
-#: ../src/yad-settings.sh:89
+#: ../src/yad-settings.sh:91
 msgid "Indentation width::NUM"
 msgstr "Ширина выравнивания::NUM"
 
-#: ../src/yad-settings.sh:90
+#: ../src/yad-settings.sh:92
 msgid "Insert spaces instead of tabulation:CHK"
 msgstr "Вставлять пробелы вместо табуляции:CHK"
 
 #. main dialog
-#: ../src/yad-settings.sh:93 ../data/yad-settings.desktop.in.h:1
+#: ../src/yad-settings.sh:95 ../data/yad-settings.desktop.in.h:1
 msgid "YAD settings"
 msgstr "Настройки YAD"
 
-#: ../src/yad-settings.sh:94
+#: ../src/yad-settings.sh:96
 msgid "Load defaults!view-refresh:3"
 msgstr "Умолчания!view-refresh:3"
 
-#: ../src/yad-settings.sh:95
+#: ../src/yad-settings.sh:97
 msgid "<span size='xx-large' weight='bold'>YAD settings editor</span>"
 msgstr "<span size='xx-large' weight='bold'>Редактор настроек YAD</span>"
 
-#: ../src/yad-settings.sh:96
+#: ../src/yad-settings.sh:98
 msgid "Main"
 msgstr "Основные"
 
-#: ../src/yad-settings.sh:96
+#: ../src/yad-settings.sh:98
 msgid "Editor"
 msgstr "Редактор"
 
@@ -2360,45 +2364,49 @@ msgid "Use large previews in file selection dialogs"
 msgstr "Использовать крупный размер при предпросмотре в диалогах выбора файлов"
 
 #: ../data/yad.gschema.xml.in.h:14
+msgid "Set width of search entry in search bar"
+msgstr "Задать ширину поля поиска в панели поиска"
+
+#: ../data/yad.gschema.xml.in.h:15
 msgid "Ignore unknown command-line options"
 msgstr "Игнорировать неизвестные арументы в командной строке"
 
-#: ../data/yad.gschema.xml.in.h:15
+#: ../data/yad.gschema.xml.in.h:16
 msgid "Enable debug mode with information about deprecated features"
 msgstr "Разрешить режим отладки с информированием об устаревших функциях"
 
-#: ../data/yad.gschema.xml.in.h:16
+#: ../data/yad.gschema.xml.in.h:17
 msgid "Default color theme for text-info dialog"
 msgstr "Цветовая тема по умолчанию в текстовом диалоге"
 
-#: ../data/yad.gschema.xml.in.h:19
+#: ../data/yad.gschema.xml.in.h:20
 msgid "Enable line marks mode"
 msgstr "Разрешить пометки строк"
 
-#: ../data/yad.gschema.xml.in.h:20
+#: ../data/yad.gschema.xml.in.h:21
 msgid "Default color for first type of text marks in text-info dialog"
 msgstr "Цвет для меток первого типа в текстовом диалоге"
 
-#: ../data/yad.gschema.xml.in.h:21
+#: ../data/yad.gschema.xml.in.h:22
 msgid "Default color for second type of text marks in text-info dialog"
 msgstr "Цвет для меток второго типа в текстовом диалоге"
 
-#: ../data/yad.gschema.xml.in.h:22
+#: ../data/yad.gschema.xml.in.h:23
 msgid "Set right margin at position"
 msgstr "Установить правую границу в позиции"
 
-#: ../data/yad.gschema.xml.in.h:25
+#: ../data/yad.gschema.xml.in.h:26
 msgid "Smart Home/End behavior"
 msgstr "Поведение умных клавиш Home/End"
 
-#: ../data/yad.gschema.xml.in.h:26
+#: ../data/yad.gschema.xml.in.h:27
 msgid "Use smart backspace"
 msgstr "Использовать умный backspace"
 
-#: ../data/yad.gschema.xml.in.h:27
+#: ../data/yad.gschema.xml.in.h:28
 msgid "Default tabulation width"
 msgstr "Ширина табуляции по умолчанию"
 
-#: ../data/yad.gschema.xml.in.h:28
+#: ../data/yad.gschema.xml.in.h:29
 msgid "Default indentation width"
 msgstr "Ширина выравнивания по умолчанию"

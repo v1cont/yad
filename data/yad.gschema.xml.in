@@ -52,6 +52,10 @@
       <default>false</default>
       <_summary>Use large previews in file selection dialogs</_summary>
     </key>
+    <key name="search-width" type="i">
+      <default>-1</default>
+      <_summary>Set width of search entry in search bar</_summary>
+    </key>
     <key name="ignore-unknown-options" type="b">
       <default>true</default>
       <_summary>Ignore unknown command-line options</_summary>

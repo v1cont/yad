@@ -41,6 +41,7 @@ yad --plug=$KEY --tabnum=1 --bool-fmt=t --quoted-output --separator=" " --form -
     --field=$"Default URI color in text-info dialog::CLR" \
     --field=$"Maximum number of tabs in notebook dialog::NUM" \
     --field=$"Use large previews in file selection dialogs:CHK" \
+    --field=$"Search entry width::NUM" \
     --field=$"Ignore unknown command-line options:CHK" \
     --field=$"Enable debug mode with information about deprecated features:CHK" \
     -- \
@@ -55,6 +56,7 @@ yad --plug=$KEY --tabnum=1 --bool-fmt=t --quoted-output --separator=" " --form -
     "$(eval echo $(gsettings get yad.settings uri-color))" \
     $(gsettings get yad.settings max-tab) \
     $(gsettings get yad.settings large-preview) \
+    $(gsettings get yad.settings search-width) \
     $(gsettings get yad.settings ignore-unknown-options) \
     $(gsettings get yad.settings debug) > $res1 &
 
@@ -111,8 +113,9 @@ if [[ $? -eq 0 ]]; then
     gsettings set yad.settings uri-color ${r1[8]}
     gsettings set yad.settings max-tab ${r1[9]}
     gsettings set yad.settings large-preview ${r1[10]}
-    gsettings set yad.settings ignore-unknown-options ${r1[11]}
-    gsettings set yad.settings debug ${r1[12]}
+    gsettings set yad.settings search-width ${r1[11]}
+    gsettings set yad.settings ignore-unknown-options ${r1[12]}
+    gsettings set yad.settings debug ${r1[13]}
 
     # GtkSourceView settings
     gsettings get yad.sourceview theme "${r2[0]}"
