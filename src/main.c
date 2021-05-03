@@ -84,6 +84,13 @@ keys_cb (GtkWidget *w, GdkEventKey *ev, gpointer d)
 
   switch (ev->keyval)
     {
+    case GDK_KEY_F1:
+      if (options.data.f1_action)
+        {
+          run_command_async (options.data.f1_action);
+          return TRUE;
+        }
+      break;
     case GDK_KEY_Escape:
       if (!ignore_esc)
         {

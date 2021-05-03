@@ -144,6 +144,8 @@ static GOptionEntry general_options[] = {
     N_("Run commands under specified interpreter (default: bash -c '%s')"), N_("CMD") },
   { "uri-handler", 0, 0, G_OPTION_ARG_STRING, &options.data.uri_handler,
     N_("Set URI handler"), N_("CMD") },
+  { "f1-action", 0, 0, G_OPTION_ARG_STRING, &options.data.f1_action,
+    N_("Set command running when F1 was pressed"), N_("CMD") },
   /* window settings */
   { "sticky", 0, 0, G_OPTION_ARG_NONE, &options.data.sticky,
     N_("Set window sticky"), NULL },
@@ -1595,6 +1597,7 @@ yad_options_init (void)
 #else
   options.data.uri_handler = OPEN_CMD;
 #endif
+  options.data.f1_action = NULL;
 
   /* Initialize window options */
   options.data.sticky = FALSE;

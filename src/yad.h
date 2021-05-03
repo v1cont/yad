@@ -249,6 +249,7 @@ typedef struct {
   gboolean use_interp;
   gchar *interp;
   gchar *uri_handler;
+  gchar *f1_action;
   /* window settings */
   gboolean sticky;
   gboolean fixed;
