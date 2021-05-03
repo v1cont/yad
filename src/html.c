@@ -316,6 +316,11 @@ key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer d)
       open_cb (NULL, NULL, d);
       return TRUE;
     }
+  else if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_Q || key->keyval == GDK_KEY_q))
+    {
+      yad_exit (options.data.def_resp);
+      return TRUE;
+    }
   else if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_F || key->keyval == GDK_KEY_f))
     {
       if (search_bar == NULL)
