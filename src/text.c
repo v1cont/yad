@@ -836,7 +836,19 @@ text_print_result (void)
     return;
 
   if (options.text_data.in_place && options.common_data.uri)
-    save_file_cb (NULL, NULL);
+    {
+      if (text_changed)
+        {
+          if (options.text_data.confirm_save)
+            {
+              if (yad_confirm_dlg (GTK_WINDOW (gtk_widget_get_toplevel (text_view)),
+                                   options.text_data.confirm_text))
+                save_file_cb (NULL, NULL);
+            }
+          else
+            save_file_cb (NULL, NULL);
+        }
+    }
   else
     {
       GtkTextIter start, end;

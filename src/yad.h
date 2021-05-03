@@ -476,6 +476,8 @@ typedef struct {
   gchar *back;
   gboolean in_place;
   gboolean file_op;
+  gboolean confirm_save;
+  gchar *confirm_text;
 } YadTextData;
 
 #ifdef HAVE_SOURCEVIEW
@@ -722,11 +724,13 @@ gchar *print_bool_val (gboolean val);
 gint run_command_sync (gchar *cmd, gchar **out);
 void run_command_async (gchar *cmd);
 
-gchar * pango_to_css (gchar *font);
+gchar *pango_to_css (gchar *font);
 
 void open_uri (const gchar *uri);
 
-YadSearchBar * create_search_bar ();
+YadSearchBar *create_search_bar ();
+
+gboolean yad_confirm_dlg (GtkWindow *parent, gchar *txt);
 
 static inline void
 strip_new_line (gchar * str)

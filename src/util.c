@@ -894,3 +894,22 @@ create_search_bar ()
 
   return sb;
 }
+
+/* Confirmation dialog */
+gboolean
+yad_confirm_dlg (GtkWindow *parent, gchar *txt)
+{
+  GtkWidget *d;
+  gchar *buf;
+
+  buf = g_strcompress (options.text_data.confirm_text);
+  d = gtk_message_dialog_new (parent, GTK_DIALOG_DESTROY_WITH_PARENT,
+                              GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, "%s", buf);
+  gtk_window_set_position (GTK_WINDOW (d), GTK_WIN_POS_CENTER_ON_PARENT);
+  g_free (buf);
+
+  ret = gtk_dialog_run (GTK_DIALOG (d));
+  gtk_widget_destroy (d);
+
+  return (ret == GTK_RESPONSE_YES);
+}

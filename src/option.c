@@ -28,6 +28,7 @@ static gboolean add_bar (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_scale_mark (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_palette (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_confirm_overwrite (const gchar *, const gchar *, gpointer, GError **);
+static gboolean add_confirm_save (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_file_filter (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_color_mode (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_buttons_layout (const gchar *, const gchar *, gpointer, GError **);
@@ -658,6 +659,8 @@ static GOptionEntry text_options[] = {
     N_("Save file instead of print on exit"), NULL },
   { "file-op", 0, 0, G_OPTION_ARG_NONE, &options.text_data.file_op,
     N_("Enable file operations"), NULL },
+  { "confirm-save", 0, G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, add_confirm_save,
+    N_("Confirm save the file if text was changed"), N_("[TEXT]") },
   { NULL }
 };
 
@@ -957,6 +960,16 @@ add_confirm_overwrite (const gchar * option_name, const gchar * value, gpointer 
   options.file_data.confirm_overwrite = TRUE;
   if (value)
     options.file_data.confirm_text = g_strdup (value);
+
+  return TRUE;
+}
+
+static gboolean
+add_confirm_save (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+{
+  options.text_data.confirm_save = TRUE;
+  if (value)
+    options.text_data.confirm_text = g_strdup (value);
 
   return TRUE;
 }
@@ -1704,7 +1717,7 @@ yad_options_init (void)
   options.file_data.directory = FALSE;
   options.file_data.save = FALSE;
   options.file_data.confirm_overwrite = FALSE;
-  options.file_data.confirm_text = N_("File exist. Overwrite?");
+  options.file_data.confirm_text = _("File exist. Overwrite?");
   options.file_data.file_filt = NULL;
   options.file_data.mime_filt = NULL;
   options.file_data.image_filt = NULL;
@@ -1845,6 +1858,8 @@ yad_options_init (void)
   options.text_data.hide_cursor = TRUE;
   options.text_data.fore = NULL;
   options.text_data.back = NULL;
+  options.text_data.confirm_save = FALSE;
+  options.text_data.confirm_text = _("File was changed. Save it?");
 #ifndef STANDALONE
   options.text_data.uri_color = g_settings_get_string (settings, "uri-color");
 #else

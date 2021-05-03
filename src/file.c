@@ -36,20 +36,7 @@ file_confirm_overwrite (GtkWidget * dlg)
       gchar *filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (filechooser));
 
       if (g_file_test (filename, G_FILE_TEST_EXISTS))
-        {
-          GtkWidget *d;
-          gint r;
-          gchar *buf;
-
-          buf = g_strcompress (options.file_data.confirm_text);
-          d = gtk_message_dialog_new (GTK_WINDOW (dlg), GTK_DIALOG_DESTROY_WITH_PARENT,
-                                      GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, "%s", buf);
-          g_free (buf);
-          r = gtk_dialog_run (GTK_DIALOG (d));
-          gtk_widget_destroy (d);
-          if (r != GTK_RESPONSE_YES)
-            return FALSE;
-        }
+        return yad_confirm_dlg (GTK_WINDOW (dlg), options.file_data.confirm_text);
     }
 
   return TRUE;
