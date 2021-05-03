@@ -808,8 +808,6 @@ text_create_widget (GtkWidget * dlg)
           g_signal_connect (G_OBJECT (search_bar->entry), "stop-search", G_CALLBACK (stop_search_cb), NULL);
           g_signal_connect (G_OBJECT (search_bar->entry), "next-match", G_CALLBACK (do_find_next), NULL);
           g_signal_connect (G_OBJECT (search_bar->entry), "previous-match", G_CALLBACK (do_find_prev), NULL);
-          g_signal_connect (G_OBJECT (search_bar->next), "clicked", G_CALLBACK (do_find_next), NULL);
-          g_signal_connect (G_OBJECT (search_bar->prev), "clicked", G_CALLBACK (do_find_prev), NULL);
         }
     }
 

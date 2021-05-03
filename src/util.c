@@ -824,6 +824,19 @@ open_uri (const gchar *uri)
   g_free (cmdline);
 }
 
+/* Search bar */
+static void
+next_clicked_cb (GtkWidget *w, YadSearchBar *sb)
+{
+  g_signal_emit_by_name (sb->entry, "next-match");
+}
+
+static void
+prev_clicked_cb (GtkWidget *w, YadSearchBar *sb)
+{
+  g_signal_emit_by_name (sb->entry, "previous-match");
+}
+
 static void
 case_toggle_cb (GtkToggleButton *b, YadSearchBar *sb)
 {
@@ -857,16 +870,23 @@ create_search_bar ()
   gtk_widget_show (sb->bar);
 
   sb->next = gtk_button_new_from_icon_name ("go-down", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_set_focus_on_click (sb->next, FALSE);
   gtk_box_pack_start (GTK_BOX (b), sb->next, FALSE, FALSE, 0);
   gtk_widget_show (sb->next);
 
+  g_signal_connect (G_OBJECT (sb->next), "clicked", G_CALLBACK (next_clicked_cb), sb);
+
   sb->prev = gtk_button_new_from_icon_name ("go-up", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_set_focus_on_click (sb->prev, FALSE);
   gtk_box_pack_start (GTK_BOX (b), sb->prev, FALSE, FALSE, 0);
   gtk_widget_show (sb->prev);
 
+  g_signal_connect (G_OBJECT (sb->prev), "clicked", G_CALLBACK (prev_clicked_cb), sb);
+
   sb->case_toggle = gtk_check_button_new_with_mnemonic (_("Case _sensitive"));
-  gtk_box_pack_start (GTK_BOX (b), sb->case_toggle, FALSE, FALSE, 0);
+  gtk_widget_set_focus_on_click (sb->case_toggle, FALSE);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sb->case_toggle), sb->case_sensitive);
+  gtk_box_pack_start (GTK_BOX (b), sb->case_toggle, FALSE, FALSE, 0);
   gtk_widget_show (sb->case_toggle);
 
   g_signal_connect (G_OBJECT (sb->case_toggle), "toggled", G_CALLBACK (case_toggle_cb), sb);
