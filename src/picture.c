@@ -23,8 +23,8 @@ static GtkWidget *picture;
 static GtkWidget *viewport;
 static GtkWidget *popup_menu;
 
-static GdkPixbufAnimation *anim_pb;
-static GdkPixbuf *orig_pb;
+static GdkPixbufAnimation *anim_pb = NULL;
+static GdkPixbuf *orig_pb = NULL;
 
 static gboolean loaded = FALSE;
 static gboolean animated = FALSE;
@@ -70,7 +70,7 @@ picture_fit_to_window ()
   gdouble width, height, ww, wh;
   gdouble factor;
 
-  if (animated)
+  if (animated || !gtk_widget_get_realized (viewport))
     return;
 
   width = gdk_pixbuf_get_width (orig_pb);
@@ -111,10 +111,12 @@ change_size_cb (GtkWidget *w, gint type)
     {
     case SIZE_FIT:
       picture_fit_to_window ();
+      options.picture_data.size = YAD_PICTURE_FIT;
       break;
     case SIZE_ORIG:
       gtk_image_set_from_pixbuf (GTK_IMAGE (picture), orig_pb);
       g_object_unref (pb);
+      options.picture_data.size = YAD_PICTURE_ORIG;
       break;
     case SIZE_INC:
       new_pb = gdk_pixbuf_scale_simple (pb, width + options.picture_data.inc,
@@ -243,6 +245,13 @@ key_handler (GtkWidget *w, GdkEventKey *ev, gpointer data)
   return FALSE;
 }
 
+static void
+size_allocate_cb ()
+{
+  if (options.picture_data.size == YAD_PICTURE_FIT)
+    picture_fit_to_window ();
+}
+
 GtkWidget *
 picture_create_widget (GtkWidget * dlg)
 {
@@ -274,7 +283,8 @@ picture_create_widget (GtkWidget * dlg)
       create_popup_menu ();
       g_signal_connect (G_OBJECT (ev), "button-press-event", G_CALLBACK (button_handler), NULL);
       g_signal_connect (G_OBJECT (ev), "key-press-event", G_CALLBACK (key_handler), NULL);
-    }
+      g_signal_connect (G_OBJECT (ev), "size-allocate", G_CALLBACK (size_allocate_cb), NULL);
+  }
 
   return sw;
 }
