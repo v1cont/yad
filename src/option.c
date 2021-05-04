@@ -385,6 +385,8 @@ static GOptionEntry form_options[] = {
     N_("Cycled reading of stdin data"), NULL },
   { "align-buttons", 0, 0, G_OPTION_ARG_NONE, &options.form_data.align_buttons,
     N_("Align labels on button fields"), NULL },
+  { "changed-action", 0, 0, G_OPTION_ARG_STRING, &options.form_data.changed_action,
+    N_("Set changed action"), "CMD" },
   { NULL }
 };
 
@@ -1734,6 +1736,7 @@ yad_options_init (void)
   options.form_data.focus_field = 1;
   options.form_data.cycle_read = FALSE;
   options.form_data.align_buttons = FALSE;
+  options.form_data.changed_action = NULL;
 
 #ifdef HAVE_HTML
   /* Initialize html data */

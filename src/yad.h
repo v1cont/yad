@@ -340,6 +340,7 @@ typedef struct {
   guint focus_field;
   gboolean cycle_read;
   gboolean align_buttons;
+  gchar *changed_action;
 } YadFormData;
 
 #ifdef HAVE_HTML

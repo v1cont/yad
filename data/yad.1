@@ -591,6 +591,10 @@ Use specific type for extended completion. \fITYPE\fP can be \fIany\fP for match
 .B \-\-scroll
 Make form scrollable.
 .TP
+.B \-\-changed-action=\fICMD\fP
+Run \fICMD\fP when \fICHK\fP or \fICB\fP field values are changed. Command runs with two arguments - number of changed field and its current value.
+Output of a command parsing in a same manner as in \fIBTN\fP fields with \fI@\fP prefix. \fBAttention\fP - this option may slow down your dialog.
+.TP
 .B \-\-quoted-output
 Output values will be in shell-style quotes.
 .TP
