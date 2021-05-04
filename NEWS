@@ -1,3 +1,18 @@
+Version 10.0
+    - many improvements in text-info dialog
+      - uses monospace font by default
+      - added search-bar instead of popup search field (can be disabled)
+      - added more GtkSourceView capabilities (use --help-source to see full list of those options)
+      - added in-place editing and file operations throug popup menu or keybindings
+    - added search bar to html dialog (can be disabled)
+    - added Ctrl+O and Ctrl+Q shortcuts to html dialog
+    - added --f1-action which run command when F1 was pressed
+    - added --changed-action to form dialog for control states of switcher fields like check or combo boxes
+    - fixed build with musl
+    - added yad-settings script. this is yad-based frontend for edit yad settings
+    - force using small icons in list dialog if icon is not a real filename
+    - fixed fitting image in picture dialog
+
 Version 9.3
     - fix freezing main window on --row-action in list or @cmd in form dialogs
 
