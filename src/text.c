@@ -26,7 +26,7 @@ static GObject *text_buffer;
 static GtkTextTag *tag;
 static GdkCursor *hand, *normal;
 static YadSearchBar *search_bar = NULL;
-static GtkTextIter search_pos;
+static GtkTextIter match_start, match_end;
 static gboolean text_changed = FALSE;
 static gboolean search_changed = FALSE;
 
@@ -34,7 +34,7 @@ static gboolean search_changed = FALSE;
 static void
 do_find_next (GtkWidget *w, gpointer d)
 {
-  GtkTextIter match_start, match_end;
+  GtkTextIter search_pos;
   GtkTextSearchFlags sflags;
 
   if (search_bar->case_sensitive)
@@ -47,12 +47,13 @@ do_find_next (GtkWidget *w, gpointer d)
       gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (text_buffer), &search_pos,
                                         gtk_text_buffer_get_insert (GTK_TEXT_BUFFER (text_buffer)));
     }
+  else
+    search_pos = match_end;
 
   if (gtk_text_iter_forward_search (&search_pos, search_bar->str, sflags, &match_start, &match_end, NULL))
     {
       gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &match_start, 0.0, FALSE, 0.0, 0.0);
       gtk_text_buffer_select_range (GTK_TEXT_BUFFER (text_buffer), &match_start, &match_end);
-      search_pos = match_end;
       search_changed = TRUE;
     }
 
@@ -62,7 +63,7 @@ do_find_next (GtkWidget *w, gpointer d)
 static void
 do_find_prev (GtkWidget *w, gpointer d)
 {
-  GtkTextIter match_start, match_end;
+  GtkTextIter search_pos;
   GtkTextSearchFlags sflags;
 
   if (search_bar->case_sensitive)
@@ -70,11 +71,11 @@ do_find_prev (GtkWidget *w, gpointer d)
   else
     sflags = GTK_TEXT_SEARCH_TEXT_ONLY | GTK_TEXT_SEARCH_CASE_INSENSITIVE;
 
+  search_pos = match_start;
   if (gtk_text_iter_backward_search (&search_pos, search_bar->str, sflags, &match_start, &match_end, NULL))
     {
       gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &match_start, 0.0, FALSE, 0.0, 0.0);
       gtk_text_buffer_select_range (GTK_TEXT_BUFFER (text_buffer), &match_start, &match_end);
-      search_pos = match_start;
       search_changed = TRUE;
     }
 }
@@ -95,8 +96,8 @@ stop_search_cb (GtkWidget *w, YadSearchBar *sb)
   gtk_widget_grab_focus (text_view);
   if (search_changed)
     {
-      gtk_text_iter_backward_char (&search_pos);
-      gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (text_buffer), &search_pos);
+      gtk_text_iter_backward_char (&match_start);
+      gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (text_buffer), &match_start);
     }
   search_changed = FALSE;
 }
