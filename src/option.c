@@ -891,6 +891,10 @@ add_field (const gchar * option_name, const gchar * value, gpointer data, GError
     fld->type = YAD_FIELD_SIMPLE;
   options.form_data.fields = g_slist_append (options.form_data.fields, fld);
 
+  /* disable homogeneous rows if form has text field */
+  if (fld->type == YAD_FIELD_TEXT)
+    options.form_data.homogeneous = FALSE;
+
   g_strfreev (fstr);
   return TRUE;
 }
@@ -1737,6 +1741,7 @@ yad_options_init (void)
   options.form_data.cycle_read = FALSE;
   options.form_data.align_buttons = FALSE;
   options.form_data.changed_action = NULL;
+  options.form_data.homogeneous = TRUE;
 
 #ifdef HAVE_HTML
   /* Initialize html data */
