@@ -494,7 +494,7 @@ cell_set_data (GtkTreeIter *it, guint num, gchar *data)
     case YAD_COLUMN_IMAGE:
       {
         GdkPixbuf *pb;
-        
+
         if (g_file_test (data, G_FILE_TEST_EXISTS))
           pb = get_pixbuf (data, YAD_SMALL_ICON, FALSE);
         else
@@ -1312,7 +1312,7 @@ list_create_widget (GtkWidget *dlg)
   /* create widget */
   w = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (w), GTK_SHADOW_ETCHED_IN);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w), options.hscroll_policy, options.vscroll_policy);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w), options.data.hscroll_policy, options.data.vscroll_policy);
 
   model = create_model ();
 

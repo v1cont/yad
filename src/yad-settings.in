@@ -28,7 +28,8 @@ trap "rm -f $res1 $res2" EXIT
 KEY=$RANDOM
 
 # first tab (values at the end due to possible hyphens)
-yad --plug=$KEY --tabnum=1 --bool-fmt=t --quoted-output --separator=" " --form --scroll \
+yad --plug=$KEY --tabnum=1 --bool-fmt=t --quoted-output --separator=" " \
+    --form --scroll --homogeneous \
     --text=$"Main YAD settings and default values\n\n" \
     --field=$"Width of dialog window::NUM" \
     --field=$"Height of dialog window::NUM" \

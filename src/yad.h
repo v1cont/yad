@@ -236,6 +236,8 @@ typedef struct {
   gchar *icon_theme;
   gchar *expander;
   gint borders;
+  GtkPolicyType hscroll_policy;
+  GtkPolicyType vscroll_policy;
   GSList *buttons;
   gboolean no_buttons;
   gboolean no_markup;
@@ -335,7 +337,6 @@ typedef struct {
 typedef struct {
   GSList *fields;
   guint columns;
-  gboolean scroll;
   gboolean output_by_row;
   guint focus_field;
   gboolean cycle_read;
@@ -524,6 +525,7 @@ typedef struct {
   gboolean hide_text;
   gint icon_size;
   gboolean enable_search;
+  gboolean scroll;
 #if GLIB_CHECK_VERSION(2,30,0)
   GFormatSizeFlags size_fmt;
 #endif
@@ -573,9 +575,6 @@ typedef struct {
 
   gchar *css;
   gchar *gtkrc_file;
-
-  GtkPolicyType hscroll_policy;
-  GtkPolicyType vscroll_policy;
 
   gchar *rest_file;
   gchar **extra_data;

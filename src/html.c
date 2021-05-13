@@ -430,7 +430,7 @@ html_create_widget (GtkWidget * dlg)
   w = gtk_box_new (GTK_ORIENTATION_VERTICAL, 2);
 
   sw = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), options.hscroll_policy, options.vscroll_policy);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), options.data.hscroll_policy, options.data.vscroll_policy);
   gtk_box_pack_start (GTK_BOX (w), sw, TRUE, TRUE, 0);
 
   view = WEBKIT_WEB_VIEW (webkit_web_view_new ());

@@ -444,7 +444,7 @@ icons_create_widget (GtkWidget * dlg)
 
   w = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (w), GTK_SHADOW_ETCHED_IN);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w), options.hscroll_policy, options.vscroll_policy);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (w), options.data.hscroll_policy, options.data.vscroll_policy);
 
   store = gtk_list_store_new (NUM_COLS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
                               GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_BOOLEAN);

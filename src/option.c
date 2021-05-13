@@ -226,6 +226,8 @@ static GOptionEntry common_options[] = {
     N_("Set extended completion for entries (any, all, or regex)"), N_("TYPE") },
   { "bool-fmt", 0, 0, G_OPTION_ARG_CALLBACK, set_bool_fmt_type,
     N_("Set type of output for boolean values (T, t, Y, y, O, o, 1)"), N_("TYPE") },
+  { "scroll", 0, 0, G_OPTION_ARG_NONE, &options.common_data.scroll,
+    N_("Make main widget scrollable"), NULL },
   { "disable-search", 0, G_OPTION_FLAG_REVERSE, G_OPTION_ARG_NONE, &options.common_data.enable_search,
     N_("Disable search in text and html dialogs"), NULL },
 #if GLIB_CHECK_VERSION(2,30,0)
@@ -375,8 +377,6 @@ static GOptionEntry form_options[] = {
     N_("Set alignment of filed labels (left, center or right)"), N_("TYPE") },
   { "columns", 0, 0, G_OPTION_ARG_INT, &options.form_data.columns,
     N_("Set number of columns in form"), N_("NUMBER") },
-  { "scroll", 0, 0, G_OPTION_ARG_NONE, &options.form_data.scroll,
-    N_("Make form scrollable"), NULL },
   { "homogeneous", 0, 0, G_OPTION_ARG_NONE, &options.form_data.homogeneous,
     N_("Make form fields same height"), NULL },
   { "output-by-row", 0, 0, G_OPTION_ARG_NONE, &options.form_data.output_by_row,
@@ -1325,9 +1325,9 @@ set_scroll_policy (const gchar * option_name, const gchar * value, gpointer data
     g_printerr (_("Unknown scrollbar policy type: %s\n"), value);
 
   if (strcmp (option_name, "--hscroll-policy") == 0)
-    options.hscroll_policy = pt;
+    options.data.hscroll_policy = pt;
   else
-    options.vscroll_policy = pt;
+    options.data.vscroll_policy = pt;
 
   return TRUE;
 }
@@ -1563,9 +1563,6 @@ yad_options_init (void)
   options.debug = FALSE;
 #endif
 
-  options.hscroll_policy = GTK_POLICY_AUTOMATIC;
-  options.vscroll_policy = GTK_POLICY_AUTOMATIC;
-
   /* plug settings */
   options.plug = -1;
   options.tabnum = 0;
@@ -1592,6 +1589,8 @@ yad_options_init (void)
   options.data.expander = NULL;
   options.data.timeout = 0;
   options.data.to_indicator = NULL;
+  options.data.hscroll_policy = GTK_POLICY_AUTOMATIC;
+  options.data.vscroll_policy = GTK_POLICY_AUTOMATIC;
   options.data.buttons = NULL;
   options.data.no_buttons = FALSE;
   options.data.buttons_layout = GTK_BUTTONBOX_END;
@@ -1663,6 +1662,7 @@ yad_options_init (void)
   options.common_data.bool_fmt = YAD_BOOL_FMT_UT;
   options.common_data.complete = YAD_COMPLETE_SIMPLE;
   options.common_data.icon_size = 0;
+  options.common_data.scroll = FALSE;
   options.common_data.enable_search = TRUE;
 #if GLIB_CHECK_VERSION(2,30,0)
   options.common_data.size_fmt = G_FORMAT_SIZE_DEFAULT;
@@ -1733,7 +1733,6 @@ yad_options_init (void)
   /* Initialize form data */
   options.form_data.fields = NULL;
   options.form_data.columns = 1;
-  options.form_data.scroll = FALSE;
   options.form_data.output_by_row = FALSE;
   options.form_data.focus_field = 1;
   options.form_data.cycle_read = FALSE;

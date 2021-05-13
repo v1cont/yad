@@ -234,7 +234,7 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
 GtkWidget *
 progress_create_widget (GtkWidget *dlg)
 {
-  GtkWidget *table;
+  GtkWidget *table, *w = NULL;
   GIOChannel *channel;
   GSList *b;
   gint i = 0;
@@ -268,6 +268,17 @@ progress_create_widget (GtkWidget *dlg)
   table = gtk_grid_new ();
   gtk_grid_set_row_spacing (GTK_GRID (table), 2);
   gtk_grid_set_column_spacing (GTK_GRID (table), 2);
+
+  if (options.common_data.scroll)
+    {
+      GtkWidget *sw = gtk_scrolled_window_new (NULL, NULL);
+      gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_NONE);
+      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), options.data.hscroll_policy, options.data.vscroll_policy);
+      gtk_container_add (GTK_CONTAINER (sw), table);
+      w = sw;
+    }
+  else
+    w = table;
 
   for (b = options.progress_data.bars; b; b = b->next)
     {
@@ -343,7 +354,7 @@ progress_create_widget (GtkWidget *dlg)
 
       sw = gtk_scrolled_window_new (NULL, NULL);
       gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
-      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), options.hscroll_policy, options.vscroll_policy);
+      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), options.data.hscroll_policy, options.data.vscroll_policy);
       gtk_scrolled_window_set_propagate_natural_height (GTK_SCROLLED_WINDOW (sw), TRUE);
       gtk_container_add (GTK_CONTAINER (ex), sw);
 
@@ -365,5 +376,5 @@ progress_create_widget (GtkWidget *dlg)
   g_io_channel_set_flags (channel, G_IO_FLAG_NONBLOCK, NULL);
   g_io_add_watch (channel, G_IO_IN | G_IO_HUP, handle_stdin, dlg);
 
-  return table;
+  return w;
 }
