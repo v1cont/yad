@@ -377,6 +377,8 @@ static GOptionEntry form_options[] = {
     N_("Set number of columns in form"), N_("NUMBER") },
   { "scroll", 0, 0, G_OPTION_ARG_NONE, &options.form_data.scroll,
     N_("Make form scrollable"), NULL },
+  { "homogeneous", 0, 0, G_OPTION_ARG_NONE, &options.form_data.homogeneous,
+    N_("Make form fields same height"), NULL },
   { "output-by-row", 0, 0, G_OPTION_ARG_NONE, &options.form_data.output_by_row,
     N_("Order output fields by rows"), NULL },
   { "focus-field", 0, 0, G_OPTION_ARG_INT, &options.form_data.focus_field,
@@ -890,10 +892,6 @@ add_field (const gchar * option_name, const gchar * value, gpointer data, GError
   else
     fld->type = YAD_FIELD_SIMPLE;
   options.form_data.fields = g_slist_append (options.form_data.fields, fld);
-
-  /* disable homogeneous rows if form has text field */
-  if (fld->type == YAD_FIELD_TEXT)
-    options.form_data.homogeneous = FALSE;
 
   g_strfreev (fstr);
   return TRUE;
@@ -1741,7 +1739,7 @@ yad_options_init (void)
   options.form_data.cycle_read = FALSE;
   options.form_data.align_buttons = FALSE;
   options.form_data.changed_action = NULL;
-  options.form_data.homogeneous = TRUE;
+  options.form_data.homogeneous = FALSE;
 
 #ifdef HAVE_HTML
   /* Initialize html data */
