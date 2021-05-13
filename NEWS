@@ -1,3 +1,6 @@
+Version 10.1
+    - don't make rows homogeneous when form has a text field
+
 Version 10.0
     - many improvements in text-info dialog
       - uses monospace font by default
