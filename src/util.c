@@ -91,7 +91,7 @@ get_pixbuf (gchar *name, YadIconSize size, gboolean force)
   else
     gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
 
-  if (g_file_test (name, G_FILE_TEST_EXISTS))
+  if (g_file_test (name, G_FILE_TEST_IS_REGULAR))
     {
       pb = gdk_pixbuf_new_from_file (name, &err);
       if (!pb)
@@ -174,24 +174,27 @@ update_preview (GtkFileChooser * chooser, GtkWidget *p)
       g_checksum_update (chs, (const guchar *) uri, -1);
       /* first try to get preview from large thumbnail */
       file = g_strdup_printf ("%s/%s.png", large_path, g_checksum_get_string (chs));
-      if (options.common_data.large_preview && g_file_test (file, G_FILE_TEST_EXISTS))
+      if (options.common_data.large_preview && g_file_test (file, G_FILE_TEST_IS_REGULAR))
         pb = gdk_pixbuf_new_from_file (file, NULL);
       else
         {
           /* try to get preview from normal thumbnail */
           g_free (file);
           file = g_strdup_printf ("%s/%s.png", normal_path, g_checksum_get_string (chs));
-          if (!options.common_data.large_preview && g_file_test (file, G_FILE_TEST_EXISTS))
+          if (!options.common_data.large_preview && g_file_test (file, G_FILE_TEST_IS_REGULAR))
             pb = gdk_pixbuf_new_from_file (file, NULL);
           else
             {
               /* try to create it */
               g_free (file);
               file = g_filename_from_uri (uri, NULL, NULL);
-              if (options.common_data.large_preview)
-                pb = gdk_pixbuf_new_from_file_at_scale (file, 256, 256, TRUE, NULL);
-              else
-                pb = gdk_pixbuf_new_from_file_at_scale (file, 128, 128, TRUE, NULL);
+              if (g_file_test (file, G_FILE_TEST_IS_REGULAR))
+                {
+                  if (options.common_data.large_preview)
+                    pb = gdk_pixbuf_new_from_file_at_scale (file, 256, 256, TRUE, NULL);
+                  else
+                    pb = gdk_pixbuf_new_from_file_at_scale (file, 128, 128, TRUE, NULL);
+                }
               if (pb)
                 {
                   struct stat st;
