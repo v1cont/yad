@@ -393,6 +393,7 @@ typedef struct {
   gchar *ellipsize_cols;
   gchar *dclick_action;
   gchar *select_action;
+  gchar *toggle_action;
   gchar *row_action;
   gboolean tree_expanded;
   gboolean regex_search;

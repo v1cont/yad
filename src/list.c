@@ -31,6 +31,83 @@ static guint n_cols = 0;
 
 static gulong select_hndl = 0;
 
+static gchar *
+cell_get_data (GtkTreeIter *it, guint num)
+{
+  gchar *data = NULL;
+  GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
+  YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, num);
+
+  switch (col->type)
+    {
+    case YAD_COLUMN_CHECK:
+    case YAD_COLUMN_RADIO:
+      {
+        gboolean bval;
+        gtk_tree_model_get (model, it, num, &bval, -1);
+        data = g_strdup (print_bool_val (bval));
+        break;
+      }
+    case YAD_COLUMN_NUM:
+    case YAD_COLUMN_SIZE:
+    case YAD_COLUMN_BAR:
+      {
+        gint64 nval;
+        gtk_tree_model_get (model, it, num, &nval, -1);
+        data = g_strdup_printf ("%ld", (long) nval);
+        break;
+      }
+    case YAD_COLUMN_FLOAT:
+      {
+        gdouble nval;
+        gtk_tree_model_get (model, it, num, &nval, -1);
+        data = g_strdup_printf ("%lf", nval);
+        break;
+      }
+    case YAD_COLUMN_IMAGE:
+      {
+        data = g_strdup ("''");
+        break;
+      }
+    default:
+      {
+        gchar *cval;
+        gtk_tree_model_get (model, it, num, &cval, -1);
+        if (cval)
+          data = g_shell_quote (cval);
+        break;
+      }
+    }
+
+  return data;
+}
+
+static gchar *
+get_data_as_string (GtkTreeIter *iter)
+{
+  GString *str;
+  gchar *res;
+  guint i;
+
+  str = g_string_new (NULL);
+
+  for (i = 0; i < n_cols; i++)
+    {
+      gchar *val = cell_get_data (iter, i);
+      if (val)
+        {
+          g_string_append_printf (str, "%s ", val);
+          g_free (val);
+        }
+    }
+
+  str->str[str->len-1] = '\0';
+  res = str->str;
+  g_string_free (str, FALSE);
+
+  return res;
+}
+
 static inline void
 yad_list_add_row (GtkTreeStore *m, GtkTreeIter *it, gchar *row_id, gchar *par_id)
 {
@@ -115,8 +192,35 @@ tooltip_cb (GtkWidget *w, gint x, gint y, gboolean mode, GtkTooltip *tip, gpoint
 }
 
 static void
+row_data_cb (gchar *action, GtkTreeIter *iter)
+{
+  gchar *cmd, *args;
+
+  args = get_data_as_string (iter);
+  if (!args)
+    args = g_strdup ("");
+
+  if (g_strstr_len (action, -1, "%s"))
+    {
+      static GRegex *regex = NULL;
+
+      if (!regex)
+        regex = g_regex_new ("\%s", G_REGEX_OPTIMIZE, 0, NULL);
+      cmd = g_regex_replace_literal (regex, action, -1, 0, args, 0, NULL);
+    }
+  else
+    cmd = g_strdup_printf ("%s %s", action, args);
+  g_free (args);
+
+  run_command_async (cmd);
+
+  g_free (cmd);
+}
+
+static void
 toggled_cb (GtkCellRendererToggle *cell, gchar *path_str, gpointer data)
 {
+  g_debug("HERE");
   gint column;
   gboolean fixed;
   GtkTreeIter iter;
@@ -132,6 +236,9 @@ toggled_cb (GtkCellRendererToggle *cell, gchar *path_str, gpointer data)
   gtk_tree_store_set (GTK_TREE_STORE (model), &iter, column, fixed, -1);
 
   gtk_tree_path_free (path);
+
+  if (options.list_data.toggle_action)
+    row_data_cb(options.list_data.toggle_action, &iter);
 }
 
 static gboolean
@@ -158,6 +265,9 @@ rtoggled_cb (GtkCellRendererToggle *cell, gchar *path_str, gpointer data)
   gtk_tree_store_set (GTK_TREE_STORE (model), &iter, column, TRUE, -1);
 
   gtk_tree_path_free (path);
+
+  if (options.list_data.toggle_action)
+    row_data_cb(options.list_data.toggle_action, &iter);
 }
 
 static void
@@ -513,57 +623,6 @@ cell_set_data (GtkTreeIter *it, guint num, gchar *data)
     }
 }
 
-static gchar *
-cell_get_data (GtkTreeIter *it, guint num)
-{
-  gchar *data = NULL;
-  GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
-  YadColumn *col = (YadColumn *) g_slist_nth_data (options.list_data.columns, num);
-
-  switch (col->type)
-    {
-    case YAD_COLUMN_CHECK:
-    case YAD_COLUMN_RADIO:
-      {
-        gboolean bval;
-        gtk_tree_model_get (model, it, num, &bval, -1);
-        data = g_strdup (print_bool_val (bval));
-        break;
-      }
-    case YAD_COLUMN_NUM:
-    case YAD_COLUMN_SIZE:
-    case YAD_COLUMN_BAR:
-      {
-        gint64 nval;
-        gtk_tree_model_get (model, it, num, &nval, -1);
-        data = g_strdup_printf ("%ld", (long) nval);
-        break;
-      }
-    case YAD_COLUMN_FLOAT:
-      {
-        gdouble nval;
-        gtk_tree_model_get (model, it, num, &nval, -1);
-        data = g_strdup_printf ("%lf", nval);
-        break;
-      }
-    case YAD_COLUMN_IMAGE:
-      {
-        data = g_strdup ("''");
-        break;
-      }
-    default:
-      {
-        gchar *cval;
-        gtk_tree_model_get (model, it, num, &cval, -1);
-        if (cval)
-          data = g_shell_quote (cval);
-        break;
-      }
-    }
-
-  return data;
-}
-
 static gboolean
 handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
 {
@@ -733,32 +792,6 @@ fill_data ()
     }
 }
 
-static gchar *
-get_data_as_string (GtkTreeIter *iter)
-{
-  GString *str;
-  gchar *res;
-  guint i;
-
-  str = g_string_new (NULL);
-
-  for (i = 0; i < n_cols; i++)
-    {
-      gchar *val = cell_get_data (iter, i);
-      if (val)
-        {
-          g_string_append_printf (str, "%s ", val);
-          g_free (val);
-        }
-    }
-
-  str->str[str->len-1] = '\0';
-  res = str->str;
-  g_string_free (str, FALSE);
-
-  return res;
-}
-
 static void edit_row_cb (GtkMenuItem *item, gpointer data);
 
 static void
@@ -850,30 +883,11 @@ select_cb (GtkTreeSelection *sel, gpointer data)
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
-  gchar *cmd, *args;
 
   if (!gtk_tree_selection_get_selected (sel, &model, &iter))
     return;
 
-  args = get_data_as_string (&iter);
-  if (!args)
-    args = g_strdup ("");
-
-  if (g_strstr_len (options.list_data.select_action, -1, "%s"))
-    {
-      static GRegex *regex = NULL;
-
-      if (!regex)
-        regex = g_regex_new ("\%s", G_REGEX_OPTIMIZE, 0, NULL);
-      cmd = g_regex_replace_literal (regex, options.list_data.select_action, -1, 0, args, 0, NULL);
-    }
-  else
-    cmd = g_strdup_printf ("%s %s", options.list_data.select_action, args);
-  g_free (args);
-
-  run_command_async (cmd);
-
-  g_free (cmd);
+  row_data_cb(options.list_data.select_action, &iter);
 }
 
 static void
