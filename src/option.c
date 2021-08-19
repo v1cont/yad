@@ -1724,7 +1724,7 @@ yad_options_init (void)
   options.file_data.directory = FALSE;
   options.file_data.save = FALSE;
   options.file_data.confirm_overwrite = FALSE;
-  options.file_data.confirm_text = _("File exist. Overwrite?");
+  options.file_data.confirm_text = _("File was changed. Save it?");
   options.file_data.file_filt = NULL;
   options.file_data.mime_filt = NULL;
   options.file_data.image_filt = NULL;
@@ -1866,7 +1866,7 @@ yad_options_init (void)
   options.text_data.fore = NULL;
   options.text_data.back = NULL;
   options.text_data.confirm_save = FALSE;
-  options.text_data.confirm_text = _("File was changed. Save it?");
+  options.text_data.confirm_text = _("File exist. Overwrite?");
 #ifndef STANDALONE
   options.text_data.uri_color = g_settings_get_string (settings, "uri-color");
 #else

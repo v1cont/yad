@@ -1604,11 +1604,11 @@ msgstr "Неизвестный режим умных Home/End: '%s'\n"
 msgid "Unknown signal: %s\n"
 msgstr "Неизвестный сигнал: %s\n"
 
-#: ../src/option.c:1724
+#: ../src/option.c:1867
 msgid "File exist. Overwrite?"
 msgstr "Файл существует. Перезаписать?"
 
-#: ../src/option.c:1867
+#: ../src/option.c:1724
 msgid "File was changed. Save it?"
 msgstr "Файл был изменен. Сохранить его?"
 
