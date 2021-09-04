@@ -1,0 +1,46 @@
+on: [push, pull_request]
+name: build
+jobs:
+  build:
+    name: Build for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+      fail-fast: false
+
+    steps:
+      - name: Install dependencies
+        id: build_env
+        run: |
+          sudo apt update
+          sudo apt install intltool libgtk-3-dev \
+          libwebkit2gtk-4.0-dev \
+          libgspell-1-dev libgtksourceview-3.0-dev hicolor-icon-theme
+
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
+      - name: Configure and build
+        run: |
+          autoreconf -ivf && intltoolize
+
+          ./configure \
+          --enable-html \
+          --enable-tray \
+          --enable-spell \
+          --enable-sourceview \
+          --enable-standalone \
+          --enable-tools \
+          --enable-icon-browser
+
+          make
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: 'yad-master'
+          path: |
+            src/yad
+            src/yad-icon-browser
+            src/yad-tools
