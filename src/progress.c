@@ -166,8 +166,11 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
                         }
                     }
                 }
-              else
-                {
+
+              /* step: in version 0.42.x single-progress pulsate can set its percentange,
+              which is desirable to be able to --auto-close the dialog at 100%.  There is no
+              harm to also let multi-progress PERM and PULSE bars set their percentage. */
+                /*{*/
                   if (!value[1] || !g_ascii_isdigit (*value[1]))
                     continue;
 
@@ -216,7 +219,7 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
                       if (need_close && close)
                         yad_exit (options.data.def_resp);
                     }
-                }
+                /*}*/
             }
         }
       while (g_io_channel_get_buffer_condition (channel) == G_IO_IN);
