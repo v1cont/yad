@@ -392,7 +392,7 @@ static GOptionEntry icons_options[] = {
     N_("Activate items by single click"), NULL },
 #ifdef HAVE_GIO
   { "monitor", 0, 0, G_OPTION_ARG_NONE, &options.icons_data.monitor,
-    N_("Watch fot changes in directory"), NULL },
+    N_("Watch for changes in directory"), NULL },
 #endif
   { NULL }
 };
@@ -529,17 +529,17 @@ static GOptionEntry progress_options[] = {
   { "bar", 0, 0, G_OPTION_ARG_CALLBACK, add_bar,
     N_("Add the progress bar (norm, rtl, pulse or perm)"), N_("LABEL[:TYPE]") },
   { "watch-bar", 0, 0, G_OPTION_ARG_INT, &options.progress_data.watch_bar,
-    N_("Watch for specific bar for auto close"), N_("NUMBER") },
+    N_("Watch specific bar to determine when to --auto-close"), N_("NUMBER") },
   { "align", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_CALLBACK, set_align,
     N_("Set alignment of bar labels (left, center or right)"), N_("TYPE") },
   { "progress-text", 0, 0, G_OPTION_ARG_STRING, &options.progress_data.progress_text,
-    N_("Set progress text"), N_("TEXT") },
+    N_("Set progress text (not with --bar)"), N_("TEXT") },
   { "hide-text", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_NONE, &options.common_data.hide_text,
     N_("Hide text on progress bar"), NULL },
   { "percentage", 0, 0, G_OPTION_ARG_INT, &options.progress_data.percentage,
     N_("Set initial percentage"), N_("PERCENTAGE") },
   { "pulsate", 0, 0, G_OPTION_ARG_NONE, &options.progress_data.pulsate,
-    N_("Pulsate progress bar"), NULL },
+    N_("Pulsate progress bar (not with --bar)"), NULL },
   { "auto-close", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_NONE, &options.progress_data.autoclose,
     /* xgettext: no-c-format */
     N_("Dismiss the dialog when 100% has been reached"), NULL },
@@ -548,7 +548,7 @@ static GOptionEntry progress_options[] = {
     N_("Kill parent process if cancel button is pressed"), NULL },
 #endif
   { "rtl", 0, 0, G_OPTION_ARG_NONE, &options.progress_data.rtl,
-    N_("Right-To-Left progress bar direction"), NULL },
+    N_("Right-To-Left progress bar direction (not with --bar)"), NULL },
   { "enable-log", 0, G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, set_progress_log,
     N_("Show log window"), N_("[TEXT]") },
   { "log-expanded", 0, 0, G_OPTION_ARG_NONE, &options.progress_data.log_expanded,
