@@ -44,6 +44,7 @@ pulsate_progress_bar (GtkProgressBar *bar)
 static gboolean
 handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
 {
+  static guint single_mode_pulsate_timeout = 0;
   float percentage = 0.0;
 
   if ((condition == G_IO_IN) || (condition == G_IO_IN + G_IO_HUP))
@@ -69,7 +70,6 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
 
               while (gtk_events_pending ())
                 gtk_main_iteration ();
-
             }
           while (status == G_IO_STATUS_AGAIN);
 
@@ -135,7 +135,13 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
             }
           else
             {
-              if (value[1] && b->type == YAD_PROGRESS_PULSE)
+              if (options.progress_data.pulsate && value[1] && b->type == YAD_PROGRESS_PULSE)
+                {
+                  if (single_mode_pulsate_timeout == 0)
+                    single_mode_pulsate_timeout = g_timeout_add (100, (GSourceFunc) pulsate_progress_bar, pb);
+                  gtk_progress_bar_pulse (pb);
+                }
+              else if (value[1] && b->type == YAD_PROGRESS_PULSE)
                 gtk_progress_bar_pulse (pb);
               else if (value[1] && b->type == YAD_PROGRESS_PERM)
                 {
