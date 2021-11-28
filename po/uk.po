@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-13 13:53+0300\n"
-"PO-Revision-Date: 2009-04-30 16:47+0300\n"
+"PO-Revision-Date: 2021-11-28 19:00+0200\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0\n"
 
 #: ../src/about.c:98
 msgid "translator-credits"
@@ -67,43 +68,43 @@ msgstr "Початкове значення - більше за максимал
 
 #: ../src/form.c:491
 msgid "Select files"
-msgstr "Вибір файлу"
+msgstr "Вибрати файли"
 
 #: ../src/form.c:494 ../src/form.c:502 ../src/form.c:581 ../src/form.c:589
 #: ../src/form.c:640 ../src/html.c:219 ../src/html.c:252 ../src/text.c:121
 #: ../src/text.c:192 ../src/util.c:40
 msgid "Cancel"
-msgstr "Відміна"
+msgstr "Скасувати"
 
 #: ../src/form.c:495 ../src/form.c:503 ../src/form.c:582 ../src/form.c:590
 #: ../src/form.c:641 ../src/html.c:220 ../src/text.c:122 ../src/text.c:193
 #: ../src/util.c:46
 msgid "OK"
-msgstr "OK"
+msgstr "Гаразд"
 
 #: ../src/form.c:499
 msgid "Select folders"
-msgstr "Вибір каталогів"
+msgstr "Вибрати теки"
 
 #: ../src/form.c:578
 msgid "Select or create file"
-msgstr "Вибір або створення файлу"
+msgstr "Вибрати або створити файл"
 
 #: ../src/form.c:586
 msgid "Select or create folder"
-msgstr "Вибір або створення каталогу"
+msgstr "Вибрати або створити теку"
 
 #: ../src/form.c:637
 msgid "Select date"
-msgstr "Вибір дати"
+msgstr "Вибрати дату"
 
 #: ../src/form.c:996
 msgid "Select file"
-msgstr "Вибір файлу"
+msgstr "Вибрати файл"
 
 #: ../src/form.c:1026
 msgid "Select folder"
-msgstr "Вибір каталогу"
+msgstr "Вибрати теку"
 
 #: ../src/form.c:1194 ../src/form.c:1196
 msgid "Link"
@@ -222,8 +223,8 @@ msgid ""
 "WARNING: You are use --checklist or --radiolist option. Those options "
 "obsoleted and will be removed in the future\n"
 msgstr ""
-"УВАГА: Використовуються опції --checklist або --radiolist. Ці опції "
-"застаріли та будуть видалені у майбутніх випусках\n"
+"УВАГА: Використовуються опції --checklist або --radiolist. Ці опції застаріли "
+"та будуть видалені у майбутніх випусках\n"
 
 #: ../src/list.c:1303
 #, c-format
@@ -240,11 +241,11 @@ msgstr "ЗАГОЛОВОК"
 
 #: ../src/option.c:95
 msgid "Set the window icon"
-msgstr "Задати піктограму діалогу"
+msgstr "Задати піктограму вікна"
 
 #: ../src/option.c:95
 msgid "ICONPATH"
-msgstr "ПІКТОГРАМА"
+msgstr "ШЛЯХПІКТОГРАМИ"
 
 #: ../src/option.c:97
 msgid "Set the window width"
@@ -342,10 +343,9 @@ msgstr "ЗОБРАЖЕННЯ"
 
 #: ../src/option.c:119
 msgid "Use specified icon theme instead of default"
-msgstr "Використовувати вказану тему піктограм"
+msgstr "Використовувати вказану тему піктограм замість стандартної"
 
-#: ../src/option.c:119 ../src/option.c:676 ../src/browser.c:217
-#: ../src/tools.c:81
+#: ../src/option.c:119 ../src/option.c:676 ../src/browser.c:217 ../src/tools.c:81
 msgid "THEME"
 msgstr "ТЕМА"
 
@@ -397,7 +397,7 @@ msgstr "Завжди виводити результат"
 
 #: ../src/option.c:139
 msgid "Set default return code"
-msgstr "Задати значення відповіді за умовчанням"
+msgstr "Задати типове значення відповіді"
 
 #: ../src/option.c:141
 msgid "Dialog text can be selected"
@@ -410,8 +410,7 @@ msgstr "Не масштабувати піктограми"
 #: ../src/option.c:145
 #, c-format
 msgid "Run commands under specified interpreter (default: bash -c '%s')"
-msgstr ""
-"Запускати команди під вказаним інтерпретатором (за замовчанням: bash -c '%s')"
+msgstr "Запускати команди під визначеним інтерпретатором (типово: bash -c '%s')"
 
 #: ../src/option.c:145 ../src/option.c:147 ../src/option.c:149
 #: ../src/option.c:194 ../src/option.c:341 ../src/option.c:345
@@ -513,7 +512,7 @@ msgstr "ШАБЛОН"
 
 #: ../src/option.c:192
 msgid "Set presicion of floating numbers (default - 3)"
-msgstr "Задати точнісь чисел з плаваючою точкою (за умовчанням - 3)"
+msgstr "Задати точність чисел з рухомою комою (типово - 3)"
 
 #: ../src/option.c:194
 msgid "Set command handler"
@@ -750,7 +749,7 @@ msgstr "Відобразити системну палітру"
 
 #: ../src/option.c:305
 msgid "Set path to palette file. Default - "
-msgstr "Задати шлях до файлу кольорів. Без назви - "
+msgstr "Задати шлях до файлу палітри. Типово - "
 
 #: ../src/option.c:307
 msgid "Expand user palette"
@@ -758,8 +757,7 @@ msgstr "Розкривати палітру користувача"
 
 #: ../src/option.c:309
 msgid "Set output mode to MODE. Values are hex (default) or rgb"
-msgstr ""
-"Встановити режим вивода в РЕЖИМ. Значення - hex (за умовчанням) або rgb"
+msgstr "Встановити режим виводу в РЕЖИМ. Значення: hex (типово) або rgb"
 
 #: ../src/option.c:309
 msgid "MODE"
@@ -905,7 +903,7 @@ msgstr "Відкрити вказану адресу"
 
 #: ../src/option.c:402
 msgid "Turn on browser mode"
-msgstr "Ввімкнути режим браузеру"
+msgstr "Ввімкнути режим навігатора"
 
 #: ../src/option.c:404
 msgid "Print clicked uri to stdout"
@@ -929,7 +927,7 @@ msgstr "Задати стрічку агента"
 
 #: ../src/option.c:412
 msgid "Set path or uri to user styles"
-msgstr "Задати файл або шлях до стилей користувача"
+msgstr "Задати URI або шлях до стилей користувача"
 
 #: ../src/option.c:414
 msgid "Set WebKit property"
@@ -965,10 +963,9 @@ msgstr "Задати ширину елемента діалогу"
 
 #: ../src/option.c:431
 msgid "Force using specified icon size"
-msgstr "Примусово використовувати розмір піктограми"
+msgstr "Примусово використовувати визначений розмір піктограми"
 
-#: ../src/option.c:431 ../src/option.c:541 ../src/option.c:649
-#: ../src/tools.c:79
+#: ../src/option.c:431 ../src/option.c:541 ../src/option.c:649 ../src/tools.c:79
 msgid "SIZE"
 msgstr "РОЗМІР"
 
@@ -977,8 +974,8 @@ msgstr "РОЗМІР"
 msgid ""
 "Use specified pattern for launch command in terminal (default: xterm -e %s)"
 msgstr ""
-"Використовувати вказаний шаблон для запуску в терміналі (без шаблону: xterm -"
-"e %s)"
+"Використовувати визначений шаблон для запуску команди в терміналі (типово: "
+"xterm -e %s)"
 
 #: ../src/option.c:436
 msgid "Sort items by name instead of filename"
@@ -1064,8 +1061,8 @@ msgid ""
 "Print a specific column. By default or if 0 is specified will be printed all "
 "columns"
 msgstr ""
-"Виводити тільки вказаний стовпчик. Без вказівки або якщо стовпчик дорівнює "
-"0, будуть виведені усі стовпчики"
+"Виводити визначений стовпчик. Типово, або якщо вказано 0, будуть виведені усі "
+"стовпчики"
 
 #: ../src/option.c:478
 msgid "Hide a specific column"
@@ -1073,15 +1070,14 @@ msgstr "Сховати вказаний стовпчик"
 
 #: ../src/option.c:480
 msgid "Set the column expandable by default. 0 sets all columns expandable"
-msgstr "Задати стовпчик, який розширюється. 0 розширює всі стовпчики"
+msgstr "Задати стовпчик, який типово розширюється. 0 розширює всі стовпчики"
 
 #: ../src/option.c:482
 msgid ""
-"Set the quick search column. Default is first column. Set it to 0 for "
-"disable searching"
+"Set the quick search column. Default is first column. Set it to 0 for disable "
+"searching"
 msgstr ""
-"Задати стовпчик швидкого пошуку. Без вказівки використовується перший "
-"стовпчик. 0 забороняє пошук"
+"Задати стовпчик швидкого пошуку. Типово це перший стовпчик. 0 забороняє пошук"
 
 #: ../src/option.c:484
 msgid "Set the tooltip column"
@@ -1217,7 +1213,7 @@ msgstr "Задати початковий розмір картинки"
 
 #: ../src/option.c:564
 msgid "Set increment for picture scaling (default - 5)"
-msgstr "Задати інкремент для зміни розміру картинки (за умовчанням - 5)"
+msgstr "Задати інкремент для зміни розміру картинки (типово - 5)"
 
 #: ../src/option.c:570
 msgid "Display printing dialog"
@@ -1512,11 +1508,11 @@ msgstr "Задати тип вертикальної прокрутки (auto, a
 
 #: ../src/option.c:729
 msgid "Add path for search icons by name"
-msgstr "Додати каталог для пошуку піктограм"
+msgstr "Додати шлях для пошуку піктограм"
 
 #: ../src/option.c:729
 msgid "PATH"
-msgstr "КАТАЛОГ"
+msgstr "ШЛЯХ"
 
 #: ../src/option.c:735
 msgid "Load extra arguments from file"
@@ -1760,11 +1756,11 @@ msgstr "Показувати параметри діалогу з вкладка
 #. Adds notification option entries
 #: ../src/option.c:2017
 msgid "Notification icon options"
-msgstr "Параметри піктограми повідомлень"
+msgstr "Параметри піктограми сповіщень"
 
 #: ../src/option.c:2018
 msgid "Show notification icon options"
-msgstr "Показувати параметри піктограми повідомлень"
+msgstr "Показувати параметри піктограми сповіщень"
 
 #. Adds paned option entries
 #: ../src/option.c:2025
@@ -2046,7 +2042,7 @@ msgstr "вбудований"
 
 #: ../src/browser.c:214
 msgid "Show all icons"
-msgstr "Показувати всі іконки"
+msgstr "Показувати всі піктограми"
 
 #: ../src/browser.c:215
 msgid "Show only symbolic icons"
@@ -2054,12 +2050,12 @@ msgstr "Показувати тільки символьні піктограм�
 
 #: ../src/browser.c:216
 msgid "Select and print icon on double-click"
-msgstr "Обрати та вівести піктограму подвійним натисканням"
+msgstr "Обрати та вивести піктограму подвійним натисканням"
 
 #. initialize GTK+ and parse the command line arguments
 #: ../src/browser.c:232
 msgid "- Icon browser"
-msgstr "- Навігатор іконок"
+msgstr "- Навігатор піктограм"
 
 #: ../src/browser.c:256
 msgid "Icon browser"
@@ -2115,7 +2111,7 @@ msgstr "Інструменти піктограм"
 
 #: ../src/tools.c:79
 msgid "Use specified icon size"
-msgstr "Використовувати визначений розмір іктограми"
+msgstr "Використовувати визначений розмір піктограми"
 
 #: ../src/tools.c:80
 msgid "Get icon size from GtkIconSize type"
@@ -2173,7 +2169,7 @@ msgstr "режим не вказано\n"
 #. first tab (values at the end due to possible hyphens)
 #: ../src/yad-settings.sh:33
 msgid "Main YAD settings and default values\\n\\n"
-msgstr "Головні налаштування YAD та значення за умовчанням\\n\\n"
+msgstr "Головні налаштування YAD та типові значення\\n\\n"
 
 #: ../src/yad-settings.sh:34
 msgid "Width of dialog window::NUM"
@@ -2189,8 +2185,7 @@ msgstr "Ширина рамки діалогу::NUM"
 
 #: ../src/yad-settings.sh:37
 msgid "Show remaining time and percentage in timeout progress bar:CHK"
-msgstr ""
-"Відображати залишок часу та проценти у індикаторі часу що залишився:CHK"
+msgstr "Відображати залишок часу та проценти у індикаторі часу що залишився:CHK"
 
 #: ../src/yad-settings.sh:38
 msgid "Combo-box in entry dialog is always editable:CHK"
@@ -2206,11 +2201,11 @@ msgstr "Типова команда відкриття:"
 
 #: ../src/yad-settings.sh:41
 msgid "Default date format:"
-msgstr "Формат відображення дати:"
+msgstr "Типовий формат виводу дати:"
 
 #: ../src/yad-settings.sh:42
 msgid "Default URI color in text-info dialog::CLR"
-msgstr "Колір посилань у текстовому діалозі::CLR"
+msgstr "Типовий колір URI посилань у текстовому діалозі::CLR"
 
 #: ../src/yad-settings.sh:43
 msgid "Maximum number of tabs in notebook dialog::NUM"
@@ -2241,15 +2236,15 @@ msgstr "<Порожнє>!"
 #. second tab
 #: ../src/yad-settings.sh:79
 msgid ""
-"YAD settings for text editor\\nThis settings only usefull when YAD built "
-"with GtkSourceView\\n\\n"
+"YAD settings for text editor\\nThis settings only usefull when YAD built with "
+"GtkSourceView\\n\\n"
 msgstr ""
-"Налаштування YAD для редактора текстів\\nЦі налаштування мают сенс тільки "
-"якщо YAD побудований з підтримкою GtkSourceView\\n\\n"
+"Налаштування YAD для редактора текстів\\nЦі налаштування мают сенс тільки якщо "
+"YAD побудований з підтримкою GtkSourceView\\n\\n"
 
 #: ../src/yad-settings.sh:80
 msgid "Default theme for text-info dialog::CB"
-msgstr "Типова кольорова тема для текстового інформаційного діалогу::CB"
+msgstr "Типова тема для текстового діалогу::CB"
 
 #: ../src/yad-settings.sh:81
 msgid "Show line numbers:CHK"
@@ -2359,16 +2354,13 @@ msgstr "Поле вибору завжди можна редагувати"
 #: ../data/yad.gschema.xml.in.h:7
 #, no-c-format
 msgid "Default terminal command (use %s for arguments placeholder)"
-msgstr ""
-"Типова команда терміналу (%s використовується для розміщення "
-"аргументів)"
+msgstr "Типова команда терміналу (%s використовується для розміщення аргументів)"
 
 #: ../data/yad.gschema.xml.in.h:9
 #, no-c-format
 msgid "Default open command (use %s for arguments placeholder)"
 msgstr ""
-"Типова команда для відкриття (%s використовується для розміщення "
-"аргументів)"
+"Типова команда для відкриття (%s використовується для розміщення аргументів)"
 
 #: ../data/yad.gschema.xml.in.h:10
 msgid "Default date format (see strftime(3) for details)"
@@ -2376,7 +2368,7 @@ msgstr "Типовий формат дати (подробиці в strftime(3))
 
 #: ../data/yad.gschema.xml.in.h:11
 msgid "Default color for URI in text-info dialog"
-msgstr "Типовий колір посилань у текстовому інформаційному діалозі"
+msgstr "Типовий колір URI посилань у текстовому діалозі"
 
 #: ../data/yad.gschema.xml.in.h:12
 msgid "Maximum number of tabs in notebook dialog"
