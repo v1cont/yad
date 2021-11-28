@@ -172,7 +172,7 @@ msgstr "УВАГА: Цей режим підтримується тільки в
 #: ../src/notification.c:130
 #, c-format
 msgid "Could not load notification icon '%s': %s\n"
-msgstr "Не вдається завантажити іконку '%s': %s\n"
+msgstr "Не вдається завантажити піктограму '%s': %s\n"
 
 #: ../src/notification.c:335
 #, c-format
@@ -240,11 +240,11 @@ msgstr "ЗАГОЛОВОК"
 
 #: ../src/option.c:95
 msgid "Set the window icon"
-msgstr "Задати іконку діалогу"
+msgstr "Задати піктограму діалогу"
 
 #: ../src/option.c:95
 msgid "ICONPATH"
-msgstr "ІКОНКА"
+msgstr "ПІКТОГРАМА"
 
 #: ../src/option.c:97
 msgid "Set the window width"
@@ -342,7 +342,7 @@ msgstr "ЗОБРАЖЕННЯ"
 
 #: ../src/option.c:119
 msgid "Use specified icon theme instead of default"
-msgstr "Використовувати вказану тему іконок"
+msgstr "Використовувати вказану тему піктограм"
 
 #: ../src/option.c:119 ../src/option.c:676 ../src/browser.c:217
 #: ../src/tools.c:81
@@ -405,7 +405,7 @@ msgstr "Текст діалогу може буди виділеним"
 
 #: ../src/option.c:143
 msgid "Don't scale icons"
-msgstr "Не масштабувати іконки"
+msgstr "Не масштабувати піктограми"
 
 #: ../src/option.c:145
 #, c-format
@@ -807,19 +807,19 @@ msgstr "Використовувати числове поле замість т
 
 #: ../src/option.c:339
 msgid "Set the left entry icon"
-msgstr "Задати ліву іконку"
+msgstr "Задати ліву піктограму"
 
 #: ../src/option.c:341
 msgid "Set the left entry icon action"
-msgstr "Дія для лівої іконки"
+msgstr "Дія для лівої піктограми"
 
 #: ../src/option.c:343
 msgid "Set the right entry icon"
-msgstr "Задати праву іконку"
+msgstr "Задати праву піктограму"
 
 #: ../src/option.c:345
 msgid "Set the right entry icon action"
-msgstr "Дія для правої іконки"
+msgstr "Дія для правої піктограми"
 
 #: ../src/option.c:351
 msgid "Display file selection dialog"
@@ -941,7 +941,7 @@ msgstr "ВЛАСТИВІСТЬ"
 
 #: ../src/option.c:421
 msgid "Display icons box dialog"
-msgstr "Відобразити діалог з іконками швидкого доступу"
+msgstr "Відобразити діалог з піктограмами швидкого доступу"
 
 #: ../src/option.c:423
 msgid "Read data from .desktop files in specified directory"
@@ -957,7 +957,7 @@ msgstr "Використовувати компактний вигляд (спи
 
 #: ../src/option.c:427
 msgid "Use GenericName field instead of Name for icon label"
-msgstr "Використовувати поле GenericName замість Name для мітки"
+msgstr "Використовувати поле GenericName замість Name для назви піктограми"
 
 #: ../src/option.c:429
 msgid "Set the width of dialog items"
@@ -965,7 +965,7 @@ msgstr "Задати ширину елемента діалогу"
 
 #: ../src/option.c:431
 msgid "Force using specified icon size"
-msgstr "Примусово використовувати розмір іконки"
+msgstr "Примусово використовувати розмір піктограми"
 
 #: ../src/option.c:431 ../src/option.c:541 ../src/option.c:649
 #: ../src/tools.c:79
@@ -1181,11 +1181,11 @@ msgstr "Заборонити вихід середньою кнопкою миш
 
 #: ../src/option.c:539
 msgid "Doesn't show icon at startup"
-msgstr "Не показувати іконку при старті"
+msgstr "Не показувати піктограму при старті"
 
 #: ../src/option.c:541
 msgid "Set icon size for fully specified icons (default - 16)"
-msgstr "Задати розмір інконки для повністю вказаних (за умовчанням - 16)"
+msgstr "Задати розмір піктограми для повністю визначених піктограм (типово - 16)"
 
 #: ../src/option.c:548
 msgid "Display paned dialog"
@@ -1512,7 +1512,7 @@ msgstr "Задати тип вертикальної прокрутки (auto, a
 
 #: ../src/option.c:729
 msgid "Add path for search icons by name"
-msgstr "Додати каталог для пошуку іконок"
+msgstr "Додати каталог для пошуку піктограм"
 
 #: ../src/option.c:729
 msgid "PATH"
@@ -1733,11 +1733,11 @@ msgstr "Показувати параметри HTML діалогу"
 #. Add icons option entries
 #: ../src/option.c:1998
 msgid "Icons box options"
-msgstr "Параметри діалогу іконок"
+msgstr "Параметри діалогу піктограм"
 
 #: ../src/option.c:1998
 msgid "Show icons box options"
-msgstr "Показувати параметри діалогу іконок швидкого доступу"
+msgstr "Показувати параметри діалогу піктограм швидкого доступу"
 
 #. Adds list option entries
 #: ../src/option.c:2004
@@ -1760,11 +1760,11 @@ msgstr "Показувати параметри діалогу з вкладка
 #. Adds notification option entries
 #: ../src/option.c:2017
 msgid "Notification icon options"
-msgstr "Параметри іконки повідомлень"
+msgstr "Параметри піктограми повідомлень"
 
 #: ../src/option.c:2018
 msgid "Show notification icon options"
-msgstr "Показувати параметри іконки повідомлень"
+msgstr "Показувати параметри піктограми повідомлень"
 
 #. Adds paned option entries
 #: ../src/option.c:2025
@@ -1969,7 +1969,7 @@ msgstr "Теми %s не знайдено\n"
 
 #: ../src/util.c:37
 msgid "About"
-msgstr "О программе"
+msgstr "Про застосунок"
 
 #: ../src/util.c:38
 msgid "Add"
@@ -2050,11 +2050,11 @@ msgstr "Показувати всі іконки"
 
 #: ../src/browser.c:215
 msgid "Show only symbolic icons"
-msgstr "Показувати тільки символьні іконки"
+msgstr "Показувати тільки символьні піктограми"
 
 #: ../src/browser.c:216
 msgid "Select and print icon on double-click"
-msgstr "Обрати та вівести іконку по подвійному натисканню"
+msgstr "Обрати та вівести піктограму подвійним натисканням"
 
 #. initialize GTK+ and parse the command line arguments
 #: ../src/browser.c:232
@@ -2063,7 +2063,7 @@ msgstr "- Навігатор іконок"
 
 #: ../src/browser.c:256
 msgid "Icon browser"
-msgstr "Навігатор іконок"
+msgstr "Навігатор піктограм"
 
 #: ../src/browser.c:276
 msgid "<b>Name:</b>"
@@ -2083,7 +2083,7 @@ msgstr "Категорія"
 
 #: ../src/browser.c:363
 msgid "Icons"
-msgstr "Іконки"
+msgstr "Піктограми"
 
 #: ../src/tools.c:61
 msgid "Show list of spell languages"
@@ -2111,19 +2111,19 @@ msgstr "Вивести назву шрифта у форматі pango"
 
 #: ../src/tools.c:78
 msgid "Icon tools"
-msgstr "Іконки"
+msgstr "Інструменти піктограм"
 
 #: ../src/tools.c:79
 msgid "Use specified icon size"
-msgstr "Використовувати заданий розмір іконки"
+msgstr "Використовувати визначений розмір іктограми"
 
 #: ../src/tools.c:80
 msgid "Get icon size from GtkIconSize type"
-msgstr "Отримати розмір іконки с типу GtkIconSize"
+msgstr "Отримати розмір піктограми з типу GtkIconSize"
 
 #: ../src/tools.c:81
 msgid "Use icon theme"
-msgstr "Використовувати вказану тему іконок"
+msgstr "Використовувати вказану тему піктограм"
 
 #: ../src/tools.c:160
 #, c-format
@@ -2133,12 +2133,12 @@ msgstr "шрифт не вказано\n"
 #: ../src/tools.c:168
 #, c-format
 msgid "cannot get font description for for string \"%s\"\n"
-msgstr "неможливо отримати опис шрифта зі стрічки \"%s\"\n"
+msgstr "неможливо отримати опис шрифта із рядка \"%s\"\n"
 
 #: ../src/tools.c:270
 #, c-format
 msgid "no icon specified\n"
-msgstr "іконку не вказано\n"
+msgstr "піктограму не визначено\n"
 
 #: ../src/tools.c:352
 msgid "- yad miscellaneous tools"
@@ -2154,11 +2154,11 @@ msgstr "Показувати параметри режиму pfd"
 
 #: ../src/tools.c:360
 msgid "Icon mode"
-msgstr "Режим іконок"
+msgstr "Перегляд піктограм"
 
 #: ../src/tools.c:360
 msgid "Show icon mode options"
-msgstr "Показувати параметри режиму іконок"
+msgstr "Показувати параметри для Перегляду піктограм"
 
 #: ../src/tools.c:367
 #, c-format
@@ -2198,11 +2198,11 @@ msgstr "Поле вибору завжди можна редагувати:CHK"
 
 #: ../src/yad-settings.sh:39
 msgid "Default terminal command:"
-msgstr "Команда термінала за умовчанням:"
+msgstr "Типова команда терміналу:"
 
 #: ../src/yad-settings.sh:40
 msgid "Default open command:"
-msgstr "Команда відкриття за умовчанням:"
+msgstr "Типова команда відкриття:"
 
 #: ../src/yad-settings.sh:41
 msgid "Default date format:"
@@ -2214,7 +2214,7 @@ msgstr "Колір посилань у текстовому діалозі::CLR"
 
 #: ../src/yad-settings.sh:43
 msgid "Maximum number of tabs in notebook dialog::NUM"
-msgstr "Максимальна кількість вкладинок у діалозі::NUM"
+msgstr "Максимальна кількість вкладок у діалозі::NUM"
 
 #: ../src/yad-settings.sh:44
 msgid "Use large previews in file selection dialogs:CHK"
@@ -2232,7 +2232,7 @@ msgstr "Ігнорувати невідомі аргументи:CHK"
 
 #: ../src/yad-settings.sh:47
 msgid "Enable debug mode with information about deprecated features:CHK"
-msgstr "Дозволити режим налагодження з інформуванням про застарілі функції:CHK"
+msgstr "Дозволити режим зневадження з інформуванням про застарілі функції:CHK"
 
 #: ../src/yad-settings.sh:66
 msgid "<Empty>!"
@@ -2245,11 +2245,11 @@ msgid ""
 "with GtkSourceView\\n\\n"
 msgstr ""
 "Налаштування YAD для редактора текстів\\nЦі налаштування мают сенс тільки "
-"якщр YAD побудований з підтримкою GtkSourceView\\n\\n"
+"якщо YAD побудований з підтримкою GtkSourceView\\n\\n"
 
 #: ../src/yad-settings.sh:80
 msgid "Default theme for text-info dialog::CB"
-msgstr "Кольорова тема за умовчанням::CB"
+msgstr "Типова кольорова тема для текстового інформаційного діалогу::CB"
 
 #: ../src/yad-settings.sh:81
 msgid "Show line numbers:CHK"
@@ -2310,7 +2310,7 @@ msgstr "Налаштування YAD"
 
 #: ../src/yad-settings.sh:97
 msgid "Load defaults!view-refresh:3"
-msgstr "Умовчання!view-refresh:3"
+msgstr "Завантажити типові!view-refresh:3"
 
 #: ../src/yad-settings.sh:98
 msgid "<span size='xx-large' weight='bold'>YAD settings editor</span>"
@@ -2326,11 +2326,11 @@ msgstr "Редактор"
 
 #: ../data/yad-icon-browser.desktop.in.h:1
 msgid "Icon Browser"
-msgstr "Навігатор іконок"
+msgstr "Навігатор піктограм"
 
 #: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
-msgstr "Перегляд теми іконок GTK"
+msgstr "Перегляд теми піктограм GTK"
 
 #: ../data/yad-settings.desktop.in.h:2
 msgid "Simple GUI for editing YAD settings"
@@ -2338,11 +2338,11 @@ msgstr "Простий інтерфейс для редагування нала
 
 #: ../data/yad.gschema.xml.in.h:1
 msgid "Default width of dialog window"
-msgstr "Ширина вікна діалогу за умовчанням"
+msgstr "Типова ширина вікна діалогу"
 
 #: ../data/yad.gschema.xml.in.h:2
 msgid "Default height of dialog window"
-msgstr "Висота вікна діалогу за умовчанням"
+msgstr "Типова висота вікна діалогу"
 
 #: ../data/yad.gschema.xml.in.h:3
 msgid "Borders around dialog"
@@ -2360,23 +2360,23 @@ msgstr "Поле вибору завжди можна редагувати"
 #, no-c-format
 msgid "Default terminal command (use %s for arguments placeholder)"
 msgstr ""
-"Команда термінала за умовчанням (%s використовується для розміщення "
+"Типова команда терміналу (%s використовується для розміщення "
 "аргументів)"
 
 #: ../data/yad.gschema.xml.in.h:9
 #, no-c-format
 msgid "Default open command (use %s for arguments placeholder)"
 msgstr ""
-"Команда відкриття за умовчанням (%s використовується для розміщення "
+"Типова команда для відкриття (%s використовується для розміщення "
 "аргументів)"
 
 #: ../data/yad.gschema.xml.in.h:10
 msgid "Default date format (see strftime(3) for details)"
-msgstr "Формат дати за умовчанням (подробиці в strftime(3))"
+msgstr "Типовий формат дати (подробиці в strftime(3))"
 
 #: ../data/yad.gschema.xml.in.h:11
 msgid "Default color for URI in text-info dialog"
-msgstr "Колір посилань у текстовому діалозі за умовчанням"
+msgstr "Типовий колір посилань у текстовому інформаційному діалозі"
 
 #: ../data/yad.gschema.xml.in.h:12
 msgid "Maximum number of tabs in notebook dialog"
@@ -2398,11 +2398,11 @@ msgstr "Ігнорувати невідомі аргументи"
 
 #: ../data/yad.gschema.xml.in.h:16
 msgid "Enable debug mode with information about deprecated features"
-msgstr "Дозволити режим налагодження з інформуванням про застарілі функції"
+msgstr "Дозволити режим зневадження з інформуванням про застарілі функції"
 
 #: ../data/yad.gschema.xml.in.h:17
 msgid "Default color theme for text-info dialog"
-msgstr "Кольорова тема у текстовому діалозі за умовчанням"
+msgstr "Типова кольорова тема у текстовому діалозі"
 
 #: ../data/yad.gschema.xml.in.h:20
 msgid "Enable line marks mode"
@@ -2410,11 +2410,11 @@ msgstr "Дозволити режим позначки строк"
 
 #: ../data/yad.gschema.xml.in.h:21
 msgid "Default color for first type of text marks in text-info dialog"
-msgstr "Колір позначок першого типу у текстовому діалозі за умовчанням"
+msgstr "Типовий колір позначок першого типу у текстовому діалозі"
 
 #: ../data/yad.gschema.xml.in.h:22
 msgid "Default color for second type of text marks in text-info dialog"
-msgstr "Колір позначок другого типу у текстовому діалозі за умовчанням"
+msgstr "Типовий колір позначок другого типу у текстовому діалозі"
 
 #: ../data/yad.gschema.xml.in.h:23
 msgid "Set right margin at position"
@@ -2430,8 +2430,8 @@ msgstr "Використовувати розумний backspace"
 
 #: ../data/yad.gschema.xml.in.h:28
 msgid "Default tabulation width"
-msgstr "Ширина табуляції за замовчанням"
+msgstr "Типова ширина табуляції"
 
 #: ../data/yad.gschema.xml.in.h:29
 msgid "Default indentation width"
-msgstr "Ширина вирівнювання за замовчанням"
+msgstr "Типова ширина вирівнювання"
