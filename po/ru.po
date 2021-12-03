@@ -1610,7 +1610,7 @@ msgstr "Файл существует. Перезаписать?"
 
 #: ../src/option.c:1867
 msgid "File was changed. Save it?"
-msgstr "Файл біл изменен. Сохранить его?"
+msgstr "Файл был изменен. Сохранить его?"
 
 #: ../src/option.c:1920
 msgid "- Yet another dialoging program"
