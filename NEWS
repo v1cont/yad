@@ -1,3 +1,7 @@
+Version 11.0
+    - DROP K HUJAM russian translation
+    - for other changes please discover the git changelog
+
 Version 10.1
     - don't make rows homogeneous when form has a text field
 
