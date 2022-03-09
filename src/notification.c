@@ -346,7 +346,8 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
           else if (!g_ascii_strcasecmp (command, "action"))
             {
               g_free (action);
-              if (value)
+              action = NULL;
+              if (value && *value)
                 action = g_strdup (value);
             }
           else if (!g_ascii_strcasecmp (command, "quit"))
@@ -356,7 +357,7 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
             }
           else if (!g_ascii_strcasecmp (command, "menu"))
             {
-              if (value)
+              if (value && *value)
                 parse_menu_str (value);
             }
           else
