@@ -31,3 +31,4 @@ stamp-h1
 build.log
 *.gschema.xml
 *.gschema.valid
+po/LINGUAS
