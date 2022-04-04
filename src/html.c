@@ -31,6 +31,7 @@ static YadSearchBar *search_bar = NULL;
 static GString *inbuf;
 
 static gboolean is_loaded = FALSE;
+static gboolean uri_cmd = FALSE;
 
 #ifndef PATH_MAX
 #define PATH_MAX 4096
@@ -141,7 +142,7 @@ policy_cb (WebKitWebView *v, WebKitPolicyDecision *pd, WebKitPolicyDecisionType 
             g_app_info_launch_default_for_uri (uri, NULL, NULL);
         }
     }
-  else if (options.data.uri_handler && options.data.uri_handler[0])
+  else if (uri_cmd && options.data.uri_handler && options.data.uri_handler[0])
     {
       gchar *v1, *v2, *cmd;
       gint status;
@@ -426,6 +427,7 @@ html_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w, *sw;
   WebKitSettings *wk_settings;
+  gchar *str;
 
   w = gtk_box_new (GTK_ORIENTATION_VERTICAL, 2);
 
@@ -491,6 +493,16 @@ html_create_widget (GtkWidget * dlg)
           g_signal_connect (G_OBJECT (search_bar->entry), "previous-match", G_CALLBACK (do_find_prev), NULL);
         }
     }
+
+  /* check for user specified uri handler */
+#ifndef STANDALONE
+  str = g_settings_get_string (settings, "open-command");
+#else
+  str = g_strdup (OPEN_CMD);
+#endif
+  if (strcmp (options.data.uri_handler, str) != 0)
+    uri_cmd = TRUE;
+  g_free (str);
 
   /* load data */
   if (options.html_data.uri)
