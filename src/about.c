@@ -123,7 +123,7 @@ yad_about (void)
       /* custom about dialog */
       gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG (dialog), options.about_data.name);
       if (options.data.dialog_image)
-        gtk_about_dialog_set_logo_icon_name (GTK_ABOUT_DIALOG (dialog), options.data.dialog_image);
+        gtk_about_dialog_set_logo (GTK_ABOUT_DIALOG (dialog), get_pixbuf (options.data.dialog_image, YAD_BIG_ICON, TRUE));
       if (options.about_data.version)
         gtk_about_dialog_set_version (GTK_ABOUT_DIALOG (dialog), options.about_data.version);
       if (options.about_data.copyright)
