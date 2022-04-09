@@ -328,16 +328,19 @@ parse_desktop_file (gchar * filename)
           if (type == TYPE_APP)
             {
               ent->command = g_key_file_get_string (kf, "Desktop Entry", "Exec", NULL);
-              /* remove possible arguments patterns */
-              for (i = strlen (ent->command); i > 0; i--)
+              if (ent->command)
                 {
-                  if (ent->command[i] == '%')
+                  /* remove possible arguments patterns */
+                  for (i = strlen (ent->command); i > 0; i--)
                     {
-                      ent->command[i] = '\0';
-                      break;
+                      if (ent->command[i] == '%')
+                        {
+                          ent->command[i] = '\0';
+                          break;
+                        }
                     }
+                  ent->in_term = g_key_file_get_boolean (kf, "Desktop Entry", "Terminal", NULL);
                 }
-              ent->in_term = g_key_file_get_boolean (kf, "Desktop Entry", "Terminal", NULL);
             }
           else
             {
