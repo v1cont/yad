@@ -1,3 +1,9 @@
+Version 11.1
+    - fix input parsing for notification icon
+    - fix parsing desktop files for icons dialog
+    - fix link handling for browser mode in html dialog
+    - improve setting user-defined image in about dialog
+
 Version 11.0
     - DROP K HUJAM russian translation
     - for other changes please discover the git changelog
