@@ -376,7 +376,7 @@ handle_stdin (GIOChannel * ch, GIOCondition cond, gpointer d)
     case G_IO_STATUS_EOF:
       data = g_bytes_new (inbuf->str, inbuf->len);
       /*g_string_free (inbuf, TRUE); */ /* FIXME: IS THAT NEEDED ??? (and where) */
-      webkit_web_view_load_bytes (view, data, options.html_data.mime, options.html_data.encoding, NULL);
+      webkit_web_view_load_bytes (view, data, options.common_data.mime, options.html_data.encoding, NULL);
       g_bytes_unref (data);
       return FALSE;
 

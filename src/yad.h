@@ -350,7 +350,6 @@ typedef struct {
   gchar *uri;
   gboolean browser;
   gboolean print_uri;
-  gchar *mime;
   gchar *encoding;
   gchar *user_agent;
   gchar *user_style;
@@ -505,6 +504,7 @@ typedef struct {
 
 typedef struct {
   gchar *uri;
+  gchar *mime;
   gchar *font;
   gchar *separator;
   gchar *item_separator;

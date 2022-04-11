@@ -218,6 +218,8 @@ static GOptionEntry common_options[] = {
     N_("Show hidden files in file selection dialogs"), NULL },
   { "filename", 0, 0, G_OPTION_ARG_FILENAME, &options.common_data.uri,
     N_("Set source filename"), N_("FILENAME") },
+  { "mime", 0, 0, G_OPTION_ARG_STRING, &options.common_data.mime,
+    N_("Set mime type of input data"), N_("TYPE") },
   { "vertical", 0, 0, G_OPTION_ARG_NONE, &options.common_data.vertical,
     N_("Set vertical orientation"), NULL },
   { "key", 0, 0, G_OPTION_ARG_INT, &options.common_data.key,
@@ -402,8 +404,6 @@ static GOptionEntry html_options[] = {
     N_("Turn on browser mode"), NULL },
   { "print-uri", 0, 0, G_OPTION_ARG_NONE, &options.html_data.print_uri,
     N_("Print clicked uri to stdout"), NULL },
-  { "mime", 0, 0, G_OPTION_ARG_STRING, &options.html_data.mime,
-    N_("Set mime type of input stream data"), N_("TYPE") },
   { "encoding", 0, 0, G_OPTION_ARG_STRING, &options.html_data.encoding,
     N_("Set encoding of input stream data"), N_("ENCODING") },
   { "user-agent", 0, 0, G_OPTION_ARG_STRING, &options.html_data.user_agent,
@@ -1631,6 +1631,7 @@ yad_options_init (void)
 
   /* Initialize common data */
   options.common_data.uri = NULL;
+  options.common_data.mime = NULL;
   options.common_data.font = NULL;
   options.common_data.separator = "|";
   options.common_data.item_separator = "!";
@@ -1745,7 +1746,6 @@ yad_options_init (void)
   options.html_data.uri = NULL;
   options.html_data.browser = FALSE;
   options.html_data.print_uri = FALSE;
-  options.html_data.mime = NULL;
   options.html_data.encoding = NULL;
   options.html_data.user_agent = "YAD-Webkit (" VERSION ")";
   options.html_data.user_style = NULL;

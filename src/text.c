@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2021, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2008-2022, Victor Ananjevsky <victor@sanana.kiev.ua>
  */
 
 #include <pango/pango.h>
@@ -456,6 +456,9 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
       GString *string;
       GError *err = NULL;
       gint status;
+#ifdef HAVE_SOURCEVIEW
+      GtkSourceLanguage *lang = NULL;
+#endif
 
       string = g_string_new (NULL);
       while (channel->is_readable != TRUE)
@@ -524,17 +527,24 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
             }
         }
 
+#ifdef HAVE_SOURCEVIEW
+      if (options.source_data.lang)
+        lang = gtk_source_language_manager_get_language (gtk_source_language_manager_get_default (), options.source_data.lang);
+      else
+        {
+          gchar *ctype;
+           if (options.common_data.mime && *options.common_data.mime)
+             ctype = g_content_type_from_mime_type (options.common_data.mime);
+           else
+             ctype = g_content_type_guess (NULL, string->str, string->len, NULL);
+           lang = gtk_source_language_manager_guess_language (gtk_source_language_manager_get_default (), options.common_data.uri, ctype);
+          g_free (ctype);
+        }
+      gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (text_buffer), lang);
+#endif
+
       g_string_free (string, TRUE);
     }
-
-#ifdef HAVE_SOURCEVIEW
-  if (options.source_data.lang)
-    {
-      GtkSourceLanguage *lang = gtk_source_language_manager_get_language (gtk_source_language_manager_get_default (),
-                                                                          options.source_data.lang);
-      gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (text_buffer), lang);
-    }
-#endif
 
   return TRUE;
 }
@@ -587,7 +597,16 @@ fill_buffer_from_file ()
   if (options.source_data.lang)
     lang = gtk_source_language_manager_get_language (gtk_source_language_manager_get_default (), options.source_data.lang);
   else
-    lang = gtk_source_language_manager_guess_language (gtk_source_language_manager_get_default (), options.common_data.uri, NULL);
+    {
+      gchar *ctype = NULL;
+
+      if (options.common_data.mime && *options.common_data.mime)
+        ctype = g_content_type_from_mime_type (options.common_data.mime);
+      else
+        ctype = g_content_type_guess (options.common_data.uri, NULL, 0, NULL);
+      lang = gtk_source_language_manager_guess_language (gtk_source_language_manager_get_default (), options.common_data.uri, ctype);
+      g_free (ctype);
+    }
   gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (text_buffer), lang);
 #endif
 
