@@ -979,6 +979,7 @@ form_create_widget (GtkWidget * dlg)
                   }
                 gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
                 gtk_widget_set_hexpand (e, TRUE);
+                gtk_widget_set_halign (e, GTK_ALIGN_START); /* prevent expanding widget (make it always compact) */
                 gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
                 fields = g_slist_append (fields, e);
               }
