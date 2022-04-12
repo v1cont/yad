@@ -93,6 +93,9 @@ expand_action (gchar * cmd)
                   arg = g_shell_quote (buf ? buf : "");
                   g_free (buf);
                   break;
+                case YAD_FIELD_SWITCH:
+                  arg = g_strdup (print_bool_val (gtk_switch_get_state (GTK_SWITCH (g_slist_nth_data (fields, num)))));
+                  break;
                 case YAD_FIELD_SCALE:
                   arg = g_strdup_printf ("%d", (gint) gtk_range_get_value (GTK_RANGE (g_slist_nth_data (fields, num))));
                   break;
@@ -241,6 +244,10 @@ set_field_value (guint num, gchar *value)
 
     case YAD_FIELD_CHECK:
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), get_bool_val (value));
+      break;
+
+    case YAD_FIELD_SWITCH:
+      gtk_switch_set_state (GTK_SWITCH (w), get_bool_val (value));
       break;
 
     case YAD_FIELD_COMPLETE:
@@ -959,6 +966,24 @@ form_create_widget (GtkWidget * dlg)
               }
               break;
 
+           case YAD_FIELD_SWITCH:
+              {
+                e = gtk_switch_new ();
+                gtk_widget_set_name (e, "yad-form-switch");
+                if (fld->tip)
+                  {
+                    if (!options.data.no_markup)
+                      gtk_widget_set_tooltip_markup (e, fld->tip);
+                    else
+                      gtk_widget_set_tooltip_text (e, fld->tip);
+                  }
+                gtk_grid_attach (GTK_GRID (tbl), e, 1 + col * 2, row, 1, 1);
+                gtk_widget_set_hexpand (e, TRUE);
+                gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
+                fields = g_slist_append (fields, e);
+              }
+              break;
+
             case YAD_FIELD_COMBO:
               e = gtk_combo_box_text_new ();
               gtk_widget_set_name (e, "yad-form-combo");
@@ -1381,6 +1406,14 @@ form_print_field (guint fn)
                   options.common_data.separator);
       else
         g_printf ("%s%s", print_bool_val (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (g_slist_nth_data (fields, fn)))),
+                  options.common_data.separator);
+      break;
+    case YAD_FIELD_SWITCH:
+      if (options.common_data.quoted_output)
+        g_printf ("'%s'%s", print_bool_val (gtk_switch_get_state (GTK_SWITCH (g_slist_nth_data (fields, fn)))),
+                  options.common_data.separator);
+      else
+        g_printf ("%s%s", print_bool_val (gtk_switch_get_state (GTK_SWITCH (g_slist_nth_data (fields, fn)))),
                   options.common_data.separator);
       break;
     case YAD_FIELD_COMBO:

@@ -876,6 +876,8 @@ add_field (const gchar * option_name, const gchar * value, gpointer data, GError
         fld->type = YAD_FIELD_DATE;
       else if (strcasecmp (fstr[1], "SCL") == 0)
         fld->type = YAD_FIELD_SCALE;
+      else if (strcasecmp (fstr[1], "SW") == 0)
+        fld->type = YAD_FIELD_SWITCH;
       else if (strcasecmp (fstr[1], "BTN") == 0)
         fld->type = YAD_FIELD_BUTTON;
       else if (strcasecmp (fstr[1], "FBTN") == 0)
