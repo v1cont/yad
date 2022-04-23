@@ -610,34 +610,34 @@ get_bool_val (gchar *str)
 gchar *
 print_bool_val (gboolean val)
 {
-  gchar *ret = "";
+  gchar *rv = "";
 
   switch (options.common_data.bool_fmt)
     {
     case YAD_BOOL_FMT_UT:
-      ret = val ? "TRUE" : "FALSE";
+      rv = val ? "TRUE" : "FALSE";
       break;
     case YAD_BOOL_FMT_UY:
-      ret = val ? "YES" : "NO";
+      rv = val ? "YES" : "NO";
       break;
     case YAD_BOOL_FMT_UO:
-      ret = val ? "ON" : "OFF";
+      rv = val ? "ON" : "OFF";
       break;
     case YAD_BOOL_FMT_LT:
-      ret = val ? "true" : "false";
+      rv = val ? "true" : "false";
       break;
     case YAD_BOOL_FMT_LY:
-      ret = val ? "yes" : "no";
+      rv = val ? "yes" : "no";
       break;
     case YAD_BOOL_FMT_LO:
-      ret = val ? "on" : "off";
+      rv = val ? "on" : "off";
       break;
     case YAD_BOOL_FMT_1:
-      ret = val ? "1" : "0";
+      rv = val ? "1" : "0";
       break;
     }
 
-  return ret;
+  return rv;
 }
 
 typedef struct {
@@ -856,9 +856,6 @@ create_search_bar ()
 
   sb = g_new0 (YadSearchBar, 1);
   sb->new_search = TRUE;
-
-  if (!sb)
-    return NULL;
 
   sb->bar = gtk_search_bar_new ();
   gtk_search_bar_set_show_close_button (GTK_SEARCH_BAR (sb->bar), TRUE);
