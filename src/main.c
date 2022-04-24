@@ -599,6 +599,10 @@ create_dialog (void)
     {
       gint cw, ch;
 
+      if (options.common_data.key != -1 && options.data.width > 0 && options.data.height > 0) {
+        gtk_window_resize (GTK_WINDOW (dlg), options.data.width, options.data.height);
+      }
+
       gtk_widget_show_all (dlg);
 
       parse_geometry ();
