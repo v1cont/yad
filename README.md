@@ -75,5 +75,6 @@ Distributions
 Distributions known to package this branch:
 
 * Fatdog64 Linux: https://distro.ibiblio.org/fatdog/web/
-* EasyOS, from version 3.0 onwards. EasyOS website: [easyos.org](https://easyos.org)
+* EasyOS, from version 3.0 onwards: https://easyos.org
+* Woof, the Puppy Linux builder: https://github.com/puppylinux-woof-CE/woof-CE
 
