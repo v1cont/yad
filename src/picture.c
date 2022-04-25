@@ -19,16 +19,6 @@
 
 #include "yad.h"
 
-static GtkWidget *picture;
-static GtkWidget *viewport;
-static GtkWidget *popup_menu;
-
-static GdkPixbufAnimation *anim_pb = NULL;
-static GdkPixbuf *orig_pb = NULL;
-
-static gboolean loaded = FALSE;
-static gboolean animated = FALSE;
-
 enum {
   SIZE_FIT,
   SIZE_ORIG,
@@ -43,25 +33,74 @@ enum {
   ROTATE_FLIP_HOR
 };
 
-static void
-load_picture (gchar *filename)
-{
-  anim_pb = gdk_pixbuf_animation_new_from_file (filename, NULL);
-  orig_pb = gdk_pixbuf_animation_get_static_image (anim_pb);
+typedef struct {
+  gchar *filename;
+  GdkPixbufAnimation *anim_pb;
+  GdkPixbuf *orig_pb;
+  gboolean loaded;
+  gboolean animated;
+} ImageItem;
 
-  if (orig_pb)
+static GList *img_list = NULL;
+static GList *lp = NULL;
+static ImageItem *img = NULL;
+
+static GtkWidget *picture;
+static GtkWidget *viewport;
+static GtkWidget *popup_menu;
+
+static void
+load_picture ()
+{
+  if (!img->loaded)
     {
-      if (gdk_pixbuf_animation_is_static_image (anim_pb))
-        gtk_image_set_from_pixbuf (GTK_IMAGE (picture), orig_pb);
-      else
+      if (img->filename && g_file_test (img->filename, G_FILE_TEST_EXISTS))
         {
-          gtk_image_set_from_animation (GTK_IMAGE (picture), anim_pb);
-          animated = TRUE;
+          img->anim_pb = gdk_pixbuf_animation_new_from_file (img->filename, NULL);
+          img->orig_pb = gdk_pixbuf_animation_get_static_image (img->anim_pb);
+
+          img->animated = !gdk_pixbuf_animation_is_static_image (img->anim_pb);
         }
-      loaded = TRUE;
+      img->loaded = TRUE;
+    }
+
+  if (img->orig_pb)
+    {
+      if (img->animated)
+        gtk_image_set_from_animation (GTK_IMAGE (picture), g_object_ref (img->anim_pb));
+      else
+        gtk_image_set_from_pixbuf (GTK_IMAGE (picture), g_object_ref (img->orig_pb));
     }
   else
     gtk_image_set_from_icon_name (GTK_IMAGE (picture), "image-missing", GTK_ICON_SIZE_DIALOG);
+}
+
+static void
+next_img_cb (GtkWidget *w, gpointer d)
+{
+  lp = g_list_next (lp);
+  if (!lp)
+    lp = g_list_first (img_list);
+  if (lp)
+    img = (ImageItem *) lp->data;
+
+  load_picture ();
+  if (options.picture_data.size == YAD_PICTURE_FIT)
+    picture_fit_to_window ();
+}
+
+static void
+prev_img_cb (GtkWidget *w, gpointer d)
+{
+  lp = g_list_previous (lp);
+  if (!lp)
+    lp = g_list_last (img_list);
+  if (lp)
+    img = (ImageItem *) lp->data;
+
+  load_picture ();
+  if (options.picture_data.size == YAD_PICTURE_FIT)
+    picture_fit_to_window ();
 }
 
 void
@@ -70,11 +109,11 @@ picture_fit_to_window ()
   gdouble width, height, ww, wh;
   gdouble factor;
 
-  if (animated || !gtk_widget_get_realized (viewport))
+  if (!gtk_widget_get_realized (viewport))
     return;
 
-  width = gdk_pixbuf_get_width (orig_pb);
-  height = gdk_pixbuf_get_height (orig_pb);
+  width = gdk_pixbuf_get_width (img->orig_pb);
+  height = gdk_pixbuf_get_height (img->orig_pb);
 
   ww = gdk_window_get_width (gtk_viewport_get_view_window (GTK_VIEWPORT (viewport)));
   wh = gdk_window_get_height (gtk_viewport_get_view_window (GTK_VIEWPORT (viewport)));
@@ -82,13 +121,9 @@ picture_fit_to_window ()
   factor = MIN (ww / width, wh / height);
   if (factor < 1.0)
     {
-      GdkPixbuf *pb = gdk_pixbuf_scale_simple (g_object_ref (orig_pb), width * factor, height * factor, GDK_INTERP_HYPER);
+      GdkPixbuf *pb = gdk_pixbuf_scale_simple (img->orig_pb, width * factor, height * factor, GDK_INTERP_HYPER);
       if (pb)
-        {
-          GdkPixbuf *old_pb = gtk_image_get_pixbuf (GTK_IMAGE (picture));
-          gtk_image_set_from_pixbuf (GTK_IMAGE (picture), pb);
-          g_object_unref (old_pb);
-        }
+        gtk_image_set_from_pixbuf (GTK_IMAGE (picture), pb);
     }
 }
 
@@ -114,8 +149,7 @@ change_size_cb (GtkWidget *w, gint type)
       options.picture_data.size = YAD_PICTURE_FIT;
       break;
     case SIZE_ORIG:
-      gtk_image_set_from_pixbuf (GTK_IMAGE (picture), orig_pb);
-      g_object_unref (pb);
+      gtk_image_set_from_pixbuf (GTK_IMAGE (picture), g_object_ref (img->orig_pb));
       options.picture_data.size = YAD_PICTURE_ORIG;
       break;
     case SIZE_INC:
@@ -182,6 +216,23 @@ create_popup_menu ()
   popup_menu = gtk_menu_new ();
   gtk_menu_set_reserve_toggle_size (GTK_MENU (popup_menu), FALSE);
 
+  if (img_list)
+    {
+      mi = gtk_menu_item_new_with_label (_("Next image"));
+      gtk_widget_show (mi);
+      gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
+      g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (next_img_cb), NULL);
+
+      mi = gtk_menu_item_new_with_label (_("Previous image"));
+      gtk_widget_show (mi);
+      gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
+      g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (prev_img_cb), NULL);
+
+      mi = gtk_separator_menu_item_new ();
+      gtk_widget_show (mi);
+      gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
+    }
+
   mi = gtk_menu_item_new_with_label (_("Fit to window"));
   gtk_widget_show (mi);
   gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
@@ -230,7 +281,7 @@ create_popup_menu ()
 static gboolean
 button_handler (GtkWidget *w, GdkEventButton *ev, gpointer data)
 {
-  if (ev->button == 3)
+  if (ev->button == 3 && !img->animated)
     {
       gtk_menu_popup_at_pointer (GTK_MENU (popup_menu), NULL);
       return TRUE;
@@ -250,6 +301,33 @@ size_allocate_cb ()
 {
   if (options.picture_data.size == YAD_PICTURE_FIT)
     picture_fit_to_window ();
+}
+
+static void init_img_data ()
+{
+  if (options.common_data.uri)
+    {
+      img = g_new0 (ImageItem, 1);
+      img->filename = options.common_data.uri;
+    }
+  else if (options.extra_data && *options.extra_data)
+    {
+      gchar **args = options.extra_data;
+      gint i = 0;
+
+      while (args[i] != NULL)
+        {
+          ImageItem *ii;
+
+          ii = g_new0 (ImageItem, 1);
+          ii->filename = args[i];
+          img_list = g_list_append (img_list, ii);
+          i++;
+        }
+
+      lp = g_list_first (img_list);
+      img = (ImageItem *) lp->data;
+    }
 }
 
 GtkWidget *
@@ -272,19 +350,19 @@ picture_create_widget (GtkWidget * dlg)
   gtk_container_add (GTK_CONTAINER (ev), picture);
 
   /* load picture */
-  if (options.common_data.uri &&
-      g_file_test (options.common_data.uri, G_FILE_TEST_EXISTS))
-    load_picture (options.common_data.uri);
-  else
-    gtk_image_set_from_icon_name (GTK_IMAGE (picture), "image-missing", GTK_ICON_SIZE_DIALOG);
+  init_img_data ();
+  load_picture ();
 
-  if (loaded && !animated)
+  if (img)
     {
       create_popup_menu ();
       g_signal_connect (G_OBJECT (ev), "button-press-event", G_CALLBACK (button_handler), NULL);
       g_signal_connect (G_OBJECT (ev), "key-press-event", G_CALLBACK (key_handler), NULL);
       g_signal_connect (G_OBJECT (ev), "size-allocate", G_CALLBACK (size_allocate_cb), NULL);
-  }
+      load_picture (0);
+    }
+  else
+    gtk_image_set_from_icon_name (GTK_IMAGE (picture), "image-missing", GTK_ICON_SIZE_DIALOG);
 
   return sw;
 }
