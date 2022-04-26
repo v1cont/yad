@@ -81,6 +81,25 @@ load_picture ()
 }
 
 static void
+img_changed_hook ()
+{
+  gchar *qfn, *cmd = NULL;
+
+  if (options.picture_data.change_cmd == NULL)
+    return;
+
+  qfn = g_shell_quote (img->filename);
+  if (g_strstr_len (options.picture_data.change_cmd, -1, "%s") != NULL)
+    cmd = g_strdup_printf (options.picture_data.change_cmd, qfn);
+  else
+    cmd = g_strdup_printf ("%s '%s'", options.picture_data.change_cmd, qfn);
+  g_free (qfn);
+
+  run_command_async (cmd);
+  g_free (cmd);
+}
+
+static void
 next_img_cb (GtkWidget *w, gpointer d)
 {
   lp = g_list_next (lp);
@@ -92,6 +111,7 @@ next_img_cb (GtkWidget *w, gpointer d)
   load_picture ();
   if (options.picture_data.size == YAD_PICTURE_FIT)
     picture_fit_to_window ();
+  img_changed_hook ();
 }
 
 static void
@@ -106,6 +126,7 @@ prev_img_cb (GtkWidget *w, gpointer d)
   load_picture ();
   if (options.picture_data.size == YAD_PICTURE_FIT)
     picture_fit_to_window ();
+  img_changed_hook ();
 }
 
 static void
@@ -118,6 +139,7 @@ first_img_cb (GtkWidget *w, gpointer d)
   load_picture ();
   if (options.picture_data.size == YAD_PICTURE_FIT)
     picture_fit_to_window ();
+  img_changed_hook ();
 }
 
 static void
@@ -130,6 +152,7 @@ last_img_cb (GtkWidget *w, gpointer d)
   load_picture ();
   if (options.picture_data.size == YAD_PICTURE_FIT)
     picture_fit_to_window ();
+  img_changed_hook ();
 }
 
 void

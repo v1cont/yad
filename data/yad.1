@@ -867,6 +867,9 @@ Set increment value for scaling image.
 .TP
 .B \-\-filename=\fIFILENAME\fP
 Set picture filename. If no file name is specified extra data will be used. In this case several filenames can be specified.
+.TP
+.B \-\-image-changed=\fICMD\fP
+Set command which runs after changing image. Argument of a command is a filename of current image. Argument can be specified by '\fI%s\fP' pattern or will be the last part of a command.
 .PP
 Some actions on a picture like navigation, scaling or rotating available from popup menu. Those actions can be made only on static images.
 

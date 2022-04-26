@@ -562,6 +562,8 @@ static GOptionEntry picture_options[] = {
     N_("Set initial size (fit or orig)"), N_("TYPE") },
   { "inc", 0, 0, G_OPTION_ARG_INT, &options.picture_data.inc,
     N_("Set increment for picture scaling (default - 5)"), N_("NUMBER") },
+  { "image-changed", 0, 0, G_OPTION_ARG_STRING, &options.picture_data.change_cmd,
+    N_("Set action on image changing"), "CMD" },
   { NULL }
 };
 
@@ -1824,6 +1826,7 @@ yad_options_init (void)
   /* Initialize picture data */
   options.picture_data.size = YAD_PICTURE_ORIG;
   options.picture_data.inc = 5;
+  options.picture_data.change_cmd = NULL;
 
   /* Initialize print data */
   options.print_data.type = YAD_PRINT_TEXT;

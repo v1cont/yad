@@ -428,6 +428,7 @@ typedef struct {
 
 typedef struct {
   YadPictureType size;
+  gchar *change_cmd;
   gint inc;
 } YadPictureData;
 
