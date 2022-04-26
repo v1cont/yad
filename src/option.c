@@ -390,7 +390,7 @@ static GOptionEntry form_options[] = {
   { "align-buttons", 0, 0, G_OPTION_ARG_NONE, &options.form_data.align_buttons,
     N_("Align labels on button fields"), NULL },
   { "changed-action", 0, 0, G_OPTION_ARG_STRING, &options.form_data.changed_action,
-    N_("Set changed action"), "CMD" },
+    N_("Set changed action"), N_("CMD") },
   { NULL }
 };
 
@@ -563,7 +563,7 @@ static GOptionEntry picture_options[] = {
   { "inc", 0, 0, G_OPTION_ARG_INT, &options.picture_data.inc,
     N_("Set increment for picture scaling (default - 5)"), N_("NUMBER") },
   { "image-changed", 0, 0, G_OPTION_ARG_STRING, &options.picture_data.change_cmd,
-    N_("Set action on image changing"), "CMD" },
+    N_("Set action on image changing"), N_("CMD") },
   { NULL }
 };
 

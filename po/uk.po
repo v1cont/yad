@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-26 10:11+0300\n"
+"POT-Creation-Date: 2022-04-26 10:23+0300\n"
 "PO-Revision-Date: 2021-11-28 19:00+0200\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -416,7 +416,8 @@ msgstr ""
 
 #: ../src/option.c:145 ../src/option.c:147 ../src/option.c:149
 #: ../src/option.c:194 ../src/option.c:343 ../src/option.c:347
-#: ../src/option.c:492 ../src/option.c:494 ../src/option.c:496
+#: ../src/option.c:393 ../src/option.c:492 ../src/option.c:494
+#: ../src/option.c:496 ../src/option.c:566
 msgid "CMD"
 msgstr "КОМАНДА"
 
