@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-26 08:34+0300\n"
+"POT-Creation-Date: 2022-04-26 09:33+0300\n"
 "PO-Revision-Date: 2021-11-28 19:00+0200\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -1852,53 +1852,61 @@ msgstr "Показувати додаткові параметри"
 msgid "WARNING: wrong focused pane number %d. Must be 1 or 2\n"
 msgstr "УВАГА: невірний номер панелі %d. Повинен бути 1 чи 2\n"
 
-#: ../src/picture.c:245
+#: ../src/picture.c:268
 msgid "Next image"
 msgstr "Наступне зображення"
 
-#: ../src/picture.c:252
+#: ../src/picture.c:275
 msgid "Previous image"
 msgstr "Попереднє зображення"
 
-#: ../src/picture.c:259
+#: ../src/picture.c:282
 msgid "First image"
 msgstr "Перше зображення"
 
-#: ../src/picture.c:266
+#: ../src/picture.c:289
 msgid "Last image"
 msgstr "Останнж зображення"
 
-#: ../src/picture.c:278
+#: ../src/picture.c:301
 msgid "Fit to window"
 msgstr "По розміру вікна"
 
-#: ../src/picture.c:285
+#: ../src/picture.c:308
 msgid "Original size"
 msgstr "Оригінальний розмір"
 
-#: ../src/picture.c:292
+#: ../src/picture.c:315
 msgid "Increase size"
 msgstr "Збільшити розмір"
 
-#: ../src/picture.c:299
+#: ../src/picture.c:322
 msgid "Decrease size"
 msgstr "Зменшити розмір"
 
-#: ../src/picture.c:310
+#: ../src/picture.c:333
 msgid "Rotate left"
 msgstr "Повернути ліворуч"
 
-#: ../src/picture.c:317
+#: ../src/picture.c:340
 msgid "Rotate right"
 msgstr "Повернути праворуч"
 
-#: ../src/picture.c:324
+#: ../src/picture.c:347
 msgid "Flip vertical"
 msgstr "Віддзеркалити вертикально"
 
-#: ../src/picture.c:331
+#: ../src/picture.c:354
 msgid "Flip horizontal"
 msgstr "Віддзеркалити горизонтально"
+
+#: ../src/picture.c:365
+msgid "Copy image to clipboard"
+msgstr "Копіювати зображення"
+
+#: ../src/picture.c:370
+msgid "Copy filename to clipboard"
+msgstr "Копіювати ім'я файла"
 
 #: ../src/print.c:200 ../src/print.c:367
 #, c-format

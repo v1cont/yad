@@ -33,6 +33,11 @@ enum {
   ROTATE_FLIP_HOR
 };
 
+enum {
+  COPY_IMAGE,
+  COPY_FILE
+};
+
 typedef struct {
   gchar *filename;
   GdkPixbufAnimation *anim_pb;
@@ -233,6 +238,24 @@ rotate_cb (GtkWidget *w, gint type)
 }
 
 static void
+copy_cb (GtkWidget *w, gint type)
+{
+  GtkClipboard *clip;
+
+  clip = gtk_clipboard_get_default (gdk_display_get_default ());
+
+  switch (type)
+    {
+    case COPY_IMAGE:
+      gtk_clipboard_set_image (clip, img->orig_pb);
+      break;
+    case COPY_FILE:
+      gtk_clipboard_set_text (clip, img->filename, -1);
+      break;
+    }
+}
+
+static void
 create_popup_menu ()
 {
   GtkWidget *mi, *al;
@@ -334,6 +357,20 @@ create_popup_menu ()
   gtk_widget_show (mi);
   gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
   g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (rotate_cb), GINT_TO_POINTER (ROTATE_FLIP_HOR));
+
+  mi = gtk_separator_menu_item_new ();
+  gtk_widget_show (mi);
+  gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
+
+  mi = gtk_menu_item_new_with_label (_("Copy image to clipboard"));
+  gtk_widget_show (mi);
+  gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
+  g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (copy_cb), GINT_TO_POINTER (COPY_IMAGE));
+
+  mi = gtk_menu_item_new_with_label (_("Copy filename to clipboard"));
+  gtk_widget_show (mi);
+  gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
+  g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (copy_cb), GINT_TO_POINTER (COPY_FILE));
 }
 
 static gboolean
