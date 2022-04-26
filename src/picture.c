@@ -103,6 +103,30 @@ prev_img_cb (GtkWidget *w, gpointer d)
     picture_fit_to_window ();
 }
 
+static void
+first_img_cb (GtkWidget *w, gpointer d)
+{
+  lp = g_list_first (img_list);
+  if (lp)
+    img = (ImageItem *) lp->data;
+
+  load_picture ();
+  if (options.picture_data.size == YAD_PICTURE_FIT)
+    picture_fit_to_window ();
+}
+
+static void
+last_img_cb (GtkWidget *w, gpointer d)
+{
+  lp = g_list_last (img_list);
+  if (lp)
+    img = (ImageItem *) lp->data;
+
+  load_picture ();
+  if (options.picture_data.size == YAD_PICTURE_FIT)
+    picture_fit_to_window ();
+}
+
 void
 picture_fit_to_window ()
 {
@@ -211,7 +235,7 @@ rotate_cb (GtkWidget *w, gint type)
 static void
 create_popup_menu ()
 {
-  GtkWidget *mi;
+  GtkWidget *mi, *al;
 
   popup_menu = gtk_menu_new ();
   gtk_menu_set_reserve_toggle_size (GTK_MENU (popup_menu), FALSE);
@@ -219,14 +243,32 @@ create_popup_menu ()
   if (img_list)
     {
       mi = gtk_menu_item_new_with_label (_("Next image"));
+      al = gtk_bin_get_child (GTK_BIN (mi));
+      gtk_accel_label_set_accel (GTK_ACCEL_LABEL (al), GDK_KEY_Right, 0);
       gtk_widget_show (mi);
       gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
       g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (next_img_cb), NULL);
 
       mi = gtk_menu_item_new_with_label (_("Previous image"));
+      al = gtk_bin_get_child (GTK_BIN (mi));
+      gtk_accel_label_set_accel (GTK_ACCEL_LABEL (al), GDK_KEY_Left, 0);
       gtk_widget_show (mi);
       gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
       g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (prev_img_cb), NULL);
+
+      mi = gtk_menu_item_new_with_label (_("First image"));
+      al = gtk_bin_get_child (GTK_BIN (mi));
+      gtk_accel_label_set_accel (GTK_ACCEL_LABEL (al), GDK_KEY_Home, 0);
+      gtk_widget_show (mi);
+      gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
+      g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (first_img_cb), NULL);
+
+      mi = gtk_menu_item_new_with_label (_("Last image"));
+      al = gtk_bin_get_child (GTK_BIN (mi));
+      gtk_accel_label_set_accel (GTK_ACCEL_LABEL (al), GDK_KEY_End, 0);
+      gtk_widget_show (mi);
+      gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
+      g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (last_img_cb), NULL);
 
       mi = gtk_separator_menu_item_new ();
       gtk_widget_show (mi);
@@ -234,21 +276,29 @@ create_popup_menu ()
     }
 
   mi = gtk_menu_item_new_with_label (_("Fit to window"));
+  al = gtk_bin_get_child (GTK_BIN (mi));
+  gtk_accel_label_set_accel (GTK_ACCEL_LABEL (al), GDK_KEY_w, 0);
   gtk_widget_show (mi);
   gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
   g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (change_size_cb), GINT_TO_POINTER (SIZE_FIT));
 
   mi = gtk_menu_item_new_with_label (_("Original size"));
+  al = gtk_bin_get_child (GTK_BIN (mi));
+  gtk_accel_label_set_accel (GTK_ACCEL_LABEL (al), GDK_KEY_o, 0);
   gtk_widget_show (mi);
   gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
   g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (change_size_cb), GINT_TO_POINTER (SIZE_ORIG));
 
   mi = gtk_menu_item_new_with_label (_("Increase size"));
+  al = gtk_bin_get_child (GTK_BIN (mi));
+  gtk_accel_label_set_accel (GTK_ACCEL_LABEL (al), GDK_KEY_plus, 0);
   gtk_widget_show (mi);
   gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
   g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (change_size_cb), GINT_TO_POINTER (SIZE_INC));
 
   mi = gtk_menu_item_new_with_label (_("Decrease size"));
+  al = gtk_bin_get_child (GTK_BIN (mi));
+  gtk_accel_label_set_accel (GTK_ACCEL_LABEL (al), GDK_KEY_minus, 0);
   gtk_widget_show (mi);
   gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
   g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (change_size_cb), GINT_TO_POINTER (SIZE_DEC));
@@ -258,21 +308,29 @@ create_popup_menu ()
   gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
 
   mi = gtk_menu_item_new_with_label (_("Rotate left"));
+  al = gtk_bin_get_child (GTK_BIN (mi));
+  gtk_accel_label_set_accel (GTK_ACCEL_LABEL (al), GDK_KEY_l, 0);
   gtk_widget_show (mi);
   gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
   g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (rotate_cb), GINT_TO_POINTER (ROTATE_LEFT));
 
   mi = gtk_menu_item_new_with_label (_("Rotate right"));
+  al = gtk_bin_get_child (GTK_BIN (mi));
+  gtk_accel_label_set_accel (GTK_ACCEL_LABEL (al), GDK_KEY_r, 0);
   gtk_widget_show (mi);
   gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
   g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (rotate_cb), GINT_TO_POINTER (ROTATE_RIGHT));
 
   mi = gtk_menu_item_new_with_label (_("Flip vertical"));
+  al = gtk_bin_get_child (GTK_BIN (mi));
+  gtk_accel_label_set_accel (GTK_ACCEL_LABEL (al), GDK_KEY_v, 0);
   gtk_widget_show (mi);
   gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
   g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (rotate_cb), GINT_TO_POINTER (ROTATE_FLIP_VERT));
 
   mi = gtk_menu_item_new_with_label (_("Flip horizontal"));
+  al = gtk_bin_get_child (GTK_BIN (mi));
+  gtk_accel_label_set_accel (GTK_ACCEL_LABEL (al), GDK_KEY_h, 0);
   gtk_widget_show (mi);
   gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
   g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (rotate_cb), GINT_TO_POINTER (ROTATE_FLIP_HOR));
@@ -293,6 +351,57 @@ button_handler (GtkWidget *w, GdkEventButton *ev, gpointer data)
 static gboolean
 key_handler (GtkWidget *w, GdkEventKey *ev, gpointer data)
 {
+  switch (ev->keyval)
+    {
+    case GDK_KEY_Right:
+    case GDK_KEY_KP_Right:
+      next_img_cb (w, NULL);
+      return TRUE;
+    case GDK_KEY_Left:
+    case GDK_KEY_KP_Left:
+      prev_img_cb (w, NULL);
+      return TRUE;
+    case GDK_KEY_Home:
+    case GDK_KEY_KP_Home:
+      first_img_cb (w, NULL);
+      return TRUE;
+    case GDK_KEY_End:
+    case GDK_KEY_KP_End:
+      last_img_cb (w, NULL);
+      return TRUE;
+    case GDK_KEY_W:
+    case GDK_KEY_w:
+      change_size_cb (w, SIZE_FIT);
+      return TRUE;
+    case GDK_KEY_O:
+    case GDK_KEY_o:
+      change_size_cb (w, SIZE_ORIG);
+      return TRUE;
+    case GDK_KEY_plus:
+    case GDK_KEY_KP_Add:
+      change_size_cb (w, SIZE_INC);
+      return TRUE;
+    case GDK_KEY_minus:
+    case GDK_KEY_KP_Subtract:
+      change_size_cb (w, SIZE_DEC);
+      return TRUE;
+    case GDK_KEY_L:
+    case GDK_KEY_l:
+      rotate_cb (w, ROTATE_LEFT);
+      return TRUE;
+    case GDK_KEY_R:
+    case GDK_KEY_r:
+      rotate_cb (w, ROTATE_RIGHT);
+      return TRUE;
+    case GDK_KEY_V:
+    case GDK_KEY_v:
+      rotate_cb (w, ROTATE_FLIP_VERT);
+      return TRUE;
+    case GDK_KEY_H:
+    case GDK_KEY_h:
+      rotate_cb (w, ROTATE_FLIP_HOR);
+      return TRUE;
+    }
   return FALSE;
 }
 
@@ -347,6 +456,7 @@ picture_create_widget (GtkWidget * dlg)
   gtk_container_add (GTK_CONTAINER (viewport), ev);
 
   picture = gtk_image_new ();
+  gtk_widget_set_can_focus (picture, TRUE); /* need to get key press events */
   gtk_container_add (GTK_CONTAINER (ev), picture);
 
   /* load picture */
