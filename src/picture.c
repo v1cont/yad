@@ -218,7 +218,7 @@ change_size_cb (GtkWidget *w, gint type)
       options.picture_data.size = YAD_PICTURE_ORIG;
       break;
     case SIZE_INC:
-      new_pb = gdk_pixbuf_scale_simple (pb, width + options.picture_data.inc,
+      new_pb = gdk_pixbuf_scale_simple (img->orig_pb, width + options.picture_data.inc,
                                         height + options.picture_data.inc, GDK_INTERP_HYPER);
       if (new_pb)
         {
@@ -227,7 +227,7 @@ change_size_cb (GtkWidget *w, gint type)
         }
       break;
     case SIZE_DEC:
-      new_pb = gdk_pixbuf_scale_simple (pb, width - options.picture_data.inc,
+      new_pb = gdk_pixbuf_scale_simple (img->orig_pb, width - options.picture_data.inc,
                                         height - options.picture_data.inc, GDK_INTERP_HYPER);
       if (new_pb)
         {
