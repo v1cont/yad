@@ -231,7 +231,7 @@ menu_popup_cb (GtkTextView *w, GtkWidget *popup, gpointer d)
   if (!GTK_IS_MENU (popup))
     return;
 
-  if (options.text_data.file_op)
+  if (options.common_data.file_op)
     {
       GtkWidget *mitem;
 
@@ -285,7 +285,7 @@ key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer d)
       gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (search_bar->bar), TRUE);
       return gtk_search_bar_handle_event (GTK_SEARCH_BAR (search_bar->bar), (GdkEvent *) key);
     }
-  else if (options.text_data.file_op)
+  else if (options.common_data.file_op)
     {
       if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_O || key->keyval == GDK_KEY_o))
         {
@@ -786,7 +786,7 @@ text_create_widget (GtkWidget * dlg)
   /* Add keyboard handler */
   g_signal_connect (text_view, "key-press-event", G_CALLBACK (key_press_cb), dlg);
 
-  if (options.text_data.file_op)
+  if (options.common_data.file_op)
     {
       g_signal_connect (G_OBJECT (text_buffer), "changed", G_CALLBACK (text_changed_cb), NULL);
       g_signal_connect_after (G_OBJECT (text_view), "populate-popup", G_CALLBACK (menu_popup_cb), dlg);

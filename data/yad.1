@@ -640,6 +640,9 @@ Set path or uri to custom user styles. Path to local file can be an absolute fil
 .B \-\-disable-search
 Disable search bar.
 .TP
+.B \-\-file-op
+Enable file operations. This option adds open menu item to popup menu,
+.TP
 .B \-\-wk-prop=\fIPROP\fP
 Set additional WebKit setting. This option may be used multiply times. Setting \fIPROP\fP must be in a form "setting-name value". First character of value must be a type identifier \fIb\fP for booleans, \fIi\fP for integers and \fIs\fP for strings. The values itself following by a colon. List of possible settings can be found on this page - https://webkitgtk.org/reference/webkit2gtk/stable/WebKitSettings.html
 .PP
@@ -867,6 +870,9 @@ Set increment value for scaling image.
 .TP
 .B \-\-filename=\fIFILENAME\fP
 Set picture filename. If no file name is specified extra data will be used. In this case several filenames can be specified.
+.TP
+.B \-\-file-op
+Enable file operations. This option adds open menu item to popup menu,
 .TP
 .B \-\-image-changed=\fICMD\fP
 Set command which runs after changing image. Argument of a command is a filename of current image. Argument can be specified by '\fI%s\fP' pattern or will be the last part of a command.

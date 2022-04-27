@@ -479,7 +479,6 @@ typedef struct {
   gchar *fore;
   gchar *back;
   gboolean in_place;
-  gboolean file_op;
   gboolean confirm_save;
   gchar *confirm_text;
 } YadTextData;
@@ -527,6 +526,7 @@ typedef struct {
   gboolean hide_text;
   gint icon_size;
   gboolean enable_search;
+  gboolean file_op;
   gboolean scroll;
 #if GLIB_CHECK_VERSION(2,30,0)
   GFormatSizeFlags size_fmt;

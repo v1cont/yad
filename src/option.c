@@ -232,6 +232,8 @@ static GOptionEntry common_options[] = {
     N_("Make main widget scrollable"), NULL },
   { "disable-search", 0, G_OPTION_FLAG_REVERSE, G_OPTION_ARG_NONE, &options.common_data.enable_search,
     N_("Disable search in text and html dialogs"), NULL },
+  { "file-op", 0, 0, G_OPTION_ARG_NONE, &options.common_data.file_op,
+    N_("Enable file operations"), NULL },
 #if GLIB_CHECK_VERSION(2,30,0)
   { "iec-format", 0, G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, set_size_format,
     N_("Use IEC (base 1024) units with for size values"), NULL },
@@ -663,8 +665,6 @@ static GOptionEntry text_options[] = {
     N_("Use pango markup"), NULL },
   { "in-place", 0, 0, G_OPTION_ARG_NONE, &options.text_data.in_place,
     N_("Save file instead of print on exit"), NULL },
-  { "file-op", 0, 0, G_OPTION_ARG_NONE, &options.text_data.file_op,
-    N_("Enable file operations"), NULL },
   { "confirm-save", 0, G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, add_confirm_save,
     N_("Confirm save the file if text was changed"), N_("[TEXT]") },
   { NULL }
@@ -1669,6 +1669,7 @@ yad_options_init (void)
   options.common_data.icon_size = 0;
   options.common_data.scroll = FALSE;
   options.common_data.enable_search = TRUE;
+  options.common_data.file_op = FALSE;
 #if GLIB_CHECK_VERSION(2,30,0)
   options.common_data.size_fmt = G_FORMAT_SIZE_DEFAULT;
 #endif
@@ -1877,7 +1878,6 @@ yad_options_init (void)
 #endif
   options.text_data.formatted = FALSE;
   options.text_data.in_place = FALSE;
-  options.text_data.file_op = FALSE;
 
 #ifdef HAVE_SOURCEVIEW
   /* Initialize sourceview data */

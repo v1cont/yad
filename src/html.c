@@ -288,14 +288,17 @@ menu_cb (WebKitWebView *view, WebKitContextMenu *menu, GdkEvent *ev, WebKitHitTe
   WebKitContextMenuItem *mi;
   GSimpleAction *act;
 
-  mi = webkit_context_menu_item_new_separator ();
-  webkit_context_menu_prepend (menu, mi);
+  if (options.common_data.file_op)
+    {
+      mi = webkit_context_menu_item_new_separator ();
+      webkit_context_menu_prepend (menu, mi);
 
-  act = g_simple_action_new ("open", NULL);
-  g_signal_connect (G_OBJECT (act), "activate", G_CALLBACK (open_cb), d);
+      act = g_simple_action_new ("open", NULL);
+      g_signal_connect (G_OBJECT (act), "activate", G_CALLBACK (open_cb), d);
 
-  mi = webkit_context_menu_item_new_from_gaction (G_ACTION (act), _("Open URI"), NULL);
-  webkit_context_menu_prepend (menu, mi);
+      mi = webkit_context_menu_item_new_from_gaction (G_ACTION (act), _("Open URI"), NULL);
+      webkit_context_menu_prepend (menu, mi);
+    }
 
   mi = webkit_context_menu_item_new_separator ();
   webkit_context_menu_append (menu, mi);

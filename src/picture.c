@@ -54,9 +54,28 @@ static GtkWidget *picture;
 static GtkWidget *viewport;
 static GtkWidget *popup_menu;
 
+static void create_popup_menu ();
+
+static void
+img_free (ImageItem *ii)
+{
+  if (ii)
+    {
+      g_free (ii->filename);
+      if (ii->orig_pb)
+        g_object_unref (ii->orig_pb);
+      if (ii->anim_pb)
+        g_object_unref (ii->anim_pb);
+      g_free (ii);
+    }
+}
+
 static void
 load_picture ()
 {
+  if (!img)
+    return;
+
   if (!img->loaded)
     {
       if (img->filename && g_file_test (img->filename, G_FILE_TEST_EXISTS))
@@ -75,6 +94,8 @@ load_picture ()
         gtk_image_set_from_animation (GTK_IMAGE (picture), g_object_ref (img->anim_pb));
       else
         gtk_image_set_from_pixbuf (GTK_IMAGE (picture), g_object_ref (img->orig_pb));
+      if (options.picture_data.size == YAD_PICTURE_FIT)
+        picture_fit_to_window ();
     }
   else
     gtk_image_set_from_icon_name (GTK_IMAGE (picture), "image-missing", GTK_ICON_SIZE_DIALOG);
@@ -109,8 +130,6 @@ next_img_cb (GtkWidget *w, gpointer d)
     img = (ImageItem *) lp->data;
 
   load_picture ();
-  if (options.picture_data.size == YAD_PICTURE_FIT)
-    picture_fit_to_window ();
   img_changed_hook ();
 }
 
@@ -124,8 +143,6 @@ prev_img_cb (GtkWidget *w, gpointer d)
     img = (ImageItem *) lp->data;
 
   load_picture ();
-  if (options.picture_data.size == YAD_PICTURE_FIT)
-    picture_fit_to_window ();
   img_changed_hook ();
 }
 
@@ -137,8 +154,6 @@ first_img_cb (GtkWidget *w, gpointer d)
     img = (ImageItem *) lp->data;
 
   load_picture ();
-  if (options.picture_data.size == YAD_PICTURE_FIT)
-    picture_fit_to_window ();
   img_changed_hook ();
 }
 
@@ -150,8 +165,6 @@ last_img_cb (GtkWidget *w, gpointer d)
     img = (ImageItem *) lp->data;
 
   load_picture ();
-  if (options.picture_data.size == YAD_PICTURE_FIT)
-    picture_fit_to_window ();
   img_changed_hook ();
 }
 
@@ -161,7 +174,7 @@ picture_fit_to_window ()
   gdouble width, height, ww, wh;
   gdouble factor;
 
-  if (!gtk_widget_get_realized (viewport))
+  if (!gtk_widget_get_realized (viewport) || !img)
     return;
 
   width = gdk_pixbuf_get_width (img->orig_pb);
@@ -261,6 +274,75 @@ rotate_cb (GtkWidget *w, gint type)
 }
 
 static void
+open_file_cb (GtkWidget *w, gpointer d)
+{
+  GtkWidget *dlg;
+  static GtkFileFilter *imgf = NULL;
+  static GtkFileFilter *allf = NULL;
+  static gchar *dir = NULL;
+
+  if (!imgf)
+    {
+      imgf = gtk_file_filter_new ();
+      gtk_file_filter_set_name (imgf, _("Images"));
+      gtk_file_filter_add_pixbuf_formats (imgf);
+    }
+
+  if (!allf)
+    {
+      allf = gtk_file_filter_new ();
+      gtk_file_filter_set_name (allf, _("All files"));
+      gtk_file_filter_add_pattern (allf, "*");
+    }
+
+  dlg = gtk_file_chooser_dialog_new (_("YAD - Select Image(s)"),
+                                     GTK_WINDOW (gtk_widget_get_toplevel (w)),
+                                     GTK_FILE_CHOOSER_ACTION_OPEN,
+                                     _("Cancel"), GTK_RESPONSE_CANCEL,
+                                     _("OK"), GTK_RESPONSE_ACCEPT,
+                                     NULL);
+  gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dlg), TRUE);
+  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dlg), imgf);
+  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dlg), allf);
+  if (dir)
+    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), dir);
+
+  if (gtk_dialog_run (GTK_DIALOG (dlg)) == GTK_RESPONSE_ACCEPT)
+    {
+      GSList *fp, *fn = gtk_file_chooser_get_filenames (GTK_FILE_CHOOSER (dlg));
+
+      if (img_list)
+        {
+          g_list_free_full (img_list, (GDestroyNotify) img_free);
+          img_list = NULL;
+        }
+
+      for (fp = fn; fp; fp = fp->next)
+        {
+          ImageItem *ii = g_new0 (ImageItem, 1);
+
+          ii->filename = g_strdup (fp->data);
+          img_list = g_list_append (img_list, ii);
+        }
+      g_slist_free_full (fn, g_free);
+
+      lp = g_list_first (img_list);
+      img = (ImageItem *) lp->data;
+      load_picture ();
+
+      /* recreate menu */
+      gtk_widget_destroy (popup_menu);
+      create_popup_menu ();
+
+      /* keep current dir */
+      g_free (dir);
+      dir = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (dlg));
+    }
+
+  gtk_widget_destroy (dlg);
+}
+
+static void
 copy_cb (GtkWidget *w, gint type)
 {
   GtkClipboard *clip;
@@ -285,6 +367,20 @@ create_popup_menu ()
 
   popup_menu = gtk_menu_new ();
   gtk_menu_set_reserve_toggle_size (GTK_MENU (popup_menu), FALSE);
+
+  if (options.common_data.file_op)
+    {
+      mi = gtk_menu_item_new_with_label (_("Open file(s)..."));
+      al = gtk_bin_get_child (GTK_BIN (mi));
+      gtk_accel_label_set_accel (GTK_ACCEL_LABEL (al), GDK_KEY_o, GDK_CONTROL_MASK);
+      gtk_widget_show (mi);
+      gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
+      g_signal_connect (G_OBJECT (mi), "activate", G_CALLBACK (open_file_cb), NULL);
+
+      mi = gtk_separator_menu_item_new ();
+      gtk_widget_show (mi);
+      gtk_menu_shell_append (GTK_MENU_SHELL (popup_menu), mi);
+    }
 
   if (img_list)
     {
@@ -399,7 +495,7 @@ create_popup_menu ()
 static gboolean
 button_handler (GtkWidget *w, GdkEventButton *ev, gpointer data)
 {
-  if (ev->button == 3 && !img->animated)
+  if (ev->button == 3 && (!img || !img->animated))
     {
       gtk_menu_popup_at_pointer (GTK_MENU (popup_menu), NULL);
       return TRUE;
@@ -435,7 +531,10 @@ key_handler (GtkWidget *w, GdkEventKey *ev, gpointer data)
       return TRUE;
     case GDK_KEY_O:
     case GDK_KEY_o:
-      change_size_cb (w, SIZE_ORIG);
+      if (ev->state & GDK_CONTROL_MASK)
+        open_file_cb (w, NULL);
+      else
+        change_size_cb (w, SIZE_ORIG);
       return TRUE;
     case GDK_KEY_plus:
     case GDK_KEY_KP_Add:
@@ -489,7 +588,7 @@ static void init_img_data ()
           ImageItem *ii;
 
           ii = g_new0 (ImageItem, 1);
-          ii->filename = args[i];
+          ii->filename = g_strdup (args[i]);
           img_list = g_list_append (img_list, ii);
           i++;
         }
@@ -519,18 +618,18 @@ picture_create_widget (GtkWidget * dlg)
   gtk_widget_set_can_focus (picture, TRUE); /* need to get key press events */
   gtk_container_add (GTK_CONTAINER (ev), picture);
 
-  /* load picture */
-  init_img_data ();
-  load_picture ();
+  g_signal_connect (G_OBJECT (ev), "button-press-event", G_CALLBACK (button_handler), NULL);
+  g_signal_connect (G_OBJECT (ev), "key-press-event", G_CALLBACK (key_handler), NULL);
+  g_signal_connect (G_OBJECT (ev), "size-allocate", G_CALLBACK (size_allocate_cb), NULL);
 
+  init_img_data ();
+
+  /* must be after calling init_img_data() */
+  create_popup_menu ();
+
+  /* load picture */
   if (img)
-    {
-      create_popup_menu ();
-      g_signal_connect (G_OBJECT (ev), "button-press-event", G_CALLBACK (button_handler), NULL);
-      g_signal_connect (G_OBJECT (ev), "key-press-event", G_CALLBACK (key_handler), NULL);
-      g_signal_connect (G_OBJECT (ev), "size-allocate", G_CALLBACK (size_allocate_cb), NULL);
-      load_picture (0);
-    }
+    load_picture ();
   else
     gtk_image_set_from_icon_name (GTK_IMAGE (picture), "image-missing", GTK_ICON_SIZE_DIALOG);
 
