@@ -277,23 +277,16 @@ static void
 open_file_cb (GtkWidget *w, gpointer d)
 {
   GtkWidget *dlg;
-  static GtkFileFilter *imgf = NULL;
-  static GtkFileFilter *allf = NULL;
+  GtkFileFilter *imgf, *allf;
   static gchar *dir = NULL;
 
-  if (!imgf)
-    {
-      imgf = gtk_file_filter_new ();
-      gtk_file_filter_set_name (imgf, _("Images"));
-      gtk_file_filter_add_pixbuf_formats (imgf);
-    }
+  imgf = gtk_file_filter_new ();
+  gtk_file_filter_set_name (imgf, _("Images"));
+  gtk_file_filter_add_pixbuf_formats (imgf);
 
-  if (!allf)
-    {
-      allf = gtk_file_filter_new ();
-      gtk_file_filter_set_name (allf, _("All files"));
-      gtk_file_filter_add_pattern (allf, "*");
-    }
+  allf = gtk_file_filter_new ();
+  gtk_file_filter_set_name (allf, _("All files"));
+  gtk_file_filter_add_pattern (allf, "*");
 
   dlg = gtk_file_chooser_dialog_new (_("YAD - Select Image(s)"),
                                      GTK_WINDOW (gtk_widget_get_toplevel (w)),
