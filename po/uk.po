@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-27 13:20+0300\n"
+"POT-Creation-Date: 2022-04-28 06:18+0300\n"
 "PO-Revision-Date: 2021-11-28 19:00+0200\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -71,13 +71,13 @@ msgid "Select files"
 msgstr "Вибрати файли"
 
 #: ../src/form.c:501 ../src/form.c:509 ../src/form.c:588 ../src/form.c:596
-#: ../src/form.c:647 ../src/html.c:220 ../src/html.c:253 ../src/picture.c:301
+#: ../src/form.c:647 ../src/html.c:220 ../src/html.c:253 ../src/picture.c:294
 #: ../src/text.c:121 ../src/text.c:192 ../src/util.c:40
 msgid "Cancel"
 msgstr "Скасувати"
 
 #: ../src/form.c:502 ../src/form.c:510 ../src/form.c:589 ../src/form.c:597
-#: ../src/form.c:648 ../src/html.c:221 ../src/picture.c:302 ../src/text.c:122
+#: ../src/form.c:648 ../src/html.c:221 ../src/picture.c:295 ../src/text.c:122
 #: ../src/text.c:193 ../src/util.c:46
 msgid "OK"
 msgstr "Гаразд"
@@ -1532,7 +1532,7 @@ msgstr "Завантажити додаткові аргументи з файл
 msgid "Mark %s doesn't have a value\n"
 msgstr "Помітці %s не надано значення\n"
 
-#: ../src/option.c:993 ../src/picture.c:287
+#: ../src/option.c:993 ../src/picture.c:284
 msgid "Images"
 msgstr "Зображення"
 
@@ -1857,71 +1857,71 @@ msgstr "Показувати додаткові параметри"
 msgid "WARNING: wrong focused pane number %d. Must be 1 or 2\n"
 msgstr "УВАГА: невірний номер панелі %d. Повинен бути 1 чи 2\n"
 
-#: ../src/picture.c:294
+#: ../src/picture.c:288
 msgid "All files"
 msgstr "Вcі файли"
 
-#: ../src/picture.c:298
+#: ../src/picture.c:291
 msgid "YAD - Select Image(s)"
 msgstr "YAD - Вибір зображень"
 
-#: ../src/picture.c:373
+#: ../src/picture.c:366
 msgid "Open file(s)..."
-msgstr "_Відкрити файл(и)..."
+msgstr "Відкрити файл(и)..."
 
-#: ../src/picture.c:387
+#: ../src/picture.c:380
 msgid "Next image"
 msgstr "Наступне зображення"
 
-#: ../src/picture.c:394
+#: ../src/picture.c:387
 msgid "Previous image"
 msgstr "Попереднє зображення"
 
-#: ../src/picture.c:401
+#: ../src/picture.c:394
 msgid "First image"
 msgstr "Перше зображення"
 
-#: ../src/picture.c:408
+#: ../src/picture.c:401
 msgid "Last image"
 msgstr "Останнж зображення"
 
-#: ../src/picture.c:420
+#: ../src/picture.c:413
 msgid "Fit to window"
 msgstr "По розміру вікна"
 
-#: ../src/picture.c:427
+#: ../src/picture.c:420
 msgid "Original size"
 msgstr "Оригінальний розмір"
 
-#: ../src/picture.c:434
+#: ../src/picture.c:427
 msgid "Increase size"
 msgstr "Збільшити розмір"
 
-#: ../src/picture.c:441
+#: ../src/picture.c:434
 msgid "Decrease size"
 msgstr "Зменшити розмір"
 
-#: ../src/picture.c:452
+#: ../src/picture.c:445
 msgid "Rotate left"
 msgstr "Повернути ліворуч"
 
-#: ../src/picture.c:459
+#: ../src/picture.c:452
 msgid "Rotate right"
 msgstr "Повернути праворуч"
 
-#: ../src/picture.c:466
+#: ../src/picture.c:459
 msgid "Flip vertical"
 msgstr "Віддзеркалити вертикально"
 
-#: ../src/picture.c:473
+#: ../src/picture.c:466
 msgid "Flip horizontal"
 msgstr "Віддзеркалити горизонтально"
 
-#: ../src/picture.c:484
+#: ../src/picture.c:477
 msgid "Copy image to clipboard"
 msgstr "Копіювати зображення"
 
-#: ../src/picture.c:489
+#: ../src/picture.c:482
 msgid "Copy filename to clipboard"
 msgstr "Копіювати ім'я файла"
 
