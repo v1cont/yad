@@ -108,7 +108,9 @@ img_changed_hook ()
 
   if (options.picture_data.change_cmd == NULL)
     return;
-
+  if (!img)
+    return;
+  
   qfn = g_shell_quote (img->filename);
   if (g_strstr_len (options.picture_data.change_cmd, -1, "%s") != NULL)
     cmd = g_strdup_printf (options.picture_data.change_cmd, qfn);
