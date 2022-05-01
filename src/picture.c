@@ -322,6 +322,7 @@ open_file_cb (GtkWidget *w, gpointer d)
       lp = g_list_first (img_list);
       img = (ImageItem *) lp->data;
       load_picture ();
+      img_changed_hook ();
 
       /* recreate menu */
       gtk_widget_destroy (popup_menu);
