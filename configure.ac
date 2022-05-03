@@ -94,7 +94,7 @@ fi
 dnl standalone build
 AC_ARG_ENABLE([standalone],
 	[AS_HELP_STRING([--enable-standalone],
-			[Build standalone YAD binary (wihtout gsettings)])],
+			[Build standalone YAD binary (without gsettings)])],
 	[build_sa=$enableval], [build_sa=no])
 AM_CONDITIONAL([STANDALONE], [test x$build_sa = xyes])
 
