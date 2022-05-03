@@ -1,3 +1,12 @@
+Version 12.0
+    - add ability to load several images in picture dialog
+    - add color picker to color dialog and yad-tools
+    - add --line option to text-info dialog
+    - improve guess of syntax highlighting in text-info dialog
+    - add --mime option to icon mode in yad-tools
+    - add switch field type in form dialog (thanks to Misko <mpsrbija@gmail.com>) 
+    - use pango markup for multiline text field in form dialog
+
 Version 11.1
     - fix input parsing for notification icon
     - fix parsing desktop files for icons dialog
