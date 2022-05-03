@@ -846,14 +846,6 @@ text_create_widget (GtkWidget * dlg)
 
   if (options.common_data.listen || options.common_data.uri == NULL)
     fill_buffer_from_stdin ();
-  else
-    {
-      /* place cursor at start of file */
-      GtkTextIter iter;
-
-      gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (text_buffer), &iter, 0);
-      gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (text_buffer), &iter);
-    }
 
   return w;
 }
