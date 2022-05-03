@@ -653,6 +653,8 @@ static GOptionEntry text_options[] = {
     N_("Set justification (left, right, center or fill)"), N_("TYPE") },
   { "margins", 0, 0, G_OPTION_ARG_INT, &options.text_data.margins,
     N_("Set text margins"), N_("SIZE") },
+  { "line", 0, 0, G_OPTION_ARG_INT64, &options.text_data.line,
+    N_("Jump to specific line"), N_("NUMBER") },
   { "fore", 0, 0, G_OPTION_ARG_STRING, &options.text_data.fore,
     N_("Use specified color for text"), N_("COLOR") },
   { "back", 0, 0, G_OPTION_ARG_STRING, &options.text_data.back,
@@ -1869,6 +1871,7 @@ yad_options_init (void)
   options.text_data.wrap = FALSE;
   options.text_data.justify = GTK_JUSTIFY_LEFT;
   options.text_data.margins = 0;
+  options.text_data.line = 0;
   options.text_data.hide_cursor = TRUE;
   options.text_data.fore = NULL;
   options.text_data.back = NULL;

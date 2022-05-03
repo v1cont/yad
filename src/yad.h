@@ -473,6 +473,7 @@ typedef struct {
   gboolean wrap;
   GtkJustification justify;
   gint margins;
+  gulong line;
   gboolean uri;
   gboolean hide_cursor;
   gchar *uri_color;
@@ -672,6 +673,7 @@ gboolean file_confirm_overwrite (GtkWidget *dlg);
 void notebook_swallow_childs (void);
 void paned_swallow_childs (void);
 void picture_fit_to_window (void);
+void text_goto_line (void);
 
 void app_print_result (void);
 void calendar_print_result (void);

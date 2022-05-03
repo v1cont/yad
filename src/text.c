@@ -609,13 +609,6 @@ fill_buffer_from_file ()
     }
   gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (text_buffer), lang);
 #endif
-
-  if (options.common_data.editable)
-    {
-      /* move cursor at the beginnging of a buffer */
-      gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (text_buffer), &iter, 0);
-      gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (text_buffer), &iter);
-    }
 }
 
 static void
@@ -633,6 +626,22 @@ static void
 text_changed_cb (GtkTextBuffer *b, gpointer d)
 {
   text_changed = TRUE;
+}
+
+void
+text_goto_line ()
+{
+  if (options.common_data.uri)
+    {
+      GtkTextIter iter;
+
+      while (gtk_events_pending ())
+        gtk_main_iteration ();
+
+      gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (text_buffer), &iter, options.text_data.line);
+      gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (text_buffer), &iter);
+      gtk_text_view_scroll_to_iter (GTK_TEXT_VIEW (text_view), &iter, 0, TRUE, 0, 0.5);
+    }
 }
 
 GtkWidget *

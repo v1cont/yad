@@ -916,6 +916,8 @@ main (gint argc, gchar ** argv)
         notebook_swallow_childs ();
       else if (options.mode == YAD_MODE_PANED)
         paned_swallow_childs ();
+      else if (options.mode == YAD_MODE_TEXTINFO)
+        text_goto_line ();
       else if (options.mode == YAD_MODE_PICTURE)
         {
           if (options.picture_data.size == YAD_PICTURE_FIT)
