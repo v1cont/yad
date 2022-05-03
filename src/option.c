@@ -309,6 +309,8 @@ static GOptionEntry color_options[] = {
     N_("Set path to palette file. Default - " RGB_FILE), N_("[FILENAME]") },
   { "expand-palette", 0, 0, G_OPTION_ARG_NONE, &options.color_data.expand_palette,
     N_("Expand user palette"), NULL },
+  { "picker", 0, 0, G_OPTION_ARG_NONE, &options.color_data.color_picker,
+    N_("Show color picker"), NULL },
   { "mode", 0, 0, G_OPTION_ARG_CALLBACK, set_color_mode,
     N_("Set output mode to MODE. Values are hex (default) or rgb"), N_("MODE") },
   { "alpha", 0, 0, G_OPTION_ARG_NONE, &options.color_data.alpha,
@@ -1704,6 +1706,7 @@ yad_options_init (void)
   options.color_data.init_color = NULL;
   options.color_data.gtk_palette = FALSE;
   options.color_data.use_palette = FALSE;
+  options.color_data.color_picker = FALSE;
   options.color_data.expand_palette = FALSE;
   options.color_data.palette = NULL;
   options.color_data.alpha = FALSE;

@@ -20,6 +20,7 @@
 #include <errno.h>
 
 #include "yad.h"
+#include "cpicker.h"
 
 static GtkWidget *color;
 
@@ -102,6 +103,12 @@ set_color (gchar *clr)
 }
 
 static void
+picker_clicked (GtkWidget *w, gpointer data)
+{
+  yad_get_screen_color (color);
+}
+
+static void
 palette_changed (GtkTreeSelection * sel, gpointer data)
 {
   GtkTreeModel *model;
@@ -128,6 +135,21 @@ color_create_widget (GtkWidget * dlg)
   if (options.color_data.init_color)
     set_color (options.color_data.init_color);
   gtk_box_pack_start (GTK_BOX (w), color, FALSE, FALSE, 2);
+
+  if (options.color_data.color_picker)
+    {
+      GtkWidget *b, *i;
+
+      b = gtk_button_new_with_label (_("Pick up screen color"));
+
+      i = gtk_image_new_from_icon_name ("gtk-color-picker", GTK_ICON_SIZE_BUTTON);
+      gtk_button_set_image (GTK_BUTTON (b), i);
+      g_object_set (G_OBJECT (b), "always-show-image", TRUE, NULL);
+
+      g_signal_connect (G_OBJECT (b), "clicked", G_CALLBACK (picker_clicked), NULL);
+
+      gtk_box_pack_start (GTK_BOX (w), b, FALSE, FALSE, 2);
+    }
 
   if (options.color_data.use_palette)
     {

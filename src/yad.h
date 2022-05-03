@@ -298,6 +298,7 @@ typedef struct {
   gchar *init_color;
   gboolean gtk_palette;
   gboolean use_palette;
+  gboolean color_picker;
   gboolean expand_palette;
   gchar *palette;
   gboolean alpha;

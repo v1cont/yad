@@ -30,6 +30,8 @@
 #include <gtksourceview/gtksource.h>
 #endif
 
+#include "cpicker.h"
+
 typedef enum {
   PANGO_SPEC,
   XFT_SPEC
@@ -42,6 +44,7 @@ static FontType font_type = XFT_SPEC;
 
 static gboolean pfd_mode = FALSE;
 static gboolean icon_mode = FALSE;
+static gboolean color_mode = FALSE;
 static gboolean mime = FALSE;
 static gboolean ver = FALSE;
 #ifdef HAVE_SPELL
@@ -50,6 +53,7 @@ static gboolean langs_mode = FALSE;
 #ifdef HAVE_SOURCEVIEW
 static gboolean themes_mode = FALSE;
 #endif
+gboolean pick_color = FALSE;
 
 static guint icon_size = 24;
 static gchar *icon_theme_name = NULL;
@@ -81,6 +85,12 @@ static GOptionEntry icon_ents[] = {
   { "size", 's', 0, G_OPTION_ARG_INT, &icon_size, N_("Use specified icon size"), N_("SIZE") },
   { "type", 't', 0, G_OPTION_ARG_CALLBACK, set_size_type, N_("Get icon size from GtkIconSize type"), N_("TYPE") },
   { "theme", 0, 0, G_OPTION_ARG_STRING, &icon_theme_name, N_("Use icon theme"), N_("THEME") },
+  { NULL }
+};
+
+static GOptionEntry color_ents[] = {
+  { "color", 'c', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &color_mode, N_("Color manipulation tools"), NULL },
+  { "pick", 0, 0, G_OPTION_ARG_NONE, &pick_color, N_("Pick up screen color"), NULL },
   { NULL }
 };
 
@@ -284,7 +294,7 @@ run_icon_mode ()
   if (mime)
     {
       gchar *ctype = g_content_type_from_mime_type (args[0]);
-      output = g_content_type_get_generic_icon_name (ctype);      
+      output = g_content_type_get_generic_icon_name (ctype);
     }
   else
     {
@@ -293,11 +303,24 @@ run_icon_mode ()
         return 1;
       output = (gchar *) gtk_icon_info_get_filename (ii);
     }
-  
+
   if (output)
     g_print ("%s\n", output);
   else
     return 1;
+
+  return 0;
+}
+
+static gint
+run_color_mode ()
+{
+  if (pick_color)
+    {
+      gtk_init (NULL, NULL);
+      yad_get_screen_color (NULL);
+      gtk_main ();
+    }
 
   return 0;
 }
@@ -313,7 +336,7 @@ show_langs ()
       const GspellLanguage *l = lng->data;
       g_print ("%s\n", gspell_language_get_code (l));
     }
-    
+
   return 0;
 }
 #endif
@@ -336,7 +359,7 @@ show_themes ()
       g_print ("%s\n", gtk_source_style_scheme_get_name (s));
       i++;
     }
-    
+
   return 0;
 }
 #endif
@@ -372,6 +395,11 @@ main (int argc, char *argv[])
   g_option_group_set_translation_domain (grp, GETTEXT_PACKAGE);
   g_option_context_add_group (ctx, grp);
 
+  grp = g_option_group_new ("color", _("Color mode"), _("Show color mode options"), NULL, NULL);
+  g_option_group_add_entries (grp, color_ents);
+  g_option_group_set_translation_domain (grp, GETTEXT_PACKAGE);
+  g_option_context_add_group (ctx, grp);
+
   if (!g_option_context_parse (ctx, &argc, &argv, &err))
     {
       g_printerr (_("option parsing failed: %s\n"), err->message);
@@ -388,6 +416,8 @@ main (int argc, char *argv[])
     ret = run_pfd_mode ();
   else if (icon_mode)
     ret = run_icon_mode ();
+  else if (color_mode)
+    ret = run_color_mode ();
 #ifdef HAVE_SPELL
   else if (langs_mode)
     ret = show_langs ();
