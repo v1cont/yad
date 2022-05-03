@@ -369,9 +369,15 @@ set_field_value (guint num, gchar *value)
 
     case YAD_FIELD_TEXT:
       {
+        GtkTextIter iter;
         GtkTextBuffer *tb = gtk_text_view_get_buffer (GTK_TEXT_VIEW (w));
         gchar *txt = g_strcompress (value);
-        gtk_text_buffer_set_text (tb, txt, -1);
+        gtk_text_buffer_set_text (tb, "", -1);
+        gtk_text_buffer_get_start_iter (tb, &iter);
+        if (options.data.no_markup)
+          gtk_text_buffer_insert (tb, &iter, txt, -1);
+        else
+          gtk_text_buffer_insert_markup (tb, &iter, txt, -1);
         g_free (txt);
         break;
       }
