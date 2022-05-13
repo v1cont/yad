@@ -22,6 +22,7 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include <gdk/gdkkeysyms.h>
+#include <locale.h>
 
 typedef struct {
   GtkWidget *win;

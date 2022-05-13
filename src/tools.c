@@ -21,6 +21,7 @@
 #include <locale.h>
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
+#include <locale.h>
 
 #ifdef HAVE_SPELL
 #include <gspell/gspell.h>
