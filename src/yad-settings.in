@@ -119,20 +119,20 @@ if [[ $? -eq 0 ]]; then
     gsettings set yad.settings debug ${r1[13]}
 
     # GtkSourceView settings
-    gsettings get yad.sourceview theme "${r2[0]}"
-    gsettings get yad.sourceview line-num ${r2[1]}
-    gsettings get yad.sourceview line-hl ${r2[2]}
-    gsettings get yad.sourceview line-marks ${r2[3]}
-    gsettings get yad.sourceview mark1-color ${r2[4]}
-    gsettings get yad.sourceview mark2-color ${r2[5]}
-    gsettings get yad.sourceview right-margin ${r2[6]}
-    gsettings get yad.sourceview brackets ${r2[7]}
-    gsettings get yad.sourceview indent ${r2[8]}
-    gsettings get yad.sourceview homend ${r2[9]}
-    gsettings get yad.sourceview smart-bs ${r2[10]}
-    gsettings get yad.sourceview tab-width ${r2[11]}
-    gsettings get yad.sourceview indent-width ${r2[12]}
-    gsettings get yad.sourceview spaces ${r2[13]}
+    gsettings set yad.sourceview theme "${r2[0]}"
+    gsettings set yad.sourceview line-num ${r2[1]}
+    gsettings set yad.sourceview line-hl ${r2[2]}
+    gsettings set yad.sourceview line-marks ${r2[3]}
+    gsettings set yad.sourceview mark1-color ${r2[4]}
+    gsettings set yad.sourceview mark2-color ${r2[5]}
+    gsettings set yad.sourceview right-margin ${r2[6]}
+    gsettings set yad.sourceview brackets ${r2[7]}
+    gsettings set yad.sourceview indent ${r2[8]}
+    gsettings set yad.sourceview homend ${r2[9]}
+    gsettings set yad.sourceview smart-bs ${r2[10]}
+    gsettings set yad.sourceview tab-width ${r2[11]}
+    gsettings set yad.sourceview indent-width ${r2[12]}
+    gsettings set yad.sourceview spaces ${r2[13]}
 elif [[ $? -eq 3 ]]; then
     # Load default settings
     gsettings reset-recursively yad.settings
