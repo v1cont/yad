@@ -80,7 +80,7 @@ yad --plug=$KEY --tabnum=2 --bool-fmt=t --quoted-output --separator=" " --form -
     --field=$"Default theme for text-info dialog::CB" ${themes%?} \
     --field=$"Show line numbers:CHK" $(gsettings get yad.sourceview line-num) \
     --field=$"Hightlight current line:CHK" $(gsettings get yad.sourceview line-hl) \
-    --field=$"Enable line mars mode:CHK" $(gsettings get yad.sourceview line-marks) \
+    --field=$"Enable line marks mode:CHK" $(gsettings get yad.sourceview line-marks) \
     --field=$"Color of first type marks::CLR" "$(eval echo $(gsettings get yad.sourceview mark1-color))" \
     --field=$"Color of second type marks::CLR" "$(eval echo $(gsettings get yad.sourceview mark2-color))" \
     --field=$"Right margin position::NUM" $(gsettings get yad.sourceview right-margin) \
