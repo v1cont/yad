@@ -756,6 +756,11 @@ Set the \fICMD\fP as a action when selection is changed. \fICMD\fP will be launc
 \fICMD\fP may contain a special character `%s' for setting a position for arguments. By default arguments will be concatenated to the end of \fICMD\fP.
 This option doesn't work with \fI--multiple\fP.
 .TP
+.B \-\-toggle-action=\fICMD\fP
+Set the \fICMD\fP as a action when either a checkbox or radiobox is toggled. \fICMD\fP will be launched with values of all columns as an arguments.
+\fICMD\fP may contain a special character `%s' for setting a position for arguments. By default arguments will be concatenated to the end of \fICMD\fP.
+This option doesn't work with \fI--multiple\fP.
+.TP
 .B \-\-row-action=\fICMD\fP
 Set the \fICMD\fP as a action when the row is added, modified or removed. First argument for the command is the name of action (\fIadd\fP, \fIedit\fP or \fIdel\fP).
 The rest of command line is data from selected row. Output of this command sets the new row values.
