@@ -1,4 +1,4 @@
-#! @BASH@
+#! @ENV@ bash
 # -*- mode: sh -*-
 #
 # YAD settings editor. This file is part of YAD
@@ -93,7 +93,7 @@ yad --plug=$KEY --tabnum=2 --bool-fmt=t --quoted-output --separator=" " --form -
     --field=$"Insert spaces instead of tabulation:CHK" $(gsettings get yad.sourceview spaces) > $res2 &
 
 # main dialog
-yad --title=$"YAD settings" --key=$KEY --width=475 --height=600 --image=preferences-other \
+yad --title=$"YAD settings" --key=$KEY --width=600 --height=700 --image=preferences-other \
     --button=$"Load defaults!view-refresh:3" --button="yad-save:0" --button="yad-close:1" \
     --text=$"<span size='xx-large' weight='bold'>YAD settings editor</span>" --text-align=center \
     --notebook --stack --expand --tab=$"Main" --tab=$"Editor"

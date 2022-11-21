@@ -15,7 +15,7 @@ IT_PROG_INTLTOOL([0.40.0])
 
 AC_PROG_CC
 
-AC_PATH_TOOL([BASH], [bash])
+AC_PATH_PROG([ENV], [env])
 
 PKG_CHECK_MODULES([GTK], [gtk+-3.0 >= 3.22.0 gtk+-unix-print-3.0])
 AC_SUBST([GTK_CFLAGS])
