@@ -207,18 +207,19 @@ update_preview (GtkFileChooser * chooser, GtkWidget *p)
                   /* save thumbnail */
                   if (options.common_data.large_preview)
                     {
-                      g_mkdir_with_parents (large_path, 0755);
+                      g_mkdir_with_parents (large_path, 0700);
                       file = g_strdup_printf ("%s/%s.png", large_path, g_checksum_get_string (chs));
                     }
                   else
                     {
-                      g_mkdir_with_parents (normal_path, 0755);
+                      g_mkdir_with_parents (normal_path, 0700);
                       file = g_strdup_printf ("%s/%s.png", normal_path, g_checksum_get_string (chs));
                     }
                   gdk_pixbuf_save (pb, file, "png", NULL,
                                    "tEXt::Thumb::URI", uri,
                                    "tEXt::Thumb::MTime", smtime,
                                    NULL);
+                  g_chmod (file, 0600);
                   g_free (smtime);
                 }
             }
