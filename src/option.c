@@ -202,6 +202,8 @@ static GOptionEntry common_options[] = {
     N_("Allow changes to text in some cases"), NULL },
   { "tail", 0, 0, G_OPTION_ARG_NONE, &options.common_data.tail,
     N_("Autoscroll to end of text"), NULL },
+  { "auto-scroll", 0, 0, G_OPTION_ARG_NONE, &options.common_data.tail,
+    N_("Autoscroll to end of text (alias to tail)"), NULL },
   { "quoted-output", 0, 0, G_OPTION_ARG_NONE, &options.common_data.quoted_output,
     N_("Quote dialogs output"), NULL },
   { "num-output", 0, 0, G_OPTION_ARG_NONE, &options.common_data.num_output,
