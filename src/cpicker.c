@@ -35,10 +35,6 @@ typedef struct {
   guint32 time;
 } GrabData;
 
-static GdkRGBA selected_color;            /* selected color */
-static gboolean pickup_made = FALSE;      /* true when color was picked up */
-static gboolean pickup_done = FALSE;      /* true when pickup was made or canceled */
-
 static gboolean key_press (GtkWidget * invisible, GdkEventKey * event, gpointer data);
 static gboolean mouse_press (GtkWidget * invisible, GdkEventButton * event, gpointer data);
 
