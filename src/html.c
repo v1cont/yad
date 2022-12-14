@@ -130,17 +130,24 @@ policy_cb (WebKitWebView *v, WebKitPolicyDecision *pd, WebKitPolicyDecisionType 
   if (!options.html_data.browser)
     {
       WebKitNavigationAction *act = webkit_navigation_policy_decision_get_navigation_action (WEBKIT_NAVIGATION_POLICY_DECISION (pd));
-      webkit_policy_decision_ignore (pd);
       if (webkit_navigation_action_get_navigation_type (act) == WEBKIT_NAVIGATION_TYPE_LINK_CLICKED)
         {
           WebKitURIRequest *r = webkit_navigation_action_get_request (act);
 
           uri = webkit_uri_request_get_uri (r);
-          if (options.html_data.print_uri)
-            g_printf ("%s\n", uri);
+          if (strncmp (uri, "about:blank#", 11) == 0)
+            webkit_policy_decision_use (pd);
           else
-            g_app_info_launch_default_for_uri (uri, NULL, NULL);
+            {
+              webkit_policy_decision_ignore (pd);
+              if (options.html_data.print_uri)
+                g_printf ("%s\n", uri);
+              else
+                g_app_info_launch_default_for_uri (uri, NULL, NULL);
+            }
         }
+      else
+        webkit_policy_decision_ignore (pd);
     }
   else if (uri_cmd && options.data.uri_handler && options.data.uri_handler[0])
     {
