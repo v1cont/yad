@@ -1,4 +1,11 @@
-Version 21.1
+Version 12.2
+    - add --auto-scroll option as an alias to --tail
+    - fixed jump to anchor in simple mode of html dialog
+    - fixed parsing data from stdin for tree mode of list dialog
+    - fixed man page
+    - code cleanup
+
+Version 12.1
     - fixed some typos
     - fixed permissions in thumbnails creation
     - improve interpreteur string in yad-settings script
