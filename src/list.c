@@ -568,15 +568,15 @@ static gboolean
 handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
 {
   static GtkTreeIter iter;
-  static gint column_count = 0;
-  static gint row_count = 0;
+  static gulong column_count = 0;
+  static gulong row_count = 0;
+  static gboolean node_added = FALSE;
   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
 
   if ((condition == G_IO_IN) || (condition == G_IO_IN + G_IO_HUP))
     {
       GError *err = NULL;
       GString *string = g_string_new (NULL);
-      gboolean node_added = FALSE;
 
       while (channel->is_readable != TRUE)
         usleep (100);
@@ -588,9 +588,6 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
           do
             {
               status = g_io_channel_read_line_string (channel, string, NULL, &err);
-
-              while (gtk_events_pending ())
-                gtk_main_iteration ();
             }
           while (status == G_IO_STATUS_AGAIN);
 
