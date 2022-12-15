@@ -437,6 +437,7 @@ html_create_widget (GtkWidget * dlg)
 {
   GtkWidget *w, *sw;
   WebKitSettings *wk_settings;
+  WebKitUserContentManager *wk_cman;
   gchar *str;
 
   w = gtk_box_new (GTK_ORIENTATION_VERTICAL, 2);
@@ -445,23 +446,19 @@ html_create_widget (GtkWidget * dlg)
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), options.data.hscroll_policy, options.data.vscroll_policy);
   gtk_box_pack_start (GTK_BOX (w), sw, TRUE, TRUE, 0);
 
-  view = WEBKIT_WEB_VIEW (webkit_web_view_new ());
+  wk_cman = webkit_user_content_manager_new ();
+  view = WEBKIT_WEB_VIEW (webkit_web_view_new_with_user_content_manager (wk_cman));
   gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (view));
-
-  wk_settings = webkit_settings_new ();
-
-  g_object_set (G_OBJECT (wk_settings), "user-agent", options.html_data.user_agent, NULL);
-  if (options.html_data.user_style)
-    {
-      gchar *uri = g_filename_to_uri (options.html_data.user_style, NULL, NULL);
-      g_object_set (G_OBJECT (wk_settings), "user-stylesheet-uri", uri, NULL);
-    }
-  webkit_web_view_set_settings (view, wk_settings);
-
-  webkit_settings_set_default_charset (wk_settings, g_get_codeset ());
 
   g_signal_connect (view, "decide-policy", G_CALLBACK (policy_cb), NULL);
   g_signal_connect (view, "load-changed", G_CALLBACK (loaded_cb), NULL);
+
+  wk_settings = webkit_settings_new ();
+
+  g_object_set (G_OBJECT (wk_settings),
+                "user-agent", options.html_data.user_agent,
+                "default-charset", g_get_codeset (),
+                NULL);
 
   if (options.html_data.browser)
     {
@@ -487,6 +484,30 @@ html_create_widget (GtkWidget * dlg)
     }
 
   set_user_props (wk_settings);
+  webkit_web_view_set_settings (view, wk_settings);
+
+  /* add user defined css */
+  if (options.html_data.user_style)
+    {
+      gchar *css;
+      GError *err = NULL;
+
+      if (g_file_get_contents (options.html_data.user_style, &css, NULL, &err))
+        {
+          WebKitUserStyleSheet *wk_css;
+
+          wk_css = webkit_user_style_sheet_new (css, WEBKIT_USER_CONTENT_INJECT_ALL_FRAMES,
+                                                WEBKIT_USER_STYLE_LEVEL_USER, NULL, NULL);
+          webkit_user_content_manager_add_style_sheet (wk_cman, wk_css);
+
+          g_free (css);
+        }
+      else
+        {
+          g_printerr ("yad_html: unable to load user css file: %s\n", err->message);
+          g_error_free (err);
+        }
+    }
 
   gtk_widget_show_all (sw);
   gtk_widget_grab_focus (GTK_WIDGET (view));
