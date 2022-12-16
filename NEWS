@@ -1,3 +1,8 @@
+Version 12.3
+    - fixed setting webkit properties and user defined style sheet in html dialog
+    - improve stdin handler for html dialog
+    - update copyright notice
+
 Version 12.2
     - add --auto-scroll option as an alias to --tail
     - fixed jump to anchor in simple mode of html dialog
