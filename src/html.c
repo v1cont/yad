@@ -366,35 +366,61 @@ icon_cb (GObject *obj, GParamSpec *spec, GtkWindow *dlg)
 }
 
 static gboolean
-handle_stdin (GIOChannel * ch, GIOCondition cond, gpointer d)
+handle_stdin (GIOChannel *ch, GIOCondition cond, gpointer d)
 {
-  gchar *buf;
-  GBytes *data;
-  GError *err = NULL;
-
-  switch (g_io_channel_read_line (ch, &buf, NULL, NULL, &err))
+  if ((cond == G_IO_IN) || (cond == G_IO_IN + G_IO_HUP))
     {
-    case G_IO_STATUS_NORMAL:
-      g_string_append (inbuf, buf);
-      return TRUE;
+       GError *err = NULL;
+      GString *string = g_string_new (NULL);
 
-    case G_IO_STATUS_ERROR:
-      g_printerr ("yad_html_handle_stdin(): %s\n", err->message);
-      g_error_free (err);
-      return FALSE;
+      while (ch->is_readable != TRUE)
+        usleep (100);
 
-    case G_IO_STATUS_EOF:
-      data = g_bytes_new (inbuf->str, inbuf->len);
-      /*g_string_free (inbuf, TRUE); */ /* FIXME: IS THAT NEEDED ??? (and where) */
-      webkit_web_view_load_bytes (view, data, options.common_data.mime, options.html_data.encoding, NULL);
-      g_bytes_unref (data);
-      return FALSE;
+      do
+        {
+          gint status;
 
-    case G_IO_STATUS_AGAIN:
-      return TRUE;
+          do
+            status = g_io_channel_read_line_string (ch, string, NULL, &err);
+          while (status == G_IO_STATUS_AGAIN);
+
+          if (status != G_IO_STATUS_NORMAL)
+            {
+              if (err)
+                {
+                  g_printerr ("yad_html_handle_stdin(): %s\n", err->message);
+                  g_error_free (err);
+                  err = NULL;
+                }
+              /* stop handling */
+              g_io_channel_shutdown (ch, TRUE, NULL);
+              return FALSE;
+            }
+
+          if (string->str[0] == '\014' )
+            g_string_truncate (inbuf, 0);
+          else
+            g_string_append (inbuf, string->str);
+        }
+      while (g_io_channel_get_buffer_condition (ch) == G_IO_IN);
+      g_string_free (string, TRUE);
+
+      if (inbuf->len)
+        {
+          GBytes *data = g_bytes_new (inbuf->str, inbuf->len);
+          is_loaded = FALSE;
+          webkit_web_view_load_bytes (view, data, options.common_data.mime, options.html_data.encoding, NULL);
+          g_bytes_unref (data);
+        }
     }
 
-  return FALSE;
+  if ((cond != G_IO_IN) && (cond != G_IO_IN + G_IO_HUP))
+    {
+      g_io_channel_shutdown (ch, TRUE, NULL);
+      return FALSE;
+    }
+
+  return TRUE;
 }
 
 static void
