@@ -508,6 +508,20 @@ text_create_widget (GtkWidget * dlg)
 
       g_string_free (css, TRUE);
     }
+#else
+  if (options.text_data.fore)
+    {
+      GdkColor clr;
+      if (gdk_color_parse (options.text_data.fore, &clr))
+        gtk_widget_modify_text (text_view, GTK_STATE_NORMAL, &clr);
+    }
+
+  if (options.text_data.back)
+    {
+      GdkColor clr;
+      if (gdk_color_parse (options.text_data.back, &clr))
+        gtk_widget_modify_base (text_view, GTK_STATE_NORMAL, &clr);
+    }
 #endif
 
 #ifdef HAVE_SOURCEVIEW
@@ -545,22 +559,6 @@ text_create_widget (GtkWidget * dlg)
         gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (text_buffer), scheme);
       else
         g_printerr (_("Theme %s not found\n"), options.source_data.theme);
-    }
-#endif
-
-#if !GTK_CHECK_VERSION(3,0,0)
-  if (options.text_data.fore)
-    {
-      GdkColor clr;
-      if (gdk_color_parse (options.text_data.fore, &clr))
-        gtk_widget_modify_text (text_view, GTK_STATE_NORMAL, &clr);
-    }
-
-  if (options.text_data.back)
-    {
-      GdkColor clr;
-      if (gdk_color_parse (options.text_data.back, &clr))
-        gtk_widget_modify_base (text_view, GTK_STATE_NORMAL, &clr);
     }
 #endif
 
