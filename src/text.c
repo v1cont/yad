@@ -525,7 +525,7 @@ text_create_widget (GtkWidget * dlg)
 #endif
 
 #ifdef HAVE_SOURCEVIEW
-  if (options.source_data.theme && (options.source_data.lang || options.common_data.uri))
+  if (options.source_data.theme && *options.source_data.theme)
     {
       GtkSourceStyleScheme *scheme = NULL;
       GtkSourceStyleSchemeManager *mgr;
