@@ -484,6 +484,32 @@ text_create_widget (GtkWidget * dlg)
   if (options.text_data.wrap)
     gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (text_view), GTK_WRAP_WORD_CHAR);
 
+#if GTK_CHECK_VERSION(3,0,0)
+  if (/*options.common_data.font ||*/ options.text_data.fore || options.text_data.back)
+    {
+      GtkCssProvider *provider;
+      GtkStyleContext *context;
+      GString *css;
+
+      css = g_string_new ("textview, textview text {\n");
+      /* if (options.common_data.font) */
+      /*   g_string_append_printf (css, " font: %s;\n", options.common_data.font); */
+      if (options.text_data.fore)
+        g_string_append_printf (css, " color: %s;\n", options.text_data.fore);
+      if (options.text_data.back)
+        g_string_append_printf (css, " background-color: %s;\n", options.text_data.back);
+      g_string_append (css, "}\n");
+
+      provider = gtk_css_provider_new ();
+      gtk_css_provider_load_from_data (provider, css->str, -1, NULL);
+      context = gtk_widget_get_style_context (text_view);
+      gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (provider),
+                                      GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+      g_string_free (css, TRUE);
+    }
+#endif
+
 #ifdef HAVE_SOURCEVIEW
   if (options.source_data.theme && (options.source_data.lang || options.common_data.uri))
     {
@@ -522,31 +548,21 @@ text_create_widget (GtkWidget * dlg)
     }
 #endif
 
+#if !GTK_CHECK_VERSION(3,0,0)
   if (options.text_data.fore)
     {
-#if GTK_CHECK_VERSION(3,0,0)
-      GdkRGBA clr;
-      if (gdk_rgba_parse (&clr, options.text_data.fore))
-        gtk_widget_override_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
-#else
       GdkColor clr;
       if (gdk_color_parse (options.text_data.fore, &clr))
         gtk_widget_modify_text (text_view, GTK_STATE_NORMAL, &clr);
-#endif
     }
 
   if (options.text_data.back)
     {
-#if GTK_CHECK_VERSION(3,0,0)
-      GdkRGBA clr;
-      if (gdk_rgba_parse (&clr, options.text_data.back))
-        gtk_widget_override_background_color (text_view, GTK_STATE_FLAG_NORMAL, &clr);
-#else
       GdkColor clr;
       if (gdk_color_parse (options.text_data.back, &clr))
         gtk_widget_modify_base (text_view, GTK_STATE_NORMAL, &clr);
-#endif
     }
+#endif
 
   /* set font */
   if (options.common_data.font)
