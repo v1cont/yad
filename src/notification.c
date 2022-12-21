@@ -158,7 +158,7 @@ activate_cb (GtkWidget * widget, YadData * data)
       if (g_ascii_strcasecmp (action, "menu") == 0)
         popup_menu_cb (GTK_STATUS_ICON (widget), 1, GDK_CURRENT_TIME, data);
       else
-        g_spawn_command_line_async (action, NULL);
+        run_command_async (action);
     }
 
   return TRUE;
@@ -192,7 +192,7 @@ popup_menu_item_activate_cb (GtkWidget * w, gpointer data)
           gtk_main_quit ();
         }
       else
-        g_spawn_command_line_async (cmd, NULL);
+        run_command_async (cmd);
     }
 }
 

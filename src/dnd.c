@@ -48,7 +48,7 @@ drop_data_cb (GtkWidget * w, GdkDragContext * dc, gint x, gint y,
                 action = g_strdup_printf (options.common_data.command, dstr);
               else
                 action = g_strdup_printf ("%s '%s'", options.common_data.command, dstr);
-              g_spawn_command_line_async (action, NULL);
+              run_command_async (action);
               g_free (action);
             }
           else
@@ -77,7 +77,8 @@ drop_data_cb (GtkWidget * w, GdkDragContext * dc, gint x, gint y,
               else
                 action = g_strdup_printf ("%s %s", options.common_data.command, arg);
               g_free (arg);
-              g_spawn_command_line_async (action, NULL);
+              
+              run_command_async (action);
               g_free (action);
             }
           else

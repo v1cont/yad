@@ -125,8 +125,9 @@ link_cb (WebKitWebView * v, WebKitWebFrame * f, WebKitNetworkRequest * r,
           g_setenv ("YAD_HTML_KEYS", vm, TRUE);
 
           /* run handler */
-          g_spawn_command_line_sync (cmd, NULL, NULL, &ret, NULL);
-          switch (ret)
+          ret = run_cmd_sync (cmd, NULL);
+          /* actual exit code in highest byte */
+          switch (ret >> 8)
             {
             case 0:
               webkit_web_policy_decision_use (pd);
@@ -138,7 +139,7 @@ link_cb (WebKitWebView * v, WebKitWebFrame * f, WebKitNetworkRequest * r,
               webkit_web_policy_decision_download (pd);
               break;
             default:
-              g_printerr ("html: undefined result of external uri handler\n");
+              g_printerr ("yad: undefined return code (%d) from uri handler\n", ret >> 8);
               webkit_web_policy_decision_ignore (pd);
               break;
             }

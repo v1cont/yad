@@ -192,7 +192,7 @@ tag_event_cb (GtkTextTag * tag, GObject * obj, GdkEvent * ev, GtkTextIter * iter
           cmdline = g_strdup_printf (settings.open_cmd, url);
           g_free (url);
 
-          g_spawn_command_line_async (cmdline, NULL);
+          run_command_async (cmdline);
 
           g_free (cmdline);
           return TRUE;

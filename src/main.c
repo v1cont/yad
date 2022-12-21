@@ -99,7 +99,7 @@ static void
 btn_cb (GtkWidget *b, gchar *cmd)
 {
   if (cmd)
-    g_spawn_command_line_async (cmd, NULL);
+    run_command_async (cmd);
   else
     {
       gint resp = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (b), "resp"));

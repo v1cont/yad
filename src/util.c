@@ -713,6 +713,60 @@ print_bool_val (gboolean val)
   return ret;
 }
 
+gint
+run_command_sync (gchar *cmd, gchar **out)
+{
+  gint ret = 0;
+  gchar *full_cmd = NULL;
+  GError *err = NULL;
+
+  if (options.data.use_interp)
+    {
+      if (g_strstr_len (options.data.interp, -1, "%s") != NULL)
+        full_cmd = g_strdup_printf (options.data.interp, cmd);
+      else
+        full_cmd = g_strdup_printf ("%s %s", options.data.interp, cmd);
+    }
+  else
+    full_cmd = g_strdup (cmd);
+
+  if (!g_spawn_command_line_sync (full_cmd, out, NULL, &ret, &err))
+    {
+/*       if (options.debug) */
+        g_printerr ("YAD: WARNING: Run command failed: %s", err->message);
+      g_error_free (err);
+    }
+
+  g_free (full_cmd);
+  return ret;
+}
+
+void
+run_command_async (gchar *cmd)
+{
+  gchar *full_cmd = NULL;
+  GError *err = NULL;
+
+  if (options.data.use_interp)
+    {
+      if (g_strstr_len (options.data.interp, -1, "%s") != NULL)
+        full_cmd = g_strdup_printf (options.data.interp, cmd);
+      else
+        full_cmd = g_strdup_printf ("%s %s", options.data.interp, cmd);
+    }
+  else
+    full_cmd = g_strdup (cmd);
+
+  if (!g_spawn_command_line_async (full_cmd, &err))
+    {
+/*       if (options.debug) */
+        g_printerr ("YAD: WARNING: Run command failed: %s", err->message);
+      g_error_free (err);
+    }
+
+  g_free (full_cmd);
+}
+
 #ifdef HAVE_SPELL
 void
 show_langs ()

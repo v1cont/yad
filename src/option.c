@@ -57,6 +57,7 @@ static gboolean set_scroll_policy (const gchar *, const gchar *, gpointer, GErro
 #if GLIB_CHECK_VERSION(2,30,0)
 static gboolean set_size_format (const gchar *, const gchar *, gpointer, GError **);
 #endif
+static gboolean set_interp (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -140,6 +141,8 @@ static GOptionEntry general_options[] = {
     N_("Dialog text can be selected"), NULL },
   { "keep-icon-size", 0, 0, G_OPTION_ARG_NONE, &options.data.keep_icon_size,
     N_("Don't scale icons"), NULL },
+  { "use-interp", 0, G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, set_interp,
+    N_("Run commands under specified interpreter (default: sh -c '%s')"), N_("CMD") },
   /* window settings */
   { "sticky", 0, 0, G_OPTION_ARG_NONE, &options.data.sticky,
     N_("Set window sticky"), NULL },
@@ -1246,6 +1249,17 @@ set_size_format (const gchar * option_name, const gchar * value, gpointer data, 
 }
 #endif
 
+static gboolean
+set_interp (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+{
+  options.data.use_interp = TRUE;
+
+  if (value)
+    options.data.interp = g_strdup (value);
+
+  return TRUE;
+}
+
 #ifndef G_OS_WIN32
 static gboolean
 set_xid_file (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
@@ -1461,6 +1475,8 @@ yad_options_init (void)
   options.data.selectable_labels = FALSE;
   options.data.keep_icon_size = FALSE;
   options.data.def_resp = YAD_RESPONSE_OK;
+  options.data.use_interp = FALSE;
+  options.data.interp = "sh -c '%s'";
 
   /* Initialize window options */
   options.data.sticky = FALSE;

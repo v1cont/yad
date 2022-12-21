@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-23 13:44+0200\n"
+"POT-Creation-Date: 2020-02-08 11:50+0200\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -455,6 +455,12 @@ msgstr "Задати точнісь чисел з плаваючою точко�
 #: ../src/option.c:186
 msgid "Set command handler"
 msgstr "Задати команду-обробник"
+
+#: ../src/option.c:146
+#, c-format
+msgid "Run commands under specified interpreter (default: sh -c '%s')"
+msgstr ""
+"Запускати команди під вказаним інтерпретатором (за замовчанням: sh -c '%s')"
 
 #: ../src/option.c:186 ../src/option.c:294 ../src/option.c:298
 #: ../src/option.c:363 ../src/option.c:447 ../src/option.c:449
