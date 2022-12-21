@@ -241,6 +241,7 @@ typedef struct {
   gint def_resp;
   gboolean use_interp;
   gchar *interp;
+  gchar *uri_handler;
   /* window settings */
   gboolean sticky;
   gboolean fixed;
@@ -650,6 +651,8 @@ gchar *print_bool_val (gboolean val);
 
 gint run_command_sync (gchar *cmd, gchar **out);
 void run_command_async (gchar *cmd);
+
+void open_uri (const gchar *uri);
 
 #ifdef HAVE_SPELL
 void show_langs ();

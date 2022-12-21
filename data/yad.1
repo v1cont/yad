@@ -171,8 +171,12 @@ Print result for any of the return codes. This option doesn't work if timeout wa
 Show separator between dialog and buttons. Works only with gtk+-2.0.
 .TP
 .B \-\-use-interp=\fI[INTERP]\fP
-Run all commands under the specified interpreter. Default is \fIsh -c '%s'\fP. Using this option can reduce quoting in commands. If \fI%s\fP is specified, it will be replaced by the command.
+Run all commands under the specified interpreter. Default is \fIsh -c '%s'\fP. Using this option can reduce quoting in commands. If \fI%s\fP is included in INTERP, it will be replaced by the command.
 Otherwise a space and the command will be appended to INTERP.
+.TP
+.B \-\-uri-handler=\fICMD\fP
+Use \fICMD\fP as URI handler. By default yad uses the \fIopen_command\fP entry from the user's settings file, falling back to \fIxdg-open '%s'\fP. If \fI%s\fP is included in CMD, it will be replaces by URI.
+Otherwise a space and URI will be appended to CMD.
 .TP
 .B \-\-borders=\fINUM\fP
 Set dialog window borders.

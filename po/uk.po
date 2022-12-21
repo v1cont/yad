@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-08 11:50+0200\n"
+"POT-Creation-Date: 2020-05-06 22:41+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -364,6 +364,16 @@ msgstr "Задати значення відповіді за умовчання
 msgid "Dialog text can be selected"
 msgstr "Текст діалогу може буди виділеним"
 
+#: ../src/option.c:146
+#, c-format
+msgid "Run commands under specified interpreter (default: sh -c '%s')"
+msgstr ""
+"Запускати команди під вказаним інтерпретатором (за замовчанням: sh -c '%s')"
+
+#: ../src/option.c:148
+msgid "Set URI handler"
+msgstr "Задати команду-обробник URI"
+
 #: ../src/option.c:144
 msgid "Set window sticky"
 msgstr "Вікно на всіх стільницях"
@@ -455,12 +465,6 @@ msgstr "Задати точнісь чисел з плаваючою точко�
 #: ../src/option.c:186
 msgid "Set command handler"
 msgstr "Задати команду-обробник"
-
-#: ../src/option.c:146
-#, c-format
-msgid "Run commands under specified interpreter (default: sh -c '%s')"
-msgstr ""
-"Запускати команди під вказаним інтерпретатором (за замовчанням: sh -c '%s')"
 
 #: ../src/option.c:186 ../src/option.c:294 ../src/option.c:298
 #: ../src/option.c:363 ../src/option.c:447 ../src/option.c:449
