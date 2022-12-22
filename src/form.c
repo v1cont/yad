@@ -109,6 +109,9 @@ expand_action (gchar * cmd)
                   arg = g_shell_quote (gtk_font_chooser_get_font (GTK_FONT_CHOOSER (g_slist_nth_data (fields, num))));
 #endif
                   break;
+                case YAD_FIELD_LINK:
+                  arg = g_shell_quote (gtk_link_button_get_uri (GTK_LINK_BUTTON (g_slist_nth_data (fields, num))));
+                  break;
                 case YAD_FIELD_COLOR:
                   {
 #if !GTK_CHECK_VERSION(3,4,0)
@@ -346,6 +349,10 @@ set_field_value (guint num, gchar * value)
     case YAD_FIELD_BUTTON:
     case YAD_FIELD_FULL_BUTTON:
       g_object_set_data_full (G_OBJECT (w), "cmd", g_strdup (value), g_free);
+      break;
+
+    case YAD_FIELD_LINK:
+      gtk_link_button_set_uri (GTK_LINK_BUTTON (w), value);
       break;
 
     case YAD_FIELD_TEXT:
@@ -625,6 +632,27 @@ select_date_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * eve
   gtk_widget_grab_focus (GTK_WIDGET (entry));
 }
 
+#if !GTK_CHECK_VERSION(3,0,0)
+/* No-op passed to gtk_link_button_set_uri_hook() to shadow GTK 2's calling
+ * gtk_show_uri() when the button is clicked. Setting the hook = NULL isn't
+ * enough to keep GTK 2 from calling gtk_show_uri() before every callback
+ * registered for the "clicked" signal.
+ */
+static void
+link_clicked_no_op (GtkLinkButton *button, const gchar *link, gpointer user_data)
+{
+  ;
+}
+#endif
+
+static gboolean
+link_clicked_cb (GtkLinkButton *btn, gpointer data)
+{
+  const gchar *uri = gtk_link_button_get_uri (btn);
+  open_uri (uri);
+  return TRUE;
+}
+
 static gboolean
 handle_stdin (GIOChannel * ch, GIOCondition cond, gpointer data)
 {
@@ -755,7 +783,8 @@ form_create_widget (GtkWidget * dlg)
           /* add field label */
           l = NULL;
           if (fld->type != YAD_FIELD_CHECK && fld->type != YAD_FIELD_BUTTON &&
-              fld->type != YAD_FIELD_FULL_BUTTON && fld->type != YAD_FIELD_LABEL && fld->type != YAD_FIELD_TEXT)
+              fld->type != YAD_FIELD_FULL_BUTTON && fld->type != YAD_FIELD_LINK &&
+              fld->type != YAD_FIELD_LABEL && fld->type != YAD_FIELD_TEXT)
             {
               gchar *buf = g_strcompress (fld->name);
               l = gtk_label_new (NULL);
@@ -1046,6 +1075,24 @@ form_create_widget (GtkWidget * dlg)
               fields = g_slist_append (fields, e);
               break;
 
+            case YAD_FIELD_LINK:
+              {
+                gchar *buf = g_strcompress (fld->name[0] ? fld->name : _("Link"));
+                e = gtk_link_button_new_with_label ("", buf);
+                gtk_widget_set_name (e, "yad-form-link");
+#if !GTK_CHECK_VERSION(3,0,0)
+                gtk_link_button_set_uri_hook ((GtkLinkButtonUriFunc) link_clicked_no_op, NULL, NULL);
+                g_signal_connect (G_OBJECT (e), "clicked", G_CALLBACK (link_clicked_cb), NULL);
+                gtk_table_attach (GTK_TABLE (tbl), e, col * 2, 2 + col * 2, row, row + 1, GTK_EXPAND | GTK_FILL, 0, 5, 5);
+#else
+                g_signal_connect (G_OBJECT (e), "activate-link", G_CALLBACK (link_clicked_cb), NULL);
+                gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
+                gtk_widget_set_hexpand (e, TRUE);
+#endif
+                fields = g_slist_append (fields, e);
+                break;
+              }
+
             case YAD_FIELD_LABEL:
               if (fld->name[0])
                 {
@@ -1312,6 +1359,17 @@ form_print_field (guint fn)
                   options.common_data.separator);
       else
         g_printf ("%d%s", (gint) gtk_range_get_value (GTK_RANGE (g_slist_nth_data (fields, fn))),
+                  options.common_data.separator);
+      break;
+    case YAD_FIELD_LINK:
+      if (options.common_data.quoted_output)
+        {
+          buf = g_shell_quote (gtk_link_button_get_uri (GTK_LINK_BUTTON (g_slist_nth_data (fields, fn))));
+          g_printf ("%s%s", buf, options.common_data.separator);
+          g_free (buf);
+        }
+      else
+        g_printf ("%s%s", gtk_link_button_get_uri (GTK_LINK_BUTTON (g_slist_nth_data (fields, fn))),
                   options.common_data.separator);
       break;
     case YAD_FIELD_BUTTON:
