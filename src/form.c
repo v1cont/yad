@@ -177,7 +177,7 @@ expand_action (gchar * cmd)
 }
 
 static void
-set_field_value (guint num, gchar * value)
+set_field_value (guint num, gchar *value)
 {
   GtkWidget *w;
   gchar **s;
@@ -215,12 +215,13 @@ set_field_value (guint num, gchar * value)
           if (s[1])
             {
               gchar **s1 = g_strsplit (s[1], "..", 2);
-              if (s[0] && s[1])
+              if (s1[0] && s1[1])
                 {
                   gdouble min, max;
                   min = g_ascii_strtod (s1[0], NULL);
                   max = g_ascii_strtod (s1[1], NULL);
-                  gtk_spin_button_set_range (GTK_SPIN_BUTTON (w), min, max);
+                  if (min < max)
+                    gtk_spin_button_set_range (GTK_SPIN_BUTTON (w), min, max);
                 }
               g_strfreev (s1);
               if (s[2])
@@ -786,7 +787,13 @@ form_create_widget (GtkWidget * dlg)
               fld->type != YAD_FIELD_FULL_BUTTON && fld->type != YAD_FIELD_LINK &&
               fld->type != YAD_FIELD_LABEL && fld->type != YAD_FIELD_TEXT)
             {
-              gchar *buf = g_strcompress (fld->name);
+              gchar *buf;
+
+              if (fld->name)
+                buf = g_strcompress (fld->name);
+              else
+                buf = g_strdup ("");
+
               l = gtk_label_new (NULL);
               if (!options.data.no_markup)
                 {
@@ -827,7 +834,7 @@ form_create_widget (GtkWidget * dlg)
                   else
                     gtk_widget_set_tooltip_text (e, fld->tip);
                 }
-             g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
+              g_signal_connect (G_OBJECT (e), "activate", G_CALLBACK (form_activate_cb), dlg);
               if (fld->type == YAD_FIELD_HIDDEN)
                 gtk_entry_set_visibility (GTK_ENTRY (e), FALSE);
               else if (fld->type == YAD_FIELD_READ_ONLY)
@@ -861,6 +868,7 @@ form_create_widget (GtkWidget * dlg)
 
             case YAD_FIELD_NUM:
               e = gtk_spin_button_new_with_range (0.0, 65525.0, 1.0);
+              gtk_widget_set_name (e, "yad-form-spin");
               if (fld->tip)
                 {
                   if (!options.data.no_markup)
@@ -869,7 +877,6 @@ form_create_widget (GtkWidget * dlg)
                     gtk_widget_set_tooltip_text (e, fld->tip);
                 }
               gtk_entry_set_alignment (GTK_ENTRY (e), 1.0);
-              gtk_widget_set_name (e, "yad-form-spin");
 #if !GTK_CHECK_VERSION(3,0,0)
               gtk_table_attach (GTK_TABLE (tbl), e, 1 + col * 2, 2 + col * 2, row, row + 1,
                                 GTK_EXPAND | GTK_FILL, 0, 5, 5);
@@ -883,7 +890,11 @@ form_create_widget (GtkWidget * dlg)
 
             case YAD_FIELD_CHECK:
               {
-                gchar *buf = g_strcompress (fld->name);
+                gchar *buf;
+                if (fld->name)
+                  buf = g_strcompress (fld->name);
+                else
+                  buf = g_strdup ("");
                 e = gtk_check_button_new_with_label (buf);
                 gtk_widget_set_name (e, "yad-form-check");
                 if (fld->tip)
@@ -1183,7 +1194,12 @@ form_create_widget (GtkWidget * dlg)
 
             case YAD_FIELD_LINK:
               {
-                gchar *buf = g_strcompress (fld->name[0] ? fld->name : _("Link"));
+                gchar *buf;
+                if (fld->name)
+                  buf = g_strdup (fld->name[0] ? fld->name : _("Link"));
+                else
+                  buf = g_strdup (_("Link"));
+
                 e = gtk_link_button_new_with_label ("", buf);
                 gtk_widget_set_name (e, "yad-form-link");
                 if (fld->tip)
@@ -1203,11 +1219,12 @@ form_create_widget (GtkWidget * dlg)
                 gtk_widget_set_hexpand (e, TRUE);
 #endif
                 fields = g_slist_append (fields, e);
+                g_free (buf);
                 break;
               }
 
             case YAD_FIELD_LABEL:
-              if (fld->name[0])
+              if (fld->name && fld->name[0])
                 {
                   gchar *buf = g_strcompress (fld->name);
                   e = gtk_label_new (NULL);
@@ -1252,8 +1269,13 @@ form_create_widget (GtkWidget * dlg)
 
             case YAD_FIELD_TEXT:
               {
-                GtkWidget *l, *sw, *b;
-                gchar *ltxt = g_strcompress (fld->name);
+                GtkWidget *sw, *b;
+                gchar *ltxt;
+
+                if (fld->name)
+                  ltxt = g_strcompress (fld->name);
+                else
+                  ltxt = g_strdup ("");
 
 #if !GTK_CHECK_VERSION(3,0,0)
                 b = gtk_vbox_new (FALSE, 2);
@@ -1539,7 +1561,7 @@ form_print_result (void)
       guint j, rows;
 
       rows = n_fields / options.form_data.columns;
-      rows += (n_fields % options.form_data.columns ? 1 : 0);
+      rows += ((n_fields % options.form_data.columns) ? 1 : 0);
       for (i = 0; i < rows; i++)
         {
           for (j = 0; j < options.form_data.columns; j++)

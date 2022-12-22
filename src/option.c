@@ -757,18 +757,28 @@ static gboolean
 add_field (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
   YadField *fld;
-  gchar **names;
   gchar **fstr = split_arg (value);
 
   fld = g_new0 (YadField, 1);
 
-  names = g_strsplit (fstr[0], options.common_data.item_separator, 2);
-  fld->name = g_strdup (names[0]);
-  if (names[1])
-    fld->tip = g_strdup (names[1]);
+  if (*fstr[0])
+    {
+      gchar **names = g_strsplit (fstr[0], options.common_data.item_separator, 3);
+      if (names[1] && names[2])
+        {
+          fld->name = g_strdup_printf ("%s%s%s", names[0], options.common_data.item_separator, names[1]);
+          fld->tip = g_strdup (names[2]);
+        }
+      else
+        {
+          fld->name = g_strdup (names[0]);
+          if (names[1])
+            fld->tip = g_strdup (names[1]);
+        }
+      g_strfreev (names);
+    }
   else
-    fld->tip = NULL;
-  g_strfreev (names);
+    fld->name = g_strdup ("");
 
   if (fstr[1])
     {
