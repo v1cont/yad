@@ -31,6 +31,9 @@ static guint n_cols = 0;
 
 static gulong select_hndl = 0;
 
+static gchar *column_align = NULL;
+static gchar *header_align = NULL;
+
 static inline void
 yad_list_add_row (GtkTreeStore *m, GtkTreeIter *it, gchar *row_id, gchar *par_id)
 {
@@ -441,10 +444,13 @@ add_columns ()
             options.list_data.tooltip_column = i + 1;
           break;
         }
+
+      gtk_cell_renderer_set_alignment (renderer, col->c_align, 0.5);
       g_object_set_data (G_OBJECT (renderer), "column", GINT_TO_POINTER (i));
       gtk_tree_view_append_column (GTK_TREE_VIEW (list_view), column);
 
       gtk_tree_view_column_set_clickable (column, options.list_data.clickable);
+      gtk_tree_view_column_set_alignment (column, col->h_align);
 
       if (col->type != YAD_COLUMN_CHECK && col->type != YAD_COLUMN_IMAGE)
         {
@@ -1177,14 +1183,17 @@ row_sep_func (GtkTreeModel *m, GtkTreeIter *it, gpointer data)
 static inline void
 parse_cols_props ()
 {
+  GSList *c;
+  guint i;
+
   /* set editable property for columns */
   if (options.common_data.editable)
     {
       if (options.list_data.editable_cols)
         {
           gchar **cnum;
-          guint i = 0;
 
+          i = 0;
           cnum = g_strsplit (options.list_data.editable_cols, ",", -1);
 
           while (cnum[i])
@@ -1202,7 +1211,6 @@ parse_cols_props ()
         }
       else
         {
-          GSList *c;
           for (c = options.list_data.columns; c; c = c->next)
             {
               YadColumn *col = (YadColumn *) c->data;
@@ -1217,8 +1225,8 @@ parse_cols_props ()
       if (options.list_data.wrap_cols)
         {
           gchar **cnum;
-          guint i = 0;
 
+          i = 0;
           cnum = g_strsplit (options.list_data.wrap_cols, ",", -1);
 
           while (cnum[i])
@@ -1236,7 +1244,6 @@ parse_cols_props ()
         }
       else
         {
-          GSList *c;
           for (c = options.list_data.columns; c; c = c->next)
             {
               YadColumn *col = (YadColumn *) c->data;
@@ -1251,8 +1258,8 @@ parse_cols_props ()
       if (options.list_data.ellipsize_cols)
         {
           gchar **cnum;
-          guint i = 0;
 
+          i = 0;
           cnum = g_strsplit (options.list_data.ellipsize_cols, ",", -1);
 
           while (cnum[i])
@@ -1270,13 +1277,52 @@ parse_cols_props ()
         }
       else
         {
-          GSList *c;
           for (c = options.list_data.columns; c; c = c->next)
             {
               YadColumn *col = (YadColumn *) c->data;
               col->ellipsize = TRUE;
             }
         }
+    }
+
+  /* set alignment */
+  i = 0;
+  for (c = options.list_data.columns; c; c = c->next)
+    {
+      YadColumn *col = (YadColumn *) c->data;
+
+      if (column_align)
+        {
+          switch (column_align[i])
+            {
+            case 'l':
+              col->c_align = 0.0;
+              break;
+            case 'r':
+              col->c_align = 1.0;
+              break;
+            case 'c':
+              col->c_align = 0.5;
+              break;
+            }
+        }
+      if (header_align)
+        {
+          switch (header_align[i])
+            {
+            case 'l':
+              col->h_align = 0.0;
+              break;
+            case 'r':
+              col->h_align = 1.0;
+              break;
+            case 'c':
+              col->h_align = 0.5;
+              break;
+            }
+        }
+
+      i++;
     }
 }
 
@@ -1303,6 +1349,18 @@ list_create_widget (GtkWidget *dlg)
 
   if (options.list_data.tree_mode)
     row_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) gtk_tree_path_free);
+
+  /* set normalized alignment array for list keaders and columns content */
+  if (options.list_data.col_align)
+    {
+      column_align = g_new0 (gchar, n_cols);
+      strncpy (column_align, options.list_data.col_align, n_cols);
+    }
+  if (options.list_data.hdr_align)
+    {
+      header_align = g_new0 (gchar, n_cols);
+      strncpy (header_align, options.list_data.hdr_align, n_cols);
+    }
 
   parse_cols_props ();
 

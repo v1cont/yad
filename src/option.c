@@ -512,6 +512,10 @@ static GOptionEntry list_options[] = {
     N_("Don't use markup in tooltips"), NULL },
   { "header-tips", 0, 0, G_OPTION_ARG_NONE, &options.list_data.header_tips,
     N_("Use column name as a header tooltip"), NULL },
+  { "column-align", 0, 0, G_OPTION_ARG_STRING, &options.list_data.col_align,
+    N_("Set columns alignment"), N_("STRING") },
+  { "header-align", 0, 0, G_OPTION_ARG_STRING, &options.list_data.hdr_align,
+    N_("Set headers alignment"), N_("STRING") },
   { NULL }
 };
 
@@ -1810,6 +1814,8 @@ yad_options_init (void)
   options.list_data.add_on_top = FALSE;
   options.list_data.simple_tips = FALSE;
   options.list_data.header_tips = FALSE;
+  options.list_data.col_align = NULL;
+  options.list_data.hdr_align = NULL;
 
   /* Initialize notebook data */
   options.notebook_data.tabs = NULL;

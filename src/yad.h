@@ -206,6 +206,8 @@ typedef struct {
   gboolean wrap;
   gboolean ellipsize;
   gboolean editable;
+  gdouble c_align;
+  gdouble h_align;
 } YadColumn;
 
 typedef struct {
@@ -402,6 +404,8 @@ typedef struct {
   gboolean add_on_top;
   gboolean simple_tips;
   gboolean header_tips;
+  gchar *col_align;
+  gchar *hdr_align;
 } YadListData;
 
 typedef struct {
