@@ -515,23 +515,27 @@ html_create_widget (GtkWidget * dlg)
   /* add user defined css */
   if (options.html_data.user_style)
     {
-      gchar *css;
+      gchar *css = NULL;
       GError *err = NULL;
 
-      if (g_file_get_contents (options.html_data.user_style, &css, NULL, &err))
+      if (g_file_test (options.html_data.user_style, G_FILE_TEST_EXISTS))
+        {
+          if (!g_file_get_contents (options.html_data.user_style, &css, NULL, &err))
+            {
+              g_printerr ("yad_html: unable to load user css file: %s\n", err->message);
+              g_error_free (err);
+            }
+        }
+      else
+        css = g_strdup (options.html_data.user_style);
+
+      if (css)
         {
           WebKitUserStyleSheet *wk_css;
-
           wk_css = webkit_user_style_sheet_new (css, WEBKIT_USER_CONTENT_INJECT_ALL_FRAMES,
                                                 WEBKIT_USER_STYLE_LEVEL_USER, NULL, NULL);
           webkit_user_content_manager_add_style_sheet (wk_cman, wk_css);
-
           g_free (css);
-        }
-      else
-        {
-          g_printerr ("yad_html: unable to load user css file: %s\n", err->message);
-          g_error_free (err);
         }
     }
 

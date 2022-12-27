@@ -415,7 +415,7 @@ static GOptionEntry html_options[] = {
   { "user-agent", 0, 0, G_OPTION_ARG_STRING, &options.html_data.user_agent,
     N_("Set user agent string"), N_("STRING") },
   { "user-style", 0, 0, G_OPTION_ARG_STRING, &options.html_data.user_style,
-    N_("Set path or uri to user styles"), "URI" },
+    N_("Set custom user style"), N_("STRING") },
   { "wk-prop", 0, 0, G_OPTION_ARG_STRING_ARRAY, &options.html_data.wk_props,
     N_("Set WebKit property"), N_("PROP") },
   { NULL }
