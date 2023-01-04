@@ -27,7 +27,7 @@ AC_ARG_WITH([gtk],
 case "$with_gtk" in
     gtk3)
         GTK_MODULE="gtk+-3.0"
-        GTK_REQUIRED="3.0.0"
+        GTK_REQUIRED="3.22.0"
         GTK_PRINT="gtk+-unix-print-3.0"
         WEBKIT="webkit2gtk-4.0"
         SPELL="gtkspell3-3.0"
