@@ -8,7 +8,7 @@ Numbered notes are grouped together at the end of this long page.
 
 ## Licence and copyright
 
-GNU GPL3 is yadL's and yadU's license. Copyright notices in yadL source code are not maintained therefore they aren't up-to-date. However, to comply with GPL3's license I hereby claim the copyright of the source code added to this repository:
+GNU GPL3 is yadL's and yadU's license. Copyright notices in yadL source code are not always up-to-date. However, to comply with GPL3's license I hereby claim copyright on the source code added to this repository:
 
 		yad maintenance branch, aka yad-maintain-gtk2, yadL, (C) 2019-2023 step
 

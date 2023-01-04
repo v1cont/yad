@@ -73,7 +73,8 @@ yad_about (void)
   g_object_set (G_OBJECT (dialog),
                 "name", PACKAGE_NAME,
                 "version", PACKAGE_VERSION,
-                "copyright", "Copyright \xc2\xa9 2008-2019, Victor Ananjevsky",
+                "copyright", "Copyright \xc2\xa9 2008-2019, Victor Ananjevsky\n"
+                             "Copyright \xc2\xa9 2019-2023, step",
                 "comments", comments,
                 "authors", roles,
                 "website", "",
