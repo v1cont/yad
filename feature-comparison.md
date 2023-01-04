@@ -29,12 +29,13 @@ Refer to [yadL commit log](https://github.com/step-/yad/commits) for more detail
 
 Several bugs that affected the parent project when it was forked have been fixed. The following stand out:
 
-- some print dialog issues⁽¹⁾
-- forcefully close a notebook dialog on exit if some tab has hung
+* some print dialog issues⁽¹⁾ [0.42.38]
+* forcefully close a notebook dialog on exit if some tab has hung
+* unpredictably, notebook tabs are too small [0.42.43]
 
 ## Frozen or untested features
 
-* As Fatdog64 no longer packages the Webkit engine, I did not make an effort to maintain or even test yadL's HTML dialog option.
+* HTML dialog widget - As Fatdog64 Linux no longer packages the Webkit engine, I do not make an effort to maintain or even compile yadL's HTML dialog widget.
 
 ## Diverged features
 
@@ -161,7 +162,7 @@ Version 7.3
 Version 7.2
 
 - `[+]` fix parsing field names for form dialog
-- `[+]` fix uri-handler for html dialog
+- `[+]` fix uri-handler for html dialog [0.42.46]
 - `[ ]` add file: scheme for uri regexp in text-info dialog
 
 Version 7.1
@@ -175,9 +176,9 @@ Version 7.0
 - `[ ]` add pango-style font definition to text-info dialog
 - `[ ]` add --large-preview options for better thumbnails handling
 - `[ ]` add --interactive option to icon browser for printing selected icons on stdout
-- `[+]` add custom uri handler (--uri-handler option)
+- `[+]` add custom uri handler (--uri-handler option) [0.42.46]
 - `[+]` improve killing children algo for notebook and paned dialogs
-- `[+]` add tooltips for form fields
+- `[+]` add tooltips for form fields [0.42.48]
 - `[ ]` fix :tip column in list dialog
 - `[ ]` fixes and cleanups in miscellaneous functions
 - `[+]` fix parsing numeric ranges in for dialog
@@ -186,8 +187,8 @@ Version 7.0
 
 Version 6.0
 
-- `[+]` add --use-interp option ⁽²⁾
-- `[+]` add link field to --form dialog
+- `[+]` add --use-interp option ⁽²⁾ [0.42.45]
+- `[+]` add link field to --form dialog [0.42.47]
 - `[ ]` returning customizable options for --text-info dialog
 - `[ ]` fix yad behavior outside X11 (spetial thanks to Michael Weiser)
 - `[ ]` improve dialog window placement
@@ -199,7 +200,7 @@ Version 5.0
 - `[!]` add configure option --enable-standalone for build yad without gsettings support
 - `[+]` fix expanding tree nodes for stdin data
 - `[+]` some fixes in print dialog
-- `[+]` fix --uri-handler option in html dialog
+- `[+]` fix --uri-handler option in html dialog [0.42.46]
 - `[ ]` fix wrong autoclose behavior in progress dialog
 
 Version 4.1
@@ -211,8 +212,8 @@ Version 4.0
 - `[>]` font can be selected with double-click in font dialog
 - `[>]` add application chooser dialog and application chooser field in form dialog
 - `[+]` add tree mode in list dialog
-- `[+]` add --hide-text option to progress dialogs
-- `[+]` multi-progress dialog features merged with progress dialog. separate multi-progress dialog no longer exists
+- `[+]` add --hide-text option to progress dialogs [0.42.42]
+- `[+]` multi-progress dialog features merged with progress dialog. separate multi-progress dialog no longer exists [0.42.42]
 - `[>]` enable markup in progress log window
 - `[+]` fix output of color values in hex notation
 - `[+]` removed \*-selection aliases for --file, --color and --font dialogs ⁽³⁾
