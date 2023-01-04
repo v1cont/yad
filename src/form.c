@@ -28,6 +28,8 @@
 static GSList *fields = NULL;
 static guint n_fields;
 
+static gboolean disable_changed = TRUE;
+
 /* expand %N in command to fields values */
 static GString *
 expand_action (gchar * cmd)
@@ -370,54 +372,88 @@ set_field_value (guint num, gchar *value)
 }
 
 static void
+parse_cmd_output (gchar *data)
+{
+  guint i = 0;
+  gchar **lines = g_strsplit (data, "\n", 0);
+
+  disable_changed = TRUE;
+  while (lines[i] && lines[i][0])
+    {
+      gint fn;
+      gchar *ptr = lines[i];
+
+      while (isblank (*ptr)) ptr++;
+
+      if (isdigit (*ptr))
+        {
+          gchar **ln = g_strsplit (ptr, ":", 2);
+          fn = g_ascii_strtoll (ln[0], NULL, 10);
+          if (fn && ln[1])
+            set_field_value (fn - 1, ln[1]);
+          g_strfreev (ln);
+        }
+      i++;
+    }
+  disable_changed = FALSE;
+}
+
+static void
 button_clicked_cb (GtkButton * b, gpointer d)
 {
   gchar *action = (gchar *) g_object_get_data (G_OBJECT (b), "cmd");
 
   if (action && action[0])
     {
+      GString *cmd;
       if (action[0] == '@')
         {
-          gchar *data;
+          gchar *data = NULL;
           gint exit = 1;
-          GString *cmd = expand_action (action + 1);
+          cmd = expand_action (action + 1);
           exit = run_command_sync (cmd->str, &data);
           if (exit == 0)
-            {
-              guint i = 0;
-              gchar **lines = g_strsplit (data, "\n", 0);
-              while (lines[i] && lines[i][0])
-                {
-                  gint fn;
-                  gchar *ptr = lines[i];
-
-                  while (isblank (*ptr)) ptr++;
-
-                  if (isdigit (*ptr))
-                    {
-                      gchar **ln = g_strsplit (ptr, ":", 2);
-                      fn = g_ascii_strtoll (ln[0], NULL, 10);
-                      if (fn && fn <= n_fields && ln[1])
-                        set_field_value (fn - 1, ln[1]);
-                      g_strfreev (ln);
-                    }
-                  i++;
-                }
-            }
+            parse_cmd_output (data);
           g_free (data);
-          g_string_free (cmd, TRUE);
         }
       else
         {
-          GString *cmd = expand_action (action);
+          cmd = expand_action (action);
           run_command_async (cmd->str);
-          g_string_free (cmd, TRUE);
         }
+      g_string_free (cmd, TRUE);
     }
 
   /* set focus to specified field */
   if (options.form_data.focus_field > 0 && options.form_data.focus_field <= n_fields)
     gtk_widget_grab_focus (GTK_WIDGET (g_slist_nth_data (fields, options.form_data.focus_field - 1)));
+}
+
+static void
+field_changed_cb (GtkWidget *w, guint fn)
+{
+  gchar *data = NULL;
+  gint exit = 1;
+
+  if (disable_changed)
+    return;
+
+  if (options.form_data.changed_action)
+    {
+      gchar *str;
+      GString *cmd;
+
+      str = g_strdup_printf ("%s %d %%%d", options.form_data.changed_action, fn + 1, fn + 1);
+      cmd = expand_action (str);
+      g_free (str);
+
+      exit = run_command_sync (cmd->str, &data);
+      if (exit == 0)
+        parse_cmd_output (data);
+      g_free (data);
+
+      g_string_free (cmd, TRUE);
+    }
 }
 
 static void
@@ -675,10 +711,7 @@ handle_stdin (GIOChannel * ch, GIOCondition cond, gpointer data)
               if (options.form_data.cycle_read)
                 cnt = 0;
               else
-                {
-                  g_io_channel_shutdown (ch, TRUE, NULL);
-                  return FALSE;
-                }
+                goto shutdown;
             }
 
           do
@@ -699,8 +732,7 @@ handle_stdin (GIOChannel * ch, GIOCondition cond, gpointer data)
                   err = NULL;
                 }
               /* stop handling */
-              g_io_channel_shutdown (ch, TRUE, NULL);
-              return FALSE;
+              goto shutdown;
             }
 
           strip_new_line (string->str);
@@ -724,12 +756,14 @@ handle_stdin (GIOChannel * ch, GIOCondition cond, gpointer data)
     }
 
   if ((cond != G_IO_IN) && (cond != G_IO_IN + G_IO_HUP))
-    {
-      g_io_channel_shutdown (ch, TRUE, NULL);
-      return FALSE;
-    }
+    goto shutdown;
 
   return TRUE;
+
+ shutdown:
+  g_io_channel_shutdown (ch, TRUE, NULL);
+  disable_changed = FALSE;
+  return FALSE;
 }
 
 GtkWidget *
@@ -913,6 +947,7 @@ form_create_widget (GtkWidget * dlg)
 #endif
                 fields = g_slist_append (fields, e);
                 g_free (buf);
+                g_signal_connect_after (G_OBJECT (e), "toggled", G_CALLBACK (field_changed_cb), GINT_TO_POINTER (i));
               }
               break;
 
@@ -939,6 +974,7 @@ form_create_widget (GtkWidget * dlg)
 #endif
               gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
               fields = g_slist_append (fields, e);
+              g_signal_connect_after (G_OBJECT (e), "changed", G_CALLBACK (field_changed_cb), GINT_TO_POINTER (i));
               break;
 
             case YAD_FIELD_COMBO_ENTRY:
@@ -1371,6 +1407,8 @@ form_create_widget (GtkWidget * dlg)
 
   if (options.form_data.focus_field > 0 && options.form_data.focus_field <= n_fields)
     gtk_widget_grab_focus (GTK_WIDGET (g_slist_nth_data (fields, options.form_data.focus_field - 1)));
+
+  disable_changed = FALSE;
 
   return w;
 }

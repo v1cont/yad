@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-14 14:59+0200\n"
+"POT-Creation-Date: 2021-05-04 09:54+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -771,6 +771,10 @@ msgstr "Циклічне читання зі стандартного вводу
 #: ../src/option.c:384
 msgid "Align labels on button fields"
 msgstr "Вирівнювати помітки на полях-кнопках"
+
+#: ../src/option.c:389
+msgid "Set changed action"
+msgstr "Дія при зміні поля"
 
 #: ../src/option.c:351
 msgid "Display HTML dialog"

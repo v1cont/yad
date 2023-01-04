@@ -116,7 +116,7 @@ Version 10.0
 - `[ ]` added search bar to html dialog (can be disabled)
 - `[ ]` added Ctrl+O and Ctrl+Q shortcuts to html dialog
 - `[ ]` added --f1-action which run command when F1 was pressed
-- `[ ]` added --changed-action to form dialog for control states of switcher fields like check or combo boxes
+- `[+]` added --changed-action to form dialog for control states of switcher fields like check or combo boxes [0.42.52]
 - `[ ]` fixed build with musl
 - `[ ]` added yad-settings script. this is yad-based frontend for edit yad settings
 - `[ ]` force using small icons in list dialog if icon is not a real filename
