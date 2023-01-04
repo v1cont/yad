@@ -453,7 +453,7 @@ Output data will be in shell-style quotes.
 .SS Form options
 .TP
 .B \-\-field=\fILABEL[!TOOLTIP][:TYPE]\fP
-Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fICE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIMDIR\fP, \fIDT\fP, \fISCL\fP, \fICLR\fP, \fIBTN\fP, \fIFBTN\fP, \fILINK\fP, \fILBL\fP or \fITXT\fP.
+Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fICE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIMDIR\fP, \fIDT\fP, \fISCL\fP, \fSW\fP, \fICLR\fP, \fIBTN\fP, \fIFBTN\fP, \fILINK\fP, \fILBL\fP or \fITXT\fP.
 .br
 \fBH\fP - hidden field type. All characters are displayed as the invisible char.
 .br
@@ -486,6 +486,8 @@ Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP
 \fBDT\fP - date field.
 .br
 \fBSCL\fP - scale field. Value of this field in a range 0..100.
+.br
+\fBSW\fP - switch field. Initial value is a case insensitive boolean constant (\fITRUE\fP or \fIFALSE\fP).
 .br
 \fBCLR\fP - color selection button. Output values for this field generates in the same manner as for color dialog.
 .br
@@ -540,7 +542,7 @@ Make form scrollable.
 Make form field heights the same.
 .TP
 .B \-\-changed-action=\fICMD\fP
-Run \fICMD\fP when \fICHK\fP or \fICB\fP field values are changed. Command runs with two arguments - number of changed field and its current value.
+Run \fICMD\fP when \fICHK\fP, \fICB\fP or \fISW\fP field value is changed. Command runs with two arguments - number of changed field and its current value.
 Output of command parsing works as for \fIBTN\fP fields with \fI@\fP prefix. \fBAttention\fP - this option may slow down your dialog.
 .TP
 .B \-\-quoted-output
@@ -1140,6 +1142,7 @@ yad-form-edit-combo@GtkComboBoxEntry@Editable combo field in form
 yad-form-link@GtkLinkButton@Link field in form
 yad-form-file@GtkFileChooserButton@File or directory field in form
 yad-form-font@GtkFontChooserButton@Font field in form
+yad-form-switch@GtkSwitch@Switch field in form
 yad-form-color@GtkColorChooserButton@Color field in form
 yad-form-label@GtkLabel@Label field in form
 yad-form-scale@GtkScale@Scale widget in form

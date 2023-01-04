@@ -124,7 +124,8 @@ typedef enum {
   YAD_FIELD_FULL_BUTTON,
   YAD_FIELD_LINK,
   YAD_FIELD_LABEL,
-  YAD_FIELD_TEXT
+  YAD_FIELD_TEXT,
+  YAD_FIELD_SWITCH
 } YadFieldType;
 
 typedef enum {

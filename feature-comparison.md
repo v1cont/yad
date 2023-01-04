@@ -87,7 +87,7 @@ Version 12.0
 - `[ ]` add --line option to text-info dialog
 - `[ ]` improve guess of syntax highlighting in text-info dialog
 - `[ ]` add --mime option to icon mode in yad-tools
-- `[?]` add switch field type in form dialog (thanks to Misko <mpsrbija@gmail.com>)
+- `[+]` add switch field type in form dialog (thanks to Misko <mpsrbija@gmail.com>) [0.42.54]
 - `[ ]` use pango markup for multiline text field in form dialog
 
 Version 11.1
