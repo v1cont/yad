@@ -370,7 +370,7 @@ set_field_value (guint num, gchar *value)
 }
 
 static void
-button_clicked_cb (GtkButton * b, gpointer data)
+button_clicked_cb (GtkButton * b, gpointer d)
 {
   gchar *action = (gchar *) g_object_get_data (G_OBJECT (b), "cmd");
 
@@ -1179,8 +1179,10 @@ form_create_widget (GtkWidget * dlg)
                     gtk_widget_set_tooltip_text (e, fld->tip);
                 }
               g_signal_connect (G_OBJECT (e), "clicked", G_CALLBACK (button_clicked_cb), NULL);
-              gtk_container_add (GTK_CONTAINER (e), get_label (fld->name, 2, e));
-              gtk_button_set_alignment (GTK_BUTTON (e), 0.5, 0.5);
+              l = get_label (fld->name, 2, e);
+              gtk_container_add (GTK_CONTAINER (e), l);
+              if (options.form_data.align_buttons)
+                gtk_button_set_alignment (GTK_BUTTON (e), options.common_data.align, 0.5);
               if (fld->type == YAD_FIELD_BUTTON)
                 gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
 #if !GTK_CHECK_VERSION(3,0,0)

@@ -45,7 +45,8 @@ See the _Notes_ section.
 [This list](https://github.com/step-/blob/maintain-gtk2/feature-comparison.md)
 of yadU features is extracted from the [NEWS](https://github.com/v1cont/NEWS) file.
 
-The version numbers below refer to yadU releases.
+The version numbers in the following headings refer to yadU releases.
+The version numbers in square brackets refer to yadL releases.
 
 Abbreviations:
 
@@ -144,7 +145,7 @@ Version 9.0
 - `[?]` fix setting splitter position in paned dialog
 - `[ ]` add --wk-prop to html dialog and made js output enabled by default
 - `[-]` add yad-tools utility instead fo pfd. pfd now is a wrapper script (just for backward compatibility)
-- `[?]` add --align-buttons option for aligning labels on button fields in form dialog
+- `[+]` add --align-buttons option for aligning labels on button fields in form dialog [0.42.50]
 
 
 - `[?]` add --text-width option for more flexible wrapping long strings in dialog text
