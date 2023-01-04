@@ -104,7 +104,7 @@ Version 11.0
 
 Version 10.1
 
-- `[ ]` don't make rows homogeneous when form has a text field
+- `[+]` don't make rows homogeneous when form has a text field [0.52.53] +form option --homogeneous
 
 Version 10.0
 

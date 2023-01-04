@@ -338,6 +338,8 @@ static GOptionEntry form_options[] = {
     N_("Set number of columns in form"), N_("NUMBER") },
   { "scroll", 0, 0, G_OPTION_ARG_NONE, &options.form_data.scroll,
     N_("Make form scrollable"), NULL },
+  { "homogeneous", 0, 0, G_OPTION_ARG_NONE, &options.form_data.homogeneous,
+    N_("Make form fields same height"), NULL },
   { "output-by-row", 0, 0, G_OPTION_ARG_NONE, &options.form_data.output_by_row,
     N_("Order output fields by rows"), NULL },
   { "focus-field", 0, 0, G_OPTION_ARG_INT, &options.form_data.focus_field,
@@ -1605,6 +1607,7 @@ yad_options_init (void)
   options.form_data.cycle_read = FALSE;
   options.form_data.align_buttons = FALSE;
   options.form_data.changed_action = NULL;
+  options.form_data.homogeneous = FALSE;
 
 #ifdef HAVE_HTML
   /* Initialize html data */

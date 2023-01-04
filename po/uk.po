@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-04 09:54+0300\n"
+"POT-Creation-Date: 2021-05-13 11:46+0300\n"
 "PO-Revision-Date: 2009-04-30 16:47+0300\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -756,7 +756,11 @@ msgstr "Задати кількість стовпчиків у формі"
 msgid "Make form scrollable"
 msgstr "Додати прокрутку до форми"
 
-#: ../src/option.c:340
+#: ../src/option.c:381
+msgid "Make form fields same height"
+msgstr "Зробити поля форми однакової висоти"
+
+#: ../src/option.c:383
 msgid "Order output fields by rows"
 msgstr "Упорядкувати виведення по рядках"
 

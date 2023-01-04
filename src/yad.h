@@ -318,6 +318,7 @@ typedef struct {
   gboolean cycle_read;
   gboolean align_buttons;
   gchar *changed_action;
+  gboolean homogeneous;
 } YadFormData;
 
 #ifdef HAVE_HTML
