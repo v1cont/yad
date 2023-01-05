@@ -242,7 +242,7 @@ Version 1.0
 - `[-]` gtk stock items not used anymore. instead there are some yad predefined names. details can be found in man page
 - `[+]` add --bool-fmt for different forms of boolean values output. all of this forms recognized on input automatically
 - `[!]` gspell library now used for spell checking
-- `[-]` tray icon is optional now. this dialog is enabled by default but can be turned off with ./configure --disable-tray
+- `[+]` tray icon is optional now. this dialog is enabled by default but can be turned off with ./configure --disable-tray [0.42.58]
 - `[-]` remove --fore, --back and --font options for text-info dialog. those functionality can be done through custom css
 
 Version 0.42.0

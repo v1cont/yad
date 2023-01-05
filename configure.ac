@@ -1,5 +1,5 @@
 # write PACKAGE_URL as "http" not "https" for About dialog to display a clickable link in the Credits tab.
-AC_INIT([YAD], [0.42.57], [https://github.com/step-/yad/issues], yad, [http://github.com/step-/yad])
+AC_INIT([YAD], [0.42.58], [https://github.com/step-/yad/issues], yad, [http://github.com/step-/yad])
 AC_CONFIG_AUX_DIR([build])
 
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz no-dist-gzip])
@@ -93,6 +93,17 @@ if test x$have_gio = xyes; then
     AC_DEFINE([HAVE_GIO], [1], [Define this if you have glib gio framework])
 fi
 
+dnl status icon widget
+AC_ARG_ENABLE([tray],
+	[AS_HELP_STRING([--enable-tray],
+			[Build YAD with status icon])],
+	[build_tray=$enableval], [build_tray=yes])
+AM_CONDITIONAL([TRAY], [test x$build_tray = xyes])
+
+if test x$build_tray = xyes; then
+    AC_DEFINE([HAVE_TRAY], [1], [Define this if you need status icon])
+fi
+
 dnl spell check
 AC_ARG_ENABLE([spell],
 	[AS_HELP_STRING([--enable-spell],
@@ -183,9 +194,10 @@ data/yad.spec
 AC_OUTPUT
 
 echo
-echo "Build configuratioh:"
+echo "Build configuration:"
 echo "  GTK+ version         - $with_gtk"
 echo "  Path to rgb.txt      - $with_rgb"
+echo "  Status icon          - $build_tray"
 echo "  HTML widget          - $have_html"
 echo "  Spell checking       - $have_spell"
 echo "  GtkSourceView        - $have_sourceview"

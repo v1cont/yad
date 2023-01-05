@@ -925,9 +925,11 @@ main (gint argc, gchar ** argv)
       break;
 #endif
 
+#ifdef HAVE_TRAY
     case YAD_MODE_NOTIFICATION:
       ret = yad_notification_run ();
       break;
+#endif
 
     case YAD_MODE_PRINT:
       ret = yad_print_run ();
