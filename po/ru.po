@@ -1731,6 +1731,11 @@ msgstr "Неверная последователньость UTF-8 при чт�
 msgid "Theme %s not found\n"
 msgstr "Тема %s не найдена\n"
 
+#: ../src/util.c:635 ../src/util.c:662
+#, c-format
+msgid "WARNING: Run command failed: %s\n"
+msgstr "ВНИМАНИЕ: Сбой при запуске команды: %s\n"
+
 #: ../src/browser.c:132
 msgid "scalable "
 msgstr "масштабируемый "

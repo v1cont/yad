@@ -718,31 +718,59 @@ print_bool_val (gboolean val)
   return ret;
 }
 
+typedef struct {
+  gchar *cmd;
+  gchar **out;
+} RunData;
+
+static gboolean run_lock = FALSE;
+static gint ret = 0;
+
+static void
+run_thread (RunData *d)
+{
+  GError *err = NULL;
+
+  if (!g_spawn_command_line_sync (d->cmd, d->out, NULL, &ret, &err))
+    {
+     if (options.debug)
+        g_printerr (_("WARNING: Run command failed: %s\n"), err->message);
+      g_error_free (err);
+    }
+  run_lock = FALSE;
+}
+
 gint
 run_command_sync (gchar *cmd, gchar **out)
 {
-  gint ret = 0;
-  gchar *full_cmd = NULL;
-  GError *err = NULL;
+  RunData *d;
+
+  d = g_new0 (RunData, 1);
 
   if (options.data.use_interp)
     {
       if (g_strstr_len (options.data.interp, -1, "%s") != NULL)
-        full_cmd = g_strdup_printf (options.data.interp, cmd);
+        d->cmd = g_strdup_printf (options.data.interp, cmd);
       else
-        full_cmd = g_strdup_printf ("%s %s", options.data.interp, cmd);
+        d->cmd = g_strdup_printf ("%s %s", options.data.interp, cmd);
     }
   else
-    full_cmd = g_strdup (cmd);
+    d->cmd = g_strdup (cmd);
+  d->out = out;
 
-  if (!g_spawn_command_line_sync (full_cmd, out, NULL, &ret, &err))
+  run_lock = TRUE;
+  ret = 0;
+  g_thread_new ("run_sync", (GThreadFunc) run_thread, d);
+
+  while (run_lock != FALSE)
     {
-/*       if (options.debug) */
-        g_printerr ("YAD: WARNING: Run command failed: %s", err->message);
-      g_error_free (err);
+      gtk_main_iteration_do (FALSE);
+      usleep (10000);
     }
 
-  g_free (full_cmd);
+  g_free (d->cmd);
+  g_free (d);
+
   return ret;
 }
 
@@ -764,8 +792,8 @@ run_command_async (gchar *cmd)
 
   if (!g_spawn_command_line_async (full_cmd, &err))
     {
-/*       if (options.debug) */
-        g_printerr ("YAD: WARNING: Run command failed: %s", err->message);
+      if (options.debug)
+        g_printerr (_("WARNING: Run command failed: %s\n"), err->message);
       g_error_free (err);
     }
 

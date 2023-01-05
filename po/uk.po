@@ -1736,6 +1736,11 @@ msgstr "Неправильна послідовність UTF-8 при чита�
 msgid "Theme %s not found\n"
 msgstr "Теми %s не знайдено\n"
 
+#: ../src/util.c:660 ../src/util.c:716
+#, c-format
+msgid "WARNING: Run command failed: %s\n"
+msgstr "УВАГА: Збій при запуску команди: %s\n"
+
 #: ../src/browser.c:132
 msgid "scalable "
 msgstr "масштабований "

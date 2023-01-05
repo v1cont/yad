@@ -123,7 +123,7 @@ Version 10.0
 
 Version 9.3
 
-- `[ ]` fix freezing main window on --row-action in list or @cmd in form dialogs
+- `[+]` fix freezing main window on --row-action in list or @cmd in form dialogs [0.42.56]
 
 Version 9.2
 
