@@ -1,5 +1,5 @@
 # write PACKAGE_URL as "http" not "https" for About dialog to display a clickable link in the Credits tab.
-AC_INIT([YAD], [0.42.56], [https://github.com/step-/yad/issues], yad, [http://github.com/step-/yad])
+AC_INIT([YAD], [0.42.57], [https://github.com/step-/yad/issues], yad, [http://github.com/step-/yad])
 AC_CONFIG_AUX_DIR([build])
 
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz no-dist-gzip])

@@ -229,6 +229,10 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
   if ((condition != G_IO_IN) && (condition != G_IO_IN + G_IO_HUP))
     {
       g_io_channel_shutdown (channel, TRUE, NULL);
+
+      if (options.progress_data.autoclose && options.plug == -1)
+         yad_exit (options.data.def_resp);
+
       return FALSE;
     }
   return TRUE;

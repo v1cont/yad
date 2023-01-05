@@ -200,7 +200,7 @@ Version 5.0
 - `[+]` fix expanding tree nodes for stdin data
 - `[+]` some fixes in print dialog
 - `[+]` fix --uri-handler option in html dialog [0.42.46]
-- `[ ]` fix wrong autoclose behavior in progress dialog
+- `[+]` fix wrong autoclose behavior in progress dialog [0.42.57]
 
 Version 4.1
 
@@ -221,7 +221,7 @@ Version 3.0
 
 - `[+]` add user defined handlers for all editing actions in list dialog.
 
-- `[?]` fix loading text from file in text-info dialog
+- `[!]` fix loading text from file in text-info dialog
 - `[!]` fix gsettings key names
 
 Version 2.0
@@ -238,11 +238,11 @@ Version 1.0
 - `[+]` minimum required gtk+ version bump to 3.22.0
 - `[>]` add --formatted option to text-info dialog for displaing text with pango markup
 - `[+]` add --expand option to tab dialog
-- `[ ]` default protocol for html widget is https now
+- `[+]` default protocol for html widget is https now
 - `[-]` gtk stock items not used anymore. instead there are some yad predefined names. details can be found in man page
 - `[+]` add --bool-fmt for different forms of boolean values output. all of this forms recognized on input automatically
 - `[!]` gspell library now used for spell checking
-- `[?]` tray icon is optional now. this dialog is enabled by default but can be turned off with ./configure --disable-tray
+- `[-]` tray icon is optional now. this dialog is enabled by default but can be turned off with ./configure --disable-tray
 - `[-]` remove --fore, --back and --font options for text-info dialog. those functionality can be done through custom css
 
 Version 0.42.0
