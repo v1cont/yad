@@ -39,6 +39,8 @@ static GtkWidget *text = NULL;
 
 static gint ret = YAD_RESPONSE_ESC;
 
+static gboolean is_x11 = FALSE;
+
 YadNTabs *tabs;
 
 #ifndef G_OS_WIN32
@@ -656,9 +658,8 @@ create_dialog (void)
         gtk_window_fullscreen (GTK_WINDOW (dlg));
     }
 
-#ifndef G_OS_WIN32
   /* print xid */
-  if (options.print_xid)
+  if (is_x11 && options.print_xid)
     {
       FILE *xf;
 
@@ -677,7 +678,6 @@ create_dialog (void)
             fflush (xf);
         }
     }
-#endif
 
   return dlg;
 }
@@ -820,6 +820,16 @@ main (gint argc, gchar ** argv)
     }
   yad_set_mode ();
 
+  /* check for current GDK backend */
+#ifdef GDK_WINDOWING_X11
+#if !GTK_CHECK_VERSION(3,0,0)
+  static gboolean is_x11 = TRUE;
+#else
+  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+    is_x11 = TRUE;
+#endif
+#endif
+
   /* parse custom gtkrc */
   if (options.gtkrc_file)
     {
@@ -893,6 +903,13 @@ main (gint argc, gchar ** argv)
   signal (SIGUSR2, sa_usr2);
 #endif
 
+  if (!is_x11 && options.plug != -1)
+    {
+      options.plug = -1;
+      if (options.debug)
+        g_printerr (_("WARNING: --plug mode not supported outside X11\n"));
+    }
+
   /* plug mode */
   if (options.plug != -1)
     {
@@ -900,6 +917,19 @@ main (gint argc, gchar ** argv)
       gtk_main ();
       shmdt (tabs);
       return ret;
+    }
+
+  if (!is_x11)
+    {
+      if (options.mode == YAD_MODE_NOTEBOOK || options.mode == YAD_MODE_PANED
+#ifdef HAVE_TRAY
+          || options.mode == YAD_MODE_NOTIFICATION
+#endif
+         )
+        {
+          g_printerr (_("WARNING: This mode not supported outside X11\n"));
+          return 1;
+        }
     }
 
   switch (options.mode)
@@ -938,11 +968,12 @@ main (gint argc, gchar ** argv)
     default:
       dialog = create_dialog ();
 
-#ifndef G_OS_WIN32
-      /* add YAD_XID variable */
-      str = g_strdup_printf ("0x%X", (guint) GDK_WINDOW_XID (gtk_widget_get_window (dialog)));
-      g_setenv ("YAD_XID", str, TRUE);
-#endif
+      if (is_x11)
+        {
+          /* add YAD_XID variable */
+          str = g_strdup_printf ("0x%X", (guint) GDK_WINDOW_XID (gtk_widget_get_window (dialog)));
+          g_setenv ("YAD_XID", str, TRUE);
+        }
 
       /* make some specific init actions */
       if (options.mode == YAD_MODE_NOTEBOOK)

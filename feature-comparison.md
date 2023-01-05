@@ -189,9 +189,9 @@ Version 6.0
 - `[+]` add --use-interp option ⁽²⁾ [0.42.45]
 - `[+]` add link field to --form dialog [0.42.47]
 - `[ ]` returning customizable options for --text-info dialog
-- `[ ]` fix yad behavior outside X11 (spetial thanks to Michael Weiser)
+- `[+]` fix yad behavior outside X11 (special thanks to Michael Weiser) ⁽⁸⁾ [0.42.59]
 - `[ ]` improve dialog window placement
-- `[ ]` update translations
+- `[+]` update translations
 
 Version 5.0
 
@@ -269,3 +269,5 @@ See the NEWS file for older versions.
 ⁽⁵⁾ yadL saves print settings to new file `$XDG_CONFIG_HOME/yad/print.conf`, and other settings to `$XDG_CONFIG_HOME/yad.conf`.  Instead, yadU uses `gsettings` to save its configuration; it can be built "standalone" without `gsettings` but then there is no `yad.conf` to save the configuration.
 
 ⁽⁶⁾ yadL still provides option `--multi-progress` as a deprecated alias for `--progress`.
+
+⁽⁸⁾ GTK+-2 does not provide a GDK Wayland backend.  yadU and yadL equally support Wayland for GTK+-3 builds but some dialog features may not be available. If configuration option `debug` is enabled, yadL and yadU will print a warning when an unavailable feature is requested.  To run yadL/yadU in this way, select the Wayland backend by setting `GDK_BACKEND=wayland,x11` in the application's environment. Special value `GDK_BACKEND=help` displays the available backends.

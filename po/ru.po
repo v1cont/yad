@@ -158,6 +158,16 @@ msgstr "Не могу разобрать YAD_OPTIONS: %s\n"
 msgid "Unable to parse command line: %s\n"
 msgstr "Не удается разобрать командную строку: %s\n"
 
+#: ../src/main.c:805
+#, c-format
+msgid "warning: --plug mode not supported outside x11\n"
+msgstr "внимание: режим --plug поддерживается только в x11\n"
+
+#: ../src/main.c:825
+#, c-format
+msgid "warning: this mode not supported outside x11\n"
+msgstr "внимание: этот режим поддерживается только в x11\n"
+
 #: ../src/notification.c:121
 #, c-format
 msgid "Could not load notification icon '%s': %s\n"
@@ -188,6 +198,14 @@ msgstr "Удалить строку"
 #: ../src/list.c:911
 msgid "Duplicate row"
 msgstr "Скопировать строку"
+
+#: ../src/list.c:1206
+#, c-format
+msgid ""
+"WARNING: options --checklist and --radiolist are deprecated\n"
+msgstr ""
+"ВНИМАНИЕ: Используются опции --checklist или --radiolist. Эти опции устарели "
+"и будут удалены в следующих выпусках\n"
 
 #: ../src/list.c:1058
 #, c-format
@@ -1702,6 +1720,14 @@ msgstr "Этот тип файлов не поддерживается для п
 #, c-format
 msgid "Load source file failed: %s\n"
 msgstr "Сбой при загрузке исходного файла: %s\n"
+
+#: ../src/progress.c:248
+#, c-format
+msgid ""
+"WARNING: the old-style progress dialog option is deprecated: use --bar style instead\n"
+msgstr ""
+"внимание: используется старый стиль описания диалога прогресса. эта "
+"возможность устарела, используйте опцию --bar\n"
 
 #: ../src/color.c:65
 #, c-format

@@ -153,6 +153,16 @@ msgstr "%d сек"
 msgid "Unable to parse YAD_OPTIONS: %s\n"
 msgstr "Не можу розібрати YAD_OPTIONS: %s\n"
 
+#: ../src/main.c:805
+#, c-format
+msgid "WARNING: --plug mode not supported outside X11\n"
+msgstr "УВАГА: Опція --plug підтримується тільки в X11\n"
+
+#: ../src/main.c:825
+#, c-format
+msgid "WARNING: This mode not supported outside X11\n"
+msgstr "УВАГА: Цей режим підтримується тільки в X11\n"
+
 #: ../src/main.c:809
 #, c-format
 msgid "Unable to parse command line: %s\n"
@@ -188,6 +198,14 @@ msgstr "Видалити рядок"
 #: ../src/list.c:911
 msgid "Duplicate row"
 msgstr "Скопіювати рядок"
+
+#: ../src/list.c:1206
+#, c-format
+msgid ""
+"WARNING: options --checklist and --radiolist are deprecated\n"
+msgstr ""
+"УВАГА: Використовуються опції --checklist або --radiolist. Ці опції "
+"застаріли та будуть видалені у майбутніх випусках\n"
 
 #: ../src/list.c:1058
 #, c-format
@@ -1707,6 +1725,14 @@ msgstr "Цей тип файлів не може бути надруковани
 #, c-format
 msgid "Load source file failed: %s\n"
 msgstr "Збій при завантажені файлу: %s\n"
+
+#: ../src/progress.c:248
+#, c-format
+msgid ""
+"WARNING: the old-style progress dialog option is deprecated: use --bar style instead\n"
+msgstr ""
+"увага: використовується старий стиль діалога прогреса. ця можливість "
+"застаріла, будь ласка застосуйте опцію --bar\n"
 
 #: ../src/color.c:65
 #, c-format
