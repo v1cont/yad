@@ -1470,6 +1470,8 @@ yad_options_init (void)
   options.xid_file = NULL;
 #endif
 
+  options.debug = settings.debug;
+
   options.hscroll_policy = GTK_POLICY_AUTOMATIC;
   options.vscroll_policy = GTK_POLICY_AUTOMATIC;
 
@@ -1894,7 +1896,10 @@ yad_create_context (void)
   g_option_context_add_group (tmp_ctx, a_group);
 
   g_option_context_set_help_enabled (tmp_ctx, TRUE);
-  g_option_context_set_ignore_unknown_options (tmp_ctx, settings.ignore_unknown);
+  if (!options.debug)
+    g_option_context_set_ignore_unknown_options (tmp_ctx, settings.ignore_unknown);
+  else
+    g_option_context_set_ignore_unknown_options (tmp_ctx, FALSE);
 
   return tmp_ctx;
 }

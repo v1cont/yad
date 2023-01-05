@@ -17,7 +17,6 @@ GNU GPL3 is yadL's and yadU's license. Copyright notices in yadL source code are
 yadL of its own adds the following new features not included in yadU, to the best of my knowledge.
 Refer to [yadL commit log](https://github.com/step-/yad/commits) for more details.
 
-- option `--multi-progress` is a deprecated alias for `--progress`
 - option `--icon-width=SIZE` is a deprecated alias for `--icon-size`
 - new option `--center-keep`
 - yadL GTK+-3 binary still supports stock items for button icons
@@ -196,8 +195,8 @@ Version 6.0
 
 Version 5.0
 
-- `[!]` add debug mode. this feature can be turned on through gsettings.
-- `[!]` add configure option --enable-standalone for build yad without gsettings support
+- `[+]` add debug mode. this feature can be turned on through gsettings. ⁽⁵⁾ [0.42.55]
+- `[!]` add configure option --enable-standalone for build yad without gsettings support ⁽⁵⁾
 - `[+]` fix expanding tree nodes for stdin data
 - `[+]` some fixes in print dialog
 - `[+]` fix --uri-handler option in html dialog [0.42.46]
@@ -213,7 +212,7 @@ Version 4.0
 - `[>]` add application chooser dialog and application chooser field in form dialog
 - `[+]` add tree mode in list dialog
 - `[+]` add --hide-text option to progress dialogs [0.42.42]
-- `[+]` multi-progress dialog features merged with progress dialog. separate multi-progress dialog no longer exists [0.42.42]
+- `[+]` multi-progress dialog features merged with progress dialog. Separate multi-progress dialog no longer exists ⁽⁶⁾ [0.42.42]
 - `[>]` enable markup in progress log window
 - `[+]` fix output of color values in hex notation
 - `[+]` removed \*-selection aliases for --file, --color and --font dialogs ⁽³⁾
@@ -227,7 +226,7 @@ Version 3.0
 
 Version 2.0
 
-- `[!]` migrate to gsettings from config file
+- `[!]` migrate to gsettings from config file ⁽⁵⁾
 - `[+]` add --keep-icon-size option
 - `[>]` icon browser shows only regular icons by default. this behavior can be changed from command line
 - `[-]` fix segfault in text-info dialog when empty file is specified ⁽⁴⁾
@@ -267,5 +266,6 @@ See the NEWS file for older versions.
 
 ⁽⁴⁾ Not applicable.
 
-⁽⁵⁾ Print settings are saved to new file `$XDG_CONFIG_HOME/yad/print.conf`.  Other settings are still saved to `$XDG_CONFIG_HOME/yad.conf`.  Instead, yadU uses `gsettings` to save its configuration; it can be built "standalone" without `gsettings` but then there is no `yad.conf` to save the configuration.
+⁽⁵⁾ yadL saves print settings to new file `$XDG_CONFIG_HOME/yad/print.conf`, and other settings to `$XDG_CONFIG_HOME/yad.conf`.  Instead, yadU uses `gsettings` to save its configuration; it can be built "standalone" without `gsettings` but then there is no `yad.conf` to save the configuration.
 
+⁽⁶⁾ yadL still provides option `--multi-progress` as a deprecated alias for `--progress`.

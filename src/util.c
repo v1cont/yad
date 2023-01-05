@@ -49,6 +49,7 @@ read_settings (void)
   settings.date_format = "%x";
   settings.ignore_unknown = TRUE;
   settings.max_tab = 100;
+  settings.debug = FALSE;
 
   settings.icon_theme = gtk_icon_theme_get_default ();
 
@@ -82,6 +83,8 @@ read_settings (void)
             settings.ignore_unknown = g_key_file_get_boolean (kf, "General", "ignore_unknown_options", NULL);
           if (g_key_file_has_key (kf, "General", "max_tab", NULL))
             settings.max_tab = g_key_file_get_integer (kf, "General", "max_tab", NULL);
+          if (g_key_file_has_key (kf, "General", "debug", NULL))
+            settings.debug = g_key_file_get_boolean (kf, "General", "debug", NULL);
         }
 
       g_key_file_free (kf);
@@ -110,7 +113,7 @@ write_settings (void)
   g_key_file_set_comment (kf, "General", "timeout_indicator",
                           " Position of timeout indicator (top, bottom, left, right, none)", NULL);
   g_key_file_set_boolean (kf, "General", "show_remain", settings.show_remain);
-  g_key_file_set_comment (kf, "General", "show_remain", " Show remain seconds in timeout indicator", NULL);
+  g_key_file_set_comment (kf, "General", "show_remain", " Show remaining seconds in timeout indicator", NULL);
   g_key_file_set_boolean (kf, "General", "combo_always_editable", settings.combo_always_editable);
   g_key_file_set_comment (kf, "General", "combo_always_editable", " Combo-box in entry dialog is always editable", NULL);
   g_key_file_set_string (kf, "General", "terminal", settings.term);
@@ -120,9 +123,11 @@ write_settings (void)
   g_key_file_set_string (kf, "General", "date_format", settings.date_format);
   g_key_file_set_comment (kf, "General", "date_format", " Default date format (see strftime(3) for details)", NULL);
   g_key_file_set_boolean (kf, "General", "ignore_unknown_options", settings.ignore_unknown);
-  g_key_file_set_comment (kf, "General", "ignore_unknown_options", " Ignore unknown command-line options", NULL);
+  g_key_file_set_comment (kf, "General", "ignore_unknown_options", " Ignore unknown command-line options (false if debug)", NULL);
   g_key_file_set_integer (kf, "General", "max_tab", settings.max_tab);
-  g_key_file_set_comment (kf, "General", "max_tab", " Maximum number of tabs in notebook", NULL);
+  g_key_file_set_comment (kf, "General", "max_tab", " Maximum number of notebook tabs", NULL);
+  g_key_file_set_boolean (kf, "General", "debug", settings.debug);
+  g_key_file_set_comment (kf, "General", "debug", " Enable debug mode and warn about deprecated features", NULL);
 
   context = g_key_file_to_data (kf, NULL, NULL);
 
@@ -313,7 +318,7 @@ update_preview (GtkFileChooser * chooser, GtkWidget *p)
 }
 
 gchar **
-split_arg (const gchar * str)
+split_arg (const gchar *str)
 {
   gchar **res;
   gchar *p_col;

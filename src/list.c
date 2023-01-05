@@ -1217,6 +1217,12 @@ list_create_widget (GtkWidget *dlg)
 
   fore_col = back_col = font_col = -1;
 
+  if (options.debug)
+    {
+      if (options.list_data.checkbox || options.list_data.radiobox)
+        g_printerr (_("WARNING: options --checklist and --radiolist are deprecated\n"));
+    }
+
   n_cols = g_slist_length (options.list_data.columns);
   if (n_cols == 0)
     {

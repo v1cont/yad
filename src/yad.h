@@ -534,6 +534,8 @@ typedef struct {
   key_t plug;
   guint tabnum;
 
+  gboolean debug;
+
 #ifndef G_OS_WIN32
   guint kill_parent;
   gboolean print_xid;
@@ -558,6 +560,7 @@ typedef struct {
   gchar *open_cmd;
   gchar *date_format;
   guint max_tab;
+  gboolean debug;
 } YadSettings;
 
 extern YadSettings settings;
