@@ -686,7 +686,7 @@ run_command_sync (gchar *cmd, gchar **out)
   g_thread_new ("run_sync", (GThreadFunc) run_thread, d);
 
   while (run_lock != FALSE)
-    gtk_main_iteration ();
+    gtk_main_iteration_do (FALSE);
 
   g_free (d->cmd);
   g_free (d);
