@@ -182,7 +182,7 @@ Version 7.0
 - `[ ]` fixes and cleanups in miscellaneous functions
 - `[+]` fix parsing numeric ranges in for dialog
 - `[ ]` fixes in man page
-- `[ ]` build icon browser by default
+- `[+]` build icon browser by default [0.42.60]
 
 Version 6.0
 

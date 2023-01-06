@@ -1,5 +1,5 @@
 # write PACKAGE_URL as "http" not "https" for About dialog to display a clickable link in the Credits tab.
-AC_INIT([YAD], [0.42.59], [https://github.com/step-/yad/issues], yad, [http://github.com/step-/yad])
+AC_INIT([YAD], [0.42.60], [https://github.com/step-/yad/issues], yad, [http://github.com/step-/yad])
 AC_CONFIG_AUX_DIR([build])
 
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz no-dist-gzip])
@@ -154,7 +154,7 @@ dnl icon browser
 AC_ARG_ENABLE([icon-browser],
 	[AS_HELP_STRING([--enable-icon-browser],
 			[Build YAD icon browser])],
-	[build_ib=$enableval], [build_ib=no])
+	[build_ib=$enableval], [build_ib=yes])
 AM_CONDITIONAL([BUILD_IB], [test x$build_ib = xyes])
 
 # *******************************
