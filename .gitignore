@@ -25,3 +25,5 @@ src/yad
 src/yad-icon-browser
 src/pfd
 stamp-h1
+*.tar.xz
+build.log

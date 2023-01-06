@@ -680,12 +680,12 @@ Set the \fICMD\fP as a double-click command. When user double-clicked on row, \f
 When double-click specified \fIEnter\fP acts as a double-click and \fICtrl+Enter\fP acts as an \fIOK\fP button.
 \fICMD\fP may contain a special character `%s' for setting a position for arguments. By default arguments will be concatenated to the end of \fICMD\fP.
 If \fICMD\fP starts with \fI@\fP, its output will replace values of current row.
-This option doesn't work with \fI--editable\fP.
+This option doesn't work with \fI\-\-editable\fP.
 .TP
 .B \-\-select-action=\fICMD\fP
 Set the \fICMD\fP as a action when selection is changed. \fICMD\fP will be launched with values of all columns as an arguments.
 \fICMD\fP may contain a special character `%s' for setting a position for arguments. By default arguments will be concatenated to the end of \fICMD\fP.
-This option doesn't work with \fI--multiple\fP.
+This option doesn't work with \fI\-\-multiple\fP.
 .TP
 .B \-\-row-action=\fICMD\fP
 Set the \fICMD\fP as an action when a row is added, modified or removed from the context menu. The first argument passed to the command is the action name (\fIadd\fP, \fIedit\fP or \fIdel\fP).
@@ -1073,17 +1073,17 @@ Exit the program. Middle click on icon also send \fIquit\fP command.
 .SH ENVIRONMENT VARIABLES
 .TP
 .B YAD_OPTIONS
-This variable can holds some default options for yad. All options in this
-variable may be redefined from command line.
+This variable sets default options for \fIyad\fP. All options in this
+variable can be redefined from the command line.
 .TP
 .B YAD_PID
-This variable sets to the value of current dialog's pid and accessible in all
-dialog children.
+This variable holds the value of the current dialog's pid. It is exported to all
+children of the dialog.
 .TP
 .B YAD_XID
-This variable sets to the value of current dialog's X Window ID and accessible in all
-dialog children. This variable is not set in print and notification dialogs,
-and in a dialogs which acts as a notebook or paned children.
+This variable holds the value of the current dialog's X Window ID. It is exported to all
+children of the dialog but it is not set in print and notification dialogs,
+and in dialogs that plug into a notebook or paned dialog.
 
 .SH USER DEFINED SIGNALS
 .TP

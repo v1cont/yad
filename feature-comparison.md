@@ -229,7 +229,7 @@ Version 2.0
 - `[!]` migrate to gsettings from config file ⁽⁵⁾
 - `[+]` add --keep-icon-size option
 - `[>]` icon browser shows only regular icons by default. this behavior can be changed from command line
-- `[-]` fix segfault in text-info dialog when empty file is specified ⁽⁴⁾
+- `[>]` fix segfault in text-info dialog when empty file is specified ⁽⁴⁾
 - `[+]` fix initial selection in selectable labels
 
 Version 1.0
