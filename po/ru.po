@@ -383,9 +383,9 @@ msgstr "Текст диалога может быть выделен"
 
 #: ../src/option.c:146
 #, c-format
-msgid "Run commands under specified interpreter (default: sh -c '%s')"
+msgid "Run commands under specified interpreter (default: sh -c \"%s\")"
 msgstr ""
-"Запускать команды под указанным интерпретатором (по умолчанию: sh -c '%s')"
+"Запускать команды под указанным интерпретатором (по умолчанию: sh -c \"%s\")"
 
 #: ../src/option.c:148
 msgid "Set URI handler"

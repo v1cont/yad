@@ -384,9 +384,9 @@ msgstr "Текст діалогу може буди виділеним"
 
 #: ../src/option.c:146
 #, c-format
-msgid "Run commands under specified interpreter (default: sh -c '%s')"
+msgid "Run commands under specified interpreter (default: sh -c \"%s\")"
 msgstr ""
-"Запускати команди під вказаним інтерпретатором (за замовчанням: sh -c '%s')"
+"Запускати команди під вказаним інтерпретатором (за замовчанням: sh -c \"%s\")"
 
 #: ../src/option.c:148
 msgid "Set URI handler"

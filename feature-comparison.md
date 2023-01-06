@@ -129,7 +129,7 @@ Version 9.2
 
 - `[ ]` some fixes of menu in editable lists
 - `[ ]` add two additional item to menu in editable lists - "move up" and "move down"
-- `[?]` use double quotes for arguments in default interpreter command
+- `[+]` use double quotes for arguments in default interpreter command [0.42.61]
 
 Version 9.1
 

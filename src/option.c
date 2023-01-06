@@ -144,7 +144,7 @@ static GOptionEntry general_options[] = {
   { "keep-icon-size", 0, 0, G_OPTION_ARG_NONE, &options.data.keep_icon_size,
     N_("Don't scale icons"), NULL },
   { "use-interp", 0, G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, set_interp,
-    N_("Run commands under specified interpreter (default: sh -c '%s')"), N_("CMD") },
+    N_("Run commands under specified interpreter (default: sh -c \"%s\")"), N_("CMD") },
   { "uri-handler", 0, 0, G_OPTION_ARG_STRING, &options.data.uri_handler,
     N_("Set URI handler"), N_("CMD") },
   /* window settings */
@@ -1515,7 +1515,7 @@ yad_options_init (void)
   options.data.keep_icon_size = FALSE;
   options.data.def_resp = YAD_RESPONSE_OK;
   options.data.use_interp = FALSE;
-  options.data.interp = "sh -c '%s'";
+  options.data.interp = "sh -c \"%s\"";
   options.data.uri_handler = settings.open_cmd;
 
   /* Initialize window options */
