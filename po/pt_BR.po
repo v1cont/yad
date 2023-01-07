@@ -21,7 +21,8 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Gustavo Soares de Lima <gustavo@logicus.com.br>\n"
-"Angela Fernanda Ferreira <angela@logicus.com.br"
+"Angela Fernanda Ferreira <angela@logicus.com.br\n"
+"Tulio Calil <tuliocll@gmail.com>"
 
 #: ../src/about.c:32
 msgid ""
@@ -1656,11 +1657,11 @@ msgstr "embutido"
 #. initialize GTK+ and parse the command line arguments
 #: ../src/browser.c:200
 msgid "- Icon browser"
-msgstr "Ícone do navegador"
+msgstr "Navegador de ícones"
 
 #: ../src/browser.c:213
 msgid "Icon browser"
-msgstr "Ícone do navegador"
+msgstr "Navegador de ícones"
 
 #: ../src/browser.c:247
 msgid "<b>Name:</b>"
@@ -1684,7 +1685,7 @@ msgstr "Ícones"
 
 #: ../data/yad-icon-browser.desktop.in.h:1
 msgid "Icon Browser"
-msgstr "Ícone do navegador"
+msgstr "Navegador de ícones"
 
 #: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
