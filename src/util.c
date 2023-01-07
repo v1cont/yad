@@ -101,6 +101,15 @@ read_settings (void)
   g_free (filename);
 }
 
+static void
+set_comment (GKeyFile *kf, gchar *key, gchar *s)
+{
+  gchar *comment;
+  comment = g_strconcat(" ", s);
+  g_key_file_set_comment (kf, "General", key, comment, NULL);
+  g_free (comment);
+}
+
 void
 write_settings (void)
 {
@@ -110,32 +119,32 @@ write_settings (void)
   kf = g_key_file_new ();
 
   g_key_file_set_integer (kf, "General", "width", settings.width);
-  g_key_file_set_comment (kf, "General", "width", " Default dialog width", NULL);
+  set_comment(kf, "width", _("Default dialog width"));
   g_key_file_set_integer (kf, "General", "height", settings.height);
-  g_key_file_set_comment (kf, "General", "height", " Default dialog height", NULL);
+  set_comment(kf, "height", _("Default dialog height"));
   g_key_file_set_integer (kf, "General", "timeout", settings.timeout);
-  g_key_file_set_comment (kf, "General", "timeout", " Default timeout (0 for no timeout)", NULL);
+  set_comment(kf, "timeout", _("Default timeout (0 for no timeout)"));
   g_key_file_set_string (kf, "General", "timeout_indicator", settings.to_indicator);
-  g_key_file_set_comment (kf, "General", "timeout_indicator",
-                          " Position of timeout indicator (top, bottom, left, right, none)", NULL);
+  set_comment(kf, "timeout_indicator",
+      _(" Position of timeout indicator (top, bottom, left, right, none)"));
   g_key_file_set_boolean (kf, "General", "show_remain", settings.show_remain);
-  g_key_file_set_comment (kf, "General", "show_remain", " Show remaining seconds in timeout indicator", NULL);
+  set_comment(kf, "show_remain", _("Show remaining seconds in timeout indicator"));
   g_key_file_set_boolean (kf, "General", "combo_always_editable", settings.combo_always_editable);
-  g_key_file_set_comment (kf, "General", "combo_always_editable", " Combo-box in entry dialog is always editable", NULL);
+  set_comment(kf, "combo_always_editable", _("Combo-box in entry dialog is always editable"));
   g_key_file_set_string (kf, "General", "terminal", settings.term);
-  g_key_file_set_comment (kf, "General", "terminal", " Default terminal command (use %s for arguments placeholder)", NULL);
+  set_comment(kf, "terminal", _("Default terminal command (use %s for arguments placeholder)"));
   g_key_file_set_string (kf, "General", "open_command", settings.open_cmd);
-  g_key_file_set_comment (kf, "General", "open_command", " Default open command (use %s for arguments placeholder)", NULL);
+  set_comment(kf, "open_command", _("Default open command (use %s for arguments placeholder)"));
   g_key_file_set_string (kf, "General", "date_format", settings.date_format);
-  g_key_file_set_comment (kf, "General", "date_format", " Default date format (see strftime(3) for details)", NULL);
+  set_comment(kf, "date_format", _("Default date format (see strftime(3) for details)"));
   g_key_file_set_boolean (kf, "General", "ignore_unknown_options", settings.ignore_unknown);
-  g_key_file_set_comment (kf, "General", "ignore_unknown_options", " Ignore unknown command-line options (false if debug)", NULL);
+  set_comment(kf, "ignore_unknown_options", _("Ignore unknown command-line options (false if debug)"));
   g_key_file_set_integer (kf, "General", "max_tab", settings.max_tab);
-  g_key_file_set_comment (kf, "General", "max_tab", " Maximum number of notebook tabs", NULL);
+  set_comment(kf, "max_tab", _("Maximum number of notebook tabs"));
   g_key_file_set_boolean (kf, "General", "debug", settings.debug);
-  g_key_file_set_comment (kf, "General", "debug", " Enable debug mode and warn about deprecated features", NULL);
+  set_comment(kf, "debug", _("Enable debug mode and warn about deprecated features"));
   g_key_file_set_boolean (kf, "General", "large_preview", settings.large_preview);
-  g_key_file_set_comment (kf, "General", "large_preview", " Use large previews in file selection dialogs", NULL);
+  set_comment(kf, "large_preview", _("Use large previews in file selection dialogs"));
 
   context = g_key_file_to_data (kf, NULL, NULL);
 
@@ -148,7 +157,7 @@ write_settings (void)
       g_free (filename);
     }
   else
-    g_printerr ("yad: cannot write settings file: %s\n", strerror (errno));
+    g_printerr (_("cannot write settings file: %s\n"), strerror (errno));
 
   g_free (context);
 }
