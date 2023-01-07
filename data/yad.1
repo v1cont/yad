@@ -600,7 +600,7 @@ Make form scrollable.
 Make form fields height the same.
 .TP
 .B \-\-changed-action=\fICMD\fP
-Run \fICMD\fP when \fICHK\fP or \fICB\fP field values are changed. Command runs with two arguments - number of changed field and its current value.
+Run \fICMD\fP when \fICHK\fP, \fICB\fP, or \fISW\fP field value is changed. Command runs with two arguments - number of changed field and its current value.
 Output of a command parsing in a same manner as in \fIBTN\fP fields with \fI@\fP prefix. \fBAttention\fP - this option may slow down your dialog.
 .TP
 .B \-\-quoted-output
@@ -1301,6 +1301,7 @@ yad-form-link@GtkLinkButton@Link field in form
 yad-form-file@GtkFileChooserButton@File or directory field in form
 yad-form-font@GtkFontChooserButton@Font field in form
 yad-form-app@GtkAppChooserButton@Application field in form
+yad-form-switch@GtkSwitch@Switch field in form
 yad-form-color@GtkColorChooserButton@Color field in form
 yad-form-label@GtkLabel@Label field in form
 yad-form-scale@GtkScale@Scale widget in form
