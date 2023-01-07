@@ -173,7 +173,7 @@ Version 7.0
 - `[+]` add --enforce-step option to scale dialog [0.42.62]
 - `[+]` add tooltips and markup to column headers in list dialog [0.42.63]
 - `[-]` add pango-style font definition to text-info dialog ⁽⁷⁾
-- `[ ]` add --large-preview options for better thumbnails handling
+- `[+]` add --large-preview options for better thumbnails handling ⁽⁵⁾⁽⁹⁾ [0.42.64]
 - `[ ]` add --interactive option to icon browser for printing selected icons on stdout
 - `[+]` add custom uri handler (--uri-handler option) [0.42.46]
 - `[+]` improve killing children algo for notebook and paned dialogs
@@ -273,3 +273,6 @@ See the NEWS file for older versions.
 ⁽⁷⁾ yadU changed the `--fontname` format of text dialog from Pango style to CSS style [fe11080]+[4b54d14] then back to Pango style [244919d]. yadL has always used Pango style [3858704].
 
 ⁽⁸⁾ GTK+-2 does not provide a GDK Wayland backend.  yadU and yadL equally support Wayland for GTK+-3 builds but some dialog features may not be available. If configuration option `debug` is enabled, yadL and yadU will print a warning when an unavailable feature is requested.  To run yadL/yadU in this way, select the Wayland backend by setting `GDK_BACKEND=wayland,x11` in the application's environment. Special value `GDK_BACKEND=help` displays the available backends.
+
+⁽⁹⁾ On GTK+-2 the preview image is generated only when a file item is selected interactively.  Therefore `yad --file --filename=/my/pic.jpg --file --preview [--large-preview]` will not start with the preview of pic.jpg loaded.
+

@@ -537,7 +537,10 @@ msgstr "Разрешить множественный выбор"
 msgid "Enable preview"
 msgstr "Добавить предпросмотр"
 
-#: ../src/option.c:208
+msgid "Use large preview"
+msgstr "Использовать крупный предпросмотр"
+
+#: ../src/option.c:215
 msgid "Show hidden files in file selection dialogs"
 msgstr "Показывать скрытые файлы в диалоге выбора файла"
 

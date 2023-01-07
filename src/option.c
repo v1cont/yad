@@ -214,6 +214,8 @@ static GOptionEntry common_options[] = {
     N_("Allow multiple selection"), NULL },
   { "add-preview", 0, 0, G_OPTION_ARG_NONE, &options.common_data.preview,
     N_("Enable preview"), NULL },
+  { "large-preview", 0, 0, G_OPTION_ARG_NONE, &options.common_data.large_preview,
+    N_("Use large preview"), NULL },
   { "show-hidden", 0, 0, G_OPTION_ARG_NONE, &options.common_data.show_hidden,
     N_("Show hidden files in file selection dialogs"), NULL },
   { "filename", 0, 0, G_OPTION_ARG_FILENAME, &options.common_data.uri,
@@ -1552,6 +1554,7 @@ yad_options_init (void)
   options.common_data.align = 0.0;
   options.common_data.listen = FALSE;
   options.common_data.preview = FALSE;
+  options.common_data.large_preview = settings.large_preview;
   options.common_data.show_hidden = FALSE;
   options.common_data.quoted_output = FALSE;
   options.common_data.num_output = FALSE;

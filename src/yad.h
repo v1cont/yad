@@ -481,6 +481,7 @@ typedef struct {
   gdouble align;
   gboolean listen;
   gboolean preview;
+  gboolean large_preview;
   gboolean show_hidden;
   gboolean quoted_output;
   gboolean num_output;
@@ -569,6 +570,7 @@ typedef struct {
   gchar *date_format;
   guint max_tab;
   gboolean debug;
+  gboolean large_preview;
 } YadSettings;
 
 extern YadSettings settings;

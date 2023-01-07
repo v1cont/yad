@@ -539,6 +539,10 @@ msgid "Enable preview"
 msgstr "Додати попередній перегляд"
 
 #: ../src/option.c:208
+msgid "Use large preview"
+msgstr "Використовувати крупний розмір зображень попереднього перегляду"
+
+#: ../src/option.c:215
 msgid "Show hidden files in file selection dialogs"
 msgstr "Відобразити скриті файли у діалозі вибору файла"
 
