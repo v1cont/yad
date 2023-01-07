@@ -1053,7 +1053,11 @@ msgstr "Закрыть диалог по достижении 100% всеми и
 msgid "Kill parent process if cancel button is pressed"
 msgstr "Завершить родительский процесс, если нажата кнопка отмены"
 
-#: ../src/option.c:484
+#: ../src/option.c:473
+msgid "Use column name as a header tooltip"
+msgstr "Использовать имя колонки как текст подсказки"
+
+#: ../src/option.c:479
 msgid "Display notebook dialog"
 msgstr "Отобразить диалог с вкладками"
 
@@ -1207,7 +1211,11 @@ msgstr "Задать максимальное значение"
 msgid "Set step size"
 msgstr "Задать шаг"
 
-#: ../src/option.c:583
+#: ../src/option.c:586
+msgid "Only allow values in step increments"
+msgstr "Переход только по шагу"
+
+#: ../src/option.c:588
 msgid "Set paging size"
 msgstr "Задать шаг страницы"
 

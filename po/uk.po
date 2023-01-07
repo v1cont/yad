@@ -1058,6 +1058,10 @@ msgstr "Закрити діалог по досягненні 100% усіма і
 msgid "Kill parent process if cancel button is pressed"
 msgstr "Завершити батьківський процес, якщо натиснута кнопка відміни"
 
+#: ../src/option.c:473
+msgid "Use column name as a header tooltip"
+msgstr "Використовувати ім'я стовпчика як текст підказки"
+
 #: ../src/option.c:484
 msgid "Display notebook dialog"
 msgstr "Відобразити діалог із вкладинками"
@@ -1212,7 +1216,11 @@ msgstr "Задати максимальне значення"
 msgid "Set step size"
 msgstr "Задати крок"
 
-#: ../src/option.c:583
+#: ../src/option.c:586
+msgid "Only allow values in step increments"
+msgstr "Дозволити переміщення тільки за кроком"
+
+#: ../src/option.c:588
 msgid "Set paging size"
 msgstr "Задати крок сторінки"
 

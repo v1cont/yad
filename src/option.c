@@ -473,6 +473,8 @@ static GOptionEntry list_options[] = {
     N_("Add new records on the top of a list"), NULL },
   { "simple-tips", 0, 0, G_OPTION_ARG_NONE, &options.list_data.simple_tips,
     N_("Don't use markup in tooltips"), NULL },
+  { "header-tips", 0, 0, G_OPTION_ARG_NONE, &options.list_data.header_tips,
+    N_("Use column name as a header tooltip"), NULL },
   { NULL }
 };
 
@@ -1677,6 +1679,7 @@ yad_options_init (void)
   options.list_data.no_selection = FALSE;
   options.list_data.add_on_top = FALSE;
   options.list_data.simple_tips = FALSE;
+  options.list_data.header_tips = FALSE;
 
   /* Initialize notebook data */
   options.notebook_data.tabs = NULL;
@@ -1733,7 +1736,7 @@ yad_options_init (void)
   options.scale_data.buttons = FALSE;
   options.scale_data.marks = NULL;
   options.scale_data.enforce_step = FALSE;
-  
+
   /* Initialize text data */
   options.text_data.fore = NULL;
   options.text_data.back = NULL;

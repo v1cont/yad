@@ -317,6 +317,32 @@ size_col_format (GtkTreeViewColumn *col, GtkCellRenderer *cell, GtkTreeModel *mo
 }
 
 static void
+set_column_title (GtkTreeViewColumn *col, gchar *title)
+{
+  GtkWidget *lbl;
+  gchar **str;
+
+  str = g_strsplit (title, options.common_data.item_separator, 2);
+  lbl = gtk_label_new (NULL);
+
+  if (options.data.no_markup)
+    {
+      gtk_label_set_text (GTK_LABEL (lbl), str[0]);
+      if (str[1] || options.list_data.header_tips)
+        gtk_widget_set_tooltip_text (lbl, str[1] ? str[1] : str[0]);
+    }
+  else
+    {
+      gtk_label_set_markup (GTK_LABEL (lbl), str[0]);
+      if (str[1] || options.list_data.header_tips)
+        gtk_widget_set_tooltip_markup (lbl, str[1] ? str[1] : str[0]);
+    }
+
+  gtk_widget_show (lbl);
+  gtk_tree_view_column_set_widget (col, lbl);
+}
+
+static void
 add_columns ()
 {
   gint i;
@@ -336,7 +362,8 @@ add_columns ()
         case YAD_COLUMN_CHECK:
         case YAD_COLUMN_RADIO:
           renderer = gtk_cell_renderer_toggle_new ();
-          column = gtk_tree_view_column_new_with_attributes (col->name, renderer, "active", i, NULL);
+          column = gtk_tree_view_column_new_with_attributes (NULL, renderer, "active", i, NULL);
+          set_column_title (column, col->name);
           if (back_col != -1)
             gtk_tree_view_column_add_attribute (column, renderer, "cell-background", back_col);
           if (col->type == YAD_COLUMN_RADIO)
@@ -349,7 +376,8 @@ add_columns ()
           break;
         case YAD_COLUMN_IMAGE:
           renderer = gtk_cell_renderer_pixbuf_new ();
-          column = gtk_tree_view_column_new_with_attributes (col->name, renderer, "pixbuf", i, NULL);
+          column = gtk_tree_view_column_new_with_attributes (NULL, renderer, "pixbuf", i, NULL);
+          set_column_title (column, col->name);
           if (back_col != -1)
             gtk_tree_view_column_add_attribute (column, renderer, "cell-background", back_col);
           break;
@@ -362,7 +390,8 @@ add_columns ()
               g_object_set (G_OBJECT (renderer), "editable", TRUE, NULL);
               g_signal_connect (renderer, "edited", G_CALLBACK (cell_edited_cb), NULL);
             }
-          column = gtk_tree_view_column_new_with_attributes (col->name, renderer, "text", i, NULL);
+          column = gtk_tree_view_column_new_with_attributes (NULL, renderer, "text", i, NULL);
+          set_column_title (column, col->name);
           if (fore_col != -1)
             gtk_tree_view_column_add_attribute (column, renderer, "foreground", fore_col);
           if (back_col != -1)
@@ -378,7 +407,8 @@ add_columns ()
           break;
         case YAD_COLUMN_BAR:
           renderer = gtk_cell_renderer_progress_new ();
-          column = gtk_tree_view_column_new_with_attributes (col->name, renderer, "value", i, NULL);
+          column = gtk_tree_view_column_new_with_attributes (NULL, renderer, "value", i, NULL);
+          set_column_title (column, col->name);
           if (back_col != -1)
             gtk_tree_view_column_add_attribute (column, renderer, "cell-background", back_col);
           gtk_tree_view_column_set_sort_column_id (column, i);
@@ -392,9 +422,10 @@ add_columns ()
               g_signal_connect (renderer, "edited", G_CALLBACK (cell_edited_cb), NULL);
             }
           if (options.data.no_markup)
-            column = gtk_tree_view_column_new_with_attributes (col->name, renderer, "text", i, NULL);
+            column = gtk_tree_view_column_new_with_attributes (NULL, renderer, "text", i, NULL);
           else
-            column = gtk_tree_view_column_new_with_attributes (col->name, renderer, "markup", i, NULL);
+            column = gtk_tree_view_column_new_with_attributes (NULL, renderer, "markup", i, NULL);
+          set_column_title (column, col->name);
           if (col->ellipsize)
             g_object_set (G_OBJECT (renderer), "ellipsize", options.list_data.ellipsize, NULL);
           if (col->wrap)

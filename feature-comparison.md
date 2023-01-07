@@ -171,7 +171,7 @@ Version 7.1
 Version 7.0
 
 - `[+]` add --enforce-step option to scale dialog [0.42.62]
-- `[ ]` add tooltips and markup to column headers in list dialog
+- `[+]` add tooltips and markup to column headers in list dialog [0.42.63]
 - `[ ]` add pango-style font definition to text-info dialog
 - `[ ]` add --large-preview options for better thumbnails handling
 - `[ ]` add --interactive option to icon browser for printing selected icons on stdout

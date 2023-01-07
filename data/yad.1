@@ -598,6 +598,8 @@ Size of icons may be set in gtk config file at GTK_ICON_SIZE_MENU position of gt
 
 Special column names \fI@fore@\fP, \fI@back@\fP and \fI@font@\fP sets corresponding rows attributes.
 Values of those columns don't show in results.
+
+Column title can be specified as \fIname!tooltip\fP and Pango markup can be used in \fIname\fP and \fItooltip\fP parts.
 .TP
 .B \-\-tree
 Enbale tree mode. In this mode extra data in form \fIROW_ID[:PARENT_ID]\fP must be passed to yad before each row. See \fBEXAMPLES\fP for details.
@@ -719,6 +721,9 @@ Sending FormFeed character to list clears it. This symbol may be sent as \fIecho
 .TP
 .B \-\-simple-tips
 Don't use markup in tooltips even if text has a valid markup.
+.TP
+.B \-\-header-tips
+Use header name as a fallback tooltip text.
 
 .SS Notebook options
 .TP
