@@ -472,6 +472,12 @@ field_changed_cb (GtkWidget *w, guint fn)
 }
 
 static void
+switch_changed_cb (GObject *obj, GParamSpec *spec, gpointer data)
+{
+  field_changed_cb (obj, data);
+}
+
+static void
 form_activate_cb (GtkEntry * entry, gpointer data)
 {
   if (options.plug == -1)
@@ -988,7 +994,7 @@ form_create_widget (GtkWidget * dlg)
                 gtk_widget_set_halign (e, GTK_ALIGN_START); /* prevent expanding widget (make it always compact) */
                 gtk_label_set_mnemonic_widget (GTK_LABEL (l), e);
                 fields = g_slist_append (fields, e);
-                g_signal_connect_after (G_OBJECT (e), "notify::active", G_CALLBACK (field_changed_cb), GINT_TO_POINTER (i));
+                g_signal_connect_after (G_OBJECT (e), "notify::active", G_CALLBACK (switch_changed_cb), GINT_TO_POINTER (i));
               }
               break;
 
