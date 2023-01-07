@@ -172,7 +172,7 @@ Version 7.0
 
 - `[+]` add --enforce-step option to scale dialog [0.42.62]
 - `[+]` add tooltips and markup to column headers in list dialog [0.42.63]
-- `[ ]` add pango-style font definition to text-info dialog
+- `[-]` add pango-style font definition to text-info dialog ⁽⁷⁾
 - `[ ]` add --large-preview options for better thumbnails handling
 - `[ ]` add --interactive option to icon browser for printing selected icons on stdout
 - `[+]` add custom uri handler (--uri-handler option) [0.42.46]
@@ -188,9 +188,9 @@ Version 6.0
 
 - `[+]` add --use-interp option ⁽²⁾ [0.42.45]
 - `[+]` add link field to --form dialog [0.42.47]
-- `[ ]` returning customizable options for --text-info dialog
+- `[-]` returning customizable options for --text-info dialog ⁽⁷⁾ [0.42.44]
 - `[+]` fix yad behavior outside X11 (special thanks to Michael Weiser) ⁽⁸⁾ [0.42.59]
-- `[ ]` improve dialog window placement
+- `[?]` improve dialog window placement [8b0e5af]
 - `[+]` update translations
 
 Version 5.0
@@ -269,5 +269,7 @@ See the NEWS file for older versions.
 ⁽⁵⁾ yadL saves print settings to new file `$XDG_CONFIG_HOME/yad/print.conf`, and other settings to `$XDG_CONFIG_HOME/yad.conf`.  Instead, yadU uses `gsettings` to save its configuration; it can be built "standalone" without `gsettings` but then there is no `yad.conf` to save the configuration.
 
 ⁽⁶⁾ yadL still provides option `--multi-progress` as a deprecated alias for `--progress`.
+
+⁽⁷⁾ yadU changed the `--fontname` format of text dialog from Pango style to CSS style [fe11080]+[4b54d14] then back to Pango style [244919d]. yadL has always used Pango style [3858704].
 
 ⁽⁸⁾ GTK+-2 does not provide a GDK Wayland backend.  yadU and yadL equally support Wayland for GTK+-3 builds but some dialog features may not be available. If configuration option `debug` is enabled, yadL and yadU will print a warning when an unavailable feature is requested.  To run yadL/yadU in this way, select the Wayland backend by setting `GDK_BACKEND=wayland,x11` in the application's environment. Special value `GDK_BACKEND=help` displays the available backends.
