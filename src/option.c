@@ -588,6 +588,8 @@ static GOptionEntry scale_options[] = {
     N_("Set maximum value"), N_("VALUE") },
   { "step", 0, 0, G_OPTION_ARG_INT, &options.scale_data.step,
     N_("Set step size"), N_("VALUE") },
+  { "enforce-step", 0, 0, G_OPTION_ARG_NONE,  &options.scale_data.enforce_step,
+    N_("Only allow values in step increments"), NULL },
   { "page", 0, 0, G_OPTION_ARG_INT, &options.scale_data.page,
     N_("Set paging size"), N_("VALUE") },
   { "print-partial", 0, 0, G_OPTION_ARG_NONE, &options.scale_data.print_partial,
@@ -1730,7 +1732,8 @@ yad_options_init (void)
   options.scale_data.invert = FALSE;
   options.scale_data.buttons = FALSE;
   options.scale_data.marks = NULL;
-
+  options.scale_data.enforce_step = FALSE;
+  
   /* Initialize text data */
   options.text_data.fore = NULL;
   options.text_data.back = NULL;
