@@ -198,23 +198,23 @@ Version 5.0
 - `[+]` add debug mode. this feature can be turned on through gsettings. ⁽⁵⁾ [0.42.55]
 - `[!]` add configure option --enable-standalone for build yad without gsettings support ⁽⁵⁾
 - `[+]` fix expanding tree nodes for stdin data
-- `[+]` some fixes in print dialog
+- `[+]` some fixes in print dialog [0.42.38]
 - `[+]` fix --uri-handler option in html dialog [0.42.46]
 - `[+]` fix wrong autoclose behavior in progress dialog [0.42.57]
 
 Version 4.1
 
-- `[+]` fix handling tree data from stdin in list dialog
+- `[+]` fix handling tree data from stdin in list dialog [0.42.35]
 
 Version 4.0
 
 - `[>]` font can be selected with double-click in font dialog
 - `[>]` add application chooser dialog and application chooser field in form dialog
-- `[+]` add tree mode in list dialog
-- `[+]` add --hide-text option to progress dialogs [0.42.42]
+- `[+]` add tree mode in list dialog [0.42.33] -> [0.42.35]
+- `[+]` add --hide-text option to progress dialogs [0.42.31]
 - `[+]` multi-progress dialog features merged with progress dialog. Separate multi-progress dialog no longer exists ⁽⁶⁾ [0.42.42]
 - `[>]` enable markup in progress log window
-- `[+]` fix output of color values in hex notation
+- `[+]` fix output of color values in hex notation [2e75f42]
 - `[+]` removed \*-selection aliases for --file, --color and --font dialogs ⁽³⁾
 
 Version 3.0
@@ -227,7 +227,7 @@ Version 3.0
 Version 2.0
 
 - `[!]` migrate to gsettings from config file ⁽⁵⁾
-- `[+]` add --keep-icon-size option
+- `[+]` add --keep-icon-size option [0.42.26]
 - `[>]` icon browser shows only regular icons by default. this behavior can be changed from command line
 - `[>]` fix segfault in text-info dialog when empty file is specified ⁽⁴⁾
 - `[+]` fix initial selection in selectable labels
