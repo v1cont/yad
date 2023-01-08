@@ -1520,11 +1520,8 @@ form_print_field (guint fn)
           g_free (buf);
         }
       else
-        {
-          g_printf ("%s%s",
-                    gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, fn))),
-                    options.common_data.separator);
-        }
+        g_printf ("%s%s", gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, fn))),
+                  options.common_data.separator);
       break;
     case YAD_FIELD_FILE:
     case YAD_FIELD_DIR:
@@ -1552,9 +1549,9 @@ form_print_field (guint fn)
         fname = gtk_font_chooser_get_font (GTK_FONT_CHOOSER (g_slist_nth_data (fields, fn)));
 #endif
         if (options.common_data.quoted_output)
-          g_printf ("'%s'%s", fname, options.common_data.separator);
+          g_printf ("'%s'%s", fname ? fname : "", options.common_data.separator);
         else
-          g_printf ("%s%s", fname, options.common_data.separator);
+          g_printf ("%s%s", fname ? fname : "", options.common_data.separator);
         g_free (fname);
         break;
       }
