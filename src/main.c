@@ -71,23 +71,14 @@ keys_cb (GtkWidget *w, GdkEventKey *ev, gpointer d)
 
   switch (ev->keyval)
     {
-#if GTK_CHECK_VERSION(2,24,0)
     case GDK_KEY_Escape:
-#else
-    case GDK_Escape:
-#endif
       if (options.data.escape_ok)
           yad_exit (options.data.def_resp);
       else if (!options.data.no_escape)
          yad_exit (YAD_RESPONSE_ESC);
       return TRUE;
-#if GTK_CHECK_VERSION(2,24,0)
     case GDK_KEY_Return:
     case GDK_KEY_KP_Enter:
-#else
-    case GDK_Return:
-    case GDK_KP_Enter:
-#endif
       if (ev->state & GDK_CONTROL_MASK)
         {
           yad_exit (options.data.def_resp);

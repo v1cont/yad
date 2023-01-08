@@ -65,7 +65,7 @@ To build successfully you may need to install the following packages:
 
 * GNU Autotools (https://www.gnu.org/software/autoconf/ http://www.gnu.org/software/automake/)
 * Intltool >= 0.40.0 (http://freedesktop.org/wiki/Software/intltool/)
-* GTK+-2 >= 2.16.0 (http://www.gtk.org)
+* GTK+-2 >= 2.24.0 (http://www.gtk.org)
 * GTK+-3 >= 3.22.0 (http://www.gtk.org)
 
 with appropriate *-dev* packages depending on your distro.

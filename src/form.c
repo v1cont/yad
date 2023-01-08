@@ -92,11 +92,7 @@ expand_action (gchar * cmd)
                   break;
                 case YAD_FIELD_COMBO:
                 case YAD_FIELD_COMBO_ENTRY:
-#if GTK_CHECK_VERSION(2,24,0)
                   buf = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, num)));
-#else
-                  buf = gtk_combo_box_get_active_text (GTK_COMBO_BOX (g_slist_nth_data (fields, num)));
-#endif
                   arg = g_shell_quote (buf ? buf : "");
                   g_free (buf);
                   break;
@@ -321,11 +317,7 @@ set_field_value (guint num, gchar *value)
               }
             else
               buf = g_strcompress (s[i]);
-#if GTK_CHECK_VERSION(2,24,0)
             gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (w), buf);
-#else
-            gtk_combo_box_append_text (GTK_COMBO_BOX (w), buf);
-#endif
             g_free (buf);
             i++;
           }
@@ -1004,11 +996,7 @@ form_create_widget (GtkWidget * dlg)
 #endif
 
             case YAD_FIELD_COMBO:
-#if GTK_CHECK_VERSION(2,24,0)
               e = gtk_combo_box_text_new ();
-#else
-              e = gtk_combo_box_new_text ();
-#endif
               gtk_widget_set_name (e, "yad-form-combo");
               if (fld->tip)
                 {
@@ -1030,11 +1018,7 @@ form_create_widget (GtkWidget * dlg)
               break;
 
             case YAD_FIELD_COMBO_ENTRY:
-#if GTK_CHECK_VERSION(2,24,0)
               e = gtk_combo_box_text_new_with_entry ();
-#else
-              e = gtk_combo_box_entry_new_text ();
-#endif
               gtk_widget_set_name (e, "yad-form-edit-combo");
               if (fld->tip)
                 {
@@ -1531,22 +1515,14 @@ form_print_field (guint fn)
                   options.common_data.separator);
       else if (options.common_data.quoted_output)
         {
-#if GTK_CHECK_VERSION(2,24,0)
           buf = g_shell_quote (gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, fn))));
-#else
-          buf = g_shell_quote (gtk_combo_box_get_active_text (GTK_COMBO_BOX (g_slist_nth_data (fields, fn))));
-#endif
           g_printf ("%s%s", buf, options.common_data.separator);
           g_free (buf);
         }
       else
         {
           g_printf ("%s%s",
-#if GTK_CHECK_VERSION(2,24,0)
                     gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, fn))),
-#else
-                    gtk_combo_box_get_active_text (GTK_COMBO_BOX (g_slist_nth_data (fields, fn))),
-#endif
                     options.common_data.separator);
         }
       break;

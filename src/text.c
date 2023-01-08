@@ -88,11 +88,7 @@ do_search (GtkWidget * e, GtkWidget * w)
 static gboolean
 search_key_cb (GtkWidget * w, GdkEventKey * key, GtkWidget * win)
 {
-#if GTK_CHECK_VERSION(2,24,0)
   if (key->keyval == GDK_KEY_Escape)
-#else
-  if (key->keyval == GDK_Escape)
-#endif
     {
       gtk_widget_destroy (win);
       return TRUE;
@@ -144,26 +140,14 @@ show_search ()
   fev->focus_change.window = gtk_widget_get_window (e);
   if (fev->focus_change.window != NULL)
     g_object_ref (fev->focus_change.window);
-#if GTK_CHECK_VERSION(2,22,0)
   gtk_widget_send_focus_change (e, fev);
-#else
-  g_object_ref (e);
-  GTK_OBJECT_FLAGS (e) |= GTK_HAS_FOCUS;
-  gtk_widget_event (e, fev);
-  g_object_notify (G_OBJECT (e), "has-focus");
-  g_object_unref (e);
-#endif
   gdk_event_free (fev);
 }
 
 static gboolean
 key_press_cb (GtkWidget * w, GdkEventKey * key, gpointer data)
 {
-#if GTK_CHECK_VERSION(2,24,0)
   if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_S || key->keyval == GDK_KEY_s))
-#else
-  if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_S || key->keyval == GDK_s))
-#endif
     {
       show_search ();
       return TRUE;

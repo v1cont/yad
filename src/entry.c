@@ -32,11 +32,7 @@ entry_activate_cb (GtkEntry * entry, gpointer data)
 static gboolean
 combo_activate_cb (GtkWidget * w, GdkEventKey * ev, gpointer data)
 {
-#if GTK_CHECK_VERSION(2,24,0)
   if (ev->keyval == GDK_KEY_Return || ev->keyval == GDK_KEY_KP_Enter)
-#else
-  if (ev->keyval == GDK_Return || ev->keyval == GDK_KP_Enter)
-#endif
     {
       if (options.plug == -1)
         yad_exit (options.data.def_resp);
@@ -198,11 +194,7 @@ entry_create_widget (GtkWidget * dlg)
 
       if (options.common_data.editable || settings.combo_always_editable)
         {
-#if GTK_CHECK_VERSION(2,24,0)
           c = gtk_combo_box_text_new_with_entry ();
-#else
-          c = gtk_combo_box_entry_new_text ();
-#endif
           gtk_widget_set_name (c, "yad-entry-edit-combo");
           entry = gtk_bin_get_child (GTK_BIN (c));
           if (options.entry_data.licon)
@@ -222,11 +214,7 @@ entry_create_widget (GtkWidget * dlg)
         }
       else
         {
-#if GTK_CHECK_VERSION(2,24,0)
           c = entry = gtk_combo_box_text_new ();
-#else
-          c = entry = gtk_combo_box_new_text ();
-#endif
           gtk_widget_set_name (c, "yad-entry-combo");
           is_combo = TRUE;
         }
@@ -238,21 +226,13 @@ entry_create_widget (GtkWidget * dlg)
           if (options.entry_data.entry_text &&
               g_ascii_strcasecmp (options.extra_data[i], options.entry_data.entry_text) == 0)
             active = i;
-#if GTK_CHECK_VERSION(2,24,0)
           gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (c), options.extra_data[i]);
-#else
-          gtk_combo_box_append_text (GTK_COMBO_BOX (c), options.extra_data[i]);
-#endif
           i++;
         }
 
       if (options.entry_data.entry_text && active == -1)
         {
-#if GTK_CHECK_VERSION(2,24,0)
           gtk_combo_box_text_prepend_text (GTK_COMBO_BOX_TEXT (c), options.entry_data.entry_text);
-#else
-          gtk_combo_box_prepend_text (GTK_COMBO_BOX (c), options.entry_data.entry_text);
-#endif
         }
 
       /* set first iter active */
@@ -338,11 +318,7 @@ entry_print_result (void)
         g_print ("%d\n", gtk_combo_box_get_active (GTK_COMBO_BOX (entry)) + 1);
       else
         {
-#if GTK_CHECK_VERSION(2,24,0)
           g_print ("%s\n", gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (entry)));
-#else
-          g_print ("%s\n", gtk_combo_box_get_active_text (GTK_COMBO_BOX (entry)));
-#endif
         }
     }
   else

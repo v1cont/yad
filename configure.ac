@@ -1,5 +1,5 @@
 # write PACKAGE_URL as "http" not "https" for About dialog to display a clickable link in the Credits tab.
-AC_INIT([YAD], [0.42.64], [https://github.com/step-/yad/issues], yad, [http://github.com/step-/yad])
+AC_INIT([YAD], [0.42.65], [https://github.com/step-/yad/issues], yad, [http://github.com/step-/yad])
 AC_CONFIG_AUX_DIR([build])
 
 AM_INIT_AUTOMAKE([1.11 foreign dist-xz no-dist-gzip])
@@ -35,7 +35,7 @@ case "$with_gtk" in
         ;;
     gtk2)
         GTK_MODULE="gtk+-2.0"
-        GTK_REQUIRED="2.16.0"
+        GTK_REQUIRED="2.24.0"
         GTK_PRINT="gtk+-unix-print-2.0"
         WEBKIT="webkit-1.0"
         SPELL="gtkspell3-2.0"
