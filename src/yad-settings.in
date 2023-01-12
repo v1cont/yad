@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License along with
 # YAD. If not, see <https://www.gnu.org/licenses/>.
 #
-# Copyright (C) 2021-2022, Victor Ananjevsky <victor@sanana.kiev.ua>
+# Copyright (C) 2021-2023, Victor Ananjevsky <victor@sanana.kiev.ua>
 #
 
 TEXTDOMAIN=@GETTEXT_PACKAGE@

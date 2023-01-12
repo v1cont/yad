@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2010-2022, Victor Ananjevsky <victor@sanana.kiev.ua>
+ * Copyright (C) 2010-2023, Victor Ananjevsky <victor@sanana.kiev.ua>
  */
 
 #include <config.h>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-27 19:11+0200\n"
+"POT-Creation-Date: 2023-01-12 10:17+0200\n"
 "PO-Revision-Date: 2021-11-28 19:00+0200\n"
 "Last-Translator: Victor Ananjevsky <ananasik@gmail.com>\n"
 "Language-Team: \n"
@@ -66,47 +66,47 @@ msgstr "Початкове значення - менше за мінімальн
 msgid "Initial value greater than maximum.\n"
 msgstr "Початкове значення - більше за максимальне.\n"
 
-#: ../src/form.c:504
+#: ../src/form.c:510
 msgid "Select files"
 msgstr "Вибрати файли"
 
-#: ../src/form.c:507 ../src/form.c:515 ../src/form.c:594 ../src/form.c:602
-#: ../src/form.c:653 ../src/html.c:227 ../src/html.c:260 ../src/picture.c:296
+#: ../src/form.c:513 ../src/form.c:521 ../src/form.c:600 ../src/form.c:608
+#: ../src/form.c:659 ../src/html.c:227 ../src/html.c:260 ../src/picture.c:296
 #: ../src/text.c:121 ../src/text.c:192 ../src/util.c:40
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: ../src/form.c:508 ../src/form.c:516 ../src/form.c:595 ../src/form.c:603
-#: ../src/form.c:654 ../src/html.c:228 ../src/picture.c:297 ../src/text.c:122
+#: ../src/form.c:514 ../src/form.c:522 ../src/form.c:601 ../src/form.c:609
+#: ../src/form.c:660 ../src/html.c:228 ../src/picture.c:297 ../src/text.c:122
 #: ../src/text.c:193 ../src/util.c:46
 msgid "OK"
 msgstr "Гаразд"
 
-#: ../src/form.c:512
+#: ../src/form.c:518
 msgid "Select folders"
 msgstr "Вибрати теки"
 
-#: ../src/form.c:591
+#: ../src/form.c:597
 msgid "Select or create file"
 msgstr "Вибрати або створити файл"
 
-#: ../src/form.c:599
+#: ../src/form.c:605
 msgid "Select or create folder"
 msgstr "Вибрати або створити теку"
 
-#: ../src/form.c:650
+#: ../src/form.c:656
 msgid "Select date"
 msgstr "Вибрати дату"
 
-#: ../src/form.c:1029
+#: ../src/form.c:1035
 msgid "Select file"
 msgstr "Вибрати файл"
 
-#: ../src/form.c:1059
+#: ../src/form.c:1065
 msgid "Select folder"
 msgstr "Вибрати теку"
 
-#: ../src/form.c:1227 ../src/form.c:1229
+#: ../src/form.c:1233 ../src/form.c:1235
 msgid "Link"
 msgstr "Посилання"
 
@@ -140,32 +140,32 @@ msgstr "Не можу розібрати файл %s: %s\n"
 msgid "Unable to open directory %s: %s\n"
 msgstr "Не можу відкрити каталог %s: %s\n"
 
-#: ../src/main.c:151 ../src/main.c:490
+#: ../src/main.c:151 ../src/main.c:497
 #, c-format
 msgid "%d sec"
 msgstr "%d сек"
 
-#: ../src/main.c:743 ../src/main.c:750
+#: ../src/main.c:750 ../src/main.c:757
 #, c-format
 msgid "Unable to parse YAD_OPTIONS: %s\n"
 msgstr "Не можу розібрати YAD_OPTIONS: %s\n"
 
-#: ../src/main.c:761
+#: ../src/main.c:768
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Не вдається розібрати командний рядок: %s\n"
 
-#: ../src/main.c:790
+#: ../src/main.c:797
 #, c-format
 msgid "WARNING: Using gtkrc option is deprecated, please use --css instead\n"
 msgstr "УВАГА: Опція gtkrc застаріла, використовуйте --css замість неї\n"
 
-#: ../src/main.c:859
+#: ../src/main.c:866
 #, c-format
 msgid "WARNING: --plug mode not supported outside X11\n"
 msgstr "УВАГА: Опція --plug підтримується тільки в X11\n"
 
-#: ../src/main.c:879
+#: ../src/main.c:886
 #, c-format
 msgid "WARNING: This mode not supported outside X11\n"
 msgstr "УВАГА: Цей режим підтримується тільки в X11\n"
@@ -2093,12 +2093,12 @@ msgstr "Налаштування"
 msgid "Yes"
 msgstr "Так"
 
-#: ../src/util.c:660 ../src/util.c:716
+#: ../src/util.c:660 ../src/util.c:719
 #, c-format
 msgid "WARNING: Run command failed: %s\n"
 msgstr "УВАГА: Збій при запуску команди: %s\n"
 
-#: ../src/util.c:889
+#: ../src/util.c:892
 msgid "Case _sensitive"
 msgstr "Враховувати _регістр"
 
