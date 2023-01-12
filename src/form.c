@@ -474,7 +474,7 @@ field_changed_cb (GtkWidget *w, guint fn)
 static void
 switch_changed_cb (GObject *obj, GParamSpec *spec, gpointer data)
 {
-  field_changed_cb (obj, data);
+  field_changed_cb (GTK_WIDGET (obj), GPOINTER_TO_INT (data));
 }
 
 static void
