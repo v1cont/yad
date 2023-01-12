@@ -350,16 +350,23 @@ create_layout (GtkWidget *dlg)
 static void
 realize_cb (GtkWidget *dlg, gpointer d)
 {
-  gint cw, ch;
-  /* get current window size for gtk_window_resize */
-  gtk_window_get_size (GTK_WINDOW (dlg), &cw, &ch);
-  if (options.data.width == -1)
-    options.data.width = cw;
-  if (options.data.height == -1)
-    options.data.height = ch;
 
-  gtk_window_resize (GTK_WINDOW (dlg), options.data.width, options.data.height);
-  gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
+  if (options.data.fixed)
+    {
+      gtk_widget_set_size_request (dlg, options.data.width, options.data.height);
+      gtk_window_set_resizable (GTK_WINDOW (dlg), !options.data.fixed);
+    }
+  else
+    {
+      gint cw, ch;
+      /* get current window size for gtk_window_resize */
+      gtk_window_get_size (GTK_WINDOW (dlg), &cw, &ch);
+      if (options.data.width == -1)
+        options.data.width = cw;
+      if (options.data.height == -1)
+        options.data.height = ch;
+      gtk_window_resize (GTK_WINDOW (dlg), options.data.width, options.data.height);
+    }
 
   if (options.data.use_posx || options.data.use_posy)
     {
