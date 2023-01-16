@@ -1781,12 +1781,24 @@ msgstr "масштабируемый "
 msgid "built-in"
 msgstr "встроенный"
 
+#: ../src/browser.c:198
+msgid "Show all icons"
+msgstr "Показывать все иконки"
+
+#: ../src/browser.c:215
+msgid "Show only symbolic icons"
+msgstr "Показывать только символьные иконки"
+
+#: ../src/browser.c:216
+msgid "Select and print icon on double-click"
+msgstr "Выбрать и вывести иконку по двойному щелчку"
+
 #. initialize GTK+ and parse the command line arguments
-#: ../src/browser.c:204
+#: ../src/browser.c:232
 msgid "- Icon browser"
 msgstr "- Броузер иконок"
 
-#: ../src/browser.c:217
+#: ../src/browser.c:239
 msgid "Icon browser"
 msgstr "Броузер иконок"
 

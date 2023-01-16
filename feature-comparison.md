@@ -46,7 +46,7 @@ See the _Notes_ section.
 of yadU features is extracted from the [NEWS](https://github.com/v1cont/NEWS) file.
 
 The version numbers in the following headings refer to yadU releases.
-The version numbers in square brackets refer to yadL releases.
+My annotations are wrapped in square brackets. The version numbers refer to yadL releases.
 
 Abbreviations:
 
@@ -58,6 +58,12 @@ Abbreviations:
 * `[?]` the feature is being evaluated for backporting
 
 ---
+
+Version 12.4  WIP WIP
+
+- `[+]` ff81778 remove some warnings [0.42.66]
+- `[+]` 7e555f6 fix returning 0 when an error occurred [PR⁽'⁾ 214],[0.42.66]
+
 
 Version 12.3
 
@@ -174,14 +180,14 @@ Version 7.0
 - `[+]` add tooltips and markup to column headers in list dialog [0.42.63]
 - `[-]` add pango-style font definition to text-info dialog ⁽⁷⁾
 - `[+]` add --large-preview options for better thumbnails handling ⁽⁵⁾⁽⁹⁾ [0.42.64]
-- `[ ]` add --interactive option to icon browser for printing selected icons on stdout
+- `[+]` add --interactive option to icon browser to print selected icon to stdout [0.42.66]
 - `[+]` add custom uri handler (--uri-handler option) [0.42.46]
 - `[+]` improve killing children algo for notebook and paned dialogs
 - `[+]` add tooltips for form fields [0.42.48]
-- `[ ]` fix :tip column in list dialog
-- `[ ]` fixes and cleanups in miscellaneous functions
-- `[+]` fix parsing numeric ranges in for dialog
-- `[ ]` fixes in man page
+- `[+]` fix :tip column in list dialog [0.42.66]
+- `[+]` fixes and cleanups in miscellaneous functions [0.42.46]
+- `[+]` fix parsing numeric ranges in form dialog
+- `[+]` fixes in man page
 - `[+]` build icon browser by default [0.42.60]
 
 Version 6.0
@@ -228,7 +234,7 @@ Version 2.0
 
 - `[!]` migrate to gsettings from config file ⁽⁵⁾
 - `[+]` add --keep-icon-size option [0.42.26]
-- `[>]` icon browser shows only regular icons by default. this behavior can be changed from command line
+- `[+]` icon browser shows only non-symbolic icons by default [0.42.66] ⁽¹⁰⁾
 - `[>]` fix segfault in text-info dialog when empty file is specified ⁽⁴⁾
 - `[+]` fix initial selection in selectable labels
 
@@ -258,6 +264,8 @@ See the NEWS file for older versions.
 
 ## Notes
 
+⁽'⁾ Refer our pull request (PR) number [https://github.com/v1cont/yad/pulls?q=author%3Astep-](https://github.com/v1cont/yad/pulls?q=author%3Astep-)
+
 ⁽¹⁾ The GTK+-2 package in your distribution may need a patch to fix a long-standing issue whereby the GTK+ "Print to File" printer silently fails to print.  This bug affects other GTK+-2 applications, such as evince, and does not involve CUPS printers.  See this [commit message](https://github.com/step-/yad/commit/c3322e79).
 
 ⁽²⁾ Use interpreter option `--use-interp`. yadL default interpreter is `sh -c '%'` whereas it is `bash -c '%'` for yadU.
@@ -276,3 +284,4 @@ See the NEWS file for older versions.
 
 ⁽⁹⁾ On GTK+-2 the preview image is generated only when a file item is selected interactively.  Therefore `yad --file --filename=/my/pic.jpg --file --preview [--large-preview]` will not start with the preview of pic.jpg loaded.
 
+⁽¹⁰⁾ On GTK+-2 icon browser options `--all` and `--symbolic` are ignored because GTK+-2 cannot discriminate symbolic icons.

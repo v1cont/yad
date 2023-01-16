@@ -775,6 +775,8 @@ run_thread (RunData *d)
       if (options.debug)
         g_printerr (_("WARNING: Run command failed: %s\n"), err->message);
       g_error_free (err);
+      if (!ret)
+        ret = 255; /* when cmd couldn't be executed */
     }
   run_lock = FALSE;
 }

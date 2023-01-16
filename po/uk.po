@@ -1787,8 +1787,20 @@ msgstr "масштабований "
 msgid "built-in"
 msgstr "вбудований"
 
+#: ../src/browser.c:198
+msgid "Show all icons"
+msgstr "Показувати всі іконки"
+
+#: ../src/browser.c:215
+msgid "Show only symbolic icons"
+msgstr "Показувати тільки символьні іконки"
+
+#: ../src/browser.c:216
+msgid "Select and print icon on double-click"
+msgstr "Обрати та вівести іконку по подвійному натисканню"
+
 #. initialize GTK+ and parse the command line arguments
-#: ../src/browser.c:204
+#: ../src/browser.c:232
 msgid "- Icon browser"
 msgstr "- Навігатор іконок"
 

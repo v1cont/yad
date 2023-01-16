@@ -37,6 +37,9 @@ typedef struct {
   GHashTable *icons;
 } IconBrowserData;
 
+static gboolean show_regular = TRUE;
+static gboolean show_symbolic = FALSE;
+
 static gboolean
 key_press_cb (GtkWidget * w, GdkEventKey * ev, gpointer data)
 {
@@ -65,8 +68,27 @@ load_icon_cat (IconBrowserData * data, gchar * cat)
     {
       GtkTreeIter iter;
       GdkPixbuf *pb, *spb;
+#if GTK_CHECK_VERSION(3,0,0)
+      GtkIconInfo *info;
 
+      info = gtk_icon_theme_lookup_icon (data->theme, i->data, size, 0);
+      if (gtk_icon_info_is_symbolic (info))
+        {
+          if (!show_symbolic)
+            continue;
+        }
+      else
+        {
+          if (!show_regular)
+            continue;
+        }
+      g_object_unref (info);
+
+      spb = pb = gtk_icon_theme_load_icon (data->theme, i->data, size, 0, NULL);
+#else
+      /* GTK+-2 can't discriminate symbolic icons */
       spb = pb = gtk_icon_theme_load_icon (data->theme, i->data, size, GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+#endif
 
       if (pb)
         {
@@ -85,13 +107,28 @@ load_icon_cat (IconBrowserData * data, gchar * cat)
 
       if (pb)
         g_object_unref (pb);
-      g_free (i->data);
     }
-  g_list_free (icons);
+  g_list_free_full (icons, g_free);
 
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store), 1, GTK_SORT_ASCENDING);
 
   return store;
+}
+
+static void
+print_icon (GtkTreeView *tv, GtkTreePath *path, GtkTreeViewColumn *col, IconBrowserData *data)
+{
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  gchar *icon;
+
+  model = gtk_tree_view_get_model (tv);
+  gtk_tree_model_get_iter (model, &iter, path);
+  gtk_tree_model_get (model, &iter, 1, &icon, -1);
+
+  g_print ("%s\n", icon);
+
+  gtk_main_quit ();
 }
 
 static void
@@ -180,10 +217,14 @@ main (gint argc, gchar * argv[])
   GtkTreeViewColumn *col;
   GtkCellRenderer *r;
   GtkWidget *w, *p, *box, *t;
+  gboolean all = FALSE, symbolic = FALSE, interactive = FALSE;
 
   GOptionEntry entrs[] = {
-    {G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &themes, NULL, NULL},
-    {NULL}
+    { "all", 'a', 0, G_OPTION_ARG_NONE, &all, _("Show all icons"), NULL },
+    { "symbolic", 's', 0, G_OPTION_ARG_NONE, &symbolic, _("Show only symbolic icons"), NULL },
+    { "interactive", 'i', 0, G_OPTION_ARG_NONE, &interactive, _("Select and print icon on double-click"), NULL },
+    { G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &themes, NULL, NULL },
+    { NULL }
   };
 
   data = g_new0 (IconBrowserData, 1);
@@ -198,6 +239,17 @@ main (gint argc, gchar * argv[])
 
   /* initialize GTK+ and parse the command line arguments */
   gtk_init_with_args (&argc, &argv, _("- Icon browser"), entrs, GETTEXT_PACKAGE, NULL);
+
+  if (all)
+    {
+      show_regular = TRUE;
+      show_symbolic = TRUE;
+    }
+  else if (symbolic)
+    {
+      show_regular = FALSE;
+      show_symbolic = TRUE;
+    }
 
   /* load icon theme */
   if (themes && themes[0])
@@ -360,6 +412,9 @@ main (gint argc, gchar * argv[])
 
   sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (data->icon_list));
   g_signal_connect (G_OBJECT (sel), "changed", G_CALLBACK (select_icon), data);
+
+  if (interactive)
+    g_signal_connect (G_OBJECT (data->icon_list), "row-activated", G_CALLBACK (print_icon), data);
 
   col = gtk_tree_view_column_new ();
   gtk_tree_view_column_set_title (col, _("Icons"));
