@@ -427,7 +427,7 @@ button_clicked_cb (GtkButton * b, gpointer d)
           gint exit = 1;
           cmd = expand_action (action + 1);
           exit = run_command_sync (cmd->str, &data);
-          if (exit == 0)
+          if (exit == 0 && data)
             parse_cmd_output (data);
           g_free (data);
         }
@@ -463,7 +463,7 @@ field_changed_cb (GtkWidget *w, guint fn)
       g_free (str);
 
       exit = run_command_sync (cmd->str, &data);
-      if (exit == 0)
+      if (exit == 0 && data)
         parse_cmd_output (data);
       g_free (data);
 
