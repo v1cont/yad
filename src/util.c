@@ -644,29 +644,30 @@ print_bool_val (gboolean val)
 typedef struct {
   gchar *cmd;
   gchar **out;
+  gint ret;
+  gboolean lock;
 } RunData;
-
-static gboolean run_lock = FALSE;
-static gint ret = 0;
 
 static void
 run_thread (RunData *d)
 {
   GError *err = NULL;
 
-  if (!g_spawn_command_line_sync (d->cmd, d->out, NULL, &ret, &err))
+  if (!g_spawn_command_line_sync (d->cmd, d->out, NULL, NULL, &err))
     {
       if (options.debug)
         g_printerr (_("WARNING: Run command failed: %s\n"), err->message);
       g_error_free (err);
+      d->ret = -1;
     }
-  run_lock = FALSE;
+  d->lock = FALSE;
 }
 
 gint
 run_command_sync (gchar *cmd, gchar **out)
 {
   RunData *d;
+  gint ret;
 
   d = g_new0 (RunData, 1);
 
@@ -681,16 +682,16 @@ run_command_sync (gchar *cmd, gchar **out)
     d->cmd = g_strdup (cmd);
   d->out = out;
 
-  run_lock = TRUE;
-  ret = 0;
+  d->lock = TRUE;
   g_thread_new ("run_sync", (GThreadFunc) run_thread, d);
 
-  while (run_lock != FALSE)
+  while (d->lock != FALSE)
     {
       gtk_main_iteration_do (FALSE);
       usleep (10000);
     }
 
+  ret = d->ret;
   g_free (d->cmd);
   g_free (d);
 
@@ -905,6 +906,7 @@ yad_confirm_dlg (GtkWindow *parent, gchar *txt)
 {
   GtkWidget *d;
   gchar *buf;
+  gint ret;
 
   buf = g_strcompress (options.text_data.confirm_text);
   d = gtk_message_dialog_new (parent, GTK_DIALOG_DESTROY_WITH_PARENT,
