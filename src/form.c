@@ -390,7 +390,12 @@ static void
 parse_cmd_output (gchar *data)
 {
   guint i = 0;
-  gchar **lines = g_strsplit (data, "\n", 0);
+  gchar **lines;
+
+  if (!data)
+    return;
+
+  lines = g_strsplit (data, "\n", 0);
 
   disable_changed = TRUE;
   while (lines[i] && lines[i][0])
