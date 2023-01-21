@@ -798,7 +798,7 @@ double_click_cb (GtkTreeView *view, GtkTreePath *path, GtkTreeViewColumn *column
           gchar *data = NULL;
           gint exit;
 
-          exit = run_command_sync (cmd + 1, &data);
+          exit = run_command_sync (cmd + 1, &data, GTK_WIDGET (view));
           if (exit == 0)
             {
               gint i;
@@ -915,7 +915,7 @@ add_row_cb (GtkMenuItem *item, gpointer data)
 
       /* run command */
       cmd = g_strdup_printf ("%s add", options.list_data.row_action);
-      exit = run_command_sync (cmd, &out);
+      exit = run_command_sync (cmd, &out, list_view);
       g_free (cmd);
       if (exit == 0)
         {
@@ -961,7 +961,7 @@ edit_row_cb (GtkMenuItem *item, gpointer data)
       args = get_data_as_string (&iter);
       cmd = g_strdup_printf ("%s edit %s", options.list_data.row_action, args);
       g_free (args);
-      exit = run_command_sync (cmd, &out);
+      exit = run_command_sync (cmd, &out, list_view);
       g_free (cmd);
       if (exit == 0)
         {
@@ -1004,7 +1004,7 @@ del_row_cb (GtkMenuItem *item, gpointer data)
           args = get_data_as_string (&iter);
           cmd = g_strdup_printf ("%s del %s", options.list_data.row_action, args);
           g_free (args);
-          exit = run_command_sync (cmd, NULL);
+          exit = run_command_sync (cmd, NULL, list_view);
           g_free (cmd);
           if (exit == 0)
             gtk_tree_store_remove (GTK_TREE_STORE (model), &iter);
