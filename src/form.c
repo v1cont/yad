@@ -384,7 +384,12 @@ static void
 parse_cmd_output (gchar *data)
 {
   guint i = 0;
-  gchar **lines = g_strsplit (data, "\n", 0);
+  gchar **lines;
+
+  if (!data)
+    return;
+
+  lines = g_strsplit (data, "\n", 0);
 
   disable_changed = TRUE;
   while (lines[i] && lines[i][0])
@@ -468,7 +473,6 @@ field_changed_cb (GtkWidget *w, guint fn)
 static void
 switch_changed_cb (GObject *obj, GParamSpec *spec, gpointer data)
 {
-  field_changed_cb (obj, data);
   field_changed_cb (GTK_WIDGET (obj), GPOINTER_TO_INT (data));
 }
 

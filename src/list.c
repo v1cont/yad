@@ -1399,7 +1399,7 @@ print_col (GtkTreeModel *model, GtkTreeIter *iter, gint num)
         gtk_tree_model_get (model, iter, num, &val, -1);
         if (options.common_data.quoted_output)
           {
-            gchar *buf = g_shell_quote (val);
+            gchar *buf = g_shell_quote (val ? val : "");
             g_printf ("%s", buf);
             g_free (buf);
           }

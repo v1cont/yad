@@ -61,8 +61,10 @@ Abbreviations:
 
 Version 12.4  WIP WIP
 
+- `[+]` d7ded23 improve run_command_sync for avoiding possible race conditions [0.42.67]
+- `[+]` 1d402f7 add some null-pointer checks in for diaalog code [0.42.67]
 - `[+]` ff81778 remove some warnings [0.42.66]
-- `[+]` 7e555f6 fix returning 0 when an error occurred [PR⁽'⁾ 214],[0.42.66]
+- `[+]` c8e9ef2 fix UI not updated when sync command runs [PR⁽'⁾ 210],[0.42.66]
 
 
 Version 12.3
