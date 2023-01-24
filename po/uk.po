@@ -838,10 +838,6 @@ msgstr "Задати зовнішній обробник для натиснут
 msgid "Set user agent string"
 msgstr "Задати стрічку агента"
 
-#: ../src/option.c:365 ../src/option.c:502
-msgid "STRING"
-msgstr "РЯДОК"
-
 #: ../src/option.c:367
 msgid "Set path or uri to user styles"
 msgstr "Задати файл або шлях до стилей користувача"
@@ -1828,36 +1824,82 @@ msgstr "Категорія"
 msgid "Icons"
 msgstr "Іконки"
 
-#: ../src/pfd.c:82
+#: ../src/tools.c:46
+msgid "STRING ..."
+msgstr "РЯДОК ..."
+
+#: ../src/tools.c:51
+msgid "Pango fonts description tools"
+msgstr "Конвертація опису шрифта"
+
+#: ../src/tools.c:52
 msgid "Print font name in xft format"
 msgstr "Вивести назву шрифта у форматі xft"
 
-#: ../src/pfd.c:83
+#: ../src/tools.c:53
 msgid "Print font name in pango format"
 msgstr "Вивести назву шрифта у форматі pango"
 
-#: ../src/pfd.c:85
-msgid "FONT"
-msgstr "НАЗВА_ШРИФТУ"
+#: ../src/tools.c:58
+msgid "Icon tools"
+msgstr "Іконки"
 
-#: ../src/pfd.c:104
-msgid "- convert font description"
-msgstr "- конвертація описа шрифта"
+#: ../src/tools.c:59
+msgid "Use specified icon size"
+msgstr "Використовувати заданий розмір іконки"
 
-#: ../src/pfd.c:108
+#: ../src/tools.c:60
+msgid "Get icon size from GtkIconSize type"
+msgstr "Отримати розмір іконки с типу GtkIconSize"
+
+#: ../src/tools.c:61
+msgid "Use icon theme"
+msgstr "Використовувати вказану тему іконок"
+
+#: ../src/tools.c:140
+#, c-format
+msgid "no font specified\n"
+msgstr "шрифт не вказано\n"
+
+#: ../src/tools.c:148
+#, c-format
+msgid "cannot get font description for for string \"%s\"\n"
+msgstr "неможливо отримати опис шрифта зі стрічки \"%s\"\n"
+
+#: ../src/tools.c:250
+#, c-format
+msgid "no icon specified\n"
+msgstr "іконку не вказано\n"
+
+#: ../src/tools.c:293
+msgid "- yad miscellaneous tools"
+msgstr "- додаткові інструменти yad"
+
+#: ../src/tools.c:296
+msgid "PFD mode"
+msgstr "Режим PFD"
+
+#: ../src/tools.c:296
+msgid "Show pfd mode options"
+msgstr "Показувати параметри режиму pfd"
+
+#: ../src/tools.c:301
+msgid "Icon mode"
+msgstr "Режим іконок"
+
+#: ../src/tools.c:301
+msgid "Show icon mode options"
+msgstr "Показувати параметри режиму іконок"
+
+#: ../src/tools.c:308
 #, c-format
 msgid "option parsing failed: %s\n"
 msgstr "збій при розборі аргументів: %s\n"
 
-#: ../src/pfd.c:120
+#: ../src/tools.c:324
 #, c-format
-msgid "no font specified\n"
-msgstr "шрифт не вказано.\n"
-
-#: ../src/pfd.c:128
-#, c-format
-msgid "cannot get font description for for string \"%s\"\n"
-msgstr "неможливо отримати опис шрифта зі стрічки \"%s\"\n"
+msgid "no mode specified\n"
+msgstr "режим не вказано\n"
 
 #: ../data/yad-icon-browser.desktop.in.h:1
 msgid "Icon Browser"
