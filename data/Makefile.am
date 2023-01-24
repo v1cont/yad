@@ -15,6 +15,6 @@ endif
 m4dir = $(datadir)/aclocal
 m4_DATA = yad.m4
 
-EXTRA_DIST = $(desktop_in_files) zenity.sh notify-send
+EXTRA_DIST = $(desktop_in_files) misc
 
 DISTCLEANFILES = $(desktop_DATA) $(m4_DATA) yad.spec

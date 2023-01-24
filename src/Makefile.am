@@ -41,7 +41,6 @@ yad_LDADD = $(GTK_LIBS) $(HTML_LIBS) $(SPELL_LIBS) $(SOURCEVIEW_LIBS)
 
 if BUILD_TOOLS
 bin_PROGRAMS += yad-tools
-bin_SCRIPTS = pfd
 
 yad_tools_SOURCES = tools.c
 yad_tools_CFLAGS = $(GTK_CFLAGS)
