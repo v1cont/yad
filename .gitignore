@@ -6,7 +6,7 @@ autom4te.cache/
 .deps/
 *.o
 *~
-#*#
+\#*\#
 aclocal.m4
 config.h
 config.h.in
@@ -23,7 +23,7 @@ po/*.gmo
 po/stamp-it
 src/yad
 src/yad-icon-browser
-src/pfd
+src/yad-tools
 stamp-h1
 *.tar.xz
 build.log

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "WARNING: pfd is deprecated. Please use yad-tools --pfd instead" >&2
+exec yad-tools --pfd "$@"

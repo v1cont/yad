@@ -39,12 +39,13 @@ endif
 yad_CFLAGS = $(GTK_CFLAGS) $(HTML_CFLAGS) $(SPELL_CFLAGS) $(SOURCEVIEW_CFLAGS)
 yad_LDADD = $(GTK_LIBS) $(HTML_LIBS) $(SPELL_LIBS) $(SOURCEVIEW_LIBS)
 
-if BUILD_PFD
-bin_PROGRAMS += pfd
+if BUILD_TOOLS
+bin_PROGRAMS += yad-tools
+bin_SCRIPTS = pfd
 
-pfd_SOURCES = pfd.c
-pfd_CFLAGS = $(PFD_CFLAGS)
-pfd_LDADD = $(PFD_LIBS)
+yad_tools_SOURCES = tools.c
+yad_tools_CFLAGS = $(GTK_CFLAGS)
+yad_tools_LDADD = $(GTK_LIBS)
 endif
 
 if BUILD_IB
