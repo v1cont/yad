@@ -676,14 +676,6 @@ void run_command_async (gchar *cmd);
 
 void open_uri (const gchar *uri);
 
-#ifdef HAVE_SPELL
-void show_langs ();
-#endif
-
-#ifdef HAVE_SOURCEVIEW
-void show_themes ();
-#endif
-
 static inline void
 strip_new_line (gchar * str)
 {

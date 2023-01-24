@@ -247,7 +247,7 @@ Set the policy type for vertical scrollbars. \fITYPE\fP can be one of the \fIaut
 Enable spell checking in textview widgets
 .TP
 .B \-\-spell-lang=\fILANGUAGE\fP
-Set spell checking language to \fILANGUAGE\fP. By default language guesses from current locale. Use option \fI\-\-show-langs\fP for get list of all possible languages.
+Set spell checking language to \fILANGUAGE\fP. By default language guesses from current locale. Use \fIyad-tools(1)\fP to get list of all possible languages.
 .TP
 .B \-\-bool-fmt=\fITYPE\fP
 Set the output type of boolean values to \fITYPE\fP. Possible types are \fIT\fP, \fIt\fP, \fIY\fP, \fIy\fP, \fIO\fP, \fIo\fP and \fI1\fP.
@@ -947,7 +947,8 @@ Set color for links. Default is \fIblue\fP.
 Highlight syntax for specified \fILANGUAGE\fP. This option works only if yad was built with \fIGtkSourceView\fP support.
 .TP
 .B \-\-theme=THEME
-Set highlight theme to \fITHEME\fP. This option needs any of \fI\-\-lang\fP or \fI\-\-filename\fP. It works only if yad was built with \fIGtkSourceView\fP support. Use option \fI\-\-show-themes\fP to list all available themes.
+Set highlight theme to \fITHEME\fP. This option needs any of \fI\-\-lang\fP or \fI\-\-filename\fP. It works only if yad was built with \fIGtkSourceView\fP support.
+Use \fIyad-tools(1)\fP to list all available themes.
 .TP
 .B \-\-listen
 Listen data from stdin even if filename was specified.
@@ -1025,13 +1026,6 @@ Display an about dialog.
 .TP
 .B \-\-version
 Show program version and exit. Use \fI\-\-about\fP to view build options.
-.TP
-.B \-\-show-langs
-Show list of possible languages for spell checking. Available only if yad was built with \fIGtkSpell\fP support.
-.TP
-.B \-\-show-themes
-Show list of possible highlight themes. Available only if yad was built with \fIGtkSourceView\fP support.
-
 .PP
 Also the standard GTK+ options are accepted.
 

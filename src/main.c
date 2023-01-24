@@ -934,18 +934,6 @@ main (gint argc, gchar ** argv)
       ret = 0;
       break;
 
-#ifdef HAVE_SPELL
-    case YAD_MODE_LANGS:
-      show_langs ();
-      break;
-#endif
-
-#ifdef HAVE_SOURCEVIEW
-    case YAD_MODE_THEMES:
-      show_themes ();
-      break;
-#endif
-
 #ifdef HAVE_TRAY
     case YAD_MODE_NOTIFICATION:
       ret = yad_notification_run ();

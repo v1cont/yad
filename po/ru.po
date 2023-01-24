@@ -1332,7 +1332,7 @@ msgstr "Показать список языков проверки орфогр
 
 #: ../src/option.c:650
 msgid "Show list of GtkSourceView themes"
-msgstr "Показать список текм для GtkSourceView"
+msgstr "Показать список тем для GtkSourceView"
 
 #: ../src/option.c:653
 msgid "Load additional GTK settings from file"
