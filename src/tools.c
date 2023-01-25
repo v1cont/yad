@@ -377,7 +377,7 @@ main (int argc, char *argv[])
 
   if (ver)
     {
-      g_print ("%s\n", VERSION);
+      g_print ("%s (GTK+ %d.%d.%d)\n", PACKAGE_VERSION, gtk_major_version, gtk_minor_version, gtk_micro_version);
       return 0;
     }
 
