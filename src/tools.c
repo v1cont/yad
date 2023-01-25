@@ -51,6 +51,7 @@ static FontType font_type = XFT_SPEC;
 
 static gboolean pfd_mode = FALSE;
 static gboolean icon_mode = FALSE;
+static gboolean mime = FALSE;
 static gboolean ver = FALSE;
 #ifdef HAVE_SPELL
 static gboolean langs_mode = FALSE;
@@ -85,6 +86,7 @@ static GOptionEntry pfd_ents[] = {
 
 static GOptionEntry icon_ents[] = {
   { "icon", 'i', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &icon_mode, N_("Icon tools"), NULL },
+  { "mime", 'm', 0, G_OPTION_ARG_NONE, &mime, N_("Get icon name for mime type"), NULL },
   { "size", 's', 0, G_OPTION_ARG_INT, &icon_size, N_("Use specified icon size"), N_("SIZE") },
   { "type", 't', 0, G_OPTION_ARG_CALLBACK, set_size_type, N_("Get icon size from GtkIconSize type"), N_("TYPE") },
   { "theme", 0, 0, G_OPTION_ARG_STRING, &icon_theme_name, N_("Use icon theme"), N_("THEME") },
@@ -272,7 +274,7 @@ run_icon_mode ()
 {
   GtkIconTheme *theme;
   GtkIconInfo *ii;
-  const gchar *filename;
+  gchar *output = NULL;
 
   if (!args || !args[0])
     {
@@ -288,13 +290,21 @@ run_icon_mode ()
   else
     theme = gtk_icon_theme_get_default ();
 
-  ii = gtk_icon_theme_lookup_icon (theme, args[0], icon_size, 0);
-  if (ii == NULL)
-    return 1;
-
-  filename = gtk_icon_info_get_filename (ii);
-  if (filename)
-    g_print ("%s\n", filename);
+  if (mime)
+    {
+      gchar *ctype = g_content_type_from_mime_type (args[0]);
+      output = g_content_type_get_generic_icon_name (ctype);      
+    }
+  else
+    {
+      ii = gtk_icon_theme_lookup_icon (theme, args[0], icon_size, 0);
+      if (ii == NULL)
+        return 1;
+      output = (gchar *) gtk_icon_info_get_filename (ii);
+    }
+  
+  if (output)
+    g_print ("%s\n", output);
   else
     return 1;
 
