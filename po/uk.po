@@ -653,6 +653,10 @@ msgid "Expand user palette"
 msgstr "Розкривати палітру користувача"
 
 #: ../src/option.c:262
+msgid "Show color picker"
+msgstr "Показувати кнопку вибору коліру"
+
+#: ../src/option.c:315
 msgid "Set output mode to MODE. Values are hex (default) or rgb"
 msgstr ""
 "Встановити режим вивода в РЕЖИМ. Значення - hex (за умовчанням) або rgb"
@@ -1747,6 +1751,10 @@ msgstr ""
 msgid "Can't open file %s: %s\n"
 msgstr "Не можу відкрити файл %s: %s\n"
 
+#: ../src/color.c:143 ../src/tools.c:93
+msgid "Pick screen color"
+msgstr "Підібрати колір з екрану"
+
 #. create expander
 #: ../src/color.c:161
 msgid "Palette"
@@ -1860,7 +1868,11 @@ msgstr "Отримати розмір іконки с типу GtkIconSize"
 msgid "Use icon theme"
 msgstr "Використовувати вказану тему іконок"
 
-#: ../src/tools.c:140
+#: ../src/tools.c:92
+msgid "Color manipulation tools"
+msgstr "Інструменти кольорів"
+
+#: ../src/tools.c:172
 #, c-format
 msgid "no font specified\n"
 msgstr "шрифт не вказано\n"
@@ -1895,7 +1907,15 @@ msgstr "Режим іконок"
 msgid "Show icon mode options"
 msgstr "Показувати параметри режиму іконок"
 
-#: ../src/tools.c:308
+#: ../src/tools.c:398
+msgid "Color mode"
+msgstr "Керування кольорами"
+
+#: ../src/tools.c:398
+msgid "Show color mode options"
+msgstr "Показувати параметри керування кольорами"
+
+#: ../src/tools.c:405
 #, c-format
 msgid "option parsing failed: %s\n"
 msgstr "збій при розборі аргументів: %s\n"

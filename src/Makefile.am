@@ -4,6 +4,8 @@ AM_CPPFLAGS =                           \
 
 bin_PROGRAMS = yad
 
+CPICKER_SOURCES = cpicker.c cpicker.h
+
 yad_SOURCES = 			\
 	about.c			\
 	calendar.c		\
@@ -26,7 +28,8 @@ yad_SOURCES = 			\
 	util.c			\
 	main.c			\
 	yad.h			\
-	calendar.xpm
+	calendar.xpm	\
+	$(CPICKER_SOURCES)
 
 if TRAY
 yad_SOURCES += notification.c
@@ -42,7 +45,7 @@ yad_LDADD = $(GTK_LIBS) $(HTML_LIBS) $(SPELL_LIBS) $(SOURCEVIEW_LIBS)
 if BUILD_TOOLS
 bin_PROGRAMS += yad-tools
 
-yad_tools_SOURCES = tools.c
+yad_tools_SOURCES = tools.c	$(CPICKER_SOURCES)
 yad_tools_CFLAGS = $(GTK_CFLAGS) $(SPELL_CFLAGS) $(SOURCEVIEW_CFLAGS)
 yad_tools_LDADD = $(GTK_LIBS) $(SPELL_LIBS) $(SOURCEVIEW_LIBS)
 endif
