@@ -1,7 +1,7 @@
 .TH YAD-TOOLS "1" "April 2021" "yad-tools" "User Commands"
 
 .SH NAME
-yad-tools \- show some miscellaneous stuff.
+yad-tools \- show miscellaneous information.
 
 .SH SYNOPSIS
 .B yad-tools
@@ -9,7 +9,7 @@ yad-tools \- show some miscellaneous stuff.
 .RI STRING
 
 .SH DESCRIPTION
-\fByad-tools\fR is a small command-line utility for getting information that may be usefull in scripts.
+\fByad-tools\fR is a small command-line utility for getting information that may be useful in scripts.
 
 .SH OPTIONS
 
@@ -17,26 +17,25 @@ yad-tools \- show some miscellaneous stuff.
 .TP
 \fB\-f\fR, \fB\-\-pfd\fR
 This mode is intended to transform font names from pango to xft specification and vice versa.
-Additional argument is font name.
+Additional argument is a font name.
 .TP
 \fB\-i\fR, \fB\-\-icon\fR
 This mode is intended to get full path to icon file from icon name.
-Additional argument is icon name.
+Additional argument is an icon name.
 .TP
 \fB\-c\fR, \fB\-\-color\fR
-This mode is intended for works with colors.
+This mode is intended for working with colors.
 .TP
 .B \-\-show-langs
-Show list of possible languages for spell checking. Available only if yad was built with \fIGtkSpell\fP support.
+Show list of available languages for spell checking. It only works if yad was built with \fIGtkspell3\fP support.
 .TP
 .B \-\-show-themes
-Show list of possible highlight themes. Available only if yad was built with \fIGtkSourceView\fP support.
-
+Show list of available GtkSourceView themes. It only works if yad was built with \fIGtkSourceView\fP support.
 
 .SS PFD mode options
 .TP
 \fB\-x\fR, \fB\-\-xft\fR
-Print font name in xft format. This is default.
+Print font name in xft format. This is the default.
 .TP
 \fB\-p\fR, \fB\-\-pango\fR
 Print font name in pango format.
@@ -47,15 +46,15 @@ Print font name in pango format.
 Use specified icon size. Default is 24.
 .TP
 \fB\-t\fR, \fB\-\-type\fR=\fITYPE\fP
-Obtain icon size from one of predefined GTK+ types. \fITYPE\fP is one of the following \fImenu\fP, \fIbutton\fP, \fIsmall_toolbar\fP, \fIlarge_toolbar\fP, \fIdnd\fP or \fIdialog\fP,
+Obtain icon size from one of the predefined GTK+ types. \fITYPE\fP is one of the following \fImenu\fP, \fIbutton\fP, \fIsmall_toolbar\fP, \fIlarge_toolbar\fP, \fIdnd\fP or \fIdialog\fP.
 .TP
 \fB\-m\fR, \fB\-\-mime\fP
 Get generic icon name for specified mime type.
 .TP
 \fB\-\-theme\fR=\fITHEME\fP
-Use specified icon theme instead of default.
+Use the specified icon theme instead of the default.
 
 .SS Color mode options
 .TP
 \fB\-\-pick\fP
-Pick up screen color.
+Pick screen pixel color.
