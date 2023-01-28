@@ -4,7 +4,11 @@ AM_CPPFLAGS =                           \
 
 bin_PROGRAMS = yad
 
+if GTK2
+CPICKER_SOURCES = cpicker_gtk2.c cpicker.h
+else
 CPICKER_SOURCES = cpicker.c cpicker.h
+endif
 
 yad_SOURCES = 			\
 	about.c			\
