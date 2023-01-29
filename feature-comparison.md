@@ -90,10 +90,10 @@ Version 12.1
 Version 12.0
 
 - `[ ]` add ability to load several images in picture dialog
-- `[ ]` add color picker to color dialog and yad-tools
+- `[+]` add color picker to color dialog and yad-tools [0.42.68]
 - `[ ]` add --line option to text-info dialog
 - `[ ]` improve guess of syntax highlighting in text-info dialog
-- `[ ]` add --mime option to icon mode in yad-tools
+- `[+]` add --mime option to icon mode in yad-tools ⁽¹¹⁾ [0.42.68]
 - `[+]` add switch field type in form dialog (thanks to Misko <mpsrbija@gmail.com>) [0.42.54]
 - `[ ]` use pango markup for multiline text field in form dialog
 
@@ -152,7 +152,7 @@ Version 9.0
 - `[?]` don't vertically expand entry in entry dialog
 - `[?]` fix setting splitter position in paned dialog
 - `[ ]` add --wk-prop to html dialog and made js output enabled by default
-- `[-]` add yad-tools utility instead fo pfd. pfd now is a wrapper script (just for backward compatibility)
+- `[+]` replace yad-tools for pfd utility. pfd remains as a compatibility wrapper script [0.42.68]
 - `[+]` add --align-buttons option for aligning labels on button fields in form dialog [0.42.50]
 
 
@@ -284,6 +284,8 @@ See the NEWS file for older versions.
 
 ⁽⁸⁾ GTK+-2 does not provide a GDK Wayland backend.  yadU and yadL equally support Wayland for GTK+-3 builds but some dialog features may not be available. If configuration option `debug` is enabled, yadL and yadU will print a warning when an unavailable feature is requested.  To run yadL/yadU in this way, select the Wayland backend by setting `GDK_BACKEND=wayland,x11` in the application's environment. Special value `GDK_BACKEND=help` displays the available backends.
 
-⁽⁹⁾ On GTK+-2 the preview image is generated only when a file item is selected interactively.  Therefore `yad --file --filename=/my/pic.jpg --file --preview [--large-preview]` will not start with the preview of pic.jpg loaded.
+⁽⁹⁾ GTK+-2 generates the preview image when a file item is selected interactively.  Therefore `yad --file --filename=/my/pic.jpg --file --preview [--large-preview]` will not start with the preview of pic.jpg loaded.
 
-⁽¹⁰⁾ On GTK+-2 icon browser options `--all` and `--symbolic` are ignored because GTK+-2 cannot discriminate symbolic icons.
+⁽¹⁰⁾ GTK+-2 cannot discriminate symbolic icons.  Therefore yad icon browser options `--all` and `--symbolic` are ignored.
+
+⁽¹¹⁾ GTK+-2 `yad-tools --icon --size` always prints the scalable icon name, if available, regardless of the requested size; a similar remark applies to options `--icon --type`.
