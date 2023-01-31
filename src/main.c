@@ -532,7 +532,9 @@ create_dialog (void)
           if (options.mode == YAD_MODE_PROGRESS || options.mode == YAD_MODE_DND || options.mode == YAD_MODE_PICTURE)
             {
               /* add close button */
+              G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
               btn = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
+              G_GNUC_END_IGNORE_DEPRECATIONS;
               g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_OK));
               g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
               gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
@@ -543,13 +545,17 @@ create_dialog (void)
               if (gtk_alternative_dialog_button_order (NULL))
                 {
                   /* add ok button */
+                  G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
                   btn = gtk_button_new_from_stock (GTK_STOCK_OK);
+                  G_GNUC_END_IGNORE_DEPRECATIONS;
                   g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_OK));
                   g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
                   gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
 
                   /* add cancel button */
+                  G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
                   btn = gtk_button_new_from_stock (GTK_STOCK_CANCEL);
+                  G_GNUC_END_IGNORE_DEPRECATIONS;
                   g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_CANCEL));
                   g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
                   gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
@@ -557,13 +563,17 @@ create_dialog (void)
               else
                 {
                   /* add cancel button */
+                  G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
                   btn = gtk_button_new_from_stock (GTK_STOCK_CANCEL);
+                  G_GNUC_END_IGNORE_DEPRECATIONS;
                   g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_CANCEL));
                   g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
                   gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
 
                   /*add ok button */
+                  G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
                   btn = gtk_button_new_from_stock (GTK_STOCK_OK);
+                  G_GNUC_END_IGNORE_DEPRECATIONS;
                   g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_OK));
                   g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
                   gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);

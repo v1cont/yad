@@ -430,6 +430,7 @@ get_label (gchar *str, guint border, GtkWidget *w)
   GtkWidget *a, *t, *i, *l;
   GtkStockItem it;
   gchar **vals;
+  gboolean b;
 
   if (!str || !*str)
     return gtk_label_new (NULL);
@@ -447,7 +448,10 @@ get_label (gchar *str, guint border, GtkWidget *w)
   gtk_container_add (GTK_CONTAINER (a), t);
 
   vals = g_strsplit_set (str, options.common_data.item_separator, 3);
-  if (gtk_stock_lookup (vals[0], &it))
+  G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
+  b = gtk_stock_lookup (vals[0], &it);
+  G_GNUC_END_IGNORE_DEPRECATIONS;
+  if (b)
     {
       l = gtk_label_new_with_mnemonic (it.label);
       i = gtk_image_new_from_pixbuf (get_pixbuf (it.stock_id, YAD_SMALL_ICON, TRUE));
