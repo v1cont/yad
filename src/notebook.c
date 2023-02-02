@@ -57,8 +57,8 @@ notebook_create_widget (GtkWidget * dlg)
     {
       GtkWidget *a, *s;
 
-      a = gtk_alignment_new (0.5, 0.5, 1, 1);
-      gtk_alignment_set_padding (GTK_ALIGNMENT (a),
+      SETUNDEPR (a, gtk_alignment_new, 0.5, 0.5, 1, 1);
+      UNDEPR (gtk_alignment_set_padding, GTK_ALIGNMENT (a),
                                  options.notebook_data.borders, options.notebook_data.borders,
                                  options.notebook_data.borders, options.notebook_data.borders);
 

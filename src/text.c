@@ -550,7 +550,7 @@ text_create_widget (GtkWidget * dlg)
     fd = pango_font_description_from_string ("Monospace");
 
 #if GTK_CHECK_VERSION(3,0,0)
-  gtk_widget_override_font (text_view, fd);
+  UNDEPR (gtk_widget_override_font, text_view, fd);
 #else
   gtk_widget_modify_font (text_view, fd);
 #endif

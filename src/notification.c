@@ -218,10 +218,10 @@ popup_menu_cb (GtkStatusIcon *icon, guint button, guint activate_time, gpointer 
           if (d->icon)
             {
               GdkPixbuf *pb = get_pixbuf (d->icon, YAD_SMALL_ICON, TRUE);
-              item = gtk_image_menu_item_new_with_mnemonic (d->name);
+              SETUNDEPR (item, gtk_image_menu_item_new_with_mnemonic, d->name);
               if (pb)
                 {
-                  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), gtk_image_new_from_pixbuf (pb));
+                  UNDEPR (gtk_image_menu_item_set_image, GTK_IMAGE_MENU_ITEM (item), gtk_image_new_from_pixbuf (pb));
                   g_object_unref (pb);
                 }
             }
@@ -244,7 +244,7 @@ popup_menu_cb (GtkStatusIcon *icon, guint button, guint activate_time, gpointer 
       gtk_widget_show (item);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
     }
-  gtk_menu_popup (GTK_MENU (menu), NULL, NULL, gtk_status_icon_position_menu, icon, button, activate_time);
+  UNDEPR (gtk_menu_popup, GTK_MENU (menu), NULL, NULL, gtk_status_icon_position_menu, icon, button, activate_time);
 }
 
 static gboolean

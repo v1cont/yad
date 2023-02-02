@@ -1259,7 +1259,7 @@ form_create_widget (GtkWidget * dlg)
               l = get_label (fld->name, 2, e);
               gtk_container_add (GTK_CONTAINER (e), l);
               if (options.form_data.align_buttons)
-                gtk_button_set_alignment (GTK_BUTTON (e), options.common_data.align, 0.5);
+                UNDEPR (gtk_button_set_alignment, GTK_BUTTON (e), options.common_data.align, 0.5);
               if (fld->type == YAD_FIELD_BUTTON)
                 gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
 #if !GTK_CHECK_VERSION(3,0,0)

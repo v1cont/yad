@@ -518,7 +518,7 @@ create_dialog (void)
 
               btn = gtk_button_new ();
               gtk_container_add (GTK_CONTAINER (btn), get_label (b->name, 2, btn));
-              gtk_button_set_alignment (GTK_BUTTON (btn), 0.5, 0.5);
+              UNDEPR (gtk_button_set_alignment, GTK_BUTTON (btn), 0.5, 0.5);
               g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (b->response));
               g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), b->cmd);
               gtk_box_pack_start (GTK_BOX (bbox), btn, FALSE, FALSE, 0);
@@ -540,7 +540,9 @@ create_dialog (void)
             }
           else
             {
-              if (gtk_alternative_dialog_button_order (NULL))
+              gboolean b;
+              SETUNDEPR (b, gtk_alternative_dialog_button_order, NULL);
+              if (b)
                 {
                   /* add ok button */
                   SETUNDEPR (btn, gtk_button_new_from_stock, GTK_STOCK_OK);
