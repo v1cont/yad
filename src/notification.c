@@ -107,9 +107,7 @@ set_icon (void)
 
   if (icon == NULL)
     {
-      G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-      gtk_status_icon_set_from_icon_name (status_icon, "yad");
-      G_GNUC_END_IGNORE_DEPRECATIONS;
+      UNDEPR (gtk_status_icon_set_from_icon_name, status_icon, "yad");
       return;
     }
 
@@ -125,24 +123,14 @@ set_icon (void)
         }
       if (pixbuf)
         {
-          G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-          gtk_status_icon_set_from_pixbuf (status_icon, pixbuf);
-          G_GNUC_END_IGNORE_DEPRECATIONS;
+          UNDEPR (gtk_status_icon_set_from_pixbuf, status_icon, pixbuf);
           g_object_unref (pixbuf);
         }
       else
-        {
-          G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-          gtk_status_icon_set_from_icon_name (status_icon, "yad");
-          G_GNUC_END_IGNORE_DEPRECATIONS;
-        }
+        UNDEPR (gtk_status_icon_set_from_icon_name, status_icon, "yad");
     }
   else
-    {
-      G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-      gtk_status_icon_set_from_icon_name (status_icon, icon);
-      G_GNUC_END_IGNORE_DEPRECATIONS;
-    }
+    UNDEPR (gtk_status_icon_set_from_icon_name, status_icon, icon);
 }
 
 static gboolean
@@ -227,13 +215,14 @@ popup_menu_cb (GtkStatusIcon *icon, guint button, guint activate_time, gpointer 
             }
           else
             {
-              G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
               GtkStockItem it;
-              if (gtk_stock_lookup (d->name, &it))
-                item = gtk_image_menu_item_new_from_stock (d->name, NULL);
+              gboolean b;
+
+              SETUNDEPR (b, gtk_stock_lookup, d->name, &it);
+              if (b)
+                SETUNDEPR (item, gtk_image_menu_item_new_from_stock, d->name, NULL) /*;*/
               else
                 item = gtk_menu_item_new_with_mnemonic (d->name);
-              G_GNUC_END_IGNORE_DEPRECATIONS;
             }
           g_signal_connect (GTK_MENU_ITEM (item), "activate",
                             G_CALLBACK (popup_menu_item_activate_cb), (gpointer) d->action);
@@ -313,12 +302,10 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
               if (g_utf8_validate (value, -1, NULL))
                 {
                   gchar *message = g_strcompress (value);
-                  G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
                   if (!options.data.no_markup)
-                    gtk_status_icon_set_tooltip_markup (status_icon, message);
+                    UNDEPR (gtk_status_icon_set_tooltip_markup, status_icon, message) /*;*/
                   else
-                    gtk_status_icon_set_tooltip_text (status_icon, message);
-                  G_GNUC_END_IGNORE_DEPRECATIONS;
+                    UNDEPR (gtk_status_icon_set_tooltip_text, status_icon, message);
                   g_free (message);
                 }
               else
@@ -394,9 +381,7 @@ yad_notification_run ()
 
   G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
   status_icon = gtk_status_icon_new ();
-  G_GNUC_END_IGNORE_DEPRECATIONS;
 
-  G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
   if (options.data.dialog_text)
     {
       if (!options.data.no_markup)
@@ -437,9 +422,7 @@ yad_notification_run ()
     }
 
   /* Show icon and wait */
-  G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-  gtk_status_icon_set_visible (status_icon, !options.notification_data.hidden);
-  G_GNUC_END_IGNORE_DEPRECATIONS;
+  UNDEPR (gtk_status_icon_set_visible, status_icon, !options.notification_data.hidden);
 
   if (options.data.timeout > 0)
     g_timeout_add_seconds (options.data.timeout, (GSourceFunc) timeout_cb, NULL);
