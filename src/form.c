@@ -504,10 +504,9 @@ select_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
             path = val ? g_path_get_dirname (val) : g_get_current_dir ();
         }
 
-      G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
       if (type == YAD_FIELD_MFILE)
         {
-          dlg = gtk_file_chooser_dialog_new (_("Select files"),
+          SETUNDEPR (dlg, gtk_file_chooser_dialog_new, _("Select files"),
                                              GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
                                              GTK_FILE_CHOOSER_ACTION_OPEN,
                                              GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -515,13 +514,12 @@ select_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
         }
       else
         {
-          dlg = gtk_file_chooser_dialog_new (_("Select folders"),
+          SETUNDEPR (dlg, gtk_file_chooser_dialog_new, _("Select folders"),
                                              GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
                                              GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
                                              GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                              GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
         }
-      G_GNUC_END_IGNORE_DEPRECATIONS;
       gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (dlg), TRUE);
       gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), path);
 
@@ -593,10 +591,9 @@ create_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
             path = val ? g_path_get_dirname (val) : g_get_current_dir ();
         }
 
-      G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
       if (type == YAD_FIELD_FILE_SAVE)
         {
-          dlg = gtk_file_chooser_dialog_new (_("Select or create file"),
+          SETUNDEPR (dlg, gtk_file_chooser_dialog_new, _("Select or create file"),
                                              GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
                                              GTK_FILE_CHOOSER_ACTION_SAVE,
                                              GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -604,13 +601,12 @@ create_files_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * ev
         }
       else
         {
-          dlg = gtk_file_chooser_dialog_new (_("Select or create folder"),
+          SETUNDEPR (dlg, gtk_file_chooser_dialog_new, _("Select or create folder"),
                                              GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
                                              GTK_FILE_CHOOSER_ACTION_CREATE_FOLDER,
                                              GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                              GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
         }
-      G_GNUC_END_IGNORE_DEPRECATIONS;
       gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dlg), path);
 
       g_signal_connect (dlg, "map", G_CALLBACK (gtk_file_chooser_set_show_hidden), GINT_TO_POINTER (options.common_data.show_hidden));
@@ -656,13 +652,11 @@ select_date_cb (GtkEntry * entry, GtkEntryIconPosition pos, GdkEventButton * eve
     {
       GDate *d;
 
-      G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-      dlg = gtk_dialog_new_with_buttons (_("Select date"),
+      SETUNDEPR (dlg, gtk_dialog_new_with_buttons, _("Select date"),
                                          GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (entry))),
                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                          GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
-      G_GNUC_END_IGNORE_DEPRECATIONS;
       cal = gtk_calendar_new ();
       gtk_widget_show (cal);
       g_signal_connect (G_OBJECT (cal), "day-selected-double-click", G_CALLBACK (date_selected_cb), dlg);

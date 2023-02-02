@@ -448,9 +448,7 @@ get_label (gchar *str, guint border, GtkWidget *w)
   gtk_container_add (GTK_CONTAINER (a), t);
 
   vals = g_strsplit_set (str, options.common_data.item_separator, 3);
-  G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-  b = gtk_stock_lookup (vals[0], &it);
-  G_GNUC_END_IGNORE_DEPRECATIONS;
+  SETUNDEPR (b, gtk_stock_lookup, vals[0], &it);
   if (b)
     {
       l = gtk_label_new_with_mnemonic (it.label);

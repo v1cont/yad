@@ -688,4 +688,10 @@ strip_new_line (gchar * str)
 
 G_END_DECLS
 
+/* C99 inliner to ignore GTK-+3 deprecation warning of 'function' */
+#define UNDEPR(function, ...) {G_GNUC_BEGIN_IGNORE_DEPRECATIONS; function (__VA_ARGS__); G_GNUC_END_IGNORE_DEPRECATIONS;}
+
+/* C99 inliner to ignore GTK-+3 deprecation warning while setting 'var' = 'function' */
+#define SETUNDEPR(var, function, ...) {G_GNUC_BEGIN_IGNORE_DEPRECATIONS; var = function (__VA_ARGS__); G_GNUC_END_IGNORE_DEPRECATIONS;}
+
 #endif /* _YAD_H_ */
