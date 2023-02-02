@@ -327,10 +327,28 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
           else if (!g_ascii_strcasecmp (command, "visible"))
             {
               G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
-              if (!g_ascii_strcasecmp (value, "false"))
-                gtk_status_icon_set_visible (status_icon, FALSE);
+#if !GTK_CHECK_VERSION(3,0,0)
+              if (!g_ascii_strcasecmp (value, "blink"))
+                {
+                  gboolean state = gtk_status_icon_get_blinking (status_icon);
+                  gtk_status_icon_set_blinking (status_icon, !state);
+                }
               else
-                gtk_status_icon_set_visible (status_icon, TRUE);
+#endif
+              if (!g_ascii_strcasecmp (value, "false"))
+                {
+                  gtk_status_icon_set_visible (status_icon, FALSE);
+#if !GTK_CHECK_VERSION(3,0,0)
+                  gtk_status_icon_set_blinking (status_icon, FALSE);
+#endif
+                }
+              else
+                {
+                  gtk_status_icon_set_visible (status_icon, TRUE);
+#if !GTK_CHECK_VERSION(3,0,0)
+                  gtk_status_icon_set_blinking (status_icon, FALSE);
+#endif
+                }
               G_GNUC_END_IGNORE_DEPRECATIONS;
             }
           else if (!g_ascii_strcasecmp (command, "action"))
