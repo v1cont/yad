@@ -24,6 +24,11 @@ Refer to [yadL commit log](https://github.com/step-/yad/commits) for more detail
 - yadL's own about dialog is modified
 - save print settings to new file `$XDG_CONFIG_HOME/yad/print.conf` ⁽⁵⁾
 
+(§)N Refer our pull request (PR) number N [https://github.com/v1cont/yad/pulls?q=author%3Astep-](https://github.com/v1cont/yad/pulls?q=author%3Astep-)
+
+- symbolic ID field references in form dialog actions [0.42.71]  (§)213
+- symbolic ID names in form dialog output [0.42.71]  (§)213
+
 ## Notable bug fixes
 
 Several bugs that affected the parent project when it was forked have been fixed. The following stand out:
@@ -64,7 +69,7 @@ Version 12.4  WIP WIP
 - `[+]` d7ded23 improve run_command_sync for avoiding possible race conditions [0.42.67]
 - `[+]` 1d402f7 add some null-pointer checks in for diaalog code [0.42.67]
 - `[+]` ff81778 remove some warnings [0.42.66]
-- `[+]` c8e9ef2 fix UI not updated when sync command runs [PR⁽'⁾ 210],[0.42.66]
+- `[+]` c8e9ef2 fix UI not updated when sync command runs [0.42.66]  (§)210
 
 
 Version 12.3
@@ -90,7 +95,7 @@ Version 12.1
 Version 12.0
 
 - `[ ]` add ability to load several images in picture dialog
-- `[+]` add color picker to color dialog and yad-tools [0.42.68]
+- `[+]` add color picker to color dialog and yad-tools [0.42.68],[0.42.72]
 - `[ ]` add --line option to text-info dialog
 - `[ ]` improve guess of syntax highlighting in text-info dialog
 - `[+]` add --mime option to icon mode in yad-tools ⁽¹¹⁾ [0.42.68]
@@ -266,7 +271,7 @@ See the NEWS file for older versions.
 
 ## Notes
 
-⁽'⁾ Refer our pull request (PR) number [https://github.com/v1cont/yad/pulls?q=author%3Astep-](https://github.com/v1cont/yad/pulls?q=author%3Astep-)
+(§)N Refer our pull request (PR) number N [https://github.com/v1cont/yad/pulls?q=author%3Astep-](https://github.com/v1cont/yad/pulls?q=author%3Astep-)
 
 ⁽¹⁾ The GTK+-2 package in your distribution may need a patch to fix a long-standing issue whereby the GTK+ "Print to File" printer silently fails to print.  This bug affects other GTK+-2 applications, such as evince, and does not involve CUPS printers.  See this [commit message](https://github.com/step-/yad/commit/c3322e79).
 
