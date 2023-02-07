@@ -495,6 +495,9 @@ parse_cmd_output (gchar *text)
   gchar **lines, *data;
   gboolean needs_free;
 
+  if (!text)
+    return;
+
   needs_free = preprocess_atid (text, "\\\\%1$s|^%1$s:", &data);
   lines = g_strsplit (data, "\n", 0);
 
