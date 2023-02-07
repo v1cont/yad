@@ -28,6 +28,7 @@ Refer to [yadL commit log](https://github.com/step-/yad/commits) for more detail
 
 - symbolic ID field references in form dialog actions [0.42.71]  (§)213
 - symbolic ID names in form dialog output [0.42.71]  (§)213
+- auto-disable form buttons and list items while synchronous action runs [0.42.73]  (§)221
 
 ## Notable bug fixes
 

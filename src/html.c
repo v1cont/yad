@@ -125,7 +125,7 @@ link_cb (WebKitWebView * v, WebKitWebFrame * f, WebKitNetworkRequest * r,
           g_setenv ("YAD_HTML_KEYS", vm, TRUE);
 
           /* run handler */
-          ret = run_cmd_sync (cmd, NULL);
+          ret = run_command_sync (cmd, NULL, NULL);
           /* actual exit code in highest byte */
           switch (ret >> 8)
             {

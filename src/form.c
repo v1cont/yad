@@ -532,7 +532,7 @@ button_clicked_cb (GtkButton * b, gpointer d)
           gchar *data = NULL;
           gint exit = 1;
           cmd = expand_action (action + 1);
-          exit = run_command_sync (cmd->str, &data);
+          exit = run_command_sync (cmd->str, &data, GTK_WIDGET (b));
           if (exit == 0)
             parse_cmd_output (data);
           g_free (data);
@@ -568,7 +568,7 @@ field_changed_cb (GtkWidget *w, guint fn)
       cmd = expand_action (str);
       g_free (str);
 
-      exit = run_command_sync (cmd->str, &data);
+      exit = run_command_sync (cmd->str, &data, w);
       if (exit == 0)
         parse_cmd_output (data);
       g_free (data);
@@ -817,6 +817,13 @@ link_clicked_cb (GtkLinkButton *btn, gpointer data)
   return TRUE;
 }
 
+/* plug for future backport
+static void
+select_icon_cb (GtkEntry *e, GtkEntryIconPosition pos, GdkEventButton *ev, gpointer d)
+{
+      exit = run_command_sync (cmd, &out, GTK_WIDGET (e));
+}
+*/
 static gboolean
 handle_stdin (GIOChannel * ch, GIOCondition cond, gpointer data)
 {

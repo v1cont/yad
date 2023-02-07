@@ -782,7 +782,7 @@ run_thread (RunData *d)
 }
 
 gint
-run_command_sync (gchar *cmd, gchar **out)
+run_command_sync (gchar *cmd, gchar **out, GtkWidget *w)
 {
   RunData *d;
   gint ret;
@@ -800,6 +800,9 @@ run_command_sync (gchar *cmd, gchar **out)
     d->cmd = g_strdup (cmd);
   d->out = out;
 
+  if (w)
+    gtk_widget_set_sensitive (w, FALSE);
+
   d->lock = TRUE;
   g_thread_new ("run_sync", (GThreadFunc) run_thread, d);
 
@@ -810,6 +813,9 @@ run_command_sync (gchar *cmd, gchar **out)
     }
 
   ret = d->ret;
+  if (w)
+      gtk_widget_set_sensitive (w, TRUE);
+
   g_free (d->cmd);
   g_free (d);
 

@@ -675,7 +675,7 @@ void parse_geometry ();
 gboolean get_bool_val (gchar *str);
 gchar *print_bool_val (gboolean val);
 
-gint run_command_sync (gchar *cmd, gchar **out);
+gint run_command_sync (gchar *cmd, gchar **out, GtkWidget *w);
 void run_command_async (gchar *cmd);
 
 void open_uri (const gchar *uri);
