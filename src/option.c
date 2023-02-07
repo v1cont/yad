@@ -58,6 +58,7 @@ static gboolean set_scroll_policy (const gchar *, const gchar *, gpointer, GErro
 static gboolean set_size_format (const gchar *, const gchar *, gpointer, GError **);
 #endif
 static gboolean set_interp (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_form_output_prefix (const gchar *, const gchar *, gpointer, GError **);
 
 static gboolean about_mode = FALSE;
 static gboolean version_mode = FALSE;
@@ -331,7 +332,7 @@ static GOptionEntry form_options[] = {
   { "form", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &form_mode,
     N_("Display form dialog"), NULL },
   { "field", 0, 0, G_OPTION_ARG_CALLBACK, add_field,
-    N_ ("Add field to form (see man page for list of possible types)"), N_("LABEL[:TYPE]") },
+    N_ ("Add field to form (see man page for list of possible types)"), N_("LABEL[:TYPE[@ID]]") },
   { "align", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_CALLBACK, set_align,
     N_("Set alignment of filed labels (left, center or right)"), N_("TYPE") },
   { "columns", 0, 0, G_OPTION_ARG_INT, &options.form_data.columns,
@@ -350,6 +351,8 @@ static GOptionEntry form_options[] = {
     N_("Align labels on button fields"), NULL },
   { "changed-action", 0, 0, G_OPTION_ARG_STRING, &options.form_data.changed_action,
     N_("Set changed action"), "CMD" },
+  { "use-output-prefix", 0, G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, set_form_output_prefix,
+    N_("Prefix form output values (default: %@=)"), N_("[PREFIX]") },
   { NULL }
 };
 
@@ -788,6 +791,19 @@ add_field (const gchar * option_name, const gchar * value, gpointer data, GError
 
   if (fstr[1])
     {
+      gchar *atid;
+
+      /* on return fld->atid starts with '@' otherwise is NULL */
+      fld->atid = NULL;
+
+      atid = strchr(fstr[1], '@');
+      if (atid)
+        {
+          if (atid[1])
+            fld->atid = g_strdup(atid);
+          *atid = '\0';
+        }
+
       if (strcasecmp (fstr[1], "H") == 0)
         fld->type = YAD_FIELD_HIDDEN;
       else if (strcasecmp (fstr[1], "RO") == 0)
@@ -1291,6 +1307,17 @@ set_interp (const gchar * option_name, const gchar * value, gpointer data, GErro
   return TRUE;
 }
 
+static gboolean
+set_form_output_prefix (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+{
+  options.form_data.use_output_prefix = TRUE;
+
+  if (value)
+    options.form_data.output_prefix = g_strdup (value);
+
+  return TRUE;
+}
+
 #ifndef G_OS_WIN32
 static gboolean
 set_xid_file (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
@@ -1608,6 +1635,8 @@ yad_options_init (void)
   options.form_data.align_buttons = FALSE;
   options.form_data.changed_action = NULL;
   options.form_data.homogeneous = FALSE;
+  options.form_data.use_output_prefix = FALSE;
+  options.form_data.output_prefix = "%@=";
 
 #ifdef HAVE_HTML
   /* Initialize html data */

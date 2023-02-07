@@ -30,13 +30,113 @@ static guint n_fields;
 
 static gboolean disable_changed = TRUE;
 
+/* replace single match "@atid" => %N or "@atid:" => N: */
+static gboolean
+preprocess_cb (const GMatchInfo *info, GString *result, gpointer data)
+{
+  gchar *match, *r, *fmt, *atid;
+  gboolean colon_suffix, is_escaped;
+
+  match = g_match_info_fetch (info, 0);
+  is_escaped = *match == '\\';
+  if (is_escaped)
+    {
+      r = match + 1;
+      fmt = "%1$s";
+    }
+  else
+    {
+      atid = g_strdup (match);
+      r = atid + strlen (atid) - 1;
+      colon_suffix = *r == ':';   /* e.g. command "@... echo '@atid: ...'" */
+      if (colon_suffix)
+        *r = '\0';
+
+      r = g_hash_table_lookup ((GHashTable *)data, atid);
+      g_free (atid);
+
+      if (!r)
+        fmt = "%2$s"; /* pop the match back to the matched text */
+      else
+        fmt = colon_suffix ? "%1$s:" : "%%%s"; /* using domain knowledge */
+    }
+  g_string_append_printf (result, fmt, r, match);
+  g_free (match);
+
+  return FALSE;
+}
+
+/* replace each matched "@atid" or "@atid:" in text using preprocess_cb
+ * return TRUE if some replacement made hence result points to newly allocated memory
+ * @param format   regex pattern where '%1$s' is replaced with the current @atid value
+*/
+static gboolean
+preprocess_atid (gchar *text, gchar *format, gchar **result)
+{
+  static gchar *fmt = NULL;
+  static GRegex *regex = NULL;
+  static GHashTable *ht = NULL;
+  static gint n_varnames = -1;
+  gchar *atid, *p, **ap;
+  GSList *f;
+  gint num = 1;
+
+  if (n_varnames && g_strcmp0 (format, fmt))
+    {
+      if (ht)
+        g_hash_table_destroy (ht);
+      ht = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_free);
+      ap = g_malloc (sizeof (gchar *) * n_fields + 1);
+      g_free (fmt);
+      fmt = g_strdup (format);
+
+      n_varnames = 0;
+      for (f = options.form_data.fields; f; f = f->next)
+        {
+          atid = ((YadField*)f->data)->atid;
+          if (atid)
+            {
+              p = g_regex_escape_string (atid, strlen (atid));
+              ap[n_varnames] = g_strdup_printf (fmt, p);
+              g_hash_table_insert (ht, atid, g_strdup_printf ("%ld", num));
+
+              g_free (p);
+              ++n_varnames;
+            }
+          ++num;
+        }
+
+      ap[n_varnames] = NULL;
+      if (n_varnames)
+        {
+          p = g_strjoinv ("|", ap);
+          if (regex)
+            g_regex_unref (regex);
+          regex = g_regex_new (p, G_REGEX_MULTILINE|G_REGEX_OPTIMIZE, 0, NULL);
+
+          g_free (p);
+        }
+      g_strfreev (ap);
+    }
+
+  if (n_varnames > 0 && regex)
+    *result = g_regex_replace_eval (regex, text, -1, 0, 0, preprocess_cb, ht, NULL);
+  else
+    *result = text;
+
+  return *result != text;
+}
+
 /* expand %N in command to fields values */
 static GString *
-expand_action (gchar * cmd)
+expand_action (gchar *command)
 {
   GString *xcmd;
   guint i = 0;
+  gchar *cmd;
+  gboolean needs_free;
 
+  needs_free = preprocess_atid (command, "\\\\%1$s|%1$s\\b(?!:)", &cmd);
   xcmd = g_string_new ("");
   while (cmd[i])
     {
@@ -178,6 +278,8 @@ expand_action (gchar * cmd)
         }
     }
   g_string_append_c (xcmd, '\0');
+  if (needs_free)
+    g_free (cmd);
 
   return xcmd;
 }
@@ -381,14 +483,17 @@ set_field_value (guint num, gchar *value)
 }
 
 static void
-parse_cmd_output (gchar *data)
+parse_cmd_output (gchar *text)
 {
   guint i = 0;
-  gchar **lines;
+  gchar **lines, *data;
+  gboolean needs_free;
 
-  if (!data)
+  if (!text)
     return;
 
+
+  needs_free = preprocess_atid (text, "\\\\%1$s|^%1$s:", &data);
   lines = g_strsplit (data, "\n", 0);
 
   disable_changed = TRUE;
@@ -409,6 +514,8 @@ parse_cmd_output (gchar *data)
         }
       i++;
     }
+  if (needs_free)
+    g_free (data);
   disable_changed = FALSE;
 }
 
@@ -1457,8 +1564,19 @@ form_create_widget (GtkWidget * dlg)
 static void
 form_print_field (guint fn)
 {
-  gchar *buf;
+  gchar *buf, *lhs;
+  static GRegex *regex;
   YadField *fld = g_slist_nth_data (options.form_data.fields, fn);
+
+  if (options.form_data.use_output_prefix)
+    {
+      if (!regex)
+        regex = g_regex_new ("\%@", G_REGEX_OPTIMIZE, 0, NULL);
+      lhs = g_regex_replace_literal (regex, options.form_data.output_prefix, -1, 0,
+                                     fld->atid ? fld->atid + 1 : "nul", 0, NULL);
+    }
+  else
+    lhs = g_strdup("");
 
   switch (fld->type)
     {
@@ -1474,21 +1592,21 @@ form_print_field (guint fn)
       if (options.common_data.quoted_output)
         {
           buf = g_shell_quote (gtk_entry_get_text (GTK_ENTRY (g_slist_nth_data (fields, fn))));
-          g_printf ("%s%s", buf, options.common_data.separator);
+          g_printf ("%s%s%s", lhs, buf, options.common_data.separator);
           g_free (buf);
         }
       else
-        g_printf ("%s%s", gtk_entry_get_text (GTK_ENTRY (g_slist_nth_data (fields, fn))),
+        g_printf ("%s%s%s", lhs, gtk_entry_get_text (GTK_ENTRY (g_slist_nth_data (fields, fn))),
                   options.common_data.separator);
       break;
     case YAD_FIELD_NUM:
       {
         guint prec = gtk_spin_button_get_digits (GTK_SPIN_BUTTON (g_slist_nth_data (fields, fn)));
         if (options.common_data.quoted_output)
-          g_printf ("'%.*f'%s", prec, gtk_spin_button_get_value (GTK_SPIN_BUTTON (g_slist_nth_data (fields, fn))),
+          g_printf ("%s'%.*f'%s", lhs, prec, gtk_spin_button_get_value (GTK_SPIN_BUTTON (g_slist_nth_data (fields, fn))),
                     options.common_data.separator);
         else
-          g_printf ("%.*f%s", prec, gtk_spin_button_get_value (GTK_SPIN_BUTTON (g_slist_nth_data (fields, fn))),
+          g_printf ("%s%.*f%s", lhs, prec, gtk_spin_button_get_value (GTK_SPIN_BUTTON (g_slist_nth_data (fields, fn))),
                     options.common_data.separator);
         break;
       }
@@ -1497,35 +1615,35 @@ form_print_field (guint fn)
 #endif
     case YAD_FIELD_CHECK:
       if (options.common_data.quoted_output)
-        g_printf ("'%s'%s", print_bool_val (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (g_slist_nth_data (fields, fn)))),
+        g_printf ("%s'%s'%s", lhs, print_bool_val (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (g_slist_nth_data (fields, fn)))),
                   options.common_data.separator);
       else
-        g_printf ("%s%s", print_bool_val (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (g_slist_nth_data (fields, fn)))),
+        g_printf ("%s%s%s", lhs, print_bool_val (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (g_slist_nth_data (fields, fn)))),
                   options.common_data.separator);
       break;
 #if GTK_CHECK_VERSION(3,0,0)
     case YAD_FIELD_SWITCH:
       if (options.common_data.quoted_output)
-        g_printf ("'%s'%s", print_bool_val (gtk_switch_get_state (GTK_SWITCH (g_slist_nth_data (fields, fn)))),
+        g_printf ("%s'%s'%s", lhs, print_bool_val (gtk_switch_get_state (GTK_SWITCH (g_slist_nth_data (fields, fn)))),
                   options.common_data.separator);
       else
-        g_printf ("%s%s", print_bool_val (gtk_switch_get_state (GTK_SWITCH (g_slist_nth_data (fields, fn)))),
+        g_printf ("%s%s%s", lhs, print_bool_val (gtk_switch_get_state (GTK_SWITCH (g_slist_nth_data (fields, fn)))),
                   options.common_data.separator);
       break;
 #endif
     case YAD_FIELD_COMBO:
     case YAD_FIELD_COMBO_ENTRY:
       if (options.common_data.num_output && fld->type == YAD_FIELD_COMBO)
-        g_printf ("%d%s", gtk_combo_box_get_active (GTK_COMBO_BOX (g_slist_nth_data (fields, fn))) + 1,
+        g_printf ("%s%d%s", lhs, gtk_combo_box_get_active (GTK_COMBO_BOX (g_slist_nth_data (fields, fn))) + 1,
                   options.common_data.separator);
       else if (options.common_data.quoted_output)
         {
           buf = g_shell_quote (gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, fn))));
-          g_printf ("%s%s", buf, options.common_data.separator);
+          g_printf ("%s%s%s", lhs, buf, options.common_data.separator);
           g_free (buf);
         }
       else
-        g_printf ("%s%s", gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, fn))),
+        g_printf ("%s%s%s", lhs, gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (g_slist_nth_data (fields, fn))),
                   options.common_data.separator);
       break;
     case YAD_FIELD_FILE:
@@ -1535,13 +1653,13 @@ form_print_field (guint fn)
           gchar *fname = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, fn)));
           buf = g_shell_quote (fname ? fname : "");
           g_free (fname);
-          g_printf ("%s%s", buf ? buf : "", options.common_data.separator);
+          g_printf ("%s%s%s", lhs, buf ? buf : "", options.common_data.separator);
           g_free (buf);
         }
       else
         {
           buf = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (g_slist_nth_data (fields, fn)));
-          g_printf ("%s%s", buf ? buf : "", options.common_data.separator);
+          g_printf ("%s%s%s", lhs, buf ? buf : "", options.common_data.separator);
           g_free (buf);
         }
       break;
@@ -1554,9 +1672,9 @@ form_print_field (guint fn)
         fname = gtk_font_chooser_get_font (GTK_FONT_CHOOSER (g_slist_nth_data (fields, fn)));
 #endif
         if (options.common_data.quoted_output)
-          g_printf ("'%s'%s", fname ? fname : "", options.common_data.separator);
+          g_printf ("%s'%s'%s", lhs, fname ? fname : "", options.common_data.separator);
         else
-          g_printf ("%s%s", fname ? fname : "", options.common_data.separator);
+          g_printf ("%s%s%s", lhs, fname ? fname : "", options.common_data.separator);
         g_free (fname);
         break;
       }
@@ -1577,40 +1695,40 @@ form_print_field (guint fn)
         if (options.common_data.quoted_output)
           {
             buf = g_shell_quote (cs ? cs : "");
-            g_printf ("%s%s", buf, options.common_data.separator);
+            g_printf ("%s%s%s", lhs, buf, options.common_data.separator);
             g_free (buf);
           }
         else
-          g_printf ("%s%s", cs, options.common_data.separator);
+          g_printf ("%s%s%s", lhs, cs, options.common_data.separator);
         g_free (cs);
         break;
       }
     case YAD_FIELD_SCALE:
       if (options.common_data.quoted_output)
-        g_printf ("'%d'%s", (gint) gtk_range_get_value (GTK_RANGE (g_slist_nth_data (fields, fn))),
+        g_printf ("%s'%d'%s", lhs, (gint) gtk_range_get_value (GTK_RANGE (g_slist_nth_data (fields, fn))),
                   options.common_data.separator);
       else
-        g_printf ("%d%s", (gint) gtk_range_get_value (GTK_RANGE (g_slist_nth_data (fields, fn))),
+        g_printf ("%s%d%s", lhs, (gint) gtk_range_get_value (GTK_RANGE (g_slist_nth_data (fields, fn))),
                   options.common_data.separator);
       break;
     case YAD_FIELD_LINK:
       if (options.common_data.quoted_output)
         {
           buf = g_shell_quote (gtk_link_button_get_uri (GTK_LINK_BUTTON (g_slist_nth_data (fields, fn))));
-          g_printf ("%s%s", buf, options.common_data.separator);
+          g_printf ("%s%s%s", lhs, buf, options.common_data.separator);
           g_free (buf);
         }
       else
-        g_printf ("%s%s", gtk_link_button_get_uri (GTK_LINK_BUTTON (g_slist_nth_data (fields, fn))),
+        g_printf ("%s%s%s", lhs, gtk_link_button_get_uri (GTK_LINK_BUTTON (g_slist_nth_data (fields, fn))),
                   options.common_data.separator);
       break;
     case YAD_FIELD_BUTTON:
     case YAD_FIELD_FULL_BUTTON:
     case YAD_FIELD_LABEL:
       if (options.common_data.quoted_output)
-        g_printf ("''%s", options.common_data.separator);
+        g_printf ("%s''%s", lhs, options.common_data.separator);
       else
-        g_printf ("%s", options.common_data.separator);
+        g_printf ("%s%s", lhs, options.common_data.separator);
       break;
     case YAD_FIELD_TEXT:
       {
@@ -1624,14 +1742,15 @@ form_print_field (guint fn)
         if (options.common_data.quoted_output)
           {
             buf = g_shell_quote (txt);
-            g_printf ("%s%s", buf, options.common_data.separator);
+            g_printf ("%s%s%s", lhs, buf, options.common_data.separator);
             g_free (buf);
           }
         else
-          g_printf ("%s%s", txt, options.common_data.separator);
+          g_printf ("%s%s%s", lhs, txt, options.common_data.separator);
         g_free (txt);
       }
     }
+  g_free (lhs);
 }
 
 void

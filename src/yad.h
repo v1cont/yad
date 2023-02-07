@@ -196,6 +196,7 @@ typedef struct {
   gchar *name;
   gchar *tip;
   YadFieldType type;
+  gchar *atid;
 } YadField;
 
 typedef struct {
@@ -324,6 +325,8 @@ typedef struct {
   gboolean align_buttons;
   gchar *changed_action;
   gboolean homogeneous;
+  gboolean use_output_prefix;
+  gchar *output_prefix;
 } YadFormData;
 
 #ifdef HAVE_HTML

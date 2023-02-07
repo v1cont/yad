@@ -455,8 +455,8 @@ Output data will be in shell-style quotes.
 
 .SS Form options
 .TP
-.B \-\-field=\fILABEL[!TOOLTIP][:TYPE]\fP
-Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fICE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIMDIR\fP, \fIDT\fP, \fISCL\fP, \fSW\fP, \fICLR\fP, \fIBTN\fP, \fIFBTN\fP, \fILINK\fP, \fILBL\fP or \fITXT\fP.
+.B \-\-field=\fILABEL[!TOOLTIP][:TYPE[@ID]]\fP
+Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP, \fICBE\fP, \fICE\fP, \fIFL\fP, \fISFL\fP, \fIDIR\fP, \fICDIR\fP, \fIFN\fP, \fIMFL\fP, \fIMDIR\fP, \fIDT\fP, \fISCL\fP, \fISW\fP, \fICLR\fP, \fIBTN\fP, \fIFBTN\fP, \fILINK\fP, \fILBL\fP or \fITXT\fP.
 .br
 \fBH\fP - hidden field type. All characters are displayed as the invisible char.
 .br
@@ -494,8 +494,9 @@ Add field to form. Type may be \fIH\fP, \fIRO\fP, \fINUM\fP, \fICHK\fP, \fICB\fP
 .br
 \fBCLR\fP - color selection button. Output values for this field generates in the same manner as for color dialog.
 .br
-\fBBTN\fP - button field. Label may be in form text in a form \fILABEL[!ICON[!TOOLTIP]]\fP where `!' is an item separator. \fILABEL\fP is a text of button label or gtk stock id. \fIICON\fP is a buttons icon (stock id or file name). \fITOOLTIP\fP is an optional text for popup help string. Initial value is a command which is running when button is clicked. A special sympols \fI%N\fP in command are replaced by value of field \fIN\fP. If command starts with \fI@\fP, the output of command will be parsed and lines started with number and colon will be treats as a new field values.
-A quoting style for value when \fIsh -c\fP is used \- a single quotes around command and double quotes around -c argument
+\fBBTN\fP - button field. Label text may be formatted as \fILABEL[!ICON[!TOOLTIP]]\fP where `!' is an item separator. \fILABEL\fP is the text of a button label or a gtk stock id. \fIICON\fP is a button icon (stock id or file name). \fITOOLTIP\fP is the text of an optional help popup tooltip. Initial value is a command that runs when the button is clicked. Special symbols \fI%N\fP (percent followed by a number) in command will be replaced by the value of the \fIN\fPth field. If command starts with \fI@\fP, the output of command will be parsed and lines that start with \fIM:\fP (a number followed by colon) will set the new value of the \fIM\fPth field.
+\fI@ID\fP can be used instead of \fI%N\fP and \fPM:\fP.
+A quoting style for value when \fIsh -c\fP is used \- single quotes around command and double quotes around -c argument.
 .br
 \fBFBTN\fP - same as button field, but with full relief of a button.
 .br
@@ -550,6 +551,9 @@ Output of command parsing works as for \fIBTN\fP fields with \fI@\fP prefix. \fB
 .TP
 .B \-\-quoted-output
 Output values will be in shell-style quotes.
+.TP
+.B \-\-use-output-prefix[=\fIPREFIX\fP]
+Prefix output field value with PREFIX. Default \fIPREFIX\fP is \fI%@=\fP. If \fI%@\fP is included in PREFIX, it will be replaced by the field's \fI@ID\fP (without the leading "@") if defined, otherwise by fixed string "nul".
 .TP
 .B \-\-output-by-row
 Output field values row by row if several columns is specified.
