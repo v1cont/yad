@@ -1,6 +1,6 @@
 .TH YAD 1 "January 4, 2023"  "yad GTK+ 2.0" "User Commands"
 .SH NAME
-yad \- display GTK+ dialogs in shell scripts
+yad \- display GTK+ dialogs from shell scripts or command-line
 
 .SH SYNOPSIS
 .B yad
@@ -754,7 +754,7 @@ See \fBNOTEBOOK and PANED\fP section for more about notebook dialog.
 .SS Notification options
 .TP
 .B \-\-command=\fICMD\fP
-Set the command running when clicked on the icon. Default action is \fIquit\fP if \fI\-\-listen\fP not specified.
+Set the command to run when clicking the icon. Default action is \fIquit\fP if \fI\-\-listen\fP is not specified.
 .TP
 .B \-\-listen
 Listen for commands on stdin. See \fBNOTIFICATION\fP section.
@@ -766,13 +766,13 @@ Set separator character for menu values. Default is \fI|\fP.
 Set separator character for menu items. Default is \fI!\fP.
 .TP
 .B \-\-menu=\fISTRING\fP
-Set initial menu for right-click.
+Set initial menu for right click.
 .TP
 .B \-\-no-middle
-Disable exit on middle click.
+Do not exit on middle click.
 .TP
 .B \-\-hidden
-Doesn't show icon at startup.
+Do not show icon at startup.
 .TP
 .B \-\-icon-size=\fISIZE\fP
 Set notification icon size to \fISIZE\fP. This option doesn't works for themed icons.
@@ -1014,8 +1014,9 @@ Add filter for images supported by gdk-pixbuf library. \fINAME\fP in as optional
 Add preview widget. Preview images loads from normal (default) or large thumbnails according to XDG Thumbnails
 specification v0.8.0 (http://standards.freedesktop.org/thumbnail-spec/latest/) or creates by yad for image files and saves
 as normal or large thumbnails.
-.TP \-\-large-preview
-Use large previews by default. This option can be permanently turned on througn yad settings.
+.TP
+.B \-\-large-preview
+Use large previews by default. This option can be permanently turned on through yad settings.
 
 This options applies to all of yad's file chooser dialogs.
 
@@ -1169,9 +1170,8 @@ yad-timeout-indicator@GtkProgreeBar@Timeout indicator
 .SH FILES
 .TP
 .B yad.conf
-YAD default settings. \fIyad.conf\fP placed in \fI$XDG_CONFIG_HOME\fP or \fI$HOME/.config\fP
-directory. This file contain comments on every defaults and will be automatically
-recreated on yad'd start if it doesn't exists.
+YAD default settings. Place \fIyad.conf\fP in \fI$XDG_CONFIG_HOME\fP or \fI$HOME/.config\fP.
+This file is automatically created if it does not already exist when yad starts.
 
 .SH EXAMPLES
 Display a file selector with the title \fISelect a file to
