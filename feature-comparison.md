@@ -1,6 +1,6 @@
 # COMPARISON BETWEEN THIS FORK AND ITS PARENT PROJECT
 
-For simplicity's sake, I will use **yadL** for the products of this fork, and **yadU** for the parent project's. [More info](README.md)
+For short, I will use **yadL** for the products of this fork, and **yadU** for the parent project's. [More info](README.md)
 
 yadL version number is formed as 0.42.x where integer "x" indicates some released progress worth mentioning.
 
@@ -8,7 +8,7 @@ Numbered notes are grouped together at the end of this long page.
 
 ## Licence and copyright
 
-GNU GPL3 is yadL's and yadU's license. Copyright notices in yadL source code are not always up-to-date. However, to comply with GPL3's license I hereby claim copyright on the source code added to this repository:
+GNU GPL3 is license to both yadL and yadU. Copyright notices in yadL source code are not always up-to-date. To comply with GPL3's license I hereby claim copyright on the source code added to this repository:
 
 		yad maintenance branch, aka yad-maintain-gtk2, yadL, (C) 2019-2023 step
 
@@ -24,7 +24,7 @@ Refer to [yadL commit log](https://github.com/step-/yad/commits) for more detail
 - yadL's own about dialog is modified
 - save print settings to new file `$XDG_CONFIG_HOME/yad/print.conf` ⁽⁵⁾
 
-(§)N Refer our pull request (PR) number N [https://github.com/v1cont/yad/pulls?q=author%3Astep-](https://github.com/v1cont/yad/pulls?q=author%3Astep-)
+(§)N Refers to our pull request (PR) number N [https://github.com/v1cont/yad/pulls?q=author%3Astep-](https://github.com/v1cont/yad/pulls?q=author%3Astep-).
 
 - symbolic ID field references in form dialog actions [0.42.71]  (§)213
 - symbolic ID names in form dialog output [0.42.71]  (§)213
@@ -44,7 +44,7 @@ Several bugs that affected the parent project when it was forked have been fixed
 
 ## Diverged features
 
-See the _Notes_ section.
+See the _New features of yadL_ and _Notes_ sections.
 
 ## Features and bug fixes backported from yadU to yadL
 
@@ -53,6 +53,7 @@ of yadU features is extracted from the [NEWS](https://github.com/v1cont/NEWS) fi
 
 The version numbers in the following headings refer to yadU releases.
 My annotations are wrapped in square brackets. The version numbers refer to yadL releases.
+(§)N Refers to our pull request (PR) number N [https://github.com/v1cont/yad/pulls?q=author%3Astep-](https://github.com/v1cont/yad/pulls?q=author%3Astep-).
 
 Abbreviations:
 
@@ -65,13 +66,12 @@ Abbreviations:
 
 ---
 
-Version 12.4  WIP WIP
+Version 12.4?  (yadU WIP)
 
-- `[+]` d7ded23 improve run_command_sync for avoiding possible race conditions [0.42.67]
-- `[+]` 1d402f7 add some null-pointer checks in for diaalog code [0.42.67]
+- `[+]` d7ded23 improve run\_command\_sync for avoiding possible race conditions [0.42.67]
+- `[+]` 1d402f7 add some null-pointer checks in form dialog code [0.42.67]
 - `[+]` ff81778 remove some warnings [0.42.66]
 - `[+]` c8e9ef2 fix UI not updated when sync command runs [0.42.66]  (§)210
-
 
 Version 12.3
 
