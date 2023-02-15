@@ -105,7 +105,7 @@ static void
 set_comment (GKeyFile *kf, gchar *key, gchar *s)
 {
   gchar *comment;
-  comment = g_strconcat(" ", s);
+  comment = g_strconcat(" ", s, NULL);
   g_key_file_set_comment (kf, "General", key, comment, NULL);
   g_free (comment);
 }
