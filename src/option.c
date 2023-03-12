@@ -1239,6 +1239,7 @@ set_posx (const gchar * option_name, const gchar * value, gpointer data, GError 
 {
   options.data.use_posx = TRUE;
   options.data.posx = atol (value);
+  options.data.negx = (*value == '-');
 
   return TRUE;
 }
@@ -1248,6 +1249,7 @@ set_posy (const gchar * option_name, const gchar * value, gpointer data, GError 
 {
   options.data.use_posy = TRUE;
   options.data.posy = atol (value);
+  options.data.negy = (*value == '-');
 
   return TRUE;
 }
@@ -1592,8 +1594,10 @@ yad_options_init (void)
 #endif
   options.data.use_posx = FALSE;
   options.data.posx = 0;
+  options.data.negx = FALSE;
   options.data.use_posy = FALSE;
   options.data.posy = 0;
+  options.data.negy = FALSE;
   options.data.geometry = NULL;
   options.data.dialog_text = NULL;
   options.data.text_width = 0;

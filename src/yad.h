@@ -227,8 +227,10 @@ typedef struct {
   gint height;
   gboolean use_posx;
   gint posx;
+  gboolean negx;
   gboolean use_posy;
   gint posy;
+  gboolean negy;
   gchar *geometry;
   guint timeout;
   gchar *to_indicator;

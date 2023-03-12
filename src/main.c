@@ -350,6 +350,7 @@ create_layout (GtkWidget *dlg)
 static void
 realize_cb (GtkWidget *dlg, gpointer d)
 {
+  GdkGravity gravity = GDK_GRAVITY_NORTH_WEST;
 
   if (options.data.fixed)
     {
@@ -378,10 +379,19 @@ realize_cb (GtkWidget *dlg, gpointer d)
         gtk_window_get_position (GTK_WINDOW (dlg), &options.data.posx, NULL);
       if (!options.data.use_posy)
         gtk_window_get_position (GTK_WINDOW (dlg), NULL, &options.data.posy);
-      if (options.data.posx < 0)
-        options.data.posx = sw - ww + options.data.posx;
-      if (options.data.posy < 0)
-        options.data.posy = sh - wh + options.data.posy;
+      if (options.data.negx)
+        {
+          options.data.posx = sw - ww + options.data.posx;
+          gravity = GDK_GRAVITY_NORTH_EAST;
+        }
+      if (options.data.negy)
+        {
+          options.data.posy = sh - wh + options.data.posy;
+          gravity = GDK_GRAVITY_SOUTH_WEST;
+        }
+      if (options.data.negx && options.data.negy)
+        gravity = GDK_GRAVITY_SOUTH_EAST;
+      gtk_window_set_gravity (GTK_WINDOW (dlg), gravity);
       gtk_window_move (GTK_WINDOW (dlg), options.data.posx, options.data.posy);
     }
 }

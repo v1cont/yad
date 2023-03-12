@@ -546,6 +546,7 @@ parse_geometry ()
 
       ptr = geom + i;
       x = atoi (ptr);
+      options.data.negx = (*ptr == '-');
 
       i++;
       while (geom[i] && geom[i] != '-' && geom[i] != '+') i++;
@@ -555,6 +556,7 @@ parse_geometry ()
 
       ptr = geom + i;
       y = atoi (ptr);
+      options.data.negy = (*ptr == '-');
     }
 
   if (w != -1)
