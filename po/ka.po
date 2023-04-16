@@ -1,0 +1,2529 @@
+# Georgian translation for YAD.
+# Copyright (C) 2023, Victor Ananjevsky.
+# This file is distributed under the same license as the YAD package.
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yad git\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-16 07:04+0200\n"
+"PO-Revision-Date: 2023-04-16 15:32+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <(nothing)>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: ../src/about.c:98
+msgid "translator-credits"
+msgstr "temuri doghonadze"
+
+#: ../src/about.c:100
+#, c-format
+msgid ""
+"Yet Another Dialog\n"
+"(show dialog boxes from shell scripts)\n"
+"\n"
+"Based on Zenity code\n"
+"\n"
+"Built with Webkit\n"
+"Built with GtkSourceView\n"
+"Built with GSpell\n"
+"Using GTK+ %d.%d.%d\n"
+msgstr ""
+"Yet Another Dialog\n"
+"(გარსის სკრიპტებიდან ფანჯრების ჩვენება)\n"
+"\n"
+"ეფუძნება Zenity-ის კოდს\n"
+"\n"
+"აგებულია Webkit-ით\n"
+"აგებულია GtkSourceView-ით\n"
+"აგებულია GSpell-ით\n"
+"ვიყენებ GTK+ %d.%d.%d\n"
+
+#: ../src/calendar.c:39 ../src/text.c:568
+#, c-format
+msgid "Cannot open file '%s': %s\n"
+msgstr "ფაილის გახსნის შეცდომა '%s': %s\n"
+
+#: ../src/entry.c:168 ../src/scale.c:89
+#, c-format
+msgid "Maximum value must be greater than minimum value.\n"
+msgstr "მაქსიმალური მნიშვნელობა მინიმალურზე მეტი უნდა იყოს.\n"
+
+#: ../src/entry.c:175 ../src/scale.c:98
+#, c-format
+msgid "Initial value less than minimal.\n"
+msgstr "საწყისი მნიშვნელობა მინიმალურზე მცირეა.\n"
+
+#: ../src/entry.c:180 ../src/scale.c:103
+#, c-format
+msgid "Initial value greater than maximum.\n"
+msgstr "საწყისი მნიშვნელობა მაქსიმალურზე მეტია.\n"
+
+#: ../src/form.c:515
+msgid "Select files"
+msgstr "მონიშნეთ ფაილები"
+
+#: ../src/form.c:518 ../src/form.c:526 ../src/form.c:605 ../src/form.c:613
+#: ../src/form.c:664 ../src/html.c:227 ../src/html.c:260 ../src/picture.c:296
+#: ../src/text.c:121 ../src/text.c:192 ../src/util.c:40
+msgid "Cancel"
+msgstr "_გაუქმება"
+
+#: ../src/form.c:519 ../src/form.c:527 ../src/form.c:606 ../src/form.c:614
+#: ../src/form.c:665 ../src/html.c:228 ../src/picture.c:297 ../src/text.c:122
+#: ../src/text.c:193 ../src/util.c:46
+msgid "OK"
+msgstr "დიახ"
+
+#: ../src/form.c:523
+msgid "Select folders"
+msgstr "მონიშნეთ საქაღალდეები"
+
+#: ../src/form.c:602
+msgid "Select or create file"
+msgstr "აირჩიეთ ან შექმენით ფაილი"
+
+#: ../src/form.c:610
+msgid "Select or create folder"
+msgstr "აირჩიეთ ან შექმენით საქაღალდე"
+
+#: ../src/form.c:661
+msgid "Select date"
+msgstr "აირჩიეთ თარიღი"
+
+#: ../src/form.c:1041
+msgid "Select file"
+msgstr "აირჩიეთ ფაილი"
+
+#: ../src/form.c:1071
+msgid "Select folder"
+msgstr "საქაღალდეს არჩევა"
+
+#: ../src/form.c:1239 ../src/form.c:1241
+msgid "Link"
+msgstr "ბმული"
+
+#: ../src/html.c:224 ../src/text.c:118 ../src/text.c:189
+msgid "YAD - Select File"
+msgstr "YAD - აირჩიეთ ფაილი"
+
+#: ../src/html.c:258 ../src/html.c:306
+msgid "Open URI"
+msgstr "URI-ის გახსნა"
+
+#: ../src/html.c:261 ../src/util.c:47
+msgid "Open"
+msgstr "გახსნა"
+
+#: ../src/html.c:267
+msgid "Enter URI or file name:"
+msgstr "შეიყვანეთ URI ან ფაილის სახელი:"
+
+#: ../src/html.c:316 ../src/util.c:49
+msgid "Quit"
+msgstr "გამოსვლა"
+
+#: ../src/icons.c:377
+#, c-format
+msgid "Unable to parse file %s: %s\n"
+msgstr "%s ფაილის დამუშავების შეცდომა: %s\n"
+
+#: ../src/icons.c:394
+#, c-format
+msgid "Unable to open directory %s: %s\n"
+msgstr "%s საქაღალდის გახსნის შეცდომა:%s\n"
+
+#: ../src/main.c:151 ../src/main.c:507
+#, c-format
+msgid "%d sec"
+msgstr "%d წმ"
+
+#: ../src/main.c:760 ../src/main.c:767
+#, c-format
+msgid "Unable to parse YAD_OPTIONS: %s\n"
+msgstr "YAD_OPTIONS-ის დამუშავების შეცდომა: %s\n"
+
+#: ../src/main.c:778
+#, c-format
+msgid "Unable to parse command line: %s\n"
+msgstr "ბრძანების პარამეტრების დამუშავების შეცდომა: %s\n"
+
+#: ../src/main.c:807
+#, c-format
+msgid "WARNING: Using gtkrc option is deprecated, please use --css instead\n"
+msgstr "გაფრთხილება: gtkrc პარამეტრი მოძველებულია. გამოიყენეთ --css\n"
+
+#: ../src/main.c:876
+#, c-format
+msgid "WARNING: --plug mode not supported outside X11\n"
+msgstr "გაფრთხილება: --plug რეჟიმი X11-ის გარეთ მხარდაუჭერელია\n"
+
+#: ../src/main.c:896
+#, c-format
+msgid "WARNING: This mode not supported outside X11\n"
+msgstr "გაფრთხილება: ეს რეჟიმი X11-ის გარეთ მხარდაუჭერელია\n"
+
+#: ../src/notification.c:130
+#, c-format
+msgid "Could not load notification icon '%s': %s\n"
+msgstr "გაფრთხილების ხატულის '%s' ჩატვირთვის შეცდომა: %s\n"
+
+#: ../src/notification.c:335
+#, c-format
+msgid "Invalid UTF-8 in tooltip!\n"
+msgstr "არასწორი UTF-8 მინიშნებაში!\n"
+
+#: ../src/notification.c:364
+#, c-format
+msgid "Unknown command '%s'\n"
+msgstr "უცნობი ბრძანება '%s'\n"
+
+#: ../src/notification.c:401
+msgid "Yad notification"
+msgstr "Yad-ის გაფრთხილება"
+
+#: ../src/list.c:1118
+msgid "Add row"
+msgstr "მწკრივის დამატება"
+
+#: ../src/list.c:1125
+msgid "Add child row"
+msgstr "შვილი მწკრივის დამატება"
+
+#: ../src/list.c:1132
+msgid "Delete row"
+msgstr "მწკრივის წაშლა"
+
+#: ../src/list.c:1139
+msgid "Edit row"
+msgstr "მწკრივის ჩასწორება"
+
+#: ../src/list.c:1145
+msgid "Duplicate row"
+msgstr "დუბლირებული მწკრივი"
+
+#: ../src/list.c:1154
+msgid "Move row up"
+msgstr "მწკრივის ატანა"
+
+#: ../src/list.c:1159
+msgid "Move row down"
+msgstr "მწკრივის ჩამოტანა"
+
+#: ../src/list.c:1340
+#, c-format
+msgid ""
+"WARNING: You are use --checklist or --radiolist option. Those options "
+"obsoleted and will be removed in the future\n"
+msgstr ""
+"გაფრთხილება: იყენებთ --checklist ან --rediolist პარამეტრს. ეს პარამეტრები "
+"მოძველებულია და მომავალში წაიშლება\n"
+
+#: ../src/list.c:1346
+#, c-format
+msgid "No column titles specified for List dialog.\n"
+msgstr "არ არის მითითებული სვეტის სათაური.\n"
+
+#: ../src/option.c:93
+msgid "Set the dialog title"
+msgstr "ფანჯრის სათაურის დაყენება"
+
+#: ../src/option.c:93
+msgid "TITLE"
+msgstr "სათაური"
+
+#: ../src/option.c:95
+msgid "Set the window icon"
+msgstr "ფანჯარის ხატულის დაყენება"
+
+#: ../src/option.c:95
+msgid "ICONPATH"
+msgstr "ხატულას მდებარეობა"
+
+#: ../src/option.c:97
+msgid "Set the window width"
+msgstr "ფანჯრის სიგანის დაყენება"
+
+#: ../src/option.c:97
+msgid "WIDTH"
+msgstr "სიგანე"
+
+#: ../src/option.c:99
+msgid "Set the window height"
+msgstr "ფანჯრის სიმაღლის დაყენება"
+
+#: ../src/option.c:99
+msgid "HEIGHT"
+msgstr "სიმაღლე"
+
+#: ../src/option.c:101
+msgid "Set the X position of a window"
+msgstr "ფანჯრის X პოზიციის დაყენება"
+
+#: ../src/option.c:101 ../src/option.c:103 ../src/option.c:113
+#: ../src/option.c:135 ../src/option.c:139 ../src/option.c:178
+#: ../src/option.c:192 ../src/option.c:329 ../src/option.c:387
+#: ../src/option.c:393 ../src/option.c:474 ../src/option.c:482
+#: ../src/option.c:484 ../src/option.c:486 ../src/option.c:488
+#: ../src/option.c:490 ../src/option.c:492 ../src/option.c:496
+#: ../src/option.c:530 ../src/option.c:532 ../src/option.c:574
+#: ../src/option.c:596 ../src/option.c:663
+msgid "NUMBER"
+msgstr "რიცხვი"
+
+#: ../src/option.c:103
+msgid "Set the Y position of a window"
+msgstr "ფანჯრის Y პოზიციის დაყენება"
+
+#: ../src/option.c:105
+msgid "Set the window geometry"
+msgstr "ფანჯრის გეომეტრიის დაყენება"
+
+#: ../src/option.c:105
+msgid "WxH+X+Y"
+msgstr "სიგxსიმ+X+Y"
+
+#: ../src/option.c:107
+msgid "Set dialog timeout in seconds"
+msgstr "ფანჯრის ვადა, წამებში"
+
+#: ../src/option.c:107
+msgid "TIMEOUT"
+msgstr "TIMEOUT"
+
+#: ../src/option.c:109
+msgid "Show remaining time indicator (top, bottom, left, right)"
+msgstr ""
+"დარჩენილი დროის ინდიკატორის ჩვენება (top (ზემოთ), bottom (ქვემოთ), left "
+"(მარცხნივ), right (მარჯვნივ))"
+
+#: ../src/option.c:109 ../src/option.c:562
+msgid "POS"
+msgstr "პოზ"
+
+#: ../src/option.c:111
+msgid "Set the dialog text"
+msgstr "ფანჯრის ტექსტის დაყენება"
+
+#: ../src/option.c:111 ../src/option.c:262 ../src/option.c:264
+#: ../src/option.c:337 ../src/option.c:339 ../src/option.c:373
+#: ../src/option.c:494 ../src/option.c:600
+msgid "TEXT"
+msgstr "ტექსტი"
+
+#: ../src/option.c:113
+msgid "Set the dialog text width in characters"
+msgstr "დიალოგის ტექსტის სიგანის მითითება, სიმბოლოების რაოდენობით"
+
+#: ../src/option.c:115
+msgid "Set the dialog text alignment (left, center, right, fill)"
+msgstr ""
+"დიალოგის ტექსტის სწორების დაყენება (left (მარცხენა), center (ცენტრი), right "
+"(მარჯვენა), fill (შევსება))"
+
+#: ../src/option.c:115 ../src/option.c:127 ../src/option.c:224
+#: ../src/option.c:230 ../src/option.c:232 ../src/option.c:385
+#: ../src/option.c:468 ../src/option.c:478 ../src/option.c:528
+#: ../src/option.c:560 ../src/option.c:572 ../src/option.c:584
+#: ../src/option.c:598 ../src/option.c:659 ../src/option.c:710
+#: ../src/option.c:737 ../src/option.c:739 ../src/tools.c:86
+msgid "TYPE"
+msgstr "ტიპი"
+
+#: ../src/option.c:117
+msgid "Set the dialog image"
+msgstr "დიალოგის გამოსახულეის დაყენება"
+
+#: ../src/option.c:117 ../src/option.c:347 ../src/option.c:351
+msgid "IMAGE"
+msgstr "გამოსახულება"
+
+#: ../src/option.c:119
+msgid "Use specified icon theme instead of default"
+msgstr "ნაგულისხმების მაგიერ მითითებული ხატულების თემის გამოყენება"
+
+#: ../src/option.c:119 ../src/option.c:688 ../src/browser.c:217
+#: ../src/tools.c:87
+msgid "THEME"
+msgstr "თემა"
+
+#: ../src/option.c:121
+msgid "Hide main widget with expander"
+msgstr "მთავარი ვიჯეტის დამალვა გამფართოებლით"
+
+#: ../src/option.c:121 ../src/option.c:365 ../src/option.c:615
+#: ../src/option.c:679
+msgid "[TEXT]"
+msgstr "[ტექსტი]"
+
+#: ../src/option.c:123
+msgid "Add dialog button (may be used multiple times)"
+msgstr "დიალოგის ღილაკის დამატება (შეგიძლიათ ბევრჯერაც გამოიყენოთ)"
+
+#: ../src/option.c:123
+msgid "NAME:ID"
+msgstr "სახელი:ID"
+
+#: ../src/option.c:125
+msgid "Don't show buttons"
+msgstr "ღილაკები ნაჩვენები არ იქნება"
+
+#: ../src/option.c:127
+msgid "Set buttons layout type (spread, edge, start, end or center)"
+msgstr ""
+"ღილაკების განაწილების დაყენება (spread (გაფანტვა), edge (წიბო), start "
+"(დასაწყისი), end (დასასრული) ან center (ცენტრი))"
+
+#: ../src/option.c:129
+msgid "Don't use pango markup language in dialog's text"
+msgstr "დიალოგის ტექსტში მარქაფის ენა pango გამოყენებული არ იქნება"
+
+#: ../src/option.c:131
+msgid "Don't close dialog if Escape was pressed"
+msgstr "Escape-ის დაჭერის შემდეგ ფანჯარა არ დაიხურება"
+
+#: ../src/option.c:133
+msgid "Escape acts like OK button"
+msgstr "Escape აკეთებს იგივეს, რასაც ღილაკი დიახ"
+
+#: ../src/option.c:135
+msgid "Set window borders"
+msgstr "ფანჯრის საზღვრების დაყენება"
+
+#: ../src/option.c:137
+msgid "Always print result"
+msgstr "შედეგის ყოველთვის გამოტანა"
+
+#: ../src/option.c:139
+msgid "Set default return code"
+msgstr "ნაგულისხმები დასაბრუნებელი კოდის დაყენება"
+
+#: ../src/option.c:141
+msgid "Dialog text can be selected"
+msgstr "დიალოგის ტექსტის მონიშვნა შესაძლებელია"
+
+#: ../src/option.c:143
+msgid "Don't scale icons"
+msgstr "ხატულების მასშტაბირების გარეშე"
+
+#: ../src/option.c:145
+#, c-format
+msgid "Run commands under specified interpreter (default: bash -c '%s')"
+msgstr ""
+"ბრძანებების მითითებული ინტერპრეტატორით გაშვება (ნაგულისხმები: bash -c '%s')"
+
+#: ../src/option.c:145 ../src/option.c:147 ../src/option.c:149
+#: ../src/option.c:194 ../src/option.c:349 ../src/option.c:353
+#: ../src/option.c:399 ../src/option.c:498 ../src/option.c:500
+#: ../src/option.c:502 ../src/option.c:576
+msgid "CMD"
+msgstr "CMD"
+
+#: ../src/option.c:147
+msgid "Set URI handler"
+msgstr "URI-ის დამმუშავებლის დაყენება"
+
+#: ../src/option.c:149
+msgid "Set command running when F1 was pressed"
+msgstr "F11-ის დაჭერის დროს გასაშვები ბრძანების დაყენება"
+
+#: ../src/option.c:152
+msgid "Set window sticky"
+msgstr "ფანჯრის წებოვნობის დაყენება"
+
+#: ../src/option.c:154
+msgid "Set window unresizable"
+msgstr "ფანჯრის ზომების შეცვლის გამორთვა"
+
+#: ../src/option.c:156
+msgid "Place window on top"
+msgstr "ფანჯრის ზემოდან დადება"
+
+#: ../src/option.c:158
+msgid "Place window on center of screen"
+msgstr "ფანჯრის ეკრანის ცენტრში დადება"
+
+#: ../src/option.c:160
+msgid "Place window at the mouse position"
+msgstr "ფანჯრის თაგუნას მდებარეობასთან მოთავსება"
+
+#: ../src/option.c:162
+msgid "Set window undecorated"
+msgstr "ფანჯრის დეკორაციების გათიშვა"
+
+#: ../src/option.c:164
+msgid "Don't show window in taskbar"
+msgstr "ფანჯარა ამოცანების პანელზე ნაჩვენები არ იქნება"
+
+#: ../src/option.c:166
+msgid "Set window maximized"
+msgstr "ფანჯრის გადიდებულად დაყენება"
+
+#: ../src/option.c:168
+msgid "Set window fullscreen"
+msgstr "ფანჯრის მთელ ეკრანზე გაშლა"
+
+#: ../src/option.c:170
+msgid "Don't focus dialog window"
+msgstr "დიალოგის ფანჯარას ფოკუსი არ ექნება"
+
+#: ../src/option.c:172
+msgid "Close window when it sets unfocused"
+msgstr "ფანჯრის დახურვა მასზე ფოკუსის მოხსნისას"
+
+#: ../src/option.c:174
+msgid "Open window as a splashscreen"
+msgstr "ფანჯრის, როგორც მისალმების ფანჯრის გახსნა"
+
+#: ../src/option.c:176
+msgid "Special type of dialog for XEMBED"
+msgstr "დიალოგის სპეციალური ტიპი XEMBED-ისთვის"
+
+#: ../src/option.c:176 ../src/option.c:228
+msgid "KEY"
+msgstr "ღილაკი"
+
+#: ../src/option.c:178
+msgid "Tab number of this dialog"
+msgstr "ამ დიალოგის ჩანართის ნომერი"
+
+#: ../src/option.c:181
+msgid "Send SIGNAL to parent"
+msgstr "მშობლისთვის სიგნალის გაგზავნა"
+
+#: ../src/option.c:181
+msgid "[SIGNAL]"
+msgstr "[სიგნალი]"
+
+#: ../src/option.c:183
+msgid "Print X Window Id to the file/stderr"
+msgstr "ფაილში/stderr-ში X Window ID-ის გამოტანა"
+
+#: ../src/option.c:183 ../src/option.c:311
+msgid "[FILENAME]"
+msgstr "[ფაილის სახელი]"
+
+#: ../src/option.c:190
+msgid "Set the format for the returned date"
+msgstr "დაბრუნებული თარიღის ფორმატის დაყენება"
+
+#: ../src/option.c:190 ../src/option.c:440
+msgid "PATTERN"
+msgstr "შაბლონი"
+
+#: ../src/option.c:192
+msgid "Set presicion of floating numbers (default - 3)"
+msgstr "მცურავმძიმიანი რიცხვების სიზუსტის დაყენება (ნაგულისხმები 3)"
+
+#: ../src/option.c:194
+msgid "Set command handler"
+msgstr "ბრძანებლის დამმუშავებლის დაყენება"
+
+#: ../src/option.c:196
+msgid "Listen for data on stdin"
+msgstr "მონაცემებისთვის stdin-ის მოსმენა"
+
+#: ../src/option.c:198
+msgid "Set common separator character"
+msgstr "საერთო გამყოფი სიმბოლოს დაყენება"
+
+#: ../src/option.c:198 ../src/option.c:200
+msgid "SEPARATOR"
+msgstr "გამყოფი"
+
+#: ../src/option.c:200
+msgid "Set item separator character"
+msgstr "ელემენტის გამყოფი სიმბოლოს დაყენება"
+
+#: ../src/option.c:202
+msgid "Allow changes to text in some cases"
+msgstr "ზოგიერთ შემთხვევაში ტექსტის შეცვლის დაშვება"
+
+#: ../src/option.c:204
+msgid "Autoscroll to end of text"
+msgstr "ავტომატური გადახვევა ტექსტის ბოლოში"
+
+#: ../src/option.c:206
+msgid "Autoscroll to end of text (alias to tail)"
+msgstr "ავტომატური გადახვევა ტექსტის ბოლოში (იგივე, რაც tail)"
+
+#: ../src/option.c:208
+msgid "Quote dialogs output"
+msgstr "ფანჯრის გამოტანის ბრჭყალებში ჩასმა"
+
+#: ../src/option.c:210
+msgid "Output number instead of text for combo-box"
+msgstr "Combo-box-სთვის ტექსტის მაგიერ რიცხვის გამოტანა"
+
+#: ../src/option.c:212
+msgid "Specify font name to use"
+msgstr "მიუთითეთ ფონტის სახელი"
+
+#: ../src/option.c:212
+msgid "FONTNAME"
+msgstr "ფონტისსახელი"
+
+#: ../src/option.c:214
+msgid "Allow multiple selection"
+msgstr "მრავალი არჩევანის დაშვება"
+
+#: ../src/option.c:216
+msgid "Enable preview"
+msgstr "მინიატურის ჩართვა"
+
+#: ../src/option.c:218
+msgid "Use large preview"
+msgstr "დიდი მინიატურების გამოყენება"
+
+#: ../src/option.c:220
+msgid "Show hidden files in file selection dialogs"
+msgstr "ფაილის არჩევის დიალოგებში დამალული ფაილების ჩვენება"
+
+#: ../src/option.c:222
+msgid "Set source filename"
+msgstr "დააყენეთ წყაროს ფაილის სახელი"
+
+#: ../src/option.c:222 ../src/option.c:297 ../src/option.c:735
+#: ../src/option.c:747
+msgid "FILENAME"
+msgstr "ფაილის სახელი"
+
+#: ../src/option.c:224
+msgid "Set mime type of input data"
+msgstr "შეყვანის მონაცემების MIME ტიპის დაყენება"
+
+#: ../src/option.c:226
+msgid "Set vertical orientation"
+msgstr "ვერტიკალური ორიენტაციის დაყენება"
+
+#: ../src/option.c:228
+msgid "Identifier of embedded dialogs"
+msgstr "ჩაშენებული დიალოგების იდენტიფიკატორი"
+
+#: ../src/option.c:230
+msgid "Set extended completion for entries (any, all, or regex)"
+msgstr ""
+"ჩანაწერების გაფართოებული დასრულების დაყენება (any (ნებისმიერი), all(ყველა) "
+"ან regex (რეგულარული გამოსახულება)"
+
+#: ../src/option.c:232
+msgid "Set type of output for boolean values (T, t, Y, y, O, o, 1)"
+msgstr "ლოგიკური მნიშვნელობების გამოტანის ტიპის დაყენება (T, t, Y, y, O, o, 1)"
+
+#: ../src/option.c:234
+msgid "Make main widget scrollable"
+msgstr "მთავარი ვიჯეტის გადახვევადად გახდომა"
+
+#: ../src/option.c:236
+msgid "Disable search in text and html dialogs"
+msgstr "ტექსტში და HTML დიალოგებში ძებნის გამორთვა"
+
+#: ../src/option.c:238
+msgid "Enable file operations"
+msgstr "ფაილის ოპერაციების ჩართვა"
+
+#: ../src/option.c:241
+msgid "Use IEC (base 1024) units with for size values"
+msgstr "ზომის მნიშვნელობებში IEC (1024-ზე ბაზირებული) ერთეულების გამოყენება"
+
+#: ../src/option.c:245
+msgid "Enable spell check for text"
+msgstr "ტექსტისთვის მართლწერის შემოწმების ჩართვა"
+
+#: ../src/option.c:247
+msgid "Set spell checking language"
+msgstr "მართლწერის შემოწმების ენის დაყენება"
+
+#: ../src/option.c:247
+msgid "LANGUAGE"
+msgstr "ენა"
+
+#: ../src/option.c:254
+msgid "Display about dialog"
+msgstr "შესახებ დიალოგის ჩვენება"
+
+#: ../src/option.c:256
+msgid "Set application name"
+msgstr "აპლიკაციის სახელის დაყენება"
+
+#: ../src/option.c:256 ../src/option.c:258 ../src/option.c:260
+#: ../src/option.c:270 ../src/option.c:416 ../src/option.c:418
+#: ../src/option.c:516 ../src/option.c:518 ../src/option.c:545
+#: ../src/option.c:733
+msgid "STRING"
+msgstr "სტრიქონი"
+
+#: ../src/option.c:258
+msgid "Set application version"
+msgstr "აპლიკაციის ვერსიის დაყენება"
+
+#: ../src/option.c:260
+msgid "Set application copyright string"
+msgstr "აპლიკაციის ლიცენზიის სტრიქონის დაყენება"
+
+#: ../src/option.c:262
+msgid "Set application comments string"
+msgstr "აპლიკაციის კომენტარის სტრიქონის დაყენება"
+
+#: ../src/option.c:264
+msgid "Set application license"
+msgstr "აპლიკაციის ლიცენზიის დაყენება"
+
+#: ../src/option.c:266
+msgid "Set application authors"
+msgstr "აპლიკაციის ავტორების დაყენება"
+
+#: ../src/option.c:266 ../src/option.c:472 ../src/option.c:476
+#: ../src/option.c:480
+msgid "LIST"
+msgstr "სია"
+
+#: ../src/option.c:268
+msgid "Set application website"
+msgstr "აპლიკაციის ვებსაიტის დაყენება"
+
+#: ../src/option.c:268
+msgid "URI"
+msgstr "URI"
+
+#: ../src/option.c:270
+msgid "Set application website label"
+msgstr "აპლიკაციის ვებსაიტის წდის დაყენება"
+
+#: ../src/option.c:276
+msgid "Display application selection dialog"
+msgstr "აპლიკაციის არჩევის დიალოგის ჩვენება"
+
+#: ../src/option.c:278
+msgid "Show fallback applications"
+msgstr "თუ არჩეული არ მუშაობს, აპლიკაციის მითითება, გადასართავად"
+
+#: ../src/option.c:280
+msgid "Show other applications"
+msgstr "სხვა აპლიკაციების ჩვენება"
+
+#: ../src/option.c:282
+msgid "Show all applications"
+msgstr "ყველა აპლიკაციის ჩვენება"
+
+#: ../src/option.c:284
+msgid "Output all application data"
+msgstr "ყველა აპლიკაციის მონაცემების გამოტანა"
+
+#: ../src/option.c:289
+msgid "Display calendar dialog"
+msgstr "კალენდრის ფანჯრის ჩვენება"
+
+#: ../src/option.c:291
+msgid "Set the calendar day"
+msgstr "კალენდრის დღის დაყენება"
+
+#: ../src/option.c:291
+msgid "DAY"
+msgstr "დღე"
+
+#: ../src/option.c:293
+msgid "Set the calendar month"
+msgstr "კალენდრის თვის დაყენება"
+
+#: ../src/option.c:293
+msgid "MONTH"
+msgstr "თვე"
+
+#: ../src/option.c:295
+msgid "Set the calendar year"
+msgstr "კალენდრის წლის დაყენება"
+
+#: ../src/option.c:295
+msgid "YEAR"
+msgstr "წელი"
+
+#: ../src/option.c:297
+msgid "Set the filename with dates details"
+msgstr "თარიღის დეტალების შემცველი ფაილის სახელის დაყენება"
+
+#: ../src/option.c:299
+msgid "Show week numbers at the left side of calendar"
+msgstr "კალენდარის მარცხენა მხარეს კვირის დღეების ჩვენება"
+
+#: ../src/option.c:305
+msgid "Display color selection dialog"
+msgstr "ფერის ასარჩევი ფანჯრის ჩვენება"
+
+#: ../src/option.c:307
+msgid "Set initial color value"
+msgstr "საწყისი ფერის მნიშვნელობის დაყენება"
+
+#: ../src/option.c:307 ../src/option.c:665 ../src/option.c:667
+#: ../src/option.c:673 ../src/option.c:696 ../src/option.c:698
+msgid "COLOR"
+msgstr "ფერი"
+
+#: ../src/option.c:309
+msgid "Show system palette in color dialog"
+msgstr "ფერის დიალოგში სისტემური პალიტრის ჩვენება"
+
+#: ../src/option.c:311
+msgid "Set path to palette file. Default - "
+msgstr "პალიტრის ფაილის ბილიკის დაყენება. ნაგულისხმები - "
+
+#: ../src/option.c:313
+msgid "Expand user palette"
+msgstr "მომხმარებლის პალიტრის გაფართოება"
+
+#: ../src/option.c:315
+msgid "Show color picker"
+msgstr "ფერის ამრჩევის ჩვენება"
+
+#: ../src/option.c:317
+msgid "Set output mode to MODE. Values are hex (default) or rgb"
+msgstr ""
+"გამოტანის რეჟიმის მითითებულ მნიშვნელობებზე დაყენება. მნიშვნელობები "
+"თექვსმეტობითშია (ნაგულისხმები) ან RGB"
+
+#: ../src/option.c:317
+msgid "MODE"
+msgstr "რეჟიმი"
+
+#: ../src/option.c:319
+msgid "Add opacity to output color value"
+msgstr "გამოტანის ფერის მნიშვნელობისთვის გაუმჭვირვალობის დამატება"
+
+#: ../src/option.c:325
+msgid "Display drag-n-drop box"
+msgstr "DnD ფანჯრის ჩვენება"
+
+#: ../src/option.c:327
+msgid "Use dialog text as tooltip"
+msgstr "დიალოგის ტექსტის მინიშნებად გამოყენება"
+
+#: ../src/option.c:329
+msgid "Exit after NUMBER of drops"
+msgstr "გასვლა მითითებული რაოდენობა დაგდების შემდეგ"
+
+#: ../src/option.c:335
+msgid "Display text entry or combo-box dialog"
+msgstr "ტექსტის შეყვანის ან კომბო-ბოქსის ფანჯრის ჩვენება"
+
+#: ../src/option.c:337
+msgid "Set the entry label"
+msgstr "ელემენტის ჭდის დაყენება"
+
+#: ../src/option.c:339
+msgid "Set the entry text"
+msgstr "ჩანაწერის ტექსტის დაყენება"
+
+#: ../src/option.c:341
+msgid "Hide the entry text"
+msgstr "ჩანაწერის ტესტის დამალვა"
+
+#: ../src/option.c:343
+msgid "Use completion instead of combo-box"
+msgstr "Combo-box-ის მაგიერ დასრულების გამოყენება"
+
+#: ../src/option.c:345
+msgid "Use spin button for text entry"
+msgstr "ტექსტური ჩანაწერებისთვის ბრუნვის ღილაკის ჩვენება"
+
+#: ../src/option.c:347
+msgid "Set the left entry icon"
+msgstr "მარცხენა ელემენტის ხატულის დაყენება"
+
+#: ../src/option.c:349
+msgid "Set the left entry icon action"
+msgstr "მარცხენა ელემენტის ხატულის ქმედების დაყენება"
+
+#: ../src/option.c:351
+msgid "Set the right entry icon"
+msgstr "მარჯვენა ელემენტის ხატულის დაყენება"
+
+#: ../src/option.c:353
+msgid "Set the right entry icon action"
+msgstr "მარჯვენა ელემენტის ხატულის ქმედების დაყენება"
+
+#: ../src/option.c:359
+msgid "Display file selection dialog"
+msgstr "ფაილის არჩევის ფანჯრის ჩვენება"
+
+#: ../src/option.c:361
+msgid "Activate directory-only selection"
+msgstr "მხოლოდ საქაღალდის არჩევა"
+
+#: ../src/option.c:363
+msgid "Activate save mode"
+msgstr "ნახვის რეჟიმის გააქტიურება"
+
+#: ../src/option.c:365
+msgid "Confirm file selection if filename already exists"
+msgstr "ფაილის არჩევის დადასტურება, თუ ის უკვე არსებობს"
+
+#: ../src/option.c:371
+msgid "Display font selection dialog"
+msgstr "ფონტის არჩევის დიალოგის ჩვენება"
+
+#: ../src/option.c:373
+msgid "Set text string for preview"
+msgstr "მინიატურისთვის ტექტური სტრიქონის დაყენება"
+
+#: ../src/option.c:375
+msgid "Separate output of font description"
+msgstr "ფონტის აღწერის გამოტანის განცალკევება"
+
+#: ../src/option.c:381
+msgid "Display form dialog"
+msgstr "ფორმის დიალოგის ჩვენება"
+
+#: ../src/option.c:383
+msgid "Add field to form (see man page for list of possible types)"
+msgstr "ფორმისთვის ველის დამატება (შესაძლო ტიპებისთვის იხილეთ man page)"
+
+#: ../src/option.c:383 ../src/option.c:594
+msgid "LABEL[:TYPE]"
+msgstr "ჭდე[:ტიპი]"
+
+#: ../src/option.c:385
+msgid "Set alignment of filed labels (left, center or right)"
+msgstr ""
+"ველის ჭდეების სწორების დაყენება (left (მარცხენა), center (ცენტრი), right "
+"(მარჯვენა), fill (შევსება))"
+
+#: ../src/option.c:387
+msgid "Set number of columns in form"
+msgstr "ფორმაში სვეტების რაოდენობის დაყენება"
+
+#: ../src/option.c:389
+msgid "Make form fields height and columns width the same size"
+msgstr "ფორმის ველების სიმაღლისა და სვეტების სიგანის იგივე ზომის დაყენება"
+
+#: ../src/option.c:391
+msgid "Order output fields by rows"
+msgstr "გამოტანის ველების მწკრივების მიხედვით დალაგება"
+
+#: ../src/option.c:393
+msgid "Set focused field"
+msgstr "ფოკუსის მქონე ველის დაყენება"
+
+#: ../src/option.c:395
+msgid "Cycled reading of stdin data"
+msgstr "Stdin-ის მონაცემების წრიული კითხვა"
+
+#: ../src/option.c:397
+msgid "Align labels on button fields"
+msgstr "ღილაკის ველებზე ჭდეების დალაგება"
+
+#: ../src/option.c:399
+msgid "Set changed action"
+msgstr "შეცვლილი ქმედების დაყენება"
+
+#: ../src/option.c:406
+msgid "Display HTML dialog"
+msgstr "HTML დიალოგის ჩვენება"
+
+#: ../src/option.c:408
+msgid "Open specified location"
+msgstr "მითითებული მდებარეობის გახსნა"
+
+#: ../src/option.c:410
+msgid "Turn on browser mode"
+msgstr "ბრაუზერის რეჟიმის ჩართვა"
+
+#: ../src/option.c:412
+msgid "Print clicked uri to stdout"
+msgstr "დაწკაპუნებული URI-ის stdout-ზე გამოტანა"
+
+#: ../src/option.c:414
+msgid "Set encoding of input stream data"
+msgstr "შეყვანის ნაკადის მონაცემების კოდირების დაყენება"
+
+#: ../src/option.c:414
+msgid "ENCODING"
+msgstr "_კოდირება"
+
+#: ../src/option.c:416
+msgid "Set user agent string"
+msgstr "მომხმარებლის აგენტის სტრიქონის დაყენება"
+
+#: ../src/option.c:418
+msgid "Set custom user style"
+msgstr "მომხმარებლის სტილის ხელით მითითება"
+
+#: ../src/option.c:420
+msgid "Set WebKit property"
+msgstr "WebKit-ის თვისების დაყენება"
+
+#: ../src/option.c:420
+msgid "PROP"
+msgstr "თვისება"
+
+#: ../src/option.c:427
+msgid "Display icons box dialog"
+msgstr "ხატულის ფანჯრის დიალოგის ჩვენება"
+
+#: ../src/option.c:429
+msgid "Read data from .desktop files in specified directory"
+msgstr ""
+"მითითებულ საქაღალდეში არსებული .desktop ფაილებიდან მონაცემების წაკითხვა"
+
+#: ../src/option.c:429
+msgid "DIR"
+msgstr "საქაღალდე"
+
+#: ../src/option.c:431
+msgid "Use compact (list) view"
+msgstr "კომპაქტური (სიის) ხედის გამოყენება"
+
+#: ../src/option.c:433
+msgid "Use GenericName field instead of Name for icon label"
+msgstr "ხატულის წდისთვის Name ველის მაგიერ GenericName-ის გამოყენება"
+
+#: ../src/option.c:435
+msgid "Set the width of dialog items"
+msgstr "დიალოგის ელემენტების სიგანის მითითება"
+
+#: ../src/option.c:437
+msgid "Force using specified icon size"
+msgstr "მითითებული ხატულის ზომის ნაძალადევი გამოყენება"
+
+#: ../src/option.c:437 ../src/option.c:551 ../src/option.c:661
+#: ../src/tools.c:85
+msgid "SIZE"
+msgstr "SIZE"
+
+#: ../src/option.c:440
+#, no-c-format
+msgid ""
+"Use specified pattern for launch command in terminal (default: xterm -e %s)"
+msgstr ""
+"ტერმინალში ბრძანების გასაშვებად მითითებული ნიმუშის გამოყენება (ნაგულისხმები: "
+"xterm -e %s)"
+
+#: ../src/option.c:442
+msgid "Sort items by name instead of filename"
+msgstr "ელემენტების ფაილის სახელის მაგიერ სახელით დალაგება"
+
+#: ../src/option.c:444
+msgid "Sort items in descending order"
+msgstr "საგნების დალაგება დაღმავალი წყობით"
+
+#: ../src/option.c:446
+msgid "Activate items by single click"
+msgstr "ელემენტების აქტივაციისთვის ერთი წკაპის გამოყენება"
+
+#: ../src/option.c:448
+msgid "Watch fot changes in directory"
+msgstr "საქაღალდის ცვლილებების თვალყურის დევნება"
+
+#: ../src/option.c:454
+msgid "Display list dialog"
+msgstr "სიის ფანჯარა"
+
+#: ../src/option.c:456
+msgid "Set the column header (see man page for list of possible types)"
+msgstr "სვეტის თავსართის დაყენება (შესაძლო ტიპების სიისთვის იხილეთ man page)"
+
+#: ../src/option.c:456
+msgid "COLUMN[:TYPE]"
+msgstr "სვეტი[:ტიპი]"
+
+#: ../src/option.c:458
+msgid "Enbale tree mode"
+msgstr "ხის რეჟიმის ჩართვა"
+
+#: ../src/option.c:460
+msgid "Use checkboxes for first column"
+msgstr "პირველ სვეტში თოლიების გამოყენება"
+
+#: ../src/option.c:462
+msgid "Use radioboxes for first column"
+msgstr "პირველ სვეტში რადიოჩამრთველების გამოყენება"
+
+#: ../src/option.c:464
+msgid "Don't show column headers"
+msgstr "სვეტების თავსართების დამალვა"
+
+#: ../src/option.c:466
+msgid "Disable clickable column headers"
+msgstr "დაწკაპუნებადი სვეტების თავსართების გამორთვა"
+
+#: ../src/option.c:468
+msgid "Set grid lines (hor[izontal], vert[ical] or both)"
+msgstr ""
+"ბადის ხაზების დაყენება (hor[izontal] (ჰორიზონტალური), vert[ical] "
+"(ვერტიკალური) ან ორივე)"
+
+#: ../src/option.c:470
+msgid "Print all data from list"
+msgstr "სიიდან ყველა მონაცემის გამოტანა"
+
+#: ../src/option.c:472
+msgid "Set the list of editable columns"
+msgstr "ჩასწორებადი სვეტების სიის დაყენება"
+
+#: ../src/option.c:474
+msgid "Set the width of a column for start wrapping text"
+msgstr "ტექსტის გადატანისთვის სვეტის სიგანის დაყენება"
+
+#: ../src/option.c:476
+msgid "Set the list of wrapped columns"
+msgstr "გადატანილი სვეტების სიის დაყენება"
+
+#: ../src/option.c:478
+msgid "Set ellipsize mode for text columns (none, start, middle or end)"
+msgstr ""
+"ტექსტური სვეტებისტვის ellipsize რეჟიმის დაყენება (none (არაფერი), start "
+"(დასაწყისი), middle (შუა) ან end (ბოლო))"
+
+#: ../src/option.c:480
+msgid "Set the list of ellipsized columns"
+msgstr "Ellipsized ტიპის სვეტების სიის დაყენება"
+
+#: ../src/option.c:482
+msgid ""
+"Print a specific column. By default or if 0 is specified will be printed all "
+"columns"
+msgstr ""
+"მითითებული სვეტის გამოტანა. ნაგულისხმებად, ან, თუ 0-ია მითითებული, ყველა "
+"სვეტის დაბეჭდვა"
+
+#: ../src/option.c:484
+msgid "Hide a specific column"
+msgstr "მითითებული სვეტის დამალვა"
+
+#: ../src/option.c:486
+msgid "Set the column expandable by default. 0 sets all columns expandable"
+msgstr ""
+"სვეტის ნაგულისხმებად გაფართოებადად მონიშვნა. 0 ყველა სვეტს გაფართოებადად "
+"დააყენებს"
+
+#: ../src/option.c:488
+msgid ""
+"Set the quick search column. Default is first column. Set it to 0 for "
+"disable searching"
+msgstr ""
+"სწრაფი ძებნის სვეტის დაყენება. ნაგულისხმებად გამოიყენება პირველი სვეტი. "
+"გამოსართავად დააყენეთ 0"
+
+#: ../src/option.c:490
+msgid "Set the tooltip column"
+msgstr "მინიშნების სვეტის დაყენება"
+
+#: ../src/option.c:492
+msgid "Set the row separator column"
+msgstr "მწკრივის გამყოფი სვეტის დაყენება"
+
+#: ../src/option.c:494
+msgid "Set the row separator value"
+msgstr "მწკრივის გამყოფის მნიშვნელობის დაყენება"
+
+#: ../src/option.c:496
+msgid "Set the limit of rows in list"
+msgstr "სიაში მწკრივების ლიმიტის დაყენება"
+
+#: ../src/option.c:498
+msgid "Set double-click action"
+msgstr "ორმაგი წკაპი ქმედების დაყენება"
+
+#: ../src/option.c:500
+msgid "Set select action"
+msgstr "არჩევის ქმედების დაყენება"
+
+#: ../src/option.c:502
+msgid "Set row action"
+msgstr "მწკრივის ქმედების დაყენება"
+
+#: ../src/option.c:504
+msgid "Expand all tree nodes"
+msgstr "ყველა ხის კვანძის ამოკეცვა"
+
+#: ../src/option.c:506
+msgid "Use regex in search"
+msgstr "ძებნაში რეგულარული გამოსახულების გამოყენება"
+
+#: ../src/option.c:508
+msgid "Disable selection"
+msgstr "მონიშვნის გამორთვა"
+
+#: ../src/option.c:510
+msgid "Add new records on the top of a list"
+msgstr "ახალი ელემენტების სიის თავში დამატება"
+
+#: ../src/option.c:512
+msgid "Don't use markup in tooltips"
+msgstr "მინიშნებებში მარქაფი გამოყენებული არ იქნება"
+
+#: ../src/option.c:514
+msgid "Use column name as a header tooltip"
+msgstr "სვეტის სახელის თავსართის მინიშნებად გამოყენება"
+
+#: ../src/option.c:516
+msgid "Set columns alignment"
+msgstr "სვეტების სწორების დაყენება"
+
+#: ../src/option.c:518
+msgid "Set headers alignment"
+msgstr "თავსართის სწორების დაყენება"
+
+#: ../src/option.c:524
+msgid "Display notebook dialog"
+msgstr "რვეულის დიალოგის ჩვენება"
+
+#: ../src/option.c:526
+msgid "Add a tab to notebook"
+msgstr "რვეულში ახალი ჩანართის დამატება"
+
+#: ../src/option.c:526
+msgid "LABEL"
+msgstr "ჭდე"
+
+#: ../src/option.c:528
+msgid "Set position of a notebook tabs (top, bottom, left or right)"
+msgstr "რვეულის ჩანართების მდებარეობის დაყენება (top, bottom, left ან right)"
+
+#: ../src/option.c:530
+msgid "Set tab borders"
+msgstr "ჩანართის საზღვრების დაყენება"
+
+#: ../src/option.c:532
+msgid "Set active tab"
+msgstr "აქტიური ჩანართის დაყენება"
+
+#: ../src/option.c:534
+msgid "Expand tabs"
+msgstr "ჩანართების გაფართოება"
+
+#: ../src/option.c:536
+msgid "Use stack mode"
+msgstr "სტეკის რეჟიმის გამოყენება"
+
+#: ../src/option.c:543
+msgid "Display notification"
+msgstr "შეტყობინების ჩვენება"
+
+#: ../src/option.c:545
+msgid "Set initial popup menu"
+msgstr "საწყისი მხტუნარა მენიუს დაყენება"
+
+#: ../src/option.c:547
+msgid "Disable exit on middle click"
+msgstr "შუა წკაპზე გამოსვლის გამორთვა"
+
+#: ../src/option.c:549
+msgid "Doesn't show icon at startup"
+msgstr "გაშვებისას ხატულა ნაჩვენები არ იქნება"
+
+#: ../src/option.c:551
+msgid "Set icon size for fully specified icons (default - 16)"
+msgstr "სრულად მითითებული ხატულების ზომის დაყენება (ნაგულისხმები - 16)"
+
+#: ../src/option.c:558
+msgid "Display paned dialog"
+msgstr "პანელების დიალოგის ჩვენება"
+
+#: ../src/option.c:560
+msgid "Set orientation (hor[izontal] or vert[ical])"
+msgstr ""
+"ორიენტაციის დაყენება (hor[izontal] (ჰორიზონტალური) ან vert[ical] "
+"(ვერტიკალური))"
+
+#: ../src/option.c:562
+msgid "Set initial splitter position"
+msgstr "საწყისი გამყოფის მდებარეობის დაყენება"
+
+#: ../src/option.c:564
+msgid "Set focused pane (1 or 2)"
+msgstr "სახელის დაყენება : %1-დან %2-მდე (1 ან 2)"
+
+#: ../src/option.c:564
+msgid "PANE"
+msgstr "პანელი"
+
+#: ../src/option.c:570
+msgid "Display picture dialog"
+msgstr "სურათის დიალოგის"
+
+#: ../src/option.c:572
+msgid "Set initial size (fit or orig)"
+msgstr "საწყისი ზომის დაყენება (ჩატევა ან ორიგ)"
+
+#: ../src/option.c:574
+msgid "Set increment for picture scaling (default - 5)"
+msgstr "სურათის მასშტაბირების ინკრემენტის დაყენება (ნაგულისხმები - 5)"
+
+#: ../src/option.c:576
+msgid "Set action on image changing"
+msgstr "გამოსახულების შეცვლის ქმედების დაყენება"
+
+#: ../src/option.c:582
+msgid "Display printing dialog"
+msgstr "გამოტანის დიალოგის ჩვენება"
+
+#: ../src/option.c:584
+msgid "Set source type (text, image or raw)"
+msgstr "წყაროს ტიპის დაყენება (ტექსტი, გამოსახულება ან დაუმუშავებელი)"
+
+#: ../src/option.c:586
+msgid "Add headers to page"
+msgstr "გვერდზე თავსართების დამატება"
+
+#: ../src/option.c:592
+msgid "Display progress indication dialog"
+msgstr "მიმდინარეობის ჩვენება"
+
+#: ../src/option.c:594
+msgid "Add the progress bar (norm, rtl, pulse or perm)"
+msgstr "პროგრესის პანელის დამატება (norm, rtl, pulse ან perm)"
+
+#: ../src/option.c:596
+msgid "Watch for specific bar for auto close"
+msgstr "მითითებული პანელისთვის თვალყურის დევნება, რომ ავტომატურად დაიხუროს"
+
+#: ../src/option.c:598
+msgid "Set alignment of bar labels (left, center or right)"
+msgstr "პანელის ჭდეების სწორების დაყენება(მარცხენა, ცენტრი ან მარჯვენა)"
+
+#: ../src/option.c:600
+msgid "Set progress text"
+msgstr "მიმდინარეობის ტექსტის დაყენება"
+
+#: ../src/option.c:602
+msgid "Hide text on progress bar"
+msgstr "პროგრესის პანელის ტექსტის დამალვა"
+
+#: ../src/option.c:604
+msgid "Pulsate progress bar"
+msgstr "პულსირებადი მიმდინარეობის მაჩვენებელი"
+
+#: ../src/option.c:607
+#, no-c-format
+msgid "Dismiss the dialog when 100% has been reached"
+msgstr "ფანჯრის დახურვა 100%-ის მიღწევისას"
+
+#: ../src/option.c:610
+msgid "Kill parent process if cancel button is pressed"
+msgstr "გაუქმების ღილაკის დაჭერისას მშობელი პროცესის მოკვლა"
+
+#: ../src/option.c:613
+msgid "Right-To-Left progress bar direction"
+msgstr "პროგრესის პანელის მარჯვნიდან-მარცხნივ  მიმართულება"
+
+#: ../src/option.c:615
+msgid "Show log window"
+msgstr "ჟურნალის ფანჯრის ჩვენება"
+
+#: ../src/option.c:617
+msgid "Expand log window"
+msgstr "ჟურნალის ფანჯრის გაფართოება"
+
+#: ../src/option.c:619
+msgid "Place log window above progress bar"
+msgstr "პროგრესის პანელის ზემოთ ჟურნალის ფანჯრის მოთავსება"
+
+#: ../src/option.c:621
+msgid "Height of log window"
+msgstr "ჟურნალის ფანჯრის სიმაღლე"
+
+#: ../src/option.c:627
+msgid "Display scale dialog"
+msgstr "მასშტაბირების ფანჯრის ჩვენება"
+
+#: ../src/option.c:629
+msgid "Set initial value"
+msgstr "საწყისი მნიშვნელობის დაყენება"
+
+#: ../src/option.c:629 ../src/option.c:631 ../src/option.c:633
+#: ../src/option.c:635 ../src/option.c:639 ../src/option.c:706
+#: ../src/option.c:708
+msgid "VALUE"
+msgstr "მნიშვნელობა"
+
+#: ../src/option.c:631
+msgid "Set minimum value"
+msgstr "მინიმალური მნიშვნელობა"
+
+#: ../src/option.c:633
+msgid "Set maximum value"
+msgstr "მაქსიმალური მნიშვნელობა"
+
+#: ../src/option.c:635
+msgid "Set step size"
+msgstr "ბიჯის ზომა"
+
+#: ../src/option.c:637
+msgid "Only allow values in step increments"
+msgstr "ნაბიჯის ბიჯემში მხოლოდ მნიშვნელობების დაშვება"
+
+#: ../src/option.c:639
+msgid "Set paging size"
+msgstr "პეიჯინგის ზომის დაყენება"
+
+#: ../src/option.c:641
+msgid "Print partial values"
+msgstr "ნაწილობრივი მნიშვნელობების ბეჭდვა"
+
+#: ../src/option.c:643
+msgid "Hide value"
+msgstr "მნიშვნელობის დამალვა"
+
+#: ../src/option.c:645
+msgid "Invert direction"
+msgstr "მიმართულების ინვერსია"
+
+#: ../src/option.c:647
+msgid "Show +/- buttons in scale"
+msgstr "მასშტაბში +/- ღილაკების ჩვენება"
+
+#: ../src/option.c:649
+msgid "Add mark to scale (may be used multiple times)"
+msgstr "მასშტაბირების ნიშნის დამატება (შეგიძლიათ ბევრჯერაც გამოიყენოთ)"
+
+#: ../src/option.c:649
+msgid "NAME:VALUE"
+msgstr "სახელი:მნიშვნელობა"
+
+#: ../src/option.c:655
+msgid "Display text information dialog"
+msgstr "ტექსტური ინფორმაციის ფანჯრის ჩვენება"
+
+#: ../src/option.c:657
+msgid "Enable text wrapping"
+msgstr "ტექსტის გადატანის ჩართვა"
+
+#: ../src/option.c:659
+msgid "Set justification (left, right, center or fill)"
+msgstr "სტრიქონის გასწორების დაყენება (მარჯვნივ, მარცხნივ, ცენტრი ან შევსება)"
+
+#: ../src/option.c:661
+msgid "Set text margins"
+msgstr "ტექსტის საზღვრების დაყენება"
+
+#: ../src/option.c:663
+msgid "Jump to specific line"
+msgstr "მითითებულ ხაზზე გადასვლა"
+
+#: ../src/option.c:665
+msgid "Use specified color for text"
+msgstr "ტექსტისთვის მითითებული ფერის გამოყენება"
+
+#: ../src/option.c:667
+msgid "Use specified color for background"
+msgstr "ფონისთვის მითითებული ფერის გამოყენება"
+
+#: ../src/option.c:669
+msgid "Show cursor in read-only mode"
+msgstr "მხოლოდ-კითხვის რეჟიმში კურსორის ჩვენება"
+
+#: ../src/option.c:671
+msgid "Make URI clickable"
+msgstr "URI-ის დაწკაპუნებადად გახდომა"
+
+#: ../src/option.c:673
+msgid "Use specified color for links"
+msgstr "ბმულებისთვის მითითებული ფერის გამოყენება"
+
+#: ../src/option.c:675
+msgid "Use pango markup"
+msgstr "Pango-ის მარქაფის გამოყენება"
+
+#: ../src/option.c:677
+msgid "Save file instead of print on exit"
+msgstr "გამოსვლისას დაბეჭდვის მაგიერ ფაილში შენახვა"
+
+#: ../src/option.c:679
+msgid "Confirm save the file if text was changed"
+msgstr "შენახვის დადასტურება ტექსტის ცვლილების შემთხვევაში"
+
+#: ../src/option.c:686
+msgid "Use specified langauge for syntax highlighting"
+msgstr "სინტაქსის გამოკვეთისთვის მითითებული ენის დაყენება"
+
+#: ../src/option.c:686
+msgid "LANG"
+msgstr "LANG"
+
+#: ../src/option.c:688
+msgid "Use specified theme"
+msgstr "მითითებული თემის გამოყენება"
+
+#: ../src/option.c:690 ../data/yad.gschema.xml.in.h:18
+msgid "Show line numbers"
+msgstr "ხაზის ნომრების ჩვენება"
+
+#: ../src/option.c:692 ../data/yad.gschema.xml.in.h:19
+msgid "Highlight current line"
+msgstr "მიმდინარე ხაზის გამოკვეთა"
+
+#: ../src/option.c:694
+msgid "Enable line marks"
+msgstr "ხაზის ნიშნების გამოყენება"
+
+#: ../src/option.c:696
+msgid "Set color for first type marks"
+msgstr "პირველი ტიპის ნიშნებისთვის ფერის დაყენება"
+
+#: ../src/option.c:698
+msgid "Set color for second type marks"
+msgstr "მეორე ტიპის ნიშნებისთვის ფერის დაყენება"
+
+#: ../src/option.c:700
+msgid "Set position of right margin"
+msgstr "მარჯვენა ზღვრის პოზიცია"
+
+#: ../src/option.c:700
+msgid "[POS]"
+msgstr "[პოზ]"
+
+#: ../src/option.c:702 ../data/yad.gschema.xml.in.h:24
+msgid "Highlight matching brackets"
+msgstr "შესაბამისი ბრჭყალების გამოკვეთა"
+
+#: ../src/option.c:704 ../data/yad.gschema.xml.in.h:25
+msgid "Use autoindent"
+msgstr "ავტომატური სწორების გამოტოვება"
+
+#: ../src/option.c:706
+msgid "Set tabulation width"
+msgstr "ტაბულაციის სიგანის დაყენება"
+
+#: ../src/option.c:708
+msgid "Set indentation width"
+msgstr "შეწევის სიგანის დაყენება"
+
+#: ../src/option.c:710
+msgid "Set smart Home/End behavior"
+msgstr "ჭკვიანი Home/End-ის ქცევის დაყენება"
+
+#: ../src/option.c:712
+msgid "Enable smart backspace"
+msgstr "ჭკვიანი backspace-ის ჩართვა"
+
+#: ../src/option.c:714 ../data/yad.gschema.xml.in.h:30
+msgid "Insert spaces instead of tabs"
+msgstr "ტაბულაციის მაგიერ გამოტოვებების ჩასმა"
+
+#: ../src/option.c:721
+msgid "Sets a filename filter"
+msgstr "ფაილის სახელის ფილტრის დაყენება"
+
+#: ../src/option.c:721
+msgid "NAME | PATTERN1 PATTERN2 ..."
+msgstr "სახელი | ნიმუში1 ნიმუში2 .."
+
+#: ../src/option.c:723
+msgid "Sets a mime-type filter"
+msgstr "MIME ტიპის ფილტრის დაყენება"
+
+#: ../src/option.c:723
+msgid "NAME | MIME1 MIME2 ..."
+msgstr "სახელი | MIME1 MIME2 ..."
+
+#: ../src/option.c:725
+msgid "Add filter for images"
+msgstr "გამოსახულებებისთვის ფილტრის დამატება"
+
+#: ../src/option.c:725
+msgid "[NAME]"
+msgstr "[სახელი]"
+
+#: ../src/option.c:731 ../src/tools.c:64
+msgid "Print version"
+msgstr "მიმდინარე ვერსიის დაბეჭდვა"
+
+#: ../src/option.c:733
+msgid "Load additional CSS settings from file or string"
+msgstr "ფაილიდან ან სტრიქონიდან დამატებითი CSS პარამეტრების ჩატვირთვა"
+
+#: ../src/option.c:735
+msgid "Load additional CSS settings from file"
+msgstr "ფაილიდან დამატებითი CSS პარამეტრების ჩატვირთვა"
+
+#: ../src/option.c:737
+msgid "Set policy for horizontal scrollbars (auto, always, never)"
+msgstr ""
+"ჰორიზონტალური ჩოჩიების წესის დაყენება (ავტომატური, ყოველთვის, არასოდეს)"
+
+#: ../src/option.c:739
+msgid "Set policy for vertical scrollbars (auto, always, never)"
+msgstr "ვერტიკალური ჩოჩიების წესის დაყენება (ავტომატური, ყოველთვის, არასოდეს)"
+
+#: ../src/option.c:741
+msgid "Add path for search icons by name"
+msgstr "სახელით ხატულების მოსაძებნი ბილიკის დამატება"
+
+#: ../src/option.c:741
+msgid "PATH"
+msgstr "ბილიკი"
+
+#: ../src/option.c:747
+msgid "Load extra arguments from file"
+msgstr "ფაილიდან დამატებითი არგუმენტების ჩატვირთვა"
+
+#: ../src/option.c:956
+#, c-format
+msgid "Mark %s doesn't have a value\n"
+msgstr "ნიშანს %s მნიშვნელობა არ გააჩნია\n"
+
+#: ../src/option.c:1003 ../src/picture.c:286
+msgid "Images"
+msgstr "სურათები"
+
+#: ../src/option.c:1068
+#, c-format
+msgid "Unknown color mode: %s\n"
+msgstr "უცნობი ფერის რეჟიმი: %s\n"
+
+#: ../src/option.c:1087
+#, c-format
+msgid "Unknown buttons layout type: %s\n"
+msgstr "უცნობი ღილაკის განლაგების ტიპი: %s\n"
+
+#: ../src/option.c:1102
+#, c-format
+msgid "Unknown align type: %s\n"
+msgstr "უცნობი სწორების ტიპი: %s\n"
+
+#: ../src/option.c:1126
+#, c-format
+msgid "Unknown justification type: %s\n"
+msgstr "უცნობი გასწორების ტიპი: %s\n"
+
+#: ../src/option.c:1143
+#, c-format
+msgid "Unknown tab position type: %s\n"
+msgstr "უცნობი ჩანართის მდებარეობის ტიპი: %s\n"
+
+#: ../src/option.c:1180
+#, c-format
+msgid "Unknown ellipsize type: %s\n"
+msgstr "უცნობი ellipsize-ის ტიპი: %s\n"
+
+#: ../src/option.c:1193
+#, c-format
+msgid "Unknown orientation: %s\n"
+msgstr "უცნობი ორიენტაცია: %s\n"
+
+#: ../src/option.c:1208
+#, c-format
+msgid "Unknown source type: %s\n"
+msgstr "უცნობი წყაროს ტიპი: %s\n"
+
+#: ../src/option.c:1219
+msgid "Progress log"
+msgstr "მიმდინარეობის ჟურნალი"
+
+#: ../src/option.c:1232
+#, c-format
+msgid "Unknown size type: %s\n"
+msgstr "უცნობი ზომის ტიპი: %s\n"
+
+#: ../src/option.c:1276
+#, c-format
+msgid "Unknown completion type: %s\n"
+msgstr "უცნობი დასრულების ტიპი: %s\n"
+
+#: ../src/option.c:1308
+#, c-format
+msgid "Unknown boolean format type: %s\n"
+msgstr "უცნობი ლოგიკური ფორმატის ტიპი: %s\n"
+
+#: ../src/option.c:1324
+#, c-format
+msgid "Unknown grid lines type: %s\n"
+msgstr "უცნობი ბადის ხაზების ტიპი: %s\n"
+
+#: ../src/option.c:1341
+#, c-format
+msgid "Unknown scrollbar policy type: %s\n"
+msgstr "უცნობი ჩოჩიის წესის ტიპი: %s\n"
+
+#: ../src/option.c:1394
+#, c-format
+msgid "Unknown smart Home/End mode: %s\n"
+msgstr "უცნობი ჭკვიანი Home/End-ის რეჟიმი: %s\n"
+
+#: ../src/option.c:1504
+#, c-format
+msgid "Unknown signal: %s\n"
+msgstr "უცნობი სიგნალი: %s\n"
+
+#: ../src/option.c:1745
+msgid "File exist. Overwrite?"
+msgstr "ფაილი არსებობს. გადავაწერო?"
+
+#: ../src/option.c:1891
+msgid "File was changed. Save it?"
+msgstr "ფაილი შეიცვალა. შევინახო?"
+
+#: ../src/option.c:1943
+msgid "- Yet another dialoging program"
+msgstr "- მორიგი დიალოგის პროგრამა"
+
+#. Adds general option entries
+#: ../src/option.c:1947
+msgid "General options"
+msgstr "საერთო პარამეტრები"
+
+#: ../src/option.c:1947
+msgid "Show general options"
+msgstr "საერთო პარამეტრების ჩვენება"
+
+#. Adds common option entries
+#: ../src/option.c:1953
+msgid "Common options"
+msgstr "საერთო პარამეტრები"
+
+#: ../src/option.c:1953
+msgid "Show common options"
+msgstr "ზოგადი პარამეტრების ჩვენება"
+
+#. Adds about option entries
+#: ../src/option.c:1959
+msgid "About dialog options"
+msgstr "დიალოგის პარამეტრების ჩვენება"
+
+#: ../src/option.c:1959
+msgid "Show custom about dialog options"
+msgstr "მორგებული შესახებ დიალოგის პარამეტრების ჩვენება"
+
+#. Adds app option entries
+#: ../src/option.c:1965
+msgid "Application selection options"
+msgstr "აპლიკაციის არჩევის პარამეტრები"
+
+#: ../src/option.c:1965
+msgid "Show application selection options"
+msgstr "აპლიკაციის არჩევის პარამეტრების ჩვენება"
+
+#. Adds calendar option entries
+#: ../src/option.c:1971
+msgid "Calendar options"
+msgstr "კალენდრის მორგება"
+
+#: ../src/option.c:1971
+msgid "Show calendar options"
+msgstr "კალენდრის პარამეტრების ჩვენება"
+
+#. Adds color option entries
+#: ../src/option.c:1977
+msgid "Color selection options"
+msgstr "ფერის არჩევის პარამეტრები"
+
+#: ../src/option.c:1977
+msgid "Show color selection options"
+msgstr "ფერის არჩევის პარამეტრების ჩვენება"
+
+#. Adds dnd option entries
+#: ../src/option.c:1983
+msgid "DND options"
+msgstr "DND-ის მორგება"
+
+#: ../src/option.c:1983
+msgid "Show drag-n-drop options"
+msgstr "DND-ის პარამეტრების ჩვენება"
+
+#. Adds entry option entries
+#: ../src/option.c:1989
+msgid "Text entry options"
+msgstr "ტექსტური ელემენტის პარამეტრები"
+
+#: ../src/option.c:1989
+msgid "Show text entry options"
+msgstr "ტექსტური ელემენტის პარამეტრების ჩვენება"
+
+#. Adds file selection option entries
+#: ../src/option.c:1995
+msgid "File selection options"
+msgstr "ფაილის არჩევის პარამეტრები"
+
+#: ../src/option.c:1995
+msgid "Show file selection options"
+msgstr "ფაილის არჩევის პარამეტრების ჩვენება"
+
+#. Add font selection option entries
+#: ../src/option.c:2001
+msgid "Font selection options"
+msgstr "ფონტის არჩევანის მორგება"
+
+#: ../src/option.c:2001
+msgid "Show font selection options"
+msgstr "ფონტის არჩევანის მორგების ჩვენება"
+
+#. Add form option entries
+#: ../src/option.c:2007
+msgid "Form options"
+msgstr "ფორმის პარამეტრები"
+
+#: ../src/option.c:2007
+msgid "Show form options"
+msgstr "ფორმის პარამეტრების ცვენება"
+
+#. Add html options entries
+#: ../src/option.c:2014
+msgid "HTML options"
+msgstr "HTML-ის პარამეტრები"
+
+#: ../src/option.c:2014
+msgid "Show HTML options"
+msgstr "HTML-ის პარამეტრების ჩვენება"
+
+#. Add icons option entries
+#: ../src/option.c:2021
+msgid "Icons box options"
+msgstr "ხატულების ფანჯრის პარამეტრები"
+
+#: ../src/option.c:2021
+msgid "Show icons box options"
+msgstr "ხატულების ფანჯრის პარამეტრების ჩვენება"
+
+#. Adds list option entries
+#: ../src/option.c:2027
+msgid "List options"
+msgstr "სიის პარამეტრები"
+
+#: ../src/option.c:2027
+msgid "Show list options"
+msgstr "სიის პარამეტრების ჩვენება"
+
+#. Adds notebook option entries
+#: ../src/option.c:2033
+msgid "Notebook options"
+msgstr "რვეულის მორგება"
+
+#: ../src/option.c:2033
+msgid "Show notebook dialog options"
+msgstr "რვეულის დიალოგის პარამეტრების ჩვენება"
+
+#. Adds notification option entries
+#: ../src/option.c:2040
+msgid "Notification icon options"
+msgstr "გაფრთხილების ხატულების პარამეტრები"
+
+#: ../src/option.c:2041
+msgid "Show notification icon options"
+msgstr "გაფრთხილების ხატულების პარამეტრების ჩვენება"
+
+#. Adds paned option entries
+#: ../src/option.c:2048
+msgid "Paned dialog options"
+msgstr "პანელის დიალოგის პარამეტრები"
+
+#: ../src/option.c:2048
+msgid "Show paned dialog options"
+msgstr "პანელის დიალოგის პარამეტრების ჩვენება"
+
+#. Adds picture option entries
+#: ../src/option.c:2054
+msgid "Picture dialog options"
+msgstr "სურათის დიალოგის პარამეტრები"
+
+#: ../src/option.c:2054
+msgid "Show picture dialog options"
+msgstr "სურათის დიალოგის პარამეტრების ჩვენება"
+
+#. Adds print option entries
+#: ../src/option.c:2060
+msgid "Print dialog options"
+msgstr "დაბეჭდვის დიალოგის პარამეტრები"
+
+#: ../src/option.c:2060
+msgid "Show print dialog options"
+msgstr "დაბეჭდვის დიალოგის პარამეტრების ჩვენება"
+
+#. Adds progress option entries
+#: ../src/option.c:2066
+msgid "Progress options"
+msgstr "მიმდინარეობის პარამეტრები"
+
+#: ../src/option.c:2066
+msgid "Show progress options"
+msgstr "მიმდინარეობის პარამეტრების ჩვენება"
+
+#. Adds scale option entries
+#: ../src/option.c:2072
+msgid "Scale options"
+msgstr "მასშტაბირების პარამეტრები"
+
+#: ../src/option.c:2072
+msgid "Show scale options"
+msgstr "მასშტაბირების პარამეტრების ჩვენება"
+
+#. Adds text option entries
+#: ../src/option.c:2078
+msgid "Text information options"
+msgstr "ტექსტური ინფორმაციის პარამეტრები"
+
+#: ../src/option.c:2078
+msgid "Show text information options"
+msgstr "ტექსტური ინფორმაციის პარამეტრების ჩვენება"
+
+#. Adds sourceview option entries
+#: ../src/option.c:2085
+msgid "SourceView options"
+msgstr "SourceView-ის პარამეტრები"
+
+#: ../src/option.c:2085
+msgid "Show SourceView options"
+msgstr "SourceView-ის პარამეტრების ჩვენება"
+
+#. Adds file filters option entries
+#: ../src/option.c:2092
+msgid "File filter options"
+msgstr "ფაილის ფილტრის პარამეტრები"
+
+#: ../src/option.c:2092
+msgid "Show file filter options"
+msgstr "ფაილის ფილტრის პარამეტრების ჩვენება"
+
+#. Adds miscellaneous option entries
+#: ../src/option.c:2098
+msgid "Miscellaneous options"
+msgstr "სხვადასხვა პარამეტრები"
+
+#: ../src/option.c:2098
+msgid "Show miscellaneous options"
+msgstr "სხვადასხვა პარამეტრების ჩვენება"
+
+#: ../src/paned.c:96
+#, c-format
+msgid "WARNING: wrong focused pane number %d. Must be 1 or 2\n"
+msgstr ""
+"გაფრთხილება: არასწორი ფოკუსის მქონე პანელის ნომერი %d. უნდა იყოს 1 ან 2\n"
+
+#: ../src/picture.c:290
+msgid "All files"
+msgstr "ყველა ფაილი"
+
+#: ../src/picture.c:293
+msgid "YAD - Select Image(s)"
+msgstr "YAD - აირჩიეთ გამოსახულება/გამოსახულებები"
+
+#: ../src/picture.c:369
+msgid "Open file(s)..."
+msgstr "ფაილ(ებ)-ის გახსნა..."
+
+#: ../src/picture.c:383
+msgid "Next image"
+msgstr "შემდეგი გამოსახულება"
+
+#: ../src/picture.c:390
+msgid "Previous image"
+msgstr "წინა გამოსახულება"
+
+#: ../src/picture.c:397
+msgid "First image"
+msgstr "პირველი გამოსახულება"
+
+#: ../src/picture.c:404
+msgid "Last image"
+msgstr "ბოლო გამოსახულება"
+
+#: ../src/picture.c:416
+msgid "Fit to window"
+msgstr "ფანჯარაში ჩატევა"
+
+#: ../src/picture.c:423
+msgid "Original size"
+msgstr "საწყისი ზომა"
+
+#: ../src/picture.c:430
+msgid "Increase size"
+msgstr "ზომის გაზრდა"
+
+#: ../src/picture.c:437
+msgid "Decrease size"
+msgstr "ზომის შემცირება"
+
+#: ../src/picture.c:448
+msgid "Rotate left"
+msgstr "მარცხნივ მოტრიალება"
+
+#: ../src/picture.c:455
+msgid "Rotate right"
+msgstr "მარჯვნივ მოტრიალება"
+
+#: ../src/picture.c:462
+msgid "Flip vertical"
+msgstr "ვერტიკალურად გადაბრუნება"
+
+#: ../src/picture.c:469
+msgid "Flip horizontal"
+msgstr "ჰორიზონტალურად გადაბრუნება"
+
+#: ../src/picture.c:480
+msgid "Copy image to clipboard"
+msgstr "გამოსახულების ბუფერში კოპირება"
+
+#: ../src/picture.c:485
+msgid "Copy filename to clipboard"
+msgstr "ფაილის სახელის ბუფერში კოპირება"
+
+#: ../src/print.c:200 ../src/print.c:367
+#, c-format
+msgid "Printing failed: %s\n"
+msgstr "დაბეჭდვის შეცდომა: %s\n"
+
+#: ../src/print.c:230
+#, c-format
+msgid "File %s not found.\n"
+msgstr "ფაილი \"%s\" ვერ მოიძებნა.\n"
+
+#: ../src/print.c:236
+#, c-format
+msgid "Filename is not specified.\n"
+msgstr "ფაილის სახელი მითითებული არაა.\n"
+
+#: ../src/print.c:383
+#, c-format
+msgid "Printer doesn't support ps format.\n"
+msgstr "პრინტერს ps ფორმატის მხარდაჭერა არ გააჩნია.\n"
+
+#: ../src/print.c:391
+#, c-format
+msgid "Printer doesn't support pdf format.\n"
+msgstr "პრინტერს pdf ფორმატის მხარდაჭერა არ გააჩნია.\n"
+
+#: ../src/print.c:397
+#, c-format
+msgid "This file type is not supported for raw printing.\n"
+msgstr "ეს ფაილის ტიპი პირდაპირი დაბეჭდვისთვის მხარდაჭერილი არაა\n"
+
+#: ../src/print.c:411
+#, c-format
+msgid "Load source file failed: %s\n"
+msgstr "წყაროს ფაილის ჩატვირთვის შეცდომა: %s\n"
+
+#: ../src/progress.c:248
+#, c-format
+msgid ""
+"WARNING: You are using old-style progress dialog. This features is obsolete "
+"now, please use --bar style instead\n"
+msgstr ""
+"გაფრთხილება: ყენებთ ძველი სტილის პროგრესის დალოგს. ეს თვისება ახლა "
+"მოძველებულია. გამოიყენეთ სტილი --bar\n"
+
+#: ../src/color.c:64
+#, c-format
+msgid "Can't open file %s: %s\n"
+msgstr "%s ფაილის გახსნის შეცდომა: %s\n"
+
+#: ../src/color.c:143 ../src/tools.c:93
+msgid "Pick up screen color"
+msgstr "აირჩიეთ ეკრანის ფერი"
+
+#. create expander
+#: ../src/color.c:166
+msgid "Palette"
+msgstr "პალიტრა"
+
+#: ../src/color.c:185
+msgid "Color"
+msgstr "ფერი"
+
+#: ../src/color.c:202
+msgid "Name"
+msgstr "სახელი"
+
+#: ../src/text.c:245
+msgid "Save _as..."
+msgstr "_შენახვა, როგორც..."
+
+#: ../src/text.c:250
+msgid "_Save"
+msgstr "_შენახვა"
+
+#: ../src/text.c:259
+msgid "_Open..."
+msgstr "_გახსნა..."
+
+#: ../src/text.c:269
+msgid "_Quit"
+msgstr "_გასვლა"
+
+#: ../src/text.c:740
+#, c-format
+msgid "Theme %s not found\n"
+msgstr "თემა %s ვერ ვიპოვე\n"
+
+#: ../src/util.c:37
+msgid "About"
+msgstr "პროგრამის შესახებ"
+
+#: ../src/util.c:38
+msgid "Add"
+msgstr "დამატება"
+
+#: ../src/util.c:39
+msgid "Apply"
+msgstr "მიღება"
+
+#: ../src/util.c:41
+msgid "Clear"
+msgstr "გაწმენდა"
+
+#: ../src/util.c:42
+msgid "Close"
+msgstr "დახურვა"
+
+#: ../src/util.c:43
+msgid "Edit"
+msgstr "ჩასწორება"
+
+#: ../src/util.c:44
+msgid "Execute"
+msgstr "გაშვება"
+
+#: ../src/util.c:45
+msgid "No"
+msgstr "არა"
+
+#: ../src/util.c:48
+msgid "Print"
+msgstr "ამობეჭდვა"
+
+#: ../src/util.c:50
+msgid "Refresh"
+msgstr "განახლება"
+
+#: ../src/util.c:51
+msgid "Remove"
+msgstr "წაშლა"
+
+#: ../src/util.c:52
+msgid "Save"
+msgstr "შენახვა"
+
+#: ../src/util.c:53
+msgid "Search"
+msgstr "ძებნა"
+
+#: ../src/util.c:54
+msgid "Settings"
+msgstr "მორგება"
+
+#: ../src/util.c:55
+msgid "Yes"
+msgstr "კი"
+
+#: ../src/util.c:661 ../src/util.c:722
+#, c-format
+msgid "WARNING: Run command failed: %s\n"
+msgstr "გაფრთხილება: ბრძანების გაშვების შეცდომა: %s\n"
+
+#: ../src/util.c:895
+msgid "Case _sensitive"
+msgstr "_რეგისტრზე დამოკიდებული"
+
+#: ../src/browser.c:160
+msgid "scalable "
+msgstr "მასშტაბირებადი "
+
+#: ../src/browser.c:170
+msgid "built-in"
+msgstr "ჩაშენებული"
+
+#: ../src/browser.c:214
+msgid "Show all icons"
+msgstr "ყველა ხატულის ჩვენება"
+
+#: ../src/browser.c:215
+msgid "Show only symbolic icons"
+msgstr "მხოლოდ სიმბოლური ხატულების ჩვენება"
+
+#: ../src/browser.c:216
+msgid "Select and print icon on double-click"
+msgstr "ორი წკაპისას ხატულის მონიშვნა და დაბეჭდვა"
+
+#. initialize GTK+ and parse the command line arguments
+#: ../src/browser.c:232
+msgid "- Icon browser"
+msgstr "- ხატულების ბრაუზერი"
+
+#: ../src/browser.c:256
+msgid "Icon browser"
+msgstr "ხატულების ბრაუზერი"
+
+#: ../src/browser.c:276
+msgid "<b>Name:</b>"
+msgstr "<b>სახელი:</b> %1<br/>"
+
+#: ../src/browser.c:287
+msgid "<b>Sizes:</b>"
+msgstr "<b>ზომები:</b>"
+
+#: ../src/browser.c:298
+msgid "<b>Filename:</b>"
+msgstr "<b>ფაილის სახელი:</b>"
+
+#: ../src/browser.c:329
+msgid "Category"
+msgstr "კატეგორია"
+
+#: ../src/browser.c:363
+msgid "Icons"
+msgstr "ხატულები"
+
+#: ../src/tools.c:66
+msgid "Show list of spell languages"
+msgstr "მართლწერის შემოწმების ენების სიის ჩვენება"
+
+#: ../src/tools.c:69
+msgid "Show list of GtkSourceView themes"
+msgstr "GtkSourceView-ის თეების სიის ჩვენება"
+
+#: ../src/tools.c:71
+msgid "STRING ..."
+msgstr "სტრიქონი ..."
+
+#: ../src/tools.c:76
+msgid "Pango fonts description tools"
+msgstr "Pango-ის ფონტების აღწერის პროგრამები"
+
+#: ../src/tools.c:77
+msgid "Print font name in xft format"
+msgstr "ფონტის სახელის xft ფორმატში დაბეჭდვა"
+
+#: ../src/tools.c:78
+msgid "Print font name in pango format"
+msgstr "ფონტის სახელის pango-ის ფორმატში დაბეჭდვა"
+
+#: ../src/tools.c:83
+msgid "Icon tools"
+msgstr "ხატულის პროგრამები"
+
+#: ../src/tools.c:84
+msgid "Get icon name for mime type"
+msgstr "MIME ტიპისთვის ხატულის სახელის მიღება"
+
+#: ../src/tools.c:85
+msgid "Use specified icon size"
+msgstr "მითითებული ხატულის ზომის გამოყენება"
+
+#: ../src/tools.c:86
+msgid "Get icon size from GtkIconSize type"
+msgstr "GtkIconSize-ის ტიპიდან ხატულის ზომის მიღება"
+
+#: ../src/tools.c:87
+msgid "Use icon theme"
+msgstr "ხატულის თემის გამოყენება"
+
+#: ../src/tools.c:92
+msgid "Color manipulation tools"
+msgstr "ფერების მანიპულაციის ხელსაწყოები"
+
+#: ../src/tools.c:172
+#, c-format
+msgid "no font specified\n"
+msgstr "ფონტი მითითებული არაა\n"
+
+#: ../src/tools.c:180
+#, c-format
+msgid "cannot get font description for for string \"%s\"\n"
+msgstr "ფონტის აღწერის მიღების შეცდომა სტრიქონისთვის \"%s\"\n"
+
+#: ../src/tools.c:282
+#, c-format
+msgid "no icon specified\n"
+msgstr "ხატულა მითითებული არაა\n"
+
+#: ../src/tools.c:385
+msgid "- yad miscellaneous tools"
+msgstr "- yad-ის სხვადასხვა ხელსაწყოები"
+
+#: ../src/tools.c:388
+msgid "PFD mode"
+msgstr "PFD რეჟიმი"
+
+#: ../src/tools.c:388
+msgid "Show pfd mode options"
+msgstr "PFD რეჟიმის პარამეტრების ჩვენება"
+
+#: ../src/tools.c:393
+msgid "Icon mode"
+msgstr "ხატულის რეჟიმი"
+
+#: ../src/tools.c:393
+msgid "Show icon mode options"
+msgstr "ხატულის რეჟიმის პარამეტრების ჩვენება"
+
+#: ../src/tools.c:398
+msgid "Color mode"
+msgstr "ფერის რეჟიმი"
+
+#: ../src/tools.c:398
+msgid "Show color mode options"
+msgstr "ფერის რეჟიმის პარამეტრების ჩვენება"
+
+#: ../src/tools.c:405
+#, c-format
+msgid "option parsing failed: %s\n"
+msgstr "პარამეტრის დამუშავების შეცდომა: %s\n"
+
+#: ../src/tools.c:431
+#, c-format
+msgid "no mode specified\n"
+msgstr "რეჟიმი მითითებული არაა\n"
+
+#. first tab (values at the end due to possible hyphens)
+#: ../src/yad-settings.sh:33
+msgid "Main YAD settings and default values\\n\\n"
+msgstr "YAD-ის მთავარი პარამეტრები და ნაგულისხმები მნიშვნელობებო\\n\\n"
+
+#: ../src/yad-settings.sh:34
+msgid "Width of dialog window::NUM"
+msgstr "სიგანე დიალოგისთვის window::NUM"
+
+#: ../src/yad-settings.sh:35
+msgid "Height of dialog window::NUM"
+msgstr "სიმაღლე დიალოგისთვის window::NUM"
+
+#: ../src/yad-settings.sh:36
+msgid "Border width around dialog::NUM"
+msgstr "საზღვრის სიგანე dialog::NUM-ის გარეშემო"
+
+#: ../src/yad-settings.sh:37
+msgid "Show remaining time and percentage in timeout progress bar:CHK"
+msgstr "დროისა და პროცენტების ჩვენება ვადის პროგრესის მიმდინარეობაზე bar:CHK"
+
+#: ../src/yad-settings.sh:38
+msgid "Combo-box in entry dialog is always editable:CHK"
+msgstr "Combo-box ჩანაწერის დიალოგში ყოველთვის ჩასწორებადია:CHK"
+
+#: ../src/yad-settings.sh:39
+msgid "Default terminal command:"
+msgstr "ნაგულისხმები ტერმინალის ბრძანება:"
+
+#: ../src/yad-settings.sh:40
+msgid "Default open command:"
+msgstr "ნაგულისხმები გახსნის ბრძანება:"
+
+#: ../src/yad-settings.sh:41
+msgid "Default date format:"
+msgstr "თარიღის ნაგულისხმები ფორმატი:"
+
+#: ../src/yad-settings.sh:42
+msgid "Default URI color in text-info dialog::CLR"
+msgstr "ნაგულისხმები URI-ის ფერი text-info დიალოგში::CLR"
+
+#: ../src/yad-settings.sh:43
+msgid "Maximum number of tabs in notebook dialog::NUM"
+msgstr "ჩანართების მაქსიმალური რაოდენობა რვეულის დიალოგში::NUM"
+
+#: ../src/yad-settings.sh:44
+msgid "Use large previews in file selection dialogs:CHK"
+msgstr "დიდი მინიატურების ჩვენება ფაილის არჩევანის დიალოგში:CHK"
+
+#: ../src/yad-settings.sh:45
+msgid "Search entry width::NUM"
+msgstr "ძებნის ჩანაწერის სიგანე::NUM"
+
+#: ../src/yad-settings.sh:46
+msgid "Ignore unknown command-line options:CHK"
+msgstr "იგნორირებული იქნება უცნობი ბრძანების სტრიქონის პარამეტრები:CHK"
+
+#: ../src/yad-settings.sh:47
+msgid "Enable debug mode with information about deprecated features:CHK"
+msgstr "გამართვის რეჟიმის ჩართვა ინფორმაციით მოძველებულ თვისებებზე:CHK"
+
+#: ../src/yad-settings.sh:66
+msgid "<Empty>!"
+msgstr "<Empty>!"
+
+#. second tab
+#: ../src/yad-settings.sh:79
+msgid ""
+"YAD settings for text editor\\nThis settings only usefull when YAD built "
+"with GtkSourceView\\n\\n"
+msgstr ""
+"YAD-ის პარამეტრები ტექსტური რედაქტორისთვის\\nეს პარამეტრები მხოლოდ მაშინაა "
+"სასარგებლო, როცა YAD-ი GtkSourceView-ის მხარდაჭერითაა აგებული\\n\\n"
+
+#: ../src/yad-settings.sh:80
+msgid "Default theme for text-info dialog::CB"
+msgstr "ნაგულისხმები თემა text-ინფო დიალოგისთვის::CB"
+
+#: ../src/yad-settings.sh:81
+msgid "Show line numbers:CHK"
+msgstr "ხაზის ნომრების ჩვენება:CHK"
+
+#: ../src/yad-settings.sh:82
+msgid "Hightlight current line:CHK"
+msgstr "მიმდინარე ხაზის გამოკვეთა:CHK"
+
+#: ../src/yad-settings.sh:83
+msgid "Enable line marks mode:CHK"
+msgstr "ხაზის ნიშნების რეჟიმის ჩართვა:CHK"
+
+#: ../src/yad-settings.sh:84
+msgid "Color of first type marks::CLR"
+msgstr "პირველი ტიპის ნიშნები ფერი::CHK"
+
+#: ../src/yad-settings.sh:85
+msgid "Color of second type marks::CLR"
+msgstr "მეორე ტიპის ნიშნების ფერი::CHK"
+
+#: ../src/yad-settings.sh:86
+msgid "Right margin position::NUM"
+msgstr "მარჯვენა ზღვრის პოზიცია:NUM"
+
+#: ../src/yad-settings.sh:87
+msgid "Highlight matching brackets:CHK"
+msgstr "შესაბამისი ბრჭყალების გამოკვეთა:CHK"
+
+#: ../src/yad-settings.sh:88
+msgid "Use autoindentation:CHK"
+msgstr "ავტომატური შეწევის გამოყენება:CHK"
+
+#: ../src/yad-settings.sh:89
+msgid "Smart Home/End behavior::CB"
+msgstr "ჭკვიანი Home/End-ის ქცევა:CB"
+
+#: ../src/yad-settings.sh:90
+msgid "Use smart backspace:CHK"
+msgstr "ჭკვიანი backspace-ის გამოყენება:CHK"
+
+#: ../src/yad-settings.sh:91
+msgid "Tabulation width::NUM"
+msgstr "ტაბულაციის სიგანე::NUM"
+
+#: ../src/yad-settings.sh:92
+msgid "Indentation width::NUM"
+msgstr "შეწევის სიგანე::NUM"
+
+#: ../src/yad-settings.sh:93
+msgid "Insert spaces instead of tabulation:CHK"
+msgstr "ტაბულაციის მაგიერ _გამოტოვებების ჩასმა:CHK"
+
+#. main dialog
+#: ../src/yad-settings.sh:96 ../data/yad-settings.desktop.in.h:1
+msgid "YAD settings"
+msgstr "YAD-ის მორგება"
+
+#: ../src/yad-settings.sh:97
+msgid "Load defaults!view-refresh:3"
+msgstr "ნაგულისხმები მნიშვნელობების ჩატვირთვა!view-refresh:3"
+
+#: ../src/yad-settings.sh:98
+msgid "<span size='xx-large' weight='bold'>YAD settings editor</span>"
+msgstr ""
+"<span size='xx-large' weight='bold'>YAD-ის პარამეტრების რედაქტორი</span>"
+
+#: ../src/yad-settings.sh:99
+msgid "Main"
+msgstr "მთავარი"
+
+#: ../src/yad-settings.sh:99
+msgid "Editor"
+msgstr "რედაქტორი"
+
+#: ../data/yad-icon-browser.desktop.in.h:1
+msgid "Icon Browser"
+msgstr "ხატულების ბრაუზერი"
+
+#: ../data/yad-icon-browser.desktop.in.h:2
+msgid "Inspect GTK Icon Theme"
+msgstr "GTK-ის ხატულების თემის შემოწმება"
+
+#: ../data/yad-settings.desktop.in.h:2
+msgid "Simple GUI for editing YAD settings"
+msgstr "მარტივი GUI-ი YAD-ის პარამეტრების ჩასასწორებლად"
+
+#: ../data/yad.gschema.xml.in.h:1
+msgid "Default width of dialog window"
+msgstr "დიალოგის ფანჯრის ნაგულისხმები სიგანე"
+
+#: ../data/yad.gschema.xml.in.h:2
+msgid "Default height of dialog window"
+msgstr "დიალოგის ფანჯრის ნაგულისხმები სიმაღლე"
+
+#: ../data/yad.gschema.xml.in.h:3
+msgid "Borders around dialog"
+msgstr "საზღვრები დიალოგის გარშემო"
+
+#: ../data/yad.gschema.xml.in.h:4
+msgid "Show remaining time and percentage in timeout progress bar"
+msgstr "დროისა და პროცენტების ჩვენება ვადის პროგრესის პანელზე"
+
+#: ../data/yad.gschema.xml.in.h:5
+msgid "Combo-box in entry dialog is always editable"
+msgstr "Combo-box ჩანაწერის დიალოგში ყოველთვის ჩასწორებადია"
+
+#: ../data/yad.gschema.xml.in.h:7
+#, no-c-format
+msgid "Default terminal command (use %s for arguments placeholder)"
+msgstr ""
+"ნაგულისხმები ტერმინალის ბრძანება (არგუმენტების ადგილმჭერისთვის გამოიყენეთ %s)"
+
+#: ../data/yad.gschema.xml.in.h:9
+#, no-c-format
+msgid "Default open command (use %s for arguments placeholder)"
+msgstr ""
+"ნაგულისხმები გახსნის ბრძანება (არგუმენტების ადგილმჭერისთვის გამოიყენეთ %s)"
+
+#: ../data/yad.gschema.xml.in.h:10
+msgid "Default date format (see strftime(3) for details)"
+msgstr "ნაგულისხმები თარიღის ფორმატი (დეტალებისთვის იხილეთ strftime(3))"
+
+#: ../data/yad.gschema.xml.in.h:11
+msgid "Default color for URI in text-info dialog"
+msgstr "ნაგულისხმები ფერი URI-ისთვის text-info დიალოგში"
+
+#: ../data/yad.gschema.xml.in.h:12
+msgid "Maximum number of tabs in notebook dialog"
+msgstr "ჩანართების მაქსიმალური რაოდენობა რვეულის დიალოგში"
+
+#: ../data/yad.gschema.xml.in.h:13
+msgid "Use large previews in file selection dialogs"
+msgstr "დიდი მინიატურების ჩვენება ფაილის არჩევანის დიალოგში"
+
+#: ../data/yad.gschema.xml.in.h:14
+msgid "Set width of search entry in search bar"
+msgstr "ძებნის ჩანაწერის სიგანის დაყენება"
+
+#: ../data/yad.gschema.xml.in.h:15
+msgid "Ignore unknown command-line options"
+msgstr "უცნობი ბრძანების სტრიქონის პარამეტრების გამოტოვება"
+
+#: ../data/yad.gschema.xml.in.h:16
+msgid "Enable debug mode with information about deprecated features"
+msgstr "გამართვის რეჟიმის ჩართვა ინფორმაციით მოძველებულ თვისებებზე"
+
+#: ../data/yad.gschema.xml.in.h:17
+msgid "Default color theme for text-info dialog"
+msgstr "ნაგულისხმები ფერის თემა text-info დიალოგისთვის"
+
+#: ../data/yad.gschema.xml.in.h:20
+msgid "Enable line marks mode"
+msgstr "ხაზის ნიშნების რეჟიმის ჩართვა"
+
+#: ../data/yad.gschema.xml.in.h:21
+msgid "Default color for first type of text marks in text-info dialog"
+msgstr "Text-info დიალოგში პირველი ტიპის ტექსტური ნიშნების ნაგულისხმები ფერი"
+
+#: ../data/yad.gschema.xml.in.h:22
+msgid "Default color for second type of text marks in text-info dialog"
+msgstr "Text-info დიალოგში მეორე ტიპის ტექსტური ნიშნების ნაგულისხმები ფერი"
+
+#: ../data/yad.gschema.xml.in.h:23
+msgid "Set right margin at position"
+msgstr "მარჯვენა საზღვრის დაყენება პოზიციაზე"
+
+#: ../data/yad.gschema.xml.in.h:26
+msgid "Smart Home/End behavior"
+msgstr "ჭკვიანი Home/End-ის ქცევა"
+
+#: ../data/yad.gschema.xml.in.h:27
+msgid "Use smart backspace"
+msgstr "ჭკვიანი backspace-ის გამოყენება"
+
+#: ../data/yad.gschema.xml.in.h:28
+msgid "Default tabulation width"
+msgstr "ნაგულისხმები ტაბულაციის სიგანე"
+
+#: ../data/yad.gschema.xml.in.h:29
+msgid "Default indentation width"
+msgstr "ნაგულისხმები შეწევის სიგანე"
