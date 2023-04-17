@@ -1,0 +1,13 @@
+#!/usr/bin/make -f
+#DH_VERBOSE = 1
+
+export DEB_CFLAGS_MAINT_APPEND = -fgnu89-inline
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export V=1
+
+%:
+	dh $@  --with autoreconf
+
+override_dh_auto_configure:
+	dh_auto_configure -- --with-gtk=gtk3 --enable-html --enable-gio --enable-spell --enable-sourceview --enable-icon-browser

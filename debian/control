@@ -1,0 +1,15 @@
+Source: yad
+Section: utils
+Priority: optional
+Maintainer: Gustavo Soares de Lima <gustavo@logicus.com.br>
+Build-Depends: debhelper (>=10), autotools-dev, libgtk-3-dev, pkg-config, intltool
+Standards-Version: 3.9.8
+Homepage: http://sourceforge.net/projects/yad-dialog/
+
+Package: yad
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Description: tool for creating graphical dialogs from shell scripts
+ Yad allows you to display GTK+ dialog boxes from command line or shell
+ scripts. It is similar to Zenity but with more dialog types and options.

@@ -1,0 +1,53 @@
+yad (12.3.0-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * New version.
+
+ -- Peter Gervai <grin@grin.hu>  Mon, 17 Apr 2023 13:52:02 +0200
+
+yad (0.40.0-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #876226).
+
+ -- Gustavo Soares de Lima <gustavo@logicus.com.br>  Sun, 09 Sep 2018 11:49:15 -0300
+
+yad (0.38.2-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/clean:
+      - Added to remove an extra file created by build process.
+  * debian/control:
+      - Bump to DH 10.
+  * debian/copyright:
+      - Changed license to BSD-3-Clause (Closes: #836877).
+      - Updated with po/* authors.
+  * debian/rules:
+      - Build with enable-gio.
+      - Build with enable-html.
+      - Build with icon-browser (Closes: #849814).
+      - Build with enable-sourceview.
+      - Build with enable-spell.
+      - Removed unnecessary lines.
+  * debian/watch:
+      - Updated to version 4.
+
+ -- Gustavo Soares de Lima <gustavo@logicus.com.br>  Tue, 24 Jan 2017 23:23:49 -0200
+
+yad (0.37.0-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Gustavo Soares de Lima <gustavo@logicus.com.br>  Tue, 16 Aug 2016 18:49:00 +0000
+
+yad (0.27.0-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Build with -fgnu89-inline. Closes: #790779.
+
+ -- Matthias Klose <doko@debian.org>  Sat, 25 Jul 2015 13:31:28 +0200
+
+yad (0.27.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #737599)
+
+ -- Gustavo Soares de Lima <gustavo@logicus.com.br>  Thu, 19 Feb 2015 19:37:03 -0200
