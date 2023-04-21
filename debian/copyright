@@ -1,0 +1,72 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: yad
+Source: https://github.com/v1cont/yad
+
+Files: *
+Copyright: 2009-2017 Victor Ananjevsky <ananasik@gmail.com>
+                     Glynn Foster <glynn.foster@sun.com>
+                     Mike Newman <mikegtn@gnome.org>
+License: GPL-3
+
+Files: po/*
+Copyright: 1995-1997 Ulrich Drepper <drepper@gnu.ai.mit.edu>
+           2003      Stephen Kennedy <steve9000@users.sourceforge.net>
+           2004-2008 Rodney Dawes <dobey.pwns@gmail.com>
+           2006-2010 Claude Paroz <claude@2xlibre.net>
+           2006      Jonathan Ernst <jonathan@ernstfamily.ch>
+           2007      Robert-Andreas Mauchin <zebob.m@pengzone.org>
+           2009-2010 Bruno Brouard <annoa.b@gmail.com>
+           2009      Manfred Mueller aka Quax <mmueller@live-modules.org>
+           2009-2016 Victor Ananjevsky <ananasik@gmail.com>
+           2011      Yannou90 <windaube.non.merci@gmail.com>
+           2012      Wei-Lun Chao <chaoweilun@gmail.com>
+           2013-2017 Gustavo Soares de Lima <gustavo@logicus.com.br>
+           2013      Slavko <linux@slavino.sk>
+           2017      Angela Fernanda Ferreira <angela@logicus.com.br>
+License: GPL-3
+
+Files: debian/*
+Copyright: 2015-2017 Gustavo Soares de Lima <gustavo@logicus.com.br>
+License: BSD-3-Clause
+
+License: GPL-3
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This package is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
+
+License: BSD-3-Clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+ 3. Neither the name of the MIPS Technologies, Inc., nor the names of its
+    contributors may be used to endorse or promote products derived from
+    this software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE MIPS TECHNOLOGIES, INC. ``AS IS'' AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE MIPS TECHNOLOGIES, INC. BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
