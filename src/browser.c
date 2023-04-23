@@ -210,6 +210,9 @@ main (gint argc, gchar * argv[])
   GtkWidget *w, *p, *box, *t;
   gboolean all = FALSE, symbolic = FALSE, interactive = FALSE;
 
+  GError *err = NULL;
+  GOptionContext *ctx;
+
   GOptionEntry entrs[] = {
     { "all", 'a', 0, G_OPTION_ARG_NONE, &all, _("Show all icons"), NULL },
     { "symbolic", 's', 0, G_OPTION_ARG_NONE, &symbolic, _("Show only symbolic icons"), NULL },
@@ -226,10 +229,18 @@ main (gint argc, gchar * argv[])
   textdomain (GETTEXT_PACKAGE);
 #endif
 
-  data = g_new0 (IconBrowserData, 1);
+  /* Parse the command line arguments */
+  ctx = g_option_context_new (_("- Icon browser"));
+  g_option_context_set_ignore_unknown_options (ctx, TRUE);
+  g_option_context_add_main_entries (ctx, entrs, GETTEXT_PACKAGE);
+  g_option_context_add_group (ctx, gtk_get_option_group (TRUE));
+  if (!g_option_context_parse (ctx, &argc, &argv, &err))
+    {
+      g_printerr ("Option parsing failed: %s\n", err->message);
+      return 1;
+    }
 
-  /* initialize GTK+ and parse the command line arguments */
-  gtk_init_with_args (&argc, &argv, _("- Icon browser"), entrs, GETTEXT_PACKAGE, NULL);
+  data = g_new0 (IconBrowserData, 1);
 
   if (all)
     {
@@ -243,13 +254,12 @@ main (gint argc, gchar * argv[])
     }
 
   /* load icon theme */
+  data->theme = gtk_icon_theme_get_default ();
   if (themes && themes[0])
     {
       data->theme = gtk_icon_theme_new ();
       gtk_icon_theme_set_custom_theme (data->theme, themes[0]);
     }
-  else
-    data->theme = gtk_icon_theme_get_default ();
 
   /* create interface */
   data->win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
