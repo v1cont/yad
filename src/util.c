@@ -327,7 +327,7 @@ get_label (gchar *str, guint border, GtkWidget *w)
 
   l = i = NULL;
 
-  t = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  t = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
   gtk_container_set_border_width (GTK_CONTAINER (t), border);
 
   gtk_widget_set_halign (t, GTK_ALIGN_CENTER);
