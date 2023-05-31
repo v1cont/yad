@@ -157,7 +157,7 @@ save_file_cb (GtkWidget *w, gpointer d)
   gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (text_buffer), &start, &end);
   text = gtk_text_buffer_get_text (GTK_TEXT_BUFFER (text_buffer), &start, &end, 0);
 
-  /* g_file_set_contents changes the file permissions. so it must be kept and restore after file saving */
+  /* g_file_set_contents changes the file permissions. so it must be kept and restored after file saving */
   if (g_stat (options.common_data.uri, &st) == 0)
     mode = st.st_mode;
 
@@ -170,7 +170,7 @@ save_file_cb (GtkWidget *w, gpointer d)
     {
       /* restore permissions */
       if (mode != -1)
-        g_chmod (options.common_data.uri, st.st_mode);
+        g_chmod (options.common_data.uri, mode);
       text_changed = FALSE;
     }
 
@@ -795,11 +795,11 @@ text_create_widget (GtkWidget * dlg)
   /* Add keyboard handler */
   g_signal_connect (text_view, "key-press-event", G_CALLBACK (key_press_cb), dlg);
 
+  if (options.common_data.editable)
+    g_signal_connect (G_OBJECT (text_buffer), "changed", G_CALLBACK (text_changed_cb), NULL);
+
   if (options.common_data.file_op)
-    {
-      g_signal_connect (G_OBJECT (text_buffer), "changed", G_CALLBACK (text_changed_cb), NULL);
-      g_signal_connect_after (G_OBJECT (text_view), "populate-popup", G_CALLBACK (menu_popup_cb), dlg);
-    }
+    g_signal_connect_after (G_OBJECT (text_view), "populate-popup", G_CALLBACK (menu_popup_cb), dlg);
 
   /* Initialize linkifying */
   if (options.text_data.uri)
