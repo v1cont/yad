@@ -536,6 +536,10 @@ typedef struct {
   gboolean enable_search;
   gboolean file_op;
   gboolean scroll;
+#ifndef G_OS_WIN32
+  gchar *usr1_action;
+  gchar *usr2_action;
+#endif
 #if GLIB_CHECK_VERSION(2,30,0)
   GFormatSizeFlags size_fmt;
 #endif
