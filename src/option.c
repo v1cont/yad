@@ -236,6 +236,12 @@ static GOptionEntry common_options[] = {
     N_("Disable search in text and html dialogs"), NULL },
   { "file-op", 0, 0, G_OPTION_ARG_NONE, &options.common_data.file_op,
     N_("Enable file operations"), NULL },
+#ifndef G_OS_WIN32
+  { "usr1-action", 0, 0, G_OPTION_ARG_STRING, &options.common_data.usr1_action,
+    N_("Action for USR1 signal"), N_("COMMAND") },
+  { "usr2-action", 0, 0, G_OPTION_ARG_STRING, &options.common_data.usr2_action,
+    N_("Action for USR2 signal"), N_("COMMAND") },
+#endif
 #if GLIB_CHECK_VERSION(2,30,0)
   { "iec-format", 0, G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, set_size_format,
     N_("Use IEC (base 1024) units with for size values"), NULL },
@@ -1684,6 +1690,10 @@ yad_options_init (void)
   options.common_data.scroll = FALSE;
   options.common_data.enable_search = TRUE;
   options.common_data.file_op = FALSE;
+#ifndef G_OS_WIN32
+  options.common_data.usr1_action = NULL;
+  options.common_data.usr2_action = NULL;
+#endif
 #if GLIB_CHECK_VERSION(2,30,0)
   options.common_data.size_fmt = G_FORMAT_SIZE_DEFAULT;
 #endif
