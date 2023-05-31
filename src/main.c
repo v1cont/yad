@@ -60,9 +60,7 @@ YadNTabs *tabs;
 static void
 sa_usr1 (gint sig)
 {
-  if (options.common_data.usr1_action)
-    run_command_async (options.common_data.usr1_action);
-  else if (options.plug != -1)
+  if (options.plug != -1)
     yad_print_result ();
   else
     yad_exit (options.data.def_resp);
@@ -71,9 +69,7 @@ sa_usr1 (gint sig)
 static void
 sa_usr2 (gint sig)
 {
-  if (options.common_data.usr2_action)
-    run_command_async (options.common_data.usr2_action);
-  else if (options.plug != -1)
+  if (options.plug != -1)
     gtk_main_quit ();
   else
     yad_exit (YAD_RESPONSE_CANCEL);
