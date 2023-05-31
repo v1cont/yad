@@ -1,3 +1,16 @@
+Version 13.0
+    - extend --in-place behavior in text-info dialog
+    - improve labels look&feel
+    - improve yad window placement
+    - --homogeneous option affects on form columns too
+    - improve run external command
+    - fix switch field in form dialog
+    - add content aligntment in list dialog
+    - load custom css from arbitrary sting in addition to file
+    - add georgian translation
+    - add debian/ directory
+    - fixes in man page
+
 Version 12.3
     - fixed setting webkit properties and user defined style sheet in html dialog
     - improve stdin handler for html dialog
