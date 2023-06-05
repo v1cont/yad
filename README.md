@@ -49,8 +49,8 @@ TERM_CMD - string with terminal command. Default is "xterm -e '%s'"
 OPEN_CMD - string with open command. Default is "xdg-open '%s'"  
 DATE_FMT - string with date output format. Default is "%x". See strftime(3) for details  
 URI_COLOR - color for URIs in text-info dialog. Default is blue  
-MARK1_COLOR - color for first type of text marks in text-info dialog. Default is lightgreen
-MARK2_COLOR - color for second type of text marks in text-info dialog. Default is pink
+MARK1_COLOR - color for first type of text marks in text-info dialog. Default is lightgreen  
+MARK2_COLOR - color for second type of text marks in text-info dialog. Default is pink  
 MAX_TABS - set the number of tabs for tabbed dialog. Default is 100
 
 Defines can be added througs CFLAGS environment variable
