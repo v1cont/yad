@@ -57,6 +57,7 @@ static gboolean set_scroll_policy (const gchar *, const gchar *, gpointer, GErro
 static gboolean set_size_format (const gchar *, const gchar *, gpointer, GError **);
 #endif
 static gboolean set_interp (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_window_type (const gchar * option_name, const gchar * value, gpointer data, GError ** err);
 #ifdef HAVE_SOURCEVIEW
 static gboolean set_right_margin (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_smart_homend (const gchar *, const gchar *, gpointer, GError **);
@@ -171,7 +172,9 @@ static GOptionEntry general_options[] = {
   { "close-on-unfocus", 0, 0, G_OPTION_ARG_NONE, &options.data.close_on_unfocus,
     N_("Close window when it sets unfocused"), NULL },
   { "splash", 0, 0, G_OPTION_ARG_NONE, &options.data.splash,
-    N_("Open window as a splashscreen"), NULL },
+    N_("Open window as a splashscreen (DEPRECATED: use --window-type=splash instead)"), NULL },
+  { "window-type", 0, 0, G_OPTION_ARG_CALLBACK, set_window_type,
+    N_("Specify the window type for the dialog"), N_("normal|dialog|splash") },
   { "plug", 0, 0, G_OPTION_ARG_INT, &options.plug,
     N_("Special type of dialog for XEMBED"), N_("KEY") },
   { "tabnum", 0, 0, G_OPTION_ARG_INT, &options.tabnum,
@@ -1369,6 +1372,21 @@ set_interp (const gchar * option_name, const gchar * value, gpointer data, GErro
   return TRUE;
 }
 
+static gboolean
+set_window_type (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+{
+  if (strcasecmp (value, "normal") == 0)
+    options.data.window_type = YAD_WINDOW_NORMAL;
+  else if (strcasecmp (value, "dialog") == 0)
+    options.data.window_type = YAD_WINDOW_DIALOG;
+  else if (strcasecmp (value, "splash") == 0)
+    options.data.window_type = YAD_WINDOW_SPLASH;
+  else
+    g_printerr (_("Unknown window type: %s\n"), value);
+
+  return TRUE;
+}
+
 #if HAVE_SOURCEVIEW
 static gboolean
 set_right_margin (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
@@ -1644,6 +1662,7 @@ yad_options_init (void)
   options.data.maximized = FALSE;
   options.data.fullscreen = FALSE;
   options.data.splash = FALSE;
+  options.data.window_type = YAD_WINDOW_UNSET;
   options.data.focus = TRUE;
   options.data.close_on_unfocus = FALSE;
 

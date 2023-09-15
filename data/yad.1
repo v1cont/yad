@@ -213,9 +213,18 @@ Run dialog window maximized.
 .B \-\-fullscreen
 Run dialog in fullscreen mode. This option may not work on all window managers.
 .TP
-.B \-\-splash
+.B \-\-splash (DEPRECATED)
 Open window with "splashscreen" window hints. For details see description of \fI_NET_WM_WINDOW_TYPE_SPLASH\fP
 in EWMH specification. The behavior of dialog with this option is HIGHLY DEPENDS on settings of your window manager.
+
+This option is deprecated. Use \fB--window-type=splash\fP instead.
+.TP
+.B \-\-window-type=\fITYPE\fP
+Create a window with the specified window type. Can be one of "normal", "dialog" or "splash".
+The behavior of each window type depends on your window manager.
+
+Tiling window managers will often float a "dialog" window but tile a "normal" window.
+The behavior of splash windows HIGHLY DEPENDS on settings of your window manager.
 .TP
 .B \-\-no-focus
 Dialog window never take focus.
@@ -239,7 +248,7 @@ Set default exit code to \fINUMBER\fP instead of \fI0\fP.
 .B \-\-css=\fISTRING\fP
 Read and parse additional GTK+ CSS styles from given data. If \fISTRING\fP is filename, the content of file is loaded. If not \fISTRING\fP treats like CSS data.
 .TP
-.B \-\-gtkrc=\fIFILENAME\fP
+.B \-\-gtkrc=\fIFILENAME\fP (DEPRECATED)
 Read and parse additional GTK+ CSS styles from given file. This option is deprecated. Use \fB--css\fP instead.
 .TP
 .B \-\-hscroll-policy=\fITYPE\fP

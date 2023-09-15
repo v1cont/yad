@@ -403,10 +403,19 @@ create_dialog (void)
 
   /* create dialog window */
   dlg = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  if (options.data.splash)
-    gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_SPLASHSCREEN);
-  else
-    gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_DIALOG);
+  switch (options.data.window_type)
+    {
+      case YAD_WINDOW_UNSET:
+      case YAD_WINDOW_NORMAL:
+        gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_NORMAL);
+        break;
+      case YAD_WINDOW_DIALOG:
+        gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_DIALOG);
+        break;
+      case YAD_WINDOW_SPLASH:
+        gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_SPLASHSCREEN);
+        break;
+    }
   gtk_window_set_title (GTK_WINDOW (dlg), options.data.dialog_title);
   gtk_widget_set_name (dlg, "yad-dialog-window");
 
@@ -780,6 +789,16 @@ main (gint argc, gchar ** argv)
       g_printerr (_("Unable to parse command line: %s\n"), err->message);
       return -1;
     }
+
+  if (options.data.splash)
+    {
+      g_warning(_("Use of deprecated option --splash, use --window-type=splash instead"));
+      if (options.data.window_type == YAD_WINDOW_UNSET)
+        options.data.window_type = YAD_WINDOW_SPLASH;
+      else
+       g_warning(_("Both --splash and --window-type are specified, ignoring --splash"));
+    }
+
   yad_set_mode ();
 
   /* check for current GDK backend */
