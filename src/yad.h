@@ -188,6 +188,13 @@ typedef enum {
   YAD_BOOL_FMT_1
 } YadBoolFormat;
 
+typedef enum {
+  YAD_WINDOW_UNSET = 0,
+  YAD_WINDOW_NORMAL,
+  YAD_WINDOW_DIALOG,
+  YAD_WINDOW_SPLASH,
+} YadWindowType;
+
 typedef struct {
   gchar *name;
   gchar *cmd;
@@ -268,6 +275,7 @@ typedef struct {
   gboolean maximized;
   gboolean fullscreen;
   gboolean splash;
+  YadWindowType window_type;
   gboolean focus;
   gboolean close_on_unfocus;
 } YadData;
