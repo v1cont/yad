@@ -46,6 +46,23 @@ if test x$have_html = xyes; then
     AC_DEFINE([HAVE_HTML], [1], [Define this if you have webkit2gt library])
 fi
 
+dnl paned and notebook
+AC_ARG_WITH([x11],
+    [AS_HELP_STRING([--with-x11],
+        [Build YAD modules that require x11 (notebook, paned)])],
+    [with_x11=$enableval], [with_x11=yes]
+)
+if test x$with_html = xyes; then
+   PKG_CHECK_MODULES([GTK_X11], [gtk+-x11-3.0], [with_x11=yes], [with_x11=no])
+else
+    with_x11=no
+fi
+AM_CONDITIONAL([X11], [test x$with_x11 = xyes])
+
+if test x$with_x11 = xyes; then
+   AC_DEFINE([HAVE_X11], [1], [Define this if you are using GTK+3 with X11 backend])
+fi
+
 dnl status icon widget
 AC_ARG_ENABLE([tray],
 	[AS_HELP_STRING([--enable-tray],

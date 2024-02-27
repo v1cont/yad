@@ -28,7 +28,9 @@
 
 #ifndef G_OS_WIN32
 # include <sys/shm.h>
-# include <gdk/gdkx.h>
+#endif
+#ifdef HAVE_X11
+#include <gdk/gdkx.h>
 #endif
 
 #include "yad.h"
@@ -290,6 +292,7 @@ create_layout (GtkWidget *dlg)
     case YAD_MODE_LIST:
       mw = list_create_widget (dlg);
       break;
+#ifdef HAVE_X11
     case YAD_MODE_NOTEBOOK:
       if (options.plug == -1)
         mw = notebook_create_widget (dlg);
@@ -298,6 +301,7 @@ create_layout (GtkWidget *dlg)
       if (options.plug == -1)
         mw = paned_create_widget (dlg);
       break;
+#endif
     case YAD_MODE_PICTURE:
       mw = picture_create_widget (dlg);
       break;
@@ -612,6 +616,7 @@ create_dialog (void)
         gtk_window_fullscreen (GTK_WINDOW (dlg));
     }
 
+#ifdef HAVE_X11
   /* print xid */
   if (is_x11 && options.print_xid)
     {
@@ -632,6 +637,7 @@ create_dialog (void)
             fflush (xf);
         }
     }
+#endif
 
   return dlg;
 }
@@ -648,10 +654,12 @@ create_plug (void)
       tabs = get_tabs (options.plug, FALSE);
     }
 
+#ifdef HAVE_X11
   while (!tabs[0].xid)
     usleep (1000);
 
   win = gtk_plug_new (0);
+#endif
   /* set window borders */
   if (options.data.borders == -1)
     options.data.borders = (gint) gtk_container_get_border_width (GTK_CONTAINER (win));
@@ -666,7 +674,9 @@ create_plug (void)
   /* add plug data */
   /* notebook/paned will count non-zero xids */
   tabs[options.tabnum].pid = getpid ();
+#ifdef HAVE_X11
   tabs[options.tabnum].xid = gtk_plug_get_id (GTK_PLUG (win));
+#endif
   shmdt (tabs);
 }
 
@@ -699,12 +709,14 @@ yad_print_result (void)
     case YAD_MODE_LIST:
       list_print_result ();
       break;
+#ifdef HAVE_X11
     case YAD_MODE_NOTEBOOK:
       notebook_print_result ();
       break;
     case YAD_MODE_PANED:
       paned_print_result ();
       break;
+#endif
     case YAD_MODE_SCALE:
       scale_print_result ();
       break;
@@ -885,6 +897,7 @@ main (gint argc, gchar ** argv)
       return ret;
     }
 
+#ifdef HAVE_X11
   if (!is_x11)
     {
       if (options.mode == YAD_MODE_NOTEBOOK || options.mode == YAD_MODE_PANED
@@ -897,6 +910,7 @@ main (gint argc, gchar ** argv)
           return 1;
         }
     }
+#endif
 
   switch (options.mode)
     {
@@ -921,20 +935,24 @@ main (gint argc, gchar ** argv)
     default:
       dialog = create_dialog ();
 
+#ifdef HAVE_X11
       if (is_x11)
         {
           /* add YAD_XID variable */
           str = g_strdup_printf ("0x%lX", GDK_WINDOW_XID (gtk_widget_get_window (dialog)));
           g_setenv ("YAD_XID", str, TRUE);
         }
+#endif
 
       /* make some specific init actions */
-      if (options.mode == YAD_MODE_NOTEBOOK)
+      if (options.mode == YAD_MODE_TEXTINFO)
+        text_goto_line ();
+#ifdef HAVE_X11
+      else if (options.mode == YAD_MODE_NOTEBOOK)
         notebook_swallow_childs ();
       else if (options.mode == YAD_MODE_PANED)
         paned_swallow_childs ();
-      else if (options.mode == YAD_MODE_TEXTINFO)
-        text_goto_line ();
+#endif
       else if (options.mode == YAD_MODE_PICTURE)
         {
           if (options.picture_data.size == YAD_PICTURE_FIT)
@@ -963,10 +981,12 @@ main (gint argc, gchar ** argv)
             }
         }
 #ifndef G_OS_WIN32
+#ifdef HAVE_X11
       if (options.mode == YAD_MODE_NOTEBOOK)
         notebook_close_childs ();
       else if (options.mode == YAD_MODE_PANED)
         paned_close_childs ();
+#endif
       /* autokill option for progress dialog */
       if (!options.kill_parent)
         {

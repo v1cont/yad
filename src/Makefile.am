@@ -20,9 +20,7 @@ yad_SOURCES = 		\
 	form.c			\
 	icons.c			\
 	list.c			\
-	notebook.c		\
 	option.c		\
-	paned.c			\
 	picture.c       \
 	print.c			\
 	progress.c		\
@@ -40,6 +38,10 @@ endif
 
 if HTML
 yad_SOURCES += html.c
+endif
+
+if X11
+yad_SOURCES += notebook.c paned.c
 endif
 
 if STANDALONE
