@@ -27,7 +27,9 @@
 #include <sys/ipc.h>
 #include <fcntl.h>
 
+#ifdef HAVE_X11
 #include <gdk/gdkx.h>
+#endif
 
 #include <gtk/gtk.h>
 #include <gtk/gtkx.h>
@@ -82,11 +84,13 @@ typedef enum {
 #endif
   YAD_MODE_ICONS,
   YAD_MODE_LIST,
+#ifdef HAVE_X11
   YAD_MODE_NOTEBOOK,
+  YAD_MODE_PANED,
+#endif
 #ifdef HAVE_TRAY
   YAD_MODE_NOTIFICATION,
 #endif
-  YAD_MODE_PANED,
   YAD_MODE_PICTURE,
   YAD_MODE_PRINT,
   YAD_MODE_PROGRESS,
@@ -629,7 +633,9 @@ extern gboolean ignore_esc;
 /* TABS */
 typedef struct {
   pid_t pid;
+#ifdef HAVE_X11
   Window xid;
+#endif
 } YadNTabs;
 
 /* pointer to shared memory for tabbed dialog */

@@ -77,11 +77,13 @@ static gboolean html_mode = FALSE;
 #endif
 static gboolean icons_mode = FALSE;
 static gboolean list_mode = FALSE;
+#ifdef HAVE_X11
 static gboolean notebook_mode = FALSE;
+static gboolean paned_mode = FALSE;
+#endif
 #ifdef HAVE_TRAY
 static gboolean notification_mode = FALSE;
 #endif
-static gboolean paned_mode = FALSE;
 static gboolean picture_mode = FALSE;
 static gboolean print_mode = FALSE;
 static gboolean progress_mode = FALSE;
@@ -519,6 +521,7 @@ static GOptionEntry list_options[] = {
   { NULL }
 };
 
+#ifdef HAVE_X11
 static GOptionEntry notebook_options[] = {
   { "notebook", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &notebook_mode,
     N_("Display notebook dialog"), NULL },
@@ -536,6 +539,7 @@ static GOptionEntry notebook_options[] = {
     N_("Use stack mode"), NULL },
   { NULL }
 };
+#endif
 
 #ifdef HAVE_TRAY
 static GOptionEntry notification_options[] = {
@@ -553,6 +557,7 @@ static GOptionEntry notification_options[] = {
 };
 #endif
 
+#ifdef HAVE_X11
 static GOptionEntry paned_options[] = {
   { "paned", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &paned_mode,
     N_("Display paned dialog"), NULL },
@@ -564,6 +569,7 @@ static GOptionEntry paned_options[] = {
     N_("Set focused pane (1 or 2)"), N_("PANE") },
   { NULL }
 };
+#endif
 
 static GOptionEntry picture_options[] = {
   { "picture", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &picture_mode,
@@ -1128,6 +1134,7 @@ set_justify (const gchar * option_name, const gchar * value, gpointer data, GErr
   return TRUE;
 }
 
+#ifdef HAVE_X11
 static gboolean
 set_tab_pos (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
@@ -1144,6 +1151,7 @@ set_tab_pos (const gchar * option_name, const gchar * value, gpointer data, GErr
 
   return TRUE;
 }
+#endif
 
 static gboolean
 set_expander (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
@@ -1182,6 +1190,7 @@ set_ellipsize (const gchar * option_name, const gchar * value, gpointer data, GE
   return TRUE;
 }
 
+#ifdef HAVE_X11
 static gboolean
 set_orient (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
 {
@@ -1194,6 +1203,7 @@ set_orient (const gchar * option_name, const gchar * value, gpointer data, GErro
 
   return TRUE;
 }
+#endif
 
 static gboolean
 set_print_type (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
@@ -1534,14 +1544,16 @@ yad_set_mode (void)
     options.mode = YAD_MODE_ICONS;
   else if (list_mode)
     options.mode = YAD_MODE_LIST;
+#ifdef HAVE_X11
   else if (notebook_mode)
     options.mode = YAD_MODE_NOTEBOOK;
+  else if (paned_mode)
+    options.mode = YAD_MODE_PANED;
+#endif
 #ifdef HAVE_TRAY
   else if (notification_mode)
     options.mode = YAD_MODE_NOTIFICATION;
 #endif
-  else if (paned_mode)
-    options.mode = YAD_MODE_PANED;
   else if (picture_mode)
     options.mode = YAD_MODE_PICTURE;
   else if (print_mode)
@@ -1821,6 +1833,7 @@ yad_options_init (void)
   options.list_data.col_align = NULL;
   options.list_data.hdr_align = NULL;
 
+#ifdef HAVE_X11
   /* Initialize notebook data */
   options.notebook_data.tabs = NULL;
   options.notebook_data.borders = 5;
@@ -1828,6 +1841,7 @@ yad_options_init (void)
   options.notebook_data.active = 1;
   options.notebook_data.expand = FALSE;
   options.notebook_data.stack = FALSE;
+#endif
 
 #ifdef HAVE_TRAY
   /* Initialize notification data */
@@ -1836,10 +1850,12 @@ yad_options_init (void)
   options.notification_data.menu = NULL;
 #endif
 
+#ifdef HAVE_X11
   /* Initialize paned data */
   options.paned_data.orient = GTK_ORIENTATION_VERTICAL;
   options.paned_data.splitter = -1;
   options.paned_data.focused = 1;
+#endif
 
   /* Initialize picture data */
   options.picture_data.size = YAD_PICTURE_ORIG;
@@ -2029,11 +2045,13 @@ yad_create_context (void)
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 
+#ifdef HAVE_X11
   /* Adds notebook option entries */
   a_group = g_option_group_new ("notebook", _("Notebook options"), _("Show notebook dialog options"), NULL, NULL);
   g_option_group_add_entries (a_group, notebook_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
+#endif
 
 #ifdef HAVE_TRAY
   /* Adds notification option entries */
@@ -2044,11 +2062,13 @@ yad_create_context (void)
   g_option_context_add_group (tmp_ctx, a_group);
 #endif
 
+#ifdef HAVE_X11
   /* Adds paned option entries */
   a_group = g_option_group_new ("paned", _("Paned dialog options"), _("Show paned dialog options"), NULL, NULL);
   g_option_group_add_entries (a_group, paned_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
+#endif
 
   /* Adds picture option entries */
   a_group = g_option_group_new ("picture", _("Picture dialog options"), _("Show picture dialog options"), NULL, NULL);
