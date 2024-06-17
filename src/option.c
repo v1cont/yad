@@ -1015,11 +1015,11 @@ add_file_filter (const gchar * option_name, const gchar * value, gpointer data, 
       for (i = 0; value[i] != '\0'; i++)
         {
           if (value[i] == '|')
-            break;
+            {
+              name = g_strstrip (g_strndup (value, i));
+              break;
+            }
         }
-
-      if (value[i] == '|')
-        name = g_strstrip (g_strndup (value, i));
 
       if (name)
         {

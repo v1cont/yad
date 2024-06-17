@@ -56,7 +56,7 @@ const YadStock yad_stock_items[] = {
 };
 
 gboolean
-stock_lookup (gchar *key, YadStock *it)
+stock_lookup (const gchar *key, YadStock *it)
 {
   gint i;
   gboolean found = FALSE;
@@ -859,7 +859,9 @@ create_search_bar ()
 {
   YadSearchBar *sb;
   GtkWidget *b;
+#ifndef STANDALONE
   gint e_width = -1;
+#endif
 
   sb = g_new0 (YadSearchBar, 1);
   sb->new_search = TRUE;
@@ -876,9 +878,9 @@ create_search_bar ()
 
 #ifndef STANDALONE
   e_width = g_settings_get_int (settings, "search-width");
-#endif
   if (e_width > 0)
     gtk_widget_set_size_request (sb->entry, e_width, -1);
+#endif
 
   sb->next = gtk_button_new_from_icon_name ("go-down", GTK_ICON_SIZE_BUTTON);
   gtk_widget_set_focus_on_click (sb->next, FALSE);

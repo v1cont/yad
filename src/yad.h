@@ -719,7 +719,7 @@ gchar **split_arg (const gchar *str);
 
 YadNTabs *get_tabs (key_t key, gboolean create);
 
-gboolean stock_lookup (gchar *key, YadStock *it);
+gboolean stock_lookup (const gchar *key, YadStock *it);
 
 GtkWidget *get_label (gchar *str, guint border, GtkWidget *w);
 
