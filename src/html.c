@@ -30,7 +30,7 @@ static YadSearchBar *search_bar = NULL;
 
 static GString *inbuf;
 
-static gboolean is_loaded = FALSE;
+static volatile gboolean is_loaded = FALSE;
 static gboolean uri_cmd = FALSE;
 
 #ifndef PATH_MAX
