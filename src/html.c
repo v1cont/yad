@@ -33,6 +33,22 @@ static GString *inbuf;
 static volatile gboolean is_loaded = FALSE;
 static gboolean uri_cmd = FALSE;
 
+/* get from devhelp */
+static const gdouble zoom_levels[] = {
+  0.5,            /* 50% */
+  0.8408964152,   /* 75% */
+  1.0,            /* 100% */
+  1.1892071149,   /* 125% */
+  1.4142135623,   /* 150% */
+  1.6817928304,   /* 175% */
+  2.0,            /* 200% */
+  2.8284271247,   /* 300% */
+  4.0             /* 400% */
+};
+
+static const guint n_zoom_levels = G_N_ELEMENTS (zoom_levels);
+static guint current_zoom = 2;
+
 #ifndef PATH_MAX
 #define PATH_MAX 4096
 #endif
@@ -290,6 +306,33 @@ quit_cb (GSimpleAction *act, GVariant *param, gpointer d)
 }
 
 static gboolean
+scroll_cb (GtkWidget *w, GdkEventScroll *ev, gpointer d)
+{
+  if ((ev->state & GDK_CONTROL_MASK) != 0)
+    {
+      switch (ev->direction)
+        {
+        case GDK_SCROLL_UP:
+          if (current_zoom < n_zoom_levels)
+            current_zoom++;
+          webkit_web_view_set_zoom_level (view, zoom_levels[current_zoom]);
+          return GDK_EVENT_STOP;
+
+        case GDK_SCROLL_DOWN:
+          if (current_zoom > 0)
+            current_zoom--;
+          webkit_web_view_set_zoom_level (view, zoom_levels[current_zoom]);
+          return GDK_EVENT_STOP;
+
+        default:
+          break;
+        }
+    }
+
+  return GDK_EVENT_PROPAGATE;
+}
+
+static gboolean
 menu_cb (WebKitWebView *view, WebKitContextMenu *menu, GdkEvent *ev, WebKitHitTestResult *hit, gpointer d)
 {
   WebKitContextMenuItem *mi;
@@ -322,24 +365,44 @@ menu_cb (WebKitWebView *view, WebKitContextMenu *menu, GdkEvent *ev, WebKitHitTe
 static gboolean
 key_press_cb (GtkWidget *w, GdkEventKey *key, gpointer d)
 {
-  if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_O || key->keyval == GDK_KEY_o))
+  if (key->state & GDK_CONTROL_MASK)
     {
-      open_cb (NULL, NULL, d);
-      return TRUE;
-    }
-  else if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_Q || key->keyval == GDK_KEY_q))
-    {
-      yad_exit (options.data.def_resp);
-      return TRUE;
-    }
-  else if ((key->state & GDK_CONTROL_MASK) && (key->keyval == GDK_KEY_F || key->keyval == GDK_KEY_f))
-    {
-      if (search_bar == NULL)
-        return FALSE;
+      if (key->keyval == GDK_KEY_plus)
+        {
+          if (current_zoom < n_zoom_levels)
+            current_zoom++;
+          webkit_web_view_set_zoom_level (view, zoom_levels[current_zoom]);
+        }
+      else if (key->keyval == GDK_KEY_minus)
+        {
+          if (current_zoom > 0)
+            current_zoom--;
+          webkit_web_view_set_zoom_level (view, zoom_levels[current_zoom]);
+        }
+      else if (key->keyval == GDK_KEY_0)
+        {
+          current_zoom = 2;
+          webkit_web_view_set_zoom_level (view, zoom_levels[current_zoom]);
+        }
+      if (key->keyval == GDK_KEY_O || key->keyval == GDK_KEY_o)
+        {
+          open_cb (NULL, NULL, d);
+          return TRUE;
+        }
+      else if (key->keyval == GDK_KEY_Q || key->keyval == GDK_KEY_q)
+        {
+          yad_exit (options.data.def_resp);
+          return TRUE;
+        }
+      else if (key->keyval == GDK_KEY_F || key->keyval == GDK_KEY_f)
+        {
+          if (search_bar == NULL)
+            return FALSE;
 
-      ignore_esc = TRUE;
-      gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (search_bar->bar), TRUE);
-      return gtk_search_bar_handle_event (GTK_SEARCH_BAR (search_bar->bar), (GdkEvent *) key);
+          ignore_esc = TRUE;
+          gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (search_bar->bar), TRUE);
+          return gtk_search_bar_handle_event (GTK_SEARCH_BAR (search_bar->bar), (GdkEvent *) key);
+        }
     }
 
   return FALSE;
@@ -478,6 +541,8 @@ html_create_widget (GtkWidget * dlg)
 
   g_signal_connect (view, "decide-policy", G_CALLBACK (policy_cb), NULL);
   g_signal_connect (view, "load-changed", G_CALLBACK (loaded_cb), NULL);
+
+  g_signal_connect (view, "scroll-event", G_CALLBACK (scroll_cb), NULL);
 
   wk_settings = webkit_settings_new ();
 
