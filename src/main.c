@@ -780,6 +780,14 @@ main (gint argc, gchar ** argv)
     }
   yad_set_mode ();
 
+  /* set working directory */
+  if (options.data.workdir)
+    {
+      if (g_chdir (options.data.workdir) != 0)
+        g_printerr (_("Unable to change directory to %s: %s\n"), 
+                    options.data.workdir, strerror (errno));
+    }
+
   /* check for current GDK backend */
 #ifdef GDK_WINDOWING_X11
   if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))

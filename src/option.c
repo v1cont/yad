@@ -147,6 +147,8 @@ static GOptionEntry general_options[] = {
     N_("Set URI handler"), N_("CMD") },
   { "f1-action", 0, 0, G_OPTION_ARG_STRING, &options.data.f1_action,
     N_("Set command running when F1 was pressed"), N_("CMD") },
+  { "workdir", 0, 0, G_OPTION_ARG_STRING, &options.data.workdir,
+    N_("Set working directory"), N_("PATH") },
   /* window settings */
   { "sticky", 0, 0, G_OPTION_ARG_NONE, &options.data.sticky,
     N_("Set window sticky"), NULL },
@@ -1632,6 +1634,7 @@ yad_options_init (void)
   options.data.uri_handler = OPEN_CMD;
 #endif
   options.data.f1_action = NULL;
+  options.data.workdir = NULL;
 
   /* Initialize window options */
   options.data.sticky = FALSE;
