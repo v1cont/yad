@@ -34,7 +34,10 @@ AC_ARG_ENABLE([html],
 			[Build YAD with HTML widget])],
 	[build_html=$enableval], [build_html=yes])
 if test x$build_html = xyes; then
-    PKG_CHECK_MODULES([HTML], [webkit2gtk-4.0], [have_html=yes], [have_html=no])
+    PKG_CHECK_MODULES([HTML], [webkit2gtk-4.1], [have_html=yes], [have_html=no])
+    if test x$have_html=no; then
+        PKG_CHECK_MODULES([HTML], [webkit2gtk-4.0], [have_html=yes], [have_html=no])
+    fi
 else
     have_html=no
 fi
