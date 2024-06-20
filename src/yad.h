@@ -26,6 +26,7 @@
 #include <sys/stat.h>
 #include <sys/ipc.h>
 #include <fcntl.h>
+#include <errno.h>
 
 #include <gdk/gdkx.h>
 
