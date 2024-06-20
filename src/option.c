@@ -57,6 +57,7 @@ static gboolean set_scroll_policy (const gchar *, const gchar *, gpointer, GErro
 static gboolean set_size_format (const gchar *, const gchar *, gpointer, GError **);
 #endif
 static gboolean set_interp (const gchar *, const gchar *, gpointer, GError **);
+static gboolean set_window_type (const gchar * option_name, const gchar * value, gpointer data, GError ** err);
 #ifdef HAVE_SOURCEVIEW
 static gboolean set_right_margin (const gchar *, const gchar *, gpointer, GError **);
 static gboolean set_smart_homend (const gchar *, const gchar *, gpointer, GError **);
@@ -172,8 +173,12 @@ static GOptionEntry general_options[] = {
     N_("Don't focus dialog window"), NULL },
   { "close-on-unfocus", 0, 0, G_OPTION_ARG_NONE, &options.data.close_on_unfocus,
     N_("Close window when it sets unfocused"), NULL },
+#ifdef DEPRECATED
   { "splash", 0, 0, G_OPTION_ARG_NONE, &options.data.splash,
-    N_("Open window as a splashscreen"), NULL },
+    N_("Open window as a splashscreen (Deprecated, see man page for details)"), NULL },
+#endif
+  { "window-type", 0, 0, G_OPTION_ARG_CALLBACK, set_window_type,
+    N_("Specify the window type for the dialog"), N_("TYPE") },
   { "plug", 0, 0, G_OPTION_ARG_INT, &options.plug,
     N_("Special type of dialog for XEMBED"), N_("KEY") },
   { "tabnum", 0, 0, G_OPTION_ARG_INT, &options.tabnum,
@@ -1373,6 +1378,31 @@ set_interp (const gchar * option_name, const gchar * value, gpointer data, GErro
   return TRUE;
 }
 
+static gboolean
+set_window_type (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
+{
+  if (strcasecmp (value, "normal") == 0)
+    options.data.window_type = GDK_WINDOW_TYPE_HINT_NORMAL;
+  else if (strcasecmp (value, "dialog") == 0)
+    options.data.window_type = GDK_WINDOW_TYPE_HINT_DIALOG;
+  else if (strcasecmp (value, "utility") == 0)
+    options.data.window_type = GDK_WINDOW_TYPE_HINT_UTILITY;
+  else if (strcasecmp (value, "dock") == 0)
+    options.data.window_type = GDK_WINDOW_TYPE_HINT_DOCK;
+  else if (strcasecmp (value, "desktop") == 0)
+    options.data.window_type = GDK_WINDOW_TYPE_HINT_DESKTOP;
+  else if (strcasecmp (value, "tooltip") == 0)
+    options.data.window_type = GDK_WINDOW_TYPE_HINT_TOOLTIP;
+  else if (strcasecmp (value, "notification") == 0)
+    options.data.window_type = GDK_WINDOW_TYPE_HINT_NOTIFICATION;
+  else if (strcasecmp (value, "splash") == 0)
+    options.data.window_type = GDK_WINDOW_TYPE_HINT_SPLASHSCREEN;
+  else
+    g_printerr (_("Unknown window type: %s\n"), value);
+
+  return TRUE;
+}
+
 #if HAVE_SOURCEVIEW
 static gboolean
 set_right_margin (const gchar * option_name, const gchar * value, gpointer data, GError ** err)
@@ -1650,7 +1680,10 @@ yad_options_init (void)
   options.data.skip_taskbar = FALSE;
   options.data.maximized = FALSE;
   options.data.fullscreen = FALSE;
+#ifdef DEPRECATED
   options.data.splash = FALSE;
+#endif
+  options.data.window_type = GDK_WINDOW_TYPE_HINT_NORMAL;
   options.data.focus = TRUE;
   options.data.close_on_unfocus = FALSE;
 

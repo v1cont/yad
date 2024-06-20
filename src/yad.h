@@ -268,7 +268,10 @@ typedef struct {
   gboolean skip_taskbar;
   gboolean maximized;
   gboolean fullscreen;
+#ifdef DEPRECATED
   gboolean splash;
+#endif
+  GdkWindowTypeHint window_type;
   gboolean focus;
   gboolean close_on_unfocus;
 } YadData;

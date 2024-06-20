@@ -216,9 +216,18 @@ Run dialog window maximized.
 .B \-\-fullscreen
 Run dialog in fullscreen mode. This option may not work on all window managers.
 .TP
-.B \-\-splash
+.B \-\-splash (Deprecated)
 Open window with "splashscreen" window hints. For details see description of \fI_NET_WM_WINDOW_TYPE_SPLASH\fP
 in EWMH specification. The behavior of dialog with this option is HIGHLY DEPENDS on settings of your window manager.
+
+This option is deprecated. Use \fB--window-type\fP instead.
+.TP
+.B \-\-window-type=\fITYPE\fP
+Create a window with the specified window type. \fITYPE\fPCan be one of \fInormal\fP, \fIdialog\fP, \fIutility\fP, 
+\fIdock\fP, \fIdesktop\fP, \fItooltip\fP, \fInotification\fP or \fIsplash\fP.
+The behavior of each window type depends on your window manager. See EWMH specification for details.
+
+\fINOTE:\fP Tiling window managers will often float a "dialog" window but tile a "normal" window.
 .TP
 .B \-\-no-focus
 Dialog window never take focus.

@@ -403,8 +403,12 @@ create_dialog (void)
 
   /* create dialog window */
   dlg = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+
+#ifdef DEPRECATED
   if (options.data.splash)
-    gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_SPLASHSCREEN);
+    options.data.window_type = GDK_WINDOW_TYPE_HINT_SPLASHSCREEN;
+#endif
+  gtk_window_set_type_hint (GTK_WINDOW (dlg), options.data.window_type);
   gtk_window_set_title (GTK_WINDOW (dlg), options.data.dialog_title);
   gtk_widget_set_name (dlg, "yad-dialog-window");
 
@@ -778,6 +782,15 @@ main (gint argc, gchar ** argv)
       g_printerr (_("Unable to parse command line: %s\n"), err->message);
       return -1;
     }
+
+#ifdef DEPRECATED
+  if (options.data.splash)
+    {
+      if (options.debug)
+        g_printerr(_("WARNING: Using splash option is deprecated, please use --window-type instead"));
+    }
+#endif
+
   yad_set_mode ();
 
   /* set working directory */
