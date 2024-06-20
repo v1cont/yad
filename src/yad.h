@@ -585,7 +585,9 @@ typedef struct {
 #endif
 
   gchar *css;
+#ifdef DEPRECATED
   gchar *gtkrc_file;
+#endif
 
   gchar *rest_file;
   gchar **extra_data;

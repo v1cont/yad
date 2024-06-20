@@ -105,6 +105,16 @@ if test x$build_sa = xyes; then
     AC_DEFINE([STANDALONE], [1], [Define this if you need standalone YAD binary])
 fi
 
+dnl deprecated options
+AC_ARG_ENABLE([deprecated],
+	[AS_HELP_STRING([--enable-deprecated],
+			[Build YAD with deprecated options])],
+	[build_depr=$enableval], [build_depr=yes])
+
+if test x$build_depr = xyes; then
+    AC_DEFINE([DEPRECATED], [1], [Define this if you need to build YAD with deprecated options])
+fi
+
 dnl tools
 AC_ARG_ENABLE([tools],
 	[AS_HELP_STRING([--enable-tools],
@@ -173,6 +183,7 @@ echo "  GtkSourceView        - $have_sourceview"
 echo "  Spell checking       - $have_spell"
 echo "  Path to rgb.txt      - $with_rgb"
 echo "  Standalone build     - $build_sa"
+echo "  Deprecated options   - $build_depr"
 echo "  Tools                - $build_tools"
 echo "  Icon browser         - $build_ib"
 echo

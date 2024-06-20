@@ -807,6 +807,7 @@ main (gint argc, gchar ** argv)
                                                  GTK_STYLE_PROVIDER_PRIORITY_USER);
       g_object_unref (css);
     }
+#ifdef DEPRECATED
   else if (options.gtkrc_file)
     {
       GtkCssProvider *css = gtk_css_provider_new ();
@@ -819,6 +820,7 @@ main (gint argc, gchar ** argv)
                                                  GTK_STYLE_PROVIDER_PRIORITY_USER);
       g_object_unref (css);
     }
+#endif
 
   /* set default icons and icon theme */
   if (options.data.icon_theme)

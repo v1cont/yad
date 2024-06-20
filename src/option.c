@@ -733,8 +733,10 @@ static GOptionEntry misc_options[] = {
     N_("Print version"), NULL },
   { "css", 0, 0, G_OPTION_ARG_STRING, &options.css,
     N_("Load additional CSS settings from file or string"), N_("STRING") },
+#ifdef DEPRECATED
   { "gtkrc", 0, 0, G_OPTION_ARG_FILENAME, &options.gtkrc_file,
     N_("Load additional CSS settings from file"), N_("FILENAME") },
+#endif
   { "hscroll-policy", 0, 0, G_OPTION_ARG_CALLBACK, set_scroll_policy,
     N_("Set policy for horizontal scrollbars (auto, always, never)"), N_("TYPE") },
   { "vscroll-policy", 0, 0, G_OPTION_ARG_CALLBACK, set_scroll_policy,
@@ -1568,7 +1570,9 @@ yad_options_init (void)
   options.rest_file = NULL;
   options.extra_data = NULL;
   options.css = NULL;
+#ifdef DEPRECATED
   options.gtkrc_file = NULL;
+#endif
 #ifndef G_OS_WIN32
   options.kill_parent = 0;
   options.print_xid = FALSE;
