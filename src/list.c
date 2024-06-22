@@ -756,7 +756,11 @@ get_data_as_string (GtkTreeIter *iter)
     }
 
   str->str[str->len-1] = '\0';
+#if GLIB_CHECK_VERSION(2,76,0)
   res = g_string_free_and_steal (str);
+#else
+  res = g_string_free (str, FALSE);
+#endif
 
   return res;
 }
