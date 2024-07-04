@@ -1,3 +1,6 @@
+Version 14.1
+    - fix build with old versions of glib
+
 Version 14.0
     - add --workdir option for changing current working directory
     - add --window-type option
