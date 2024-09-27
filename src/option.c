@@ -1411,6 +1411,8 @@ set_right_margin (const gchar * option_name, const gchar * value, gpointer data,
     options.source_data.right_margin = atoi (value);
   else
     options.source_data.right_margin = RIGHT_MARGIN;
+
+  return TRUE;
 }
 
 static gboolean
