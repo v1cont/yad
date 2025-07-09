@@ -1,6 +1,19 @@
 Yet Another Dialog
 ====================
 
+NB:
+
+Well, sorry for silence but i'm too busy right now (fucking war,
+fucking russians). After all i'm still alive
+
+Just want to say - YAD is not an abandoned project.  Because of
+external circumstances i cannot maintain it very actively, but i lurk
+for all of yours reports and proposals and keeps it in my mind
+
+Thanks for understanding and patience
+
+=========
+
 Program allows you to display GTK+ dialog boxes from command line or 
 shell scripts. YAD depends on GTK+ only. Minimal GTK+ version is 3.22.0
 
