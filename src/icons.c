@@ -148,7 +148,6 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
 {
   static GtkTreeIter iter;
   static gint column_count = 1;
-  static gint row_count = 0;
   static gboolean first_time = TRUE;
   GtkTreeModel *model;
 
@@ -204,7 +203,6 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
           if (string->str[0] == '\014')
             {
               gtk_list_store_clear (GTK_LIST_STORE (model));
-              row_count = 0;
               column_count = 1;
               continue;
             }
@@ -213,7 +211,6 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
             {
               /* We're starting a new row */
               column_count = 1;
-              row_count++;
               gtk_list_store_append (GTK_LIST_STORE (model), &iter);
               gtk_list_store_set (GTK_LIST_STORE (model), &iter, COL_FILENAME, "", -1);
             }
