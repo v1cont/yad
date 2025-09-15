@@ -132,6 +132,8 @@ set_size_type (const gchar *name, const gchar *val, gpointer d, GError **err)
 
   if (w && h)
     icon_size = MIN (w, h);
+
+  return TRUE;
 }
 
 static gchar *
