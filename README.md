@@ -38,13 +38,13 @@ git clone https://github.com/v1cont/yad.git yad-dialog-code
 Before run the standard ./configure && make && make install procedure
 you need to generate build scripts. This can be done by running command
 
-autoreconf -ivf && intltoolize
+autoreconf -ivf
 
 You must manually run gtk-update-icon-cache after installation.
 
 For successfully build you may need to install the following packages:
 * GNU Autotools (https://www.gnu.org/software/autoconf/ http://www.gnu.org/software/automake/)
-* Intltool >= 0.40.0 (http://freedesktop.org/wiki/Software/intltool/)
+* gettext >= 0.19.7 (https://www.gnu.org/software/gettext/)
 * GTK+ >= 3.22.0 (http://www.gtk.org)
 with appropriate *-dev* packages depending on your distro
 

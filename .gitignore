@@ -3,6 +3,8 @@ Makefile.in
 configure
 build/
 autom4te.cache/
+intl/
+m4/
 .deps/
 *.o
 *~
@@ -15,11 +17,15 @@ config.status
 data/*.desktop
 data/yad.m4
 data/yad.spec
-po/.intltool-merge-cache
 po/Makefile.in.in
+po/Makevars.template
 po/POTFILES
+po/Rules-quot
 po/*.pot
 po/*.gmo
+po/*.sed
+po/*.header
+po/*.sin
 po/stamp-it
 src/yad
 src/yad-icon-browser
@@ -31,3 +37,5 @@ stamp-h1
 build.log
 *.gschema.xml
 *.gschema.valid
+ABOUT-NLS
+ChangeLog

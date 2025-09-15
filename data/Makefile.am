@@ -10,11 +10,9 @@ endif
 
 desktopdir = $(datadir)/applications
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
-@INTLTOOL_DESKTOP_RULE@
 
 gsettings_in_files = yad.gschema.xml.in
 gsettings_SCHEMAS = $(gsettings_in_files:.xml.in=.xml)
-@INTLTOOL_XML_NOMERGE_RULE@
 @GSETTINGS_RULES@
 
 dist_man_MANS = yad.1
