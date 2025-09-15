@@ -533,11 +533,11 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
       else
         {
           gchar *ctype;
-           if (options.common_data.mime && *options.common_data.mime)
-             ctype = g_content_type_from_mime_type (options.common_data.mime);
-           else
-             ctype = g_content_type_guess (NULL, string->str, string->len, NULL);
-           lang = gtk_source_language_manager_guess_language (gtk_source_language_manager_get_default (), options.common_data.uri, ctype);
+          if (options.common_data.mime && *options.common_data.mime)
+            ctype = g_content_type_from_mime_type (options.common_data.mime);
+          else
+            ctype = g_content_type_guess (NULL, (const guchar *) string->str, string->len, NULL);
+          lang = gtk_source_language_manager_guess_language (gtk_source_language_manager_get_default (), options.common_data.uri, ctype);
           g_free (ctype);
         }
       gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (text_buffer), lang);
