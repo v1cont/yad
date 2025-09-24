@@ -84,12 +84,12 @@ msgstr "La valeur minimale doit être inférieure à la valeur maximale.\n"
 #: ../src/entry.c:179 ../src/scale.c:48
 #, c-format
 msgid "Initial value less than minimal.\n"
-msgstr "Valeur initial inférieur à la minimal.\n"
+msgstr "Valeur initiale inférieure à la minimale.\n"
 
 #: ../src/entry.c:184 ../src/scale.c:53
 #, c-format
 msgid "Initial value greater than maximum.\n"
-msgstr "Valeur initial supérieur à la maximal.\n"
+msgstr "Valeur initiale supérieure à la maximale.\n"
 
 #: ../src/form.c:372
 msgid "Select files"
@@ -128,7 +128,7 @@ msgstr "Impossible d'analyser le fichier %s: %s\n"
 #: ../src/icons.c:338
 #, c-format
 msgid "Unable to open directory %s: %s\n"
-msgstr "impossible d'ouvrir le répertoire  %s: %s\n"
+msgstr "Impossible d'ouvrir le répertoire  %s: %s\n"
 
 #: ../src/main.c:102 ../src/main.c:233
 #, c-format
@@ -148,7 +148,7 @@ msgstr "Impossible de charger l'icône de notification '%s': %s\n"
 #: ../src/notification.c:301
 #, c-format
 msgid "Invalid UTF-8 in tooltip!\n"
-msgstr "Charactère UTF-8 invalide du tooltip!\n"
+msgstr "Charactère UTF-8 invalide dans le tooltip!\n"
 
 #: ../src/notification.c:345
 #, c-format
@@ -170,16 +170,16 @@ msgstr "Supprimer la ligne"
 #: ../src/list.c:870
 #, fuzzy
 msgid "Duplicate row"
-msgstr "Supprimer la ligne"
+msgstr "Dupliquer la ligne"
 
 #: ../src/list.c:897
 #, c-format
 msgid "No column titles specified for List dialog.\n"
-msgstr "Pas de titre de colonne spécifié pour liste.\n"
+msgstr "Pas de titre de colonne spécifié pour le dialogue de liste.\n"
 
 #: ../src/option.c:69
 msgid "Set the dialog title"
-msgstr "Définit le titre"
+msgstr "Définir le titre"
 
 #: ../src/option.c:70
 msgid "TITLE"
@@ -211,7 +211,7 @@ msgstr "HAUTEUR"
 
 #: ../src/option.c:93
 msgid "Set the window geometry"
-msgstr "Définir la géométrie de la fenêtre"
+msgstr "Définir les dimensions de la fenêtre"
 
 #: ../src/option.c:94
 msgid "WxH+X+Y"
@@ -219,7 +219,7 @@ msgstr "WxH+X+Y"
 
 #: ../src/option.c:99
 msgid "Set dialog timeout in seconds"
-msgstr "Sélectionner le compte à rebourt en seconde de la boite de dialogue"
+msgstr "Sélectionner le compte à rebourt en seconde de la boîte de dialogue"
 
 #: ../src/option.c:100
 msgid "TIMEOUT"
@@ -269,7 +269,7 @@ msgstr "Afficher l'image du widget principal"
 
 #: ../src/option.c:135
 msgid "Use specified icon theme instead of default"
-msgstr "Utiliser un théme d'icone spécifique"
+msgstr "Utiliser un thème d'icône spécifique"
 
 #: ../src/option.c:136
 msgid "THEME"
@@ -293,7 +293,7 @@ msgstr "Ne pas afficher les boutons"
 
 #: ../src/option.c:159
 msgid "Set buttons layout type (spread, edge, start, end or center)"
-msgstr ""
+msgstr "Définir les types de boutons de la zone (étendre, bords, début, fin ou centre)"
 
 #: ../src/option.c:165
 msgid "Don't use pango markup language in dialog's text"
@@ -324,15 +324,15 @@ msgstr "Le texte peut être sélectionné"
 
 #: ../src/option.c:198
 msgid "Set window sticky"
-msgstr "Définir la fenêtre comme collante"
+msgstr "Définir la fenêtre comme inamovible"
 
 #: ../src/option.c:204
 msgid "Set window unresizable"
-msgstr "Fixer la géométrie de la fenêtre"
+msgstr "Rendre la fenêtre non redimensionnable"
 
 #: ../src/option.c:210
 msgid "Place window on top"
-msgstr "Placer la fenêtre sur le dessus"
+msgstr "Placer la fenêtre au dessus"
 
 #: ../src/option.c:216
 msgid "Place window on center of screen"
@@ -340,7 +340,7 @@ msgstr "Centrer la fenêtre"
 
 #: ../src/option.c:222
 msgid "Place window at the mouse position"
-msgstr "Placer la fenêtre sous la souri"
+msgstr "Placer la fenêtre à la position de la souris"
 
 #: ../src/option.c:228
 msgid "Set window undecorated"
@@ -353,12 +353,12 @@ msgstr "Ne pas montrer la fenêtre dans la barre de tâches"
 #: ../src/option.c:240
 #, fuzzy
 msgid "Set window maximized"
-msgstr "Fixer la géométrie de la fenêtre"
+msgstr "Rendre la fenêtre maximisée"
 
 #: ../src/option.c:246
 #, fuzzy
 msgid "Set window fulscreen"
-msgstr "Fixer la géométrie de la fenêtre"
+msgstr "Rendre la fenêtre en plein-écran"
 
 #: ../src/option.c:252
 msgid "Special type of dialog for XEMBED"
@@ -506,7 +506,7 @@ msgstr "Utiliser un bouton pour l'entré de texte"
 
 #: ../src/option.c:420
 msgid "Allow changes to text in combo-box"
-msgstr "Autoriser les modifications au texte dans la liste déroulante"
+msgstr "Autoriser les modifications du texte dans la liste déroulante"
 
 #: ../src/option.c:426
 msgid "Set the left entry icon"
@@ -550,7 +550,7 @@ msgstr "Activer le mode sauvegarde"
 
 #: ../src/option.c:490 ../src/option.c:577 ../src/option.c:713
 msgid "Set output separator character"
-msgstr "Définir le charactère séparateur en sortie"
+msgstr "Définir le caractère séparateur en sortie"
 
 #: ../src/option.c:491 ../src/option.c:578 ../src/option.c:584
 #: ../src/option.c:714 ../src/option.c:897 ../src/option.c:903
@@ -576,12 +576,12 @@ msgstr "NOM | REPERTOIRE1 REPERTOIRE2 ..."
 #: ../src/option.c:508
 #, fuzzy
 msgid "Enable preview"
-msgstr "Définir le texte initial"
+msgstr "Activer la prévisualisation"
 
 #: ../src/option.c:514 ../src/option.c:601 ../src/option.c:791
 #, fuzzy
 msgid "Quote dialogs output"
-msgstr "Définir le texte"
+msgstr "Mettre entre guillemets la sortie"
 
 #: ../src/option.c:524
 msgid "Display font selection dialog"
@@ -601,7 +601,7 @@ msgstr "NOMDEPOLICE"
 
 #: ../src/option.c:542
 msgid "Set preview text"
-msgstr "Définir le texte initial"
+msgstr "Définir le texte de prévisualisation"
 
 #: ../src/option.c:552
 msgid "Display form dialog"
@@ -633,7 +633,7 @@ msgstr "Définir le nombre de colonnes dans la boîte form"
 #: ../src/option.c:583
 msgid "Set separator character for combobox or scale data"
 msgstr ""
-"Définir le séparateur de charactère pour la liste déroulante ou les données "
+"Définir le séparateur de caractère pour la liste déroulante ou les données "
 "d'échelle"
 
 #: ../src/option.c:595
@@ -655,12 +655,12 @@ msgstr "REPERTOIRE"
 
 #: ../src/option.c:623
 msgid "Use compact (list) view"
-msgstr "Utiliser la vue compacter (liste)"
+msgstr "Utiliser la vue compacte (liste)"
 
 #: ../src/option.c:629
 msgid "Use GenericName field instead of Name for icon label"
 msgstr ""
-"Utiliser le nom générique plutôt que le nom pour  l'étiquette de l'icone"
+"Utiliser le nom générique plutôt que le nom pour l'étiquette de l'icône"
 
 #: ../src/option.c:635
 msgid "Read data from stdin"
@@ -688,7 +688,7 @@ msgstr "Trier les éléments par ordre décroissant"
 
 #: ../src/option.c:666
 msgid "Activate items by single click"
-msgstr ""
+msgstr "Activer les items par un simple clic"
 
 #: ../src/option.c:676
 msgid "Display list dialog"
@@ -715,11 +715,11 @@ msgstr "Utiliser des cases à cocher pour la première colonne"
 #: ../src/option.c:700
 #, fuzzy
 msgid "Use radioboxes for first column"
-msgstr "Utiliser des cases à cocher pour la première colonne"
+msgstr "Utiliser des cases radio pour la première colonne"
 
 #: ../src/option.c:706
 msgid "Disable clickable column headers"
-msgstr ""
+msgstr "Désactiver les entêtes de colonnes cliquables"
 
 #: ../src/option.c:719
 msgid "Allow multiple rows to be selected"
@@ -745,7 +745,7 @@ msgid ""
 "columns"
 msgstr ""
 "Renvoyer une colonne spécifique. Par défaut ou si 0 est spécifié toutes les "
-"colonnes sont renvoyée"
+"colonnes sont renvoyées"
 
 #: ../src/option.c:749
 msgid "Hide a specific column"
@@ -754,7 +754,7 @@ msgstr "Cacher une colonne spécifique"
 #: ../src/option.c:755
 msgid "Set the column expandable by default. 0 sets all columns expandable"
 msgstr ""
-"Définirla colonne extensible par défaut. 0 définit toutes les colonnes comme "
+"Définir la colonne extensible par défaut. 0 définit toutes les colonnes comme "
 "extensible"
 
 #: ../src/option.c:761
@@ -811,7 +811,7 @@ msgstr "Tuer le processus parent quand le bouton quitter est pressé"
 #: ../src/option.c:844
 #, fuzzy
 msgid "Display notebook dialog"
-msgstr "Afficher une boîte de type icône"
+msgstr "Afficher une boîte de type notebook"
 
 #: ../src/option.c:850
 msgid "Identifier of embedded dialogs"
@@ -819,7 +819,7 @@ msgstr ""
 
 #: ../src/option.c:856
 msgid "Add a tab to notebook"
-msgstr ""
+msgstr "Ajouter un onglet au notebook"
 
 #: ../src/option.c:857
 msgid "LABEL"
@@ -833,15 +833,15 @@ msgstr "Voir indicateur de temps restant (haut, bas, gauche, droite)"
 #: ../src/option.c:868
 #, fuzzy
 msgid "Set tab borders"
-msgstr "Définir les bordures de fenêtre"
+msgstr "Définir les bordures d'onglet"
 
 #: ../src/option.c:878
 msgid "Display notification"
-msgstr "Utiliser la notification"
+msgstr "Afficher la notification"
 
 #: ../src/option.c:884
 msgid "Set left-click action"
-msgstr "Action sur un  clic gauche"
+msgstr "Action sur un clic gauche"
 
 #: ../src/option.c:890
 msgid "Listen for commands on stdin"
@@ -858,7 +858,7 @@ msgstr "Définir le séparateur pour les champs du menu"
 #: ../src/option.c:908
 #, fuzzy
 msgid "Set initial popup menu"
-msgstr "Définir la police d'écriture"
+msgstr "Affecter le menu de popup initial"
 
 #: ../src/option.c:909
 msgid "STRING"
@@ -866,7 +866,7 @@ msgstr ""
 
 #: ../src/option.c:914
 msgid "Disable exit on middle click"
-msgstr ""
+msgstr "Désactiver quitter lors d'un clic milieu"
 
 #: ../src/option.c:924
 #, fuzzy
@@ -884,11 +884,11 @@ msgstr ""
 
 #: ../src/option.c:942
 msgid "Add headers to page"
-msgstr ""
+msgstr "Ajouter des entêtes à la page"
 
 #: ../src/option.c:948
 msgid "Enable preview in print dialog"
-msgstr ""
+msgstr "Activer la prévisualisation dans le dialogue print"
 
 #: ../src/option.c:954 ../src/option.c:1125
 msgid "Use specified font"
@@ -979,7 +979,7 @@ msgstr "Cacher la valeur"
 
 #: ../src/option.c:1085
 msgid "Show vertical scale"
-msgstr "Affiche l'échelle verticale"
+msgstr "Affiche l'ascenseur verticale"
 
 #: ../src/option.c:1091
 msgid "Invert direction"
@@ -987,7 +987,7 @@ msgstr "Inverser la direction"
 
 #: ../src/option.c:1097
 msgid "Add mark to scale (may be used multiple times)"
-msgstr "Ajouter un marqueur à l'échelle (peut être utilisée plusieurs fois)"
+msgstr "Ajouter un marqueur à l'ascenseur (peut être utilisée plusieurs fois)"
 
 #: ../src/option.c:1098
 msgid "NAME:VALUE"
@@ -1039,7 +1039,7 @@ msgstr ""
 
 #: ../src/option.c:1183
 msgid "Show about dialog"
-msgstr "Afficher la boîte \"A propos\""
+msgstr "Afficher la boîte \"À propos\""
 
 #: ../src/option.c:1189
 msgid "Print version"
