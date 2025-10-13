@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: victor@sanana.kiev.ua\n"
-"POT-Creation-Date: 2025-09-15 08:44+0300\n"
+"POT-Creation-Date: 2025-10-13 19:18+0300\n"
 "PO-Revision-Date: 2021-11-28 19:00+0200\n"
 "Last-Translator: Victor Ananjevsky <victor@sanana.kiev.ua>\n"
 "Language-Team: \n"
@@ -1461,11 +1461,11 @@ msgstr "МОВА"
 msgid "Use specified theme"
 msgstr "Використовувати вказану тему"
 
-#: ../src/option.c:697 ../data/yad.gschema.xml.in.h:18
+#: ../src/option.c:697
 msgid "Show line numbers"
 msgstr "Відображати номера строк"
 
-#: ../src/option.c:699 ../data/yad.gschema.xml.in.h:19
+#: ../src/option.c:699
 msgid "Highlight current line"
 msgstr "Виділяти активну строку"
 
@@ -1489,11 +1489,11 @@ msgstr "Задати позицію правого поля"
 msgid "[POS]"
 msgstr "[ПОЗИЦІЯ]"
 
-#: ../src/option.c:709 ../data/yad.gschema.xml.in.h:24
+#: ../src/option.c:709
 msgid "Highlight matching brackets"
 msgstr "Виділяти відповідні дужки"
 
-#: ../src/option.c:711 ../data/yad.gschema.xml.in.h:25
+#: ../src/option.c:711
 msgid "Use autoindent"
 msgstr "Використовувати автовирівнювання"
 
@@ -1513,7 +1513,7 @@ msgstr "Задати поведінку розумних Home/End"
 msgid "Enable smart backspace"
 msgstr "Використовувати розумній backspace"
 
-#: ../src/option.c:721 ../data/yad.gschema.xml.in.h:30
+#: ../src/option.c:721
 msgid "Insert spaces instead of tabs"
 msgstr "Вставляти пробіл замість табуляції"
 
@@ -2412,7 +2412,7 @@ msgid "Insert spaces instead of tabulation:CHK"
 msgstr "Вставляти пробіли замість табуляції:CHK"
 
 #. main dialog
-#: ../src/yad-settings.sh:96 ../data/yad-settings.desktop.in.h:1
+#: ../src/yad-settings.sh:96
 msgid "YAD settings"
 msgstr "Налаштування YAD"
 
@@ -2432,112 +2432,12 @@ msgstr "Головні"
 msgid "Editor"
 msgstr "Редактор"
 
-#: ../data/yad-icon-browser.desktop.in.h:1
+# Translation of .desktop files
 msgid "Icon Browser"
 msgstr "Навігатор піктограм"
 
-#: ../data/yad-icon-browser.desktop.in.h:2
 msgid "Inspect GTK Icon Theme"
 msgstr "Перегляд теми піктограм GTK"
 
-#: ../data/yad-settings.desktop.in.h:2
 msgid "Simple GUI for editing YAD settings"
 msgstr "Простий інтерфейс для редагування налаштувань YAD"
-
-#: ../data/yad.gschema.xml.in.h:1
-msgid "Default width of dialog window"
-msgstr "Типова ширина вікна діалогу"
-
-#: ../data/yad.gschema.xml.in.h:2
-msgid "Default height of dialog window"
-msgstr "Типова висота вікна діалогу"
-
-#: ../data/yad.gschema.xml.in.h:3
-msgid "Borders around dialog"
-msgstr "Ширина рамки діалогу"
-
-#: ../data/yad.gschema.xml.in.h:4
-msgid "Show remaining time and percentage in timeout progress bar"
-msgstr "Відображати залишок часу та проценти у індикаторі часу що залишився"
-
-#: ../data/yad.gschema.xml.in.h:5
-msgid "Combo-box in entry dialog is always editable"
-msgstr "Поле вибору завжди можна редагувати"
-
-#: ../data/yad.gschema.xml.in.h:7
-#, no-c-format
-msgid "Default terminal command (use %s for arguments placeholder)"
-msgstr ""
-"Типова команда терміналу (%s використовується для розміщення аргументів)"
-
-#: ../data/yad.gschema.xml.in.h:9
-#, no-c-format
-msgid "Default open command (use %s for arguments placeholder)"
-msgstr ""
-"Типова команда для відкриття (%s використовується для розміщення аргументів)"
-
-#: ../data/yad.gschema.xml.in.h:10
-msgid "Default date format (see strftime(3) for details)"
-msgstr "Типовий формат дати (подробиці в strftime(3))"
-
-#: ../data/yad.gschema.xml.in.h:11
-msgid "Default color for URI in text-info dialog"
-msgstr "Типовий колір URI посилань у текстовому діалозі"
-
-#: ../data/yad.gschema.xml.in.h:12
-msgid "Maximum number of tabs in notebook dialog"
-msgstr "Максимальна кількість вкладинок у діалозі"
-
-#: ../data/yad.gschema.xml.in.h:13
-msgid "Use large previews in file selection dialogs"
-msgstr ""
-"Використовувати крупний розмір зображень попереднього перегляду у діалогах "
-"вибору файла"
-
-#: ../data/yad.gschema.xml.in.h:14
-msgid "Set width of search entry in search bar"
-msgstr "Задати ширину поля пошуку у панелі пошуку"
-
-#: ../data/yad.gschema.xml.in.h:15
-msgid "Ignore unknown command-line options"
-msgstr "Ігнорувати невідомі аргументи"
-
-#: ../data/yad.gschema.xml.in.h:16
-msgid "Enable debug mode with information about deprecated features"
-msgstr "Дозволити режим зневадження з інформуванням про застарілі функції"
-
-#: ../data/yad.gschema.xml.in.h:17
-msgid "Default color theme for text-info dialog"
-msgstr "Типова кольорова тема у текстовому діалозі"
-
-#: ../data/yad.gschema.xml.in.h:20
-msgid "Enable line marks mode"
-msgstr "Дозволити режим позначки строк"
-
-#: ../data/yad.gschema.xml.in.h:21
-msgid "Default color for first type of text marks in text-info dialog"
-msgstr "Типовий колір позначок першого типу у текстовому діалозі"
-
-#: ../data/yad.gschema.xml.in.h:22
-msgid "Default color for second type of text marks in text-info dialog"
-msgstr "Типовий колір позначок другого типу у текстовому діалозі"
-
-#: ../data/yad.gschema.xml.in.h:23
-msgid "Set right margin at position"
-msgstr "Встановити праву межу у позиції"
-
-#: ../data/yad.gschema.xml.in.h:26
-msgid "Smart Home/End behavior"
-msgstr "Поведінка розумного Home/End"
-
-#: ../data/yad.gschema.xml.in.h:27
-msgid "Use smart backspace"
-msgstr "Використовувати розумний backspace"
-
-#: ../data/yad.gschema.xml.in.h:28
-msgid "Default tabulation width"
-msgstr "Типова ширина табуляції"
-
-#: ../data/yad.gschema.xml.in.h:29
-msgid "Default indentation width"
-msgstr "Типова ширина вирівнювання"

@@ -11,8 +11,10 @@ endif
 desktopdir = $(datadir)/applications
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
-gsettings_in_files = yad.gschema.xml.in
-gsettings_SCHEMAS = $(gsettings_in_files:.xml.in=.xml)
+%.desktop: %.desktop.in
+	$(AM_V_GEN)$(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
+
+gsettings_SCHEMAS = yad.gschema.xml
 @GSETTINGS_RULES@
 
 dist_man_MANS = yad.1
@@ -23,6 +25,6 @@ endif
 m4dir = $(datadir)/aclocal
 m4_DATA = yad.m4
 
-EXTRA_DIST = $(desktop_in_files) $(gsettings_in_files) misc
+EXTRA_DIST = $(desktop_in_files) $(gsettings_SCHEMAS) misc
 
-DISTCLEANFILES = $(desktop_DATA) $(gsettings_SCHEMAS) $(m4_DATA) yad.spec
+DISTCLEANFILES = $(desktop_DATA) $(m4_DATA) yad.spec

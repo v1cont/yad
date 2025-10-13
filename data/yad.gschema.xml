@@ -10,118 +10,118 @@
   <schema id="yad.settings" path="/yad/settings/" gettext-domain="yad">
     <key name="width" type="i">
       <default>-1</default>
-      <_summary>Default width of dialog window</_summary>
+      <summary>Default width of dialog window</summary>
     </key>
     <key name="height" type="i">
       <default>-1</default>
-      <_summary>Default height of dialog window</_summary>
+      <summary>Default height of dialog window</summary>
     </key>
     <key name="border" type="i">
       <default>5</default>
-      <_summary>Borders around dialog</_summary>
+      <summary>Borders around dialog</summary>
     </key>
     <key name="show-remain" type="b">
       <default>false</default>
-      <_summary>Show remaining time and percentage in timeout progress bar</_summary>
+      <summary>Show remaining time and percentage in timeout progress bar</summary>
     </key>
     <key name="combo-always-editable" type="b">
       <default>false</default>
-      <_summary>Combo-box in entry dialog is always editable</_summary>
+      <summary>Combo-box in entry dialog is always editable</summary>
     </key>
     <key name="terminal" type="s">
       <default>'xterm -e "%s"'</default>
-      <_summary>Default terminal command (use %s for arguments placeholder)</_summary>
+      <summary>Default terminal command (use %s for arguments placeholder)</summary>
     </key>
     <key name="open-command" type="s">
       <default>'xdg-open "%s"'</default>
-      <_summary>Default open command (use %s for arguments placeholder)</_summary>
+      <summary>Default open command (use %s for arguments placeholder)</summary>
     </key>
     <key name="date-format" type="s">
       <default>'%x'</default>
-      <_summary>Default date format (see strftime(3) for details)</_summary>
+      <summary>Default date format (see strftime(3) for details)</summary>
     </key>
     <key name="uri-color" type="s">
       <default>'blue'</default>
-      <_summary>Default color for URI in text-info dialog</_summary>
+      <summary>Default color for URI in text-info dialog</summary>
     </key>
     <key name="max-tab" type="i">
       <default>100</default>
-      <_summary>Maximum number of tabs in notebook dialog</_summary>
+      <summary>Maximum number of tabs in notebook dialog</summary>
     </key>
     <key name="large-preview" type="b">
       <default>false</default>
-      <_summary>Use large previews in file selection dialogs</_summary>
+      <summary>Use large previews in file selection dialogs</summary>
     </key>
     <key name="search-width" type="i">
       <default>-1</default>
-      <_summary>Set width of search entry in search bar</_summary>
+      <summary>Set width of search entry in search bar</summary>
     </key>
     <key name="ignore-unknown-options" type="b">
       <default>true</default>
-      <_summary>Ignore unknown command-line options</_summary>
+      <summary>Ignore unknown command-line options</summary>
     </key>
     <key name="debug" type="b">
       <default>false</default>
-      <_summary>Enable debug mode with information about deprecated features</_summary>
+      <summary>Enable debug mode with information about deprecated features</summary>
     </key>
   </schema>
 
   <schema id="yad.sourceview" path="/yad/sourceview/" gettext-domain="yad">
     <key name="theme" type="s">
       <default>''</default>
-      <_summary>Default color theme for text-info dialog</_summary>
+      <summary>Default color theme for text-info dialog</summary>
     </key>
     <key name="line-num" type="b">
       <default>false</default>
-      <_summary>Show line numbers</_summary>
+      <summary>Show line numbers</summary>
     </key>
     <key name="line-hl" type="b">
       <default>false</default>
-      <_summary>Highlight current line</_summary>
+      <summary>Highlight current line</summary>
     </key>
     <key name="line-marks" type="b">
       <default>false</default>
-      <_summary>Enable line marks mode</_summary>
+      <summary>Enable line marks mode</summary>
     </key>
     <key name="mark1-color" type="s">
       <default>'lightgreen'</default>
-      <_summary>Default color for first type of text marks in text-info dialog</_summary>
+      <summary>Default color for first type of text marks in text-info dialog</summary>
     </key>
     <key name="mark2-color" type="s">
       <default>'pink'</default>
-      <_summary>Default color for second type of text marks in text-info dialog</_summary>
+      <summary>Default color for second type of text marks in text-info dialog</summary>
     </key>
     <key name="right-margin" type="i">
       <default>0</default>
-      <_summary>Set right margin at position</_summary>
+      <summary>Set right margin at position</summary>
     </key>
     <key name="brackets" type="b">
       <default>false</default>
-      <_summary>Highlight matching brackets</_summary>
+      <summary>Highlight matching brackets</summary>
     </key>
     <key name="indent" type="b">
       <default>false</default>
-      <_summary>Use autoindent</_summary>
+      <summary>Use autoindent</summary>
     </key>
     <key name="homend" enum="yad.homend">
       <default>'never'</default>
-      <_summary>Smart Home/End behavior</_summary>
+      <summary>Smart Home/End behavior</summary>
     </key>
     <key name="smart-bs" type="b">
       <default>false</default>
-      <_summary>Use smart backspace</_summary>
+      <summary>Use smart backspace</summary>
     </key>
     <key name="tab-width" type="i">
       <default>8</default>
-      <_summary>Default tabulation width</_summary>
+      <summary>Default tabulation width</summary>
     </key>
     <key name="indent-width" type="i">
       <default>4</default>
-      <_summary>Default indentation width</_summary>
+      <summary>Default indentation width</summary>
     </key>
     <key name="spaces" type="b">
       <default>true</default>
-      <_summary>Insert spaces instead of tabs</_summary>
+      <summary>Insert spaces instead of tabs</summary>
     </key>
   </schema>
 
