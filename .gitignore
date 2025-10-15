@@ -27,6 +27,7 @@ po/*.sed
 po/*.header
 po/*.sin
 po/stamp-it
+po/stamp-po
 src/yad
 src/yad-icon-browser
 src/yad-tools
