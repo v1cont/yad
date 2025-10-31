@@ -1,4 +1,3 @@
-
 /*
  * This file is part of YAD.
  *
@@ -15,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2020-2024, Victor Ananjevsky <victor@sanana.kiev.ua>
+ * Copyright (C) 2020-2025, Victor Ananjevsky <victor@sanana.kiev.ua>
  */
 
 /* This code getted from deprecated GtkColorSelection widget (gtk+-3.24.33) */

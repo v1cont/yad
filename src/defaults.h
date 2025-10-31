@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2020-2021, Victor Ananjevsky <ananasik@gmail.com>
+ * Copyright (C) 2020-2025, Victor Ananjevsky <ananasik@gmail.com>
  */
 
 #ifndef __YAD_DEFS_H__
