@@ -64,12 +64,12 @@ yad --plug=$KEY --tabnum=1 --bool-fmt=t --quoted-output --separator=" " \
 # get list for themes
 eval SV_THEME=$(gsettings get yad.sourceview theme)
 themes=$"<Empty>!"
-for t in $(yad-tools --show-themes); do
+while read t; do
     [[ $t == $SV_THEME ]] && themes+="^$t!" || themes+="$t!"
-done
+done < <(yad-tools --show-themes)
 
 # get list for home/end
-eval HE==$(gsettings get yad.sourceview homend)
+eval HE=$(gsettings get yad.sourceview homend)
 for b in never before after always; do
     [[ $b == $HE ]] && homend+="^$b!" || homend+="$b!"
 done
@@ -77,7 +77,7 @@ done
 # second tab
 yad --plug=$KEY --tabnum=2 --bool-fmt=t --quoted-output --separator=" " --form --scroll \
     --text=$"YAD settings for text editor\nThis settings only usefull when YAD built with GtkSourceView\n\n" \
-    --field=$"Default theme for text-info dialog::CB" ${themes%?} \
+    --field=$"Default theme for text-info dialog::CB" "${themes%?}" \
     --field=$"Show line numbers:CHK" $(gsettings get yad.sourceview line-num) \
     --field=$"Hightlight current line:CHK" $(gsettings get yad.sourceview line-hl) \
     --field=$"Enable line marks mode:CHK" $(gsettings get yad.sourceview line-marks) \
@@ -86,7 +86,7 @@ yad --plug=$KEY --tabnum=2 --bool-fmt=t --quoted-output --separator=" " --form -
     --field=$"Right margin position::NUM" $(gsettings get yad.sourceview right-margin) \
     --field=$"Highlight matching brackets:CHK" $(gsettings get yad.sourceview brackets) \
     --field=$"Use autoindentation:CHK" $(gsettings get yad.sourceview indent) \
-    --field=$"Smart Home/End behavior::CB" ${homend%?} \
+    --field=$"Smart Home/End behavior::CB" "${homend%?}" \
     --field=$"Use smart backspace:CHK" $(gsettings get yad.sourceview smart-bs) \
     --field=$"Tabulation width::NUM" $(gsettings get yad.sourceview tab-width) \
     --field=$"Indentation width::NUM" $(gsettings get yad.sourceview indent-width) \
