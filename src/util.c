@@ -305,11 +305,15 @@ get_tabs (key_t key, gboolean create)
       for (i = 1; i < max_tab; i++)
         {
           t[i].pid = -1;
+#ifdef HAVE_X11
           t[i].xid = 0;
+#endif
         }
       t[0].pid = shmid;
       /* lastly, allow plugs to write shmem */
+#ifdef HAVE_X11
       t[0].xid = 1;
+#endif
     }
 
   return t;
