@@ -633,6 +633,8 @@ html_create_widget (GtkWidget * dlg)
   /* load data */
   if (options.html_data.uri)
     load_uri (options.html_data.uri);
+  else if (options.extra_data)
+    load_uri (options.extra_data[0]);
   else if (!options.html_data.browser)
     {
       GIOChannel *ch;
@@ -643,8 +645,6 @@ html_create_widget (GtkWidget * dlg)
       g_io_channel_set_flags (ch, G_IO_FLAG_NONBLOCK, NULL);
       g_io_add_watch (ch, G_IO_IN | G_IO_HUP, handle_stdin, NULL);
     }
-  else if (options.extra_data)
-    load_uri (options.extra_data[0]);
 
   return w;
 }
