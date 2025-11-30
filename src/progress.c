@@ -138,7 +138,20 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
           else
             {
               if (value[1] && b->type == YAD_PROGRESS_PULSE)
-                gtk_progress_bar_pulse (pb);
+                {
+                  /* Fix for issue #305: Check if this is a completion signal (100 or more) */
+                  if (g_ascii_isdigit (*value[1]))
+                    {
+                      gint val = atoi (value[1]);
+                      if (val >= 100 && options.progress_data.autoclose && options.plug == -1)
+                        {
+                          /* Treat 100+ as completion signal for pulsate bar */
+                          yad_exit (options.data.def_resp);
+                        }
+                    }
+                  /* Continue pulsating for values < 100 or non-numeric input */
+                  gtk_progress_bar_pulse (pb);
+                }
               else if (value[1] && b->type == YAD_PROGRESS_PERM)
                 {
                   guint id;
