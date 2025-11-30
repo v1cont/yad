@@ -751,6 +751,9 @@ YadSearchBar *create_search_bar ();
 
 gboolean yad_confirm_dlg (GtkWindow *parent, gchar *txt);
 
+gboolean yad_check_x11 (void);
+gboolean yad_check_wayland (void);
+
 static inline void
 strip_new_line (gchar * str)
 {

@@ -31,6 +31,10 @@
 # include <gdk/gdkx.h>
 #endif
 
+#ifdef GDK_WINDOWING_WAYLAND
+# include <gdk/gdkwayland.h>
+#endif
+
 #include "yad.h"
 
 YadOptions options;
@@ -53,8 +57,21 @@ static GtkWidget *text = NULL;
 static gint ret = YAD_RESPONSE_ESC;
 
 static gboolean is_x11 = FALSE;
+static gboolean is_wayland = FALSE;
 
 YadNTabs *tabs;
+
+gboolean
+yad_check_x11 (void)
+{
+  return is_x11;
+}
+
+gboolean
+yad_check_wayland (void)
+{
+  return is_wayland;
+}
 
 #ifndef G_OS_WIN32
 static void
@@ -74,7 +91,27 @@ sa_usr2 (gint sig)
   else
     yad_exit (YAD_RESPONSE_CANCEL);
 }
+
+static void
+sa_term (gint sig)
+{
+  /* Handle SIGTERM/SIGINT for graceful shutdown */
+  if (options.plug != -1)
+    gtk_main_quit ();
+  else
+    yad_exit (YAD_RESPONSE_CANCEL);
+}
 #endif
+
+/* Callback to fix text label sizing with line wrap */
+static void
+text_size_allocate_cb (GtkWidget *w, GtkAllocation *al, gpointer data)
+{
+  /* Set the width request to the allocated width to enable proper line wrapping.
+   * This prevents GTK from requesting the natural (unwrapped) width which causes
+   * windows to become excessively large. See issues #107, #140, #32, #297, #300 */
+  gtk_widget_set_size_request (w, al->width, -1);
+}
 
 static gboolean
 keys_cb (GtkWidget *w, GdkEventKey *ev, gpointer d)
@@ -221,12 +258,33 @@ create_layout (GtkWidget *dlg)
           text = gtk_label_new (NULL);
           gtk_widget_set_name (text, "yad-dialog-label");
           gtk_label_set_line_wrap (GTK_LABEL (text), TRUE);
+          gtk_label_set_line_wrap_mode (GTK_LABEL (text), PANGO_WRAP_WORD_CHAR);
           gtk_label_set_selectable (GTK_LABEL (text), options.data.selectable_labels);
           gtk_widget_set_state_flags (text, GTK_STATE_FLAG_NORMAL, FALSE);
           gtk_widget_set_can_focus (text, FALSE);
 
           if (options.data.text_width > 0)
             gtk_label_set_width_chars (GTK_LABEL (text), options.data.text_width);
+
+          /* Constrain label width when window size is constrained.
+           * This fixes line wrapping with --width, --height, and --geometry options.
+           * Using max_width_chars with ellipsize=NONE forces text to wrap instead
+           * of expanding the window. See issues #107, #140, #32, #297, #300 */
+          if (options.data.width != -1)
+            {
+              /* Approximate chars based on width (assuming ~8px per char average) */
+              gint max_chars = (options.data.width - 50) / 8;
+              if (max_chars > 10)
+                {
+                  gtk_label_set_max_width_chars (GTK_LABEL (text), max_chars);
+                  gtk_label_set_ellipsize (GTK_LABEL (text), PANGO_ELLIPSIZE_NONE);
+                  gtk_widget_set_hexpand (text, FALSE);
+                }
+            }
+
+          /* Also connect size-allocate for geometry-based constraints */
+          if (options.data.geometry || options.data.width != -1)
+            g_signal_connect (G_OBJECT (text), "size-allocate", G_CALLBACK (text_size_allocate_cb), NULL);
 
           /* set label align and justification */
           switch (options.data.text_align)
@@ -371,28 +429,38 @@ realize_cb (GtkWidget *dlg, gpointer d)
 
   if (options.data.use_posx || options.data.use_posy)
     {
-      gint ww, wh, sw, sh;
-      gtk_window_get_size (GTK_WINDOW (dlg), &ww, &wh);
-      gdk_window_get_geometry (gdk_get_default_root_window (), NULL, NULL, &sw, &sh);
-      /* place window to specified coordinates */
-      if (!options.data.use_posx)
-        gtk_window_get_position (GTK_WINDOW (dlg), &options.data.posx, NULL);
-      if (!options.data.use_posy)
-        gtk_window_get_position (GTK_WINDOW (dlg), NULL, &options.data.posy);
-      if (options.data.negx)
+      /* Window positioning doesn't work reliably on Wayland - compositor controls placement */
+      if (is_wayland)
         {
-          options.data.posx = sw - ww + options.data.posx;
-          gravity = GDK_GRAVITY_NORTH_EAST;
+          if (options.debug)
+            g_printerr (_("WARNING: Window positioning (--posx/--posy) is controlled by "
+                         "the Wayland compositor and may not work as expected.\n"));
         }
-      if (options.data.negy)
+      else
         {
-          options.data.posy = sh - wh + options.data.posy;
-          gravity = GDK_GRAVITY_SOUTH_WEST;
+          gint ww, wh, sw, sh;
+          gtk_window_get_size (GTK_WINDOW (dlg), &ww, &wh);
+          gdk_window_get_geometry (gdk_get_default_root_window (), NULL, NULL, &sw, &sh);
+          /* place window to specified coordinates */
+          if (!options.data.use_posx)
+            gtk_window_get_position (GTK_WINDOW (dlg), &options.data.posx, NULL);
+          if (!options.data.use_posy)
+            gtk_window_get_position (GTK_WINDOW (dlg), NULL, &options.data.posy);
+          if (options.data.negx)
+            {
+              options.data.posx = sw - ww + options.data.posx;
+              gravity = GDK_GRAVITY_NORTH_EAST;
+            }
+          if (options.data.negy)
+            {
+              options.data.posy = sh - wh + options.data.posy;
+              gravity = GDK_GRAVITY_SOUTH_WEST;
+            }
+          if (options.data.negx && options.data.negy)
+            gravity = GDK_GRAVITY_SOUTH_EAST;
+          gtk_window_set_gravity (GTK_WINDOW (dlg), gravity);
+          gtk_window_move (GTK_WINDOW (dlg), options.data.posx, options.data.posy);
         }
-      if (options.data.negx && options.data.negy)
-        gravity = GDK_GRAVITY_SOUTH_EAST;
-      gtk_window_set_gravity (GTK_WINDOW (dlg), gravity);
-      gtk_window_move (GTK_WINDOW (dlg), options.data.posx, options.data.posy);
     }
 }
 
@@ -438,7 +506,13 @@ create_dialog (void)
       if (options.data.center)
         gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER_ALWAYS);
       else if (options.data.mouse)
-        gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_MOUSE);
+        {
+          /* Mouse positioning doesn't work on Wayland */
+          if (is_wayland && options.debug)
+            g_printerr (_("WARNING: --mouse option is not supported on Wayland.\n"));
+          else
+            gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_MOUSE);
+        }
     }
 
   /* set window behavior */
@@ -593,6 +667,17 @@ create_dialog (void)
             }
         }
       /* add buttons box to main window */
+      
+      // Check for footer widget from form
+      GtkWidget *footer_widget = g_object_get_data (G_OBJECT (dlg), "yad-footer-widget");
+      if (footer_widget)
+        {
+          gtk_box_pack_start (GTK_BOX (bbox), footer_widget, FALSE, FALSE, 0);
+          gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (bbox), footer_widget, TRUE);
+          gtk_button_box_set_child_non_homogeneous (GTK_BUTTON_BOX (bbox), footer_widget, TRUE);
+          gtk_widget_show_all (footer_widget);
+        }
+
       gtk_box_pack_start (GTK_BOX (vbox), bbox, FALSE, FALSE, 0);
     }
 
@@ -807,6 +892,11 @@ main (gint argc, gchar ** argv)
     is_x11 = TRUE;
 #endif
 
+#ifdef GDK_WINDOWING_WAYLAND
+  if (GDK_IS_WAYLAND_DISPLAY (gdk_display_get_default ()))
+    is_wayland = TRUE;
+#endif
+
   /* parse custom css */
   if (options.css)
     {
@@ -890,6 +980,8 @@ main (gint argc, gchar ** argv)
   /* set signal handlers */
   signal (SIGUSR1, sa_usr1);
   signal (SIGUSR2, sa_usr2);
+  signal (SIGTERM, sa_term);
+  signal (SIGINT, sa_term);
 #endif
 
   if (!is_x11 && options.plug != -1)
