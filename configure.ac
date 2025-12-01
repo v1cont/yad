@@ -141,7 +141,7 @@ AC_SUBST([GETTEXT_PACKAGE])
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [Gettext domain])
 
 AM_GNU_GETTEXT_VERSION([0.19.7])
-AM_GNU_GETTEXT
+AM_GNU_GETTEXT([external])
 
 # *******************************
 
