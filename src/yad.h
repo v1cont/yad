@@ -714,6 +714,8 @@ gboolean yad_send_notify (gboolean);
 void notebook_close_childs (void);
 void paned_close_childs (void);
 
+gboolean yad_check_x11 (void);
+
 void read_settings (void);
 void write_settings (void);
 
