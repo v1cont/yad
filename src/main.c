@@ -890,6 +890,8 @@ main (gint argc, gchar ** argv)
   /* set signal handlers */
   signal (SIGUSR1, sa_usr1);
   signal (SIGUSR2, sa_usr2);
+  signal (SIGTERM, sa_usr2);  /* Clean exit on SIGTERM */
+  signal (SIGINT, sa_usr2);   /* Clean exit on SIGINT (Ctrl+C) */
 #endif
 
   if (!is_x11 && options.plug != -1)
