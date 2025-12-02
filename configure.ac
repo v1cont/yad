@@ -58,6 +58,32 @@ if test x$build_tray = xyes; then
     AC_DEFINE([HAVE_TRAY], [1], [Define this if you need status icon])
 fi
 
+dnl appindicator support for modern desktop environments
+AC_ARG_ENABLE([appindicator],
+	[AS_HELP_STRING([--enable-appindicator],
+			[Build YAD with AppIndicator support (StatusNotifier/SNI)])],
+	[build_appindicator=$enableval], [build_appindicator=auto])
+if test x$build_tray = xyes; then
+    if test x$build_appindicator != xno; then
+        dnl Try ayatana-appindicator first (recommended), then fallback to legacy appindicator
+        PKG_CHECK_MODULES([APPINDICATOR], [ayatana-appindicator3-0.1], [have_appindicator=yes], [
+            PKG_CHECK_MODULES([APPINDICATOR], [appindicator3-0.1], [have_appindicator=yes], [have_appindicator=no])
+        ])
+        if test x$have_appindicator = xyes; then
+            AC_DEFINE([HAVE_APPINDICATOR], [1], [Define this if you have AppIndicator support])
+        elif test x$build_appindicator = xyes; then
+            AC_MSG_ERROR([AppIndicator requested but not found. Install libayatana-appindicator3-dev or libappindicator3-dev])
+        fi
+    else
+        have_appindicator=no
+    fi
+else
+    have_appindicator=no
+fi
+AC_SUBST([APPINDICATOR_CFLAGS])
+AC_SUBST([APPINDICATOR_LIBS])
+AM_CONDITIONAL([APPINDICATOR], [test x$have_appindicator = xyes])
+
 dnl spell check
 AC_ARG_ENABLE([spell],
 	[AS_HELP_STRING([--enable-spell],

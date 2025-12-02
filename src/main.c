@@ -937,6 +937,12 @@ main (gint argc, gchar ** argv)
       break;
 #endif
 
+#ifdef HAVE_APPINDICATOR
+    case YAD_MODE_APPINDICATOR:
+      ret = yad_appindicator_run ();
+      break;
+#endif
+
     case YAD_MODE_PRINT:
       ret = yad_print_run ();
       break;

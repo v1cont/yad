@@ -87,6 +87,9 @@ typedef enum {
 #ifdef HAVE_TRAY
   YAD_MODE_NOTIFICATION,
 #endif
+#ifdef HAVE_APPINDICATOR
+  YAD_MODE_APPINDICATOR,
+#endif
   YAD_MODE_PANED,
   YAD_MODE_PICTURE,
   YAD_MODE_PRINT,
@@ -705,6 +708,9 @@ void dnd_init (GtkWidget *w);
 
 #ifdef HAVE_TRAY
 gint yad_notification_run (void);
+#endif
+#ifdef HAVE_APPINDICATOR
+gint yad_appindicator_run (void);
 #endif
 gint yad_print_run (void);
 gint yad_about (void);
