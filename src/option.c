@@ -551,13 +551,13 @@ static GOptionEntry notebook_options[] = {
 static GOptionEntry notification_options[] = {
   { "notification", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &notification_mode,
     N_("Display notification"), NULL },
-  { "menu", 0, 0, G_OPTION_ARG_STRING, &options.notification_data.menu,
+  { "menu", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_STRING, &options.notification_data.menu,
     N_("Set initial popup menu"), N_("STRING") },
   { "no-middle", 0, G_OPTION_FLAG_REVERSE, G_OPTION_ARG_NONE, &options.notification_data.middle,
     N_("Disable exit on middle click"), NULL },
-  { "hidden", 0, 0, G_OPTION_ARG_NONE, &options.notification_data.hidden,
+  { "hidden", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_NONE, &options.notification_data.hidden,
     N_("Doesn't show icon at startup"), NULL },
-  { "icon-size", 0,  G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_INT, &options.common_data.icon_size,
+  { "icon-size", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_INT, &options.common_data.icon_size,
     N_("Set icon size for fully specified icons (default - 16)"), N_("SIZE") },
   { NULL }
 };
@@ -567,6 +567,10 @@ static GOptionEntry notification_options[] = {
 static GOptionEntry appindicator_options[] = {
   { "indicator", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &appindicator_mode,
     N_("Display indicator icon (StatusNotifier/AppIndicator)"), NULL },
+  { "menu", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_STRING, &options.notification_data.menu,
+    N_("Set initial popup menu"), N_("STRING") },
+  { "hidden", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_NONE, &options.notification_data.hidden,
+    N_("Doesn't show icon at startup"), NULL },
   { NULL }
 };
 #endif

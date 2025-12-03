@@ -427,7 +427,7 @@ typedef struct {
   gboolean stack;
 } YadNotebookData;
 
-#ifdef HAVE_TRAY
+#if defined(HAVE_TRAY) || defined(HAVE_APPINDICATOR)
 typedef struct {
   gboolean middle;
   gboolean hidden;
@@ -578,7 +578,7 @@ typedef struct {
   YadIconsData icons_data;
   YadListData list_data;
   YadNotebookData notebook_data;
-#ifdef HAVE_TRAY
+#if defined(HAVE_TRAY) || defined(HAVE_APPINDICATOR)
   YadNotificationData notification_data;
 #endif
   YadPanedData paned_data;
