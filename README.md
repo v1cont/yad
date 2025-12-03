@@ -52,6 +52,7 @@ Additionally, you can build yad with the following libraries:
 * Webkit - for supporting HTML dialog (http://webkitgtk.org)
 * GtkSourceView - for enabling syntax highlighting in text-info dialog (https://wiki.gnome.org/Projects/GtkSourceView)
 * GSpell - for support spell checking in text fields (https://wiki.gnome.org/Projects/gspell)
+* Libappindicator - for support appindicator extension (https://ayatana-indicators.org/)
 
 In standalone build (configure option --enable-standalone) some defaults can be redefined with the following defines
 
