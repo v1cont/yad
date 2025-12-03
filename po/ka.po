@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad git\n"
 "Report-Msgid-Bugs-To: victor@sanana.kiev.ua\n"
-"POT-Creation-Date: 2025-12-03 14:38+0200\n"
+"POT-Creation-Date: 2025-12-03 15:47+0200\n"
 "PO-Revision-Date: 2023-04-16 15:32+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <(nothing)>\n"
@@ -272,7 +272,7 @@ msgstr "ფანჯრის X პოზიციის დაყენებ�
 #: src/option.c:397 src/option.c:403 src/option.c:484 src/option.c:492
 #: src/option.c:494 src/option.c:496 src/option.c:498 src/option.c:500
 #: src/option.c:502 src/option.c:506 src/option.c:540 src/option.c:542
-#: src/option.c:596 src/option.c:618 src/option.c:685
+#: src/option.c:596 src/option.c:618 src/option.c:687
 msgid "NUMBER"
 msgstr "რიცხვი"
 
@@ -328,8 +328,8 @@ msgstr ""
 #: src/option.c:119 src/option.c:131 src/option.c:184 src/option.c:234
 #: src/option.c:240 src/option.c:242 src/option.c:395 src/option.c:478
 #: src/option.c:488 src/option.c:538 src/option.c:582 src/option.c:594
-#: src/option.c:606 src/option.c:620 src/option.c:681 src/option.c:732
-#: src/option.c:761 src/option.c:763 src/tools.c:86
+#: src/option.c:606 src/option.c:620 src/option.c:683 src/option.c:734
+#: src/option.c:763 src/option.c:765 src/tools.c:86
 msgid "TYPE"
 msgstr "ტიპი"
 
@@ -345,7 +345,7 @@ msgstr "გამოსახულება"
 msgid "Use specified icon theme instead of default"
 msgstr "ნაგულისხმების მაგიერ მითითებული ხატულების თემის გამოყენება"
 
-#: src/option.c:123 src/option.c:710 src/browser.c:220 src/tools.c:87
+#: src/option.c:123 src/option.c:712 src/browser.c:220 src/tools.c:87
 msgid "THEME"
 msgstr "თემა"
 
@@ -353,7 +353,7 @@ msgstr "თემა"
 msgid "Hide main widget with expander"
 msgstr "მთავარი ვიჯეტის დამალვა გამფართოებლით"
 
-#: src/option.c:125 src/option.c:375 src/option.c:637 src/option.c:701
+#: src/option.c:125 src/option.c:375 src/option.c:639 src/option.c:703
 msgid "[TEXT]"
 msgstr "[ტექსტი]"
 
@@ -432,7 +432,7 @@ msgstr "F11-ის დაჭერის დროს გასაშვებ�
 msgid "Set working directory"
 msgstr "ფანჯრის დეკორაციების გათიშვა"
 
-#: src/option.c:155 src/option.c:765
+#: src/option.c:155 src/option.c:767
 msgid "PATH"
 msgstr "ბილიკი"
 
@@ -597,7 +597,7 @@ msgstr "ფაილის არჩევის დიალოგებში 
 msgid "Set source filename"
 msgstr "დააყენეთ წყაროს ფაილის სახელი"
 
-#: src/option.c:232 src/option.c:307 src/option.c:758 src/option.c:771
+#: src/option.c:232 src/option.c:307 src/option.c:760 src/option.c:773
 msgid "FILENAME"
 msgstr "ფაილის სახელი"
 
@@ -661,7 +661,7 @@ msgstr "აპლიკაციის სახელის დაყენე�
 
 #: src/option.c:266 src/option.c:268 src/option.c:270 src/option.c:280
 #: src/option.c:426 src/option.c:428 src/option.c:526 src/option.c:528
-#: src/option.c:555 src/option.c:571 src/option.c:755
+#: src/option.c:555 src/option.c:571 src/option.c:757
 msgid "STRING"
 msgstr "სტრიქონი"
 
@@ -765,8 +765,8 @@ msgstr "ფერის ასარჩევი ფანჯრის ჩვე
 msgid "Set initial color value"
 msgstr "საწყისი ფერის მნიშვნელობის დაყენება"
 
-#: src/option.c:317 src/option.c:687 src/option.c:689 src/option.c:695
-#: src/option.c:718 src/option.c:720
+#: src/option.c:317 src/option.c:689 src/option.c:691 src/option.c:697
+#: src/option.c:720 src/option.c:722
 msgid "COLOR"
 msgstr "ფერი"
 
@@ -995,7 +995,7 @@ msgstr "დიალოგის ელემენტების სიგა�
 msgid "Force using specified icon size"
 msgstr "მითითებული ხატულის ზომის ნაძალადევი გამოყენება"
 
-#: src/option.c:447 src/option.c:561 src/option.c:683 src/tools.c:85
+#: src/option.c:447 src/option.c:561 src/option.c:685 src/tools.c:85
 msgid "SIZE"
 msgstr "SIZE"
 
@@ -1284,7 +1284,8 @@ msgid "Display progress indication dialog"
 msgstr "მიმდინარეობის ჩვენება"
 
 #: src/option.c:616
-msgid "Add the progress bar (norm, rtl, pulse or perm)"
+#, fuzzy
+msgid "Add the progress bar (norm, rtl, pulse, cpulse or perm)"
 msgstr "პროგრესის პანელის დამატება (norm, rtl, pulse ან perm)"
 
 #: src/option.c:618
@@ -1307,577 +1308,582 @@ msgstr "პროგრესის პანელის ტექსტის 
 msgid "Pulsate progress bar"
 msgstr "პულსირებადი მიმდინარეობის მაჩვენებელი"
 
-#: src/option.c:629
+#: src/option.c:628
+#, fuzzy
+msgid "Conlinuous pulsating progress bar"
+msgstr "პულსირებადი მიმდინარეობის მაჩვენებელი"
+
+#: src/option.c:631
 #, no-c-format
 msgid "Dismiss the dialog when 100% has been reached"
 msgstr "ფანჯრის დახურვა 100%-ის მიღწევისას"
 
-#: src/option.c:632
+#: src/option.c:634
 msgid "Kill parent process if cancel button is pressed"
 msgstr "გაუქმების ღილაკის დაჭერისას მშობელი პროცესის მოკვლა"
 
-#: src/option.c:635
+#: src/option.c:637
 msgid "Right-To-Left progress bar direction"
 msgstr "პროგრესის პანელის მარჯვნიდან-მარცხნივ  მიმართულება"
 
-#: src/option.c:637
+#: src/option.c:639
 msgid "Show log window"
 msgstr "ჟურნალის ფანჯრის ჩვენება"
 
-#: src/option.c:639
+#: src/option.c:641
 msgid "Expand log window"
 msgstr "ჟურნალის ფანჯრის გაფართოება"
 
-#: src/option.c:641
+#: src/option.c:643
 msgid "Place log window above progress bar"
 msgstr "პროგრესის პანელის ზემოთ ჟურნალის ფანჯრის მოთავსება"
 
-#: src/option.c:643
+#: src/option.c:645
 msgid "Height of log window"
 msgstr "ჟურნალის ფანჯრის სიმაღლე"
 
-#: src/option.c:649
+#: src/option.c:651
 msgid "Display scale dialog"
 msgstr "მასშტაბირების ფანჯრის ჩვენება"
 
-#: src/option.c:651
+#: src/option.c:653
 msgid "Set initial value"
 msgstr "საწყისი მნიშვნელობის დაყენება"
 
-#: src/option.c:651 src/option.c:653 src/option.c:655 src/option.c:657
-#: src/option.c:661 src/option.c:728 src/option.c:730
+#: src/option.c:653 src/option.c:655 src/option.c:657 src/option.c:659
+#: src/option.c:663 src/option.c:730 src/option.c:732
 msgid "VALUE"
 msgstr "მნიშვნელობა"
 
-#: src/option.c:653
+#: src/option.c:655
 msgid "Set minimum value"
 msgstr "მინიმალური მნიშვნელობა"
 
-#: src/option.c:655
+#: src/option.c:657
 msgid "Set maximum value"
 msgstr "მაქსიმალური მნიშვნელობა"
 
-#: src/option.c:657
+#: src/option.c:659
 msgid "Set step size"
 msgstr "ბიჯის ზომა"
 
-#: src/option.c:659
+#: src/option.c:661
 msgid "Only allow values in step increments"
 msgstr "ნაბიჯის ბიჯემში მხოლოდ მნიშვნელობების დაშვება"
 
-#: src/option.c:661
+#: src/option.c:663
 msgid "Set paging size"
 msgstr "პეიჯინგის ზომის დაყენება"
 
-#: src/option.c:663
+#: src/option.c:665
 msgid "Print partial values"
 msgstr "ნაწილობრივი მნიშვნელობების ბეჭდვა"
 
-#: src/option.c:665
+#: src/option.c:667
 msgid "Hide value"
 msgstr "მნიშვნელობის დამალვა"
 
-#: src/option.c:667
+#: src/option.c:669
 msgid "Invert direction"
 msgstr "მიმართულების ინვერსია"
 
-#: src/option.c:669
+#: src/option.c:671
 msgid "Show +/- buttons in scale"
 msgstr "მასშტაბში +/- ღილაკების ჩვენება"
 
-#: src/option.c:671
+#: src/option.c:673
 msgid "Add mark to scale (may be used multiple times)"
 msgstr "მასშტაბირების ნიშნის დამატება (შეგიძლიათ ბევრჯერაც გამოიყენოთ)"
 
-#: src/option.c:671
+#: src/option.c:673
 msgid "NAME:VALUE"
 msgstr "სახელი:მნიშვნელობა"
 
-#: src/option.c:677
+#: src/option.c:679
 msgid "Display text information dialog"
 msgstr "ტექსტური ინფორმაციის ფანჯრის ჩვენება"
 
-#: src/option.c:679
+#: src/option.c:681
 msgid "Enable text wrapping"
 msgstr "ტექსტის გადატანის ჩართვა"
 
-#: src/option.c:681
+#: src/option.c:683
 msgid "Set justification (left, right, center or fill)"
 msgstr "სტრიქონის გასწორების დაყენება (მარჯვნივ, მარცხნივ, ცენტრი ან შევსება)"
 
-#: src/option.c:683
+#: src/option.c:685
 msgid "Set text margins"
 msgstr "ტექსტის საზღვრების დაყენება"
 
-#: src/option.c:685
+#: src/option.c:687
 msgid "Jump to specific line"
 msgstr "მითითებულ ხაზზე გადასვლა"
 
-#: src/option.c:687
+#: src/option.c:689
 msgid "Use specified color for text"
 msgstr "ტექსტისთვის მითითებული ფერის გამოყენება"
 
-#: src/option.c:689
+#: src/option.c:691
 msgid "Use specified color for background"
 msgstr "ფონისთვის მითითებული ფერის გამოყენება"
 
-#: src/option.c:691
+#: src/option.c:693
 msgid "Show cursor in read-only mode"
 msgstr "მხოლოდ-კითხვის რეჟიმში კურსორის ჩვენება"
 
-#: src/option.c:693
+#: src/option.c:695
 msgid "Make URI clickable"
 msgstr "URI-ის დაწკაპუნებადად გახდომა"
 
-#: src/option.c:695
+#: src/option.c:697
 msgid "Use specified color for links"
 msgstr "ბმულებისთვის მითითებული ფერის გამოყენება"
 
-#: src/option.c:697
+#: src/option.c:699
 msgid "Use pango markup"
 msgstr "Pango-ის მარქაფის გამოყენება"
 
-#: src/option.c:699
+#: src/option.c:701
 msgid "Save file instead of print on exit"
 msgstr "გამოსვლისას დაბეჭდვის მაგიერ ფაილში შენახვა"
 
-#: src/option.c:701
+#: src/option.c:703
 msgid "Confirm save the file if text was changed"
 msgstr "შენახვის დადასტურება ტექსტის ცვლილების შემთხვევაში"
 
-#: src/option.c:708
+#: src/option.c:710
 msgid "Use specified langauge for syntax highlighting"
 msgstr "სინტაქსის გამოკვეთისთვის მითითებული ენის დაყენება"
 
-#: src/option.c:708
+#: src/option.c:710
 msgid "LANG"
 msgstr "LANG"
 
-#: src/option.c:710
+#: src/option.c:712
 msgid "Use specified theme"
 msgstr "მითითებული თემის გამოყენება"
 
-#: src/option.c:712
+#: src/option.c:714
 msgid "Show line numbers"
 msgstr "ხაზის ნომრების ჩვენება"
 
-#: src/option.c:714
+#: src/option.c:716
 msgid "Highlight current line"
 msgstr "მიმდინარე ხაზის გამოკვეთა"
 
-#: src/option.c:716
+#: src/option.c:718
 msgid "Enable line marks"
 msgstr "ხაზის ნიშნების გამოყენება"
 
-#: src/option.c:718
+#: src/option.c:720
 msgid "Set color for first type marks"
 msgstr "პირველი ტიპის ნიშნებისთვის ფერის დაყენება"
 
-#: src/option.c:720
+#: src/option.c:722
 msgid "Set color for second type marks"
 msgstr "მეორე ტიპის ნიშნებისთვის ფერის დაყენება"
 
-#: src/option.c:722
+#: src/option.c:724
 msgid "Set position of right margin"
 msgstr "მარჯვენა ზღვრის პოზიცია"
 
-#: src/option.c:722
+#: src/option.c:724
 msgid "[POS]"
 msgstr "[პოზ]"
 
-#: src/option.c:724
+#: src/option.c:726
 msgid "Highlight matching brackets"
 msgstr "შესაბამისი ბრჭყალების გამოკვეთა"
 
-#: src/option.c:726
+#: src/option.c:728
 msgid "Use autoindent"
 msgstr "ავტომატური სწორების გამოტოვება"
 
-#: src/option.c:728
+#: src/option.c:730
 msgid "Set tabulation width"
 msgstr "ტაბულაციის სიგანის დაყენება"
 
-#: src/option.c:730
+#: src/option.c:732
 msgid "Set indentation width"
 msgstr "შეწევის სიგანის დაყენება"
 
-#: src/option.c:732
+#: src/option.c:734
 msgid "Set smart Home/End behavior"
 msgstr "ჭკვიანი Home/End-ის ქცევის დაყენება"
 
-#: src/option.c:734
+#: src/option.c:736
 msgid "Enable smart backspace"
 msgstr "ჭკვიანი backspace-ის ჩართვა"
 
-#: src/option.c:736
+#: src/option.c:738
 msgid "Insert spaces instead of tabs"
 msgstr "ტაბულაციის მაგიერ გამოტოვებების ჩასმა"
 
-#: src/option.c:743
+#: src/option.c:745
 msgid "Sets a filename filter"
 msgstr "ფაილის სახელის ფილტრის დაყენება"
 
-#: src/option.c:743
+#: src/option.c:745
 msgid "NAME | PATTERN1 PATTERN2 ..."
 msgstr "სახელი | ნიმუში1 ნიმუში2 .."
 
-#: src/option.c:745
+#: src/option.c:747
 msgid "Sets a mime-type filter"
 msgstr "MIME ტიპის ფილტრის დაყენება"
 
-#: src/option.c:745
+#: src/option.c:747
 msgid "NAME | MIME1 MIME2 ..."
 msgstr "სახელი | MIME1 MIME2 ..."
 
-#: src/option.c:747
+#: src/option.c:749
 msgid "Add filter for images"
 msgstr "გამოსახულებებისთვის ფილტრის დამატება"
 
-#: src/option.c:747
+#: src/option.c:749
 msgid "[NAME]"
 msgstr "[სახელი]"
 
-#: src/option.c:753 src/tools.c:64
+#: src/option.c:755 src/tools.c:64
 msgid "Print version"
 msgstr "მიმდინარე ვერსიის დაბეჭდვა"
 
-#: src/option.c:755
+#: src/option.c:757
 msgid "Load additional CSS settings from file or string"
 msgstr "ფაილიდან ან სტრიქონიდან დამატებითი CSS პარამეტრების ჩატვირთვა"
 
-#: src/option.c:758
+#: src/option.c:760
 msgid "Load additional CSS settings from file"
 msgstr "ფაილიდან დამატებითი CSS პარამეტრების ჩატვირთვა"
 
-#: src/option.c:761
+#: src/option.c:763
 msgid "Set policy for horizontal scrollbars (auto, always, never)"
 msgstr ""
 "ჰორიზონტალური ჩოჩიების წესის დაყენება (ავტომატური, ყოველთვის, არასოდეს)"
 
-#: src/option.c:763
+#: src/option.c:765
 msgid "Set policy for vertical scrollbars (auto, always, never)"
 msgstr "ვერტიკალური ჩოჩიების წესის დაყენება (ავტომატური, ყოველთვის, არასოდეს)"
 
-#: src/option.c:765
+#: src/option.c:767
 msgid "Add path for search icons by name"
 msgstr "სახელით ხატულების მოსაძებნი ბილიკის დამატება"
 
-#: src/option.c:771
+#: src/option.c:773
 msgid "Load extra arguments from file"
 msgstr "ფაილიდან დამატებითი არგუმენტების ჩატვირთვა"
 
-#: src/option.c:980
+#: src/option.c:984
 #, c-format
 msgid "Mark %s doesn't have a value\n"
 msgstr "ნიშანს %s მნიშვნელობა არ გააჩნია\n"
 
-#: src/option.c:1027 src/picture.c:286
+#: src/option.c:1031 src/picture.c:286
 msgid "Images"
 msgstr "სურათები"
 
-#: src/option.c:1092
+#: src/option.c:1096
 #, c-format
 msgid "Unknown color mode: %s\n"
 msgstr "უცნობი ფერის რეჟიმი: %s\n"
 
-#: src/option.c:1111
+#: src/option.c:1115
 #, c-format
 msgid "Unknown buttons layout type: %s\n"
 msgstr "უცნობი ღილაკის განლაგების ტიპი: %s\n"
 
-#: src/option.c:1126
+#: src/option.c:1130
 #, c-format
 msgid "Unknown align type: %s\n"
 msgstr "უცნობი სწორების ტიპი: %s\n"
 
-#: src/option.c:1150
+#: src/option.c:1154
 #, c-format
 msgid "Unknown justification type: %s\n"
 msgstr "უცნობი გასწორების ტიპი: %s\n"
 
-#: src/option.c:1167
+#: src/option.c:1171
 #, c-format
 msgid "Unknown tab position type: %s\n"
 msgstr "უცნობი ჩანართის მდებარეობის ტიპი: %s\n"
 
-#: src/option.c:1204
+#: src/option.c:1208
 #, c-format
 msgid "Unknown ellipsize type: %s\n"
 msgstr "უცნობი ellipsize-ის ტიპი: %s\n"
 
-#: src/option.c:1217
+#: src/option.c:1221
 #, c-format
 msgid "Unknown orientation: %s\n"
 msgstr "უცნობი ორიენტაცია: %s\n"
 
-#: src/option.c:1232
+#: src/option.c:1236
 #, c-format
 msgid "Unknown source type: %s\n"
 msgstr "უცნობი წყაროს ტიპი: %s\n"
 
-#: src/option.c:1243
+#: src/option.c:1247
 msgid "Progress log"
 msgstr "მიმდინარეობის ჟურნალი"
 
-#: src/option.c:1256
+#: src/option.c:1260
 #, c-format
 msgid "Unknown size type: %s\n"
 msgstr "უცნობი ზომის ტიპი: %s\n"
 
-#: src/option.c:1300
+#: src/option.c:1304
 #, c-format
 msgid "Unknown completion type: %s\n"
 msgstr "უცნობი დასრულების ტიპი: %s\n"
 
-#: src/option.c:1332
+#: src/option.c:1336
 #, c-format
 msgid "Unknown boolean format type: %s\n"
 msgstr "უცნობი ლოგიკური ფორმატის ტიპი: %s\n"
 
-#: src/option.c:1348
+#: src/option.c:1352
 #, c-format
 msgid "Unknown grid lines type: %s\n"
 msgstr "უცნობი ბადის ხაზების ტიპი: %s\n"
 
-#: src/option.c:1365
+#: src/option.c:1369
 #, c-format
 msgid "Unknown scrollbar policy type: %s\n"
 msgstr "უცნობი ჩოჩიის წესის ტიპი: %s\n"
 
-#: src/option.c:1416
+#: src/option.c:1420
 #, fuzzy, c-format
 msgid "Unknown window type: %s\n"
 msgstr "უცნობი სწორების ტიპი: %s\n"
 
-#: src/option.c:1445
+#: src/option.c:1449
 #, c-format
 msgid "Unknown smart Home/End mode: %s\n"
 msgstr "უცნობი ჭკვიანი Home/End-ის რეჟიმი: %s\n"
 
-#: src/option.c:1555
+#: src/option.c:1559
 #, c-format
 msgid "Unknown signal: %s\n"
 msgstr "უცნობი სიგნალი: %s\n"
 
-#: src/option.c:1806
+#: src/option.c:1810
 msgid "File exist. Overwrite?"
 msgstr "ფაილი არსებობს. გადავაწერო?"
 
-#: src/option.c:1952
+#: src/option.c:1957
 msgid "File was changed. Save it?"
 msgstr "ფაილი შეიცვალა. შევინახო?"
 
-#: src/option.c:2004
+#: src/option.c:2009
 msgid "- Yet another dialoging program"
 msgstr "- მორიგი დიალოგის პროგრამა"
 
-#: src/option.c:2008
+#: src/option.c:2013
 msgid "General options"
 msgstr "საერთო პარამეტრები"
 
-#: src/option.c:2008
+#: src/option.c:2013
 msgid "Show general options"
 msgstr "საერთო პარამეტრების ჩვენება"
 
-#: src/option.c:2014
+#: src/option.c:2019
 msgid "Common options"
 msgstr "საერთო პარამეტრები"
 
-#: src/option.c:2014
+#: src/option.c:2019
 msgid "Show common options"
 msgstr "ზოგადი პარამეტრების ჩვენება"
 
-#: src/option.c:2020
+#: src/option.c:2025
 msgid "About dialog options"
 msgstr "დიალოგის პარამეტრების ჩვენება"
 
-#: src/option.c:2020
+#: src/option.c:2025
 msgid "Show custom about dialog options"
 msgstr "მორგებული შესახებ დიალოგის პარამეტრების ჩვენება"
 
-#: src/option.c:2026
+#: src/option.c:2031
 msgid "Application selection options"
 msgstr "აპლიკაციის არჩევის პარამეტრები"
 
-#: src/option.c:2026
+#: src/option.c:2031
 msgid "Show application selection options"
 msgstr "აპლიკაციის არჩევის პარამეტრების ჩვენება"
 
-#: src/option.c:2032
+#: src/option.c:2037
 msgid "Calendar options"
 msgstr "კალენდრის მორგება"
 
-#: src/option.c:2032
+#: src/option.c:2037
 msgid "Show calendar options"
 msgstr "კალენდრის პარამეტრების ჩვენება"
 
-#: src/option.c:2038
+#: src/option.c:2043
 msgid "Color selection options"
 msgstr "ფერის არჩევის პარამეტრები"
 
-#: src/option.c:2038
+#: src/option.c:2043
 msgid "Show color selection options"
 msgstr "ფერის არჩევის პარამეტრების ჩვენება"
 
-#: src/option.c:2044
+#: src/option.c:2049
 msgid "DND options"
 msgstr "DND-ის მორგება"
 
-#: src/option.c:2044
+#: src/option.c:2049
 msgid "Show drag-n-drop options"
 msgstr "DND-ის პარამეტრების ჩვენება"
 
-#: src/option.c:2050
+#: src/option.c:2055
 msgid "Text entry options"
 msgstr "ტექსტური ელემენტის პარამეტრები"
 
-#: src/option.c:2050
+#: src/option.c:2055
 msgid "Show text entry options"
 msgstr "ტექსტური ელემენტის პარამეტრების ჩვენება"
 
-#: src/option.c:2056
+#: src/option.c:2061
 msgid "File selection options"
 msgstr "ფაილის არჩევის პარამეტრები"
 
-#: src/option.c:2056
+#: src/option.c:2061
 msgid "Show file selection options"
 msgstr "ფაილის არჩევის პარამეტრების ჩვენება"
 
-#: src/option.c:2062
+#: src/option.c:2067
 msgid "Font selection options"
 msgstr "ფონტის არჩევანის მორგება"
 
-#: src/option.c:2062
+#: src/option.c:2067
 msgid "Show font selection options"
 msgstr "ფონტის არჩევანის მორგების ჩვენება"
 
-#: src/option.c:2068
+#: src/option.c:2073
 msgid "Form options"
 msgstr "ფორმის პარამეტრები"
 
-#: src/option.c:2068
+#: src/option.c:2073
 msgid "Show form options"
 msgstr "ფორმის პარამეტრების ცვენება"
 
-#: src/option.c:2075
+#: src/option.c:2080
 msgid "HTML options"
 msgstr "HTML-ის პარამეტრები"
 
-#: src/option.c:2075
+#: src/option.c:2080
 msgid "Show HTML options"
 msgstr "HTML-ის პარამეტრების ჩვენება"
 
-#: src/option.c:2082
+#: src/option.c:2087
 msgid "Icons box options"
 msgstr "ხატულების ფანჯრის პარამეტრები"
 
-#: src/option.c:2082
+#: src/option.c:2087
 msgid "Show icons box options"
 msgstr "ხატულების ფანჯრის პარამეტრების ჩვენება"
 
-#: src/option.c:2088
+#: src/option.c:2093
 msgid "List options"
 msgstr "სიის პარამეტრები"
 
-#: src/option.c:2088
+#: src/option.c:2093
 msgid "Show list options"
 msgstr "სიის პარამეტრების ჩვენება"
 
-#: src/option.c:2094
+#: src/option.c:2099
 msgid "Notebook options"
 msgstr "რვეულის მორგება"
 
-#: src/option.c:2094
+#: src/option.c:2099
 msgid "Show notebook dialog options"
 msgstr "რვეულის დიალოგის პარამეტრების ჩვენება"
 
-#: src/option.c:2101
+#: src/option.c:2106
 msgid "Notification icon options"
 msgstr "გაფრთხილების ხატულების პარამეტრები"
 
-#: src/option.c:2102
+#: src/option.c:2107
 msgid "Show notification icon options"
 msgstr "გაფრთხილების ხატულების პარამეტრების ჩვენება"
 
-#: src/option.c:2110
+#: src/option.c:2115
 #, fuzzy
 msgid "StatusNotifier/AppIndicator options"
 msgstr "გაფრთხილების ხატულების პარამეტრები"
 
-#: src/option.c:2111
+#: src/option.c:2116
 #, fuzzy
 msgid "Show indicator options"
 msgstr "დაბეჭდვის დიალოგის პარამეტრების ჩვენება"
 
-#: src/option.c:2118
+#: src/option.c:2123
 msgid "Paned dialog options"
 msgstr "პანელის დიალოგის პარამეტრები"
 
-#: src/option.c:2118
+#: src/option.c:2123
 msgid "Show paned dialog options"
 msgstr "პანელის დიალოგის პარამეტრების ჩვენება"
 
-#: src/option.c:2124
+#: src/option.c:2129
 msgid "Picture dialog options"
 msgstr "სურათის დიალოგის პარამეტრები"
 
-#: src/option.c:2124
+#: src/option.c:2129
 msgid "Show picture dialog options"
 msgstr "სურათის დიალოგის პარამეტრების ჩვენება"
 
-#: src/option.c:2130
+#: src/option.c:2135
 msgid "Print dialog options"
 msgstr "დაბეჭდვის დიალოგის პარამეტრები"
 
-#: src/option.c:2130
+#: src/option.c:2135
 msgid "Show print dialog options"
 msgstr "დაბეჭდვის დიალოგის პარამეტრების ჩვენება"
 
-#: src/option.c:2136
+#: src/option.c:2141
 msgid "Progress options"
 msgstr "მიმდინარეობის პარამეტრები"
 
-#: src/option.c:2136
+#: src/option.c:2141
 msgid "Show progress options"
 msgstr "მიმდინარეობის პარამეტრების ჩვენება"
 
-#: src/option.c:2142
+#: src/option.c:2147
 msgid "Scale options"
 msgstr "მასშტაბირების პარამეტრები"
 
-#: src/option.c:2142
+#: src/option.c:2147
 msgid "Show scale options"
 msgstr "მასშტაბირების პარამეტრების ჩვენება"
 
-#: src/option.c:2148
+#: src/option.c:2153
 msgid "Text information options"
 msgstr "ტექსტური ინფორმაციის პარამეტრები"
 
-#: src/option.c:2148
+#: src/option.c:2153
 msgid "Show text information options"
 msgstr "ტექსტური ინფორმაციის პარამეტრების ჩვენება"
 
-#: src/option.c:2155
+#: src/option.c:2160
 msgid "SourceView options"
 msgstr "SourceView-ის პარამეტრები"
 
-#: src/option.c:2155
+#: src/option.c:2160
 msgid "Show SourceView options"
 msgstr "SourceView-ის პარამეტრების ჩვენება"
 
-#: src/option.c:2162
+#: src/option.c:2167
 msgid "File filter options"
 msgstr "ფაილის ფილტრის პარამეტრები"
 
-#: src/option.c:2162
+#: src/option.c:2167
 msgid "Show file filter options"
 msgstr "ფაილის ფილტრის პარამეტრების ჩვენება"
 
-#: src/option.c:2168
+#: src/option.c:2173
 msgid "Miscellaneous options"
 msgstr "სხვადასხვა პარამეტრები"
 
-#: src/option.c:2168
+#: src/option.c:2173
 msgid "Show miscellaneous options"
 msgstr "სხვადასხვა პარამეტრების ჩვენება"
 
@@ -1986,7 +1992,7 @@ msgstr "ეს ფაილის ტიპი პირდაპირი დ�
 msgid "Load source file failed: %s\n"
 msgstr "წყაროს ფაილის ჩატვირთვის შეცდომა: %s\n"
 
-#: src/progress.c:248
+#: src/progress.c:250
 msgid ""
 "WARNING: You are using old-style progress dialog. This features is obsolete "
 "now, please use --bar style instead\n"

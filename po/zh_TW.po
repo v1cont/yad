@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad 0.17.0\n"
 "Report-Msgid-Bugs-To: victor@sanana.kiev.ua\n"
-"POT-Creation-Date: 2025-12-03 14:38+0200\n"
+"POT-Creation-Date: 2025-12-03 15:47+0200\n"
 "PO-Revision-Date: 2012-02-28 16:08+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -270,7 +270,7 @@ msgstr ""
 #: src/option.c:397 src/option.c:403 src/option.c:484 src/option.c:492
 #: src/option.c:494 src/option.c:496 src/option.c:498 src/option.c:500
 #: src/option.c:502 src/option.c:506 src/option.c:540 src/option.c:542
-#: src/option.c:596 src/option.c:618 src/option.c:685
+#: src/option.c:596 src/option.c:618 src/option.c:687
 msgid "NUMBER"
 msgstr "編號"
 
@@ -324,8 +324,8 @@ msgstr "設定對話框文字對齊 (靠左、置中，靠右)"
 #: src/option.c:119 src/option.c:131 src/option.c:184 src/option.c:234
 #: src/option.c:240 src/option.c:242 src/option.c:395 src/option.c:478
 #: src/option.c:488 src/option.c:538 src/option.c:582 src/option.c:594
-#: src/option.c:606 src/option.c:620 src/option.c:681 src/option.c:732
-#: src/option.c:761 src/option.c:763 src/tools.c:86
+#: src/option.c:606 src/option.c:620 src/option.c:683 src/option.c:734
+#: src/option.c:763 src/option.c:765 src/tools.c:86
 msgid "TYPE"
 msgstr "型態"
 
@@ -341,7 +341,7 @@ msgstr "圖像"
 msgid "Use specified icon theme instead of default"
 msgstr "使用指定的圖示布景主題以代替預設"
 
-#: src/option.c:123 src/option.c:710 src/browser.c:220 src/tools.c:87
+#: src/option.c:123 src/option.c:712 src/browser.c:220 src/tools.c:87
 msgid "THEME"
 msgstr "布景主題"
 
@@ -349,7 +349,7 @@ msgstr "布景主題"
 msgid "Hide main widget with expander"
 msgstr "以擴充元件隱藏主要視窗元件"
 
-#: src/option.c:125 src/option.c:375 src/option.c:637 src/option.c:701
+#: src/option.c:125 src/option.c:375 src/option.c:639 src/option.c:703
 msgid "[TEXT]"
 msgstr "[文字]"
 
@@ -427,7 +427,7 @@ msgstr ""
 msgid "Set working directory"
 msgstr "設定視窗無裝飾"
 
-#: src/option.c:155 src/option.c:765
+#: src/option.c:155 src/option.c:767
 #, fuzzy
 msgid "PATH"
 msgstr "圖示路徑"
@@ -609,7 +609,7 @@ msgstr "顯示檔案選取對話框"
 msgid "Set source filename"
 msgstr "來源檔名"
 
-#: src/option.c:232 src/option.c:307 src/option.c:758 src/option.c:771
+#: src/option.c:232 src/option.c:307 src/option.c:760 src/option.c:773
 msgid "FILENAME"
 msgstr "檔名"
 
@@ -676,7 +676,7 @@ msgstr ""
 
 #: src/option.c:266 src/option.c:268 src/option.c:270 src/option.c:280
 #: src/option.c:426 src/option.c:428 src/option.c:526 src/option.c:528
-#: src/option.c:555 src/option.c:571 src/option.c:755
+#: src/option.c:555 src/option.c:571 src/option.c:757
 msgid "STRING"
 msgstr ""
 
@@ -785,8 +785,8 @@ msgstr "顯示顏色選擇對話框"
 msgid "Set initial color value"
 msgstr "設定初始顏色值"
 
-#: src/option.c:317 src/option.c:687 src/option.c:689 src/option.c:695
-#: src/option.c:718 src/option.c:720
+#: src/option.c:317 src/option.c:689 src/option.c:691 src/option.c:697
+#: src/option.c:720 src/option.c:722
 msgid "COLOR"
 msgstr "顏色"
 
@@ -1016,7 +1016,7 @@ msgstr "設定對話框項目的寬度"
 msgid "Force using specified icon size"
 msgstr ""
 
-#: src/option.c:447 src/option.c:561 src/option.c:683 src/tools.c:85
+#: src/option.c:447 src/option.c:561 src/option.c:685 src/tools.c:85
 msgid "SIZE"
 msgstr "大小"
 
@@ -1318,7 +1318,7 @@ msgstr "顯示進度指示對話框"
 
 #: src/option.c:616
 #, fuzzy
-msgid "Add the progress bar (norm, rtl, pulse or perm)"
+msgid "Add the progress bar (norm, rtl, pulse, cpulse or perm)"
 msgstr "加入進度條 (型態 - NORM, RTL 或 PULSE)"
 
 #: src/option.c:618
@@ -1343,609 +1343,614 @@ msgstr "脈衝式進度條"
 msgid "Pulsate progress bar"
 msgstr "脈衝式進度條"
 
-#: src/option.c:629
+#: src/option.c:628
+#, fuzzy
+msgid "Conlinuous pulsating progress bar"
+msgstr "脈衝式進度條"
+
+#: src/option.c:631
 #, no-c-format
 msgid "Dismiss the dialog when 100% has been reached"
 msgstr "當達到 100% 時去除對話框"
 
-#: src/option.c:632
+#: src/option.c:634
 msgid "Kill parent process if cancel button is pressed"
 msgstr "如果按下取消按鈕就砍除上層進程"
 
-#: src/option.c:635
+#: src/option.c:637
 msgid "Right-To-Left progress bar direction"
 msgstr "進度條方向由右到左"
 
-#: src/option.c:637
+#: src/option.c:639
 msgid "Show log window"
 msgstr ""
 
-#: src/option.c:639
+#: src/option.c:641
 msgid "Expand log window"
 msgstr ""
 
-#: src/option.c:641
+#: src/option.c:643
 #, fuzzy
 msgid "Place log window above progress bar"
 msgstr "脈衝式進度條"
 
-#: src/option.c:643
+#: src/option.c:645
 msgid "Height of log window"
 msgstr ""
 
-#: src/option.c:649
+#: src/option.c:651
 msgid "Display scale dialog"
 msgstr "顯示尺度對話框"
 
-#: src/option.c:651
+#: src/option.c:653
 msgid "Set initial value"
 msgstr "設定初始值"
 
-#: src/option.c:651 src/option.c:653 src/option.c:655 src/option.c:657
-#: src/option.c:661 src/option.c:728 src/option.c:730
+#: src/option.c:653 src/option.c:655 src/option.c:657 src/option.c:659
+#: src/option.c:663 src/option.c:730 src/option.c:732
 msgid "VALUE"
 msgstr "值"
 
-#: src/option.c:653
+#: src/option.c:655
 msgid "Set minimum value"
 msgstr "設定最小值"
 
-#: src/option.c:655
+#: src/option.c:657
 msgid "Set maximum value"
 msgstr "設定最大值"
 
-#: src/option.c:657
+#: src/option.c:659
 msgid "Set step size"
 msgstr "設定步增值"
 
-#: src/option.c:659
+#: src/option.c:661
 msgid "Only allow values in step increments"
 msgstr ""
 
-#: src/option.c:661
+#: src/option.c:663
 msgid "Set paging size"
 msgstr "設定換頁大小"
 
-#: src/option.c:663
+#: src/option.c:665
 msgid "Print partial values"
 msgstr "列印部分值"
 
-#: src/option.c:665
+#: src/option.c:667
 msgid "Hide value"
 msgstr "隱藏值"
 
-#: src/option.c:667
+#: src/option.c:669
 msgid "Invert direction"
 msgstr "反相方向"
 
-#: src/option.c:669
+#: src/option.c:671
 msgid "Show +/- buttons in scale"
 msgstr ""
 
-#: src/option.c:671
+#: src/option.c:673
 msgid "Add mark to scale (may be used multiple times)"
 msgstr "將標記加入尺度 (也許會被多次使用)"
 
-#: src/option.c:671
+#: src/option.c:673
 msgid "NAME:VALUE"
 msgstr "名稱:值"
 
-#: src/option.c:677
+#: src/option.c:679
 msgid "Display text information dialog"
 msgstr "顯示文字資訊對話框"
 
-#: src/option.c:679
+#: src/option.c:681
 msgid "Enable text wrapping"
 msgstr "啟用文字環繞"
 
-#: src/option.c:681
+#: src/option.c:683
 #, fuzzy
 msgid "Set justification (left, right, center or fill)"
 msgstr "設定調整 (型態 - left, right, center 或 fill)"
 
-#: src/option.c:683
+#: src/option.c:685
 msgid "Set text margins"
 msgstr "設定文字邊距"
 
-#: src/option.c:685
+#: src/option.c:687
 #, fuzzy
 msgid "Jump to specific line"
 msgstr "隱藏特定欄"
 
-#: src/option.c:687
+#: src/option.c:689
 msgid "Use specified color for text"
 msgstr "使用指定的文字顏色"
 
-#: src/option.c:689
+#: src/option.c:691
 msgid "Use specified color for background"
 msgstr "使用指定的背景顏色"
 
-#: src/option.c:691
+#: src/option.c:693
 msgid "Show cursor in read-only mode"
 msgstr ""
 
-#: src/option.c:693
+#: src/option.c:695
 msgid "Make URI clickable"
 msgstr "讓 URI 可點選"
 
-#: src/option.c:695
+#: src/option.c:697
 #, fuzzy
 msgid "Use specified color for links"
 msgstr "使用指定的文字顏色"
 
-#: src/option.c:697
+#: src/option.c:699
 msgid "Use pango markup"
 msgstr ""
 
-#: src/option.c:699
+#: src/option.c:701
 msgid "Save file instead of print on exit"
 msgstr ""
 
-#: src/option.c:701
+#: src/option.c:703
 msgid "Confirm save the file if text was changed"
-msgstr ""
-
-#: src/option.c:708
-#, fuzzy
-msgid "Use specified langauge for syntax highlighting"
-msgstr "使用指定的文字顏色"
-
-#: src/option.c:708
-msgid "LANG"
 msgstr ""
 
 #: src/option.c:710
 #, fuzzy
+msgid "Use specified langauge for syntax highlighting"
+msgstr "使用指定的文字顏色"
+
+#: src/option.c:710
+msgid "LANG"
+msgstr ""
+
+#: src/option.c:712
+#, fuzzy
 msgid "Use specified theme"
 msgstr "使用指定的字型"
 
-#: src/option.c:712
+#: src/option.c:714
 msgid "Show line numbers"
 msgstr ""
 
-#: src/option.c:714
+#: src/option.c:716
 msgid "Highlight current line"
 msgstr ""
 
-#: src/option.c:716
+#: src/option.c:718
 msgid "Enable line marks"
 msgstr ""
 
-#: src/option.c:718
+#: src/option.c:720
 msgid "Set color for first type marks"
 msgstr ""
 
-#: src/option.c:720
+#: src/option.c:722
 msgid "Set color for second type marks"
 msgstr ""
 
-#: src/option.c:722
+#: src/option.c:724
 msgid "Set position of right margin"
 msgstr ""
 
-#: src/option.c:722
+#: src/option.c:724
 msgid "[POS]"
 msgstr ""
 
-#: src/option.c:724
+#: src/option.c:726
 msgid "Highlight matching brackets"
 msgstr ""
 
-#: src/option.c:726
+#: src/option.c:728
 msgid "Use autoindent"
 msgstr ""
 
-#: src/option.c:728
+#: src/option.c:730
 #, fuzzy
 msgid "Set tabulation width"
 msgstr "設定寬度"
 
-#: src/option.c:730
+#: src/option.c:732
 #, fuzzy
 msgid "Set indentation width"
 msgstr "設定寬度"
 
-#: src/option.c:732
+#: src/option.c:734
 msgid "Set smart Home/End behavior"
 msgstr ""
 
-#: src/option.c:734
+#: src/option.c:736
 msgid "Enable smart backspace"
 msgstr ""
 
-#: src/option.c:736
+#: src/option.c:738
 msgid "Insert spaces instead of tabs"
 msgstr ""
 
-#: src/option.c:743
+#: src/option.c:745
 msgid "Sets a filename filter"
 msgstr "設定檔名篩選器"
 
-#: src/option.c:743
+#: src/option.c:745
 msgid "NAME | PATTERN1 PATTERN2 ..."
 msgstr "名稱 | 胚騰1 胚騰2…"
 
-#: src/option.c:745
+#: src/option.c:747
 #, fuzzy
 msgid "Sets a mime-type filter"
 msgstr "設定檔名篩選器"
 
-#: src/option.c:745
+#: src/option.c:747
 #, fuzzy
 msgid "NAME | MIME1 MIME2 ..."
 msgstr "名稱 | 胚騰1 胚騰2…"
 
-#: src/option.c:747
+#: src/option.c:749
 #, fuzzy
 msgid "Add filter for images"
 msgstr "將頁首加入頁面"
 
-#: src/option.c:747
+#: src/option.c:749
 #, fuzzy
 msgid "[NAME]"
 msgstr "名稱:識別號"
 
-#: src/option.c:753 src/tools.c:64
+#: src/option.c:755 src/tools.c:64
 msgid "Print version"
 msgstr "印出版本"
 
-#: src/option.c:755
+#: src/option.c:757
 msgid "Load additional CSS settings from file or string"
 msgstr ""
 
-#: src/option.c:758
+#: src/option.c:760
 #, fuzzy
 msgid "Load additional CSS settings from file"
 msgstr "從檔案載入額外引數"
 
-#: src/option.c:761
+#: src/option.c:763
 msgid "Set policy for horizontal scrollbars (auto, always, never)"
 msgstr ""
 
-#: src/option.c:763
+#: src/option.c:765
 msgid "Set policy for vertical scrollbars (auto, always, never)"
 msgstr ""
 
-#: src/option.c:765
+#: src/option.c:767
 msgid "Add path for search icons by name"
 msgstr ""
 
-#: src/option.c:771
+#: src/option.c:773
 msgid "Load extra arguments from file"
 msgstr "從檔案載入額外引數"
 
-#: src/option.c:980
+#: src/option.c:984
 #, c-format
 msgid "Mark %s doesn't have a value\n"
 msgstr "標記 %s 沒有值\n"
 
-#: src/option.c:1027 src/picture.c:286
+#: src/option.c:1031 src/picture.c:286
 msgid "Images"
 msgstr ""
 
-#: src/option.c:1092
+#: src/option.c:1096
 #, fuzzy, c-format
 msgid "Unknown color mode: %s\n"
 msgstr "不明命令『%s』\n"
 
-#: src/option.c:1111
+#: src/option.c:1115
 #, fuzzy, c-format
 msgid "Unknown buttons layout type: %s\n"
 msgstr "不明的來源型態：%s\n"
 
-#: src/option.c:1126
+#: src/option.c:1130
 #, c-format
 msgid "Unknown align type: %s\n"
 msgstr "不明的對齊型態：%s\n"
 
-#: src/option.c:1150
+#: src/option.c:1154
 #, c-format
 msgid "Unknown justification type: %s\n"
 msgstr "不明的調整型態：%s\n"
 
-#: src/option.c:1167
+#: src/option.c:1171
 #, fuzzy, c-format
 msgid "Unknown tab position type: %s\n"
 msgstr "不明的對齊型態：%s\n"
 
-#: src/option.c:1204
+#: src/option.c:1208
 #, c-format
 msgid "Unknown ellipsize type: %s\n"
 msgstr "不明的省略型態：%s\n"
 
-#: src/option.c:1217
+#: src/option.c:1221
 #, fuzzy, c-format
 msgid "Unknown orientation: %s\n"
 msgstr "不明的對齊型態：%s\n"
 
-#: src/option.c:1232
+#: src/option.c:1236
 #, c-format
 msgid "Unknown source type: %s\n"
 msgstr "不明的來源型態：%s\n"
 
-#: src/option.c:1243
+#: src/option.c:1247
 #, fuzzy
 msgid "Progress log"
 msgstr "進度選項"
 
-#: src/option.c:1256
+#: src/option.c:1260
 #, fuzzy, c-format
 msgid "Unknown size type: %s\n"
 msgstr "不明的省略型態：%s\n"
 
-#: src/option.c:1300
+#: src/option.c:1304
 #, fuzzy, c-format
 msgid "Unknown completion type: %s\n"
 msgstr "不明的對齊型態：%s\n"
 
-#: src/option.c:1332
+#: src/option.c:1336
 #, fuzzy, c-format
 msgid "Unknown boolean format type: %s\n"
 msgstr "不明的來源型態：%s\n"
 
-#: src/option.c:1348
+#: src/option.c:1352
 #, fuzzy, c-format
 msgid "Unknown grid lines type: %s\n"
 msgstr "不明的對齊型態：%s\n"
 
-#: src/option.c:1365
+#: src/option.c:1369
 #, fuzzy, c-format
 msgid "Unknown scrollbar policy type: %s\n"
 msgstr "不明的來源型態：%s\n"
 
-#: src/option.c:1416
+#: src/option.c:1420
 #, fuzzy, c-format
 msgid "Unknown window type: %s\n"
 msgstr "不明的對齊型態：%s\n"
 
-#: src/option.c:1445
+#: src/option.c:1449
 #, fuzzy, c-format
 msgid "Unknown smart Home/End mode: %s\n"
 msgstr "不明的來源型態：%s\n"
 
-#: src/option.c:1555
+#: src/option.c:1559
 #, fuzzy, c-format
 msgid "Unknown signal: %s\n"
 msgstr "不明的對齊型態：%s\n"
 
-#: src/option.c:1806
+#: src/option.c:1810
 msgid "File exist. Overwrite?"
 msgstr "檔案已存在。覆寫？"
 
-#: src/option.c:1952
+#: src/option.c:1957
 msgid "File was changed. Save it?"
 msgstr ""
 
-#: src/option.c:2004
+#: src/option.c:2009
 #, fuzzy
 msgid "- Yet another dialoging program"
 msgstr "又一個對話框程式"
 
-#: src/option.c:2008
+#: src/option.c:2013
 msgid "General options"
 msgstr "一般選項"
 
-#: src/option.c:2008
+#: src/option.c:2013
 msgid "Show general options"
 msgstr "顯示一般選項"
 
-#: src/option.c:2014
+#: src/option.c:2019
 #, fuzzy
 msgid "Common options"
 msgstr "表單選項"
 
-#: src/option.c:2014
+#: src/option.c:2019
 #, fuzzy
 msgid "Show common options"
 msgstr "顯示表單選項"
 
-#: src/option.c:2020
+#: src/option.c:2025
 #, fuzzy
 msgid "About dialog options"
 msgstr "列印對話框選項"
 
-#: src/option.c:2020
+#: src/option.c:2025
 #, fuzzy
 msgid "Show custom about dialog options"
 msgstr "顯示列印對話框選項"
 
-#: src/option.c:2026
+#: src/option.c:2031
 #, fuzzy
 msgid "Application selection options"
 msgstr "字型選擇選項"
 
-#: src/option.c:2026
+#: src/option.c:2031
 #, fuzzy
 msgid "Show application selection options"
 msgstr "顯示字型選擇選項"
 
-#: src/option.c:2032
+#: src/option.c:2037
 msgid "Calendar options"
 msgstr "行事曆選項"
 
-#: src/option.c:2032
+#: src/option.c:2037
 msgid "Show calendar options"
 msgstr "顯示行事曆選項"
 
-#: src/option.c:2038
+#: src/option.c:2043
 msgid "Color selection options"
 msgstr "顏色選擇選項"
 
-#: src/option.c:2038
+#: src/option.c:2043
 msgid "Show color selection options"
 msgstr "顯示顏色選擇選項"
 
-#: src/option.c:2044
+#: src/option.c:2049
 msgid "DND options"
 msgstr "拖放選項"
 
-#: src/option.c:2044
+#: src/option.c:2049
 msgid "Show drag-n-drop options"
 msgstr "顯示拖放選項"
 
-#: src/option.c:2050
+#: src/option.c:2055
 msgid "Text entry options"
 msgstr "文字輸入框選項"
 
-#: src/option.c:2050
+#: src/option.c:2055
 msgid "Show text entry options"
 msgstr "顯示文字輸入框選項"
 
-#: src/option.c:2056
+#: src/option.c:2061
 msgid "File selection options"
 msgstr "檔案選取選項"
 
-#: src/option.c:2056
+#: src/option.c:2061
 msgid "Show file selection options"
 msgstr "顯示檔案選取選項"
 
-#: src/option.c:2062
+#: src/option.c:2067
 msgid "Font selection options"
 msgstr "字型選擇選項"
 
-#: src/option.c:2062
+#: src/option.c:2067
 msgid "Show font selection options"
 msgstr "顯示字型選擇選項"
 
-#: src/option.c:2068
+#: src/option.c:2073
 msgid "Form options"
 msgstr "表單選項"
 
-#: src/option.c:2068
+#: src/option.c:2073
 msgid "Show form options"
 msgstr "顯示表單選項"
 
-#: src/option.c:2075
+#: src/option.c:2080
 #, fuzzy
 msgid "HTML options"
 msgstr "清單選項"
 
-#: src/option.c:2075
+#: src/option.c:2080
 #, fuzzy
 msgid "Show HTML options"
 msgstr "顯示表單選項"
 
-#: src/option.c:2082
+#: src/option.c:2087
 msgid "Icons box options"
 msgstr "圖示框選項"
 
-#: src/option.c:2082
+#: src/option.c:2087
 msgid "Show icons box options"
 msgstr "顯示圖示框選項"
 
-#: src/option.c:2088
+#: src/option.c:2093
 msgid "List options"
 msgstr "清單選項"
 
-#: src/option.c:2088
+#: src/option.c:2093
 msgid "Show list options"
 msgstr "顯示清單選項"
 
-#: src/option.c:2094
+#: src/option.c:2099
 #, fuzzy
 msgid "Notebook options"
 msgstr "拖放選項"
 
-#: src/option.c:2094
+#: src/option.c:2099
 #, fuzzy
 msgid "Show notebook dialog options"
 msgstr "顯示列印對話框選項"
 
-#: src/option.c:2101
+#: src/option.c:2106
 msgid "Notification icon options"
 msgstr "通知圖示選項"
 
-#: src/option.c:2102
+#: src/option.c:2107
 msgid "Show notification icon options"
 msgstr "顯示通知圖示選項"
 
-#: src/option.c:2110
+#: src/option.c:2115
 #, fuzzy
 msgid "StatusNotifier/AppIndicator options"
 msgstr "通知圖示選項"
 
-#: src/option.c:2111
+#: src/option.c:2116
 #, fuzzy
 msgid "Show indicator options"
 msgstr "顯示列印對話框選項"
 
-#: src/option.c:2118
+#: src/option.c:2123
 #, fuzzy
 msgid "Paned dialog options"
 msgstr "列印對話框選項"
 
-#: src/option.c:2118
+#: src/option.c:2123
 #, fuzzy
 msgid "Show paned dialog options"
 msgstr "顯示列印對話框選項"
 
-#: src/option.c:2124
+#: src/option.c:2129
 #, fuzzy
 msgid "Picture dialog options"
 msgstr "列印對話框選項"
 
-#: src/option.c:2124
+#: src/option.c:2129
 #, fuzzy
 msgid "Show picture dialog options"
 msgstr "顯示列印對話框選項"
 
-#: src/option.c:2130
+#: src/option.c:2135
 msgid "Print dialog options"
 msgstr "列印對話框選項"
 
-#: src/option.c:2130
+#: src/option.c:2135
 msgid "Show print dialog options"
 msgstr "顯示列印對話框選項"
 
-#: src/option.c:2136
+#: src/option.c:2141
 msgid "Progress options"
 msgstr "進度選項"
 
-#: src/option.c:2136
+#: src/option.c:2141
 msgid "Show progress options"
 msgstr "顯示進度選項"
 
-#: src/option.c:2142
+#: src/option.c:2147
 msgid "Scale options"
 msgstr "尺度選項"
 
-#: src/option.c:2142
+#: src/option.c:2147
 msgid "Show scale options"
 msgstr "顯示尺度選項"
 
-#: src/option.c:2148
+#: src/option.c:2153
 msgid "Text information options"
 msgstr "文字資訊選項"
 
-#: src/option.c:2148
+#: src/option.c:2153
 msgid "Show text information options"
 msgstr "顯示文字資訊選項"
 
-#: src/option.c:2155
+#: src/option.c:2160
 #, fuzzy
 msgid "SourceView options"
 msgstr "尺度選項"
 
-#: src/option.c:2155
+#: src/option.c:2160
 #, fuzzy
 msgid "Show SourceView options"
 msgstr "顯示表單選項"
 
-#: src/option.c:2162
+#: src/option.c:2167
 #, fuzzy
 msgid "File filter options"
 msgstr "檔案選取選項"
 
-#: src/option.c:2162
+#: src/option.c:2167
 #, fuzzy
 msgid "Show file filter options"
 msgstr "顯示檔案選取選項"
 
-#: src/option.c:2168
+#: src/option.c:2173
 msgid "Miscellaneous options"
 msgstr "雜項選項"
 
-#: src/option.c:2168
+#: src/option.c:2173
 msgid "Show miscellaneous options"
 msgstr "顯示雜項選項"
 
@@ -2059,7 +2064,7 @@ msgstr "原始資料列印不支援這個檔案類型。\n"
 msgid "Load source file failed: %s\n"
 msgstr "載入原始檔案失敗：%s\n"
 
-#: src/progress.c:248
+#: src/progress.c:250
 msgid ""
 "WARNING: You are using old-style progress dialog. This features is obsolete "
 "now, please use --bar style instead\n"
