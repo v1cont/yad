@@ -57,14 +57,14 @@ Display HTML dialog
 .B \-\-list
 Display list dialog
 .TP
-.B \-\-multi-progress
-Display multi progress bars dialog.
-.TP
 .B \-\-notebook
 Display notebook dialog.
 .TP
 .B \-\-notification
 Display notification icon.
+.TP
+.B \-\-appindicator
+Display appindicator icon.
 .TP
 .B \-\-print
 Display print dialog.
@@ -72,11 +72,11 @@ Display print dialog.
 .B \-\-progress
 Display progress indication dialog.
 .TP
-.B \-\-text-info
-Display text information dialog.
-.TP
 .B \-\-scale
 Display scale dialog.
+.TP
+.B \-\-text-info
+Display text information dialog.
 
 .SS General options
 .TP
@@ -845,14 +845,14 @@ Set the command running when clicked on the icon. Default action is \fIquit\fP i
 .B \-\-listen
 Listen for commands on stdin. See \fBNOTIFICATION\fP section.
 .TP
+.B \-\-menu=\fISTRING\fP
+Set initial menu for right-click.
+.TP
 .B \-\-separator=\fISTRING\fP
 Set separator character for menu values. Default is \fI|\fP.
 .TP
 .B \-\-item-separator=\fISTRING\fP
 Set separator character for menu items. Default is \fI!\fP.
-.TP
-.B \-\-menu=\fISTRING\fP
-Set initial menu for right-click.
 .TP
 .B \-\-no-middle
 Disable exit on middle click.
@@ -864,6 +864,23 @@ Doesn't show icon at startup.
 Set notification icon size to \fISIZE\fP. This option doesn't works for themed icons.
 .PP
 See \fBNOTIFICATION\fP section for more about separators.
+
+.SS Appindicator options
+.TP
+.B \-\-listen
+Listen for commands on stdin. See \fBNOTIFICATION\fP section.
+.TP
+.B \-\-menu=\fISTRING\fP
+Set initial menu for right-click.
+.TP
+.B \-\-separator=\fISTRING\fP
+Set separator character for menu values. Default is \fI|\fP.
+.TP
+.B \-\-item-separator=\fISTRING\fP
+Set separator character for menu items. Default is \fI!\fP.
+.TP
+.B \-\-hidden
+Doesn't show icon at startup.
 
 .SS Paned options
 .TP
