@@ -82,6 +82,9 @@ static gboolean notebook_mode = FALSE;
 #ifdef HAVE_TRAY
 static gboolean notification_mode = FALSE;
 #endif
+#ifdef HAVE_APPINDICATOR
+static gboolean appindicator_mode = FALSE;
+#endif
 static gboolean paned_mode = FALSE;
 static gboolean picture_mode = FALSE;
 static gboolean print_mode = FALSE;
@@ -556,6 +559,14 @@ static GOptionEntry notification_options[] = {
     N_("Doesn't show icon at startup"), NULL },
   { "icon-size", 0,  G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_INT, &options.common_data.icon_size,
     N_("Set icon size for fully specified icons (default - 16)"), N_("SIZE") },
+  { NULL }
+};
+#endif
+
+#ifdef HAVE_APPINDICATOR
+static GOptionEntry appindicator_options[] = {
+  { "indicator", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &appindicator_mode,
+    N_("Display indicator icon (StatusNotifier/AppIndicator)"), NULL },
   { NULL }
 };
 #endif
@@ -1576,6 +1587,10 @@ yad_set_mode (void)
   else if (notification_mode)
     options.mode = YAD_MODE_NOTIFICATION;
 #endif
+#ifdef HAVE_APPINDICATOR
+  else if (appindicator_mode)
+    options.mode = YAD_MODE_APPINDICATOR;
+#endif
   else if (paned_mode)
     options.mode = YAD_MODE_PANED;
   else if (picture_mode)
@@ -2082,6 +2097,15 @@ yad_create_context (void)
   a_group = g_option_group_new ("notification", _("Notification icon options"),
                                 _("Show notification icon options"), NULL, NULL);
   g_option_group_add_entries (a_group, notification_options);
+  g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+  g_option_context_add_group (tmp_ctx, a_group);
+#endif
+
+#ifdef HAVE_APPINDICATOR
+  /* Adds indicator option entries */
+  a_group = g_option_group_new ("indicator", _("StatusNotifier/AppIndicator options"),
+                                _("Show indicator options"), NULL, NULL);
+  g_option_group_add_entries (a_group, appindicator_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 #endif
