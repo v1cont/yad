@@ -942,7 +942,7 @@ bar label. Numeric values treats like a percents for progress bar.
 .TP
 .B \-\-bar=\fILABEL[:TYPE]\fP
 Add progress bar. \fILABEL\fP is a text label for progress bar. \fITYPE\fP is a progress bar type.
-Types are: \fINORM\fP for normal progress bar, \fIRTL\fP for inverted progress bar and \fIPULSE\fP for pulsate progress bar.
+Types are: \fINORM\fP for normal progress bar, \fIRTL\fP for inverted progress bar, \fIPULSE\fP for pulsate progress bar and \fICPULSE\fP for continuous pulsating progress bar.
 If no bars specified, the progress dialog works in \fIsingle-bar\fP mode.
 .TP
 .B \-\-vertical
@@ -968,6 +968,9 @@ Kill parent process if cancel button is pressed.
 .TP
 .B \-\-pulsate
 Pulsate progress bar. This option works only in \fIsingle-bar\fP mode.
+.TP
+.B \-\-continuous
+Continuously pulsating progress bar. This option works only in \fIsingle-bar\fP mode.
 .TP
 .B \-\-scroll
 Make layout scrollable.

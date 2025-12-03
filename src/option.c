@@ -613,7 +613,7 @@ static GOptionEntry progress_options[] = {
   { "progress", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &progress_mode,
     N_("Display progress indication dialog"), NULL },
   { "bar", 0, 0, G_OPTION_ARG_CALLBACK, add_bar,
-    N_("Add the progress bar (norm, rtl, pulse or perm)"), N_("LABEL[:TYPE]") },
+    N_("Add the progress bar (norm, rtl, pulse, cpulse or perm)"), N_("LABEL[:TYPE]") },
   { "watch-bar", 0, 0, G_OPTION_ARG_INT, &options.progress_data.watch_bar,
     N_("Watch for specific bar for auto close"), N_("NUMBER") },
   { "align", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_CALLBACK, set_align,
@@ -624,6 +624,8 @@ static GOptionEntry progress_options[] = {
     N_("Hide text on progress bar"), NULL },
   { "pulsate", 0, 0, G_OPTION_ARG_NONE, &options.progress_data.pulsate,
     N_("Pulsate progress bar"), NULL },
+  { "continuous", 0, 0, G_OPTION_ARG_NONE, &options.progress_data.cont,
+    N_("Conlinuous pulsating progress bar"), NULL },
   { "auto-close", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_NONE, &options.progress_data.autoclose,
     /* xgettext: no-c-format */
     N_("Dismiss the dialog when 100% has been reached"), NULL },
@@ -949,6 +951,8 @@ add_bar (const gchar * option_name, const gchar * value, gpointer data, GError *
         bar->type = YAD_PROGRESS_RTL;
       else if (strcasecmp (bstr[1], "PULSE") == 0)
         bar->type = YAD_PROGRESS_PULSE;
+      else if (strcasecmp (bstr[1], "CPULSE") == 0)
+        bar->type = YAD_PROGRESS_CPULSE;
       else if (strcasecmp (bstr[1], "PERM") == 0)
         bar->type = YAD_PROGRESS_PERM;
       else
@@ -1916,6 +1920,7 @@ yad_options_init (void)
   options.progress_data.watch_bar = 0;
   options.progress_data.progress_text = NULL;
   options.progress_data.pulsate = FALSE;
+  options.progress_data.cont = FALSE;
   options.progress_data.autoclose = FALSE;
 #ifndef G_OS_WIN32
   options.progress_data.autokill = FALSE;

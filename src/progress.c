@@ -38,7 +38,7 @@ static gboolean
 pulsate_progress_bar (GtkProgressBar *bar)
 {
   gtk_progress_bar_pulse (bar);
-  return TRUE;
+  return G_SOURCE_CONTINUE;
 }
 
 static gboolean
@@ -139,6 +139,8 @@ handle_stdin (GIOChannel *channel, GIOCondition condition, gpointer data)
             {
               if (value[1] && b->type == YAD_PROGRESS_PULSE)
                 gtk_progress_bar_pulse (pb);
+              else if (value[1] && b->type == YAD_PROGRESS_CPULSE)
+                continue; /* just skip */
               else if (value[1] && b->type == YAD_PROGRESS_PERM)
                 {
                   guint id;
@@ -254,6 +256,10 @@ progress_create_widget (GtkWidget *dlg)
       else
         bar->type = YAD_PROGRESS_NORMAL;
 
+      /* special case */
+      if (options.progress_data.cont)
+        bar->type = YAD_PROGRESS_CPULSE;
+
       if (options.progress_data.progress_text)
         bar->name = options.progress_data.progress_text;
 
@@ -303,7 +309,7 @@ progress_create_widget (GtkWidget *dlg)
       gtk_widget_set_name (w, "yad-progress-widget");
       gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (w), !options.common_data.hide_text);
 
-      if (p->type != YAD_PROGRESS_PULSE)
+      if (p->type != YAD_PROGRESS_PULSE || p->type != YAD_PROGRESS_CPULSE)
         {
           if (options.extra_data && options.extra_data[i])
             {
@@ -335,6 +341,9 @@ progress_create_widget (GtkWidget *dlg)
         }
 
       progress_bars = g_slist_append (progress_bars, w);
+      
+      if (p->type == YAD_PROGRESS_CPULSE)
+        g_timeout_add_seconds (1, (GSourceFunc) pulsate_progress_bar, w);
 
       i++;
     }
