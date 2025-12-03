@@ -19,9 +19,11 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <errno.h>
 
 #include <sys/ipc.h>
 #include <sys/shm.h>
@@ -127,8 +129,10 @@ notebook_swallow_childs (void)
   guint i;
   gboolean all_registered;
   GtkWidget *s;
+  gint timeout_ms = 10000;  /* 10 second timeout */
+  gint waited_ms = 0;
 
-  /* wait until all children are registered */
+  /* wait until all children are registered (with timeout) */
   do
     {
       all_registered = TRUE;
@@ -139,9 +143,19 @@ notebook_swallow_childs (void)
             break;
           }
       if (!all_registered)
-        usleep (1000);
+        {
+          usleep (1000);
+          waited_ms++;
+        }
     }
-  while (!all_registered);
+  while (!all_registered && waited_ms < timeout_ms);
+
+  if (waited_ms >= timeout_ms)
+    {
+      g_warning (_("Timeout waiting for notebook child windows to register. "
+                   "Notebook dialogs require X11 (use GDK_BACKEND=x11 on Wayland)."));
+      return;
+    }
 
   for (i = 1; i <= n_tabs; i++)
     {
@@ -191,33 +205,78 @@ notebook_close_childs (void)
   guint i;
   struct shmid_ds buf;
   gboolean is_running;
+  gint timeout_ms = 5000;  /* 5 second timeout */
+  gint waited_ms = 0;
 
+  /* Send graceful termination signal to all children */
   for (i = 1; i <= n_tabs; i++)
     {
       if (tabs[i].pid != -1)
-        kill (tabs[i].pid, SIGUSR2);
-      else
-        break;
+        {
+          /* Check if process still exists before signaling */
+          if (kill (tabs[i].pid, 0) == 0)
+            kill (tabs[i].pid, SIGUSR2);
+          else if (errno == ESRCH)
+            tabs[i].pid = -1;  /* Process already dead, mark as such */
+        }
     }
 
-  /* wait for stop subprocesses */
+  /* Wait for subprocesses to stop (with timeout) */
   do
     {
       is_running = FALSE;
       for (i = 1; i <= n_tabs; i++)
         {
-          if (tabs[i].pid != -1 && kill (tabs[i].pid, 0) == 0)
+          if (tabs[i].pid != -1)
             {
-              is_running = TRUE;
-              break;
+              /* Try to reap the process first */
+              int status;
+              pid_t result = waitpid (tabs[i].pid, &status, WNOHANG);
+              if (result == tabs[i].pid)
+                {
+                  /* Process has exited, mark as dead */
+                  tabs[i].pid = -1;
+                }
+              else if (result == 0)
+                {
+                  /* Process still running */
+                  is_running = TRUE;
+                }
+              else if (result == -1 && errno == ECHILD)
+                {
+                  /* Not our child or already reaped */
+                  if (kill (tabs[i].pid, 0) == -1 && errno == ESRCH)
+                    tabs[i].pid = -1;  /* Process doesn't exist */
+                  else
+                    is_running = TRUE;  /* Still running but not our child */
+                }
             }
         }
       if (is_running)
-        usleep (1000);
+        {
+          usleep (1000);
+          waited_ms++;
+        }
     }
-  while (is_running);
+  while (is_running && waited_ms < timeout_ms);
 
-  /* cleanup shared memory */
+  /* Force kill if still running after timeout */
+  if (is_running)
+    {
+      g_warning (_("Child processes didn't terminate in time, force killing..."));
+      for (i = 1; i <= n_tabs; i++)
+        {
+          if (tabs[i].pid != -1)
+            {
+              kill (tabs[i].pid, SIGKILL);
+              /* Reap the killed process */
+              waitpid (tabs[i].pid, NULL, 0);
+              tabs[i].pid = -1;
+            }
+        }
+    }
+
+  /* Cleanup shared memory */
   shmctl (tabs[0].pid, IPC_RMID, &buf);
   shmdt (tabs);
 }
