@@ -23,6 +23,16 @@
 
 #include "cpicker.h"
 
+#include <glib/gi18n.h>  /* For _() macro */
+
+/* Forward declaration - defined in main.c when building yad */
+gboolean yad_check_x11 (void);
+
+/* Weak symbol: if yad_check_x11 doesn't exist (tools build), return TRUE for X11 */
+#ifdef __GNUC__
+gboolean __attribute__((weak)) yad_check_x11 (void) { return TRUE; }
+#endif
+
 #define BIG_STEP 20
 
 typedef struct {
@@ -214,6 +224,15 @@ yad_get_screen_color (GtkWidget *widget)
   GdkCursor *picker_cursor;
   GdkGrabStatus grab_status;
   GdkWindow *window;
+
+  /* Color picking doesn't work on Wayland - screen capture and device grab are restricted */
+  if (!yad_check_x11 ())
+    {
+      g_printerr (_("WARNING: Color picker is not supported on Wayland.\n"
+                    "Screen capture and pointer grab require X11 or a portal.\n"
+                    "Use GDK_BACKEND=x11 to enable color picking.\n"));
+      return;
+    }
 
   gd = g_new0 (GrabData, 1);
   gd->color_widget = widget;
