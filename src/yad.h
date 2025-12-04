@@ -238,6 +238,7 @@ typedef struct {
   gboolean negy;
   gchar *geometry;
   guint timeout;
+  guint timeout_elapsed; /* Time already elapsed from previous dialog */
   gchar *to_indicator;
   gchar *dialog_text;
   guint text_width;
