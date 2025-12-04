@@ -20,10 +20,10 @@ msgstr ""
 #: src/about.c:98
 msgid "translator-credits"
 msgstr ""
+"Cristiano Fraga G. Nunes <cfgnunes@gmail.com>\n"
 "Gustavo Soares de Lima <gustavo@logicus.com.br>\n"
-"Angela Fernanda Ferreira <angela@logicus.com.br\n"
-"Tulio Calil <tuliocll@gmail.com>\n"
-"Cristiano Fraga G. Nunes <cfgnunes@gmail.com>"
+"Angela Fernanda Ferreira <angela@logicus.com.br>\n"
+"Tulio Calil <tuliocll@gmail.com>"
 
 #: src/about.c:100
 #, c-format
