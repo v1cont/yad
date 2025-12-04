@@ -1087,12 +1087,12 @@ form_create_widget (GtkWidget * dlg)
                 }
               g_signal_connect (G_OBJECT (e), "toggled", G_CALLBACK (switch_changed_cb), GINT_TO_POINTER (i));
               
-              if (is_footer)
-                gtk_box_pack_start (GTK_BOX (main_box), e, FALSE, FALSE, 0);
-              else
-                gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
-                
-              gtk_widget_set_hexpand (e, TRUE);
+              // Only add to grid if NOT a footer widget (footer widgets are packed later into button box)
+              if (!is_footer)
+                {
+                  gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
+                  gtk_widget_set_hexpand (e, TRUE);
+                }
               fields = g_slist_append (fields, e);
               break;
 
@@ -1340,12 +1340,12 @@ form_create_widget (GtkWidget * dlg)
               if (fld->type == YAD_FIELD_BUTTON)
                 gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
               
-              if (is_footer)
-                gtk_box_pack_start (GTK_BOX (main_box), e, FALSE, FALSE, 0);
-              else
-                gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
-
-              gtk_widget_set_hexpand (e, TRUE);
+              // Only add to grid if NOT a footer widget (footer widgets are packed later into button box)
+              if (!is_footer)
+                {
+                  gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
+                  gtk_widget_set_hexpand (e, TRUE);
+                }
               fields = g_slist_append (fields, e);
               break;
 
