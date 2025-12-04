@@ -526,6 +526,8 @@ static GOptionEntry list_options[] = {
     N_("Set columns alignment"), N_("STRING") },
   { "header-align", 0, 0, G_OPTION_ARG_STRING, &options.list_data.hdr_align,
     N_("Set headers alignment"), N_("STRING") },
+  { "select-row", 0, 0, G_OPTION_ARG_STRING, &options.list_data.select_row,
+    N_("Pre-select row by number (1-based, comma-separated for multiple)"), N_("ROW[,ROW...]") },
   { NULL }
 };
 
@@ -1885,6 +1887,7 @@ yad_options_init (void)
   options.list_data.header_tips = FALSE;
   options.list_data.col_align = NULL;
   options.list_data.hdr_align = NULL;
+  options.list_data.select_row = NULL;
 
   /* Initialize notebook data */
   options.notebook_data.tabs = NULL;
