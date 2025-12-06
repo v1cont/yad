@@ -258,6 +258,7 @@ typedef struct {
   gboolean keep_icon_size;
   GtkButtonBoxStyle buttons_layout;
   gint def_resp;
+  gint enter_resp;
   gboolean use_interp;
   gchar *interp;
   gchar *uri_handler;
