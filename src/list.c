@@ -67,21 +67,26 @@ list_activate_cb (GtkWidget *widget, GdkEventKey *event, gpointer data)
 {
   if (event->keyval == GDK_KEY_Return || event->keyval == GDK_KEY_KP_Enter)
     {
-      if (options.list_data.dclick_action)
+      if (event->state & GDK_CONTROL_MASK)
         {
-          /* FIXME: check this under gtk-3.0 */
-          if (event->state & GDK_CONTROL_MASK)
-            {
-              if (options.plug == -1)
-                yad_exit (options.data.def_resp);
-            }
-          else
-            return FALSE;
+          /* CTRL+ENTER: always exit with def_resp (--response value) */
+          if (options.plug == -1)
+            yad_exit (options.data.def_resp);
+          return TRUE;
+        }
+      else if (options.list_data.dclick_action)
+        {
+          /* ENTER with dclick_action: let double-click handler process it */
+          return FALSE;
         }
       else
         {
+          /* ENTER without dclick_action: use enter_resp if set, else def_resp */
           if (options.plug == -1)
-            yad_exit (options.data.def_resp);
+            {
+              gint resp = (options.data.enter_resp >= 0) ? options.data.enter_resp : options.data.def_resp;
+              yad_exit (resp);
+            }
         }
 
       return TRUE;

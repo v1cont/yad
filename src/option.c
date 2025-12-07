@@ -141,6 +141,8 @@ static GOptionEntry general_options[] = {
     N_("Always print result"), NULL },
   { "response", 0, 0, G_OPTION_ARG_INT, &options.data.def_resp,
     N_("Set default return code"), N_("NUMBER") },
+  { "enter-response", 0, 0, G_OPTION_ARG_INT, &options.data.enter_resp,
+    N_("Set return code for Enter key (defaults to --response value)"), N_("NUMBER") },
   { "selectable-labels", 0, 0, G_OPTION_ARG_NONE, &options.data.selectable_labels,
     N_("Dialog text can be selected"), NULL },
   { "keep-icon-size", 0, 0, G_OPTION_ARG_NONE, &options.data.keep_icon_size,
@@ -1685,6 +1687,7 @@ yad_options_init (void)
   options.data.selectable_labels = FALSE;
   options.data.keep_icon_size = FALSE;
   options.data.def_resp = YAD_RESPONSE_OK;
+  options.data.enter_resp = -1;  /* -1 means use def_resp, for backward compatibility */
   options.data.use_interp = FALSE;
   options.data.interp = "bash -c \"%s\"";
 #ifndef STANDALONE
