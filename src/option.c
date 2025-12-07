@@ -111,6 +111,8 @@ static GOptionEntry general_options[] = {
     N_("Set dialog timeout in seconds"), N_("TIMEOUT") },
   { "timeout-indicator", 0, 0, G_OPTION_ARG_STRING, &options.data.to_indicator,
     N_("Show remaining time indicator (top, bottom, left, right)"), N_("POS") },
+  { "timeout-elapsed", 0, 0, G_OPTION_ARG_INT, &options.data.timeout_elapsed,
+    N_("Set elapsed time for timeout continuation"), N_("SECONDS") },
   { "text", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_STRING, &options.data.dialog_text,
     N_("Set the dialog text"), N_("TEXT") },
   { "text-width", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_INT, &options.data.text_width,
@@ -1667,6 +1669,7 @@ yad_options_init (void)
   options.data.icon_theme = NULL;
   options.data.expander = NULL;
   options.data.timeout = 0;
+  options.data.timeout_elapsed = 0;
   options.data.to_indicator = NULL;
   options.data.hscroll_policy = GTK_POLICY_AUTOMATIC;
   options.data.vscroll_policy = GTK_POLICY_AUTOMATIC;
