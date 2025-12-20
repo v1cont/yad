@@ -86,6 +86,9 @@ Set the dialog title.
 .B \-\-window-icon=\fIICON\fP
 Set the window icon.
 .TP
+.B \-\-menubar=\fISTRING\fP
+Add a main menu bar to the top of the dialog window. This is distinct from the notification tray menu. See \fBMENU BAR\fP section for the syntax of \fISTRING\fP.
+.TP
 .B \-\-width=\fIWIDTH\fP
 Set the dialog window width.
 .TP
@@ -1227,6 +1230,59 @@ Separator character for menu items (e.g. `!') sets with \-\-item-separator argum
 .TP
 .B quit
 Exit the program. Middle click on icon also send \fIquit\fP command.
+
+.SH MENU BAR
+The \fB\-\-menubar\fR option adds a standard hierarchical menu bar to the top of the dialog window. This menu is processed as a stack, allowing for deeply nested submenus.
+
+The \fISTRING\fR is a comma-separated list of entries defined by the following syntax:
+
+.SS Item Syntax
+.TP
+\fBRoot Menu\fR
+.B label[;;]
+A root menu heading on the bar. It must end with two semicolons to distinguish it from standard menu items.
+.TP
+\fBMenu Item\fR
+.B label [| command [| icon/type]]
+The standard format for items within a menu.
+.RS
+.IP \(bu 2
+\fBlabel\fR: The text displayed. Use an underscore (\fB_\fR) before a character to create a mnemonic (e.g., \fI_File\fR). \fByad\fR automatically validates mnemonics at each level; if a character is already in use, the underscore is stripped to prevent focus conflicts. Use \fB__\fR for a literal underscore.
+.IP \(bu 2
+\fBcommand\fR: The shell command to execute. If this field is omitted or empty, the item is treated as a \fBSubmenu\fR opener.
+.IP \(bu 2
+\fBicon/type\fR: Either a themed icon name, a path to an image, or the keyword \fBcheck\fR. If \fBcheck\fR is used, the item becomes a toggleable checkbox and executes the command upon every state change.
+.RE
+
+.SS Special Commands
+The following keywords can be used in the \fIcommand\fR field for built-in functionality:
+.TP
+\fBquit\fR or \fBexit\fR
+Closes the \fByad\fR dialog immediately.
+
+.SS Hierarchy Control
+.TP
+\fBSubmenus\fR
+A submenu is opened by providing a \fBlabel\fR without a \fBcommand\fR. All subsequent items in the string will be placed inside this submenu.
+.TP
+\fBClosing Levels\fR
+An empty entry (indicated by two consecutive commas \fB, ,\fR) pops the menu stack, closing the current submenu and returning to the previous level.
+.TP
+\fBSeparators\fR
+An entry with an empty label or a single dash (\fB\-\fR) creates a horizontal separator line.
+
+.SS Examples
+.PP
+\fB1. Standard File and Edit setup:\fR
+.nf
+yad \-\-menubar="_File;;_New|touch n.txt|document-new, _Quit|exit|gtk-quit, _Edit;;_Undo|undo-cmd|edit-undo"
+.fi
+
+.PP
+\fB2. Nested submenus and Checkboxes:\fR
+.nf
+yad \-\-menubar="_Settings;;_View|, _Toolbar||check, \-, _Statusbar||check, , _Network|, _Wifi|nm-applet|network-wireless, , _Quit|quit|gtk-quit"
+.fi
 
 .SH STOCK ITEMS
 .TP
