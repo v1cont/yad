@@ -3,6 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
 /* ===========================
    DATA STRUCTURES
    =========================== */
@@ -81,23 +83,6 @@ static gchar* validate_mnemonic(const gchar *label, gboolean *used_list) {
         }
     }
     return new_label;
-}
-
-/* ===========================
-   CSS & STYLING
-   =========================== */
-
-static void load_menu_css(void) {
-    GtkCssProvider *provider = gtk_css_provider_new();
-    const gchar *css =
-        ".yad-menu-box { margin-left: -24px; padding: 0; }\n"
-        ".yad-menu-box label { padding: 0; margin: 0; }\n"
-        "menuitem { padding-left: 0; }\n";
-    
-    gtk_css_provider_load_from_data(provider, css, -1, NULL);
-    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
-        GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-    g_object_unref(provider);
 }
 
 /* ===========================
@@ -198,33 +183,29 @@ static void parse_menu_string(const gchar *def) {
 
 static void mb_activate(GtkWidget *w, gpointer data) {
     MenuItem *item = (MenuItem *)data;
-    if (!item || !item->command) return;
+    if (!item) return;
 
-    // 1. Handle Checkboxes
-    if (item->is_check) {
-        item->checked = !item->checked;
-        if (item->indicator_image) {
-            if (item->checked)
-                gtk_image_set_from_icon_name(GTK_IMAGE(item->indicator_image), "check-symbolic", GTK_ICON_SIZE_MENU);
-            else
-                gtk_image_clear(GTK_IMAGE(item->indicator_image));
-        }
+    if (GTK_IS_CHECK_MENU_ITEM(w)) {
+        item->checked = gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(w));
     }
 
-    // 2. Handle "Quit" or "Exit" internal commands
-    if (g_ascii_strcasecmp(item->command, "quit") == 0 || 
-        g_ascii_strcasecmp(item->command, "exit") == 0) {
+    if (!item->command || strlen(item->command) == 0) {
+        return;
+    }
+
+    // Handle "Quit" or "Exit" internal commands
+   gchar *cmd = g_strstrip(g_strdup(item->command));
+    
+    if (g_ascii_strcasecmp(cmd, "quit") == 0 || 
+        g_ascii_strcasecmp(cmd, "exit") == 0) {
+        g_free(cmd);
         gtk_main_quit();
         return;
     }
 
-    // 3. Export YAD_PID to the environment for shell scripts
-    gchar *pid_str = g_strdup_printf("%d", getpid());
-    g_setenv("YAD_PID", pid_str, TRUE);
-
-    // 4. Run the command
-    run_command_async(item->command);
-    g_free(pid_str);
+    run_command_async(cmd);
+    
+   g_free(cmd);
 }
 
 static void populate_yad_menu(GtkWidget *menu, GList *items) {
@@ -234,52 +215,37 @@ static void populate_yad_menu(GtkWidget *menu, GList *items) {
 
         if (item->is_separator) {
             mi = gtk_separator_menu_item_new();
-        } else {
+        } 
+        else if (item->is_check) {
+            mi = gtk_check_menu_item_new_with_mnemonic(item->label);
+            gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(mi), item->checked);
+        } 
+        else if (item->icon_name) {
+            mi = gtk_image_menu_item_new_with_mnemonic(item->label);
+            GdkPixbuf *pb = get_pixbuf(item->icon_name, YAD_SMALL_ICON, TRUE);
+            if (pb) {
+                GtkWidget *img = gtk_image_new_from_pixbuf(pb);
+                gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(mi), img);
+                gtk_image_menu_item_set_always_show_image(GTK_IMAGE_MENU_ITEM(mi), TRUE);
+                g_object_unref(pb);
+            }
+        } 
+        else {
             mi = gtk_menu_item_new_with_mnemonic(item->label);
-            GtkWidget *box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
-            gtk_style_context_add_class(gtk_widget_get_style_context(box), "yad-menu-box");
-            gtk_widget_set_halign(box, GTK_ALIGN_START);
-
-            GtkWidget *ind = gtk_image_new();
-            GtkWidget *ico = gtk_image_new();
-            GtkWidget *lbl = gtk_bin_get_child(GTK_BIN(mi)); 
-            
-            if (lbl) {
-                g_object_ref(lbl);
-                gtk_container_remove(GTK_CONTAINER(mi), lbl);
-                gtk_label_set_xalign(GTK_LABEL(lbl), 0.0);
-            }
-
-            gtk_widget_set_size_request(ind, 16, 16);
-            gtk_widget_set_size_request(ico, 16, 16);
-
-            item->indicator_image = ind;
-            if (item->is_check && item->checked)
-                gtk_image_set_from_icon_name(GTK_IMAGE(ind), "check-symbolic", GTK_ICON_SIZE_MENU);
-            
-            if (item->icon_name) {
-                GdkPixbuf *pb = get_pixbuf(item->icon_name, YAD_SMALL_ICON, TRUE);
-                if (pb) {
-                    gtk_image_set_from_pixbuf(GTK_IMAGE(ico), pb);
-                    g_object_unref(pb);
-                }
-            }
-
-            gtk_box_pack_start(GTK_BOX(box), ind, FALSE, FALSE, 0);
-            gtk_box_pack_start(GTK_BOX(box), ico, FALSE, FALSE, 0);
-            gtk_box_pack_start(GTK_BOX(box), lbl, TRUE, TRUE, 0);
-            
-            gtk_container_add(GTK_CONTAINER(mi), box);
-            g_object_unref(lbl);
-
-            if (item->submenu_items) {
-                GtkWidget *sub = gtk_menu_new();
-                populate_yad_menu(sub, item->submenu_items);
-                gtk_menu_item_set_submenu(GTK_MENU_ITEM(mi), sub);
-            } else {
-                g_signal_connect(mi, "activate", G_CALLBACK(mb_activate), item);
-            }
         }
+
+        if (item->submenu_items) {
+            GtkWidget *sub = gtk_menu_new();
+            populate_yad_menu(sub, item->submenu_items);
+            gtk_menu_item_set_submenu(GTK_MENU_ITEM(mi), sub);
+        } else {
+            g_signal_connect(mi, "activate", G_CALLBACK(mb_activate), item);
+        }
+
+        if (mi) {
+            gtk_style_context_add_class(gtk_widget_get_style_context(mi), "yad-menu-item");
+        }
+
         gtk_menu_shell_append(GTK_MENU_SHELL(menu), mi);
     }
 }
@@ -291,10 +257,10 @@ GtkWidget* yad_build_global_menu(const gchar *def) {
         root_menus = NULL;
     }
 
-    load_menu_css();
-    parse_menu_string(def);
+   parse_menu_string(def);
 
     GtkWidget *menubar = gtk_menu_bar_new();
+    gtk_style_context_add_class(gtk_widget_get_style_context(menubar), "yad-menubar");
     for (GList *l = root_menus; l; l = l->next) {
         RootMenu *root = (RootMenu *)l->data;
         GtkWidget *root_mi = gtk_menu_item_new_with_mnemonic(root->label);
