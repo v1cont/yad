@@ -3,7 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 /* ===========================
    DATA STRUCTURES
@@ -209,6 +208,8 @@ static void mb_activate(GtkWidget *w, gpointer data) {
 }
 
 static void populate_yad_menu(GtkWidget *menu, GList *items) {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     for (GList *l = items; l; l = l->next) {
         MenuItem *item = (MenuItem *)l->data;
         GtkWidget *mi;
@@ -248,6 +249,7 @@ static void populate_yad_menu(GtkWidget *menu, GList *items) {
 
         gtk_menu_shell_append(GTK_MENU_SHELL(menu), mi);
     }
+#pragma GCC diagnostic pop 
 }
 
 GtkWidget* yad_build_global_menu(const gchar *def) {
