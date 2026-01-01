@@ -1,14 +1,14 @@
 # Georgian translation for YAD.
 # Copyright (C) 2023, Victor Ananjevsky.
 # This file is distributed under the same license as the YAD package.
-# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2023.
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2023-2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: yad git\n"
 "Report-Msgid-Bugs-To: victor@sanana.kiev.ua\n"
 "POT-Creation-Date: 2025-12-03 15:47+0200\n"
-"PO-Revision-Date: 2023-04-16 15:32+0200\n"
+"PO-Revision-Date: 2026-01-01 15:41+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.8\n"
 
 #: src/about.c:98
 msgid "translator-credits"
@@ -151,15 +151,16 @@ msgid "Unable to parse command line: %s\n"
 msgstr "ბრძანების პარამეტრების დამუშავების შეცდომა: %s\n"
 
 #: src/main.c:790
-#, fuzzy
 msgid ""
 "WARNING: Using splash option is deprecated, please use --window-type instead"
-msgstr "გაფრთხილება: gtkrc პარამეტრი მოძველებულია. გამოიყენეთ --css\n"
+msgstr ""
+"გაფრთხილება: გაშვების სურათის პარამეტრი მოძველებულია. გამოიყენეთ მის მაგიერ "
+"--window-type"
 
 #: src/main.c:800
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to change directory to %s: %s\n"
-msgstr "%s საქაღალდის გახსნის შეცდომა:%s\n"
+msgstr "საქაღალდის %s-ზე შეცვლა შეუძლებელია: %s\n"
 
 #: src/main.c:829
 msgid "WARNING: Using gtkrc option is deprecated, please use --css instead\n"
@@ -428,9 +429,8 @@ msgid "Set command running when F1 was pressed"
 msgstr "F11-ის დაჭერის დროს გასაშვები ბრძანების დაყენება"
 
 #: src/option.c:155
-#, fuzzy
 msgid "Set working directory"
-msgstr "ფანჯრის დეკორაციების გათიშვა"
+msgstr "სამუშაო საქაღალდის დაყენება"
 
 #: src/option.c:155 src/option.c:767
 msgid "PATH"
@@ -483,11 +483,12 @@ msgstr "ფანჯრის დახურვა მასზე ფოკუ
 #: src/option.c:181
 msgid "Open window as a splashscreen (Deprecated, see man page for details)"
 msgstr ""
+"ფანჯრის გახსნა გაშვების ეკრანის სახით (მოძველებულია. დეტალებისთვის იხილეთ "
+"man-ის გვერდი)"
 
 #: src/option.c:184
-#, fuzzy
 msgid "Specify the window type for the dialog"
-msgstr "ფანჯრის სიმაღლის დაყენება"
+msgstr "მიუთითეთ ფანჯრის ტიპი დიალოგისთვის"
 
 #: src/option.c:186
 msgid "Special type of dialog for XEMBED"
@@ -1227,7 +1228,7 @@ msgstr "სრულად მითითებული ხატულებ�
 
 #: src/option.c:569
 msgid "Display indicator icon (StatusNotifier/AppIndicator)"
-msgstr ""
+msgstr "მაჩვენებლის ხატულას ჩვენებეა (StatusNotifier/AppIndicator)"
 
 #: src/option.c:580
 msgid "Display paned dialog"
@@ -1284,9 +1285,8 @@ msgid "Display progress indication dialog"
 msgstr "მიმდინარეობის ჩვენება"
 
 #: src/option.c:616
-#, fuzzy
 msgid "Add the progress bar (norm, rtl, pulse, cpulse or perm)"
-msgstr "პროგრესის პანელის დამატება (norm, rtl, pulse ან perm)"
+msgstr "მიმდინარეობის პანელის დამატება (norm, rtl, pulse, cpulse ან perm)"
 
 #: src/option.c:618
 msgid "Watch for specific bar for auto close"
@@ -1309,9 +1309,8 @@ msgid "Pulsate progress bar"
 msgstr "პულსირებადი მიმდინარეობის მაჩვენებელი"
 
 #: src/option.c:628
-#, fuzzy
 msgid "Conlinuous pulsating progress bar"
-msgstr "პულსირებადი მიმდინარეობის მაჩვენებელი"
+msgstr "უწყვეტი პულსირებადი მიმდინარეობის მაჩვენებლის პანელი"
 
 #: src/option.c:631
 #, no-c-format
@@ -1651,9 +1650,9 @@ msgid "Unknown scrollbar policy type: %s\n"
 msgstr "უცნობი ჩოჩიის წესის ტიპი: %s\n"
 
 #: src/option.c:1420
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown window type: %s\n"
-msgstr "უცნობი სწორების ტიპი: %s\n"
+msgstr "უცნობი ფანჯრის ტიპი: %s\n"
 
 #: src/option.c:1449
 #, c-format
@@ -1806,14 +1805,12 @@ msgid "Show notification icon options"
 msgstr "გაფრთხილების ხატულების პარამეტრების ჩვენება"
 
 #: src/option.c:2115
-#, fuzzy
 msgid "StatusNotifier/AppIndicator options"
-msgstr "გაფრთხილების ხატულების პარამეტრები"
+msgstr "StatusNotifier/AppIndicator-ის პარამეტრები"
 
 #: src/option.c:2116
-#, fuzzy
 msgid "Show indicator options"
-msgstr "დაბეჭდვის დიალოგის პარამეტრების ჩვენება"
+msgstr "მაჩვენებლის პარამეტრების ჩვენება"
 
 #: src/option.c:2123
 msgid "Paned dialog options"
@@ -2417,81 +2414,3 @@ msgstr "GTK-ის ხატულების თემის შემოწ�
 #: data/yad-settings.desktop.in:4
 msgid "Simple GUI for editing YAD settings"
 msgstr "მარტივი GUI-ი YAD-ის პარამეტრების ჩასასწორებლად"
-
-#~ msgid "Open window as a splashscreen"
-#~ msgstr "ფანჯრის, როგორც მისალმების ფანჯრის გახსნა"
-
-#~ msgid "Default width of dialog window"
-#~ msgstr "დიალოგის ფანჯრის ნაგულისხმები სიგანე"
-
-#~ msgid "Default height of dialog window"
-#~ msgstr "დიალოგის ფანჯრის ნაგულისხმები სიმაღლე"
-
-#~ msgid "Borders around dialog"
-#~ msgstr "საზღვრები დიალოგის გარშემო"
-
-#~ msgid "Show remaining time and percentage in timeout progress bar"
-#~ msgstr "დროისა და პროცენტების ჩვენება ვადის პროგრესის პანელზე"
-
-#~ msgid "Combo-box in entry dialog is always editable"
-#~ msgstr "Combo-box ჩანაწერის დიალოგში ყოველთვის ჩასწორებადია"
-
-#, no-c-format
-#~ msgid "Default terminal command (use %s for arguments placeholder)"
-#~ msgstr ""
-#~ "ნაგულისხმები ტერმინალის ბრძანება (არგუმენტების ადგილმჭერისთვის გამოიყენეთ "
-#~ "%s)"
-
-#, no-c-format
-#~ msgid "Default open command (use %s for arguments placeholder)"
-#~ msgstr ""
-#~ "ნაგულისხმები გახსნის ბრძანება (არგუმენტების ადგილმჭერისთვის გამოიყენეთ %s)"
-
-#~ msgid "Default date format (see strftime(3) for details)"
-#~ msgstr "ნაგულისხმები თარიღის ფორმატი (დეტალებისთვის იხილეთ strftime(3))"
-
-#~ msgid "Default color for URI in text-info dialog"
-#~ msgstr "ნაგულისხმები ფერი URI-ისთვის text-info დიალოგში"
-
-#~ msgid "Maximum number of tabs in notebook dialog"
-#~ msgstr "ჩანართების მაქსიმალური რაოდენობა რვეულის დიალოგში"
-
-#~ msgid "Use large previews in file selection dialogs"
-#~ msgstr "დიდი მინიატურების ჩვენება ფაილის არჩევანის დიალოგში"
-
-#~ msgid "Set width of search entry in search bar"
-#~ msgstr "ძებნის ჩანაწერის სიგანის დაყენება"
-
-#~ msgid "Ignore unknown command-line options"
-#~ msgstr "უცნობი ბრძანების სტრიქონის პარამეტრების გამოტოვება"
-
-#~ msgid "Enable debug mode with information about deprecated features"
-#~ msgstr "გამართვის რეჟიმის ჩართვა ინფორმაციით მოძველებულ თვისებებზე"
-
-#~ msgid "Default color theme for text-info dialog"
-#~ msgstr "ნაგულისხმები ფერის თემა text-info დიალოგისთვის"
-
-#~ msgid "Enable line marks mode"
-#~ msgstr "ხაზის ნიშნების რეჟიმის ჩართვა"
-
-#~ msgid "Default color for first type of text marks in text-info dialog"
-#~ msgstr ""
-#~ "Text-info დიალოგში პირველი ტიპის ტექსტური ნიშნების ნაგულისხმები ფერი"
-
-#~ msgid "Default color for second type of text marks in text-info dialog"
-#~ msgstr "Text-info დიალოგში მეორე ტიპის ტექსტური ნიშნების ნაგულისხმები ფერი"
-
-#~ msgid "Set right margin at position"
-#~ msgstr "მარჯვენა საზღვრის დაყენება პოზიციაზე"
-
-#~ msgid "Smart Home/End behavior"
-#~ msgstr "ჭკვიანი Home/End-ის ქცევა"
-
-#~ msgid "Use smart backspace"
-#~ msgstr "ჭკვიანი backspace-ის გამოყენება"
-
-#~ msgid "Default tabulation width"
-#~ msgstr "ნაგულისხმები ტაბულაციის სიგანე"
-
-#~ msgid "Default indentation width"
-#~ msgstr "ნაგულისხმები შეწევის სიგანე"
