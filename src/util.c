@@ -655,7 +655,7 @@ run_thread (RunData *d)
 {
   GError *err = NULL;
 
-  if (!g_spawn_command_line_sync (d->cmd, d->out, NULL, NULL, &err))
+  if (!g_spawn_command_line_sync (d->cmd, d->out, NULL, &d->ret, &err))
     {
       if (options.debug)
         g_printerr (_("WARNING: Run command failed: %s\n"), err->message);
