@@ -31,6 +31,7 @@
 # include <gdk/gdkx.h>
 #endif
 
+#include "menu.h"
 #include "yad.h"
 
 YadOptions options;
@@ -453,6 +454,16 @@ create_dialog (void)
   /* create box */
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 2);
   gtk_container_add (GTK_CONTAINER (dlg), vbox);
+
+  if (options.data.dialog_menu && strlen(options.data.dialog_menu) > 0) {
+    GtkWidget *toolbar_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    GtkWidget *menubar = yad_build_global_menu(options.data.dialog_menu);
+    if (menubar) {
+        gtk_box_pack_start(GTK_BOX(toolbar_box), menubar, FALSE, FALSE, 0);
+        gtk_box_pack_start(GTK_BOX(vbox), toolbar_box, FALSE, FALSE, 0);
+
+    }
+  }
 
   layout = create_layout (dlg);
 

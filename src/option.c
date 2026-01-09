@@ -20,6 +20,7 @@
 #include <stdlib.h>
 
 #include "yad.h"
+#include "menu.h"
 
 static gboolean add_button (const gchar *, const gchar *, gpointer, GError **);
 static gboolean add_column (const gchar *, const gchar *, gpointer, GError **);
@@ -113,6 +114,8 @@ static GOptionEntry general_options[] = {
     N_("Show remaining time indicator (top, bottom, left, right)"), N_("POS") },
   { "text", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_STRING, &options.data.dialog_text,
     N_("Set the dialog text"), N_("TEXT") },
+  { "menubar", 0, 0, G_OPTION_ARG_STRING, &options.data.dialog_menu,
+    N_("Attach a hierarchical GTK menu to the dialog"),  N_("STRING") },
   { "text-width", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_INT, &options.data.text_width,
     N_("Set the dialog text width in characters"), N_("NUMBER") },
   { "text-align", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_CALLBACK, set_justify,
@@ -1661,6 +1664,7 @@ yad_options_init (void)
   options.data.negy = FALSE;
   options.data.geometry = NULL;
   options.data.dialog_text = NULL;
+  options.data.dialog_menu = NULL;
   options.data.text_width = 0;
   options.data.text_align = GTK_JUSTIFY_LEFT;
   options.data.dialog_image = NULL;
