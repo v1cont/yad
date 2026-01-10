@@ -129,8 +129,16 @@ btn_cb (GtkWidget *b, gchar *cmd)
 static gboolean
 timeout_cb (gpointer data)
 {
-  static guint count = 1;
+  static guint count = 0;
+  static gboolean initialized = FALSE;
   GtkWidget *w = (GtkWidget *) data;
+
+  /* Initialize count only once, accounting for elapsed time from previous dialog */
+  if (!initialized)
+    {
+      count = options.data.timeout_elapsed + 1;
+      initialized = TRUE;
+    }
 
   if (options.data.timeout < count)
     {
@@ -463,8 +471,15 @@ create_dialog (void)
 
       if (G_LIKELY (options.data.to_indicator) && strcasecmp (options.data.to_indicator, "none") != 0)
         {
+          gdouble initial_fraction = 1.0;
+
           topb = gtk_progress_bar_new ();
-          gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (topb), 1.0);
+
+          /* Calculate initial fraction accounting for elapsed time */
+          if (options.data.timeout_elapsed > 0 && options.data.timeout_elapsed < options.data.timeout)
+            initial_fraction = (gdouble)(options.data.timeout - options.data.timeout_elapsed) / (gdouble)options.data.timeout;
+
+          gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (topb), initial_fraction);
           gtk_widget_set_name (topb, "yad-timeout-indicator");
         }
 
@@ -508,7 +523,13 @@ create_dialog (void)
           if (SHOW_REMAIN)
 #endif
             {
-              gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout);
+              guint remaining = options.data.timeout;
+
+              /* Account for elapsed time in initial label */
+              if (options.data.timeout_elapsed > 0 && options.data.timeout_elapsed < options.data.timeout)
+                remaining = options.data.timeout - options.data.timeout_elapsed;
+
+              gchar *lbl = g_strdup_printf (_("%d sec"), remaining);
               gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (topb), TRUE);
               gtk_progress_bar_set_text (GTK_PROGRESS_BAR (topb), lbl);
               g_free (lbl);
