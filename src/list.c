@@ -1441,6 +1441,57 @@ list_create_widget (GtkWidget *dlg)
   if (options.list_data.tree_expanded)
     gtk_tree_view_expand_all (GTK_TREE_VIEW (list_view));
 
+  /* pre-select rows if specified */
+  if (options.list_data.select_row && !options.list_data.no_selection)
+    {
+      GtkTreeSelection *sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (list_view));
+      GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list_view));
+      gchar **rows = g_strsplit (options.list_data.select_row, ",", -1);
+      gint i;
+      GtkTreePath *first_path = NULL;
+
+      /* block select_action handler during initial selection */
+      if (select_hndl)
+        g_signal_handler_block (G_OBJECT (sel), select_hndl);
+
+      for (i = 0; rows[i]; i++)
+        {
+          gint row_num = atoi (rows[i]);
+          if (row_num > 0)
+            {
+              GtkTreePath *path = gtk_tree_path_new_from_indices (row_num - 1, -1);
+              GtkTreeIter iter;
+
+              if (gtk_tree_model_get_iter (model, &iter, path))
+                {
+                  gtk_tree_selection_select_path (sel, path);
+                  if (!first_path)
+                    first_path = gtk_tree_path_copy (path);
+
+                  /* for single selection, only select first valid row */
+                  if (gtk_tree_selection_get_mode (sel) != GTK_SELECTION_MULTIPLE)
+                    {
+                      gtk_tree_path_free (path);
+                      break;
+                    }
+                }
+              gtk_tree_path_free (path);
+            }
+        }
+
+      /* scroll to first selected row */
+      if (first_path)
+        {
+          gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (list_view), first_path, NULL, TRUE, 0.5, 0.0);
+          gtk_tree_path_free (first_path);
+        }
+
+      if (select_hndl)
+        g_signal_handler_unblock (G_OBJECT (sel), select_hndl);
+
+      g_strfreev (rows);
+    }
+
   return w;
 }
 
