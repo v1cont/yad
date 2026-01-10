@@ -56,6 +56,12 @@ static gboolean is_x11 = FALSE;
 
 YadNTabs *tabs;
 
+gboolean
+yad_check_x11 (void)
+{
+  return is_x11;
+}
+
 #ifndef G_OS_WIN32
 static void
 sa_usr1 (gint sig)

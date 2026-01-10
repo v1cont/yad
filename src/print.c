@@ -284,7 +284,11 @@ yad_print_run (void)
   if (options.data.center)
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
   else if (options.data.mouse)
-    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_MOUSE);
+    {
+      /* Mouse positioning doesn't work on Wayland */
+      if (yad_check_x11 ())
+        gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_MOUSE);
+    }
 
   /* create yad's top box */
   if (options.data.dialog_text || options.data.dialog_image)
