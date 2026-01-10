@@ -243,7 +243,54 @@ set_field_value (guint num, gchar *value)
       break;
 
     case YAD_FIELD_CHECK:
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), get_bool_val (value));
+      {
+        gchar **parts = NULL;
+        gchar *val_str = value;
+        gchar *color = NULL;
+
+        if (strstr (value, options.common_data.item_separator))
+          {
+             parts = g_strsplit (value, options.common_data.item_separator, 2);
+             val_str = parts[0];
+             color = parts[1];
+          }
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), get_bool_val (val_str));
+
+        if (color && *color)
+          {
+             GtkCssProvider *css = (GtkCssProvider *) g_object_get_data (G_OBJECT (w), "css_provider");
+             GtkStyleContext *context = gtk_widget_get_style_context (w);
+
+             if (!css)
+               {
+                 css = gtk_css_provider_new ();
+                 g_object_set_data_full (G_OBJECT (w), "css_provider", css, g_object_unref);
+                 gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css), GTK_STYLE_PROVIDER_PRIORITY_USER);
+               }
+             // Target the checkbutton's background or label? 
+             // For checkbutton, usually we want to color the background of the widget to indicate state?
+             // Or maybe the user wants the label color?
+             // Let's try background-color on the widget first.
+             gchar *css_data = g_strdup_printf ("checkbutton { background-color: %s; }", color);
+             gtk_css_provider_load_from_data (css, css_data, -1, NULL);
+             g_free (css_data);
+          }
+        else if (parts) // If we had parts but no color (or cleared), maybe remove?
+          {
+             // Optional: Clear color if passed empty color? 
+             // For now, if color param is missing, we do nothing (keep existing?) or clear?
+             // Let's allow clearing if ! is present but color is empty.
+             GtkCssProvider *css = (GtkCssProvider *) g_object_get_data (G_OBJECT (w), "css_provider");
+             if (css)
+               {
+                 gtk_style_context_remove_provider (gtk_widget_get_style_context (w), GTK_STYLE_PROVIDER (css));
+                 g_object_set_data (G_OBJECT (w), "css_provider", NULL);
+               }
+          }
+
+        if (parts) g_strfreev (parts);
+      }
       break;
 
     case YAD_FIELD_SWITCH:
@@ -360,7 +407,62 @@ set_field_value (guint num, gchar *value)
 
     case YAD_FIELD_BUTTON:
     case YAD_FIELD_FULL_BUTTON:
-      g_object_set_data_full (G_OBJECT (w), "cmd", g_strdup (value), g_free);
+      g_object_set_data_full (G_OBJECT (w), "yad_value", g_strdup (value), g_free);
+
+      if (strstr (value, options.common_data.item_separator))
+        {
+          gchar **parts = g_strsplit (value, options.common_data.item_separator, 4);
+          gchar *lbl_str = NULL;
+          gchar *color = NULL;
+
+          if (parts[0] && parts[1] && parts[2] && parts[3])
+            {
+              lbl_str = g_strdup_printf ("%s%s%s%s%s", parts[0], options.common_data.item_separator,
+                                         parts[1], options.common_data.item_separator, parts[2]);
+              color = parts[3];
+            }
+          else
+            lbl_str = g_strdup (value);
+
+          GtkWidget *child = gtk_bin_get_child (GTK_BIN (w));
+          if (child)
+            gtk_container_remove (GTK_CONTAINER (w), child);
+
+          child = get_label (lbl_str, 2, w);
+          gtk_container_add (GTK_CONTAINER (w), child);
+          gtk_widget_show_all (w);
+
+          if (color && *color)
+            {
+              GtkCssProvider *css = (GtkCssProvider *) g_object_get_data (G_OBJECT (w), "css_provider");
+              GtkStyleContext *context = gtk_widget_get_style_context (w);
+
+              if (!css)
+                {
+                  css = gtk_css_provider_new ();
+                  g_object_set_data_full (G_OBJECT (w), "css_provider", css, g_object_unref);
+                  gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css), GTK_STYLE_PROVIDER_PRIORITY_USER);
+                }
+
+              gchar *css_data = g_strdup_printf ("button { background-image: none; background-color: %s; }", color);
+              gtk_css_provider_load_from_data (css, css_data, -1, NULL);
+              g_free (css_data);
+            }
+          else
+            {
+              GtkCssProvider *css = (GtkCssProvider *) g_object_get_data (G_OBJECT (w), "css_provider");
+              if (css)
+                {
+                  gtk_style_context_remove_provider (gtk_widget_get_style_context (w), GTK_STYLE_PROVIDER (css));
+                  g_object_set_data (G_OBJECT (w), "css_provider", NULL);
+                }
+            }
+
+          g_free (lbl_str);
+          g_strfreev (parts);
+        }
+      else
+        g_object_set_data_full (G_OBJECT (w), "cmd", g_strdup (value), g_free);
       break;
 
     case YAD_FIELD_LINK:
@@ -443,10 +545,6 @@ button_clicked_cb (GtkButton * b, gpointer d)
         }
       g_string_free (cmd, TRUE);
     }
-
-  /* set focus to specified field */
-  if (options.form_data.focus_field > 0 && options.form_data.focus_field <= n_fields)
-    gtk_widget_grab_focus (GTK_WIDGET (g_slist_nth_data (fields, options.form_data.focus_field - 1)));
 }
 
 static void
@@ -821,6 +919,7 @@ GtkWidget *
 form_create_widget (GtkWidget * dlg)
 {
   GtkWidget *tbl, *w = NULL;
+  GtkWidget *main_box;
   GList *filt;
 
   if (options.form_data.fields)
@@ -836,9 +935,12 @@ form_create_widget (GtkWidget * dlg)
       if (n_fields % options.form_data.columns > 0)
         rows++;
 
+      main_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+
       tbl = gtk_grid_new ();
       gtk_grid_set_row_spacing (GTK_GRID (tbl), 5);
       gtk_grid_set_column_spacing (GTK_GRID (tbl), 5);
+      gtk_container_set_border_width (GTK_CONTAINER (tbl), options.data.borders);
 
       gtk_grid_set_row_homogeneous (GTK_GRID (tbl), options.form_data.homogeneous);
       gtk_grid_set_column_homogeneous (GTK_GRID (tbl), options.form_data.homogeneous);
@@ -849,19 +951,32 @@ form_create_widget (GtkWidget * dlg)
           gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_NONE);
           gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), options.data.hscroll_policy, options.data.vscroll_policy);
           gtk_container_add (GTK_CONTAINER (sw), tbl);
-          w = sw;
+          gtk_box_pack_start (GTK_BOX (main_box), sw, TRUE, TRUE, 0);
         }
       else
-        w = tbl;
+        gtk_box_pack_start (GTK_BOX (main_box), tbl, TRUE, TRUE, 0);
 
       /* create form */
       for (i = 0; i < n_fields; i++)
         {
           YadField *fld = g_slist_nth_data (options.form_data.fields, i);
+          gboolean is_footer = FALSE;
+
+          // Check for @footer@ tag in label name
+          if (fld->name && strstr (fld->name, "@footer@"))
+            {
+              gchar *new_name = g_strdup (fld->name);
+              gchar *tag = strstr (new_name, "@footer@");
+              // Remove the tag
+              memmove (tag, tag + 8, strlen (tag + 8) + 1); 
+              g_free (fld->name);
+              fld->name = new_name;
+              is_footer = TRUE;
+            }
 
           /* add field label */
           l = NULL;
-          if (fld->type != YAD_FIELD_CHECK && fld->type != YAD_FIELD_BUTTON &&
+          if (!is_footer && fld->type != YAD_FIELD_CHECK && fld->type != YAD_FIELD_BUTTON &&
               fld->type != YAD_FIELD_FULL_BUTTON && fld->type != YAD_FIELD_LINK &&
               fld->type != YAD_FIELD_LABEL && fld->type != YAD_FIELD_TEXT)
             {
@@ -961,27 +1076,24 @@ form_create_widget (GtkWidget * dlg)
               break;
 
             case YAD_FIELD_CHECK:
-              {
-                gchar *buf;
-                if (fld->name)
-                  buf = g_strcompress (fld->name);
-                else
-                  buf = g_strdup ("");
-                e = gtk_check_button_new_with_label (buf);
-                gtk_widget_set_name (e, "yad-form-check");
-                if (fld->tip)
-                  {
-                    if (!options.data.no_markup)
-                      gtk_widget_set_tooltip_markup (e, fld->tip);
-                    else
-                      gtk_widget_set_tooltip_text (e, fld->tip);
-                  }
-                gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
-                gtk_widget_set_hexpand (e, TRUE);
-                fields = g_slist_append (fields, e);
-                g_free (buf);
-                g_signal_connect_after (G_OBJECT (e), "toggled", G_CALLBACK (field_changed_cb), GINT_TO_POINTER (i));
-              }
+              e = gtk_check_button_new_with_mnemonic (fld->name);
+              gtk_widget_set_name (e, "yad-form-check");
+              if (fld->tip)
+                {
+                  if (!options.data.no_markup)
+                    gtk_widget_set_tooltip_markup (e, fld->tip);
+                  else
+                    gtk_widget_set_tooltip_text (e, fld->tip);
+                }
+              g_signal_connect (G_OBJECT (e), "toggled", G_CALLBACK (switch_changed_cb), GINT_TO_POINTER (i));
+              
+              // Only add to grid if NOT a footer widget (footer widgets are packed later into button box)
+              if (!is_footer)
+                {
+                  gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
+                  gtk_widget_set_hexpand (e, TRUE);
+                }
+              fields = g_slist_append (fields, e);
               break;
 
            case YAD_FIELD_SWITCH:
@@ -1227,8 +1339,13 @@ form_create_widget (GtkWidget * dlg)
                 gtk_widget_set_halign (l, options.common_data.align);
               if (fld->type == YAD_FIELD_BUTTON)
                 gtk_button_set_relief (GTK_BUTTON (e), GTK_RELIEF_NONE);
-              gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
-              gtk_widget_set_hexpand (e, TRUE);
+              
+              // Only add to grid if NOT a footer widget (footer widgets are packed later into button box)
+              if (!is_footer)
+                {
+                  gtk_grid_attach (GTK_GRID (tbl), e, col * 2, row, 2, 1);
+                  gtk_widget_set_hexpand (e, TRUE);
+                }
               fields = g_slist_append (fields, e);
               break;
 
@@ -1260,7 +1377,15 @@ form_create_widget (GtkWidget * dlg)
             case YAD_FIELD_LABEL:
               if (fld->name && fld->name[0])
                 {
+                  gboolean vexpand = FALSE;
                   gchar *buf = g_strcompress (fld->name);
+                  
+                  if (g_strcmp0 (buf, "@vexpand@") == 0)
+                    {
+                      vexpand = TRUE;
+                      *buf = '\0';
+                    }
+
                   e = gtk_label_new (NULL);
                   gtk_widget_set_name (e, "yad-form-label");
                   if (fld->tip)
@@ -1277,6 +1402,8 @@ form_create_widget (GtkWidget * dlg)
                   gtk_label_set_line_wrap (GTK_LABEL (e), TRUE);
                   gtk_label_set_selectable (GTK_LABEL (e), options.data.selectable_labels);
                   gtk_label_set_xalign (GTK_LABEL (e), options.common_data.align);
+                  if (vexpand)
+                    gtk_widget_set_vexpand (e, TRUE);
                   g_free (buf);
                 }
               else
@@ -1345,12 +1472,31 @@ form_create_widget (GtkWidget * dlg)
               }
             }
 
-          /* increase row and column */
-          row++;
-          if (row >= rows)
+          if (is_footer)
             {
-              row = 0;
-              col++;
+               // Store the footer widget on the dialog object so main.c can pack it into the button box later
+               // We support only one footer widget for now (or we could use a list, but let's start with one)
+               // If multiple, we could pack them into a temporary box and store that box.
+               
+               GtkWidget *footer_box = g_object_get_data (G_OBJECT (dlg), "yad-footer-widget");
+               if (!footer_box)
+                 {
+                   footer_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 5);
+                   g_object_set_data (G_OBJECT (dlg), "yad-footer-widget", footer_box);
+                 }
+               
+               gtk_box_pack_start (GTK_BOX (footer_box), e, FALSE, FALSE, 0);
+               gtk_widget_show_all (e);
+            }
+          else
+            {
+              /* increase row and column */
+              row++;
+              if (row >= rows)
+                {
+                  row = 0;
+                  col++;
+                }
             }
         }
 
@@ -1378,7 +1524,7 @@ form_create_widget (GtkWidget * dlg)
 
   disable_changed = FALSE;
 
-  return w;
+  return main_box;
 }
 
 static void
@@ -1547,6 +1693,18 @@ form_print_field (guint fn)
       break;
     case YAD_FIELD_BUTTON:
     case YAD_FIELD_FULL_BUTTON:
+      {
+        gchar *val = g_object_get_data (G_OBJECT (g_slist_nth_data (fields, fn)), "yad_value");
+        if (options.common_data.quoted_output)
+          {
+            buf = g_shell_quote (val ? val : "");
+            g_printf ("%s%s", buf, options.common_data.separator);
+            g_free (buf);
+          }
+        else
+          g_printf ("%s%s", val ? val : "", options.common_data.separator);
+        break;
+      }
     case YAD_FIELD_LABEL:
       if (options.common_data.quoted_output)
         g_printf ("''%s", options.common_data.separator);
