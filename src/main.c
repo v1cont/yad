@@ -76,6 +76,16 @@ sa_usr2 (gint sig)
 }
 #endif
 
+/* Callback to fix text label sizing with line wrap */
+static void
+text_size_allocate_cb (GtkWidget *w, GtkAllocation *al, gpointer data)
+{
+  /* Set the width request to the allocated width to enable proper line wrapping.
+   * This prevents GTK from requesting the natural (unwrapped) width which causes
+   * windows to become excessively large. See issues #107, #140, #32, #297, #300 */
+  gtk_widget_set_size_request (w, al->width, -1);
+}
+
 static gboolean
 keys_cb (GtkWidget *w, GdkEventKey *ev, gpointer d)
 {
@@ -221,12 +231,33 @@ create_layout (GtkWidget *dlg)
           text = gtk_label_new (NULL);
           gtk_widget_set_name (text, "yad-dialog-label");
           gtk_label_set_line_wrap (GTK_LABEL (text), TRUE);
+          gtk_label_set_line_wrap_mode (GTK_LABEL (text), PANGO_WRAP_WORD_CHAR);
           gtk_label_set_selectable (GTK_LABEL (text), options.data.selectable_labels);
           gtk_widget_set_state_flags (text, GTK_STATE_FLAG_NORMAL, FALSE);
           gtk_widget_set_can_focus (text, FALSE);
 
           if (options.data.text_width > 0)
             gtk_label_set_width_chars (GTK_LABEL (text), options.data.text_width);
+
+          /* Constrain label width when window size is constrained.
+           * This fixes line wrapping with --width, --height, and --geometry options.
+           * Using max_width_chars with ellipsize=NONE forces text to wrap instead
+           * of expanding the window. See issues #107, #140, #32, #297, #300 */
+          if (options.data.width != -1)
+            {
+              /* Approximate chars based on width (assuming ~8px per char average) */
+              gint max_chars = (options.data.width - 50) / 8;
+              if (max_chars > 10)
+                {
+                  gtk_label_set_max_width_chars (GTK_LABEL (text), max_chars);
+                  gtk_label_set_ellipsize (GTK_LABEL (text), PANGO_ELLIPSIZE_NONE);
+                  gtk_widget_set_hexpand (text, FALSE);
+                }
+            }
+
+          /* Connect size-allocate for geometry-based constraints */
+          if (options.data.geometry || options.data.width != -1)
+            g_signal_connect (G_OBJECT (text), "size-allocate", G_CALLBACK (text_size_allocate_cb), NULL);
 
           /* set label align and justification */
           switch (options.data.text_align)
