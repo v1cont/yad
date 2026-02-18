@@ -446,7 +446,7 @@ button_clicked_cb (GtkButton * b, gpointer d)
 
   /* set focus to specified field */
   if (options.form_data.focus_field > 0 && options.form_data.focus_field <= n_fields)
-    gtk_widget_grab_focus (GTK_WIDGET (g_slist_nth_data (fields, options.form_data.focus_field - 1)));
+    gtk_widget_grab_focus (GTK_WIDGET (b));
 }
 
 static void
