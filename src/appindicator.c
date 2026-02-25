@@ -176,15 +176,13 @@ build_indicator_menu (void)
 
   indicator_menu = gtk_menu_new ();
 
-  /* Add activate action as first item if action is set */
+  /* Register secondary (middle-click) action */
   if (action && g_ascii_strcasecmp (action, "quit") != 0 && g_ascii_strcasecmp (action, "menu") != 0)
     {
-      item = gtk_menu_item_new_with_label (_("Activate"));
+      item = gtk_menu_item_new ();
       g_signal_connect (item, "activate", G_CALLBACK (activate_cb), NULL);
       gtk_menu_shell_append (GTK_MENU_SHELL (indicator_menu), item);
-
-      item = gtk_separator_menu_item_new ();
-      gtk_menu_shell_append (GTK_MENU_SHELL (indicator_menu), item);
+      app_indicator_set_secondary_activate_target (app_indicator, item);
     }
 
   /* Add custom menu items */
@@ -412,4 +410,3 @@ yad_appindicator_run (void)
 
   return exit_code;
 }
-
