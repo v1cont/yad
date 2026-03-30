@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Brazilian\n"
 "Report-Msgid-Bugs-To: victor@sanana.kiev.ua\n"
-"POT-Creation-Date: 2025-12-03 15:47+0200\n"
+"POT-Creation-Date: 2026-01-06 16:31+0200\n"
 "PO-Revision-Date: 2025-12-04 09:22-0300\n"
 "Last-Translator: Cristiano Fraga G. Nunes <cfgnunes@gmail.com>\n"
 "Language-Team: Brazilian\n"
@@ -608,7 +608,8 @@ msgstr "Identificador de diálogos embutidos"
 
 #: src/option.c:240
 msgid "Set extended completion for entries (any, all, or regex)"
-msgstr "Definir conclusão estendida para entradas (any, all ou expressão regular)"
+msgstr ""
+"Definir conclusão estendida para entradas (any, all ou expressão regular)"
 
 #: src/option.c:242
 msgid "Set type of output for boolean values (T, t, Y, y, O, o, 1)"
@@ -891,7 +892,8 @@ msgstr "Defina o número de colunas no formulário"
 
 #: src/option.c:399
 msgid "Make form fields height and columns width the same size"
-msgstr "Tornar a altura dos campos e a largura das colunas do formulário iguais"
+msgstr ""
+"Tornar a altura dos campos e a largura das colunas do formulário iguais"
 
 #: src/option.c:401
 msgid "Order output fields by rows"
@@ -1063,7 +1065,8 @@ msgstr "Definir a lista de colunas cobertas"
 
 #: src/option.c:488
 msgid "Set ellipsize mode for text columns (none, start, middle or end)"
-msgstr "Definir modo de elipse para colunas de texto (none, start, middle ou end)"
+msgstr ""
+"Definir modo de elipse para colunas de texto (none, start, middle ou end)"
 
 #: src/option.c:490
 msgid "Set the list of ellipsized columns"
@@ -1203,7 +1206,8 @@ msgstr "Não exibir ícone na inicialização"
 
 #: src/option.c:561
 msgid "Set icon size for fully specified icons (default - 16)"
-msgstr "Definir tamanho do ícone para ícones totalmente especificados (padrão: 16)"
+msgstr ""
+"Definir tamanho do ícone para ícones totalmente especificados (padrão: 16)"
 
 #: src/option.c:569
 msgid "Display indicator icon (StatusNotifier/AppIndicator)"
@@ -1969,8 +1973,8 @@ msgid ""
 "WARNING: You are using old-style progress dialog. This features is obsolete "
 "now, please use --bar style instead\n"
 msgstr ""
-"AVISO: Você está usando o diálogo de progresso no estilo antigo."
-"Esse recurso está obsoleto agora, por favor use o estilo --bar em seu lugar\n"
+"AVISO: Você está usando o diálogo de progresso no estilo antigo.Esse recurso "
+"está obsoleto agora, por favor use o estilo --bar em seu lugar\n"
 
 #: src/color.c:64
 #, c-format
@@ -2247,7 +2251,8 @@ msgstr "Largura da borda ao redor do diálogo::NUM"
 
 #: src/yad-settings.sh:37
 msgid "Show remaining time and percentage in timeout progress bar:CHK"
-msgstr "Exibir tempo restante e porcentagem na barra de progresso com timeout:CHK"
+msgstr ""
+"Exibir tempo restante e porcentagem na barra de progresso com timeout:CHK"
 
 #: src/yad-settings.sh:38
 msgid "Combo-box in entry dialog is always editable:CHK"
@@ -2287,7 +2292,8 @@ msgstr "Ignorar opções desconhecidas da linha de comando:CHK"
 
 #: src/yad-settings.sh:47
 msgid "Enable debug mode with information about deprecated features:CHK"
-msgstr "Habilitar modo de depuração com informações sobre recursos obsoletos:CHK"
+msgstr ""
+"Habilitar modo de depuração com informações sobre recursos obsoletos:CHK"
 
 #: src/yad-settings.sh:66
 msgid "<Empty>!"
@@ -2367,7 +2373,8 @@ msgstr "Carregar padrões!view-refresh:3"
 
 #: src/yad-settings.sh:98
 msgid "<span size='xx-large' weight='bold'>YAD settings editor</span>"
-msgstr "<span size='xx-large' weight='bold'>Editor de configurações do YAD</span>"
+msgstr ""
+"<span size='xx-large' weight='bold'>Editor de configurações do YAD</span>"
 
 #: src/yad-settings.sh:99
 msgid "Main"
@@ -2483,8 +2490,8 @@ msgstr "Interface simples para editar as configurações do YAD"
 #~ "Add field to form (TYPE - H, RO, NUM, CHK, CB, CBE, FL, SFL, MFL, DIR, "
 #~ "CDIR, MDIR, FN, DT, SCL, CLR, BTN, FBTN, LBL or TXT)"
 #~ msgstr ""
-#~ "Adicionar campo no formulário (TYPE - H, RO, NUM, CHK, CB, CBE, FL, SFL, MFL, "
-#~ "DIR, CDIR, MDIR, FN, DT, SCL, CLR, BTN, FBTN, LBL ou TXT)"
+#~ "Adicionar campo no formulário (TYPE - H, RO, NUM, CHK, CB, CBE, FL, SFL, "
+#~ "MFL, DIR, CDIR, MDIR, FN, DT, SCL, CLR, BTN, FBTN, LBL ou TXT)"
 
 #~ msgid "Set separator character for combobox or scale data"
 #~ msgstr "Definir caractere separador para combo-box ou escalador"
@@ -2527,4 +2534,5 @@ msgstr "Interface simples para editar as configurações do YAD"
 
 #~ msgid "Set alignment of tab labels (left, center or right)"
 #~ msgstr ""
-#~ "Defina o alinhamento dos rótulos de tabulação (esquerda, centro ou direita)"
+#~ "Defina o alinhamento dos rótulos de tabulação (esquerda, centro ou "
+#~ "direita)"
