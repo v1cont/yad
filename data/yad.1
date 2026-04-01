@@ -223,7 +223,7 @@ in EWMH specification. The behavior of dialog with this option is HIGHLY DEPENDS
 This option is deprecated. Use \fB--window-type\fP instead.
 .TP
 .B \-\-window-type=\fITYPE\fP
-Create a window with the specified window type. \fITYPE\fPCan be one of \fInormal\fP, \fIdialog\fP, \fIutility\fP, 
+Create a window with the specified window type. \fITYPE\fP can be one of \fInormal\fP, \fIdialog\fP, \fIutility\fP,
 \fIdock\fP, \fIdesktop\fP, \fItooltip\fP, \fInotification\fP or \fIsplash\fP.
 The behavior of each window type depends on your window manager. See EWMH specification for details.
 
@@ -840,7 +840,7 @@ See \fBNOTEBOOK and PANED\fP section for more about notebook dialog.
 .SS Notification options
 .TP
 .B \-\-command=\fICMD\fP
-Set the command running when clicked on the icon. Default action is \fIquit\fP if \fI\-\-listen\fP not specified.
+The command to run when clicking the icon. Default action is \fIquit\fP if \fI\-\-listen\fP not specified.
 .TP
 .B \-\-listen
 Listen for commands on stdin. See \fBNOTIFICATION\fP section.
@@ -867,6 +867,9 @@ See \fBNOTIFICATION\fP section for more about separators.
 
 .SS Appindicator options
 .TP
+.B \-\-command=\fICMD\fP
+The command to run when middle-clicking the icon. Default action is \fIquit\fP if \fI\-\-no-middle\fP not specified.
+.TP
 .B \-\-listen
 Listen for commands on stdin. See \fBNOTIFICATION\fP section.
 .TP
@@ -878,6 +881,9 @@ Set separator character for menu values. Default is \fI|\fP.
 .TP
 .B \-\-item-separator=\fISTRING\fP
 Set separator character for menu items. Default is \fI!\fP.
+.TP
+.B \-\-no-middle
+Disable exit on middle click when there's no other action defined.
 .TP
 .B \-\-hidden
 Doesn't show icon at startup.
