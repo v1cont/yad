@@ -1,9 +1,348 @@
-yad (12.3.0-0.1) unstable; urgency=medium
+yad (14.2.2) experimental; urgency=medium
+
+  * Correct, complete and updated French translation.
+  * New Debian's files to update the YAD Debian package compiling process.
+
+ -- Jazz Debian User <jazz@ejazz.fr>  Wed, 10 Dec 2025 07:43:20 +0100
+
+yad (14.2.1) experimental; urgency=medium
+
+  * New version of Debian changelog for updating the package: 
+    Debian 12.9 Bookworm and 13.1 Trixie (currently v. 0.40-1.1).
+  * Update debhelper to compat 13.
+
+ -- Jazz Debian User <jazz@ejazz.fr>  Fri, 07 Nov 2025 08:27:12 +0100
+
+yad (14.2) experimental; urgency=medium
+
+    * remove intltool dependency (use pure gettext)
+    * fix zooming in html dialog
+    * fix extra arguments handling in html dialog
+    * fix yad settings script
+    * fix typo in man page
+    * update translations
+    * code cleanup
+
+ -- Victor Ananjevsky 
+ 
+yad (14.1) experimental; urgency=medium
+
+    * fix build with old versions of glib
+
+ -- Victor Ananjevsky 
+ 
+yad (14.0) experimental; urgency=medium
+
+    * add --workdir option for changing current working directory
+    * add --window-type option
+    * add zooming in html dialog
+    * updates in man page
+    * add --disable-deprecated configure option for exlude obsoletted features in compile-time
+    * possible build against webkit2gtk-4.1 or webkit2gtk-4.0
+    * code cleanup
+
+ -- Victor Ananjevsky 
+ 
+yad (13.0) experimental; urgency=medium
+
+    * extend --in-place behavior in text-info dialog
+    * improve labels look&feel
+    * improve yad window placement
+    * --homogeneous option affects on form columns too
+    * improve run external command
+    * fix switch field in form dialog
+    * add content aligntment in list dialog
+    * load custom css from arbitrary sting in addition to file
+    * add georgian translation
+    * add debian/ directory
+    * fixes in man page
+
+ -- Victor Ananjevsky 
+
+yad (12.3.0-0.1) experimental; urgency=medium
 
   * Non-maintainer upload.
-  * New version.
+  * New yad.
 
  -- Peter Gervai <grin@grin.hu>  Mon, 17 Apr 2023 13:52:02 +0200
+
+yad (12.3) experimental; urgency=medium
+
+    * fixed setting webkit properties and user defined style sheet in html dialog
+    * improve stdin handler for html dialog
+    * update copyright notice
+
+ -- Victor Ananjevsky 
+ 
+yad (12.2) experimental; urgency=medium
+
+    * add --auto-scroll option as an alias to --tail
+    * fixed jump to anchor in simple mode of html dialog
+    * fixed parsing data from stdin for tree mode of list dialog
+    * fixed man page
+    * code cleanup
+
+ -- Victor Ananjevsky 
+ 
+yad (12.1) experimental; urgency=medium
+
+    * fixed some typos
+    * fixed permissions in thumbnails creation
+    * improve interpreteur string in yad-settings script
+
+ -- Victor Ananjevsky 
+ 
+yad (12.0) experimental; urgency=medium
+
+    * add ability to load several images in picture dialog
+    * add color picker to color dialog and yad-tools
+    * add --line option to text-info dialog
+    * mprove guess of syntax highlighting in text-info dialog
+    * add --mime option to icon mode in yad-tools
+    * add switch field type in form dialog (thanks to Misko <mpsrbija@gmail.com>) 
+    * use pango markup for multiline text field in form dialog
+
+ -- Victor Ananjevsky 
+ 
+yad (11.1) experimental; urgency=medium
+
+    * fix input parsing for notification icon
+    * fix parsing desktop files for icons dialog
+    * fix link handling for browser mode in html dialog
+    * improve setting user-defined image in about dialog
+
+ -- Victor Ananjevsky 
+ 
+yad (11.0) experimental; urgency=medium
+
+    * DROP K HUJAM russian translation
+    * for other changes please discover the git changelog
+
+ -- Victor Ananjevsky 
+ 
+yad (10.1) experimental; urgency=medium
+
+    * don't make rows homogeneous when form has a text field
+
+ -- Victor Ananjevsky 
+ 
+yad (10.0) experimental; urgency=medium
+
+    * many improvements in text-info dialog
+      - uses monospace font by default
+      - added search-bar instead of popup search field (can be disabled)
+      - added more GtkSourceView capabilities (use --help-source to see full list of those options)
+      - added in-place editing and file operations throug popup menu or keybindings
+    * added search bar to html dialog (can be disabled)
+    * added Ctrl+O and Ctrl+Q shortcuts to html dialog
+    * added --f1-action which run command when F1 was pressed
+    * added --changed-action to form dialog for control states 
+      of switcher fields like check or combo boxes
+    * fixed build with musl
+    * added yad-settings script. this is yad-based frontend for edit yad settings
+    * force using small icons in list dialog if icon is not a real filename
+    * fixed fitting image in picture dialog
+
+yad (9.3) experimental; urgency=medium
+
+    * fix freezing main window on --row-action in list or @cmd in form dialogs
+
+ -- Victor Ananjevsky 
+ 
+yad (9.2) experimental; urgency=medium
+
+    * some fixes of menu in editable lists
+    * add two additional item to menu in editable lists - "move up" and "move down"
+    * use double quotes for arguments in default interpreter command
+
+ -- Victor Ananjevsky 
+ 
+yad (9.1) experimental; urgency=medium
+
+    * fix --yad option
+
+ -- Victor Ananjevsky 
+ 
+yad (9.0) experimental; urgency=medium
+
+    * implement user's customizable --about dialog
+    * fix passing focus to children in notebook and paned dialogs
+    * add --stack mode to notebook dialog
+    * add --focused option to paned dialog for selectin focused pane
+    * don't vertically expand entry in entry dialog
+    * fix setting splitter position in paned dialog
+    * add --wk-prop to html dialog and made js output enabled by default
+    * add yad-tools utility instead fo pfd. pfd now is a wrapper script 
+      (just for backward compatibility)
+    * add --align-buttons option for aligning labels on button fields in form dialog
+
+ -- Victor Ananjevsky
+ 
+yad (8.0) experimental; urgency=medium
+
+    * add --text-width option for more flexible wrapping long strings in dialog text
+    * handle URIs in dialog text
+    * add --css option (--gtkrc marked as deprecated)
+    * lots of bug fixes
+
+    Special thanks to Dmitry Butskoy for a lots of contributions
+
+ -- Victor Ananjevsky
+ 
+yad (7.3) experimental; urgency=medium
+
+    * fix parsing separator field for form dialog (thanks to Dmitry Butskoy)
+    * fix handling user defined size of dialog with --width and --height arguments
+
+ --  contributor?
+ 
+yad (7.2) experimental; urgency=medium
+
+    * fix parsing field names for form dialog
+    * fix uri-handler for html dialog
+    * add file: scheme for uri regexp in text-info dialog
+
+ -- Victor Ananjevsky
+ 
+yad (7.1) experimental; urgency=medium
+
+    * fix parsing field names for form dialog
+
+ -- Victor Ananjevsky
+ 
+yad (7.0) experimental; urgency=medium
+
+    * add --enforce-step option to scale dialog
+    * add tooltips and markup to column headers in list dialog
+    * add pango-style font definition to text-info dialog
+    * add --large-preview options for better thumbnails handling
+    * add --interactive option to icon browser for printing selected icons on stdout
+    * add custom uri handler (--uri-handler option)
+    * improve killing children algo for notebook and paden dialogs
+    * add tooltips for form fields
+    * fix :tip column in list dialog
+    * fixes and cleanups in miscellaneous functions
+    *  fix parsing numeric ranges in for dialog
+    * fixes in man page
+    * build icon browser by default
+
+ -- Victor Ananjevsky
+ 
+yad (6.0) experimental; urgency=medium
+
+    * add --use-interp option. this feature can reduce quoting in command arguments
+    * add link field to --form dialog
+    * returning customizable options for --text-info dialog
+    * fix yad behavior outside X11 (spetial thanks to Michael Weiser)
+    * improve dialog window placement
+    * update translations
+
+ -- Victor Ananjevsky
+
+yad (5.0) experimental; urgency=medium
+
+ --  contributor?
+ 
+    * add debug mode. this feature can be turned on through gsettings.
+      in this mode yad will warn about obsolete or nonexistent options
+    * add configure option --enable-standalone for build yad without gsettings support
+    * fix expanding tree nodes for stdin data
+    * some fixes in print dialog
+    * fix --uri-handler option in html dialog
+    * fix wrong autoclose behavior in progress dialog
+
+yad (4.1) experimental; urgency=medium
+
+    * fix handling tree data from stdin in list dialog
+
+ -- Victor Ananjevsky
+ 
+yad (4.0) experimental; urgency=medium
+
+    * font can be selected with double-click in font dialog
+    * add application chooser dialog and application chooser field in form dialog
+    * add tree mode in list dialog
+    * multi-progress dialog features merged with progress dialog. separate multi-progres 
+      dialog no longer exists
+    * enable markup in progress log window
+    *  fix output of color values in hex notation
+    * removed *-selection aliases for --file, --color and --font dialogs
+
+ -- Victor Ananjevsky
+ 
+yad (3.0) experimental; urgency=medium
+
+    * add user defined handlers for all editing actions in list dialog. --add-action 
+      parameter renamed to --row-action
+    * fix loading text from file in text-info dialog
+    * fix gsettings key names
+
+ -- Victor Ananjevsky
+ 
+yad (2.0) experimental; urgency=medium
+
+    * migrate to gsettings from config file
+    * add --keep-icon-size option
+    * icon browser shows only regular icons by default. this behavior can be changed 
+      from command line
+    * fix segfailt in text-info dialog when empty file is specified
+    * fix initial selection in selectable labels
+
+ -- Victor Ananjevsky
+ 
+yad (1.0) experimental; urgency=medium
+
+    * completely removed support of gtk+-2.0
+    * minimum required gtk+ version bump to 3.22.0
+    * add --formatted option to text-info dialog for displaing text with pango markup
+    * add --expand option to tab dialog
+    * default protocol for html widget is https now
+    * gtk stock items not used anymore. instead there are some yad predefined names.
+      details can be found in man page
+   * add --bool-fmt for different forms of boolean values output. all of this forms 
+     recognized on input automatically
+    * gspell library now used for spell checking
+    * tray icon is optional now. this dialog is enabled by default but can be turned off 
+      with ./configure --disable-tray
+    * remove --fore, --back and --font options for text-info dialog. those functionality 
+      can be done through custom css
+
+ -- Victor Ananjevsky
+
+yad (0.42.0) unstable; urgency=medium
+
+    * add pfd utility for fontnames transformation in scripts
+    * add 'menu' action for notification icon
+    * add --icon-size option to icon dialog
+    * add --simple-tips option to list dialog
+    * fixes in setting window size
+    * improve size scaling in separate output of font dialog
+
+ --  contributor?
+
+yad (0.41.0) unstable; urgency=medium
+
+    * add supoort for webkit2
+    * use https as a default protocol in html dialog
+    * html dialog in browser mode treats extra argument as url to load
+    * add --expand option to a notebook dialog
+    * improve gtk3 dialog
+    * many bug fixes (details in git changelog)
+
+ --  contributor?
+
+yad (0.40.3) unstable; urgency=medium
+
+    * shows overwrite confirmation dialog for save file dialog only on even button codes
+
+ --  contributor?
+
+yad (0.40.2) unstable; urgency=medium
+
+    * fix --image-path option
+    * fix typos in man page
+
+ --  contributor?
 
 yad (0.40.0-1) unstable; urgency=medium
 
@@ -11,27 +350,72 @@ yad (0.40.0-1) unstable; urgency=medium
 
  -- Gustavo Soares de Lima <gustavo@logicus.com.br>  Sun, 09 Sep 2018 11:49:15 -0300
 
+yad (0.40.0) unstable; urgency=medium
+    * add --exit-on-drop argument to dnd dialog
+    * use --response option to set default exit code
+    * add --iec-format option for size values
+    * add --escape-ok option
+    * add FormFeed handling in icon dialog
+    * use %s in command for dnd dialog
+    * fix parse numeric arguments in entry dialog
+    * add fix of progress log from BrandonH <bhaberfeld@gmail.com>
+    * add --icon-size option to notification dialog
+
+ --  contributor?
+
+yad (0.39.0) unstable; urgency=medium
+    * add --active-tab to notebook widget
+    * place value position of scale form field to the left
+    * add --uri-handler option to html dialog
+    * add --theme option to text-info dialog (works with GtkSourceView)
+    * add --user-agent and --user-style options to html dialog
+    * remove --parent-win option
+    * add --add-on-top and --tail options to list dialog
+
+ --  contributor?
+
 yad (0.38.2-1) unstable; urgency=medium
 
   * New upstream release.
   * debian/clean:
-      - Added to remove an extra file created by build process.
+      * Added to remove an extra file created by build process.
   * debian/control:
-      - Bump to DH 10.
+      * Bump to DH 10.
   * debian/copyright:
-      - Changed license to BSD-3-Clause (Closes: #836877).
-      - Updated with po/* authors.
+      * Changed license to BSD-3-Clause (Closes: #836877).
+      * Updated with po/* authors.
   * debian/rules:
-      - Build with enable-gio.
-      - Build with enable-html.
-      - Build with icon-browser (Closes: #849814).
-      - Build with enable-sourceview.
-      - Build with enable-spell.
-      - Removed unnecessary lines.
+      * Build with enable-gio.
+      * Build with enable-html.
+      * Build with icon-browser (Closes: #849814).
+      * Build with enable-sourceview.
+      * Build with enable-spell.
+      * Removed unnecessary lines.
   * debian/watch:
-      - Updated to version 4.
+      * Updated to version 4.
 
  -- Gustavo Soares de Lima <gustavo@logicus.com.br>  Tue, 24 Jan 2017 23:23:49 -0200
+
+yad (0.38.2) unstable; urgency=medium
+    
+    * fix enter behavior
+
+ --  contributor?
+
+yad (0.38.1) unstable; urgency=medium
+    * fix tooltip option in dnd dialog
+    * fix russian and ukrainian translations
+
+ --  contributor?
+
+yad (0.38.0) unstable; urgency=medium
+    * add ctrl+enter behavior for all dialogs
+    * add --inc-button option to scale dialog
+    * fix --no-escape handling
+    * add --show-week option to calendar dialog
+    * improve behavior of --filename option of file dialog
+
+ --  contributor?
 
 yad (0.37.0-1) unstable; urgency=medium
 
@@ -39,6 +423,201 @@ yad (0.37.0-1) unstable; urgency=medium
 
  -- Gustavo Soares de Lima <gustavo@logicus.com.br>  Tue, 16 Aug 2016 18:49:00 +0000
 
+yad (0.37.0) unstable; urgency=medium
+
+    * new layout management (fix gtk3 warning about missing parent)
+    * fix single-click selection in list dialog
+    * add --grid-lines option to list dialog
+    * dd --posx and --posy options for setting window position
+    * fix quoting and escaping arguments for handlers in list and form dialogs
+    * add wrapping ability for columns in list dialog
+    * wrapped, ellipsized and editable columns may be specified as list
+    * add 'perm' type of bar in multiprogress dialog
+
+ --  contributor?
+
+yad (0.36.3) unstable; urgency=medium
+
+    * fix segfault when parse desktop files with missed or empty Comment field
+      in icons dialog
+    * code and output cleanup
+
+ --  contributor?
+
+yad (0.36.2) unstable; urgency=medium
+
+    * honor precision for floats in numeric fields of form and entry dialogs
+    * fix settings title and icon for browser mode in html dialog
+
+ --  contributor?
+
+yad (0.36.1) unstable; urgency=medium
+
+    * fix quoting buttons commands in form dialog
+
+ --  contributor?
+
+yad (0.36.0) unstable; urgency=medium
+
+    * add --no-selection option to list dialog
+    * improve --center option
+    * add spell checking support for text field in form and text-info dialog
+    * add gtksourceview support to text-info dialog
+    * fix setting initial value for numeric text entry in entry dialog
+    * do not close print dialog when preview button is clicked
+    * add --monitor option to icon dialog
+    * change default font for text-info and print text files to Monospace
+    * quote field values for button callback in form dialog
+
+ --  contributor?
+
+yad (0.35.0) unstable; urgency=medium
+
+    * add BAR column type to list dialog
+    * add SZ column type to list dialog (displays human readable sizes)
+    * add --show-cursor option to text dialog
+    * fix handling leading spaces in button callback of form dialog
+    * fix --show-hidden behavior
+    * switch float output from %g to %f
+    * fix setting custom bg color in text-info dialog for gtk3
+
+ --  contributor?
+
+yad (0.34.2) unstable; urgency=medium
+
+    * fix clearing fields in form when --cycle-read is using
+
+yad (0.34.1) unstable; urgency=medium
+
+    * fix expander
+    * update man page
+
+ --  contributor?
+
+yad (0.34.0) unstable; urgency=medium
+
+    * add --select-action option to list dialog
+    * add --separate-output option to font dialog
+    * honor --quoted-output option in font dialog
+    * add --show-hidden option to file selection dialogs
+    * add --watch-bar to multi-progress dialog
+    * improve handling of autoclosing event in multi-progress dialog
+    * improve output of color values in form dialog
+    * fix build with gtk+-3.0 and webkit-3.0
+
+ --  contributor?
+
+yad (0.33.1) unstable; urgency=medium
+    * fix timeout handling
+
+ --  contributor?
+
+yad (0.33.0) unstable; urgency=medium
+
+    * add --picture dialog, a simple image viewer
+    * add --focus-field option to form dialog for set initialy fosuced field
+    * add --complete option for extended completions in entry fields
+    * add ability to fill form data through stdin
+    * fix handling empty data in form dialog
+    * improvements in browser mode of html dialog
+    * add --float-precision option
+    * improve output of floating point numbers
+
+ --  contributor?
+
+yad (0.32.0) unstable; urgency=medium
+
+    * enable rules-hint for icons list in icon browser
+    * add --splash options (thanks to Konstantin Baierer)
+    * add --no-focus option
+    * fix timeout progressbar layout for gtk3 builds
+    * add --num-output option for output index of active element in combo-boxes
+
+ --  contributor?
+
+yad (0.31.3) unstable; urgency=medium
+
+    * fix setting default value for completion entry in form dialog
+
+ --  contributor?
+
+yad (0.31.2) unstable; urgency=medium
+
+    * fix segfault in list dialog when separators enabled but --sep-value is unset
+
+ --  contributor?
+
+yad (0.31.1) unstable; urgency=medium
+
+    * fix segfault in html dialog
+
+ --  contributor?
+
+yad (0.31.0) unstable; urgency=medium
+
+    * separators to list dialog
+    * use YAD_OPTIONS variable for specify default yad arguments
+    * add --no-rules-hint option to list dialog
+    * add parameters for controlling palettes in color selection
+    * remove some entries from settings file
+    * set default open command and date format through the settings file
+    * add additional filter settings for file selection dialogs
+    * apply filter and preview settings to all of file selection dialogs
+    * fix settings custom icon theme
+
+ --  contributor?
+
+ yad (0.30.1) unstable; urgency=medium
+ 
+    * fix parsing paned orientation
+
+ --  contributor?
+
+yad (0.30.0) unstable; urgency=medium
+
+    * add paned dialog
+    * add --parent-win option to make dialog transient for special window
+    * add --uri-color option for setting text color of URIs in text-info dialog
+
+ --  contributor?
+
+yad (0.29.1) unstable; urgency=medium
+
+    * fix build without HTML dialog
+
+ --  contributor?
+
+yad (0.29.0) unstable; urgency=medium
+
+    * fix focus problems in html dialog
+    * set default encoding from locale for html widget
+    * fix quoted output in form dialog
+    * add --no-escape option to prevent close dialog when Esc is pressed
+    * show gtk version within --version and about dialog
+    * fix build with gcc 5.x
+
+ --  contributor?
+
+yad (0.28.1) unstable; urgency=medium
+
+    * fix incorrect rows output order in form dialog
+
+ --  contributor?
+ 
+yad (0.28.0) unstable; urgency=medium
+
+    * add HTML dialog
+    * add different output formats for color dialog
+    * add mnemonic feature for field labels in form and entry dialogs
+    * add completion entry as field type in form dialog
+    * add output by rows in form dialog when layout with several columns is used
+    * fix labels in multiprogress dialog
+    * fix print to file in print dialog
+    * fix setup arguments for double-click action in list dialog
+    *  update man page
+
+ --  contributor?
+ 
 yad (0.27.0-1.1) unstable; urgency=medium
 
   * Non-maintainer upload.
@@ -51,3 +630,587 @@ yad (0.27.0-1) unstable; urgency=low
   * Initial release (Closes: #737599)
 
  -- Gustavo Soares de Lima <gustavo@logicus.com.br>  Thu, 19 Feb 2015 19:37:03 -0200
+
+yad (0.27.0) unstable; urgency=medium
+
+    * add --hidden option to notification icon
+    * add --tooltip-column option to list dialog
+    * add --gtkrc option
+    * fix detection of expandind columns in list dialog
+    * fix markup handling
+    * add YAD_XID variable for dialogs children
+    * code cleanup for remove deprecated api
+
+ --  contributor?
+ 
+yad (0.26.1) unstable; urgency=medium
+
+    * fix output in list dialog for check and radiolists
+    * fix button alignment in form dialog
+    * don't add last item separator in multifile field of form dialog
+
+ --  contributor?
+ 
+yad(-0.26.0) unstable; urgency=medium
+
+    * double-click actions in list dialog can change values in current row
+    * impove handling of markup text in list dialog
+    * add FBTN field type (relief buttons) to form dialog
+    * add buttons with custom icons
+    * add labels with icons for tab labels in notebook dialog
+    * remove --align option for notebook dialog
+    * numeric entries aligned to the right side
+
+ --  contributor?
+ 
+yad (0.25.1) unstable; urgency=medium
+
+    * use normal window hints for dialog windows
+    * fix menu in notification icon (issue #196)
+
+ --  contributor?
+ 
+yad (0.25.0) unstable; urgency=medium
+
+    * add --menu option for notification icon
+    * add --maximized and --fullscreen options
+    * unify --listen option for different kind of dialogs
+    * replace --stdin option by --listen in icon dialog
+
+ --  contributor?
+ 
+Vesrion (0.24.1) unstable; urgency=medium
+
+    * fix parsing menu in notification dialog
+
+ --  contributor?
+ 
+ersion (0.24.0) unstable; urgency=medium
+
+    * add --auto-close option for multi-progress dialog
+    * add --image-path option
+    * add --no-click option to list dialog
+    * allow clear text in text-info dialog with ^L
+    * new translations
+    * bug fixes
+
+ --  contributor?
+ 
+yad (0.23.1) unstable; urgency=medium
+
+    * wait for child termination in notebook dialog
+    * honour custom width and height settings in unresizable dialogs
+
+ --  contributor?
+ 
+yad (0.23.0) unstable; urgency=medium
+
+    * add --quoted-output option for file, form and list dialogs
+    * add default values for combo-box field in form dialog
+    * fix dialogs responses when working in notebook mode
+
+ --  contributor?
+ 
+yad (0.22.1) unstable; urgency=medium
+
+    * fix resize of dialog text
+    * fix usage of stock items in popup menu of notification icon
+
+ --  contributor?
+ 
+yad (0.22.0) unstable; urgency=medium
+
+    * add scale field to form dialog
+    * fix form layout on gtk+-3.0
+    * fix borders around child dialogs in notebook
+    * fix handle stdin for icons dialog in compact mode
+    * fix dialog text alignment
+    * add italian translation
+    * update man page
+
+ --  contributor?
+ 
+yad (0.21.0) unstable; urgency=medium
+
+    * add optional scrollbars for form dialog
+    * add "duplicate row" menu entry for editable lists
+    * some fixes in man page
+
+ --  contributor?
+ 
+yad (0.20.3) unstable; urgency=medium
+
+    * update slovak translation
+    * use double-ckick for selecting date in form dialog
+    * fix check field layout in form dialog for gtk3
+
+ --  contributor?
+ 
+yad (0.20.2) unstable; urgency=medium
+
+    * fix tooltips in list dialog
+
+ --  contributor?
+ 
+yad (0.20.1) unstable; urgency=medium
+
+    * fix --kill-parent option
+
+ --  contributor?
+ 
+yad (0.20.0) unstable; urgency=medium
+
+    * default value for combo-box can be specified by --entry-text from one 
+      of existings entries in list
+    * add --single-click option for icon dialog
+    * add log window to progress dialog
+    * fix geometry settings for unresizable windows
+    * fix layout on gtk3
+    * add custom signals for --kill-parent option
+
+ --  contributor?
+ 
+yad (0.19.1) unstable; urgency=medium
+
+    * use current path as a default folder for file selection dialogs
+    * fix parsing .desktop files in icons dialog
+
+ --  contributor?
+ 
+yad (0.19.0) unstable; urgency=medium
+
+    * add preview to file dialog
+    * recognize link type in .desktop files for icon dialog
+    * make icon description selectable in icon browser
+    * fix quoting special characters when pass data to the command in list and dnd dialogs
+
+ --  contributor?
+ 
+yad (0.18.0) unstable; urgency=medium
+
+    * add notebook dialog
+    * add --button-layout option
+    * use markup for bar labels in multiprogress dialog
+    * make --align works for multi-progress too
+    * fix --geometry behavior
+    * fix wrap for multiline text fields in form dialog
+    * add radio and hidden column types in list dialog
+    * add @disabled@ value to form dialog
+    * add precisions to form and entry numeric fields
+    * add --listen option to list and text dialogs
+
+ --  contributor?
+ 
+yad (0.17.1.1) unstable; urgency=medium
+
+    * fix --listen mode of notification
+
+ --  contributor?
+ 
+yad (0.17.1) unstable; urgency=medium
+
+    * fix build with gtk+ < 2.22
+    * add wrapping to multiline text field in form dialog
+    * fix search in text-info dialog
+    * fix handling empty strings in --listen mode of notification
+    * add traditional chinese translation
+
+ --  contributor?
+ 
+yad (0.17.0) unstable; urgency=medium
+
+    * add search in --text-info dialog (activate by pressing Ctrl+S)
+    * add multiline text field to form dialog
+    * add multiply directory selection to form dialog
+    * add --rest option for specify extra command-line options through the external file
+    * add new setting "ignore_unknown_options"
+    * list dialog now can handle command-line and stdin data at the same time
+    * sending "^L" to list dialog will clear the list
+
+ --  contributor?
+ 
+yad (0.16.3) unstable; urgency=medium
+
+    * fix text settings in text-info dialog on gtk3
+    * fix --percentage option in progress dialog
+    * recognize special characters like \n in form labels
+
+ --  contributor?
+ 
+yad (0.16.2) unstable; urgency=medium
+
+    * always set first item as active for combo-box in entry dialog
+    * fix includes in print for build with gtk3
+
+ --  contributor?
+ 
+yad (0.16.1) unstable; urgency=medium
+
+    * add initial sorting to yad icon browser
+    * remove some deprecated calls
+    * fix build with gtk+-3.0
+
+ --  contributor?
+ 
+yad (0.16.0) unstable; urgency=medium
+
+    * add printing dialog
+    * add callbacks for dialog buttons
+    * add icons for popup menu in notification icon
+    * add french translation
+    * make Return works for combo-boxes in entry dialog
+    * change notification behavior. if --listen is specified, left click on icon
+      doesn't close it
+    * add --text-align option for aligning dialog text
+
+ --  contributor?
+ 
+yad (0.15.1) unstable; urgency=medium
+
+    * fix grid placement in form dialog
+    * fix popup menu in editable lists
+    * fix escaping markup text
+    * update man page
+
+ --  contributor?
+ 
+yad (0.15.0) unstable; urgency=medium
+
+    * add multiple progress bars dialog
+    * add field control for buttons in form dialog
+    * keep current directory in auxiliary file selectors in form dialog
+    * add tooltips for form buttons
+    * add new field types: SFL for create new file and CDIR for create new dir
+    * add --tooltip option for dnd dialog
+    * fix setting initial value for numeric field in form dialog
+    * add --print-xid option
+    * for progress dialog the default button is gtk-close now
+    * user can specify gtk version in ./configure script
+    * new yad icons (special thanks to Bogdan Lisovich)
+
+ --  contributor?
+ 
+yad (0.14.2) unstable; urgency=medium
+
+    * fix broken dialog text placement
+
+ --  contributor?
+ 
+yad (0.14.1) unstable; urgency=medium
+
+    * fix build with gtk3
+
+ --  contributor?
+ 
+yad (0.14.0) unstable; urgency=medium
+
+    * add regex search to list dialog
+    * add --page option for scale dialog
+    * add marks to scale dialog
+    * add expander for main widget
+    * bug fixes
+
+ --  contributor?
+ 
+yad (0.13.0) unstable; urgency=medium
+
+    * fixes for icons in entry dialog
+    * add icons for editable combo-boxes in entry dialog
+    * add new field types for form dialog * labels and buttons
+    * fix blinking behavior in notification icon
+    * some improvements in user-defined double-click action for list dialog
+    * dialog text can be selected if --selectable-labels specified
+    * fix image clipping in gtk+-3.0
+    * fix tooltips in list dialog
+    * fix wrapping dialog's text
+    * add --border option for set margins around dialog widgets
+    * add names for widgets for customize dialog look&feel through .gtkrc
+    * fix handling window icon
+
+ --  contributor?
+ 
+yad (0.12.4) unstable; urgency=medium
+
+    * fix output for image fields in list dialog
+    * fix Enter behavior in list dialog
+    * update license information in sources
+
+ --  contributor?
+ 
+yad (0.12.3) unstable; urgency=medium
+
+    * fix build with gtk3
+    * update man page
+
+ --  contributor?
+ 
+yad (0.12.2) unstable; urgency=medium
+
+    * wrap dialog text when width or geometry specified
+    * fix icon handling in motification
+    * fix timeout indicator orientation
+    * fix typo in man page and russian translation
+
+ --  contributor?
+ 
+yad (0.12.1) unstable; urgency=medium
+
+    * fix builds with gtk3
+
+ --  contributor?
+ 
+yad (0.12.0) unstable; urgency=medium
+
+    * add icons to entry dialog
+    * add --details option to calendar dialog
+    * add new field types to form dialog: CBE for editable combo-boxes, DT for date field
+      and MFL for choose multiple files
+    * add user-specified doubleclick actions to list dialog
+    * makes YAD buildable under MS Windows
+    * code cleanups
+
+ --  contributor?
+ 
+yad (0.11.0) unstable; urgency=medium
+
+    * new --skip-taskbar option for hiding yad window from taskbar and pager
+    * add --search-column option to list dialog for set quicksearch column number
+    * add --elipsize option to list dialog for shortened long text in text columns
+    * add tooltips for list dialog. when tooltip column is not specified tooltips
+      shows content of cell under mouse
+    * add markup for entry labels in entry and form dialogs
+
+ --  contributor?
+ 
+yad (0.10.2) unstable; urgency=medium
+
+    * fix wrong memory allocation when handling makrup text
+    * fix reading data from stdin in text dialogs
+    * 'always selected' settings in list dialog works only for command-line data
+    * update README and manual page
+
+ --  contributor?
+ 
+yad (0.10.1) unstable; urgency=medium
+
+    * fix URI handling in dnd dialog for non-gtk applications
+    * fix sizing for gtk3 builds
+
+ --  contributor?
+ 
+yad (0.10.0) unstable; urgency=medium
+
+    * fix in markup tooltips in list and icons dialogs
+    * limits for number of rows in lists
+    * support for settings row attributes in lists
+    * vertical and invert scale dialog
+    * numeric entry
+    * new font selection dialog
+    * tagging URIs in text dialog
+    * new option --kill-parent for send SIGTERM to parent process
+    * fix URI handling in dnd dialog
+
+ --  contributor?
+ 
+yad (0.9.1) unstable; urgency=medium
+
+    * fix handle markup for tooltips in list and icons dialogs
+    * add ukrainian and update slovak translations
+    * use GtkComboBoxText in entry and form dialogs when gtk+ >= 2.24.x is used
+
+ --  contributor?
+ 
+yad (0.9.0) unstable; urgency=medium
+
+    * fix --hide-column option in list dialog
+    * fix settting up initial value in scale dialog
+    * add --expand-column option in list dialog
+    * add aliased name --color-selection for --color dialog
+
+ --  contributor?
+ 
+yad (0.8.1) unstable; urgency=medium
+
+    * fix --auto-kill option in progress dialog
+    * fix setting initial value in DIR field of form dialog
+
+ --  contributor?
+ 
+yad (0.8.0) unstable; urgency=medium
+
+    * add --icon-theme option for use specific icon theme
+      instead of default
+    * add --align option for label alignment in form dialog
+    * fix handling ESC for return proper exit code
+    * fix handling colons in options
+    * add yad-icon-browser, a separate tool for exploring GTK icon
+      themes
+    * add autoconf macros AM_PATH_YAD for easily check for yad when
+      use autotools
+
+ --  contributor?
+ 
+yad (0.7.2) unstable; urgency=medium
+
+    * fix bug with launching commands in icons dialog
+    * remove column title from compact view in icons dialog
+
+ --  contributor?
+ 
+yad (0.7.1) unstable; urgency=medium
+
+    * fix bug with memory corruption
+
+ --  contributor?
+ 
+yad (0.7.0) unstable; urgency=medium
+
+    * improvements in printing data with custom buttons
+    * add sorting in icon dialog
+    * --tail option in text fialog now working for files too
+    * add new field types in form dialog
+    * separators sets from command-line only
+
+ --  contributor?
+ 
+yad (0.6.0) unstable; urgency=medium
+
+    * add compact view in icons dialog
+    * add justifications and margins to text dialog
+    * make double-click works in simple lists
+
+ --  contributor?
+ 
+yad (0.5.2) unstable; urgency=medium
+
+    * fix build with gtk+ < 2.16.x
+
+ --  contributor?
+ 
+yad (0.5.1) unstable; urgency=medium
+
+    * fix segfault in --checklist
+
+ --  contributor?
+ 
+yad (0.5.0) unstable; urgency=medium
+
+    * add --no-markup option
+    * add --geometry option
+    * new filed types in form dialog
+    * notification icon always close on middle click
+    * YAD now understand SIGUSR1 and SIGUSR2 signals
+    * YAD can be build against new gtk+ 3.0
+    * fix output bug in list dialog
+
+ --  contributor?
+ 
+yad (0.4.0) unstable; urgency=medium
+
+    * add --no-headers option in list dialog
+    * add tooltip column type for list dialog
+    * fix tail mode in text dialog
+    * initial value in color dialog now sets as --init-color
+    * code cleanups
+
+ --  contributor?
+ 
+yad (0.3.1) unstable; urgency=medium
+
+    * update slovak translation
+    * fix key handling in editable lists
+    * fix format string vulnerability in file dialog
+    * fix handling quickly piped lots of data from stdin
+
+ --  contributor?
+ 
+yad (0.3.0) unstable; urgency=medium
+
+    * add iconbox dialog
+    * fix option parsing
+    * improvements in no
+
+ --  contributor?
+
+yad (0.2.1) unstable; urgency=medium
+
+    * improve keyboard navigation
+    * update man page
+    * add slovak translation
+    * add label to timeout indicator
+    * some fixes in dnd dialog
+
+ --  contributor?
+ 
+yad (0.2.0) unstable; urgency=medium
+
+    * add drag-and-drop box dialog
+    * fix --confirm-overwrite option for fileselection dialog
+    * fix --mouse position placement
+    * add remaining time indicator for --timeout option
+    * code cleanup
+    * fix typos in man page
+
+ --  contributor?
+ 
+yad (0.1.0) unstable; urgency=medium
+
+    * add types to form fields and list columns
+    * change default behaviour when print list results (print full row instead of first column)
+    * new --mouse options for place dialog under mouse position
+
+ --  contributor?
+ 
+yad (0.0.10) unstable; urgency=medium
+
+    * add rtl direction to progress bar
+    * add --image-on-top option
+    * set cursor invisible when text is not editable in text dialog
+    * add oprtion for setting colors of text-dialog
+    * add --tail options to text dialog for autoscrolling
+    * add predefined colors to color dialog
+    * recognize 'quit' command from stdin in notification icon
+    * add types to fields in form dialog
+    * usage examples now on wiki
+    * cleanups and bugfixes
+
+ --  contributor?
+ 
+yad (0.0.9) unstable; urgency=medium
+
+    * fix bug in progress dialog
+    * add .spec file
+    * update man page
+
+ --  contributor?
+ 
+yad (0.0.8) unstable; urgency=medium
+
+    * use HIG buttons order (with honouring gtk-alternative-button-order settings in .gtkrc)
+    * add --no-buttons option
+    * fix typo in man page
+
+ --  contributor?
+ 
+yad (0.0.7) unstable; urgency=medium
+
+    * add window behavior options
+    * add markup tooltips for tray icon i
+
+ --  contributor?
+ 
+yad (0.0.7) unstable; urgency=medium
+f gtk+ >= 2.16.0
+    * add german translation
+    * fix build on gtk+ 2.12.x
+
+ --  contributor?
+ 
+yad (0.0.6) unstable; urgency=medium
+
+    * add form dialog
+    * add label to entry dialog
+    * change the default behavior of combo-box entry (this may change in config file)
+    * update translation and man page
+
+ --  contributor?
