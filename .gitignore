@@ -36,6 +36,5 @@ src/*.sh
 stamp-h1
 *.tar.xz
 build.log
-*.gschema.valid
 ABOUT-NLS
 ChangeLog

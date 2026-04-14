@@ -269,11 +269,7 @@ get_tabs (key_t key, gboolean create)
   int shmid, i, max_tab;
 
   /* get shared memory */
-#ifndef STANDALONE
-  max_tab = g_settings_get_int (settings, "max-tab") + 1;
-#else
-  max_tab = MAX_TABS + 1;
-#endif
+  max_tab = settings->max_tab + 1;
   if (create)
     {
       if ((shmid = shmget (key, max_tab * sizeof (YadNTabs), IPC_CREAT | IPC_EXCL | 0644)) == -1)
@@ -859,9 +855,6 @@ create_search_bar ()
 {
   YadSearchBar *sb;
   GtkWidget *b;
-#ifndef STANDALONE
-  gint e_width = -1;
-#endif
 
   sb = g_new0 (YadSearchBar, 1);
   sb->new_search = TRUE;
@@ -876,11 +869,8 @@ create_search_bar ()
   gtk_box_pack_start (GTK_BOX (b), sb->entry, TRUE, TRUE, 0);
   gtk_search_bar_connect_entry (GTK_SEARCH_BAR (sb->bar), GTK_ENTRY (sb->entry));
 
-#ifndef STANDALONE
-  e_width = g_settings_get_int (settings, "search-width");
-  if (e_width > 0)
-    gtk_widget_set_size_request (sb->entry, e_width, -1);
-#endif
+  if (settings->search_width > 0)
+    gtk_widget_set_size_request (sb->entry, settings->search_width, -1);
 
   sb->next = gtk_button_new_from_icon_name ("go-down", GTK_ICON_SIZE_BUTTON);
   gtk_widget_set_focus_on_click (sb->next, FALSE);

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2025, Victor Ananjevsky <victor@sanana.kiev.ua>
+ * Copyright (C) 2008-2026, Victor Ananjevsky <victor@sanana.kiev.ua>
  */
 
 #include <stdlib.h>
@@ -765,6 +765,8 @@ static GOptionEntry misc_options[] = {
     N_("Set policy for vertical scrollbars (auto, always, never)"), N_("TYPE") },
   { "image-path", 0, 0, G_OPTION_ARG_CALLBACK, add_image_path,
     N_("Add path for search icons by name"), N_("PATH") },
+  { "write-settings", 0, 0, G_OPTION_ARG_NONE, &write_settings,
+    N_("Write settings to file and exit"), NULL },
   { NULL }
 };
 
@@ -1634,11 +1636,7 @@ yad_options_init (void)
   options.xid_file = NULL;
 #endif
 
-#ifndef STANDALONE
-  options.debug = g_settings_get_boolean (settings, "debug");
-#else
-  options.debug = FALSE;
-#endif
+  options.debug = settings->debug;
 
   /* plug settings */
   options.plug = -1;
@@ -1647,12 +1645,8 @@ yad_options_init (void)
   /* Initialize general data */
   options.data.dialog_title = NULL;
   options.data.window_icon = NULL;
-#ifndef STANDALONE
-  options.data.width = g_settings_get_int (settings, "width");
-  options.data.height = g_settings_get_int (settings, "height");
-#else
-  options.data.width = options.data.height = -1;
-#endif
+  options.data.width = settings->width;
+  options.data.height = settings->height;
   options.data.use_posx = FALSE;
   options.data.posx = 0;
   options.data.negx = FALSE;
@@ -1673,11 +1667,7 @@ yad_options_init (void)
   options.data.buttons = NULL;
   options.data.no_buttons = FALSE;
   options.data.buttons_layout = GTK_BUTTONBOX_END;
-#ifndef STANDALONE
-  options.data.borders = g_settings_get_int (settings, "border");
-#else
-  options.data.borders = BORDERS;
-#endif
+  options.data.borders = settings->border;
   options.data.no_markup = FALSE;
   options.data.no_escape = FALSE;
   options.data.escape_ok = FALSE;
@@ -1687,11 +1677,7 @@ yad_options_init (void)
   options.data.def_resp = YAD_RESPONSE_OK;
   options.data.use_interp = FALSE;
   options.data.interp = "bash -c \"%s\"";
-#ifndef STANDALONE
-  options.data.uri_handler = g_settings_get_string (settings, "open-command");
-#else
-  options.data.uri_handler = OPEN_CMD;
-#endif
+  options.data.uri_handler = settings->open_command;
   options.data.f1_action = NULL;
   options.data.workdir = NULL;
 
@@ -1722,21 +1708,13 @@ yad_options_init (void)
   options.common_data.editable = FALSE;
   options.common_data.tail = FALSE;
   options.common_data.command = NULL;
-#ifndef STANDALONE
-  options.common_data.date_format = g_settings_get_string (settings, "date-format");
-#else
-  options.common_data.date_format = DATE_FMT;
-#endif
+  options.common_data.date_format = settings->date_format;
   options.common_data.float_precision = 3;
   options.common_data.vertical = FALSE;
   options.common_data.align = 0.0;
   options.common_data.listen = FALSE;
   options.common_data.preview = FALSE;
-#ifndef STANDALONE
-  options.common_data.large_preview = g_settings_get_boolean (settings, "large-preview");
-#else
-  options.common_data.large_preview = FALSE;
-#endif
+  options.common_data.large_preview = settings->large_preview;
   options.common_data.show_hidden = FALSE;
   options.common_data.quoted_output = FALSE;
   options.common_data.num_output = FALSE;
@@ -1842,11 +1820,7 @@ yad_options_init (void)
   options.icons_data.compact = FALSE;
   options.icons_data.generic = FALSE;
   options.icons_data.width = -1;
-#ifndef STANDALONE
-  options.icons_data.term = g_settings_get_string (settings, "terminal");
-#else
-  options.icons_data.term = TERM_CMD;
-#endif
+  options.icons_data.term = settings->terminal;
   options.icons_data.sort_by_name = FALSE;
   options.icons_data.descend = FALSE;
   options.icons_data.single_click = FALSE;
@@ -1955,48 +1929,27 @@ yad_options_init (void)
   options.text_data.back = NULL;
   options.text_data.confirm_save = FALSE;
   options.text_data.confirm_text = _("File was changed. Save it?");
-#ifndef STANDALONE
-  options.text_data.uri_color = g_settings_get_string (settings, "uri-color");
-#else
-  options.text_data.uri_color = URI_COLOR;
-#endif
+  options.text_data.uri_color = settings->uri_color;
   options.text_data.formatted = FALSE;
   options.text_data.in_place = FALSE;
 
 #ifdef HAVE_SOURCEVIEW
   /* Initialize sourceview data */
   options.source_data.lang = NULL;
-#ifndef STANDALONE
-  options.source_data.theme = g_settings_get_string (sv_settings, "theme");;
-  options.source_data.line_num = g_settings_get_boolean (sv_settings, "line-num");
-  options.source_data.line_hl = g_settings_get_boolean (sv_settings, "line-hl");
-  options.source_data.line_marks = g_settings_get_boolean (sv_settings, "line-marks");
-  options.source_data.m1_color = g_settings_get_string (sv_settings, "mark1-color");
-  options.source_data.m2_color = g_settings_get_string (sv_settings, "mark2-color");
-  options.source_data.right_margin = g_settings_get_int (sv_settings, "right-margin");
-  options.source_data.brackets = g_settings_get_boolean (sv_settings, "brackets");
-  options.source_data.indent = g_settings_get_boolean (sv_settings, "indent");
-  options.source_data.tab_width = g_settings_get_int (sv_settings, "tab-width");
-  options.source_data.indent_width = g_settings_get_int (sv_settings, "indent-width");
-  options.source_data.smart_he = g_settings_get_enum (sv_settings, "homend");
-  options.source_data.smart_bs = g_settings_get_boolean (sv_settings, "smart-bs");
-  options.source_data.spaces = g_settings_get_boolean (sv_settings, "spaces");
-#else
-  options.source_data.theme = NULL;
-  options.source_data.line_num = FALSE;
-  options.source_data.line_hl = FALSE;
-  options.source_data.line_marks = FALSE;
-  options.source_data.m1_color = MARK1_COLOR;
-  options.source_data.m2_color = MARK2_COLOR;
-  options.source_data.right_margin = 0;
-  options.source_data.brackets = FALSE;
-  options.source_data.indent = FALSE;
-  options.source_data.tab_width = 8;
-  options.source_data.indent_width = 4;
-  options.source_data.smart_he = GTK_SOURCE_SMART_HOME_END_DISABLED;
-  options.source_data.smart_bs = FALSE;
-  options.source_data.spaces = FALSE;
-#endif
+  options.source_data.theme = settings->sv->theme;
+  options.source_data.line_num = settings->sv->line_num;
+  options.source_data.line_hl = settings->sv->line_hl;
+  options.source_data.line_marks = settings->sv->line_marks;
+  options.source_data.m1_color = settings->sv->mark1_color;
+  options.source_data.m2_color = settings->sv->mark2_color;
+  options.source_data.right_margin = settings->sv->right_margin;
+  options.source_data.brackets = settings->sv->brackets;
+  options.source_data.indent = settings->sv->indent;
+  options.source_data.tab_width = settings->sv->tab_width;
+  options.source_data.indent_width = settings->sv->indent_width;
+  options.source_data.smart_he = settings->sv->homend;
+  options.source_data.smart_bs = settings->sv->smart_bs;
+  options.source_data.spaces = settings->sv->spaces;
 #endif
 }
 
@@ -2180,14 +2133,10 @@ yad_create_context (void)
   g_option_context_add_group (tmp_ctx, a_group);
 
   g_option_context_set_help_enabled (tmp_ctx, TRUE);
-#ifndef STANDALONE
-  if (!options.debug)
-    g_option_context_set_ignore_unknown_options (tmp_ctx, g_settings_get_boolean (settings, "ignore-unknown-options"));
+  if (settings->debug)
+    g_option_context_set_ignore_unknown_options (tmp_ctx, settings->ignore_unknown_options);
   else
     g_option_context_set_ignore_unknown_options (tmp_ctx, FALSE);
-#else
-  g_option_context_set_ignore_unknown_options (tmp_ctx, TRUE);
-#endif
 
   return tmp_ctx;
 }

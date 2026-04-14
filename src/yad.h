@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2025, Victor Ananjevsky <victor@sanana.kiev.ua>
+ * Copyright (C) 2008-2026, Victor Ananjevsky <victor@sanana.kiev.ua>
  */
 
 #ifndef _YAD_H_
@@ -48,10 +48,6 @@
 
 #ifdef HAVE_SOURCEVIEW
 #include <gtksourceview/gtksource.h>
-#endif
-
-#ifdef STANDALONE
-#include "defaults.h"
 #endif
 
 G_BEGIN_DECLS
@@ -559,6 +555,45 @@ typedef struct {
 #endif
 } YadCommonData;
 
+#ifdef HAVE_SOURCEVIEW
+typedef struct {
+  gchar *theme;                         /* Default color theme name */
+  gboolean line_num;                    /* Show line numbers */
+  gboolean line_hl;                     /* Highlight current line */
+  gboolean line_marks;                  /* Enable line marks mode */
+  gchar *mark1_color;                   /* Default color for first type of text marks */
+  gchar *mark2_color;                   /* Default color for second type of text marks */
+  guint right_margin;                   /* Position of right margin */
+  gboolean brackets;                    /* Highlight matching brackets */
+  gboolean indent;                      /* Use autoindent */
+  GtkSourceSmartHomeEndType homend;     /* Smart Home/End behavior */
+  gboolean smart_bs;                    /* Use smart backspace */
+  guint tab_width;                      /* Default tabulation width */
+  guint indent_width;                   /* Default indentation width */
+  gboolean spaces;                      /* Insert spaces instead of tabs */
+} YadSVSettings;
+#endif
+
+typedef struct {
+  gint width;                       /* Default width of dialog window */
+  gint height;                      /* Default height of dialog window */
+  guint border;                     /* Borders around dialog */
+  gboolean show_remain;             /* Show remaining time/percentage in timeout progress bar */
+  gboolean combo_always_editable;   /* Combo-box in entry dialog is always editable */
+  gchar *terminal;                  /* Default terminal command */
+  gchar *open_command;              /* Default open command */
+  gchar *date_format;               /* Default date format */
+  gchar *uri_color;                 /* Default color for URI in text-info dialog */
+  guint max_tab;                    /* Maximum number of tabs in notebook dialog */
+  gboolean large_preview;           /* Use large previews in file selection dialogs */
+  gint search_width;                /* Set width of search entry in search bar */
+  gboolean ignore_unknown_options;  /* Ignore unknown command-line options */
+  gboolean debug;                   /* Enable debug mode with information about deprecated features */
+#ifdef HAVE_SOURCEVIEW
+  YadSVSettings *sv;
+#endif
+} YadSettings;
+
 typedef struct {
   YadDialogMode mode;
 
@@ -628,10 +663,8 @@ typedef struct {
 extern YadOptions options;
 extern GtkIconTheme *yad_icon_theme;
 
-#ifndef STANDALONE
-extern GSettings *settings;
-extern GSettings *sv_settings;
-#endif
+extern YadSettings *settings;
+extern gboolean write_settings;
 
 extern GdkPixbuf *big_fallback_image;
 extern GdkPixbuf *small_fallback_image;
@@ -722,9 +755,6 @@ gboolean yad_send_notify (gboolean);
 void notebook_close_childs (void);
 void paned_close_childs (void);
 
-void read_settings (void);
-void write_settings (void);
-
 void update_preview (GtkFileChooser *chooser, GtkWidget *p);
 
 GdkPixbuf *get_pixbuf (gchar *name, YadIconSize size, gboolean force);
@@ -758,6 +788,9 @@ void open_uri (const gchar *uri);
 YadSearchBar *create_search_bar ();
 
 gboolean yad_confirm_dlg (GtkWindow *parent, gchar *txt);
+
+void yad_load_settings ();
+void yad_write_settings ();
 
 static inline void
 strip_new_line (gchar * str)

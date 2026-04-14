@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2025, Victor Ananjevsky <victor@sanana.kiev.ua>
+ * Copyright (C) 2008-2026, Victor Ananjevsky <victor@sanana.kiev.ua>
  */
 
 #include "yad.h"
@@ -188,13 +188,7 @@ entry_create_widget (GtkWidget * dlg)
     {
       gint active, i;
 
-      if (options.common_data.editable || 
-#ifndef STANDALONE
-          g_settings_get_boolean (settings, "combo-always-editable")
-#else
-          COMBO_ALWAYS_EDIT
-#endif
-         )
+      if (options.common_data.editable || settings->combo_always_editable)
         {
           c = gtk_combo_box_text_new_with_entry ();
           gtk_widget_set_name (c, "yad-entry-edit-combo");

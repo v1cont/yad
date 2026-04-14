@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2025, Victor Ananjevsky <victor@sanana.kiev.ua>
+ * Copyright (C) 2008-2026, Victor Ananjevsky <victor@sanana.kiev.ua>
  */
 
 #include "yad.h"
@@ -344,11 +344,7 @@ parse_desktop_file (gchar * filename)
               gchar *url = g_key_file_get_string (kf, "Desktop Entry", "URL", NULL);
               if (url)
                 {
-#ifndef STANDALONE
-                  ent->command = g_strdup_printf (g_settings_get_string (settings, "open-command"), url);
-#else
-                  ent->command = g_strdup_printf (OPEN_CMD, url);
-#endif
+                  ent->command = g_strdup_printf (settings->open_command, url);
                   g_free (url);
                 }
             }

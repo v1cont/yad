@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2025, Victor Ananjevsky <victor@sanana.kiev.ua>
+ * Copyright (C) 2008-2026, Victor Ananjevsky <victor@sanana.kiev.ua>
  */
 
 #include <limits.h>
@@ -545,7 +545,6 @@ html_create_widget (GtkWidget * dlg)
   GtkWidget *w, *sw;
   WebKitSettings *wk_settings;
   WebKitUserContentManager *wk_cman;
-  gchar *str;
 
   w = gtk_box_new (GTK_ORIENTATION_VERTICAL, 2);
 
@@ -639,14 +638,8 @@ html_create_widget (GtkWidget * dlg)
     }
 
   /* check for user specified uri handler */
-#ifndef STANDALONE
-  str = g_settings_get_string (settings, "open-command");
-#else
-  str = g_strdup (OPEN_CMD);
-#endif
-  if (strcmp (options.data.uri_handler, str) != 0)
+  if (strcmp (options.data.uri_handler, settings->open_command) != 0)
     uri_cmd = TRUE;
-  g_free (str);
 
   /* load data */
   if (options.html_data.uri)

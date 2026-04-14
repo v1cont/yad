@@ -223,7 +223,7 @@ in EWMH specification. The behavior of dialog with this option is HIGHLY DEPENDS
 This option is deprecated. Use \fB--window-type\fP instead.
 .TP
 .B \-\-window-type=\fITYPE\fP
-Create a window with the specified window type. \fITYPE\fPCan be one of \fInormal\fP, \fIdialog\fP, \fIutility\fP, 
+Create a window with the specified window type. \fITYPE\fPCan be one of \fInormal\fP, \fIdialog\fP, \fIutility\fP,
 \fIdock\fP, \fIdesktop\fP, \fItooltip\fP, \fInotification\fP or \fIsplash\fP.
 The behavior of each window type depends on your window manager. See EWMH specification for details.
 
@@ -276,6 +276,9 @@ Set the output type of boolean values to \fITYPE\fP. Possible types are \fIT\fP,
 \fIO\fP and \fIo\fP - for \fIon/off\fP pair in appropriate case.
 .br
 \fI1\fP - for \fI1/0\fP pair.
+.TP
+.B \-\-write-settings
+Write yad settings to a file. See \fBSETTINGS\fP section.
 
 .SS Custom about dialog options
 .TP
@@ -1265,6 +1268,9 @@ yad-yes@Yes@gtk-yes
 This variable can holds some default options for \fIyad\fP. All options in this
 variable may be redefined from command line.
 .TP
+.B YAD_SETTINGS_FILE
+Location of file with yad settings. See \fBSETTINGS\fP section for details.
+.TP
 .B YAD_PID
 This variable sets to the value of current dialog's pid and accessible in all
 dialog children.
@@ -1353,8 +1359,7 @@ yad-timeout-indicator@GtkProgreeBar@Timeout indicator
 .TE
 
 .SH SETTINGS
-YAD keeps settings in gsettings database. Use \fIgsettings list-keys yad.settings\fP to get list of available settings.
-Settings values can be obtained by \fIgsettings get yad.settings <key>\fP and changed by \fIgsettings set yad.settings <key> <new-value>\fP
+YAD read some defaults from settings file. This file may be created with \fI--write-settings\fP argument. Syntax of this file is a simple ini-style. Default location is \fI$XDG_CONFIG_HOME/yad/settings.conf\fP and can be redefined with \fIYAD_SETTINGS_FILE\fP environment variable.
 
 .SH EXAMPLES
 Display a file selector with the title \fISelect a file to

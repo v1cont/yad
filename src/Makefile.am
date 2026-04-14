@@ -2,9 +2,7 @@ AM_CPPFLAGS = -DLOCALEDIR=\""$(datadir)/locale"\"
 
 bin_PROGRAMS = yad
 
-if !STANDALONE
 bin_SCRIPTS = yad-settings
-endif
 
 CPICKER_SOURCES = cpicker.c cpicker.h
 
@@ -27,6 +25,7 @@ yad_SOURCES = 		\
 	print.c			\
 	progress.c		\
 	scale.c			\
+	settings.c		\
 	text.c			\
 	util.c			\
 	main.c			\
@@ -44,10 +43,6 @@ endif
 
 if APPINDICATOR
 yad_SOURCES += appindicator.c
-endif
-
-if STANDALONE
-yad_SOURCES += defaults.h
 endif
 
 yad_CFLAGS = $(GTK_CFLAGS) $(HTML_CFLAGS) $(SPELL_CFLAGS) $(SOURCEVIEW_CFLAGS) $(APPINDICATOR_CFLAGS)

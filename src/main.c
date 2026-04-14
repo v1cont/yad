@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with YAD. If not, see <http://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2008-2025, Victor Ananjevsky <victor@sanana.kiev.ua>
+ * Copyright (C) 2008-2026, Victor Ananjevsky <victor@sanana.kiev.ua>
  */
 
 #include <sys/types.h>
@@ -35,11 +35,6 @@
 
 YadOptions options;
 GtkIconTheme *yad_icon_theme;
-
-#ifndef STANDALONE
-GSettings *settings;
-GSettings *sv_settings;
-#endif
 
 GdkPixbuf *big_fallback_image = NULL;
 GdkPixbuf *small_fallback_image = NULL;
@@ -142,11 +137,7 @@ timeout_cb (gpointer data)
     {
       gdouble percent = ((gdouble) options.data.timeout - count) / (gdouble) options.data.timeout;
       gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (w), percent);
-#ifndef STANDALONE
-      if (g_settings_get_boolean (settings, "show-remain"))
-#else
-      if (SHOW_REMAIN)
-#endif
+      if (settings->show_remain)
         {
           gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout - count);
           gtk_progress_bar_set_text (GTK_PROGRESS_BAR (w), lbl);
@@ -502,11 +493,7 @@ create_dialog (void)
               gtk_box_pack_end (GTK_BOX (cbox), topb, FALSE, FALSE, 2);
             }
 
-#ifndef STANDALONE
-          if (g_settings_get_boolean (settings, "show-remain"))
-#else
-          if (SHOW_REMAIN)
-#endif
+          if (settings->show_remain)
             {
               gchar *lbl = g_strdup_printf (_("%d sec"), options.data.timeout);
               gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (topb), TRUE);
@@ -738,10 +725,7 @@ main (gint argc, gchar ** argv)
   gtk_init (&argc, &argv);
   g_set_application_name ("YAD");
 
-#ifndef STANDALONE
-  settings = g_settings_new ("yad.settings");
-  sv_settings = g_settings_new ("yad.sourceview");
-#endif
+  yad_load_settings ();
 
   yad_icon_theme = gtk_icon_theme_get_default ();
 
@@ -783,6 +767,12 @@ main (gint argc, gchar ** argv)
       return -1;
     }
 
+  if (write_settings)
+    {
+      yad_write_settings ();
+      return 0;
+    }
+
 #ifdef DEPRECATED
   if (options.data.splash)
     {
@@ -797,7 +787,7 @@ main (gint argc, gchar ** argv)
   if (options.data.workdir)
     {
       if (g_chdir (options.data.workdir) != 0)
-        g_printerr (_("Unable to change directory to %s: %s\n"), 
+        g_printerr (_("Unable to change directory to %s: %s\n"),
                     options.data.workdir, strerror (errno));
     }
 
