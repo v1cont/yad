@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: yad git\n"
 "Report-Msgid-Bugs-To: victor@sanana.kiev.ua\n"
-"POT-Creation-Date: 2025-12-03 15:47+0200\n"
+"POT-Creation-Date: 2026-04-15 17:11+0300\n"
 "PO-Revision-Date: 2026-01-01 15:41+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <(nothing)>\n"
@@ -125,52 +125,52 @@ msgstr "შეიყვანეთ URI ან ფაილის სახე�
 msgid "Quit"
 msgstr "გამოსვლა"
 
-#: src/icons.c:374
+#: src/icons.c:370
 #, c-format
 msgid "Unable to parse file %s: %s\n"
 msgstr "%s ფაილის დამუშავების შეცდომა: %s\n"
 
-#: src/icons.c:391
+#: src/icons.c:387
 #, c-format
 msgid "Unable to open directory %s: %s\n"
 msgstr "%s საქაღალდის გახსნის შეცდომა:%s\n"
 
-#: src/main.c:151 src/main.c:511
+#: src/main.c:142 src/main.c:498
 #, c-format
 msgid "%d sec"
 msgstr "%d წმ"
 
-#: src/main.c:764 src/main.c:771
+#: src/main.c:748 src/main.c:755
 #, c-format
 msgid "Unable to parse YAD_OPTIONS: %s\n"
 msgstr "YAD_OPTIONS-ის დამუშავების შეცდომა: %s\n"
 
-#: src/main.c:782
+#: src/main.c:766
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "ბრძანების პარამეტრების დამუშავების შეცდომა: %s\n"
 
-#: src/main.c:790
+#: src/main.c:780
 msgid ""
 "WARNING: Using splash option is deprecated, please use --window-type instead"
 msgstr ""
 "გაფრთხილება: გაშვების სურათის პარამეტრი მოძველებულია. გამოიყენეთ მის მაგიერ "
 "--window-type"
 
-#: src/main.c:800
+#: src/main.c:790
 #, c-format
 msgid "Unable to change directory to %s: %s\n"
 msgstr "საქაღალდის %s-ზე შეცვლა შეუძლებელია: %s\n"
 
-#: src/main.c:829
+#: src/main.c:819
 msgid "WARNING: Using gtkrc option is deprecated, please use --css instead\n"
 msgstr "გაფრთხილება: gtkrc პარამეტრი მოძველებულია. გამოიყენეთ --css\n"
 
-#: src/main.c:901
+#: src/main.c:891
 msgid "WARNING: --plug mode not supported outside X11\n"
 msgstr "გაფრთხილება: --plug რეჟიმი X11-ის გარეთ მხარდაუჭერელია\n"
 
-#: src/main.c:921
+#: src/main.c:911
 msgid "WARNING: This mode not supported outside X11\n"
 msgstr "გაფრთხილება: ეს რეჟიმი X11-ის გარეთ მხარდაუჭერელია\n"
 
@@ -598,7 +598,7 @@ msgstr "ფაილის არჩევის დიალოგებში 
 msgid "Set source filename"
 msgstr "დააყენეთ წყაროს ფაილის სახელი"
 
-#: src/option.c:232 src/option.c:307 src/option.c:760 src/option.c:773
+#: src/option.c:232 src/option.c:307 src/option.c:760 src/option.c:775
 msgid "FILENAME"
 msgstr "ფაილის სახელი"
 
@@ -1567,320 +1567,324 @@ msgstr "ვერტიკალური ჩოჩიების წესი�
 msgid "Add path for search icons by name"
 msgstr "სახელით ხატულების მოსაძებნი ბილიკის დამატება"
 
-#: src/option.c:773
+#: src/option.c:769
+msgid "Write settings to file and exit"
+msgstr ""
+
+#: src/option.c:775
 msgid "Load extra arguments from file"
 msgstr "ფაილიდან დამატებითი არგუმენტების ჩატვირთვა"
 
-#: src/option.c:984
+#: src/option.c:986
 #, c-format
 msgid "Mark %s doesn't have a value\n"
 msgstr "ნიშანს %s მნიშვნელობა არ გააჩნია\n"
 
-#: src/option.c:1031 src/picture.c:286
+#: src/option.c:1033 src/picture.c:286
 msgid "Images"
 msgstr "სურათები"
 
-#: src/option.c:1096
+#: src/option.c:1098
 #, c-format
 msgid "Unknown color mode: %s\n"
 msgstr "უცნობი ფერის რეჟიმი: %s\n"
 
-#: src/option.c:1115
+#: src/option.c:1117
 #, c-format
 msgid "Unknown buttons layout type: %s\n"
 msgstr "უცნობი ღილაკის განლაგების ტიპი: %s\n"
 
-#: src/option.c:1130
+#: src/option.c:1132
 #, c-format
 msgid "Unknown align type: %s\n"
 msgstr "უცნობი სწორების ტიპი: %s\n"
 
-#: src/option.c:1154
+#: src/option.c:1156
 #, c-format
 msgid "Unknown justification type: %s\n"
 msgstr "უცნობი გასწორების ტიპი: %s\n"
 
-#: src/option.c:1171
+#: src/option.c:1173
 #, c-format
 msgid "Unknown tab position type: %s\n"
 msgstr "უცნობი ჩანართის მდებარეობის ტიპი: %s\n"
 
-#: src/option.c:1208
+#: src/option.c:1210
 #, c-format
 msgid "Unknown ellipsize type: %s\n"
 msgstr "უცნობი ellipsize-ის ტიპი: %s\n"
 
-#: src/option.c:1221
+#: src/option.c:1223
 #, c-format
 msgid "Unknown orientation: %s\n"
 msgstr "უცნობი ორიენტაცია: %s\n"
 
-#: src/option.c:1236
+#: src/option.c:1238
 #, c-format
 msgid "Unknown source type: %s\n"
 msgstr "უცნობი წყაროს ტიპი: %s\n"
 
-#: src/option.c:1247
+#: src/option.c:1249
 msgid "Progress log"
 msgstr "მიმდინარეობის ჟურნალი"
 
-#: src/option.c:1260
+#: src/option.c:1262
 #, c-format
 msgid "Unknown size type: %s\n"
 msgstr "უცნობი ზომის ტიპი: %s\n"
 
-#: src/option.c:1304
+#: src/option.c:1306
 #, c-format
 msgid "Unknown completion type: %s\n"
 msgstr "უცნობი დასრულების ტიპი: %s\n"
 
-#: src/option.c:1336
+#: src/option.c:1338
 #, c-format
 msgid "Unknown boolean format type: %s\n"
 msgstr "უცნობი ლოგიკური ფორმატის ტიპი: %s\n"
 
-#: src/option.c:1352
+#: src/option.c:1354
 #, c-format
 msgid "Unknown grid lines type: %s\n"
 msgstr "უცნობი ბადის ხაზების ტიპი: %s\n"
 
-#: src/option.c:1369
+#: src/option.c:1371
 #, c-format
 msgid "Unknown scrollbar policy type: %s\n"
 msgstr "უცნობი ჩოჩიის წესის ტიპი: %s\n"
 
-#: src/option.c:1420
+#: src/option.c:1422
 #, c-format
 msgid "Unknown window type: %s\n"
 msgstr "უცნობი ფანჯრის ტიპი: %s\n"
 
-#: src/option.c:1449
+#: src/option.c:1451
 #, c-format
 msgid "Unknown smart Home/End mode: %s\n"
 msgstr "უცნობი ჭკვიანი Home/End-ის რეჟიმი: %s\n"
 
-#: src/option.c:1559
+#: src/option.c:1561
 #, c-format
 msgid "Unknown signal: %s\n"
 msgstr "უცნობი სიგნალი: %s\n"
 
-#: src/option.c:1810
+#: src/option.c:1788
 msgid "File exist. Overwrite?"
 msgstr "ფაილი არსებობს. გადავაწერო?"
 
-#: src/option.c:1957
+#: src/option.c:1931
 msgid "File was changed. Save it?"
 msgstr "ფაილი შეიცვალა. შევინახო?"
 
-#: src/option.c:2009
+#: src/option.c:1962
 msgid "- Yet another dialoging program"
 msgstr "- მორიგი დიალოგის პროგრამა"
 
-#: src/option.c:2013
+#: src/option.c:1966
 msgid "General options"
 msgstr "საერთო პარამეტრები"
 
-#: src/option.c:2013
+#: src/option.c:1966
 msgid "Show general options"
 msgstr "საერთო პარამეტრების ჩვენება"
 
-#: src/option.c:2019
+#: src/option.c:1972
 msgid "Common options"
 msgstr "საერთო პარამეტრები"
 
-#: src/option.c:2019
+#: src/option.c:1972
 msgid "Show common options"
 msgstr "ზოგადი პარამეტრების ჩვენება"
 
-#: src/option.c:2025
+#: src/option.c:1978
 msgid "About dialog options"
 msgstr "დიალოგის პარამეტრების ჩვენება"
 
-#: src/option.c:2025
+#: src/option.c:1978
 msgid "Show custom about dialog options"
 msgstr "მორგებული შესახებ დიალოგის პარამეტრების ჩვენება"
 
-#: src/option.c:2031
+#: src/option.c:1984
 msgid "Application selection options"
 msgstr "აპლიკაციის არჩევის პარამეტრები"
 
-#: src/option.c:2031
+#: src/option.c:1984
 msgid "Show application selection options"
 msgstr "აპლიკაციის არჩევის პარამეტრების ჩვენება"
 
-#: src/option.c:2037
+#: src/option.c:1990
 msgid "Calendar options"
 msgstr "კალენდრის მორგება"
 
-#: src/option.c:2037
+#: src/option.c:1990
 msgid "Show calendar options"
 msgstr "კალენდრის პარამეტრების ჩვენება"
 
-#: src/option.c:2043
+#: src/option.c:1996
 msgid "Color selection options"
 msgstr "ფერის არჩევის პარამეტრები"
 
-#: src/option.c:2043
+#: src/option.c:1996
 msgid "Show color selection options"
 msgstr "ფერის არჩევის პარამეტრების ჩვენება"
 
-#: src/option.c:2049
+#: src/option.c:2002
 msgid "DND options"
 msgstr "DND-ის მორგება"
 
-#: src/option.c:2049
+#: src/option.c:2002
 msgid "Show drag-n-drop options"
 msgstr "DND-ის პარამეტრების ჩვენება"
 
-#: src/option.c:2055
+#: src/option.c:2008
 msgid "Text entry options"
 msgstr "ტექსტური ელემენტის პარამეტრები"
 
-#: src/option.c:2055
+#: src/option.c:2008
 msgid "Show text entry options"
 msgstr "ტექსტური ელემენტის პარამეტრების ჩვენება"
 
-#: src/option.c:2061
+#: src/option.c:2014
 msgid "File selection options"
 msgstr "ფაილის არჩევის პარამეტრები"
 
-#: src/option.c:2061
+#: src/option.c:2014
 msgid "Show file selection options"
 msgstr "ფაილის არჩევის პარამეტრების ჩვენება"
 
-#: src/option.c:2067
+#: src/option.c:2020
 msgid "Font selection options"
 msgstr "ფონტის არჩევანის მორგება"
 
-#: src/option.c:2067
+#: src/option.c:2020
 msgid "Show font selection options"
 msgstr "ფონტის არჩევანის მორგების ჩვენება"
 
-#: src/option.c:2073
+#: src/option.c:2026
 msgid "Form options"
 msgstr "ფორმის პარამეტრები"
 
-#: src/option.c:2073
+#: src/option.c:2026
 msgid "Show form options"
 msgstr "ფორმის პარამეტრების ცვენება"
 
-#: src/option.c:2080
+#: src/option.c:2033
 msgid "HTML options"
 msgstr "HTML-ის პარამეტრები"
 
-#: src/option.c:2080
+#: src/option.c:2033
 msgid "Show HTML options"
 msgstr "HTML-ის პარამეტრების ჩვენება"
 
-#: src/option.c:2087
+#: src/option.c:2040
 msgid "Icons box options"
 msgstr "ხატულების ფანჯრის პარამეტრები"
 
-#: src/option.c:2087
+#: src/option.c:2040
 msgid "Show icons box options"
 msgstr "ხატულების ფანჯრის პარამეტრების ჩვენება"
 
-#: src/option.c:2093
+#: src/option.c:2046
 msgid "List options"
 msgstr "სიის პარამეტრები"
 
-#: src/option.c:2093
+#: src/option.c:2046
 msgid "Show list options"
 msgstr "სიის პარამეტრების ჩვენება"
 
-#: src/option.c:2099
+#: src/option.c:2052
 msgid "Notebook options"
 msgstr "რვეულის მორგება"
 
-#: src/option.c:2099
+#: src/option.c:2052
 msgid "Show notebook dialog options"
 msgstr "რვეულის დიალოგის პარამეტრების ჩვენება"
 
-#: src/option.c:2106
+#: src/option.c:2059
 msgid "Notification icon options"
 msgstr "გაფრთხილების ხატულების პარამეტრები"
 
-#: src/option.c:2107
+#: src/option.c:2060
 msgid "Show notification icon options"
 msgstr "გაფრთხილების ხატულების პარამეტრების ჩვენება"
 
-#: src/option.c:2115
+#: src/option.c:2068
 msgid "StatusNotifier/AppIndicator options"
 msgstr "StatusNotifier/AppIndicator-ის პარამეტრები"
 
-#: src/option.c:2116
+#: src/option.c:2069
 msgid "Show indicator options"
 msgstr "მაჩვენებლის პარამეტრების ჩვენება"
 
-#: src/option.c:2123
+#: src/option.c:2076
 msgid "Paned dialog options"
 msgstr "პანელის დიალოგის პარამეტრები"
 
-#: src/option.c:2123
+#: src/option.c:2076
 msgid "Show paned dialog options"
 msgstr "პანელის დიალოგის პარამეტრების ჩვენება"
 
-#: src/option.c:2129
+#: src/option.c:2082
 msgid "Picture dialog options"
 msgstr "სურათის დიალოგის პარამეტრები"
 
-#: src/option.c:2129
+#: src/option.c:2082
 msgid "Show picture dialog options"
 msgstr "სურათის დიალოგის პარამეტრების ჩვენება"
 
-#: src/option.c:2135
+#: src/option.c:2088
 msgid "Print dialog options"
 msgstr "დაბეჭდვის დიალოგის პარამეტრები"
 
-#: src/option.c:2135
+#: src/option.c:2088
 msgid "Show print dialog options"
 msgstr "დაბეჭდვის დიალოგის პარამეტრების ჩვენება"
 
-#: src/option.c:2141
+#: src/option.c:2094
 msgid "Progress options"
 msgstr "მიმდინარეობის პარამეტრები"
 
-#: src/option.c:2141
+#: src/option.c:2094
 msgid "Show progress options"
 msgstr "მიმდინარეობის პარამეტრების ჩვენება"
 
-#: src/option.c:2147
+#: src/option.c:2100
 msgid "Scale options"
 msgstr "მასშტაბირების პარამეტრები"
 
-#: src/option.c:2147
+#: src/option.c:2100
 msgid "Show scale options"
 msgstr "მასშტაბირების პარამეტრების ჩვენება"
 
-#: src/option.c:2153
+#: src/option.c:2106
 msgid "Text information options"
 msgstr "ტექსტური ინფორმაციის პარამეტრები"
 
-#: src/option.c:2153
+#: src/option.c:2106
 msgid "Show text information options"
 msgstr "ტექსტური ინფორმაციის პარამეტრების ჩვენება"
 
-#: src/option.c:2160
+#: src/option.c:2113
 msgid "SourceView options"
 msgstr "SourceView-ის პარამეტრები"
 
-#: src/option.c:2160
+#: src/option.c:2113
 msgid "Show SourceView options"
 msgstr "SourceView-ის პარამეტრების ჩვენება"
 
-#: src/option.c:2167
+#: src/option.c:2120
 msgid "File filter options"
 msgstr "ფაილის ფილტრის პარამეტრები"
 
-#: src/option.c:2167
+#: src/option.c:2120
 msgid "Show file filter options"
 msgstr "ფაილის ფილტრის პარამეტრების ჩვენება"
 
-#: src/option.c:2173
+#: src/option.c:2126
 msgid "Miscellaneous options"
 msgstr "სხვადასხვა პარამეტრები"
 
-#: src/option.c:2173
+#: src/option.c:2126
 msgid "Show miscellaneous options"
 msgstr "სხვადასხვა პარამეტრების ჩვენება"
 
@@ -2099,14 +2103,28 @@ msgstr "მორგება"
 msgid "Yes"
 msgstr "კი"
 
-#: src/util.c:661 src/util.c:722
+#: src/util.c:657 src/util.c:718
 #, c-format
 msgid "WARNING: Run command failed: %s\n"
 msgstr "გაფრთხილება: ბრძანების გაშვების შეცდომა: %s\n"
 
-#: src/util.c:897
+#: src/util.c:887
 msgid "Case _sensitive"
 msgstr "_რეგისტრზე დამოკიდებული"
+
+#: src/settings.c:168
+#, c-format
+msgid "Value (%d) of HomeEnd settings is out of range. Reset to default\n"
+msgstr ""
+
+#: src/settings.c:191
+msgid "Settings file exists. Do nothing\n"
+msgstr ""
+
+#: src/settings.c:264
+#, fuzzy, c-format
+msgid "Unable to write settings: %s\n"
+msgstr "%s ფაილის დამუშავების შეცდომა: %s\n"
 
 #: src/browser.c:160
 msgid "scalable "
@@ -2254,71 +2272,71 @@ msgstr "პარამეტრის დამუშავების შე�
 msgid "no mode specified\n"
 msgstr "რეჟიმი მითითებული არაა\n"
 
-#: src/yad-settings.sh:33
+#: src/yad-settings.sh:51
 msgid "Main YAD settings and default values\\n\\n"
 msgstr "YAD-ის მთავარი პარამეტრები და ნაგულისხმები მნიშვნელობებო\\n\\n"
 
-#: src/yad-settings.sh:34
+#: src/yad-settings.sh:52
 msgid "Width of dialog window::NUM"
 msgstr "სიგანე დიალოგისთვის window::NUM"
 
-#: src/yad-settings.sh:35
+#: src/yad-settings.sh:53
 msgid "Height of dialog window::NUM"
 msgstr "სიმაღლე დიალოგისთვის window::NUM"
 
-#: src/yad-settings.sh:36
+#: src/yad-settings.sh:54
 msgid "Border width around dialog::NUM"
 msgstr "საზღვრის სიგანე dialog::NUM-ის გარეშემო"
 
-#: src/yad-settings.sh:37
+#: src/yad-settings.sh:55
 msgid "Show remaining time and percentage in timeout progress bar:CHK"
 msgstr "დროისა და პროცენტების ჩვენება ვადის პროგრესის მიმდინარეობაზე bar:CHK"
 
-#: src/yad-settings.sh:38
+#: src/yad-settings.sh:56
 msgid "Combo-box in entry dialog is always editable:CHK"
 msgstr "Combo-box ჩანაწერის დიალოგში ყოველთვის ჩასწორებადია:CHK"
 
-#: src/yad-settings.sh:39
+#: src/yad-settings.sh:57
 msgid "Default terminal command:"
 msgstr "ნაგულისხმები ტერმინალის ბრძანება:"
 
-#: src/yad-settings.sh:40
+#: src/yad-settings.sh:58
 msgid "Default open command:"
 msgstr "ნაგულისხმები გახსნის ბრძანება:"
 
-#: src/yad-settings.sh:41
+#: src/yad-settings.sh:59
 msgid "Default date format:"
 msgstr "თარიღის ნაგულისხმები ფორმატი:"
 
-#: src/yad-settings.sh:42
+#: src/yad-settings.sh:60
 msgid "Default URI color in text-info dialog::CLR"
 msgstr "ნაგულისხმები URI-ის ფერი text-info დიალოგში::CLR"
 
-#: src/yad-settings.sh:43
+#: src/yad-settings.sh:61
 msgid "Maximum number of tabs in notebook dialog::NUM"
 msgstr "ჩანართების მაქსიმალური რაოდენობა რვეულის დიალოგში::NUM"
 
-#: src/yad-settings.sh:44
+#: src/yad-settings.sh:62
 msgid "Use large previews in file selection dialogs:CHK"
 msgstr "დიდი მინიატურების ჩვენება ფაილის არჩევანის დიალოგში:CHK"
 
-#: src/yad-settings.sh:45
+#: src/yad-settings.sh:63
 msgid "Search entry width::NUM"
 msgstr "ძებნის ჩანაწერის სიგანე::NUM"
 
-#: src/yad-settings.sh:46
+#: src/yad-settings.sh:64
 msgid "Ignore unknown command-line options:CHK"
 msgstr "იგნორირებული იქნება უცნობი ბრძანების სტრიქონის პარამეტრები:CHK"
 
-#: src/yad-settings.sh:47
+#: src/yad-settings.sh:65
 msgid "Enable debug mode with information about deprecated features:CHK"
 msgstr "გამართვის რეჟიმის ჩართვა ინფორმაციით მოძველებულ თვისებებზე:CHK"
 
-#: src/yad-settings.sh:66
+#: src/yad-settings.sh:74
 msgid "<Empty>!"
 msgstr "<Empty>!"
 
-#: src/yad-settings.sh:79
+#: src/yad-settings.sh:89
 msgid ""
 "YAD settings for text editor\\nThis settings only usefull when YAD built "
 "with GtkSourceView\\n\\n"
@@ -2326,80 +2344,80 @@ msgstr ""
 "YAD-ის პარამეტრები ტექსტური რედაქტორისთვის\\nეს პარამეტრები მხოლოდ მაშინაა "
 "სასარგებლო, როცა YAD-ი GtkSourceView-ის მხარდაჭერითაა აგებული\\n\\n"
 
-#: src/yad-settings.sh:80
+#: src/yad-settings.sh:90
 msgid "Default theme for text-info dialog::CB"
 msgstr "ნაგულისხმები თემა text-ინფო დიალოგისთვის::CB"
 
-#: src/yad-settings.sh:81
+#: src/yad-settings.sh:91
 msgid "Show line numbers:CHK"
 msgstr "ხაზის ნომრების ჩვენება:CHK"
 
-#: src/yad-settings.sh:82
+#: src/yad-settings.sh:92
 msgid "Hightlight current line:CHK"
 msgstr "მიმდინარე ხაზის გამოკვეთა:CHK"
 
-#: src/yad-settings.sh:83
+#: src/yad-settings.sh:93
 msgid "Enable line marks mode:CHK"
 msgstr "ხაზის ნიშნების რეჟიმის ჩართვა:CHK"
 
-#: src/yad-settings.sh:84
+#: src/yad-settings.sh:94
 msgid "Color of first type marks::CLR"
 msgstr "პირველი ტიპის ნიშნები ფერი::CHK"
 
-#: src/yad-settings.sh:85
+#: src/yad-settings.sh:95
 msgid "Color of second type marks::CLR"
 msgstr "მეორე ტიპის ნიშნების ფერი::CHK"
 
-#: src/yad-settings.sh:86
+#: src/yad-settings.sh:96
 msgid "Right margin position::NUM"
 msgstr "მარჯვენა ზღვრის პოზიცია:NUM"
 
-#: src/yad-settings.sh:87
+#: src/yad-settings.sh:97
 msgid "Highlight matching brackets:CHK"
 msgstr "შესაბამისი ბრჭყალების გამოკვეთა:CHK"
 
-#: src/yad-settings.sh:88
+#: src/yad-settings.sh:98
 msgid "Use autoindentation:CHK"
 msgstr "ავტომატური შეწევის გამოყენება:CHK"
 
-#: src/yad-settings.sh:89
+#: src/yad-settings.sh:99
 msgid "Smart Home/End behavior::CB"
 msgstr "ჭკვიანი Home/End-ის ქცევა:CB"
 
-#: src/yad-settings.sh:90
+#: src/yad-settings.sh:100
 msgid "Use smart backspace:CHK"
 msgstr "ჭკვიანი backspace-ის გამოყენება:CHK"
 
-#: src/yad-settings.sh:91
+#: src/yad-settings.sh:101
 msgid "Tabulation width::NUM"
 msgstr "ტაბულაციის სიგანე::NUM"
 
-#: src/yad-settings.sh:92
+#: src/yad-settings.sh:102
 msgid "Indentation width::NUM"
 msgstr "შეწევის სიგანე::NUM"
 
-#: src/yad-settings.sh:93
+#: src/yad-settings.sh:103
 msgid "Insert spaces instead of tabulation:CHK"
 msgstr "ტაბულაციის მაგიერ _გამოტოვებების ჩასმა:CHK"
 
-#: src/yad-settings.sh:96 data/yad-settings.desktop.in:3
+#: src/yad-settings.sh:113 data/yad-settings.desktop.in:3
 msgid "YAD settings"
 msgstr "YAD-ის მორგება"
 
-#: src/yad-settings.sh:97
+#: src/yad-settings.sh:114
 msgid "Load defaults!view-refresh:3"
 msgstr "ნაგულისხმები მნიშვნელობების ჩატვირთვა!view-refresh:3"
 
-#: src/yad-settings.sh:98
+#: src/yad-settings.sh:115
 msgid "<span size='xx-large' weight='bold'>YAD settings editor</span>"
 msgstr ""
 "<span size='xx-large' weight='bold'>YAD-ის პარამეტრების რედაქტორი</span>"
 
-#: src/yad-settings.sh:99
+#: src/yad-settings.sh:116
 msgid "Main"
 msgstr "მთავარი"
 
-#: src/yad-settings.sh:99
+#: src/yad-settings.sh:116
 msgid "Editor"
 msgstr "რედაქტორი"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YAD\n"
 "Report-Msgid-Bugs-To: victor@sanana.kiev.ua\n"
-"POT-Creation-Date: 2026-01-06 16:31+0200\n"
+"POT-Creation-Date: 2026-04-15 17:11+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Yannou90 <windaube.non.merci@gmail.com>\n"
 "Language-Team: Français\n"
@@ -132,50 +132,50 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: src/icons.c:374
+#: src/icons.c:370
 #, c-format
 msgid "Unable to parse file %s: %s\n"
 msgstr "Impossible d'analyser le fichier %s: %s\n"
 
-#: src/icons.c:391
+#: src/icons.c:387
 #, c-format
 msgid "Unable to open directory %s: %s\n"
 msgstr "Impossible d'ouvrir le répertoire  %s: %s\n"
 
-#: src/main.c:151 src/main.c:511
+#: src/main.c:142 src/main.c:498
 #, c-format
 msgid "%d sec"
 msgstr "%d sec"
 
-#: src/main.c:764 src/main.c:771
+#: src/main.c:748 src/main.c:755
 #, fuzzy, c-format
 msgid "Unable to parse YAD_OPTIONS: %s\n"
 msgstr "Impossible d'analyser le fichier %s: %s\n"
 
-#: src/main.c:782
+#: src/main.c:766
 #, c-format
 msgid "Unable to parse command line: %s\n"
 msgstr "Impossible d'analyser la ligne de commande: %s\n"
 
-#: src/main.c:790
+#: src/main.c:780
 msgid ""
 "WARNING: Using splash option is deprecated, please use --window-type instead"
 msgstr ""
 
-#: src/main.c:800
+#: src/main.c:790
 #, fuzzy, c-format
 msgid "Unable to change directory to %s: %s\n"
 msgstr "Impossible d'ouvrir le répertoire  %s: %s\n"
 
-#: src/main.c:829
+#: src/main.c:819
 msgid "WARNING: Using gtkrc option is deprecated, please use --css instead\n"
 msgstr ""
 
-#: src/main.c:901
+#: src/main.c:891
 msgid "WARNING: --plug mode not supported outside X11\n"
 msgstr ""
 
-#: src/main.c:921
+#: src/main.c:911
 msgid "WARNING: This mode not supported outside X11\n"
 msgstr ""
 
@@ -624,7 +624,7 @@ msgstr "Afficher la boîte de sélection de fichier"
 msgid "Set source filename"
 msgstr "Définir le nom de fichier"
 
-#: src/option.c:232 src/option.c:307 src/option.c:760 src/option.c:773
+#: src/option.c:232 src/option.c:307 src/option.c:760 src/option.c:775
 msgid "FILENAME"
 msgstr "NOMDEFICHIER"
 
@@ -1642,344 +1642,348 @@ msgstr ""
 msgid "Add path for search icons by name"
 msgstr ""
 
-#: src/option.c:773
+#: src/option.c:769
+msgid "Write settings to file and exit"
+msgstr ""
+
+#: src/option.c:775
 msgid "Load extra arguments from file"
 msgstr ""
 
-#: src/option.c:984
+#: src/option.c:986
 #, c-format
 msgid "Mark %s doesn't have a value\n"
 msgstr "Le marqueur %s n'a pas de valeur\n"
 
-#: src/option.c:1031 src/picture.c:286
+#: src/option.c:1033 src/picture.c:286
 msgid "Images"
 msgstr ""
 
-#: src/option.c:1096
+#: src/option.c:1098
 #, fuzzy, c-format
 msgid "Unknown color mode: %s\n"
 msgstr "Commande inconnue: '%s'\n"
 
-#: src/option.c:1115
+#: src/option.c:1117
 #, fuzzy, c-format
 msgid "Unknown buttons layout type: %s\n"
 msgstr "Type d'alignement inconnue: %s\n"
 
-#: src/option.c:1130
+#: src/option.c:1132
 #, c-format
 msgid "Unknown align type: %s\n"
 msgstr "Type d'alignement inconnue: %s\n"
 
-#: src/option.c:1154
+#: src/option.c:1156
 #, c-format
 msgid "Unknown justification type: %s\n"
 msgstr "Type de justification inconnue: %s\n"
 
-#: src/option.c:1171
+#: src/option.c:1173
 #, fuzzy, c-format
 msgid "Unknown tab position type: %s\n"
 msgstr "Type d'alignement inconnue: %s\n"
 
-#: src/option.c:1208
+#: src/option.c:1210
 #, c-format
 msgid "Unknown ellipsize type: %s\n"
 msgstr "Type de défilement automatique inconnue: %s\n"
 
-#: src/option.c:1221
+#: src/option.c:1223
 #, fuzzy, c-format
 msgid "Unknown orientation: %s\n"
 msgstr "Type d'alignement inconnue: %s\n"
 
-#: src/option.c:1236
+#: src/option.c:1238
 #, fuzzy, c-format
 msgid "Unknown source type: %s\n"
 msgstr "Type de défilement automatique inconnue: %s\n"
 
-#: src/option.c:1247
+#: src/option.c:1249
 #, fuzzy
 msgid "Progress log"
 msgstr "Options de la barre de progression"
 
-#: src/option.c:1260
+#: src/option.c:1262
 #, fuzzy, c-format
 msgid "Unknown size type: %s\n"
 msgstr "Type de défilement automatique inconnue: %s\n"
 
-#: src/option.c:1304
+#: src/option.c:1306
 #, fuzzy, c-format
 msgid "Unknown completion type: %s\n"
 msgstr "Type d'alignement inconnue: %s\n"
 
-#: src/option.c:1336
+#: src/option.c:1338
 #, fuzzy, c-format
 msgid "Unknown boolean format type: %s\n"
 msgstr "Type d'alignement inconnue: %s\n"
 
-#: src/option.c:1352
+#: src/option.c:1354
 #, fuzzy, c-format
 msgid "Unknown grid lines type: %s\n"
 msgstr "Type d'alignement inconnue: %s\n"
 
-#: src/option.c:1369
+#: src/option.c:1371
 #, fuzzy, c-format
 msgid "Unknown scrollbar policy type: %s\n"
 msgstr "Type de défilement automatique inconnue: %s\n"
 
-#: src/option.c:1420
+#: src/option.c:1422
 #, fuzzy, c-format
 msgid "Unknown window type: %s\n"
 msgstr "Type d'alignement inconnue: %s\n"
 
-#: src/option.c:1449
+#: src/option.c:1451
 #, fuzzy, c-format
 msgid "Unknown smart Home/End mode: %s\n"
 msgstr "Type de défilement automatique inconnue: %s\n"
 
-#: src/option.c:1559
+#: src/option.c:1561
 #, fuzzy, c-format
 msgid "Unknown signal: %s\n"
 msgstr "Type d'alignement inconnue: %s\n"
 
-#: src/option.c:1810
+#: src/option.c:1788
 msgid "File exist. Overwrite?"
 msgstr "Le fichier existe. Écraser?"
 
-#: src/option.c:1957
+#: src/option.c:1931
 msgid "File was changed. Save it?"
 msgstr ""
 
-#: src/option.c:2009
+#: src/option.c:1962
 #, fuzzy
 msgid "- Yet another dialoging program"
 msgstr "Yet another dialoging program"
 
-#: src/option.c:2013
+#: src/option.c:1966
 msgid "General options"
 msgstr "Options générales"
 
-#: src/option.c:2013
+#: src/option.c:1966
 msgid "Show general options"
 msgstr "Afficher les options générales"
 
-#: src/option.c:2019
+#: src/option.c:1972
 #, fuzzy
 msgid "Common options"
 msgstr "Options de types form"
 
-#: src/option.c:2019
+#: src/option.c:1972
 #, fuzzy
 msgid "Show common options"
 msgstr "Afficher les options de types form"
 
-#: src/option.c:2025
+#: src/option.c:1978
 #, fuzzy
 msgid "About dialog options"
 msgstr "Options de la barre de progression"
 
-#: src/option.c:2025
+#: src/option.c:1978
 #, fuzzy
 msgid "Show custom about dialog options"
 msgstr "Afficher les options de la barre de progression"
 
-#: src/option.c:2031
+#: src/option.c:1984
 #, fuzzy
 msgid "Application selection options"
 msgstr "Options de la boîte de sélection de police"
 
-#: src/option.c:2031
+#: src/option.c:1984
 #, fuzzy
 msgid "Show application selection options"
 msgstr "Afficher les options de la boîte de sélection de police"
 
-#: src/option.c:2037
+#: src/option.c:1990
 msgid "Calendar options"
 msgstr "Options du calendrier"
 
-#: src/option.c:2037
+#: src/option.c:1990
 msgid "Show calendar options"
 msgstr "Afficher les options du calendrier"
 
-#: src/option.c:2043
+#: src/option.c:1996
 msgid "Color selection options"
 msgstr "Options de la boîte de sélection de couleurs"
 
-#: src/option.c:2043
+#: src/option.c:1996
 msgid "Show color selection options"
 msgstr "Afficher les options de la boîte de sélection de couleurs"
 
-#: src/option.c:2049
+#: src/option.c:2002
 msgid "DND options"
 msgstr "Options de la boîte de glisser/déposer"
 
-#: src/option.c:2049
+#: src/option.c:2002
 msgid "Show drag-n-drop options"
 msgstr "Afficher les options de la boîte de glisser/déposer"
 
-#: src/option.c:2055
+#: src/option.c:2008
 msgid "Text entry options"
 msgstr "Options de la boîte d'entrée"
 
-#: src/option.c:2055
+#: src/option.c:2008
 msgid "Show text entry options"
 msgstr "Afficher les options de la boîte d'entrée"
 
-#: src/option.c:2061
+#: src/option.c:2014
 msgid "File selection options"
 msgstr "Options de la boîte de sélection de fichier"
 
-#: src/option.c:2061
+#: src/option.c:2014
 msgid "Show file selection options"
 msgstr "Afficher les options de la boîte de sélection de fichier"
 
-#: src/option.c:2067
+#: src/option.c:2020
 msgid "Font selection options"
 msgstr "Options de la boîte de sélection de police"
 
-#: src/option.c:2067
+#: src/option.c:2020
 msgid "Show font selection options"
 msgstr "Afficher les options de la boîte de sélection de police"
 
-#: src/option.c:2073
+#: src/option.c:2026
 msgid "Form options"
 msgstr "Options de types form"
 
-#: src/option.c:2073
+#: src/option.c:2026
 msgid "Show form options"
 msgstr "Afficher les options de types form"
 
-#: src/option.c:2080
+#: src/option.c:2033
 #, fuzzy
 msgid "HTML options"
 msgstr "Options de la boîte de type liste"
 
-#: src/option.c:2080
+#: src/option.c:2033
 #, fuzzy
 msgid "Show HTML options"
 msgstr "Afficher les options de types form"
 
-#: src/option.c:2087
+#: src/option.c:2040
 msgid "Icons box options"
 msgstr "Options de la boîte de sélection d'icône"
 
-#: src/option.c:2087
+#: src/option.c:2040
 msgid "Show icons box options"
 msgstr "Afficher les options de la boîte de sélection d'icône"
 
-#: src/option.c:2093
+#: src/option.c:2046
 msgid "List options"
 msgstr "Options de la boîte de type liste"
 
-#: src/option.c:2093
+#: src/option.c:2046
 msgid "Show list options"
 msgstr "Afficher les options de la boîte de sélection d'icône"
 
-#: src/option.c:2099
+#: src/option.c:2052
 #, fuzzy
 msgid "Notebook options"
 msgstr "Options de la boîte de glisser/déposer"
 
-#: src/option.c:2099
+#: src/option.c:2052
 #, fuzzy
 msgid "Show notebook dialog options"
 msgstr "Afficher les options de la barre de progression"
 
-#: src/option.c:2106
+#: src/option.c:2059
 msgid "Notification icon options"
 msgstr "Options de la boîte de type icône"
 
-#: src/option.c:2107
+#: src/option.c:2060
 msgid "Show notification icon options"
 msgstr "Afficher les options de la boîte de type icône"
 
-#: src/option.c:2115
+#: src/option.c:2068
 #, fuzzy
 msgid "StatusNotifier/AppIndicator options"
 msgstr "Options de la boîte de type icône"
 
-#: src/option.c:2116
+#: src/option.c:2069
 #, fuzzy
 msgid "Show indicator options"
 msgstr "Afficher les options de la barre de progression"
 
-#: src/option.c:2123
+#: src/option.c:2076
 #, fuzzy
 msgid "Paned dialog options"
 msgstr "Options de la barre de progression"
 
-#: src/option.c:2123
+#: src/option.c:2076
 #, fuzzy
 msgid "Show paned dialog options"
 msgstr "Afficher les options de la barre de progression"
 
-#: src/option.c:2129
+#: src/option.c:2082
 #, fuzzy
 msgid "Picture dialog options"
 msgstr "Options de la barre de progression"
 
-#: src/option.c:2129
+#: src/option.c:2082
 #, fuzzy
 msgid "Show picture dialog options"
 msgstr "Afficher les options de la barre de progression"
 
-#: src/option.c:2135
+#: src/option.c:2088
 #, fuzzy
 msgid "Print dialog options"
 msgstr "Options de la barre de progression"
 
-#: src/option.c:2135
+#: src/option.c:2088
 #, fuzzy
 msgid "Show print dialog options"
 msgstr "Afficher les options de la barre de progression"
 
-#: src/option.c:2141
+#: src/option.c:2094
 msgid "Progress options"
 msgstr "Options de la barre de progression"
 
-#: src/option.c:2141
+#: src/option.c:2094
 msgid "Show progress options"
 msgstr "Afficher les options de la barre de progression"
 
-#: src/option.c:2147
+#: src/option.c:2100
 msgid "Scale options"
 msgstr "Options de la boîte échelle"
 
-#: src/option.c:2147
+#: src/option.c:2100
 msgid "Show scale options"
 msgstr "Afficher les options de la boîte échelle"
 
-#: src/option.c:2153
+#: src/option.c:2106
 msgid "Text information options"
 msgstr "Options de la boîte de type information"
 
-#: src/option.c:2153
+#: src/option.c:2106
 msgid "Show text information options"
 msgstr "Afficher les options de la boîte de type information"
 
-#: src/option.c:2160
+#: src/option.c:2113
 #, fuzzy
 msgid "SourceView options"
 msgstr "Options de la boîte échelle"
 
-#: src/option.c:2160
+#: src/option.c:2113
 #, fuzzy
 msgid "Show SourceView options"
 msgstr "Afficher les options de types form"
 
-#: src/option.c:2167
+#: src/option.c:2120
 #, fuzzy
 msgid "File filter options"
 msgstr "Options de la boîte de sélection de fichier"
 
-#: src/option.c:2167
+#: src/option.c:2120
 #, fuzzy
 msgid "Show file filter options"
 msgstr "Afficher les options de la boîte de sélection de fichier"
 
-#: src/option.c:2173
+#: src/option.c:2126
 msgid "Miscellaneous options"
 msgstr "Options diverses"
 
-#: src/option.c:2173
+#: src/option.c:2126
 msgid "Show miscellaneous options"
 msgstr "Afficher les options diverses"
 
@@ -2202,14 +2206,28 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: src/util.c:661 src/util.c:722
+#: src/util.c:657 src/util.c:718
 #, c-format
 msgid "WARNING: Run command failed: %s\n"
 msgstr ""
 
-#: src/util.c:897
+#: src/util.c:887
 msgid "Case _sensitive"
 msgstr ""
+
+#: src/settings.c:168
+#, c-format
+msgid "Value (%d) of HomeEnd settings is out of range. Reset to default\n"
+msgstr ""
+
+#: src/settings.c:191
+msgid "Settings file exists. Do nothing\n"
+msgstr ""
+
+#: src/settings.c:264
+#, fuzzy, c-format
+msgid "Unable to write settings: %s\n"
+msgstr "Impossible d'analyser le fichier %s: %s\n"
 
 #: src/browser.c:160
 msgid "scalable "
@@ -2372,150 +2390,150 @@ msgstr "Impossible d'ouvrir le fichier %s: %s"
 msgid "no mode specified\n"
 msgstr "Utiliser une police spécifiée"
 
-#: src/yad-settings.sh:33
+#: src/yad-settings.sh:51
 msgid "Main YAD settings and default values\\n\\n"
 msgstr ""
 
-#: src/yad-settings.sh:34
+#: src/yad-settings.sh:52
 msgid "Width of dialog window::NUM"
 msgstr ""
 
-#: src/yad-settings.sh:35
+#: src/yad-settings.sh:53
 msgid "Height of dialog window::NUM"
 msgstr ""
 
-#: src/yad-settings.sh:36
+#: src/yad-settings.sh:54
 msgid "Border width around dialog::NUM"
 msgstr ""
 
-#: src/yad-settings.sh:37
+#: src/yad-settings.sh:55
 msgid "Show remaining time and percentage in timeout progress bar:CHK"
 msgstr ""
 
-#: src/yad-settings.sh:38
+#: src/yad-settings.sh:56
 msgid "Combo-box in entry dialog is always editable:CHK"
 msgstr ""
 
-#: src/yad-settings.sh:39
+#: src/yad-settings.sh:57
 msgid "Default terminal command:"
 msgstr ""
 
-#: src/yad-settings.sh:40
+#: src/yad-settings.sh:58
 msgid "Default open command:"
 msgstr ""
 
-#: src/yad-settings.sh:41
+#: src/yad-settings.sh:59
 msgid "Default date format:"
 msgstr ""
 
-#: src/yad-settings.sh:42
+#: src/yad-settings.sh:60
 msgid "Default URI color in text-info dialog::CLR"
 msgstr ""
 
-#: src/yad-settings.sh:43
+#: src/yad-settings.sh:61
 msgid "Maximum number of tabs in notebook dialog::NUM"
 msgstr ""
 
-#: src/yad-settings.sh:44
+#: src/yad-settings.sh:62
 #, fuzzy
 msgid "Use large previews in file selection dialogs:CHK"
 msgstr "Afficher la boîte de sélection de fichier"
 
-#: src/yad-settings.sh:45
+#: src/yad-settings.sh:63
 msgid "Search entry width::NUM"
 msgstr ""
 
-#: src/yad-settings.sh:46
+#: src/yad-settings.sh:64
 msgid "Ignore unknown command-line options:CHK"
 msgstr ""
 
-#: src/yad-settings.sh:47
+#: src/yad-settings.sh:65
 msgid "Enable debug mode with information about deprecated features:CHK"
 msgstr ""
 
-#: src/yad-settings.sh:66
+#: src/yad-settings.sh:74
 msgid "<Empty>!"
 msgstr ""
 
-#: src/yad-settings.sh:79
+#: src/yad-settings.sh:89
 msgid ""
 "YAD settings for text editor\\nThis settings only usefull when YAD built "
 "with GtkSourceView\\n\\n"
 msgstr ""
 
-#: src/yad-settings.sh:80
+#: src/yad-settings.sh:90
 msgid "Default theme for text-info dialog::CB"
 msgstr ""
 
-#: src/yad-settings.sh:81
+#: src/yad-settings.sh:91
 msgid "Show line numbers:CHK"
 msgstr ""
 
-#: src/yad-settings.sh:82
+#: src/yad-settings.sh:92
 msgid "Hightlight current line:CHK"
 msgstr ""
 
-#: src/yad-settings.sh:83
+#: src/yad-settings.sh:93
 msgid "Enable line marks mode:CHK"
 msgstr ""
 
-#: src/yad-settings.sh:84
+#: src/yad-settings.sh:94
 msgid "Color of first type marks::CLR"
 msgstr ""
 
-#: src/yad-settings.sh:85
+#: src/yad-settings.sh:95
 msgid "Color of second type marks::CLR"
 msgstr ""
 
-#: src/yad-settings.sh:86
+#: src/yad-settings.sh:96
 msgid "Right margin position::NUM"
 msgstr ""
 
-#: src/yad-settings.sh:87
+#: src/yad-settings.sh:97
 msgid "Highlight matching brackets:CHK"
 msgstr ""
 
-#: src/yad-settings.sh:88
+#: src/yad-settings.sh:98
 msgid "Use autoindentation:CHK"
 msgstr ""
 
-#: src/yad-settings.sh:89
+#: src/yad-settings.sh:99
 msgid "Smart Home/End behavior::CB"
 msgstr ""
 
-#: src/yad-settings.sh:90
+#: src/yad-settings.sh:100
 msgid "Use smart backspace:CHK"
 msgstr ""
 
-#: src/yad-settings.sh:91
+#: src/yad-settings.sh:101
 msgid "Tabulation width::NUM"
 msgstr ""
 
-#: src/yad-settings.sh:92
+#: src/yad-settings.sh:102
 msgid "Indentation width::NUM"
 msgstr ""
 
-#: src/yad-settings.sh:93
+#: src/yad-settings.sh:103
 msgid "Insert spaces instead of tabulation:CHK"
 msgstr ""
 
-#: src/yad-settings.sh:96 data/yad-settings.desktop.in:3
+#: src/yad-settings.sh:113 data/yad-settings.desktop.in:3
 msgid "YAD settings"
 msgstr ""
 
-#: src/yad-settings.sh:97
+#: src/yad-settings.sh:114
 msgid "Load defaults!view-refresh:3"
 msgstr ""
 
-#: src/yad-settings.sh:98
+#: src/yad-settings.sh:115
 msgid "<span size='xx-large' weight='bold'>YAD settings editor</span>"
 msgstr ""
 
-#: src/yad-settings.sh:99
+#: src/yad-settings.sh:116
 msgid "Main"
 msgstr ""
 
-#: src/yad-settings.sh:99
+#: src/yad-settings.sh:116
 msgid "Editor"
 msgstr ""
 
