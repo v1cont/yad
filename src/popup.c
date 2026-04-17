@@ -22,6 +22,13 @@
 #define MIN_BORDERS          15
 
 static gboolean
+activate_link_cb (GtkLabel *l, gchar *uri, gpointer d)
+{
+  open_uri (uri);
+  return TRUE;
+}
+
+static gboolean
 on_draw_event (GtkWidget *widget, cairo_t *cr, gpointer d)
 {
   gdouble val;
@@ -125,6 +132,8 @@ yad_popup_run ()
           gtk_label_set_line_wrap (GTK_LABEL (lbl), TRUE);
           gtk_label_set_line_wrap_mode (GTK_LABEL (lbl), PANGO_WRAP_WORD_CHAR);
           gtk_box_pack_start (GTK_BOX (tbox), lbl, TRUE, TRUE, 2);
+
+          g_signal_connect (G_OBJECT (lbl), "activate-link", G_CALLBACK (activate_link_cb), NULL);
         }
     }
 
