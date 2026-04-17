@@ -121,6 +121,7 @@ yad_popup_run ()
           lbl = gtk_label_new (NULL);
           gtk_label_set_markup (GTK_LABEL (lbl), options.data.dialog_text);
           gtk_label_set_xalign (GTK_LABEL (lbl), options.common_data.align);
+          gtk_label_set_justify (GTK_LABEL (lbl), options.data.text_align);
           gtk_label_set_line_wrap (GTK_LABEL (lbl), TRUE);
           gtk_label_set_line_wrap_mode (GTK_LABEL (lbl), PANGO_WRAP_WORD_CHAR);
           gtk_box_pack_start (GTK_BOX (tbox), lbl, TRUE, TRUE, 2);
