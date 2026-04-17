@@ -603,6 +603,8 @@ static GOptionEntry picture_options[] = {
 static GOptionEntry popup_options[] = {
   { "popup", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &popup_mode,
     N_("Display popup dialog"), NULL },
+  { "align", 0, G_OPTION_FLAG_NOALIAS, G_OPTION_ARG_CALLBACK, set_align,
+    N_("Set alignment of title and text (left, center or right)"), N_("TYPE") },
   { "transparent", 0, 0, G_OPTION_ARG_INT, &options.popup_data.transparent,
     N_("Set transparency"), N_("PERCENT") },
   { "keep", 0, 0, G_OPTION_ARG_NONE, &options.popup_data.keep,
