@@ -829,9 +829,11 @@ main (gint argc, gchar ** argv)
   if (options.data.icon_theme)
     gtk_icon_theme_set_custom_theme (yad_icon_theme, options.data.icon_theme);
   gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &w, &h);
-  big_fallback_image = gtk_icon_theme_load_icon (yad_icon_theme, "yad", MIN (w, h), GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+  big_fallback_image = gtk_icon_theme_load_icon (yad_icon_theme, "yad", MIN (w, h),
+                                                 GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
   gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
-  small_fallback_image = gtk_icon_theme_load_icon (yad_icon_theme, "yad", MIN (w, h), GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
+  small_fallback_image = gtk_icon_theme_load_icon (yad_icon_theme, "yad", MIN (w, h),
+                                                   GTK_ICON_LOOKUP_GENERIC_FALLBACK, NULL);
 
   /* correct separators */
   str = g_strcompress (options.common_data.separator);
@@ -934,6 +936,17 @@ main (gint argc, gchar ** argv)
       ret = yad_appindicator_run ();
       break;
 #endif
+
+    case YAD_MODE_POPUP:
+      if (!options.popup_data.keep)
+        {
+          /* set timeout handler (must be before runiing popup) */
+          if (options.data.timeout == 0)
+            options.data.timeout = YAD_POPUP_TIMEOUT;
+          g_timeout_add_seconds (1, timeout_cb, NULL);
+        }
+      ret = yad_popup_run ();
+      break;
 
     case YAD_MODE_PRINT:
       ret = yad_print_run ();

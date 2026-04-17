@@ -59,7 +59,9 @@ G_BEGIN_DECLS
 
 #define YAD_URL_REGEX "(http|https|ftp|file)://[a-zA-Z0-9./_%#&-]+"
 
-#define RIGHT_MARGIN     80  /* default right margin position for GtkSourceView */
+#define YAD_POPUP_TIMEOUT       300 /* default timeout for popup dialog */
+
+#define RIGHT_MARGIN            80  /* default right margin position for GtkSourceView */
 
 #define SV_MARK1 "one"
 #define SV_MARK2 "two"
@@ -88,6 +90,7 @@ typedef enum {
 #endif
   YAD_MODE_PANED,
   YAD_MODE_PICTURE,
+  YAD_MODE_POPUP,
   YAD_MODE_PRINT,
   YAD_MODE_PROGRESS,
   YAD_MODE_SCALE,
@@ -445,6 +448,12 @@ typedef struct {
 } YadPictureData;
 
 typedef struct {
+  guint transparent;
+  gboolean keep;
+  guint round;
+} YadPopupData;
+
+typedef struct {
   YadPrintType type;
   gboolean headers;
 } YadPrintData;
@@ -620,6 +629,7 @@ typedef struct {
 #endif
   YadPanedData paned_data;
   YadPictureData picture_data;
+  YadPopupData popup_data;
   YadPrintData print_data;
   YadProgressData progress_data;
   YadScaleData scale_data;
@@ -747,6 +757,7 @@ gint yad_notification_run (void);
 #ifdef HAVE_APPINDICATOR
 gint yad_appindicator_run (void);
 #endif
+gint yad_popup_run (void);
 gint yad_print_run (void);
 gint yad_about (void);
 

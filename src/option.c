@@ -87,6 +87,7 @@ static gboolean appindicator_mode = FALSE;
 #endif
 static gboolean paned_mode = FALSE;
 static gboolean picture_mode = FALSE;
+static gboolean popup_mode = FALSE;
 static gboolean print_mode = FALSE;
 static gboolean progress_mode = FALSE;
 static gboolean scale_mode = FALSE;
@@ -596,6 +597,16 @@ static GOptionEntry picture_options[] = {
     N_("Set increment for picture scaling (default - 5)"), N_("NUMBER") },
   { "image-changed", 0, 0, G_OPTION_ARG_STRING, &options.picture_data.change_cmd,
     N_("Set action on image changing"), N_("CMD") },
+  { NULL }
+};
+
+static GOptionEntry popup_options[] = {
+  { "popup", 0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE, &popup_mode,
+    N_("Display popup dialog"), NULL },
+  { "transparent", 0, 0, G_OPTION_ARG_INT, &options.popup_data.transparent,
+    N_("Set transparency"), N_("PERCENT") },
+  { "keep", 0, 0, G_OPTION_ARG_NONE, &options.popup_data.keep,
+    N_("Don't close popup by timeout"), NULL },
   { NULL }
 };
 
@@ -1605,6 +1616,8 @@ yad_set_mode (void)
     options.mode = YAD_MODE_PANED;
   else if (picture_mode)
     options.mode = YAD_MODE_PICTURE;
+  else if (popup_mode)
+    options.mode = YAD_MODE_POPUP;
   else if (print_mode)
     options.mode = YAD_MODE_PRINT;
   else if (progress_mode)
@@ -1885,6 +1898,10 @@ yad_options_init (void)
   options.picture_data.inc = 5;
   options.picture_data.change_cmd = NULL;
 
+  /* Initialize popup data */
+  options.popup_data.transparent = 0;
+  options.popup_data.keep = FALSE;
+
   /* Initialize print data */
   options.print_data.type = YAD_PRINT_TEXT;
   options.print_data.headers = FALSE;
@@ -2081,6 +2098,12 @@ yad_create_context (void)
   /* Adds picture option entries */
   a_group = g_option_group_new ("picture", _("Picture dialog options"), _("Show picture dialog options"), NULL, NULL);
   g_option_group_add_entries (a_group, picture_options);
+  g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
+  g_option_context_add_group (tmp_ctx, a_group);
+
+  /* Adds popup option entries */
+  a_group = g_option_group_new ("popup", _("Popup dialog options"), _("Show popup dialog options"), NULL, NULL);
+  g_option_group_add_entries (a_group, popup_options);
   g_option_group_set_translation_domain (a_group, GETTEXT_PACKAGE);
   g_option_context_add_group (tmp_ctx, a_group);
 

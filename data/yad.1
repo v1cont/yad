@@ -66,6 +66,9 @@ Display notification icon.
 .B \-\-appindicator
 Display appindicator icon.
 .TP
+.B \-\-popup
+Display popup message dialog.
+.TP
 .B \-\-print
 Display print dialog.
 .TP
@@ -913,6 +916,17 @@ Enable file operations. This option adds open menu item to popup menu,
 Set command which runs after changing image. Argument of a command is a filename of current image. Argument can be specified by '\fI%s\fP' pattern or will be the last part of a command.
 .PP
 Some actions on a picture like navigation, scaling or rotating available from popup menu. Those actions can be made only on static images.
+
+.SS Popup options
+.TP
+.B \-\-transparent=\fIPERCENT\fP
+Make popup window transparent.
+.TP
+.B \-\-timeout=\fITIMEOUT\fP
+Change default timeout. By default timeout is a 300 seconds.
+.TP
+.B \-\-keep
+Don't close popup window automatically. By default window will be closed after \fITIMEOUT\fP seconds.
 
 .SS Print options
 .TP
