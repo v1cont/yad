@@ -278,6 +278,7 @@ typedef struct {
   GdkWindowTypeHint window_type;
   gboolean focus;
   gboolean close_on_unfocus;
+  gchar *dialog_menu;
 } YadData;
 
 typedef struct {
@@ -648,7 +649,7 @@ typedef struct {
 
   key_t plug;
   guint tabnum;
-
+  gchar *menubar_string;
   gboolean debug;
 
 #ifndef G_OS_WIN32
