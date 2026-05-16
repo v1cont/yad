@@ -348,7 +348,12 @@ handle_stdin (GIOChannel * channel, GIOCondition condition, gpointer data)
               g_free (action);
               action = NULL;
               if (value && *value)
-                action = g_strdup (value);
+                {
+                  if (strstr (value, "$(") || strchr (value, '`'))
+                    g_printerr (_("Unsafe command substitution in action rejected\n"));
+                  else
+                    action = g_strdup (value);
+                }
             }
           else if (!g_ascii_strcasecmp (command, "quit"))
             {
