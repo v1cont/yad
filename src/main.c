@@ -522,6 +522,8 @@ create_dialog (void)
     options.data.no_buttons = TRUE;
 #endif
 
+  GtkWidget *default_btn = NULL;
+
   if (!options.data.no_buttons)
     {
       GtkWidget *btn;
@@ -546,6 +548,9 @@ create_dialog (void)
               g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), b->cmd);
               gtk_box_pack_start (GTK_BOX (bbox), btn, TRUE, TRUE, 0);
 
+              if (options.data.default_button && g_strcmp0 (b->name, options.data.default_button) == 0)
+                default_btn = btn;
+
               tmp = tmp->next;
             }
           while (tmp != NULL);
@@ -561,6 +566,8 @@ create_dialog (void)
               g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
               gtk_box_pack_start (GTK_BOX (bbox), btn, TRUE, TRUE, 0);
 
+              if (options.data.default_button && g_strcmp0 ("yad-close", options.data.default_button) == 0)
+                default_btn = btn;
             }
           else
             {
@@ -571,12 +578,18 @@ create_dialog (void)
               g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
               gtk_box_pack_start (GTK_BOX (bbox), btn, TRUE, TRUE, 0);
 
+              if (options.data.default_button && g_strcmp0 ("yad-cancel", options.data.default_button) == 0)
+                default_btn = btn;
+
               /*add ok button */
               btn = gtk_button_new ();
               gtk_container_add (GTK_CONTAINER (btn), get_label ("yad-ok", 2, btn));
               g_object_set_data (G_OBJECT (btn), "resp", GINT_TO_POINTER (YAD_RESPONSE_OK));
               g_signal_connect (G_OBJECT (btn), "clicked", G_CALLBACK (btn_cb), NULL);
               gtk_box_pack_start (GTK_BOX (bbox), btn, TRUE, TRUE, 0);
+
+              if (options.data.default_button && g_strcmp0 ("yad-ok", options.data.default_button) == 0)
+                default_btn = btn;
             }
         }
       /* add buttons box to main window */
@@ -585,6 +598,16 @@ create_dialog (void)
 
   /* show widgets */
   gtk_widget_show_all (vbox);
+
+  if (options.data.default_button && !default_btn)
+    g_printerr (_("WARNING: --default-button '%s' does not match any button\n"), options.data.default_button);
+  else if (default_btn)
+    {
+      gtk_style_context_add_class (gtk_widget_get_style_context (default_btn), "suggested-action");
+      gtk_widget_set_can_default (default_btn, TRUE);
+      gtk_widget_grab_default (default_btn);
+      gtk_widget_grab_focus (default_btn);
+    }
 
   /* parse geometry or move window, if given. must be after showing widget */
   if (!options.data.maximized && !options.data.fullscreen)

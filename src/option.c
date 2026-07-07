@@ -130,6 +130,8 @@ static GOptionEntry general_options[] = {
     N_("Don't show buttons"), NULL },
   { "buttons-layout", 0, 0, G_OPTION_ARG_CALLBACK, set_buttons_layout,
     N_("Set buttons layout type (spread, edge, start, end or center)"), N_("TYPE") },
+  { "default-button", 0, 0, G_OPTION_ARG_STRING, &options.data.default_button,
+    N_("Set focus to the named button when dialog opens"), N_("NAME") },
   { "no-markup", 0, 0, G_OPTION_ARG_NONE, &options.data.no_markup,
     N_("Don't use pango markup language in dialog's text"), NULL },
   { "no-escape", 0, 0, G_OPTION_ARG_NONE, &options.data.no_escape,
@@ -1684,6 +1686,7 @@ yad_options_init (void)
   options.data.buttons = NULL;
   options.data.no_buttons = FALSE;
   options.data.buttons_layout = GTK_BUTTONBOX_END;
+  options.data.default_button = NULL;
   options.data.borders = settings->border;
   options.data.no_markup = FALSE;
   options.data.no_escape = FALSE;
