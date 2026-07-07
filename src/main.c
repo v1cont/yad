@@ -599,7 +599,9 @@ create_dialog (void)
   /* show widgets */
   gtk_widget_show_all (vbox);
 
-  if (default_btn)
+  if (options.data.default_button && !default_btn)
+    g_printerr (_("WARNING: --default-button '%s' does not match any button\n"), options.data.default_button);
+  else if (default_btn)
     {
       gtk_style_context_add_class (gtk_widget_get_style_context (default_btn), "suggested-action");
       gtk_widget_set_can_default (default_btn, TRUE);
