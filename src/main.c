@@ -600,7 +600,12 @@ create_dialog (void)
   gtk_widget_show_all (vbox);
 
   if (default_btn)
-    gtk_widget_grab_focus (default_btn);
+    {
+      gtk_style_context_add_class (gtk_widget_get_style_context (default_btn), "suggested-action");
+      gtk_widget_set_can_default (default_btn, TRUE);
+      gtk_widget_grab_default (default_btn);
+      gtk_widget_grab_focus (default_btn);
+    }
 
   /* parse geometry or move window, if given. must be after showing widget */
   if (!options.data.maximized && !options.data.fullscreen)
