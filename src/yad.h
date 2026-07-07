@@ -256,6 +256,7 @@ typedef struct {
   gboolean selectable_labels;
   gboolean keep_icon_size;
   GtkButtonBoxStyle buttons_layout;
+  gchar *default_button;
   gint def_resp;
   gboolean use_interp;
   gchar *interp;
