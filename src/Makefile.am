@@ -30,6 +30,8 @@ yad_SOURCES = 		\
 	text.c			\
 	util.c			\
 	main.c			\
+	menu.c			\
+	menu.h			\
 	yad.h			\
 	calendar.xpm	\
 	$(CPICKER_SOURCES)
