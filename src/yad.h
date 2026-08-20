@@ -697,7 +697,7 @@ typedef struct {
 extern YadNTabs *tabs;
 
 /* STOCK ITEMS */
-#define YAD_STOCK_COUNT 19
+#define YAD_STOCK_COUNT 20
 
 typedef struct {
   gchar *key;
