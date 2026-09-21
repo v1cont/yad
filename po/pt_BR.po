@@ -579,7 +579,7 @@ msgstr "Permitir seleção múltipla"
 
 #: src/option.c:227
 msgid "Enable preview"
-msgstr "Habilitar pré-visualização"
+msgstr "Ativar pré-visualização"
 
 #: src/option.c:229
 msgid "Use large preview"
@@ -628,7 +628,7 @@ msgstr "Desativar pesquisa em diálogos de texto e html"
 
 #: src/option.c:249
 msgid "Enable file operations"
-msgstr "Habilitar operações de arquivo"
+msgstr "Ativar operações de arquivo"
 
 #: src/option.c:252
 msgid "Use IEC (base 1024) units with for size values"
@@ -636,7 +636,7 @@ msgstr "Usar unidades IEC (base 1024) para valores de tamanho"
 
 #: src/option.c:256
 msgid "Enable spell check for text"
-msgstr "Habilitar a verificação ortográfica do texto"
+msgstr "Ativar a verificação ortográfica do texto"
 
 #: src/option.c:258
 msgid "Set spell checking language"
@@ -652,7 +652,7 @@ msgstr "Exibir diálogo Sobre"
 
 #: src/option.c:267
 msgid "Set application name"
-msgstr "Definir nome do aplicativo"
+msgstr "Definir nome da aplicação"
 
 #: src/option.c:267 src/option.c:269 src/option.c:271 src/option.c:281
 #: src/option.c:429 src/option.c:431 src/option.c:529 src/option.c:531
@@ -662,23 +662,23 @@ msgstr "STRING"
 
 #: src/option.c:269
 msgid "Set application version"
-msgstr "Definir a versão do aplicativo"
+msgstr "Definir a versão da aplicação"
 
 #: src/option.c:271
 msgid "Set application copyright string"
-msgstr "Definir o texto de direitos autorais do aplicativo"
+msgstr "Definir o texto de direitos autorais da aplicação"
 
 #: src/option.c:273
 msgid "Set application comments string"
-msgstr "Definir o texto de comentários do aplicativo"
+msgstr "Definir o texto de comentários da aplicação"
 
 #: src/option.c:275
 msgid "Set application license"
-msgstr "Definir a licença do aplicativo"
+msgstr "Definir a licença da aplicação"
 
 #: src/option.c:277
 msgid "Set application authors"
-msgstr "Definir os autores do aplicativo"
+msgstr "Definir os autores da aplicação"
 
 #: src/option.c:277 src/option.c:485 src/option.c:489 src/option.c:493
 msgid "LIST"
@@ -686,7 +686,7 @@ msgstr "LISTA"
 
 #: src/option.c:279
 msgid "Set application website"
-msgstr "Definir site do aplicativo"
+msgstr "Definir site da aplicação"
 
 #: src/option.c:279
 msgid "URI"
@@ -694,7 +694,7 @@ msgstr "URI"
 
 #: src/option.c:281
 msgid "Set application website label"
-msgstr "Definir rótulo do site do aplicativo"
+msgstr "Definir rótulo do site da aplicação"
 
 #: src/option.c:287
 msgid "Display application selection dialog"
@@ -714,7 +714,7 @@ msgstr "Exibir todos os aplicativos"
 
 #: src/option.c:295
 msgid "Output all application data"
-msgstr "Imprimir todos os dados do aplicativo"
+msgstr "Imprimir todos os dados da aplicação"
 
 #: src/option.c:300
 msgid "Display calendar dialog"
@@ -855,11 +855,11 @@ msgstr "Exibir diálogo de seleção de arquivo"
 
 #: src/option.c:374
 msgid "Activate directory-only selection"
-msgstr "Habilitar seleção apenas de diretório"
+msgstr "Ativar seleção apenas de diretório"
 
 #: src/option.c:376
 msgid "Activate save mode"
-msgstr "Habilitar o modo de salvar"
+msgstr "Ativar o modo de salvar"
 
 #: src/option.c:378
 msgid "Confirm file selection if filename already exists"
@@ -932,7 +932,7 @@ msgstr "Abrir local especificado"
 
 #: src/option.c:423
 msgid "Turn on browser mode"
-msgstr "Habilitar o modo de navegador"
+msgstr "Ativar o modo de navegador"
 
 #: src/option.c:425
 msgid "Print clicked uri to stdout"
@@ -1012,7 +1012,7 @@ msgstr "Classificar itens em ordem decrescente"
 
 #: src/option.c:459
 msgid "Activate items by single click"
-msgstr "Habilitar itens com um único clique"
+msgstr "Ativar itens com um único clique"
 
 #: src/option.c:461
 msgid "Watch fot changes in directory"
@@ -1032,7 +1032,7 @@ msgstr "COLUNA[:TIPO]"
 
 #: src/option.c:471
 msgid "Enbale tree mode"
-msgstr "Habilitar modo árvore"
+msgstr "Ativar modo árvore"
 
 #: src/option.c:473
 msgid "Use checkboxes for first column"
@@ -1409,7 +1409,7 @@ msgstr "Exibir diálogo de texto informativo"
 
 #: src/option.c:696
 msgid "Enable text wrapping"
-msgstr "Habilitar quebra de texto"
+msgstr "Ativar quebra de texto"
 
 #: src/option.c:698
 msgid "Set justification (left, right, center or fill)"
@@ -1477,7 +1477,7 @@ msgstr "Destacar linha atual"
 
 #: src/option.c:733
 msgid "Enable line marks"
-msgstr "Habilitar marcas de linha"
+msgstr "Ativar marcas de linha"
 
 #: src/option.c:735
 msgid "Set color for first type marks"
@@ -1517,7 +1517,7 @@ msgstr "Definir comportamento inteligente do Home/End"
 
 #: src/option.c:751
 msgid "Enable smart backspace"
-msgstr "Habilitar backspace inteligente"
+msgstr "Ativar backspace inteligente"
 
 #: src/option.c:753
 msgid "Insert spaces instead of tabs"
@@ -2350,7 +2350,7 @@ msgstr "Ignorar opções desconhecidas da linha de comando:CHK"
 #: src/yad-settings.sh:65
 msgid "Enable debug mode with information about deprecated features:CHK"
 msgstr ""
-"Habilitar modo de depuração com informações sobre recursos obsoletos:CHK"
+"Ativar modo de depuração com informações sobre recursos obsoletos:CHK"
 
 #: src/yad-settings.sh:74
 msgid "<Empty>!"
@@ -2378,7 +2378,7 @@ msgstr "Destacar linha atual:CHK"
 
 #: src/yad-settings.sh:93
 msgid "Enable line marks mode:CHK"
-msgstr "Habilitar modo de marcas de linha:CHK"
+msgstr "Ativar modo de marcas de linha:CHK"
 
 #: src/yad-settings.sh:94
 msgid "Color of first type marks::CLR"
@@ -2578,7 +2578,7 @@ msgstr "Interface simples para editar as configurações do YAD"
 #~ msgstr "Definir caractere separador para itens de menu"
 
 #~ msgid "Enable preview in print dialog"
-#~ msgstr "Habilitar pré-visualização na caixa de diálogo de impressão"
+#~ msgstr "Ativar pré-visualização na caixa de diálogo de impressão"
 
 #~ msgid "Show vertical scale"
 #~ msgstr "Exibir escala vertical"
