@@ -40,7 +40,6 @@ msgid ""
 msgstr ""
 "Yet Another Dialog\n"
 "(exibir caixas de diálogo a partir de scripts de shell)\n"
-"\n"
 "Baseado no código do Zenity\n"
 "\n"
 "Construído com Webkit\n"
@@ -236,7 +235,7 @@ msgstr "Nenhum título de coluna especificado para o diálogo de lista.\n"
 
 #: src/option.c:98
 msgid "Set the dialog title"
-msgstr "Defina o título do diálogo"
+msgstr "Definir o título do diálogo"
 
 #: src/option.c:98
 msgid "TITLE"
@@ -244,7 +243,7 @@ msgstr "TÍTULO"
 
 #: src/option.c:100
 msgid "Set the window icon"
-msgstr "Defina o ícone da janela"
+msgstr "Definir o ícone da janela"
 
 #: src/option.c:100
 msgid "ICONPATH"
@@ -252,7 +251,7 @@ msgstr "CAMINHODOICONE"
 
 #: src/option.c:102
 msgid "Set the window width"
-msgstr "Defina a largura da janela"
+msgstr "Definir a largura da janela"
 
 #: src/option.c:102
 msgid "WIDTH"
@@ -260,7 +259,7 @@ msgstr "LARGURA"
 
 #: src/option.c:104
 msgid "Set the window height"
-msgstr "Defina a altura da janela"
+msgstr "Definir a altura da janela"
 
 #: src/option.c:104
 msgid "HEIGHT"
@@ -268,7 +267,7 @@ msgstr "ALTURA"
 
 #: src/option.c:106
 msgid "Set the X position of a window"
-msgstr "Defina a posição X da janela"
+msgstr "Definir a posição X da janela"
 
 #: src/option.c:106 src/option.c:108 src/option.c:118 src/option.c:140
 #: src/option.c:144 src/option.c:189 src/option.c:203 src/option.c:342
@@ -281,11 +280,11 @@ msgstr "NUMERO"
 
 #: src/option.c:108
 msgid "Set the Y position of a window"
-msgstr "Defina a posição Y da janela"
+msgstr "Definir a posição Y da janela"
 
 #: src/option.c:110
 msgid "Set the window geometry"
-msgstr "Defina a geometria da janela"
+msgstr "Definir a geometria da janela"
 
 #: src/option.c:110
 msgid "WxH+X+Y"
@@ -309,7 +308,7 @@ msgstr "POS"
 
 #: src/option.c:116
 msgid "Set the dialog text"
-msgstr "Defina o texto do diálogo"
+msgstr "Definir o texto do diálogo"
 
 #: src/option.c:116 src/option.c:273 src/option.c:275 src/option.c:350
 #: src/option.c:352 src/option.c:386 src/option.c:507 src/option.c:637
@@ -589,7 +588,7 @@ msgstr "Exibir arquivos ocultos em caixas de seleção de arquivos"
 
 #: src/option.c:233
 msgid "Set source filename"
-msgstr "Defina nome do arquivo fonte"
+msgstr "Definir nome do arquivo fonte"
 
 #: src/option.c:233 src/option.c:308 src/option.c:775 src/option.c:790
 msgid "FILENAME"
@@ -601,7 +600,7 @@ msgstr "Definir tipo MIME dos dados de entrada"
 
 #: src/option.c:237
 msgid "Set vertical orientation"
-msgstr "Defina orientação vertical"
+msgstr "Definir orientação vertical"
 
 #: src/option.c:239
 msgid "Identifier of embedded dialogs"
@@ -720,7 +719,7 @@ msgstr "Exibir caixa de diálogo de calendário"
 
 #: src/option.c:302
 msgid "Set the calendar day"
-msgstr "Defina o dia no calendário"
+msgstr "Definir o dia no calendário"
 
 #: src/option.c:302
 msgid "DAY"
@@ -728,7 +727,7 @@ msgstr "DIA"
 
 #: src/option.c:304
 msgid "Set the calendar month"
-msgstr "Defina o mês"
+msgstr "Definir o mês"
 
 #: src/option.c:304
 msgid "MONTH"
@@ -736,7 +735,7 @@ msgstr "MES"
 
 #: src/option.c:306
 msgid "Set the calendar year"
-msgstr "Defina o ano"
+msgstr "Definir o ano"
 
 #: src/option.c:306
 msgid "YEAR"
@@ -744,7 +743,7 @@ msgstr "ANO"
 
 #: src/option.c:308
 msgid "Set the filename with dates details"
-msgstr "Defina o nome do arquivo com detalhes da data"
+msgstr "Definir o nome do arquivo com detalhes da data"
 
 #: src/option.c:310
 msgid "Show week numbers at the left side of calendar"
@@ -752,7 +751,7 @@ msgstr "Exibir números de semana no lado esquerdo do calendário"
 
 #: src/option.c:312 src/option.c:513
 msgid "Set select action"
-msgstr "Defina ação de seleção"
+msgstr "Definir ação de seleção"
 
 #: src/option.c:318
 msgid "Display color selection dialog"
@@ -813,11 +812,11 @@ msgstr "Exibir a entrada de texto ou diálogo combo-box"
 
 #: src/option.c:350
 msgid "Set the entry label"
-msgstr "Defina o rótulo da entrada"
+msgstr "Definir o rótulo da entrada"
 
 #: src/option.c:352
 msgid "Set the entry text"
-msgstr "Defina o texto de entrada"
+msgstr "Definir o texto de entrada"
 
 #: src/option.c:354
 msgid "Hide the entry text"
@@ -833,19 +832,19 @@ msgstr "Use o botão de rotação para entrada do texto"
 
 #: src/option.c:360
 msgid "Set the left entry icon"
-msgstr "Defina o ícone de entrada à esquerda"
+msgstr "Definir o ícone de entrada à esquerda"
 
 #: src/option.c:362
 msgid "Set the left entry icon action"
-msgstr "Defina a ação do ícone de entrada à esquerda"
+msgstr "Definir a ação do ícone de entrada à esquerda"
 
 #: src/option.c:364
 msgid "Set the right entry icon"
-msgstr "Defina o ícone de entrada à direita"
+msgstr "Definir o ícone de entrada à direita"
 
 #: src/option.c:366
 msgid "Set the right entry icon action"
-msgstr "Defina a ação do ícone de entrada à direita"
+msgstr "Definir a ação do ícone de entrada à direita"
 
 #: src/option.c:372
 msgid "Display file selection dialog"
@@ -889,11 +888,11 @@ msgstr "ROTULO[:TIPO]"
 
 #: src/option.c:398
 msgid "Set alignment of filed labels (left, center or right)"
-msgstr "Defina o alinhamento dos rótulos de campo (left, center ou right)"
+msgstr "Definir o alinhamento dos rótulos de campo (left, center ou right)"
 
 #: src/option.c:400
 msgid "Set number of columns in form"
-msgstr "Defina o número de colunas no formulário"
+msgstr "Definir o número de colunas no formulário"
 
 #: src/option.c:402
 msgid "Make form fields height and columns width the same size"
@@ -982,7 +981,7 @@ msgstr "Use o campo GenericName ao invés de Nome para o rótulo do ícone"
 
 #: src/option.c:448
 msgid "Set the width of dialog items"
-msgstr "Defina a largura dos itens de diálogo"
+msgstr "Definir a largura dos itens de diálogo"
 
 #: src/option.c:450
 msgid "Force using specified icon size"
@@ -1050,7 +1049,7 @@ msgstr "Desativar clicabilidade dos cabeçalhos de coluna"
 
 #: src/option.c:481
 msgid "Set grid lines (hor[izontal], vert[ical] or both)"
-msgstr "Defina linhas de grade (hor[izontal], vert[ical] ou both)"
+msgstr "Definir linhas de grade (hor[izontal], vert[ical] ou both)"
 
 #: src/option.c:483
 msgid "Print all data from list"
@@ -1058,7 +1057,7 @@ msgstr "Imprimir todos os dados da lista"
 
 #: src/option.c:485
 msgid "Set the list of editable columns"
-msgstr "Defina a lista das colunas editáveis"
+msgstr "Definir a lista das colunas editáveis"
 
 #: src/option.c:487
 msgid "Set the width of a column for start wrapping text"
@@ -1075,7 +1074,7 @@ msgstr ""
 
 #: src/option.c:493
 msgid "Set the list of ellipsized columns"
-msgstr "Defina a lista de colunas com reticências"
+msgstr "Definir a lista de colunas com reticências"
 
 #: src/option.c:495
 msgid ""
@@ -1103,7 +1102,7 @@ msgstr ""
 
 #: src/option.c:503
 msgid "Set the tooltip column"
-msgstr "Defina a coluna da dica de ferramenta"
+msgstr "Definir a coluna da dica de ferramenta"
 
 #: src/option.c:505
 msgid "Set the row separator column"
@@ -1115,7 +1114,7 @@ msgstr "Definir valor do separador de linha"
 
 #: src/option.c:509
 msgid "Set the limit of rows in list"
-msgstr "Defina o limite de linhas na lista"
+msgstr "Definir o limite de linhas na lista"
 
 #: src/option.c:511
 msgid "Set double-click action"
@@ -1171,11 +1170,11 @@ msgstr "ROTULO"
 
 #: src/option.c:541
 msgid "Set position of a notebook tabs (top, bottom, left or right)"
-msgstr "Defina a posição das guias no notebook (top, bottom, left ou right)"
+msgstr "Definir a posição das guias no notebook (top, bottom, left ou right)"
 
 #: src/option.c:543
 msgid "Set tab borders"
-msgstr "Defina borda para a guia"
+msgstr "Definir borda para a guia"
 
 #: src/option.c:545
 msgid "Set active tab"
@@ -1220,7 +1219,7 @@ msgstr "Exibir diálogo com painéis"
 
 #: src/option.c:585
 msgid "Set orientation (hor[izontal] or vert[ical])"
-msgstr "Defina a orientação (hor[izontal] ou vert[ical])"
+msgstr "Definir a orientação (hor[izontal] ou vert[ical])"
 
 #: src/option.c:587
 msgid "Set initial splitter position"
@@ -1296,7 +1295,7 @@ msgstr "Monitorar barra específica para fechar automaticamente"
 
 #: src/option.c:635
 msgid "Set alignment of bar labels (left, center or right)"
-msgstr "Defina o alinhamento dos rótulos de barras (left, center ou right)"
+msgstr "Definir o alinhamento dos rótulos de barras (left, center ou right)"
 
 #: src/option.c:637
 msgid "Set progress text"
@@ -1358,15 +1357,15 @@ msgstr "VALOR"
 
 #: src/option.c:670
 msgid "Set minimum value"
-msgstr "Defina o valor mínimo"
+msgstr "Definir o valor mínimo"
 
 #: src/option.c:672
 msgid "Set maximum value"
-msgstr "Defina o valor máximo"
+msgstr "Definir o valor máximo"
 
 #: src/option.c:674
 msgid "Set step size"
-msgstr "Defina o tamanho do passo"
+msgstr "Definir o tamanho do passo"
 
 #: src/option.c:676
 msgid "Only allow values in step increments"
@@ -1374,7 +1373,7 @@ msgstr "Permitir apenas valores em incrementos fixos"
 
 #: src/option.c:678
 msgid "Set paging size"
-msgstr "Defina o tamanho de paginação"
+msgstr "Definir o tamanho de paginação"
 
 #: src/option.c:680
 msgid "Print partial values"
@@ -1454,7 +1453,7 @@ msgstr "Confirmar salvamento se o texto foi alterado"
 
 #: src/option.c:725
 msgid "Use specified langauge for syntax highlighting"
-msgstr "Defina a linguagem para realce de sintaxe"
+msgstr "Definir a linguagem para realce de sintaxe"
 
 #: src/option.c:725
 msgid "LANG"
@@ -1522,7 +1521,7 @@ msgstr "Inserir espaços em vez de tabulações"
 
 #: src/option.c:760
 msgid "Sets a filename filter"
-msgstr "Defina filtro para o nome do arquivo"
+msgstr "Definir filtro para o nome do arquivo"
 
 #: src/option.c:760
 msgid "NAME | PATTERN1 PATTERN2 ..."
@@ -1530,7 +1529,7 @@ msgstr "NOME | PADRAO1 PADRAO2 ..."
 
 #: src/option.c:762
 msgid "Sets a mime-type filter"
-msgstr "Defina filtro mime-type"
+msgstr "Definir filtro mime-type"
 
 #: src/option.c:762
 msgid "NAME | MIME1 MIME2 ..."
@@ -2528,7 +2527,7 @@ msgstr "Interface simples para editar as configurações do YAD"
 #~ msgstr "Conjunto de comandos para o processo de dados d-n-d"
 
 #~ msgid "Set the filename"
-#~ msgstr "Defina o nome do arquivo"
+#~ msgstr "Definir o nome do arquivo"
 
 #~ msgid "Allow multiple files to be selected"
 #~ msgstr "Permitir seleção de vários arquivos"
