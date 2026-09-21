@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Brazilian\n"
 "Report-Msgid-Bugs-To: victor@sanana.kiev.ua\n"
 "POT-Creation-Date: 2026-07-14 11:13+0300\n"
-"PO-Revision-Date: 2026-09-20 22:42-0300\n"
+"PO-Revision-Date: 2026-09-21 08:30-0300\n"
 "Last-Translator: Cristiano Fraga G. Nunes <cfgnunes@gmail.com>\n"
 "Language-Team: Brazilian\n"
 "Language: pt_BR\n"
@@ -40,6 +40,7 @@ msgid ""
 msgstr ""
 "Yet Another Dialog\n"
 "(exibir caixas de diálogo a partir de scripts de shell)\n"
+"\n"
 "Baseado no código do Zenity\n"
 "\n"
 "Construído com Webkit\n"
@@ -81,7 +82,7 @@ msgstr "OK"
 
 #: src/form.c:529
 msgid "Select folders"
-msgstr "Selecione as pastas"
+msgstr "Selecionar diretórios"
 
 #: src/form.c:608
 msgid "Select or create file"
@@ -89,19 +90,19 @@ msgstr "Selecionar ou criar arquivo"
 
 #: src/form.c:616
 msgid "Select or create folder"
-msgstr "Selecionar ou criar pasta"
+msgstr "Selecionar ou criar diretório"
 
 #: src/form.c:667
 msgid "Select date"
-msgstr "Selecione a data"
+msgstr "Selecionar data"
 
 #: src/form.c:1055
 msgid "Select file"
-msgstr "Selecione o arquivo"
+msgstr "Selecionar arquivo"
 
 #: src/form.c:1085
 msgid "Select folder"
-msgstr "Selecione a pasta"
+msgstr "Selecionar diretório"
 
 #: src/form.c:1253 src/form.c:1255
 msgid "Link"
@@ -121,7 +122,7 @@ msgstr "Abrir"
 
 #: src/html.c:285
 msgid "Enter URI or file name:"
-msgstr "Digite a URI ou nome do arquivo:"
+msgstr "Digite a URI ou o nome do arquivo:"
 
 #: src/html.c:385 src/util.c:49
 msgid "Quit"
@@ -156,7 +157,7 @@ msgstr "Não foi possível analisar a linha de comando: %s\n"
 msgid ""
 "WARNING: Using splash option is deprecated, please use --window-type instead"
 msgstr ""
-"AVISO: A opção splash está obsoleta, por favor use --window-type no lugar"
+"AVISO: A opção splash está obsoleta, use --window-type em seu lugar"
 
 #: src/main.c:790
 #, c-format
@@ -169,7 +170,7 @@ msgstr "AVISO: A opção gtkrc está obsoleta, use --css em seu lugar\n"
 
 #: src/main.c:893
 msgid "WARNING: --plug mode not supported outside X11\n"
-msgstr "AVISO: o modo --plug não é suportado fora do X11\n"
+msgstr "AVISO: O modo --plug não é suportado fora do X11\n"
 
 #: src/main.c:913
 msgid "WARNING: This mode not supported outside X11\n"
@@ -182,7 +183,7 @@ msgstr "Não foi possível carregar o ícone de notificação '%s': %s\n"
 
 #: src/notification.c:335
 msgid "Invalid UTF-8 in tooltip!\n"
-msgstr "Tooltip UTF-8 inválido!\n"
+msgstr "UTF-8 inválido na dica de ferramenta!\n"
 
 #: src/notification.c:364
 #, c-format
@@ -191,7 +192,7 @@ msgstr "Comando desconhecido '%s'\n"
 
 #: src/notification.c:401
 msgid "Yad notification"
-msgstr "Notificação do Yad"
+msgstr "Notificação do YAD"
 
 #: src/list.c:1121
 msgid "Add row"
@@ -203,7 +204,7 @@ msgstr "Adicionar linha filha"
 
 #: src/list.c:1135
 msgid "Delete row"
-msgstr "Deletar linha"
+msgstr "Excluir linha"
 
 #: src/list.c:1142
 msgid "Edit row"
@@ -292,7 +293,7 @@ msgstr "WxH+X+Y"
 
 #: src/option.c:112
 msgid "Set dialog timeout in seconds"
-msgstr "Definir em segundos o tempo limite do diálogo"
+msgstr "Definir o tempo limite do diálogo em segundos"
 
 #: src/option.c:112
 msgid "TIMEOUT"
@@ -321,7 +322,7 @@ msgstr "Definir a largura do texto do diálogo em caracteres"
 
 #: src/option.c:120
 msgid "Set the dialog text alignment (left, center, right, fill)"
-msgstr "Definir o alinhamento do texto de diálogo (left,center,right,fill)"
+msgstr "Definir o alinhamento do texto do diálogo (left, center, right, fill)"
 
 #: src/option.c:120 src/option.c:132 src/option.c:185 src/option.c:235
 #: src/option.c:241 src/option.c:243 src/option.c:398 src/option.c:481
@@ -369,15 +370,16 @@ msgstr "Não exibir botões"
 
 #: src/option.c:132
 msgid "Set buttons layout type (spread, edge, start, end or center)"
-msgstr "Definir o tipo de layout do botão (spread, edge, start, end ou center)"
+msgstr ""
+"Definir o tipo de disposição dos botões (spread, edge, start, end ou center)"
 
 #: src/option.c:134
 msgid "Don't use pango markup language in dialog's text"
-msgstr "Não use linguagem de marcação Pango no texto do diálogo"
+msgstr "Não usar linguagem de marcação Pango no texto do diálogo"
 
 #: src/option.c:136
 msgid "Don't close dialog if Escape was pressed"
-msgstr "Não feche o diálogo se a tecla de escape for pressionada"
+msgstr "Não fechar o diálogo se a tecla Esc for pressionada"
 
 #: src/option.c:138
 msgid "Escape acts like OK button"
@@ -389,7 +391,7 @@ msgstr "Definir bordas da janela"
 
 #: src/option.c:142
 msgid "Always print result"
-msgstr "Sempre imprima o resultado"
+msgstr "Sempre imprimir o resultado"
 
 #: src/option.c:144
 msgid "Set default return code"
@@ -397,7 +399,7 @@ msgstr "Definir código de retorno padrão"
 
 #: src/option.c:146
 msgid "Dialog text can be selected"
-msgstr "O texto de diálogo pode ser selecionado"
+msgstr "O texto do diálogo pode ser selecionado"
 
 #: src/option.c:148
 msgid "Don't scale icons"
@@ -432,7 +434,7 @@ msgstr "CAMINHO"
 
 #: src/option.c:159
 msgid "Set window sticky"
-msgstr "Definir janela sticky"
+msgstr "Tornar a janela visível em todos os espaços de trabalho"
 
 #: src/option.c:161
 msgid "Set window unresizable"
@@ -472,11 +474,12 @@ msgstr "Não focar a janela do diálogo"
 
 #: src/option.c:179
 msgid "Close window when it sets unfocused"
-msgstr "Fechar janela quando for definida sem foco"
+msgstr "Fechar a janela ao perder o foco"
 
 #: src/option.c:182
 msgid "Open window as a splashscreen (Deprecated, see man page for details)"
-msgstr "Abrir janela como splashscreen (Obsoleto, veja o manual para detalhes)"
+msgstr ""
+"Abrir janela como tela de abertura (Obsoleto, veja o manual para detalhes)"
 
 #: src/option.c:185
 msgid "Specify the window type for the dialog"
@@ -496,7 +499,7 @@ msgstr "Número da aba deste diálogo"
 
 #: src/option.c:192
 msgid "Send SIGNAL to parent"
-msgstr "Enviar SIGNAL para o pai"
+msgstr "Enviar SIGNAL para o processo pai"
 
 #: src/option.c:192
 msgid "[SIGNAL]"
@@ -512,7 +515,7 @@ msgstr "[NOMEDOARQUIVO]"
 
 #: src/option.c:201
 msgid "Set the format for the returned date"
-msgstr "Definir formato de retorno da data"
+msgstr "Definir o formato da data retornada"
 
 #: src/option.c:201 src/option.c:453
 msgid "PATTERN"
@@ -520,7 +523,7 @@ msgstr "PADRAO"
 
 #: src/option.c:203
 msgid "Set presicion of floating numbers (default - 3)"
-msgstr "Definir precisão de números flutuantes (default - 3)"
+msgstr "Definir precisão de números flutuantes (padrão - 3)"
 
 #: src/option.c:205
 msgid "Set command handler"
@@ -532,7 +535,7 @@ msgstr "Aguardar dados em stdin"
 
 #: src/option.c:209
 msgid "Set common separator character"
-msgstr "Definir caractere separador de saída"
+msgstr "Definir caractere separador comum"
 
 #: src/option.c:209 src/option.c:211
 msgid "SEPARATOR"
@@ -540,15 +543,15 @@ msgstr "SEPARADOR"
 
 #: src/option.c:211
 msgid "Set item separator character"
-msgstr "Definir caractere separador de ítem"
+msgstr "Definir caractere separador de item"
 
 #: src/option.c:213
 msgid "Allow changes to text in some cases"
-msgstr "Permitir alterações do texto em alguns casos"
+msgstr "Permitir alterações no texto em alguns casos"
 
 #: src/option.c:215
 msgid "Autoscroll to end of text"
-msgstr "Auto rolagem para o fim do texto"
+msgstr "Rolar automaticamente até o fim do texto"
 
 #: src/option.c:217
 msgid "Autoscroll to end of text (alias to tail)"
@@ -560,11 +563,11 @@ msgstr "Colocar aspas na saída dos diálogos"
 
 #: src/option.c:221
 msgid "Output number instead of text for combo-box"
-msgstr "Número de saída ao invés de texto na combo-box"
+msgstr "Imprimir número em vez de texto na caixa de combinação"
 
 #: src/option.c:223
 msgid "Specify font name to use"
-msgstr "Especifique nome da fonte a ser usada"
+msgstr "Especificar nome da fonte a ser usada"
 
 #: src/option.c:223
 msgid "FONTNAME"
@@ -576,19 +579,19 @@ msgstr "Permitir seleção múltipla"
 
 #: src/option.c:227
 msgid "Enable preview"
-msgstr "Ativar pré-visualização"
+msgstr "Habilitar pré-visualização"
 
 #: src/option.c:229
 msgid "Use large preview"
-msgstr "Usar visualização ampliada"
+msgstr "Usar pré-visualização ampliada"
 
 #: src/option.c:231
 msgid "Show hidden files in file selection dialogs"
-msgstr "Exibir arquivos ocultos em caixas de seleção de arquivos"
+msgstr "Exibir arquivos ocultos nos diálogos de seleção de arquivos"
 
 #: src/option.c:233
 msgid "Set source filename"
-msgstr "Definir nome do arquivo fonte"
+msgstr "Definir o nome do arquivo de origem"
 
 #: src/option.c:233 src/option.c:308 src/option.c:775 src/option.c:790
 msgid "FILENAME"
@@ -609,7 +612,7 @@ msgstr "Identificador de diálogos embutidos"
 #: src/option.c:241
 msgid "Set extended completion for entries (any, all, or regex)"
 msgstr ""
-"Definir conclusão estendida para entradas (any, all ou expressão regular)"
+"Definir completação estendida para entradas (any, all ou regex)"
 
 #: src/option.c:243
 msgid "Set type of output for boolean values (T, t, Y, y, O, o, 1)"
@@ -621,7 +624,7 @@ msgstr "Tornar o widget principal rolável"
 
 #: src/option.c:247
 msgid "Disable search in text and html dialogs"
-msgstr "Desabilitar busca em diálogos de texto e html"
+msgstr "Desativar pesquisa em diálogos de texto e html"
 
 #: src/option.c:249
 msgid "Enable file operations"
@@ -633,7 +636,7 @@ msgstr "Usar unidades IEC (base 1024) para valores de tamanho"
 
 #: src/option.c:256
 msgid "Enable spell check for text"
-msgstr "Ativar a verificação ortográfica do texto"
+msgstr "Habilitar a verificação ortográfica do texto"
 
 #: src/option.c:258
 msgid "Set spell checking language"
@@ -649,7 +652,7 @@ msgstr "Exibir diálogo Sobre"
 
 #: src/option.c:267
 msgid "Set application name"
-msgstr "Definir nome da aplicação"
+msgstr "Definir nome do aplicativo"
 
 #: src/option.c:267 src/option.c:269 src/option.c:271 src/option.c:281
 #: src/option.c:429 src/option.c:431 src/option.c:529 src/option.c:531
@@ -659,23 +662,23 @@ msgstr "STRING"
 
 #: src/option.c:269
 msgid "Set application version"
-msgstr "Definir a versão da aplicação"
+msgstr "Definir a versão do aplicativo"
 
 #: src/option.c:271
 msgid "Set application copyright string"
-msgstr "Definir o texto de direitos autorais da aplicação"
+msgstr "Definir o texto de direitos autorais do aplicativo"
 
 #: src/option.c:273
 msgid "Set application comments string"
-msgstr "Definir o texto de comentários da aplicação"
+msgstr "Definir o texto de comentários do aplicativo"
 
 #: src/option.c:275
 msgid "Set application license"
-msgstr "Definir a licença da aplicação"
+msgstr "Definir a licença do aplicativo"
 
 #: src/option.c:277
 msgid "Set application authors"
-msgstr "Definir os autores da aplicação"
+msgstr "Definir os autores do aplicativo"
 
 #: src/option.c:277 src/option.c:485 src/option.c:489 src/option.c:493
 msgid "LIST"
@@ -683,7 +686,7 @@ msgstr "LISTA"
 
 #: src/option.c:279
 msgid "Set application website"
-msgstr "Definir site da aplicação"
+msgstr "Definir site do aplicativo"
 
 #: src/option.c:279
 msgid "URI"
@@ -691,7 +694,7 @@ msgstr "URI"
 
 #: src/option.c:281
 msgid "Set application website label"
-msgstr "Definir rótulo do site da aplicação"
+msgstr "Definir rótulo do site do aplicativo"
 
 #: src/option.c:287
 msgid "Display application selection dialog"
@@ -711,11 +714,11 @@ msgstr "Exibir todos os aplicativos"
 
 #: src/option.c:295
 msgid "Output all application data"
-msgstr "Exibir todos os dados da aplicação"
+msgstr "Imprimir todos os dados do aplicativo"
 
 #: src/option.c:300
 msgid "Display calendar dialog"
-msgstr "Exibir caixa de diálogo de calendário"
+msgstr "Exibir diálogo de calendário"
 
 #: src/option.c:302
 msgid "Set the calendar day"
@@ -727,7 +730,7 @@ msgstr "DIA"
 
 #: src/option.c:304
 msgid "Set the calendar month"
-msgstr "Definir o mês"
+msgstr "Definir o mês no calendário"
 
 #: src/option.c:304
 msgid "MONTH"
@@ -735,7 +738,7 @@ msgstr "MES"
 
 #: src/option.c:306
 msgid "Set the calendar year"
-msgstr "Definir o ano"
+msgstr "Definir o ano no calendário"
 
 #: src/option.c:306
 msgid "YEAR"
@@ -784,11 +787,11 @@ msgstr "Exibir seletor de cores"
 
 #: src/option.c:330
 msgid "Set output mode to MODE. Values are hex (default) or rgb"
-msgstr "Definir modo de saída para MODE. Valores: hex (padrão) ou rgb"
+msgstr "Definir modo de saída para MODO. Valores: hex (padrão) ou rgb"
 
 #: src/option.c:330
 msgid "MODE"
-msgstr "MODE"
+msgstr "MODO"
 
 #: src/option.c:332
 msgid "Add opacity to output color value"
@@ -796,7 +799,7 @@ msgstr "Adicionar opacidade ao valor de saída da cor"
 
 #: src/option.c:338
 msgid "Display drag-n-drop box"
-msgstr "Exibir a caixa drag-n-drop"
+msgstr "Exibir a caixa de arrastar e soltar"
 
 #: src/option.c:340
 msgid "Use dialog text as tooltip"
@@ -804,11 +807,11 @@ msgstr "Usar o texto do diálogo como dica de ferramenta"
 
 #: src/option.c:342
 msgid "Exit after NUMBER of drops"
-msgstr "Sair após NÚMERO de inserções"
+msgstr "Sair após NÚMERO de solturas"
 
 #: src/option.c:348
 msgid "Display text entry or combo-box dialog"
-msgstr "Exibir a entrada de texto ou diálogo combo-box"
+msgstr "Exibir diálogo de entrada de texto ou caixa de combinação"
 
 #: src/option.c:350
 msgid "Set the entry label"
@@ -824,11 +827,11 @@ msgstr "Ocultar o texto de entrada"
 
 #: src/option.c:356
 msgid "Use completion instead of combo-box"
-msgstr "Usar completação em vez de combo-box"
+msgstr "Usar completação em vez de caixa de combinação"
 
 #: src/option.c:358
 msgid "Use spin button for text entry"
-msgstr "Use o botão de rotação para entrada do texto"
+msgstr "Usar botão de giro para entrada de texto"
 
 #: src/option.c:360
 msgid "Set the left entry icon"
@@ -848,35 +851,35 @@ msgstr "Definir a ação do ícone de entrada à direita"
 
 #: src/option.c:372
 msgid "Display file selection dialog"
-msgstr "Exibir caixa de diálogo de seleção de arquivo"
+msgstr "Exibir diálogo de seleção de arquivo"
 
 #: src/option.c:374
 msgid "Activate directory-only selection"
-msgstr "Ativar seleção apenas de diretório"
+msgstr "Habilitar seleção apenas de diretório"
 
 #: src/option.c:376
 msgid "Activate save mode"
-msgstr "Ative o modo de salvar"
+msgstr "Habilitar o modo de salvar"
 
 #: src/option.c:378
 msgid "Confirm file selection if filename already exists"
-msgstr "Confirme se o nome do arquivo selecionado já existe"
+msgstr "Confirmar a seleção se o arquivo já existir"
 
 #: src/option.c:384
 msgid "Display font selection dialog"
-msgstr "Exibir caixa de diálogo de seleção de fonte"
+msgstr "Exibir diálogo de seleção de fonte"
 
 #: src/option.c:386
 msgid "Set text string for preview"
-msgstr "Definir sequência de texto para visualização"
+msgstr "Definir texto de pré-visualização"
 
 #: src/option.c:388
 msgid "Separate output of font description"
-msgstr "Saída separada da descrição da fonte"
+msgstr "Separar a saída da descrição da fonte"
 
 #: src/option.c:394
 msgid "Display form dialog"
-msgstr "Exibir caixa de diálogo tipo formulário"
+msgstr "Exibir diálogo de formulário"
 
 #: src/option.c:396
 msgid "Add field to form (see man page for list of possible types)"
@@ -929,7 +932,7 @@ msgstr "Abrir local especificado"
 
 #: src/option.c:423
 msgid "Turn on browser mode"
-msgstr "Ativar o modo de navegador"
+msgstr "Habilitar o modo de navegador"
 
 #: src/option.c:425
 msgid "Print clicked uri to stdout"
@@ -937,7 +940,7 @@ msgstr "Imprimir URI clicada em stdout"
 
 #: src/option.c:427
 msgid "Set encoding of input stream data"
-msgstr "Definir a codificação de dados de fluxo de entrada"
+msgstr "Definir a codificação dos dados do fluxo de entrada"
 
 #: src/option.c:427
 msgid "ENCODING"
@@ -945,7 +948,7 @@ msgstr "CODIFICACAO"
 
 #: src/option.c:429
 msgid "Set user agent string"
-msgstr "Definir string de user agent"
+msgstr "Definir a string do agente do usuário"
 
 #: src/option.c:431
 msgid "Set custom user style"
@@ -973,11 +976,11 @@ msgstr "DIRETORIO"
 
 #: src/option.c:444
 msgid "Use compact (list) view"
-msgstr "Usar visão compacta (lista)"
+msgstr "Usar visualização compacta (lista)"
 
 #: src/option.c:446
 msgid "Use GenericName field instead of Name for icon label"
-msgstr "Use o campo GenericName ao invés de Nome para o rótulo do ícone"
+msgstr "Usar o campo GenericName em vez de Name para o rótulo do ícone"
 
 #: src/option.c:448
 msgid "Set the width of dialog items"
@@ -996,8 +999,8 @@ msgstr "TAMANHO"
 msgid ""
 "Use specified pattern for launch command in terminal (default: xterm -e %s)"
 msgstr ""
-"Use o padrão especificado para o comando de inicialização no terminal "
-"(default: xterm -e %s)"
+"Usar o padrão especificado para o comando de inicialização no terminal "
+"(padrão: xterm -e %s)"
 
 #: src/option.c:455
 msgid "Sort items by name instead of filename"
@@ -1009,15 +1012,15 @@ msgstr "Classificar itens em ordem decrescente"
 
 #: src/option.c:459
 msgid "Activate items by single click"
-msgstr "Ativar itens com um único clique"
+msgstr "Habilitar itens com um único clique"
 
 #: src/option.c:461
 msgid "Watch fot changes in directory"
-msgstr "Monitorar mudanças no diretório"
+msgstr "Monitorar alterações no diretório"
 
 #: src/option.c:467
 msgid "Display list dialog"
-msgstr "Exibir caixa de diálogo tipo lista"
+msgstr "Exibir diálogo de lista"
 
 #: src/option.c:469
 msgid "Set the column header (see man page for list of possible types)"
@@ -1033,11 +1036,11 @@ msgstr "Habilitar modo árvore"
 
 #: src/option.c:473
 msgid "Use checkboxes for first column"
-msgstr "Use caixas de seleção para a primeira coluna"
+msgstr "Usar caixas de seleção para a primeira coluna"
 
 #: src/option.c:475
 msgid "Use radioboxes for first column"
-msgstr "Use radiobox para a primeira coluna"
+msgstr "Usar botões de opção para a primeira coluna"
 
 #: src/option.c:477
 msgid "Don't show column headers"
@@ -1045,7 +1048,7 @@ msgstr "Não exibir os cabeçalhos das colunas"
 
 #: src/option.c:479
 msgid "Disable clickable column headers"
-msgstr "Desativar clicabilidade dos cabeçalhos de coluna"
+msgstr "Desativar cabeçalhos de coluna clicáveis"
 
 #: src/option.c:481
 msgid "Set grid lines (hor[izontal], vert[ical] or both)"
@@ -1070,7 +1073,8 @@ msgstr "Definir a lista de colunas com quebra de linha"
 #: src/option.c:491
 msgid "Set ellipsize mode for text columns (none, start, middle or end)"
 msgstr ""
-"Definir modo de reticências para colunas de texto (none, start, middle ou end)"
+"Definir modo de reticências para colunas de texto (none, start, middle ou "
+"end)"
 
 #: src/option.c:493
 msgid "Set the list of ellipsized columns"
@@ -1097,8 +1101,8 @@ msgid ""
 "Set the quick search column. Default is first column. Set it to 0 for "
 "disable searching"
 msgstr ""
-"Defina a coluna de pesquisa rápida. Por padrão é primeira coluna. Você pode "
-"configurar 0 para desabilitar a pesquisa"
+"Definir a coluna de pesquisa rápida. O padrão é a primeira coluna. Definir "
+"como 0 desativa a pesquisa"
 
 #: src/option.c:503
 msgid "Set the tooltip column"
@@ -1118,7 +1122,7 @@ msgstr "Definir o limite de linhas na lista"
 
 #: src/option.c:511
 msgid "Set double-click action"
-msgstr "Definir ação com duplo-clique"
+msgstr "Definir ação de duplo clique"
 
 #: src/option.c:515
 msgid "Set row action"
@@ -1134,7 +1138,7 @@ msgstr "Usar expressão regular na pesquisa"
 
 #: src/option.c:521
 msgid "Disable selection"
-msgstr "Desative seleção"
+msgstr "Desativar seleção"
 
 #: src/option.c:523
 msgid "Add new records on the top of a list"
@@ -1142,11 +1146,11 @@ msgstr "Adicionar novos registros no topo da lista"
 
 #: src/option.c:525
 msgid "Don't use markup in tooltips"
-msgstr "Não usar markup em tooltips"
+msgstr "Não usar marcação nas dicas de ferramenta"
 
 #: src/option.c:527
 msgid "Use column name as a header tooltip"
-msgstr "Usar nome da coluna como tooltip do cabeçalho"
+msgstr "Usar o nome da coluna como dica de ferramenta do cabeçalho"
 
 #: src/option.c:529
 msgid "Set columns alignment"
@@ -1158,11 +1162,11 @@ msgstr "Definir alinhamento dos cabeçalhos"
 
 #: src/option.c:537
 msgid "Display notebook dialog"
-msgstr "Exibir caixa de diálogo notebook"
+msgstr "Exibir diálogo com abas"
 
 #: src/option.c:539
 msgid "Add a tab to notebook"
-msgstr "Adicionar uma guia para notebook"
+msgstr "Adicionar uma aba ao diálogo"
 
 #: src/option.c:539
 msgid "LABEL"
@@ -1170,11 +1174,11 @@ msgstr "ROTULO"
 
 #: src/option.c:541
 msgid "Set position of a notebook tabs (top, bottom, left or right)"
-msgstr "Definir a posição das guias no notebook (top, bottom, left ou right)"
+msgstr "Definir a posição das abas (top, bottom, left ou right)"
 
 #: src/option.c:543
 msgid "Set tab borders"
-msgstr "Definir borda para a guia"
+msgstr "Definir bordas das abas"
 
 #: src/option.c:545
 msgid "Set active tab"
@@ -1186,7 +1190,7 @@ msgstr "Expandir abas"
 
 #: src/option.c:549
 msgid "Use stack mode"
-msgstr "Usar modo pilha (stack)"
+msgstr "Usar modo empilhado"
 
 #: src/option.c:556
 msgid "Display notification"
@@ -1207,7 +1211,7 @@ msgstr "Não exibir ícone na inicialização"
 #: src/option.c:564
 msgid "Set icon size for fully specified icons (default - 16)"
 msgstr ""
-"Definir tamanho do ícone para ícones totalmente especificados (padrão: 16)"
+"Definir tamanho do ícone para ícones totalmente especificados (padrão - 16)"
 
 #: src/option.c:572
 msgid "Display indicator icon (StatusNotifier/AppIndicator)"
@@ -1235,7 +1239,7 @@ msgstr "PAINEL"
 
 #: src/option.c:595
 msgid "Display picture dialog"
-msgstr "Exibir caixa de diálogo de imagem"
+msgstr "Exibir diálogo de imagem"
 
 #: src/option.c:597
 msgid "Set initial size (fit or orig)"
@@ -1243,7 +1247,7 @@ msgstr "Definir tamanho inicial (fit ou orig)"
 
 #: src/option.c:599
 msgid "Set increment for picture scaling (default - 5)"
-msgstr "Definir incremento para escala de imagem (default - 5)"
+msgstr "Definir incremento para escala de imagem (padrão - 5)"
 
 #: src/option.c:601
 msgid "Set action on image changing"
@@ -1251,7 +1255,7 @@ msgstr "Definir ação ao mudar a imagem"
 
 #: src/option.c:607
 msgid "Display popup dialog"
-msgstr "Exibir diálogo popup"
+msgstr "Exibir diálogo pop-up"
 
 #: src/option.c:609
 msgid "Set alignment of title and text (left, center or right)"
@@ -1267,19 +1271,19 @@ msgstr "PERCENTUAL"
 
 #: src/option.c:613
 msgid "Don't close popup by timeout"
-msgstr "Não fechar o popup por tempo limite"
+msgstr "Não fechar o pop-up por tempo limite"
 
 #: src/option.c:619
 msgid "Display printing dialog"
-msgstr "Exibir caixa de diálogo de impressão"
+msgstr "Exibir diálogo de impressão"
 
 #: src/option.c:621
 msgid "Set source type (text, image or raw)"
-msgstr "Definir o tipo de fonte (text, image ou raw)"
+msgstr "Definir o tipo de origem (text, image ou raw)"
 
 #: src/option.c:623
 msgid "Add headers to page"
-msgstr "Adicionar cabeçalhos de página"
+msgstr "Adicionar cabeçalhos à página"
 
 #: src/option.c:629
 msgid "Display progress indication dialog"
@@ -1320,7 +1324,7 @@ msgstr "Descartar diálogo quando for alcançado 100%"
 
 #: src/option.c:649
 msgid "Kill parent process if cancel button is pressed"
-msgstr "Matar processo pai se o botão cancelar for pressionado"
+msgstr "Encerrar o processo pai se o botão Cancelar for pressionado"
 
 #: src/option.c:652
 msgid "Right-To-Left progress bar direction"
@@ -1344,11 +1348,11 @@ msgstr "Altura da janela de log"
 
 #: src/option.c:666
 msgid "Display scale dialog"
-msgstr "Exibir caixa de diálogo tipo escala"
+msgstr "Exibir diálogo de escala"
 
 #: src/option.c:668
 msgid "Set initial value"
-msgstr "Ajustar o valor inicial"
+msgstr "Definir o valor inicial"
 
 #: src/option.c:668 src/option.c:670 src/option.c:672 src/option.c:674
 #: src/option.c:678 src/option.c:745 src/option.c:747
@@ -1381,7 +1385,7 @@ msgstr "Imprimir valores parciais"
 
 #: src/option.c:682
 msgid "Hide value"
-msgstr "Esconder valor"
+msgstr "Ocultar valor"
 
 #: src/option.c:684
 msgid "Invert direction"
@@ -1405,7 +1409,7 @@ msgstr "Exibir diálogo de texto informativo"
 
 #: src/option.c:696
 msgid "Enable text wrapping"
-msgstr "Ativar quebra de texto"
+msgstr "Habilitar quebra de texto"
 
 #: src/option.c:698
 msgid "Set justification (left, right, center or fill)"
@@ -1421,11 +1425,11 @@ msgstr "Ir para linha específica"
 
 #: src/option.c:704
 msgid "Use specified color for text"
-msgstr "Usar cor específica para o texto"
+msgstr "Usar a cor especificada para o texto"
 
 #: src/option.c:706
 msgid "Use specified color for background"
-msgstr "Use cor específica no fundo"
+msgstr "Usar a cor especificada para o fundo"
 
 #: src/option.c:708
 msgid "Show cursor in read-only mode"
@@ -1433,15 +1437,15 @@ msgstr "Exibir o cursor no modo só de leitura"
 
 #: src/option.c:710
 msgid "Make URI clickable"
-msgstr "Faça URI clicável"
+msgstr "Tornar a URI clicável"
 
 #: src/option.c:712
 msgid "Use specified color for links"
-msgstr "Use cor específica para links"
+msgstr "Usar a cor especificada para os links"
 
 #: src/option.c:714
 msgid "Use pango markup"
-msgstr "Usar markup Pango"
+msgstr "Usar marcação Pango"
 
 #: src/option.c:716
 msgid "Save file instead of print on exit"
@@ -1449,15 +1453,15 @@ msgstr "Salvar arquivo em vez de imprimir ao sair"
 
 #: src/option.c:718
 msgid "Confirm save the file if text was changed"
-msgstr "Confirmar salvamento se o texto foi alterado"
+msgstr "Confirmar o salvamento do arquivo se o texto foi alterado"
 
 #: src/option.c:725
 msgid "Use specified langauge for syntax highlighting"
-msgstr "Definir a linguagem para realce de sintaxe"
+msgstr "Usar a linguagem especificada para realce de sintaxe"
 
 #: src/option.c:725
 msgid "LANG"
-msgstr "LINGUAGEM"
+msgstr "IDIOMA"
 
 #: src/option.c:727
 msgid "Use specified theme"
@@ -1497,7 +1501,7 @@ msgstr "Destacar colchetes correspondentes"
 
 #: src/option.c:743
 msgid "Use autoindent"
-msgstr "Usar autoidentação"
+msgstr "Usar autoindentação"
 
 #: src/option.c:745
 msgid "Set tabulation width"
@@ -1521,15 +1525,15 @@ msgstr "Inserir espaços em vez de tabulações"
 
 #: src/option.c:760
 msgid "Sets a filename filter"
-msgstr "Definir filtro para o nome do arquivo"
+msgstr "Definir um filtro de nome de arquivo"
 
 #: src/option.c:760
 msgid "NAME | PATTERN1 PATTERN2 ..."
-msgstr "NOME | PADRAO1 PADRAO2 ..."
+msgstr "NOME | PADRÃO1 PADRÃO2 ..."
 
 #: src/option.c:762
 msgid "Sets a mime-type filter"
-msgstr "Definir filtro mime-type"
+msgstr "Definir um filtro de tipo MIME"
 
 #: src/option.c:762
 msgid "NAME | MIME1 MIME2 ..."
@@ -1537,7 +1541,7 @@ msgstr "NOME | MIME1 MIME2 ..."
 
 #: src/option.c:764
 msgid "Add filter for images"
-msgstr "Adicione filtro para imagens"
+msgstr "Adicionar filtro para imagens"
 
 #: src/option.c:764
 msgid "[NAME]"
@@ -1565,7 +1569,7 @@ msgstr "Definir política da barra de rolagem vertical (auto, always, never)"
 
 #: src/option.c:782
 msgid "Add path for search icons by name"
-msgstr "Adicionar caminho para buscar ícones pelo nome"
+msgstr "Adicionar caminho de busca de ícones pelo nome"
 
 #: src/option.c:784
 msgid "Write settings to file and exit"
@@ -1592,7 +1596,7 @@ msgstr "Modo de cor desconhecido: %s\n"
 #: src/option.c:1132
 #, c-format
 msgid "Unknown buttons layout type: %s\n"
-msgstr "Tipo de layout de botão desconhecido: %s\n"
+msgstr "Tipo de disposição dos botões desconhecido: %s\n"
 
 #: src/option.c:1147
 #, c-format
@@ -1678,7 +1682,7 @@ msgstr "O arquivo foi modificado. Deseja salvá-lo?"
 
 #: src/option.c:1984
 msgid "- Yet another dialoging program"
-msgstr "- Yet another dialoging program"
+msgstr "- Mais um programa de caixas de diálogo"
 
 #: src/option.c:1988
 msgid "General options"
@@ -1794,11 +1798,11 @@ msgstr "Exibir opções de lista"
 
 #: src/option.c:2074
 msgid "Notebook options"
-msgstr "Opções de notebook"
+msgstr "Opções de diálogo com abas"
 
 #: src/option.c:2074
 msgid "Show notebook dialog options"
-msgstr "Exibir opções de diálogo de notebook"
+msgstr "Exibir opções de diálogo com abas"
 
 #: src/option.c:2081
 msgid "Notification icon options"
@@ -1826,7 +1830,7 @@ msgstr "Exibir opções de diálogo com painéis"
 
 #: src/option.c:2104
 msgid "Picture dialog options"
-msgstr "Opções de diálogo de imagens"
+msgstr "Opções de diálogo de imagem"
 
 #: src/option.c:2104
 msgid "Show picture dialog options"
@@ -1834,11 +1838,11 @@ msgstr "Exibir opções de diálogo de imagem"
 
 #: src/option.c:2110
 msgid "Popup dialog options"
-msgstr "Opções do diálogo popup"
+msgstr "Opções do diálogo pop-up"
 
 #: src/option.c:2110
 msgid "Show popup dialog options"
-msgstr "Exibir opções do diálogo popup"
+msgstr "Exibir opções do diálogo pop-up"
 
 #: src/option.c:2116
 msgid "Print dialog options"
@@ -1866,11 +1870,11 @@ msgstr "Exibir opções de escala"
 
 #: src/option.c:2134
 msgid "Text information options"
-msgstr "Opções de texto de informação"
+msgstr "Opções de informações de texto"
 
 #: src/option.c:2134
 msgid "Show text information options"
-msgstr "Exibir opções de texto de informação"
+msgstr "Exibir opções de informações de texto"
 
 #: src/option.c:2141
 msgid "SourceView options"
@@ -1890,11 +1894,11 @@ msgstr "Exibir opções de filtro de arquivos"
 
 #: src/option.c:2154
 msgid "Miscellaneous options"
-msgstr "Opções de miscelânea"
+msgstr "Opções diversas"
 
 #: src/option.c:2154
 msgid "Show miscellaneous options"
-msgstr "Exibir opções de miscelânea"
+msgstr "Exibir opções diversas"
 
 #: src/paned.c:96
 #, c-format
@@ -1993,7 +1997,7 @@ msgstr "A impressora não suporta o formato pdf.\n"
 
 #: src/print.c:397
 msgid "This file type is not supported for raw printing.\n"
-msgstr "Este tipo de arquivo não é suportado na impressão crua.\n"
+msgstr "Este tipo de arquivo não é suportado na impressão raw.\n"
 
 #: src/print.c:411
 #, c-format
@@ -2005,13 +2009,13 @@ msgid ""
 "WARNING: You are using old-style progress dialog. This features is obsolete "
 "now, please use --bar style instead\n"
 msgstr ""
-"AVISO: Você está usando o diálogo de progresso no estilo antigo. Esse recurso "
-"está obsoleto agora, por favor use o estilo --bar em seu lugar\n"
+"AVISO: Você está usando o diálogo de progresso no estilo antigo. Esse "
+"recurso está obsoleto agora, use o estilo --bar em seu lugar\n"
 
 #: src/color.c:64
 #, c-format
 msgid "Can't open file %s: %s\n"
-msgstr "Não é possível abrir o arquivo %s: %s\n"
+msgstr "Não foi possível abrir o arquivo %s: %s\n"
 
 #: src/color.c:143 src/tools.c:93
 msgid "Pick up screen color"
@@ -2100,7 +2104,7 @@ msgstr "Salvar"
 
 #: src/util.c:53
 msgid "Search"
-msgstr "Procurar"
+msgstr "Pesquisar"
 
 #: src/util.c:54
 msgid "Send"
@@ -2161,7 +2165,7 @@ msgstr "Selecionar e imprimir ícone ao dar duplo clique"
 
 #: src/browser.c:233
 msgid "- Icon browser"
-msgstr "Navegador de ícones"
+msgstr "- Navegador de ícones"
 
 #: src/browser.c:266
 msgid "Icon browser"
@@ -2242,7 +2246,7 @@ msgstr "nenhuma fonte especificada\n"
 #: src/tools.c:182
 #, c-format
 msgid "cannot get font description for for string \"%s\"\n"
-msgstr "não foi possível obter descrição da fonte para a string \"%s\"\n"
+msgstr "não foi possível obter a descrição da fonte para a string \"%s\"\n"
 
 #: src/tools.c:284
 msgid "no icon specified\n"
@@ -2250,7 +2254,7 @@ msgstr "nenhum ícone especificado\n"
 
 #: src/tools.c:387
 msgid "- yad miscellaneous tools"
-msgstr "- ferramentas diversas do yad"
+msgstr "- ferramentas diversas do YAD"
 
 #: src/tools.c:390
 msgid "PFD mode"
@@ -2258,7 +2262,7 @@ msgstr "Modo PFD"
 
 #: src/tools.c:390
 msgid "Show pfd mode options"
-msgstr "Exibir opções do modo pfd"
+msgstr "Exibir opções do modo PFD"
 
 #: src/tools.c:395
 msgid "Icon mode"
@@ -2304,7 +2308,8 @@ msgstr "Largura da borda ao redor do diálogo::NUM"
 #: src/yad-settings.sh:55
 msgid "Show remaining time and percentage in timeout progress bar:CHK"
 msgstr ""
-"Exibir tempo restante e porcentagem na barra de progresso com timeout:CHK"
+"Exibir tempo restante e porcentagem na barra de progresso de tempo "
+"limite:CHK"
 
 #: src/yad-settings.sh:56
 msgid "Combo-box in entry dialog is always editable:CHK"
@@ -2328,7 +2333,7 @@ msgstr "Cor padrão de URI no diálogo text-info::CLR"
 
 #: src/yad-settings.sh:61
 msgid "Maximum number of tabs in notebook dialog::NUM"
-msgstr "Número máximo de abas no diálogo de notebook::NUM"
+msgstr "Número máximo de abas no diálogo com abas::NUM"
 
 #: src/yad-settings.sh:62
 msgid "Use large previews in file selection dialogs:CHK"
@@ -2336,7 +2341,7 @@ msgstr "Usar pré-visualizações grandes nos diálogos de seleção de arquivos
 
 #: src/yad-settings.sh:63
 msgid "Search entry width::NUM"
-msgstr "Largura do campo de busca::NUM"
+msgstr "Largura do campo de pesquisa::NUM"
 
 #: src/yad-settings.sh:64
 msgid "Ignore unknown command-line options:CHK"
@@ -2356,7 +2361,7 @@ msgid ""
 "YAD settings for text editor\\nThis settings only usefull when YAD built "
 "with GtkSourceView\\n\\n"
 msgstr ""
-"Configurações do YAD para o editor de texto\\nEssas configurações são apenas "
+"Configurações do YAD para o editor de texto\\nEstas configurações só são "
 "úteis quando o YAD é compilado com o GtkSourceView\\n\\n"
 
 #: src/yad-settings.sh:90
@@ -2393,7 +2398,7 @@ msgstr "Destacar colchetes correspondentes:CHK"
 
 #: src/yad-settings.sh:98
 msgid "Use autoindentation:CHK"
-msgstr "Usar autoidentação:CHK"
+msgstr "Usar autoindentação:CHK"
 
 #: src/yad-settings.sh:99
 msgid "Smart Home/End behavior::CB"
@@ -2573,7 +2578,7 @@ msgstr "Interface simples para editar as configurações do YAD"
 #~ msgstr "Definir caractere separador para itens de menu"
 
 #~ msgid "Enable preview in print dialog"
-#~ msgstr "Ativar pré-visualização na caixa de diálogo de impressão"
+#~ msgstr "Habilitar pré-visualização na caixa de diálogo de impressão"
 
 #~ msgid "Show vertical scale"
 #~ msgstr "Exibir escala vertical"
